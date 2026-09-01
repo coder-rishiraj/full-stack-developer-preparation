@@ -1,0 +1,42 @@
+d7-disaster-recovery — Disaster Recovery
+d7-failover — Failover
+d7-load-shedding — Load Shedding
+d7-rate-limiting — Rate Limiting (Systems)
+d7-redundancy — Redundancy
+d7-retry-strategies — Retry Strategies
+d7-sla — SLA
+d7-sli — SLI
+d7-slo — SLO
+d7-spof — Single Points of Failure
+d8-bandwidth — Bandwidth Estimation
+d8-cache-sizing — Cache-Size Estimation
+d8-db-growth — Database-Growth Estimation
+d8-qps — Requests per Second
+d8-read-write-ratios — Read/Write Ratios
+d8-storage — Storage Estimation
+d9-api-design — API Design (Interview)
+d9-capacity — Capacity Estimation (Interview)
+d9-consistency — Consistency (Interview)
+d9-data-modelling — Data Modelling (Interview)
+d9-deep-dives — Component Deep Dives
+d9-failure-handling — Failure Handling
+d9-functional — Functional Requirements
+d9-hla — High-Level Architecture
+d9-non-functional — Non-Functional Requirements
+d9-observability — Observability (Interview)
+d9-reliability — Reliability (Interview)
+d9-requirements — Requirements Gathering
+d9-scaling — Scaling (Interview)
+d9-security — Security (Interview)
+d9-tradeoffs — Trade-off Analysis
+d10-autocomplete — Search Autocomplete
+d10-chat — Chat System
+d10-distributed-cache — Distributed Cache
+d10-drive — Dropbox / Google Drive
+d10-job-scheduler — Distributed Job Scheduler
+d10-monitoring — Metrics/Monitoring Platform
+d10-news-feed — Twitter / News Feed
+d10-notification-system — Notification System
+d10-pastebin — Pastebin
+d10-payments — Payment System
+d10-ticket-booking — Ticket-Booking System

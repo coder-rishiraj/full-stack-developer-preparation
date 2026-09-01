@@ -1,0 +1,42 @@
+e1-venvs — Virtual Environments
+e2-attention — Attention Conceptually
+e2-context-windows — Context Windows
+e2-embeddings — Embeddings
+e2-hallucinations — Hallucinations
+e2-ml-vs-dl-vs-genai — ML vs Deep Learning vs Generative AI
+e2-neural-networks — Neural-Network Concepts
+e2-supervised-unsupervised — Supervised vs Unsupervised Concepts
+e2-temperature — Temperature/Sampling
+e2-tokenization — Tokenization
+e2-tokens — Tokens
+e2-training-vs-inference — Training vs Inference
+e2-transformers — Transformers Conceptually
+e3-chat-apis — Chat/Completion APIs
+e3-cost-latency-quality — Cost/Latency/Quality Trade-offs
+e3-json-schemas — JSON Schemas
+e3-messages — System/User Messages
+e3-model-selection — Model Selection
+e3-rate-limits — Rate Limits
+e3-retries — Retries
+e3-streaming — Streaming
+e3-structured-outputs — Structured Outputs
+e3-token-usage — Token Usage
+e3-tool-calling — Tool/Function Calling
+e4-context-management — Context Management
+e4-context-optimization — Context-Window Optimization
+e4-few-shot — Few-Shot Prompting
+e4-output-validation — Output Validation
+e4-prompt-injection — Prompt-Injection Awareness
+e4-structured-prompting — Structured Prompting
+e4-system-instructions — System Instructions
+e5-cosine — Cosine Similarity
+e5-embeddings — Embeddings
+e5-hybrid-search — Hybrid Search
+e5-metadata-filtering — Metadata Filtering
+e5-semantic-search — Semantic Search
+e5-similarity — Vector Similarity
+e6-chunking — Chunking Strategies
+e6-context-construction — Context Construction
+e6-embedding-models — Embedding Models
+e6-evaluation — Retrieval Evaluation
+e6-failure-modes — RAG Failure Modes

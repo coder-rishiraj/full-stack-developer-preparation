@@ -1,0 +1,42 @@
+c5-aop — AOP
+c5-proxies — Spring Proxies
+c7-partitioning — Partitioning
+c7-replication — Replication
+c10-distributed-locks — Distributed Locks
+c10-persistence — Redis Persistence
+c10-pubsub — Pub/Sub
+c10-replication — Redis Replication
+c11-internals — Kafka Internals
+c11-outbox — Outbox Pattern
+c11-rebalancing — Consumer Rebalancing
+c11-saga — Saga Pattern
+c13-contract-testing — Contract Testing
+c13-load-testing — Load Testing
+c13-testcontainers — Testcontainers
+c14-github-actions — GitHub Actions / Jenkins
+c15-cloudfront — CloudFront
+c15-ecs — ECS
+c15-lambda — Lambda
+c15-route53 — Route 53
+c15-secrets-manager — Secrets Manager
+c15-sns — SNS
+c15-sqs — SQS
+c16-grafana — Grafana
+c16-prometheus — Prometheus
+d2-chain-of-responsibility — Chain of Responsibility
+d2-command — Command
+d2-proxy — Proxy
+d2-state — State
+d2-template-method — Template Method
+d3-food-delivery — Food Delivery (LLD)
+d3-movie-ticket-booking — Movie Ticket Booking (LLD)
+d4-2pc — Two-Phase Commit
+d4-consistent-hashing — Consistent Hashing
+d4-gossip — Gossip Protocols
+d4-leader-election — Leader Election
+d4-saga — Saga
+d6-graphql — GraphQL Concepts
+d6-grpc — gRPC
+d6-sse — SSE
+d6-websockets — WebSockets
+d8-server-requirements — Server Requirements

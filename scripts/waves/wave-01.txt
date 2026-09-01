@@ -1,0 +1,42 @@
+a9-combination-sum — Combination Sum
+a9-combinations — Combinations
+a9-constraint-backtracking — Constraint-Based Backtracking
+a9-grid-search — Grid Search Backtracking
+a9-n-queens — N-Queens
+a9-permutations — Permutations
+a9-pruning — Pruning
+a9-subsets — Subsets
+a10-heap-greedy — Heap + Greedy
+a10-interval-scheduling — Interval Scheduling
+a10-local-vs-global — Local vs Global Optimum Reasoning
+a10-sorting-greedy — Sorting + Greedy
+a11-1d-dp — 1D DP
+a11-2d-dp — 2D DP
+a11-grid-dp — Grid DP
+a11-knapsack — Knapsack Patterns
+a11-lcs — Longest Common Subsequence
+a11-lis — Longest Increasing Subsequence
+a11-memoization — Memoization
+a11-partition-dp — Partition DP Basics
+a11-subsequences — Subsequence Problems
+a11-tabulation — Tabulation
+a13-and-or-xor — AND / OR / XOR
+a13-check-bit — Check Bit
+a13-powers-of-two — Powers of Two
+a13-set-bit — Set Bit
+a13-unset-bit — Unset Bit
+a14-brute-force-first — Explaining Brute-Force First
+a14-clarifying-requirements — Clarifying Requirements
+a14-clean-coding — Clean Coding Without IDE Assistance
+a14-complexity-in-interview — Complexity Analysis in Interviews
+a14-deriving-optimization — Deriving Optimized Solution
+a14-edge-cases — Edge-Case Identification
+a14-manual-testing — Manual Testing
+a14-mock-interviews — Mock Interviews
+a14-responding-to-hints — Responding to Interviewer Hints
+a14-thinking-aloud — Thinking Aloud
+a14-timed-coding — Timed Coding
+c9-authentication — Authentication vs Authorization
+c9-cors-security — CORS (Security)
+c9-csrf — CSRF
+c9-jwt — JWT

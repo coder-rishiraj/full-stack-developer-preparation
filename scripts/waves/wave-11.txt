@@ -1,0 +1,4 @@
+e12-multi-tenant — Multi-Tenant AI Platform
+e12-recommendation — Recommendation/Personalization System
+e12-research-assistant — AI Research Assistant
+e12-tool-agent — AI Agent with External Tools

@@ -1,0 +1,42 @@
+c9-oauth2 — OAuth 2.0 Concepts
+c9-oidc — OpenID Connect Concepts
+c9-owasp — OWASP Basics
+c9-password-hashing — Password Hashing
+c9-rbac — RBAC
+c9-secrets — Secrets Management
+c9-sessions — Sessions (Security)
+c9-spring-security — Spring Security
+c9-sql-injection — SQL Injection
+c9-xss — XSS
+c10-cache-aside — Cache-Aside
+c10-data-structures — Redis Data Structures
+c10-distributed-caching — Distributed Caching
+c10-invalidation — Cache Invalidation
+c10-rate-limiting — Rate Limiting with Redis
+c10-ttl — TTL
+c10-when-not-to-cache — When Not to Cache
+c11-at-least-once — At-Least-Once
+c11-at-most-once — At-Most-Once
+c11-consumer-groups — Consumer Groups
+c11-consumers — Consumers
+c11-dlq — Dead-Letter Queues
+c11-eda — Event-Driven Architecture
+c11-exactly-once — Exactly-Once Concepts
+c11-idempotent-consumers — Idempotent Consumers
+c11-offsets — Offsets
+c11-ordering — Ordering Guarantees
+c11-partitions — Partitions
+c11-producers — Producers
+c11-retries — Retries
+c11-schema-evolution — Schema Evolution
+c11-topics — Topics
+c12-backpressure — Backpressure
+c12-bulkheads — Bulkheads
+c12-circuit-breakers — Circuit Breakers
+c12-eventual-consistency — Eventual Consistency
+c12-exponential-backoff — Exponential Backoff
+c12-failure-recovery — Failure Recovery
+c12-graceful-degradation — Graceful Degradation
+c12-health-checks — Health Checks
+c12-idempotency — Idempotency
+c12-rate-limiting — Rate Limiting
