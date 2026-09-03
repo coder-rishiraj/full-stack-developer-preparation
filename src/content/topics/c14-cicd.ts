@@ -4,7 +4,7 @@ export const content: TopicContent = {
   whatIsIt:
     'CI/CD automates build, test, and deploy: Continuous Integration merges code frequently with automated tests; Continuous Delivery deploys to staging automatically; Continuous Deployment promotes to production without manual gate. Pipeline stages: checkout → build → test → scan → publish artifact → deploy.',
   whyExists:
-    'Manual deploys are slow, error-prone, and inconsistent. CI catches regressions before merge. CD reduces time-to-production and enables rollbacks via immutable artifacts. DevOps culture pairs code ownership with pipeline responsibility.',
+    'Manual deploys are slow, error-prone, and inconsistent. CI catches regressions before merge. CD reduces time-to-production and enables rollbacks via immutable artifacts. DevOps culture pairs code ownership with pipeline responsibility — Docker makes the build and test environment reproducible across machines.',
   mentalModel:
     'Assembly line for software. Every commit rides the line: compile, test, security scan, package Docker image, push to registry, deploy to environment. Red build blocks merge; green artifact is promotable.',
   howItWorks: [

@@ -38,25 +38,29 @@ export const content: TopicContent = {
       type: 'list',
       items: [
         'docker run creates container from image, assigns network, mounts volumes.',
+        'Docker architecture: CLI client → dockerd daemon → images/containers/networks/volumes; registries (Hub/ECR) store/share images.',
         'PID 1 in container should handle signals (use tini/dumb-init or proper init).',
         'Containers are ephemeral — state goes to volumes or external DB.',
         'Root in container != root on host unless --privileged (avoid).',
+        'Same container image is the DevOps collaboration unit: local → CI → staging → prod.',
       ],
     },
   ],
   example: [
     {
       type: 'paragraph',
-      text: 'Build Spring Boot JAR, package in eclipse-temurin:21-jre-alpine image, run with docker run -p 8080:8080 --env SPRING_PROFILES_ACTIVE=prod app:1.0. Same image runs in ECS, EKS, or local Compose.',
+      text: 'Build Spring Boot JAR, package in eclipse-temurin:21-jre-alpine image, run with docker run -p 8080:8080 --env SPRING_PROFILES_ACTIVE=prod app:1.0. Same image runs in ECS, EKS, or local Compose — that is Docker for DevOps consistency.',
     },
     {
       type: 'code',
       language: 'bash',
-      caption: 'Basic container lifecycle',
+      caption: 'Essential commands (interview fluency)',
       code: `docker pull eclipse-temurin:21-jre-alpine
 docker build -t myapp:1.0 .
-docker run -d --name api -p 8080:8080 myapp:1.0
+docker run -d --name api -p 8080:8080 --memory=512m --cpus=1 myapp:1.0
+docker ps
 docker logs -f api
+docker exec -it api sh
 docker stop api && docker rm api`,
     },
   ],

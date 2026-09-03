@@ -14,7 +14,7 @@ import {
   getContentReadyTopics,
 } from '@/content/taxonomy'
 import { getTopicContentSync, preloadAllTopicContent } from '@/content/topics'
-import { filterTopics } from '@/domain/progress-selectors'
+import { filterTopics, interviewReadiness } from '@/domain/progress-selectors'
 import { listCustomTopicsFromMap } from '@/domain/user-content'
 import { groupSectionsForDisplay } from '@/content/section-display'
 
@@ -115,15 +115,114 @@ const AUTHORITATIVE_SECTION_COUNTS: Record<
   'C7.13': [3, 0, 0], 'C7.14': [3, 0, 0], 'C7.15': [3, 0, 0],
   'C7.16': [1, 0, 0], 'C7.17': [0, 1, 0], 'C7.18': [1, 0, 0],
   'C7.19': [0, 1, 0], 'C7.20': [0, 1, 0],
-  C8: [12, 0, 0],
-  C9: [14, 0, 0], C10: [6, 4, 0], C11: [13, 4, 0], C12: [12, 0, 0],
-  C13: [6, 3, 0], C14: [12, 1, 1], C15: [8, 7, 1], C16: [9, 2, 0],
-  D1: [7, 0, 0], D2: [7, 5, 1], D3: [12, 2, 0], D4: [17, 5, 1],
-  D5: [17, 0, 0], D6: [9, 4, 0], D7: [13, 0, 0], D8: [6, 1, 0],
-  D9: [13, 0, 0], D10: [15, 2, 0], E1: [8, 2, 0], E2: [12, 3, 0],
-  E3: [11, 0, 0], E4: [7, 1, 0], E5: [6, 2, 0], E6: [12, 0, 0],
-  E7: [10, 1, 0], E8: [0, 1, 0], E9: [8, 2, 0], E10: [16, 0, 0],
-  E11: [8, 1, 0], E12: [6, 2, 0],
+  'C8.1': [1, 0, 0], 'C8.2': [1, 0, 0], 'C8.3': [1, 0, 0],
+  'C8.4': [1, 0, 0], 'C8.5': [2, 0, 0], 'C8.6': [1, 0, 0],
+  'C8.7': [3, 0, 0], 'C8.8': [1, 0, 0], 'C8.9': [2, 0, 0],
+  'C8.10': [1, 0, 0], 'C8.11': [1, 0, 0], 'C8.12': [1, 0, 0],
+  'C8.13': [1, 0, 0], 'C8.14': [1, 0, 0], 'C8.15': [1, 0, 0],
+  'C8.16': [1, 0, 0],
+  'C9.1': [1, 0, 0], 'C9.2': [1, 0, 0], 'C9.3': [1, 0, 0],
+  'C9.4': [1, 0, 0], 'C9.5': [1, 0, 0], 'C9.6': [1, 0, 0],
+  'C9.7': [1, 0, 0], 'C9.8': [1, 0, 0], 'C9.9': [1, 0, 0],
+  'C9.10': [1, 0, 0], 'C9.11': [1, 0, 0], 'C9.12': [1, 0, 0],
+  'C9.13': [1, 0, 0], 'C9.14': [1, 0, 0], 'C9.15': [1, 0, 0],
+  'C10.1': [1, 0, 0], 'C10.2': [1, 0, 0], 'C10.3': [1, 0, 0],
+  'C10.4': [1, 0, 0], 'C10.5': [1, 0, 0], 'C10.6': [1, 0, 0],
+  'C10.7': [1, 0, 0], 'C10.8': [1, 0, 0], 'C10.9': [1, 0, 0],
+  'C10.10': [1, 0, 0], 'C10.11': [0, 1, 0], 'C10.12': [0, 1, 0],
+  'C10.13': [0, 1, 0], 'C10.14': [0, 1, 0], 'C10.15': [0, 1, 0],
+  'C10.16': [0, 1, 0],
+  'C11.1': [1, 0, 0], 'C11.2': [1, 0, 0], 'C11.3': [1, 0, 0],
+  'C11.4': [1, 0, 0], 'C11.5': [1, 0, 0], 'C11.6': [1, 0, 0],
+  'C11.7': [1, 0, 0], 'C11.8': [1, 1, 0], 'C11.9': [1, 0, 0],
+  'C11.10': [1, 0, 0], 'C11.11': [1, 0, 0], 'C11.12': [3, 0, 0],
+  'C11.13': [1, 0, 0], 'C11.14': [0, 1, 0], 'C11.15': [0, 1, 0],
+  'C11.16': [0, 2, 0],
+  'C12.1': [1, 0, 0], 'C12.2': [1, 0, 0], 'C12.3': [2, 0, 0],
+  'C12.4': [1, 0, 0], 'C12.5': [1, 0, 0], 'C12.6': [1, 0, 0],
+  'C12.7': [1, 0, 0], 'C12.8': [1, 0, 0], 'C12.9': [1, 0, 0],
+  'C12.10': [1, 0, 0], 'C12.11': [1, 0, 0], 'C12.12': [1, 0, 0],
+  'C12.13': [0, 1, 0], 'C12.14': [0, 1, 0],
+  'C13.1': [1, 0, 0], 'C13.2': [1, 0, 0], 'C13.3': [1, 0, 0],
+  'C13.4': [1, 0, 0], 'C13.5': [1, 0, 0], 'C13.6': [1, 0, 0],
+  'C13.7': [1, 0, 0], 'C13.8': [0, 1, 0], 'C13.9': [0, 1, 0],
+  'C13.10': [1, 0, 0], 'C13.11': [0, 1, 0], 'C13.12': [0, 1, 0],
+  'C13.13': [0, 1, 0], 'C13.14': [0, 1, 0],
+  'C14.1': [1, 0, 0], 'C14.2': [1, 0, 0], 'C14.3': [1, 0, 0],
+  'C14.4': [1, 0, 0], 'C14.5': [1, 0, 0], 'C14.6': [2, 0, 0],
+  'C14.7': [1, 0, 0], 'C14.8': [1, 0, 0], 'C14.9': [1, 0, 0],
+  'C14.10': [1, 0, 0], 'C14.11': [0, 1, 0], 'C14.12': [0, 1, 0],
+  'C14.13': [0, 1, 0], 'C14.14': [0, 1, 0], 'C14.15': [0, 1, 0],
+  'C14.16': [0, 1, 0],
+  'C15.1': [1, 0, 0], 'C15.2': [1, 0, 0], 'C15.3': [0, 1, 0],
+  'C15.4': [1, 0, 0], 'C15.5': [0, 1, 0], 'C15.6': [0, 2, 0],
+  'C15.7': [1, 0, 0], 'C15.8': [1, 0, 0], 'C15.9': [1, 0, 0],
+  'C15.10': [2, 0, 0], 'C15.11': [0, 2, 0], 'C15.12': [1, 0, 0],
+  'C15.13': [0, 1, 0], 'C15.14': [0, 2, 0], 'C15.15': [1, 0, 0],
+  'C15.16': [0, 1, 0],
+  'C16.1': [1, 0, 0], 'C16.2': [1, 0, 0], 'C16.3': [1, 0, 0],
+  'C16.4': [4, 0, 0], 'C16.5': [1, 0, 0], 'C16.6': [1, 0, 0],
+  'C16.7': [1, 0, 0], 'C16.8': [0, 1, 0], 'C16.9': [0, 1, 0],
+  'C16.10': [0, 1, 0], 'C16.11': [1, 0, 0], 'C16.12': [0, 1, 0],
+  'C16.13': [0, 1, 0], 'C16.14': [0, 1, 0],
+  D1: [7, 0, 0], D2: [7, 5, 1], D3: [12, 2, 0],
+  'D4.1': [1, 0, 0], 'D4.2': [1, 0, 0], 'D4.3': [1, 0, 0],
+  'D4.4': [1, 0, 0], 'D4.5': [1, 0, 0], 'D4.6': [1, 0, 0],
+  'D4.7': [1, 0, 0], 'D4.8': [1, 0, 0], 'D4.9': [1, 0, 0],
+  'D4.10': [1, 0, 0], 'D4.11': [1, 0, 0], 'D4.12': [1, 0, 0],
+  'D5.1': [1, 0, 0], 'D5.2': [1, 0, 0], 'D5.3': [1, 0, 0],
+  'D5.4': [1, 0, 0], 'D5.5': [1, 0, 0], 'D5.6': [1, 0, 0],
+  'D5.7': [1, 0, 0], 'D5.8': [1, 0, 0], 'D5.9': [1, 0, 0],
+  'D5.10': [1, 0, 0],
+  'D6.1': [1, 0, 0], 'D6.2': [1, 0, 0], 'D6.3': [1, 0, 0],
+  'D6.4': [0, 1, 0], 'D6.5': [1, 0, 0], 'D6.6': [1, 0, 0],
+  'D7.1': [1, 0, 0], 'D7.2': [1, 0, 0], 'D7.3': [1, 0, 0],
+  'D7.4': [1, 0, 0], 'D7.5': [1, 0, 0], 'D7.6': [1, 0, 0],
+  'D7.7': [0, 1, 0], 'D7.8': [0, 1, 0],
+  'D8.1': [1, 0, 0], 'D8.2': [1, 0, 0], 'D8.3': [1, 0, 0],
+  'D8.4': [0, 1, 0],
+  'D9.1': [1, 0, 0], 'D9.2': [1, 0, 0], 'D9.3': [1, 0, 0],
+  'D9.4': [1, 0, 0], 'D9.5': [1, 0, 0], 'D9.6': [1, 0, 0],
+  'D9.7': [0, 1, 0],
+  'D10.1': [1, 0, 0], 'D10.2': [1, 0, 0], 'D10.3': [1, 0, 0],
+  'D10.4': [1, 0, 0], 'D10.5': [1, 0, 0], 'D10.6': [1, 0, 0],
+  'D10.7': [1, 0, 0], 'D10.8': [1, 0, 0], 'D10.9': [1, 0, 0],
+  'D10.10': [1, 0, 0], 'D10.11': [1, 0, 0], 'D10.12': [1, 0, 0],
+  'D10.13': [1, 0, 0], 'D10.14': [1, 0, 0], 'D10.15': [1, 0, 0],
+  'D10.16': [1, 0, 0], 'D10.17': [1, 0, 0],
+  'D10.18': [0, 1, 0], 'D10.19': [0, 1, 0], 'D10.20': [0, 1, 0],
+  'D10.21': [0, 1, 0], 'D10.22': [0, 1, 0], 'D10.23': [0, 1, 0],
+  'D10.24': [0, 1, 0], 'D10.25': [0, 1, 0], 'D10.26': [0, 1, 0],
+  'D10.27': [0, 0, 1], 'D10.28': [0, 1, 0], 'D10.29': [0, 0, 1],
+  'D10.30': [0, 1, 0],
+  'E1.1': [1, 0, 0], 'E1.2': [1, 0, 0], 'E1.3': [1, 0, 0], 'E1.4': [1, 0, 0],
+  'E2.1': [1, 0, 0], 'E2.2': [1, 0, 0], 'E2.3': [1, 0, 0],
+  'E2.4': [0, 1, 0], 'E2.5': [0, 1, 0], 'E2.6': [0, 1, 0],
+  'E2.7': [1, 0, 0], 'E2.8': [1, 0, 0],
+  'E3.1': [1, 0, 0], 'E3.2': [1, 0, 0], 'E3.3': [1, 0, 0],
+  'E3.4': [1, 0, 0], 'E3.5': [1, 0, 0],
+  'E4.1': [1, 0, 0], 'E4.2': [1, 0, 0], 'E4.3': [1, 0, 0],
+  'E4.4': [0, 1, 0], 'E4.5': [1, 0, 0],
+  'E5.1': [1, 0, 0], 'E5.2': [1, 0, 0], 'E5.3': [0, 1, 0], 'E5.4': [1, 0, 0],
+  'E6.1': [1, 0, 0], 'E6.2': [1, 0, 0], 'E6.3': [1, 0, 0],
+  'E6.4': [1, 0, 0], 'E6.5': [1, 0, 0], 'E6.6': [1, 0, 0],
+  'E6.7': [0, 1, 0], 'E6.8': [1, 0, 0],
+  'E7.1': [1, 0, 0], 'E7.2': [1, 0, 0], 'E7.3': [1, 0, 0],
+  'E7.4': [1, 0, 0], 'E7.5': [1, 0, 0], 'E7.6': [1, 0, 0],
+  'E7.7': [0, 1, 0], 'E7.8': [0, 1, 0], 'E7.9': [0, 1, 0], 'E7.10': [0, 1, 0],
+  'E8.1': [0, 1, 0], 'E8.2': [0, 1, 0], 'E8.3': [0, 1, 0],
+  'E8.4': [0, 1, 0], 'E8.5': [0, 1, 0], 'E8.6': [0, 1, 0],
+  'E8.7': [0, 1, 0], 'E8.8': [0, 0, 1],
+  'E9.1': [1, 0, 0], 'E9.2': [1, 0, 0], 'E9.3': [1, 0, 0],
+  'E9.4': [1, 0, 0], 'E9.5': [1, 0, 0],
+  'E10.1': [1, 0, 0], 'E10.2': [1, 0, 0], 'E10.3': [1, 0, 0],
+  'E10.4': [1, 0, 0], 'E10.5': [1, 0, 0], 'E10.6': [1, 0, 0],
+  'E10.7': [1, 0, 0],
+  'E11.1': [1, 0, 0], 'E11.2': [1, 0, 0], 'E11.3': [1, 0, 0],
+  'E11.4': [1, 0, 0], 'E11.5': [0, 1, 0],
+  'E12.1': [1, 0, 0], 'E12.2': [1, 0, 0], 'E12.3': [1, 0, 0],
+  'E12.4': [1, 0, 0], 'E12.5': [1, 0, 0], 'E12.6': [1, 0, 0],
+  'E12.7': [0, 1, 0], 'E12.8': [0, 1, 0],
 }
 
 describe('revision engine', () => {
@@ -251,16 +350,16 @@ describe('import/export', () => {
 describe('Phase 2 curriculum hierarchy', () => {
   it('includes full A–E topic list with unique ids', () => {
     const stats = curriculumStats()
-    expect(stats.total).toBe(1310)
-    expect(stats.sections).toBe(328)
-    expect(stats.byTier).toEqual({ tier1: 1061, tier2: 227, tier3: 22 })
-    expect(stats.byTrack).toEqual({ A: 117, B: 647, C: 290, D: 137, E: 119 })
+    expect(stats.total).toBe(1281)
+    expect(stats.sections).toBe(591)
+    expect(stats.byTier).toEqual({ tier1: 1003, tier2: 256, tier3: 22 })
+    expect(stats.byTrack).toEqual({ A: 117, B: 647, C: 329, D: 111, E: 77 })
     expect(new Set(TOPICS.map((t) => t.id)).size).toBe(TOPICS.length)
     expect(SECTIONS.length).toBe(stats.sections)
   })
 
   it('matches every authoritative section count and keeps nested concepts attached', () => {
-    expect(Object.keys(AUTHORITATIVE_SECTION_COUNTS)).toHaveLength(328)
+    expect(Object.keys(AUTHORITATIVE_SECTION_COUNTS)).toHaveLength(591)
 
     for (const [sectionId, expected] of Object.entries(
       AUTHORITATIVE_SECTION_COUNTS,
@@ -517,9 +616,9 @@ describe('Phase 2 curriculum hierarchy', () => {
     )
 
     expect(sqlSections).toHaveLength(20)
-    expect(sqlTopics).toHaveLength(245)
+    expect(sqlTopics).toHaveLength(285)
     expect(classified).toHaveLength(30)
-    expect(nested).toHaveLength(215)
+    expect(nested).toHaveLength(255)
     expect(getTopicMeta('c7-crud')?.sectionId).toBe('C7.5')
     expect(getTopicMeta('c7-leftmost-prefix')?.parentTopicId).toBe('c7-composite-indexes')
     expect(getTopicMeta('c7-serializable-ssi')?.sectionId).toBe('C7.12')
@@ -529,6 +628,342 @@ describe('Phase 2 curriculum hierarchy', () => {
     const group = groupSectionsForDisplay(SECTIONS).find((candidate) => candidate.id === 'C7')
     expect(group?.title).toBe('SQL & PostgreSQL')
     expect(group?.sections).toHaveLength(20)
+  })
+
+  it('models JPA and Hibernate as 16 interview-grade sections for experienced backend roles', () => {
+    const jpaSections = SECTIONS.filter((section) => /^C8\.\d+$/.test(section.id))
+    const jpaTopics = TOPICS.filter((topic) => topic.sectionId.startsWith('C8.'))
+    const classified = jpaTopics.filter(
+      (topic) => topic.curriculumLevel === 'classified-item',
+    )
+    const nested = jpaTopics.filter(
+      (topic) => topic.curriculumLevel === 'nested-concept',
+    )
+
+    expect(jpaSections).toHaveLength(16)
+    expect(jpaTopics).toHaveLength(129)
+    expect(classified).toHaveLength(20)
+    expect(nested).toHaveLength(109)
+    expect(getTopicMeta('c8-entities')?.sectionId).toBe('C8.2')
+    expect(getTopicMeta('c8-repositories')?.sectionId).toBe('C8.8')
+    expect(getTopicMeta('c8-nplus1')?.sectionId).toBe('C8.7')
+    expect(getTopicMeta('c8-pessimistic-locking')?.parentTopicId).toBe('c8-optimistic-locking')
+    expect(getTopicMeta('c8-testcontainers-postgres')?.sectionId).toBe('C8.14')
+
+    const group = groupSectionsForDisplay(SECTIONS).find((candidate) => candidate.id === 'C8')
+    expect(group?.title).toBe('JPA / Hibernate')
+    expect(group?.sections).toHaveLength(16)
+  })
+
+  it('models Security as 15 interview-grade sections for experienced backend roles', () => {
+    const securitySections = SECTIONS.filter((section) => /^C9\.\d+$/.test(section.id))
+    const securityTopics = TOPICS.filter((topic) => topic.sectionId.startsWith('C9.'))
+    const classified = securityTopics.filter(
+      (topic) => topic.curriculumLevel === 'classified-item',
+    )
+    const nested = securityTopics.filter(
+      (topic) => topic.curriculumLevel === 'nested-concept',
+    )
+
+    expect(securitySections).toHaveLength(15)
+    expect(securityTopics).toHaveLength(95)
+    expect(classified).toHaveLength(15)
+    expect(nested).toHaveLength(80)
+    expect(getTopicMeta('c9-authentication')?.sectionId).toBe('C9.1')
+    expect(getTopicMeta('c9-auth-code-pkce')?.parentTopicId).toBe('c9-oauth2')
+    expect(getTopicMeta('c9-spring-security')?.sectionId).toBe('C9.7')
+    expect(getTopicMeta('c9-token-management')?.sectionId).toBe('C9.6')
+    expect(getTopicMeta('c9-broken-access-control')?.parentTopicId).toBe('c9-rbac')
+    expect(getTopicMeta('c9-csp')?.sectionId).toBe('C9.9')
+
+    const group = groupSectionsForDisplay(SECTIONS).find((candidate) => candidate.id === 'C9')
+    expect(group?.title).toBe('Security')
+    expect(group?.sections).toHaveLength(15)
+  })
+
+  it('models Redis as 16 interview-grade sections from foundations to operations', () => {
+    const redisSections = SECTIONS.filter((section) => /^C10\.\d+$/.test(section.id))
+    const redisTopics = TOPICS.filter((topic) => topic.sectionId.startsWith('C10.'))
+    const classified = redisTopics.filter(
+      (topic) => topic.curriculumLevel === 'classified-item',
+    )
+    const nested = redisTopics.filter(
+      (topic) => topic.curriculumLevel === 'nested-concept',
+    )
+
+    expect(redisSections).toHaveLength(16)
+    expect(redisTopics).toHaveLength(91)
+    expect(classified).toHaveLength(16)
+    expect(nested).toHaveLength(75)
+    expect(getTopicMeta('c10-redis-foundations')?.sectionId).toBe('C10.1')
+    expect(getTopicMeta('c10-data-structures')?.sectionId).toBe('C10.4')
+    expect(getTopicMeta('c10-when-not-to-cache')?.parentTopicId).toBe('c10-cache-aside')
+    expect(getTopicMeta('c10-rate-limiting')?.sectionId).toBe('C10.10')
+    expect(getTopicMeta('c10-strings')?.parentTopicId).toBe('c10-data-structures')
+    expect(getTopicMeta('c10-replication')?.sectionId).toBe('C10.15')
+
+    const group = groupSectionsForDisplay(SECTIONS).find((candidate) => candidate.id === 'C10')
+    expect(group?.title).toBe('Redis')
+    expect(group?.sections).toHaveLength(16)
+  })
+
+  it('models Kafka as 16 interview-grade sections from foundations to production patterns', () => {
+    const kafkaSections = SECTIONS.filter((section) => /^C11\.\d+$/.test(section.id))
+    const kafkaTopics = TOPICS.filter((topic) => topic.sectionId.startsWith('C11.'))
+    const classified = kafkaTopics.filter(
+      (topic) => topic.curriculumLevel === 'classified-item',
+    )
+    const nested = kafkaTopics.filter(
+      (topic) => topic.curriculumLevel === 'nested-concept',
+    )
+
+    expect(kafkaSections).toHaveLength(16)
+    expect(kafkaTopics).toHaveLength(93)
+    expect(classified).toHaveLength(20)
+    expect(nested).toHaveLength(73)
+    expect(getTopicMeta('c11-kafka-foundations')?.sectionId).toBe('C11.1')
+    expect(getTopicMeta('c11-eda')?.sectionId).toBe('C11.2')
+    expect(getTopicMeta('c11-at-least-once')?.parentTopicId).toBe('c11-at-most-once')
+    expect(getTopicMeta('c11-producers')?.sectionId).toBe('C11.6')
+    expect(getTopicMeta('c11-rebalancing')?.sectionId).toBe('C11.8')
+    expect(getTopicMeta('c11-outbox')?.sectionId).toBe('C11.16')
+
+    const group = groupSectionsForDisplay(SECTIONS).find((candidate) => candidate.id === 'C11')
+    expect(group?.title).toBe('Kafka & Event-Driven Systems')
+    expect(group?.sections).toHaveLength(16)
+  })
+
+  it('models Backend Reliability as 14 interview-grade sections for experienced engineers', () => {
+    const reliabilitySections = SECTIONS.filter((section) => /^C12\.\d+$/.test(section.id))
+    const reliabilityTopics = TOPICS.filter((topic) => topic.sectionId.startsWith('C12.'))
+    const classified = reliabilityTopics.filter(
+      (topic) => topic.curriculumLevel === 'classified-item',
+    )
+    const nested = reliabilityTopics.filter(
+      (topic) => topic.curriculumLevel === 'nested-concept',
+    )
+
+    expect(reliabilitySections).toHaveLength(14)
+    expect(reliabilityTopics).toHaveLength(86)
+    expect(classified).toHaveLength(15)
+    expect(nested).toHaveLength(71)
+    expect(getTopicMeta('c12-reliability-foundations')?.sectionId).toBe('C12.1')
+    expect(getTopicMeta('c12-timeouts')?.sectionId).toBe('C12.2')
+    expect(getTopicMeta('c12-exponential-backoff')?.sectionId).toBe('C12.3')
+    expect(getTopicMeta('c12-jitter')?.parentTopicId).toBe('c12-exponential-backoff')
+    expect(getTopicMeta('c12-idempotency')?.sectionId).toBe('C12.4')
+    expect(getTopicMeta('c12-slos')?.sectionId).toBe('C12.13')
+
+    const group = groupSectionsForDisplay(SECTIONS).find((candidate) => candidate.id === 'C12')
+    expect(group?.title).toBe('Backend Reliability')
+    expect(group?.sections).toHaveLength(14)
+  })
+
+  it('models Testing as 14 interview-grade sections for experienced backend engineers', () => {
+    const testingSections = SECTIONS.filter((section) => /^C13\.\d+$/.test(section.id))
+    const testingTopics = TOPICS.filter((topic) => topic.sectionId.startsWith('C13.'))
+    const classified = testingTopics.filter(
+      (topic) => topic.curriculumLevel === 'classified-item',
+    )
+    const nested = testingTopics.filter(
+      (topic) => topic.curriculumLevel === 'nested-concept',
+    )
+
+    expect(testingSections).toHaveLength(14)
+    expect(testingTopics).toHaveLength(82)
+    expect(classified).toHaveLength(14)
+    expect(nested).toHaveLength(68)
+    expect(getTopicMeta('c13-testing-strategy')?.sectionId).toBe('C13.1')
+    expect(getTopicMeta('c13-unit-testing')?.sectionId).toBe('C13.2')
+    expect(getTopicMeta('c13-mockito')?.sectionId).toBe('C13.4')
+    expect(getTopicMeta('c13-testcontainers')?.sectionId).toBe('C13.8')
+    expect(getTopicMeta('c13-mockbean-spybean')?.parentTopicId).toBe('c13-spring-boot-testing')
+    expect(getTopicMeta('c13-load-testing')?.sectionId).toBe('C13.12')
+
+    const group = groupSectionsForDisplay(SECTIONS).find((candidate) => candidate.id === 'C13')
+    expect(group?.title).toBe('Testing')
+    expect(group?.sections).toHaveLength(14)
+  })
+
+  it('models Docker / DevOps as 16 interview-grade sections for experienced full-stack engineers', () => {
+    const dockerSections = SECTIONS.filter((section) => /^C14\.\d+$/.test(section.id))
+    const dockerTopics = TOPICS.filter((topic) => topic.sectionId.startsWith('C14.'))
+    const classified = dockerTopics.filter(
+      (topic) => topic.curriculumLevel === 'classified-item',
+    )
+    const nested = dockerTopics.filter(
+      (topic) => topic.curriculumLevel === 'nested-concept',
+    )
+
+    expect(dockerSections).toHaveLength(16)
+    expect(dockerTopics).toHaveLength(92)
+    expect(classified).toHaveLength(17)
+    expect(nested).toHaveLength(75)
+    expect(getTopicMeta('c14-devops-foundations')?.sectionId).toBe('C14.1')
+    expect(getTopicMeta('c14-linux')?.sectionId).toBe('C14.3')
+    expect(getTopicMeta('c14-processes')?.parentTopicId).toBe('c14-linux')
+    expect(getTopicMeta('c14-containers')?.sectionId).toBe('C14.4')
+    expect(getTopicMeta('c14-dockerfile')?.sectionId).toBe('C14.6')
+    expect(getTopicMeta('c14-multi-stage')?.sectionId).toBe('C14.6')
+    expect(getTopicMeta('c14-cicd')?.sectionId).toBe('C14.10')
+    expect(getTopicMeta('c14-kubernetes')?.sectionId).toBe('C14.12')
+    expect(getTopicMeta('c14-kubernetes')?.priority).toBe('tier2')
+    expect(getTopicMeta('c14-devsecops')?.sectionId).toBe('C14.16')
+
+    const group = groupSectionsForDisplay(SECTIONS).find((candidate) => candidate.id === 'C14')
+    expect(group?.title).toBe('Docker / DevOps')
+    expect(group?.sections).toHaveLength(16)
+  })
+
+  it('models AWS / Cloud as 16 interview-grade sections for experienced full-stack engineers', () => {
+    const awsSections = SECTIONS.filter((section) => /^C15\.\d+$/.test(section.id))
+    const awsTopics = TOPICS.filter((topic) => topic.sectionId.startsWith('C15.'))
+    const classified = awsTopics.filter(
+      (topic) => topic.curriculumLevel === 'classified-item',
+    )
+    const nested = awsTopics.filter(
+      (topic) => topic.curriculumLevel === 'nested-concept',
+    )
+
+    expect(awsSections).toHaveLength(16)
+    expect(awsTopics).toHaveLength(102)
+    expect(classified).toHaveLength(20)
+    expect(nested).toHaveLength(82)
+    expect(getTopicMeta('c15-cloud-foundations')?.sectionId).toBe('C15.1')
+    expect(getTopicMeta('c15-iam')?.sectionId).toBe('C15.2')
+    expect(getTopicMeta('c15-ec2')?.sectionId).toBe('C15.4')
+    expect(getTopicMeta('c15-ecs')?.sectionId).toBe('C15.6')
+    expect(getTopicMeta('c15-eks')?.sectionId).toBe('C15.6')
+    expect(getTopicMeta('c15-eks')?.priority).toBe('tier2')
+    expect(getTopicMeta('c15-s3')?.sectionId).toBe('C15.7')
+    expect(getTopicMeta('c15-vpc')?.sectionId).toBe('C15.9')
+    expect(getTopicMeta('c15-rds')?.sectionId).toBe('C15.12')
+    expect(getTopicMeta('c15-dynamodb')?.sectionId).toBe('C15.13')
+    expect(getTopicMeta('c15-cost-governance')?.sectionId).toBe('C15.16')
+
+    const group = groupSectionsForDisplay(SECTIONS).find((candidate) => candidate.id === 'C15')
+    expect(group?.title).toBe('AWS / Cloud')
+    expect(group?.sections).toHaveLength(16)
+  })
+
+  it('models Observability as 14 interview-grade sections for experienced full-stack engineers', () => {
+    const obsSections = SECTIONS.filter((section) => /^C16\.\d+$/.test(section.id))
+    const obsTopics = TOPICS.filter((topic) => topic.sectionId.startsWith('C16.'))
+    const classified = obsTopics.filter(
+      (topic) => topic.curriculumLevel === 'classified-item',
+    )
+    const nested = obsTopics.filter(
+      (topic) => topic.curriculumLevel === 'nested-concept',
+    )
+
+    expect(obsSections).toHaveLength(14)
+    expect(obsTopics).toHaveLength(83)
+    expect(classified).toHaveLength(17)
+    expect(nested).toHaveLength(66)
+    expect(getTopicMeta('c16-observability-foundations')?.sectionId).toBe('C16.1')
+    expect(getTopicMeta('c16-structured-logging')?.sectionId).toBe('C16.2')
+    expect(getTopicMeta('c16-latency-percentiles')?.sectionId).toBe('C16.4')
+    expect(getTopicMeta('c16-p50-p95-p99')?.parentTopicId).toBe('c16-latency-percentiles')
+    expect(getTopicMeta('c16-otel')?.sectionId).toBe('C16.7')
+    expect(getTopicMeta('c16-frontend-observability')?.sectionId).toBe('C16.11')
+    expect(getTopicMeta('c16-prometheus')?.priority).toBe('tier2')
+
+    const group = groupSectionsForDisplay(SECTIONS).find((candidate) => candidate.id === 'C16')
+    expect(group?.title).toBe('Observability')
+    expect(group?.sections).toHaveLength(14)
+  })
+
+  it('models System Design as a progressive 77-section learning and practice path', () => {
+    const systemSections = SECTIONS.filter((section) => /^D(?:[4-9]|10)\.\d+$/.test(section.id))
+    const systemTopics = TOPICS.filter((topic) => /^D(?:[4-9]|10)\./.test(topic.sectionId))
+    const classified = systemTopics.filter(
+      (topic) => topic.curriculumLevel === 'classified-item',
+    )
+    const nested = systemTopics.filter(
+      (topic) => topic.curriculumLevel === 'nested-concept',
+    )
+
+    expect(systemSections).toHaveLength(77)
+    expect(systemTopics).toHaveLength(422)
+    expect(classified).toHaveLength(77)
+    expect(nested).toHaveLength(345)
+    expect(getTopicMeta('d4-system-design-foundations')?.sectionId).toBe('D4.1')
+    expect(getTopicMeta('d4-cap')?.sectionId).toBe('D4.7')
+    expect(getTopicMeta('d4-consistent-hashing')?.parentTopicId).toBe('d4-partitioning')
+    expect(getTopicMeta('d5-caching')?.sectionId).toBe('D5.6')
+    expect(getTopicMeta('d6-websockets')?.sectionId).toBe('D6.4')
+    expect(getTopicMeta('d7-circuit-breakers')?.parentTopicId).toBe('d7-failure-containment')
+    expect(getTopicMeta('d8-qps')?.sectionId).toBe('D8.2')
+    expect(getTopicMeta('d9-interview-framework')?.sectionId).toBe('D9.1')
+    expect(getTopicMeta('d10-url-shortener')?.sectionId).toBe('D10.1')
+    expect(getTopicMeta('d10-stock-exchange')?.sectionId).toBe('D10.27')
+
+    const expectedGroups: Record<string, number> = {
+      D4: 12,
+      D5: 10,
+      D6: 6,
+      D7: 8,
+      D8: 4,
+      D9: 7,
+      D10: 30,
+    }
+    for (const [id, count] of Object.entries(expectedGroups)) {
+      expect(groupSectionsForDisplay(SECTIONS).find((group) => group.id === id)?.sections)
+        .toHaveLength(count)
+    }
+  })
+
+  it('models Applied AI as a build-first 77-section engineering and project path', () => {
+    const aiSections = SECTIONS.filter((section) => /^E(?:[1-9]|1[0-2])\.\d+$/.test(section.id))
+    const aiTopics = TOPICS.filter((topic) => /^E(?:[1-9]|1[0-2])\./.test(topic.sectionId))
+    const classified = aiTopics.filter(
+      (topic) => topic.curriculumLevel === 'classified-item',
+    )
+    const nested = aiTopics.filter(
+      (topic) => topic.curriculumLevel === 'nested-concept',
+    )
+
+    expect(aiSections).toHaveLength(77)
+    expect(aiTopics).toHaveLength(471)
+    expect(classified).toHaveLength(77)
+    expect(nested).toHaveLength(394)
+    expect(getTopicMeta('e1-ai-tool-mastery')?.sectionId).toBe('E1.2')
+    expect(getTopicMeta('e2-transformers')?.sectionId).toBe('E2.7')
+    expect(getTopicMeta('e3-tool-calling')?.sectionId).toBe('E3.4')
+    expect(getTopicMeta('e5-pgvector')?.parentTopicId).toBe('e5-vector-indexes')
+    expect(getTopicMeta('e6-reranking')?.sectionId).toBe('E6.4')
+    expect(getTopicMeta('e7-mcp-fundamentals')?.sectionId).toBe('E7.8')
+    expect(getTopicMeta('e9-tool-correctness')?.sectionId).toBe('E9.4')
+    expect(getTopicMeta('e11-prompt-injection')?.sectionId).toBe('E11.1')
+    expect(getTopicMeta('e12-multi-tenant')?.sectionId).toBe('E12.8')
+
+    const expectedGroups: Record<string, number> = {
+      E1: 4,
+      E2: 8,
+      E3: 5,
+      E4: 5,
+      E5: 4,
+      E6: 8,
+      E7: 10,
+      E8: 8,
+      E9: 5,
+      E10: 7,
+      E11: 5,
+      E12: 8,
+    }
+    for (const [id, count] of Object.entries(expectedGroups)) {
+      expect(groupSectionsForDisplay(SECTIONS).find((group) => group.id === id)?.sections)
+        .toHaveLength(count)
+    }
+  })
+
+  it('includes numbered system-design sections in HLD interview readiness', () => {
+    const readiness = interviewReadiness(EMPTY_USER_STATE)
+
+    expect(readiness.LLD.total).toBe(34)
+    expect(readiness.HLD.total).toBe(422)
+    expect(readiness.HLD.ready).toBe(0)
+    expect(readiness.HLD.percent).toBe(0)
   })
 
   it('marks Phase 4 deep topics contentReady from modules', () => {

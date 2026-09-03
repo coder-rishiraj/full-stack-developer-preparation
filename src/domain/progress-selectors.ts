@@ -148,7 +148,9 @@ export function interviewReadiness(state: UserState) {
     HLD: (t) =>
       t.track === 'D' &&
       (t.kind === 'system-design' ||
-        ['D4', 'D5', 'D6', 'D7', 'D8', 'D9', 'D10'].includes(t.sectionId)),
+        ['D4', 'D5', 'D6', 'D7', 'D8', 'D9', 'D10'].some(
+          (prefix) => t.sectionId === prefix || t.sectionId.startsWith(`${prefix}.`),
+        )),
     Databases: (t) => t.sectionId.startsWith('C7') || t.tags.includes('postgresql'),
     'Distributed Systems': (t) => t.track === 'D',
     'Applied AI': (t) => t.track === 'E',

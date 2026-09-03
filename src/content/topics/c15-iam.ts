@@ -25,6 +25,8 @@ export const content: TopicContent = {
         'Explicit Deny always wins over Allow.',
         'Least privilege: s3:GetObject on arn:.../bucket/prefix/* not s3:*.',
         'sts:AssumeRole for cross-account and CI OIDC.',
+        'Enable MFA on root and privileged human users; prefer SSO/federation over long-lived IAM users.',
+        'Attach roles to EC2 via instance profiles — apps get temporary credentials from IMDSv2.',
         'CloudTrail logs every IAM-authenticated API call.',
       ],
     },

@@ -26,6 +26,8 @@ export const content: TopicContent = {
       items: [
         'Launch in VPC subnet — public subnet + EIP for direct internet or private + NAT.',
         'Instance profile attaches IAM role — app gets temp credentials via IMDS.',
+        'AMIs are golden templates (OS + software) for consistent, repeatable launches.',
+        'Pricing models: On-Demand, Reserved/Savings Plans, and Spot for interruptible work.',
         'Placement group cluster for HPC; spread for HA across hardware.',
         'Spot instances cheap interruptible capacity for batch jobs.',
       ],
