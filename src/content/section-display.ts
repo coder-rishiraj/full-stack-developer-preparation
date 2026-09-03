@@ -10,6 +10,16 @@ const TRACK_SUBSECTION_PREFIX: Record<string, { id: string; title: string }> = {
   B1: { id: 'B1', title: 'JavaScript' },
   B2: { id: 'B2', title: 'TypeScript' },
   B3: { id: 'B3', title: 'Browser & Web Platform' },
+  B4: { id: 'B4', title: 'React' },
+  B5: { id: 'B5', title: 'CSS / UI Engineering' },
+  B6: { id: 'B6', title: 'Frontend System Design' },
+  C1: { id: 'C1', title: 'Core Java' },
+  C2: { id: 'C2', title: 'JVM' },
+  C3: { id: 'C3', title: 'Java Concurrency' },
+  C4: { id: 'C4', title: 'Networking & Web' },
+  C5: { id: 'C5', title: 'Spring Core' },
+  C6: { id: 'C6', title: 'Spring Boot' },
+  C7: { id: 'C7', title: 'SQL & PostgreSQL' },
 }
 
 function flushBuffer(
@@ -37,7 +47,20 @@ export function groupSectionsForDisplay(
     const dot = section.id.indexOf('.')
     const prefix = dot > 0 ? section.id.slice(0, dot) : section.id
     const isSubsection =
-      dot > 0 && (prefix === 'B1' || prefix === 'B2' || prefix === 'B3')
+      dot > 0 &&
+      (prefix === 'B1' ||
+        prefix === 'B2' ||
+        prefix === 'B3' ||
+        prefix === 'B4' ||
+        prefix === 'B5' ||
+        prefix === 'B6' ||
+        prefix === 'C1' ||
+        prefix === 'C2' ||
+        prefix === 'C3' ||
+        prefix === 'C4' ||
+        prefix === 'C5' ||
+        prefix === 'C6' ||
+        prefix === 'C7')
 
     if (isSubsection) {
       if (bufferPrefix && bufferPrefix !== prefix) {

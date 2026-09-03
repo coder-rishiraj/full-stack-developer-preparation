@@ -16,6 +16,7 @@ import {
 import { getTopicContentSync, preloadAllTopicContent } from '@/content/topics'
 import { filterTopics } from '@/domain/progress-selectors'
 import { listCustomTopicsFromMap } from '@/domain/user-content'
+import { groupSectionsForDisplay } from '@/content/section-display'
 
 const AUTHORITATIVE_SECTION_COUNTS: Record<
   string,
@@ -53,9 +54,68 @@ const AUTHORITATIVE_SECTION_COUNTS: Record<
   'B3.25': [1, 3, 0], 'B3.26': [0, 3, 1], 'B3.27': [6, 0, 0], 'B3.28': [6, 0, 0],
   'B3.29': [4, 1, 0], 'B3.30': [3, 3, 0], 'B3.31': [3, 1, 1], 'B3.32': [4, 1, 0],
   'B3.33': [0, 4, 0], 'B3.34': [0, 4, 4], 'B3.35': [4, 1, 0], 'B3.36': [8, 1, 0],
-  'B3.37': [17, 3, 0], B4: [36, 1, 0], B5: [9, 2, 0], B6: [15, 0, 0],
-  C1: [24, 1, 0], C2: [6, 5, 0], C3: [17, 2, 0], C4: [15, 3, 0],
-  C5: [9, 2, 0], C6: [14, 0, 0], C7: [21, 2, 0], C8: [12, 0, 0],
+  'B3.37': [17, 3, 0],
+  'B4.1': [7, 0, 0], 'B4.2': [8, 0, 0], 'B4.3': [9, 0, 0],
+  'B4.4': [3, 0, 0], 'B4.5': [4, 0, 0], 'B4.6': [12, 1, 0],
+  'B4.7': [2, 0, 0], 'B4.8': [3, 0, 0], 'B4.9': [4, 2, 0],
+  'B4.10': [2, 0, 0], 'B4.11': [2, 0, 0], 'B4.12': [10, 0, 0],
+  'B4.13': [4, 0, 0], 'B4.14': [4, 0, 0], 'B4.15': [4, 1, 0],
+  'B4.16': [8, 0, 0], 'B4.17': [6, 0, 0], 'B4.18': [5, 0, 0],
+  'B4.19': [0, 1, 0], 'B4.20': [5, 2, 0], 'B4.21': [1, 0, 0],
+  'B4.22': [0, 1, 0], 'B4.23': [0, 2, 1], 'B4.24': [4, 0, 0],
+  'B5.1': [2, 1, 0], 'B5.2': [2, 0, 0], 'B5.3': [1, 0, 0],
+  'B5.4': [1, 0, 0], 'B5.5': [1, 0, 0], 'B5.6': [2, 0, 0],
+  'B5.7': [3, 0, 0], 'B5.8': [3, 0, 0], 'B5.9': [1, 0, 0],
+  'B5.10': [2, 0, 0], 'B5.11': [1, 1, 0], 'B5.12': [3, 0, 0],
+  'B6.1': [3, 0, 0], 'B6.2': [2, 1, 0], 'B6.3': [1, 0, 0],
+  'B6.4': [1, 0, 0], 'B6.5': [1, 0, 0], 'B6.6': [1, 0, 0],
+  'B6.7': [2, 0, 0], 'B6.8': [1, 0, 0], 'B6.9': [1, 0, 0],
+  'B6.10': [2, 0, 0], 'B6.11': [1, 0, 0], 'B6.12': [1, 0, 0],
+  'B6.13': [3, 0, 0], 'B6.14': [2, 0, 0],
+  'C1.1': [2, 1, 0], 'C1.2': [2, 0, 0], 'C1.3': [2, 0, 0],
+  'C1.4': [2, 0, 0], 'C1.5': [3, 0, 0], 'C1.6': [3, 0, 0],
+  'C1.7': [3, 0, 0], 'C1.8': [2, 0, 0], 'C1.9': [1, 0, 0],
+  'C1.10': [2, 0, 0], 'C1.11': [1, 0, 0], 'C1.12': [1, 0, 0],
+  'C1.13': [5, 0, 0], 'C1.14': [4, 1, 0], 'C1.15': [2, 0, 0],
+  'C1.16': [2, 3, 0],
+  'C2.1': [1, 0, 0], 'C2.2': [1, 0, 0], 'C2.3': [1, 1, 0],
+  'C2.4': [1, 0, 0], 'C2.5': [1, 0, 0], 'C2.6': [1, 0, 0],
+  'C2.7': [1, 0, 0], 'C2.8': [2, 0, 0], 'C2.9': [1, 0, 0],
+  'C2.10': [1, 1, 0], 'C2.11': [0, 2, 0], 'C2.12': [0, 1, 0],
+  'C3.1': [2, 0, 0], 'C3.2': [1, 0, 0], 'C3.3': [1, 0, 0],
+  'C3.4': [2, 0, 0], 'C3.5': [1, 0, 0], 'C3.6': [1, 0, 0],
+  'C3.7': [1, 0, 0], 'C3.8': [1, 0, 0], 'C3.9': [1, 0, 0],
+  'C3.10': [1, 0, 0], 'C3.11': [2, 0, 0], 'C3.12': [2, 0, 0],
+  'C3.13': [0, 1, 0], 'C3.14': [2, 0, 0], 'C3.15': [1, 0, 0],
+  'C3.16': [0, 2, 0],
+  'C3.17': [0, 1, 0],
+  'C4.1': [2, 0, 0], 'C4.2': [0, 1, 1], 'C4.3': [0, 1, 0],
+  'C4.4': [1, 0, 0], 'C4.5': [1, 0, 0], 'C4.6': [1, 0, 0],
+  'C4.7': [1, 0, 0], 'C4.8': [1, 0, 0], 'C4.9': [1, 0, 0],
+  'C4.10': [1, 0, 0], 'C4.11': [2, 0, 0], 'C4.12': [0, 2, 0],
+  'C4.13': [3, 0, 0], 'C4.14': [3, 0, 0], 'C4.15': [2, 1, 0],
+  'C4.16': [1, 0, 0], 'C4.17': [0, 1, 0], 'C4.18': [2, 0, 0],
+  'C4.19': [1, 0, 0],
+  'C5.1': [1, 0, 0], 'C5.2': [1, 0, 0], 'C5.3': [1, 0, 0],
+  'C5.4': [1, 0, 0], 'C5.5': [1, 0, 0], 'C5.6': [1, 0, 0],
+  'C5.7': [1, 0, 0], 'C5.8': [1, 0, 0], 'C5.9': [1, 0, 0],
+  'C5.10': [1, 0, 0], 'C5.11': [0, 1, 0], 'C5.12': [0, 1, 0],
+  'C5.13': [0, 1, 0], 'C5.14': [1, 0, 0],
+  'C6.1': [1, 0, 0], 'C6.2': [1, 0, 0], 'C6.3': [1, 0, 0],
+  'C6.4': [1, 0, 0], 'C6.5': [1, 0, 0], 'C6.6': [1, 0, 0],
+  'C6.7': [1, 0, 0], 'C6.8': [1, 0, 0], 'C6.9': [1, 0, 0],
+  'C6.10': [1, 0, 0], 'C6.11': [1, 0, 0], 'C6.12': [0, 1, 0],
+  'C6.13': [1, 0, 0], 'C6.14': [1, 0, 0], 'C6.15': [0, 1, 0],
+  'C6.16': [1, 0, 0], 'C6.17': [1, 0, 0], 'C6.18': [1, 0, 0],
+  'C6.19': [0, 1, 0], 'C6.20': [1, 0, 0],
+  'C7.1': [1, 0, 0], 'C7.2': [1, 0, 0], 'C7.3': [1, 0, 0],
+  'C7.4': [1, 0, 0], 'C7.5': [1, 0, 0], 'C7.6': [1, 0, 0],
+  'C7.7': [1, 0, 0], 'C7.8': [1, 0, 0], 'C7.9': [2, 0, 0],
+  'C7.10': [1, 0, 0], 'C7.11': [2, 0, 0], 'C7.12': [3, 0, 0],
+  'C7.13': [3, 0, 0], 'C7.14': [3, 0, 0], 'C7.15': [3, 0, 0],
+  'C7.16': [1, 0, 0], 'C7.17': [0, 1, 0], 'C7.18': [1, 0, 0],
+  'C7.19': [0, 1, 0], 'C7.20': [0, 1, 0],
+  C8: [12, 0, 0],
   C9: [14, 0, 0], C10: [6, 4, 0], C11: [13, 4, 0], C12: [12, 0, 0],
   C13: [6, 3, 0], C14: [12, 1, 1], C15: [8, 7, 1], C16: [9, 2, 0],
   D1: [7, 0, 0], D2: [7, 5, 1], D3: [12, 2, 0], D4: [17, 5, 1],
@@ -191,16 +251,16 @@ describe('import/export', () => {
 describe('Phase 2 curriculum hierarchy', () => {
   it('includes full A–E topic list with unique ids', () => {
     const stats = curriculumStats()
-    expect(stats.total).toBe(1154)
-    expect(stats.sections).toBe(170)
-    expect(stats.byTier).toEqual({ tier1: 931, tier2: 203, tier3: 20 })
-    expect(stats.byTrack).toEqual({ A: 117, B: 545, C: 236, D: 137, E: 119 })
+    expect(stats.total).toBe(1310)
+    expect(stats.sections).toBe(328)
+    expect(stats.byTier).toEqual({ tier1: 1061, tier2: 227, tier3: 22 })
+    expect(stats.byTrack).toEqual({ A: 117, B: 647, C: 290, D: 137, E: 119 })
     expect(new Set(TOPICS.map((t) => t.id)).size).toBe(TOPICS.length)
     expect(SECTIONS.length).toBe(stats.sections)
   })
 
   it('matches every authoritative section count and keeps nested concepts attached', () => {
-    expect(Object.keys(AUTHORITATIVE_SECTION_COUNTS)).toHaveLength(170)
+    expect(Object.keys(AUTHORITATIVE_SECTION_COUNTS)).toHaveLength(328)
 
     for (const [sectionId, expected] of Object.entries(
       AUTHORITATIVE_SECTION_COUNTS,
@@ -225,6 +285,250 @@ describe('Phase 2 curriculum hierarchy', () => {
       expect(parent?.sectionId, topic.id).toBe(topic.sectionId)
       expect(parent?.curriculumLevel, topic.id).toBe('classified-item')
     }
+  })
+
+  it('models React as 24 deep sections with nested atomic concepts', () => {
+    const reactSections = SECTIONS.filter((section) => /^B4\.\d+$/.test(section.id))
+    const reactTopics = TOPICS.filter((topic) => topic.sectionId.startsWith('B4.'))
+    const classified = reactTopics.filter(
+      (topic) => topic.curriculumLevel === 'classified-item',
+    )
+    const nested = reactTopics.filter(
+      (topic) => topic.curriculumLevel === 'nested-concept',
+    )
+
+    expect(reactSections).toHaveLength(24)
+    expect(reactTopics).toHaveLength(439)
+    expect(classified).toHaveLength(118)
+    expect(nested).toHaveLength(321)
+    expect(getTopicMeta('b4-fiber')?.sectionId).toBe('B4.3')
+    expect(getTopicMeta('b4-use-action-state')?.sectionId).toBe('B4.17')
+    expect(getTopicMeta('b4-testing-library')?.sectionId).toBe('B4.20')
+
+    const reactGroup = groupSectionsForDisplay(SECTIONS).find((group) => group.id === 'B4')
+    expect(reactGroup?.title).toBe('React')
+    expect(reactGroup?.sections).toHaveLength(24)
+  })
+
+  it('models CSS as 12 deep sections with nested atomic concepts', () => {
+    const cssSections = SECTIONS.filter((section) => /^B5\.\d+$/.test(section.id))
+    const cssTopics = TOPICS.filter((topic) => topic.sectionId.startsWith('B5.'))
+    const classified = cssTopics.filter(
+      (topic) => topic.curriculumLevel === 'classified-item',
+    )
+    const nested = cssTopics.filter(
+      (topic) => topic.curriculumLevel === 'nested-concept',
+    )
+
+    expect(cssSections).toHaveLength(12)
+    expect(cssTopics).toHaveLength(78)
+    expect(classified).toHaveLength(24)
+    expect(nested).toHaveLength(54)
+    expect(getTopicMeta('b5-stacking-context')?.sectionId).toBe('B5.6')
+    expect(getTopicMeta('b5-container-queries')?.sectionId).toBe('B5.8')
+    expect(getTopicMeta('b5-custom-properties')?.sectionId).toBe('B5.9')
+
+    const cssGroup = groupSectionsForDisplay(SECTIONS).find((group) => group.id === 'B5')
+    expect(cssGroup?.title).toBe('CSS / UI Engineering')
+    expect(cssGroup?.sections).toHaveLength(12)
+  })
+
+  it('models frontend system design as 14 deep sections with nested atoms', () => {
+    const fsdSections = SECTIONS.filter((section) => /^B6\.\d+$/.test(section.id))
+    const fsdTopics = TOPICS.filter((topic) => topic.sectionId.startsWith('B6.'))
+    const classified = fsdTopics.filter(
+      (topic) => topic.curriculumLevel === 'classified-item',
+    )
+    const nested = fsdTopics.filter(
+      (topic) => topic.curriculumLevel === 'nested-concept',
+    )
+
+    expect(fsdSections).toHaveLength(14)
+    expect(fsdTopics).toHaveLength(121)
+    expect(classified).toHaveLength(23)
+    expect(nested).toHaveLength(98)
+    expect(getTopicMeta('b6-radio-framework')?.sectionId).toBe('B6.1')
+    expect(getTopicMeta('b6-infinite-scrolling')?.sectionId).toBe('B6.7')
+    expect(getTopicMeta('b6-practice-google-docs')?.parentTopicId).toBe('b6-hld-practice')
+    expect(getTopicMeta('b6-widget-autocomplete')?.parentTopicId).toBe(
+      'b6-component-architecture',
+    )
+
+    const fsdGroup = groupSectionsForDisplay(SECTIONS).find((group) => group.id === 'B6')
+    expect(fsdGroup?.title).toBe('Frontend System Design')
+    expect(fsdGroup?.sections).toHaveLength(14)
+  })
+
+  it('models Core Java as 16 deep sections with nested atomic concepts', () => {
+    const javaSections = SECTIONS.filter((section) => /^C1\.\d+$/.test(section.id))
+    const javaTopics = TOPICS.filter((topic) => topic.sectionId.startsWith('C1.'))
+    const classified = javaTopics.filter(
+      (topic) => topic.curriculumLevel === 'classified-item',
+    )
+    const nested = javaTopics.filter(
+      (topic) => topic.curriculumLevel === 'nested-concept',
+    )
+
+    expect(javaSections).toHaveLength(16)
+    expect(javaTopics).toHaveLength(113)
+    expect(classified).toHaveLength(42)
+    expect(nested).toHaveLength(71)
+    expect(getTopicMeta('c1-string-pool')?.sectionId).toBe('C1.4')
+    expect(getTopicMeta('c1-hashmap-internals')?.sectionId).toBe('C1.13')
+    expect(getTopicMeta('c1-interfaces')?.parentTopicId).toBe('c1-classes')
+    expect(getTopicMeta('c1-hashcode')?.parentTopicId).toBe('c1-equals')
+
+    const javaGroup = groupSectionsForDisplay(SECTIONS).find((group) => group.id === 'C1')
+    expect(javaGroup?.title).toBe('Core Java')
+    expect(javaGroup?.sections).toHaveLength(16)
+  })
+
+  it('models JVM as 12 deep sections with modern runtime concepts', () => {
+    const jvmSections = SECTIONS.filter((section) => /^C2\.\d+$/.test(section.id))
+    const jvmTopics = TOPICS.filter((topic) => topic.sectionId.startsWith('C2.'))
+    const classified = jvmTopics.filter(
+      (topic) => topic.curriculumLevel === 'classified-item',
+    )
+    const nested = jvmTopics.filter(
+      (topic) => topic.curriculumLevel === 'nested-concept',
+    )
+
+    expect(jvmSections).toHaveLength(12)
+    expect(jvmTopics).toHaveLength(82)
+    expect(classified).toHaveLength(16)
+    expect(nested).toHaveLength(66)
+    expect(getTopicMeta('c2-jvm-jdk-jre')?.sectionId).toBe('C2.1')
+    expect(getTopicMeta('c2-class-loading')?.sectionId).toBe('C2.4')
+    expect(getTopicMeta('c2-thread-dumps')?.parentTopicId).toBe('c2-heap-dumps')
+    expect(getTopicMeta('c2-zgc')?.parentTopicId).toBe('c2-gc-collectors')
+
+    const jvmGroup = groupSectionsForDisplay(SECTIONS).find((group) => group.id === 'C2')
+    expect(jvmGroup?.title).toBe('JVM')
+    expect(jvmGroup?.sections).toHaveLength(12)
+  })
+
+  it('models Java concurrency as 17 deep sections including modern Loom concepts', () => {
+    const concurrencySections = SECTIONS.filter((section) => /^C3\.\d+$/.test(section.id))
+    const concurrencyTopics = TOPICS.filter((topic) => topic.sectionId.startsWith('C3.'))
+    const classified = concurrencyTopics.filter(
+      (topic) => topic.curriculumLevel === 'classified-item',
+    )
+    const nested = concurrencyTopics.filter(
+      (topic) => topic.curriculumLevel === 'nested-concept',
+    )
+
+    expect(concurrencySections).toHaveLength(17)
+    expect(concurrencyTopics).toHaveLength(142)
+    expect(classified).toHaveLength(23)
+    expect(nested).toHaveLength(119)
+    expect(getTopicMeta('c3-happens-before')?.sectionId).toBe('C3.4')
+    expect(getTopicMeta('c3-synchronized')?.parentTopicId).toBe('c3-synchronization')
+    expect(getTopicMeta('c3-virtual-threads')?.sectionId).toBe('C3.15')
+    expect(getTopicMeta('c3-structured-concurrency')?.priority).toBe('tier2')
+
+    const group = groupSectionsForDisplay(SECTIONS).find((candidate) => candidate.id === 'C3')
+    expect(group?.title).toBe('Java Concurrency')
+    expect(group?.sections).toHaveLength(17)
+  })
+
+  it('models Networking & Web as 19 layered sections with Java networking APIs', () => {
+    const networkingSections = SECTIONS.filter((section) => /^C4\.\d+$/.test(section.id))
+    const networkingTopics = TOPICS.filter((topic) => topic.sectionId.startsWith('C4.'))
+    const classified = networkingTopics.filter(
+      (topic) => topic.curriculumLevel === 'classified-item',
+    )
+    const nested = networkingTopics.filter(
+      (topic) => topic.curriculumLevel === 'nested-concept',
+    )
+
+    expect(networkingSections).toHaveLength(19)
+    expect(networkingTopics).toHaveLength(203)
+    expect(classified).toHaveLength(30)
+    expect(nested).toHaveLength(173)
+    expect(getTopicMeta('c4-tcp-handshake')?.sectionId).toBe('C4.7')
+    expect(getTopicMeta('c4-https')?.parentTopicId).toBe('c4-tls')
+    expect(getTopicMeta('c4-http3')?.sectionId).toBe('C4.12')
+    expect(getTopicMeta('c4-url-request-lifecycle')?.sectionId).toBe('C4.18')
+    expect(getTopicMeta('c4-java-httpclient')?.sectionId).toBe('C4.19')
+
+    const group = groupSectionsForDisplay(SECTIONS).find((candidate) => candidate.id === 'C4')
+    expect(group?.title).toBe('Networking & Web')
+    expect(group?.sections).toHaveLength(19)
+  })
+
+  it('models Spring Core as 14 deep sections covering container, DI, AOP and tests', () => {
+    const springSections = SECTIONS.filter((section) => /^C5\.\d+$/.test(section.id))
+    const springTopics = TOPICS.filter((topic) => topic.sectionId.startsWith('C5.'))
+    const classified = springTopics.filter(
+      (topic) => topic.curriculumLevel === 'classified-item',
+    )
+    const nested = springTopics.filter(
+      (topic) => topic.curriculumLevel === 'nested-concept',
+    )
+
+    expect(springSections).toHaveLength(14)
+    expect(springTopics).toHaveLength(86)
+    expect(classified).toHaveLength(14)
+    expect(nested).toHaveLength(72)
+    expect(getTopicMeta('c5-constructor-injection')?.parentTopicId).toBe('c5-di')
+    expect(getTopicMeta('c5-constructor-injection')?.sectionId).toBe('C5.3')
+    expect(getTopicMeta('c5-aop')?.sectionId).toBe('C5.11')
+    expect(getTopicMeta('c5-proxies')?.priority).toBe('tier2')
+    expect(getTopicMeta('c5-circular-dependencies')?.sectionId).toBe('C5.9')
+
+    const group = groupSectionsForDisplay(SECTIONS).find((candidate) => candidate.id === 'C5')
+    expect(group?.title).toBe('Spring Core')
+    expect(group?.sections).toHaveLength(14)
+  })
+
+  it('models Spring Boot as 20 modern sections without duplicating adjacent tracks', () => {
+    const bootSections = SECTIONS.filter((section) => /^C6\.\d+$/.test(section.id))
+    const bootTopics = TOPICS.filter((topic) => topic.sectionId.startsWith('C6.'))
+    const classified = bootTopics.filter(
+      (topic) => topic.curriculumLevel === 'classified-item',
+    )
+    const nested = bootTopics.filter(
+      (topic) => topic.curriculumLevel === 'nested-concept',
+    )
+
+    expect(bootSections).toHaveLength(20)
+    expect(bootTopics).toHaveLength(177)
+    expect(classified).toHaveLength(20)
+    expect(nested).toHaveLength(157)
+    expect(getTopicMeta('c6-auto-configuration')?.sectionId).toBe('C6.3')
+    expect(getTopicMeta('c6-restclient')?.parentTopicId).toBe('c6-http-clients')
+    expect(getTopicMeta('c6-mockito-bean')?.sectionId).toBe('C6.18')
+    expect(getTopicMeta('c6-resttemplate-legacy')?.priority).toBe('tier2')
+    expect(getTopicMeta('c6-aot-native')?.sectionId).toBe('C6.19')
+
+    const group = groupSectionsForDisplay(SECTIONS).find((candidate) => candidate.id === 'C6')
+    expect(group?.title).toBe('Spring Boot')
+    expect(group?.sections).toHaveLength(20)
+  })
+
+  it('models SQL and PostgreSQL as 20 sections from relational semantics to operations', () => {
+    const sqlSections = SECTIONS.filter((section) => /^C7\.\d+$/.test(section.id))
+    const sqlTopics = TOPICS.filter((topic) => topic.sectionId.startsWith('C7.'))
+    const classified = sqlTopics.filter(
+      (topic) => topic.curriculumLevel === 'classified-item',
+    )
+    const nested = sqlTopics.filter(
+      (topic) => topic.curriculumLevel === 'nested-concept',
+    )
+
+    expect(sqlSections).toHaveLength(20)
+    expect(sqlTopics).toHaveLength(245)
+    expect(classified).toHaveLength(30)
+    expect(nested).toHaveLength(215)
+    expect(getTopicMeta('c7-crud')?.sectionId).toBe('C7.5')
+    expect(getTopicMeta('c7-leftmost-prefix')?.parentTopicId).toBe('c7-composite-indexes')
+    expect(getTopicMeta('c7-serializable-ssi')?.sectionId).toBe('C7.12')
+    expect(getTopicMeta('c7-json-jsonb')?.sectionId).toBe('C7.16')
+    expect(getTopicMeta('c7-partitioning')?.priority).toBe('tier2')
+
+    const group = groupSectionsForDisplay(SECTIONS).find((candidate) => candidate.id === 'C7')
+    expect(group?.title).toBe('SQL & PostgreSQL')
+    expect(group?.sections).toHaveLength(20)
   })
 
   it('marks Phase 4 deep topics contentReady from modules', () => {

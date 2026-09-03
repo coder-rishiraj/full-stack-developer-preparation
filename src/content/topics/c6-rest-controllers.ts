@@ -6,7 +6,7 @@ export const restControllersContent: TopicContent = {
   whyExists:
     'REST APIs need thin HTTP adapters over business logic. Annotated mapping methods (@GetMapping, @PostMapping) declaratively bind paths, params, headers, and bodies — replacing manual Servlet parsing and keeping web layer separate from services.',
   mentalModel:
-    'DispatcherServlet routes URI + method to @RequestMapping handler. Method params resolved by HandlerMethodArgumentResolver (@PathVariable, @RequestBody). Return value written by RequestResponseBodyMethodProcessor through MappingJackson2HttpMessageConverter. Controllers delegate to @Service immediately.',
+    'DispatcherServlet routes URI + method to an @RequestMapping handler. HandlerMethodArgumentResolver binds parameters such as @PathVariable and @RequestBody. RequestResponseBodyMethodProcessor writes the return value through a compatible HttpMessageConverter; Boot 3 commonly uses Jackson 2 while Boot 4 uses Jackson 3 by default. Controllers delegate to application services immediately.',
   howItWorks: [
     {
       type: 'list',

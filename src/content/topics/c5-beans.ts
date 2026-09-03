@@ -55,10 +55,9 @@ public class UserService {
       code: `@Configuration
 public class AppConfig {
   @Bean
-  public RestTemplate restTemplate(RestTemplateBuilder builder) {
+  public RestClient restClient(RestClient.Builder builder) {
     return builder
-        .setConnectTimeout(Duration.ofSeconds(3))
-        .setReadTimeout(Duration.ofSeconds(10))
+        .requestFactory(new JdkClientHttpRequestFactory())
         .build();
   }
 }`,
@@ -71,7 +70,7 @@ public class AppConfig {
         'BeanDefinition stores class, scope, lazy, init/destroy method names.',
         'Default bean name: @Service UserService → userService.',
         'Alias support via @Bean("customName") or @Qualifier.',
-        'Conditional beans: @ConditionalOnProperty, @Profile.',
+        'Conditional beans: @Conditional, @Profile (Boot adds @ConditionalOnProperty).',
         'FactoryBean<T> produces beans; getObject() is product.',
       ],
     },

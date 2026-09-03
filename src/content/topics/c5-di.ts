@@ -77,7 +77,7 @@ MessageSender emailSender() { return new EmailSender(); }`,
       items: [
         'AutowiredAnnotationBeanPostProcessor resolves @Autowired injection points.',
         'Constructor resolution uses parameter types + qualifiers.',
-        'Circular deps: setter/field may use proxies; constructor cycles fail.',
+        'Constructor cycles fail at startup. Boot 2.6+ also rejects circular references by default; do not rely on setter/field cycles.',
         'JSR-330 @Inject interchangeable with @Autowired (mostly).',
         'Spring Boot test slices (@WebMvcTest) inject mocks via @MockBean.',
       ],

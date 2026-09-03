@@ -114,7 +114,7 @@ CompletableFuture<Dashboard> dash = userCf.thenCombine(
       'join vs get?',
     ],
     misconceptions: [
-      'supplyAsync always runs on new thread (may run sync if completed fast)',
+      'supplyAsync creates a dedicated thread (it submits to the common pool or the supplied Executor)',
       'thenApplyAsync always better (overhead if trivial work)',
     ],
     traps: ['CPU work on commonPool blocking parallel streams'],

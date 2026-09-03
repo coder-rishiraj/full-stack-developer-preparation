@@ -4,7 +4,7 @@ export const locksContent: TopicContent = {
   whatIsIt:
     'java.util.concurrent locks (ReentrantLock, ReadWriteLock, StampedLock) are explicit mutual-exclusion APIs built on AQS. They offer tryLock, timed/interruptible acquisition, fairness policies, and multiple Condition queues — beyond intrinsic synchronized monitors.',
   whyExists:
-    'Production code needs timed waits, lock ordering diagnostics, read/write sharing, and non-reentrant-adjacent features. Explicit locks integrate with executors and avoid some virtual-thread pinning patterns when used instead of synchronized.',
+    'Production code sometimes needs timed or interruptible acquisition, fairness, multiple wait conditions, or read/write modes. Since JDK 24, avoiding synchronized pinning is no longer a reason by itself to choose ReentrantLock.',
   mentalModel:
     'ReentrantLock = synchronized with knobs. ReadWriteLock: many readers OR one writer. StampedLock: optimistic reads with validation stamp. Always unlock in finally; prefer tryLock with timeout to avoid indefinite deadlock.',
   howItWorks: [

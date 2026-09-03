@@ -2,7 +2,7 @@ import type { TopicContent } from '@/domain/types'
 
 export const testingContent: TopicContent = {
   whatIsIt:
-    'Spring Boot testing layers: @WebMvcTest (controller slice), @DataJpaTest (repository), @SpringBootTest (full context), MockMvc for HTTP assertions, @MockBean to replace beans, Testcontainers for real PostgreSQL integration.',
+    'Spring Boot testing layers: @WebMvcTest (controller slice), @DataJpaTest (repository), @SpringBootTest (full context), MockMvc for HTTP assertions, @MockitoBean to override context beans, and Testcontainers for real PostgreSQL integration.',
   whyExists:
     'Full context tests are slow and flaky; slices load minimal beans for fast feedback. MockMvc tests HTTP contract without starting browser; Testcontainers validates SQL against real DB behavior MVCC/constraints.',
   mentalModel:
@@ -11,10 +11,10 @@ export const testingContent: TopicContent = {
     {
       type: 'list',
       items: [
-        '@WebMvcTest(UserController.class) + @MockBean UserService — MockMvc perform get/post.',
+        '@WebMvcTest(UserController.class) + @MockitoBean UserService — MockMvc perform get/post.',
         '@DataJpaTest — in-memory or Testcontainers PostgreSQL; @Autowired TestEntityManager.',
         '@SpringBootTest(webEnvironment = RANDOM_PORT) + TestRestTemplate or WebTestClient.',
-        '@MockBean replaces bean in test context; @SpyBean partial mock.',
+        '@MockitoBean overrides a bean in the test context; @MockitoSpyBean wraps a real bean.',
         '@Testcontainers + @Container static PostgreSQLContainer for shared DB.',
       ],
     },
@@ -44,7 +44,7 @@ export const testingContent: TopicContent = {
       code: `@WebMvcTest(UserController.class)
 class UserControllerTest {
   @Autowired MockMvc mockMvc;
-  @MockBean UserService userService;
+  @MockitoBean UserService userService;
 
   @Test
   void returnsUser() throws Exception {
@@ -102,7 +102,7 @@ class OrderFlowIT {
     {
       type: 'list',
       items: [
-        '@MockBean uses Mockito mock in ApplicationContext — slower than pure unit test.',
+        '@MockitoBean uses a Mockito mock in the ApplicationContext — slower than a pure unit test.',
         'Test slice excludes @Service unless @Import — controller test mocks service.',
         '@DirtiesContext resets context if test mutates beans — expensive.',
         'spring-boot-testcontainers auto-starts containers (Boot 3.1+).',
@@ -118,7 +118,7 @@ class OrderFlowIT {
     ],
     disadvantages: [
       '@SpringBootTest slow for large context',
-      '@MockBean can hide integration bugs',
+      '@MockitoBean can hide integration bugs',
       'Testcontainers needs Docker in CI',
     ],
     alternatives: [
@@ -137,7 +137,7 @@ class OrderFlowIT {
   },
   failureModes: [
     '@WebMvcTest loads security — 401 unless @AutoConfigureMockMvc(addFilters = false) or @WithMockUser.',
-    'MockBean type mismatch — context fails to start.',
+    'MockitoBean type or name mismatch — context fails to start.',
     'Shared mutable state between tests without @Transactional rollback.',
     'H2 passes but PostgreSQL JSON/constraint fails in prod.',
     'Testing implementation details not behavior.',
@@ -149,12 +149,12 @@ class OrderFlowIT {
   interview: {
     expectations: [
       '@WebMvcTest vs @SpringBootTest',
-      'MockMvc and @MockBean',
+      'MockMvc and @MockitoBean',
       'Testcontainers purpose',
     ],
     commonQuestions: [
       'How test REST controller in Spring Boot?',
-      'Difference @MockBean and @Mock?',
+      'Difference @MockitoBean and @Mock?',
       'Why Testcontainers over H2?',
     ],
     followUps: [
@@ -163,7 +163,7 @@ class OrderFlowIT {
     ],
     misconceptions: [
       '@SpringBootTest required for all tests',
-      '@Mock works in Spring tests without @MockBean',
+      '@Mock replaces a Spring context bean',
     ],
     traps: ['Only MockMvc with mocked service — zero integration coverage'],
     strongSignals: [
@@ -174,7 +174,7 @@ class OrderFlowIT {
   },
   keyTakeaways: [
     '@WebMvcTest + MockMvc for controllers.',
-    '@MockBean replaces context beans in slice tests.',
+    '@MockitoBean replaces context beans in slice tests.',
     '@DataJpaTest + Testcontainers for real SQL.',
     '@SpringBootTest sparingly for E2E.',
     '@Transactional rolls back DB in tests.',
@@ -183,12 +183,12 @@ class OrderFlowIT {
     {
       level: 'basic',
       question: 'Test controller without starting full app?',
-      answerHint: '@WebMvcTest + MockMvc + @MockBean dependencies.',
+      answerHint: '@WebMvcTest + MockMvc + @MockitoBean dependencies.',
     },
     {
       level: 'intermediate',
-      question: '@MockBean vs @Mock?',
-      answerHint: '@MockBean registers mock in Spring context; @Mock pure Mockito field.',
+      question: '@MockitoBean vs @Mock?',
+      answerHint: '@MockitoBean overrides a bean in the Spring context; @Mock is a pure Mockito field.',
     },
     {
       level: 'advanced',
@@ -198,13 +198,13 @@ class OrderFlowIT {
   ],
   flashcards: [
     { front: '@WebMvcTest loads', back: 'Web layer slice — controllers, MockMvc' },
-    { front: '@MockBean', back: 'Mockito mock as Spring bean replacement' },
+    { front: '@MockitoBean', back: 'Mockito mock as Spring bean override' },
     { front: 'MockMvc perform', back: 'Simulate HTTP and assert status/jsonPath' },
   ],
   quickRevision: [
     'Test pyramid',
     '@WebMvcTest + MockMvc',
-    '@MockBean not @Mock',
+    '@MockitoBean not @Mock',
     'Testcontainers Postgres',
     '@DataJpaTest repos',
     '@SpringBootTest E2E sparse',

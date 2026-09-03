@@ -51,8 +51,8 @@ describe('Phase 5 quality control', () => {
     }
 
     expect(report.topicCount).toBe(TOPICS.length)
-    expect(report.classifiedCount).toBe(1154)
-    expect(report.nestedConceptCount).toBe(590)
+    expect(report.classifiedCount).toBe(1310)
+    expect(report.nestedConceptCount).toBe(1917)
     expect(report.contentCount).toBe(TOPICS.length)
     expect(report.errors).toHaveLength(0)
     expect(report.warnings).toHaveLength(0)

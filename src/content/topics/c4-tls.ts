@@ -33,7 +33,7 @@ export const tlsContent: TopicContent = {
     {
       type: 'list',
       items: [
-        'TLS 1.3: 1-RTT handshake (2-RTT first connect); removed weak ciphers.',
+        'TLS 1.3 completes a full handshake in 1 RTT; a new HTTPS-over-TCP connection also pays the TCP handshake first.',
         'Mutual TLS (mTLS): client also presents certificate.',
         'Session tickets / PSK resumption reduces handshake RTT.',
         'OCSP stapling: server attaches cert revocation status.',
@@ -155,7 +155,7 @@ ctx.init(null, tmf.getTrustManagers(), new SecureRandom());`,
     },
   ],
   flashcards: [
-    { front: 'TLS 1.3 handshake RTT', back: '1-RTT typical (2-RTT first flight some cases)' },
+    { front: 'TLS 1.3 full handshake', back: '1 RTT for TLS, in addition to a cold TCP handshake' },
     { front: 'ALPN', back: 'Negotiates h2 vs http/1.1 during TLS handshake' },
     { front: 'mTLS', back: 'Client and server both present certificates' },
   ],

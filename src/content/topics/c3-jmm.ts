@@ -6,7 +6,7 @@ export const jmmContent: TopicContent = {
   whyExists:
     'Without rules, optimized hardware and JIT would break naive single-thread reasoning. The JMM gives portable guarantees for synchronized, volatile, thread start/join, and concurrent APIs so correctly synchronized programs behave consistently on all JVMs.',
   mentalModel:
-    'Each thread has a working view of memory; flushes/sync points publish changes. If action A happens-before B, B sees A’s effects. No happens-before → data races on non-volatile/non-sync fields are undefined behavior (not just stale reads).',
+    'If action A happens-before B, B is guaranteed to observe A’s memory effects. Without a happens-before edge, conflicting accesses form a data race: the JMM still constrains executions, but counterintuitive non-sequentially-consistent results can occur.',
   howItWorks: [
     {
       type: 'paragraph',
@@ -27,7 +27,7 @@ export const jmmContent: TopicContent = {
       type: 'callout',
       variant: 'warning',
       title: 'Data race definition',
-      text: 'Two accesses to same field, at least one write, not ordered by happens-before → data race. Avoid for non-volatile fields; behavior undefined except limited atomicity for 32/64-bit primitives.',
+      text: 'Two conflicting accesses to the same variable, at least one write, not ordered by happens-before → data race. Java does not call this C/C++-style undefined behavior, but correctly synchronized reasoning no longer applies and surprising legal results can occur.',
     },
   ],
   architecture: {
@@ -132,7 +132,7 @@ void writer() { x = 42; ready = true; }
   },
   keyTakeaways: [
     'JMM = visibility and ordering rules via happens-before.',
-    'Data race on plain fields → undefined behavior.',
+    'Data races permit counterintuitive outcomes; Java still imposes causality and safety constraints.',
     'synchronized/volatile/thread start/join create HB edges.',
     'volatile fixes flag publication; lock for compound state.',
     'final fields + safe publication after ctor complete.',
@@ -165,7 +165,7 @@ void writer() { x = 42; ready = true; }
     'Monitor unlock→lock',
     'volatile write→read',
     'start/join HB edges',
-    'Data race = UB on plain fields',
+    'Data race = no sequential-consistency guarantee',
     'DCL needs volatile ref',
   ],
 }

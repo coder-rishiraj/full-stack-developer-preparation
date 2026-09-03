@@ -1,0 +1,374 @@
+import type { Priority } from '@/domain/types'
+import type { SectionSeed, TopicSeed } from './build'
+
+const SQL = ['sql', 'postgresql'] as const
+const M34 = [3, 4]
+const M56 = [5, 6]
+
+function item(
+  id: string,
+  title: string,
+  priority: Priority = 'tier1',
+  extra: Partial<TopicSeed> = {},
+): TopicSeed {
+  const { tags, executionPriority, ...rest } = extra
+  return {
+    id,
+    title,
+    priority,
+    months: extra.months ?? (priority === 'tier1' ? M34 : M56),
+    tags: [...SQL, ...(tags ?? [])],
+    executionPriority:
+      executionPriority ?? (priority === 'tier1' ? 'p0' : priority === 'tier2' ? 'p1' : 'later'),
+    ...rest,
+  }
+}
+
+function nest(
+  parent: string,
+  id: string,
+  title: string,
+  priority: Priority = 'tier1',
+  extra: Partial<TopicSeed> = {},
+): TopicSeed {
+  return item(id, title, priority, {
+    ...extra,
+    curriculumLevel: 'nested-concept',
+    parentTopicId: parent,
+  })
+}
+
+function section(id: string, title: string, order: number, topics: TopicSeed[]): SectionSeed {
+  return {
+    id,
+    track: 'C',
+    title,
+    order,
+    defaultKind: 'theory',
+    defaultDepth: 'deep',
+    topics,
+  }
+}
+
+/**
+ * C7.1–C7.20 — portable relational SQL followed by PostgreSQL internals and operations.
+ * ORM/entity behavior stays in C8, application security in C9, and distributed
+ * database architecture in Track D. Existing C7 IDs remain stable.
+ */
+export const TRACK_C_SQL_SECTIONS: SectionSeed[] = [
+  section('C7.1', 'Relational & PostgreSQL Foundations', 99, [
+    item('c7-relational-foundations', 'Relational Databases & PostgreSQL'),
+    nest('c7-relational-foundations', 'c7-relational-model', 'Relations, Tuples, Attributes & Domains'),
+    nest('c7-relational-foundations', 'c7-sql-sub-languages', 'DDL, DML, DQL, DCL & TCL'),
+    nest('c7-relational-foundations', 'c7-sql-vs-postgresql', 'Standard SQL vs PostgreSQL Dialect'),
+    nest('c7-relational-foundations', 'c7-postgresql-architecture', 'PostgreSQL Client/Server Architecture'),
+    nest('c7-relational-foundations', 'c7-installation-cluster', 'Installation, Cluster & Database Initialization', 'tier2'),
+    nest('c7-relational-foundations', 'c7-psql', 'psql Essentials'),
+    nest('c7-relational-foundations', 'c7-pgadmin', 'pgAdmin & Database GUI Tools', 'tier2'),
+    nest('c7-relational-foundations', 'c7-database-schema-search-path', 'Database, Schema & search_path'),
+  ]),
+
+  section('C7.2', 'SQL Syntax, Types & Expressions', 100, [
+    item('c7-sql-syntax-types', 'SQL Syntax, Data Types & Expressions'),
+    nest('c7-sql-syntax-types', 'c7-identifiers-keywords', 'Identifiers, Keywords & Quoting'),
+    nest('c7-sql-syntax-types', 'c7-comments-semicolons', 'Statements, Semicolons & Comments'),
+    nest('c7-sql-syntax-types', 'c7-scalar-types', 'Numeric, Boolean & Character Types'),
+    nest('c7-sql-syntax-types', 'c7-date-time-types', 'DATE, TIME, TIMESTAMP & INTERVAL'),
+    nest('c7-sql-syntax-types', 'c7-timestamp-time-zone', 'timestamp vs timestamptz'),
+    nest('c7-sql-syntax-types', 'c7-null-three-valued-logic', 'NULL & Three-Valued Logic'),
+    nest('c7-sql-syntax-types', 'c7-arithmetic-comparison', 'Arithmetic & Comparison Operators'),
+    nest('c7-sql-syntax-types', 'c7-logical-operators', 'AND, OR & NOT'),
+    nest('c7-sql-syntax-types', 'c7-casts-conversion', 'CAST, :: & Type Conversion'),
+    nest('c7-sql-syntax-types', 'c7-operator-precedence', 'Operator Precedence'),
+  ]),
+
+  section('C7.3', 'Databases, Schemas & Table DDL', 101, [
+    item('c7-ddl', 'Database, Schema & Table DDL'),
+    nest('c7-ddl', 'c7-create-drop-database', 'CREATE & DROP DATABASE', 'tier2'),
+    nest('c7-ddl', 'c7-create-drop-schema', 'CREATE & DROP SCHEMA'),
+    nest('c7-ddl', 'c7-create-table', 'CREATE TABLE'),
+    nest('c7-ddl', 'c7-alter-table', 'ALTER TABLE'),
+    nest('c7-ddl', 'c7-drop-truncate-table', 'DROP vs TRUNCATE vs DELETE'),
+    nest('c7-ddl', 'c7-rename-table-column', 'Renaming Tables & Columns'),
+    nest('c7-ddl', 'c7-temporary-unlogged-tables', 'Temporary & Unlogged Tables', 'tier2'),
+    nest('c7-ddl', 'c7-create-table-as', 'CREATE TABLE AS & SELECT INTO'),
+    nest('c7-ddl', 'c7-copy', 'COPY for Bulk Import/Export', 'tier2'),
+    nest('c7-ddl', 'c7-transactional-ddl', 'Transactional DDL in PostgreSQL', 'tier2'),
+  ]),
+
+  section('C7.4', 'Keys, Constraints & Generated Values', 102, [
+    item('c7-constraints', 'Keys, Constraints & Generated Values'),
+    nest('c7-constraints', 'c7-primary-key', 'PRIMARY KEY'),
+    nest('c7-constraints', 'c7-foreign-key', 'FOREIGN KEY & Referential Actions'),
+    nest('c7-constraints', 'c7-unique-constraint', 'UNIQUE & NULL Semantics'),
+    nest('c7-constraints', 'c7-not-null', 'NOT NULL'),
+    nest('c7-constraints', 'c7-check-constraint', 'CHECK Constraints'),
+    nest('c7-constraints', 'c7-default-values', 'DEFAULT Values'),
+    nest('c7-constraints', 'c7-composite-keys', 'Composite & Candidate Keys'),
+    nest('c7-constraints', 'c7-identity-columns', 'IDENTITY Columns'),
+    nest('c7-constraints', 'c7-sequences', 'Sequences & nextval()'),
+    nest('c7-constraints', 'c7-serial-legacy', 'serial / bigserial (Legacy Convenience)', 'tier2'),
+    nest('c7-constraints', 'c7-deferrable-constraints', 'Deferrable Constraints', 'tier2'),
+    nest('c7-constraints', 'c7-exclusion-constraints', 'Exclusion Constraints', 'tier2'),
+  ]),
+
+  section('C7.5', 'CRUD & Data Modification', 103, [
+    item('c7-crud', 'SELECT, INSERT, UPDATE & DELETE'),
+    nest('c7-crud', 'c7-select-projection', 'SELECT & Projection'),
+    nest('c7-crud', 'c7-distinct', 'DISTINCT & DISTINCT ON'),
+    nest('c7-crud', 'c7-insert-values', 'INSERT & Multi-row VALUES'),
+    nest('c7-crud', 'c7-insert-select', 'INSERT INTO … SELECT'),
+    nest('c7-crud', 'c7-update-from', 'UPDATE & UPDATE … FROM'),
+    nest('c7-crud', 'c7-delete-using', 'DELETE & DELETE … USING'),
+    nest('c7-crud', 'c7-returning', 'RETURNING'),
+    nest('c7-crud', 'c7-upsert', 'INSERT … ON CONFLICT (UPSERT)'),
+    nest('c7-crud', 'c7-merge', 'MERGE', 'tier2'),
+    nest('c7-crud', 'c7-data-modifying-cte', 'Data-Modifying CTEs', 'tier2'),
+    nest('c7-crud', 'c7-safe-updates-deletes', 'Safe UPDATE/DELETE Practices'),
+  ]),
+
+  section('C7.6', 'Filtering, Ordering & Conditional Logic', 104, [
+    item('c7-filtering', 'Filtering, Ordering & Conditional Logic'),
+    nest('c7-filtering', 'c7-where', 'WHERE'),
+    nest('c7-filtering', 'c7-like-ilike', 'LIKE, ILIKE & Wildcards'),
+    nest('c7-filtering', 'c7-in-not-in', 'IN, NOT IN & NULL Trap'),
+    nest('c7-filtering', 'c7-between', 'BETWEEN & Range Boundaries'),
+    nest('c7-filtering', 'c7-is-null', 'IS NULL, IS DISTINCT FROM'),
+    nest('c7-filtering', 'c7-exists', 'EXISTS & NOT EXISTS'),
+    nest('c7-filtering', 'c7-any-all', 'ANY, ALL & Array Comparisons'),
+    nest('c7-filtering', 'c7-case', 'CASE Expressions'),
+    nest('c7-filtering', 'c7-coalesce-nullif', 'COALESCE & NULLIF'),
+    nest('c7-filtering', 'c7-order-by', 'ORDER BY & NULLS FIRST/LAST'),
+    nest('c7-filtering', 'c7-limit-offset-fetch', 'LIMIT, OFFSET & FETCH'),
+    nest('c7-filtering', 'c7-aliases', 'Column & Table Aliases'),
+  ]),
+
+  section('C7.7', 'Functions, Aggregation & Grouping', 105, [
+    item('c7-aggregations', 'Functions, Aggregation & Grouping'),
+    nest('c7-aggregations', 'c7-count-sum-avg', 'COUNT, SUM & AVG'),
+    nest('c7-aggregations', 'c7-min-max', 'MIN & MAX'),
+    nest('c7-aggregations', 'c7-group-by', 'GROUP BY'),
+    nest('c7-aggregations', 'c7-having', 'HAVING vs WHERE'),
+    nest('c7-aggregations', 'c7-aggregate-null', 'Aggregate NULL Semantics'),
+    nest('c7-aggregations', 'c7-filter-aggregate', 'FILTER on Aggregates'),
+    nest('c7-aggregations', 'c7-string-functions', 'String Functions'),
+    nest('c7-aggregations', 'c7-numeric-functions', 'Numeric Functions'),
+    nest('c7-aggregations', 'c7-date-functions', 'Date/Time Functions & date_trunc'),
+    nest('c7-aggregations', 'c7-regex-functions', 'Regular Expressions'),
+    nest('c7-aggregations', 'c7-grouping-sets', 'GROUPING SETS, ROLLUP & CUBE', 'tier2'),
+  ]),
+
+  section('C7.8', 'Joins & Set Operations', 106, [
+    item('c7-joins', 'Joins & Set Operations'),
+    nest('c7-joins', 'c7-inner-join', 'INNER JOIN'),
+    nest('c7-joins', 'c7-left-join', 'LEFT OUTER JOIN'),
+    nest('c7-joins', 'c7-right-full-join', 'RIGHT & FULL OUTER JOIN'),
+    nest('c7-joins', 'c7-cross-join', 'CROSS JOIN'),
+    nest('c7-joins', 'c7-self-join', 'Self Join'),
+    nest('c7-joins', 'c7-on-vs-where', 'ON vs WHERE in Outer Joins'),
+    nest('c7-joins', 'c7-join-cardinality', 'Join Cardinality & Duplicate Rows'),
+    nest('c7-joins', 'c7-lateral-join', 'LATERAL Joins', 'tier2'),
+    nest('c7-joins', 'c7-union', 'UNION vs UNION ALL'),
+    nest('c7-joins', 'c7-intersect-except', 'INTERSECT & EXCEPT'),
+    nest('c7-joins', 'c7-set-compatibility', 'Set Operation Type Compatibility'),
+  ]),
+
+  section('C7.9', 'Subqueries & CTEs', 107, [
+    item('c7-subqueries', 'Subqueries'),
+    nest('c7-subqueries', 'c7-scalar-subquery', 'Scalar Subqueries'),
+    nest('c7-subqueries', 'c7-multirow-subquery', 'Multi-row Subqueries'),
+    nest('c7-subqueries', 'c7-correlated-subquery', 'Correlated Subqueries'),
+    nest('c7-subqueries', 'c7-semi-anti-join', 'EXISTS as Semi/Anti Join'),
+    nest('c7-subqueries', 'c7-subquery-vs-join', 'Subquery vs Join'),
+    item('c7-ctes', 'Common Table Expressions'),
+    nest('c7-ctes', 'c7-with', 'WITH Queries'),
+    nest('c7-ctes', 'c7-recursive-cte', 'WITH RECURSIVE'),
+    nest('c7-ctes', 'c7-recursive-cycle', 'Recursive CTE Cycle Handling', 'tier2'),
+    nest('c7-ctes', 'c7-cte-materialization', 'CTE Inlining & MATERIALIZED', 'tier2'),
+  ]),
+
+  section('C7.10', 'Window Functions & Advanced Querying', 108, [
+    item('c7-window-functions', 'Window Functions'),
+    nest('c7-window-functions', 'c7-over-partition-order', 'OVER, PARTITION BY & ORDER BY'),
+    nest('c7-window-functions', 'c7-row-number-rank', 'ROW_NUMBER, RANK & DENSE_RANK'),
+    nest('c7-window-functions', 'c7-lag-lead', 'LAG & LEAD'),
+    nest('c7-window-functions', 'c7-first-last-nth', 'FIRST_VALUE, LAST_VALUE & NTH_VALUE'),
+    nest('c7-window-functions', 'c7-window-aggregates', 'Running & Moving Aggregates'),
+    nest('c7-window-functions', 'c7-window-frames', 'ROWS, RANGE & GROUPS Frames'),
+    nest('c7-window-functions', 'c7-named-windows', 'Named Windows'),
+    nest('c7-window-functions', 'c7-top-n-per-group', 'Top-N per Group'),
+    nest('c7-window-functions', 'c7-gaps-islands', 'Gaps & Islands', 'tier2'),
+    nest('c7-window-functions', 'c7-pivot-crosstab', 'Pivoting with FILTER/crosstab', 'tier2'),
+  ]),
+
+  section('C7.11', 'Data Modeling & Normalization', 109, [
+    item('c7-schema-design', 'Relational Schema Design'),
+    nest('c7-schema-design', 'c7-er-modeling', 'Entities, Relationships & ER Diagrams'),
+    nest('c7-schema-design', 'c7-cardinality-optionality', 'Cardinality & Optionality'),
+    nest('c7-schema-design', 'c7-one-many-many-many', 'One-to-One, One-to-Many & Many-to-Many'),
+    nest('c7-schema-design', 'c7-natural-surrogate-keys', 'Natural vs Surrogate Keys'),
+    nest('c7-schema-design', 'c7-functional-dependencies', 'Functional Dependencies'),
+    item('c7-normalization', 'Normalization'),
+    nest('c7-normalization', 'c7-first-normal-form', 'First Normal Form'),
+    nest('c7-normalization', 'c7-second-normal-form', 'Second Normal Form'),
+    nest('c7-normalization', 'c7-third-normal-form', 'Third Normal Form'),
+    nest('c7-normalization', 'c7-bcnf', 'Boyce–Codd Normal Form', 'tier2'),
+    nest('c7-normalization', 'c7-update-anomalies', 'Insert, Update & Delete Anomalies'),
+    nest('c7-normalization', 'c7-denormalization', 'Denormalization & Trade-offs'),
+  ]),
+
+  section('C7.12', 'Transactions, ACID & Isolation', 110, [
+    item('c7-transactions', 'Transactions'),
+    nest('c7-transactions', 'c7-begin-commit-rollback', 'BEGIN, COMMIT & ROLLBACK'),
+    nest('c7-transactions', 'c7-autocommit', 'Autocommit'),
+    nest('c7-transactions', 'c7-savepoints', 'SAVEPOINT & Partial Rollback'),
+    nest('c7-transactions', 'c7-transaction-boundaries', 'Transaction Boundary Design'),
+    item('c7-acid', 'ACID'),
+    nest('c7-acid', 'c7-atomicity', 'Atomicity'),
+    nest('c7-acid', 'c7-consistency', 'Consistency'),
+    nest('c7-acid', 'c7-isolation', 'Isolation'),
+    nest('c7-acid', 'c7-durability', 'Durability & WAL'),
+    item('c7-isolation-levels', 'PostgreSQL Isolation Levels', 'tier1', {
+      prereqs: ['c7-transactions', 'c7-acid'],
+      related: ['c7-mvcc', 'c7-locks', 'c8-optimistic-locking', 'd10-ticket-booking'],
+      next: ['c7-locks'],
+      capstone: 'Prevents inconsistent concurrent ticket reservations and double-booking under load.',
+    }),
+    nest('c7-isolation-levels', 'c7-read-committed', 'Read Committed'),
+    nest('c7-isolation-levels', 'c7-repeatable-read', 'Repeatable Read / Snapshot Isolation'),
+    nest('c7-isolation-levels', 'c7-serializable-ssi', 'Serializable Snapshot Isolation'),
+    nest('c7-isolation-levels', 'c7-isolation-anomalies', 'Dirty, Nonrepeatable, Phantom & Serialization Anomalies'),
+    nest('c7-isolation-levels', 'c7-retry-serialization', 'Retrying Serialization Failures'),
+  ]),
+
+  section('C7.13', 'MVCC, Locks & Deadlocks', 111, [
+    item('c7-mvcc', 'MVCC'),
+    nest('c7-mvcc', 'c7-tuple-versions', 'Tuple Versions: xmin, xmax & Snapshots'),
+    nest('c7-mvcc', 'c7-readers-writers', 'Readers, Writers & Visibility'),
+    nest('c7-mvcc', 'c7-bloat', 'Dead Tuples & Table Bloat'),
+    nest('c7-mvcc', 'c7-long-transactions', 'Long Transactions & Snapshot Retention'),
+    item('c7-locks', 'Locks', 'tier1', { prereqs: ['c7-isolation-levels'] }),
+    nest('c7-locks', 'c7-table-lock-modes', 'Table Lock Modes', 'tier2'),
+    nest('c7-locks', 'c7-row-locks', 'Row Locks & SELECT FOR UPDATE'),
+    nest('c7-locks', 'c7-nowait-skip-locked', 'NOWAIT & SKIP LOCKED'),
+    nest('c7-locks', 'c7-advisory-locks', 'Advisory Locks', 'tier2'),
+    nest('c7-locks', 'c7-lock-monitoring', 'pg_locks & Blocking Queries', 'tier2'),
+    item('c7-deadlocks', 'Deadlocks', 'tier1', { related: ['c3-deadlocks'] }),
+    nest('c7-deadlocks', 'c7-deadlock-detection', 'Deadlock Detection & Victim Abort'),
+    nest('c7-deadlocks', 'c7-lock-ordering', 'Consistent Lock Ordering'),
+  ]),
+
+  section('C7.14', 'Indexes & Access Methods', 112, [
+    item('c7-indexes', 'PostgreSQL Indexes'),
+    item('c7-btrees', 'B-Tree / B+ Tree Concepts'),
+    nest('c7-indexes', 'c7-index-selectivity', 'Selectivity & Cardinality'),
+    nest('c7-indexes', 'c7-unique-indexes', 'Unique Indexes'),
+    item('c7-composite-indexes', 'Composite Indexes'),
+    nest('c7-composite-indexes', 'c7-leftmost-prefix', 'Column Order & Leftmost Prefix'),
+    nest('c7-indexes', 'c7-covering-indexes', 'Covering Indexes & INCLUDE'),
+    nest('c7-indexes', 'c7-partial-indexes', 'Partial Indexes'),
+    nest('c7-indexes', 'c7-expression-indexes', 'Expression Indexes'),
+    nest('c7-indexes', 'c7-gin-indexes', 'GIN Indexes'),
+    nest('c7-indexes', 'c7-gist-spgist-indexes', 'GiST & SP-GiST Indexes', 'tier2'),
+    nest('c7-indexes', 'c7-brin-indexes', 'BRIN Indexes', 'tier2'),
+    nest('c7-indexes', 'c7-hash-indexes', 'Hash Indexes', 'tier2'),
+    nest('c7-indexes', 'c7-index-write-cost', 'Index Write, Storage & Vacuum Cost'),
+    nest('c7-indexes', 'c7-concurrent-index-build', 'CREATE INDEX CONCURRENTLY', 'tier2'),
+  ]),
+
+  section('C7.15', 'Query Planning & Performance', 113, [
+    item('c7-query-plans', 'Query Plans'),
+    item('c7-explain', 'EXPLAIN & EXPLAIN ANALYZE', 'tier1', { prereqs: ['c7-query-plans'] }),
+    nest('c7-explain', 'c7-explain-buffers', 'BUFFERS, WAL, SETTINGS & Timing', 'tier2'),
+    nest('c7-query-plans', 'c7-sequential-index-scan', 'Sequential, Index & Bitmap Scans'),
+    nest('c7-query-plans', 'c7-nested-loop-hash-merge', 'Nested Loop, Hash & Merge Joins'),
+    nest('c7-query-plans', 'c7-sort-aggregate-nodes', 'Sort, Aggregate & Materialize Nodes'),
+    nest('c7-query-plans', 'c7-cost-estimates', 'Planner Costs, Rows & Width'),
+    nest('c7-query-plans', 'c7-statistics-analyze', 'Statistics & ANALYZE'),
+    nest('c7-query-plans', 'c7-extended-statistics', 'Extended Statistics', 'tier2'),
+    item('c7-query-optimization', 'Query Optimization'),
+    nest('c7-query-optimization', 'c7-sargability', 'Sargability'),
+    nest('c7-query-optimization', 'c7-query-rewrite', 'Query Rewriting & Predicate Placement'),
+    nest('c7-query-optimization', 'c7-work-mem-spill', 'work_mem, Sort/Hash Spill', 'tier2'),
+    nest('c7-query-optimization', 'c7-pg-stat-statements', 'pg_stat_statements', 'tier2'),
+  ]),
+
+  section('C7.16', 'PostgreSQL Types & Document Features', 114, [
+    item('c7-postgresql-types', 'PostgreSQL Advanced Types'),
+    nest('c7-postgresql-types', 'c7-uuid', 'UUID'),
+    nest('c7-postgresql-types', 'c7-enum-domain', 'ENUM & DOMAIN', 'tier2'),
+    nest('c7-postgresql-types', 'c7-arrays', 'Arrays'),
+    nest('c7-postgresql-types', 'c7-range-multirange', 'Range & Multirange Types', 'tier2'),
+    nest('c7-postgresql-types', 'c7-network-types', 'Network Address Types', 'tier2'),
+    nest('c7-postgresql-types', 'c7-geometric-types', 'Geometric Types', 'tier3'),
+    nest('c7-postgresql-types', 'c7-json-jsonb', 'JSON vs JSONB'),
+    nest('c7-postgresql-types', 'c7-json-operators', 'JSONB Operators & SQL/JSON'),
+    nest('c7-postgresql-types', 'c7-jsonb-indexing', 'JSONB Indexing with GIN'),
+    nest('c7-postgresql-types', 'c7-full-text-search', 'Full-Text Search: tsvector & tsquery', 'tier2'),
+    nest('c7-postgresql-types', 'c7-generated-columns', 'Generated Columns', 'tier2'),
+  ]),
+
+  section('C7.17', 'Views, Functions, Procedures & Triggers', 115, [
+    item('c7-database-programmability', 'Views & Database Programmability', 'tier2'),
+    nest('c7-database-programmability', 'c7-views', 'Views'),
+    nest('c7-database-programmability', 'c7-updatable-views', 'Updatable Views & CHECK OPTION', 'tier2'),
+    nest('c7-database-programmability', 'c7-materialized-views', 'Materialized Views & REFRESH', 'tier2'),
+    nest('c7-database-programmability', 'c7-sql-functions', 'SQL Functions', 'tier2'),
+    nest('c7-database-programmability', 'c7-plpgsql', 'PL/pgSQL', 'tier2'),
+    nest('c7-database-programmability', 'c7-functions-vs-procedures', 'Functions vs Procedures', 'tier2'),
+    nest('c7-database-programmability', 'c7-stored-procedures', 'Stored Procedures & CALL', 'tier2'),
+    nest('c7-database-programmability', 'c7-triggers', 'Row & Statement Triggers', 'tier2'),
+    nest('c7-database-programmability', 'c7-trigger-timing', 'BEFORE, AFTER & INSTEAD OF', 'tier2'),
+    nest('c7-database-programmability', 'c7-trigger-tradeoffs', 'Trigger Trade-offs & Hidden Side Effects', 'tier2'),
+  ]),
+
+  section('C7.18', 'Connectivity, Security & Data Safety', 116, [
+    item('c7-connection-pooling', 'Connections & Pooling'),
+    nest('c7-connection-pooling', 'c7-postgresql-protocol', 'PostgreSQL Wire Protocol Overview', 'tier2'),
+    nest('c7-connection-pooling', 'c7-max-connections', 'max_connections & Backend Cost'),
+    nest('c7-connection-pooling', 'c7-hikari-pgbouncer', 'HikariCP vs PgBouncer'),
+    nest('c7-connection-pooling', 'c7-session-transaction-pooling', 'Session vs Transaction Pooling', 'tier2'),
+    nest('c7-connection-pooling', 'c7-prepared-statements', 'Prepared Statements & Parameters', 'tier1', {
+      related: ['c9-sql-injection'],
+    }),
+    nest('c7-connection-pooling', 'c7-roles-privileges', 'Roles, GRANT, REVOKE & Least Privilege'),
+    nest('c7-connection-pooling', 'c7-row-level-security', 'Row-Level Security', 'tier2'),
+    nest('c7-connection-pooling', 'c7-ssl-connections', 'TLS Connections & Certificate Verification', 'tier2', {
+      related: ['c4-tls'],
+    }),
+    nest('c7-connection-pooling', 'c7-backup-restore', 'Logical vs Physical Backup & Restore', 'tier2'),
+    nest('c7-connection-pooling', 'c7-pg-dump-restore', 'pg_dump, pg_restore & pg_basebackup', 'tier2'),
+    nest('c7-connection-pooling', 'c7-pitr', 'WAL Archiving & Point-in-Time Recovery', 'tier2'),
+    nest('c7-connection-pooling', 'c7-schema-migrations', 'Versioned Schema Migrations', 'tier1', {
+      related: ['c6-production-lifecycle'],
+    }),
+  ]),
+
+  section('C7.19', 'Partitioning & Large Tables', 117, [
+    item('c7-partitioning', 'Table Partitioning', 'tier2', { related: ['d4-partitioning'] }),
+    nest('c7-partitioning', 'c7-declarative-partitioning', 'Declarative Partitioning', 'tier2'),
+    nest('c7-partitioning', 'c7-range-list-hash-partitioning', 'Range, List & Hash Partitioning', 'tier2'),
+    nest('c7-partitioning', 'c7-partition-key', 'Choosing a Partition Key', 'tier2'),
+    nest('c7-partitioning', 'c7-partition-pruning', 'Partition Pruning', 'tier2'),
+    nest('c7-partitioning', 'c7-partition-routing', 'Tuple Routing & Default Partitions', 'tier2'),
+    nest('c7-partitioning', 'c7-partition-indexes-constraints', 'Partitioned Indexes & Constraints', 'tier2'),
+    nest('c7-partitioning', 'c7-partition-maintenance', 'Attach, Detach & Retention', 'tier2'),
+    nest('c7-partitioning', 'c7-partitioning-tradeoffs', 'Partitioning Trade-offs', 'tier2'),
+  ]),
+
+  section('C7.20', 'Replication, Vacuum & Operations', 118, [
+    item('c7-replication', 'PostgreSQL Replication', 'tier2', { related: ['d4-replication'] }),
+    nest('c7-replication', 'c7-streaming-replication', 'Physical Streaming Replication', 'tier2'),
+    nest('c7-replication', 'c7-wal', 'Write-Ahead Log (WAL)'),
+    nest('c7-replication', 'c7-synchronous-replication', 'Synchronous vs Asynchronous Replication', 'tier2'),
+    nest('c7-replication', 'c7-replication-slots', 'Replication Slots & WAL Retention', 'tier2'),
+    nest('c7-replication', 'c7-logical-replication', 'Logical Replication & Publications', 'tier2'),
+    nest('c7-replication', 'c7-read-replicas-lag', 'Read Replicas & Replication Lag', 'tier2'),
+    nest('c7-replication', 'c7-vacuum', 'VACUUM & Dead Tuple Reclamation'),
+    nest('c7-replication', 'c7-autovacuum', 'Autovacuum Tuning'),
+    nest('c7-replication', 'c7-freeze-wraparound', 'Transaction ID Freeze & Wraparound', 'tier2'),
+    nest('c7-replication', 'c7-reindex-cluster', 'REINDEX, CLUSTER & pg_repack', 'tier2'),
+    nest('c7-replication', 'c7-system-catalogs-stats', 'System Catalogs & Statistics Views', 'tier2'),
+    nest('c7-replication', 'c7-monitoring-capacity', 'Monitoring, Capacity & Slow-Query Workflow'),
+  ]),
+]

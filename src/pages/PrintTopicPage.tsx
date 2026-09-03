@@ -5,6 +5,7 @@ import { loadTopicContent } from '@/content/topics'
 import { TopicBody } from '@/components/topic/TopicBody'
 import { Button } from '@/components/ui/Button'
 import { useUserStore } from '@/stores/user-store'
+import { isJavaLanguageRound } from '@/domain/progress-selectors'
 import { useTopicContent } from '@/hooks/useTopicContent'
 import type { TopicContent } from '@/domain/types'
 
@@ -38,8 +39,7 @@ export function PrintPreviewPage() {
       list = list.filter((t) => t.track === 'D' && !['D1', 'D2', 'D3'].includes(t.sectionId))
     else if (round === 'lld')
       list = list.filter((t) => t.track === 'D' && ['D1', 'D2', 'D3'].includes(t.sectionId))
-    else if (round === 'java')
-      list = list.filter((t) => t.track === 'C' && ['C1', 'C2', 'C3'].includes(t.sectionId))
+    else if (round === 'java') list = list.filter((t) => isJavaLanguageRound(t))
     return list.slice(0, 40)
   }, [sheet, round])
 

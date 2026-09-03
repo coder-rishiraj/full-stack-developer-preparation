@@ -24,10 +24,10 @@ export const beanLifecycleContent: TopicContent = {
       type: 'table',
       headers: ['Callback', 'Mechanism'],
       rows: [
-        ['@PostConstruct', 'JSR-250 after injection'],
+        ['@PostConstruct', 'jakarta.annotation after injection (javax in Spring 5)'],
         ['InitializingBean.afterPropertiesSet', 'Spring interface (legacy style)'],
         ['@Bean(initMethod = "start")', 'Custom method name'],
-        ['@PreDestroy', 'JSR-250 before destroy'],
+        ['@PreDestroy', 'jakarta.annotation before destroy'],
         ['DisposableBean.destroy', 'Spring interface'],
         ['@Bean(destroyMethod = "stop")', 'Custom teardown'],
       ],

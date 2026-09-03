@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { TOPICS } from '@/content/taxonomy'
 import { PROBLEMS } from '@/content/problems'
-import { interviewReadiness } from '@/domain/progress-selectors'
+import { interviewReadiness, isJavaLanguageRound } from '@/domain/progress-selectors'
 import { ProgressBar } from '@/components/ui/Progress'
 import { useUserStore } from '@/stores/user-store'
 
@@ -17,8 +17,7 @@ const ROUNDS = [
     id: 'java',
     title: 'Java Round',
     hint: 'Core Java, JVM, concurrency',
-    topicFilter: (t: { track: string; sectionId: string }) =>
-      t.track === 'C' && ['C1', 'C2', 'C3'].includes(t.sectionId),
+    topicFilter: (t: { track: string; sectionId: string }) => isJavaLanguageRound(t),
   },
   {
     id: 'backend',
@@ -30,7 +29,7 @@ const ROUNDS = [
   {
     id: 'frontend',
     title: 'Frontend Round',
-    hint: 'JavaScript, TypeScript, React, browser, FE system design',
+    hint: 'JavaScript, TypeScript, React (see React Interview Questions), browser, FE system design',
     topicFilter: (t: { track: string; priority: string }) =>
       t.track === 'B' && t.priority === 'tier1',
   },
@@ -75,6 +74,34 @@ export function InterviewPage() {
           Focused checklists generated from existing progress — not fake readiness scores.
         </p>
       </div>
+
+      <Link
+        to="/interview/java"
+        className="block rounded-lg border border-[var(--border)] bg-[var(--bg-elevated)] p-4 hover:border-[var(--border-strong)]"
+      >
+        <div className="text-[10px] font-semibold uppercase tracking-wider text-[var(--text-faint)]">
+          Backend · Java
+        </div>
+        <h2 className="mt-1 font-semibold">Java Interview Questions</h2>
+        <p className="mt-1 text-sm text-[var(--text-muted)]">
+          Core language, collections, experienced traps, Java 8, and an MCQ drill — with links into
+          Track C deep notes.
+        </p>
+      </Link>
+
+      <Link
+        to="/interview/react"
+        className="block rounded-lg border border-[var(--border)] bg-[var(--bg-elevated)] p-4 hover:border-[var(--border-strong)]"
+      >
+        <div className="text-[10px] font-semibold uppercase tracking-wider text-[var(--text-faint)]">
+          Frontend · React
+        </div>
+        <h2 className="mt-1 font-semibold">React Interview Questions</h2>
+        <p className="mt-1 text-sm text-[var(--text-muted)]">
+          Freshers through architecture, modern patterns, and an MCQ drill — with links into Track
+          B deep notes.
+        </p>
+      </Link>
 
       <section>
         <h2 className="mb-2 text-sm font-semibold uppercase tracking-wide text-[var(--text-faint)]">

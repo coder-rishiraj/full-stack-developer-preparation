@@ -8,6 +8,8 @@ import { DsaExplorerPage } from '@/pages/DsaExplorerPage'
 import { DsaProblemPage } from '@/pages/DsaProblemPage'
 import { RevisionPage } from '@/pages/RevisionPage'
 import { InterviewPage } from '@/pages/InterviewPage'
+import { JavaInterviewPage } from '@/pages/JavaInterviewPage'
+import { ReactInterviewPage } from '@/pages/ReactInterviewPage'
 import { CapstonePage } from '@/pages/CapstonePage'
 import { PrintCenterPage } from '@/pages/PrintCenterPage'
 import { PrintPreviewPage } from '@/pages/PrintTopicPage'
@@ -35,6 +37,8 @@ export function AppRouter() {
           <Route path="dsa/:problemId" element={<DsaProblemPage />} />
           <Route path="revision" element={<RevisionPage />} />
           <Route path="interview" element={<InterviewPage />} />
+          <Route path="interview/java" element={<JavaInterviewPage />} />
+          <Route path="interview/react" element={<ReactInterviewPage />} />
           <Route path="capstone" element={<CapstonePage />} />
           <Route path="print" element={<PrintCenterPage />} />
           <Route path="print/preview" element={<PrintPreviewPage />} />

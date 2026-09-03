@@ -32,7 +32,7 @@ export const tcpIpContent: TopicContent = {
     {
       type: 'list',
       items: [
-        'IP address identifies host; port identifies process (e.g. :443).',
+        'IP address identifies an interface/host path; a port identifies a transport endpoint that the OS maps to a socket.',
         'TCP segments: sequence numbers, ACKs, window for flow control.',
         'Congestion control (Cubic, BBR) adapts send rate to network.',
         'UDP: no connection, no guarantee — DNS, QUIC base, video.',

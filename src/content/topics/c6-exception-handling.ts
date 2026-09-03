@@ -4,7 +4,7 @@ export const exceptionHandlingContent: TopicContent = {
   whatIsIt:
     'Global exception handling in Spring MVC uses @ControllerAdvice + @ExceptionHandler (or ResponseEntityExceptionHandler / ProblemDetail) to map thrown exceptions to consistent HTTP status codes and JSON error bodies across all controllers.',
   whyExists:
-    'Try/catch in every controller duplicates logic and returns inconsistent error shapes. Central handling ensures 404/400/409/500 map correctly, logs once, hides stack traces from clients, and supports RFC 7807 Problem Details.',
+    'Try/catch in every controller duplicates logic and returns inconsistent error shapes. Central handling ensures 404/400/409/500 map correctly, logs once, hides stack traces from clients, and supports RFC 9457 Problem Details (which obsoletes RFC 7807).',
   mentalModel:
     'Controller throws DomainNotFoundException → propagates uncaught → DispatcherServlet asks HandlerExceptionResolver chain → @ExceptionHandler method in @ControllerAdvice matches type → returns ResponseEntity or ProblemDetail → client gets stable JSON.',
   howItWorks: [
@@ -15,7 +15,7 @@ export const exceptionHandlingContent: TopicContent = {
         '@ControllerAdvice — global @ExceptionHandler methods (scoped by basePackages optional).',
         '@ExceptionHandler(SomeException.class) method receives exception + WebRequest.',
         'Extend ResponseEntityExceptionHandler for Spring MVC built-in exceptions.',
-        'Spring 6+ ProblemDetail for RFC 7807 (type, title, status, detail, instance).',
+        'Spring 6+ ProblemDetail for RFC 9457 (type, title, status, detail, instance).',
         'Order: closest matching handler; @Order on advice beans for precedence.',
       ],
     },
@@ -145,7 +145,7 @@ public User findById(Long id) {
       '@ControllerAdvice vs try/catch?',
     ],
     followUps: [
-      'ProblemDetail RFC 7807?',
+      'ProblemDetail RFC 9457?',
       'Multiple ControllerAdvice ordering?',
     ],
     misconceptions: [
@@ -186,7 +186,7 @@ public User findById(Long id) {
   flashcards: [
     { front: '@RestControllerAdvice', back: '@ControllerAdvice + @ResponseBody on handlers' },
     { front: 'Validation exception', back: 'MethodArgumentNotValidException → 400' },
-    { front: 'ProblemDetail', back: 'RFC 7807 structured error body' },
+    { front: 'ProblemDetail', back: 'RFC 9457 structured error body' },
   ],
   quickRevision: [
     '@RestControllerAdvice',

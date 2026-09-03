@@ -6,7 +6,7 @@ export const dnsContent: TopicContent = {
   whyExists:
     'IPs change, load-balance, and are hard to remember. DNS decouples service identity from network location, enables CDN routing, email routing (MX), and service discovery patterns.',
   mentalModel:
-    'Phone book for the internet. Browser asks resolver “what IP for api.example.com?” Resolver caches answer (TTL), walks DNS tree if miss, returns A/AAAA record. CNAME is alias; multiple A records = round-robin or anycast.',
+    'Phone book for the internet. Browser asks a recursive resolver “what IP for api.example.com?” The resolver caches by TTL and performs iterative queries on a miss. CNAME is an alias; multiple A/AAAA answers can distribute clients, while anycast advertises the same IP from multiple network locations.',
   howItWorks: [
     {
       type: 'table',
@@ -68,7 +68,9 @@ String ip = addr.getHostAddress(); // blocks on DNS
     {
       type: 'list',
       items: [
-        'UDP port 53 default; TCP for large responses/truncation.',
+        'Classic DNS uses UDP or TCP port 53; TCP is also used after truncation and for operations such as zone transfer.',
+        'Encrypted transports include DNS over TLS, HTTPS, and QUIC.',
+        'SVCB/HTTPS records can advertise alternative endpoints and HTTP protocol parameters, including HTTP/3.',
         'DNSSEC signs records — prevents cache poisoning if validated.',
         'Negative caching: NXDOMAIN also cached with TTL.',
         'Split-horizon: internal DNS returns private IPs for corp hosts.',

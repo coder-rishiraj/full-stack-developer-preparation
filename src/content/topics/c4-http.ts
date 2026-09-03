@@ -40,7 +40,7 @@ Cache-Control: private, max-age=0
       headers: ['Version', 'Transport', 'Notes'],
       rows: [
         ['HTTP/1.1', 'TCP', 'Text, keep-alive default; head-of-line blocking'],
-        ['HTTP/2', 'TCP + TLS', 'Binary frames, multiplexing, HPACK compression'],
+        ['HTTP/2', 'TCP (normally TLS in browsers)', 'Binary frames, multiplexing, HPACK compression'],
         ['HTTP/3', 'QUIC (UDP)', 'Independent streams, faster handshake'],
       ],
     },

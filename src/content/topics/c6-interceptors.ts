@@ -12,7 +12,7 @@ export const interceptorsContent: TopicContent = {
       type: 'list',
       ordered: true,
       items: [
-        'Implement HandlerInterceptor or extend HandlerInterceptorAdapter (deprecated).',
+        'Implement HandlerInterceptor directly; HandlerInterceptorAdapter is obsolete migration knowledge.',
         'WebMvcConfigurer.addInterceptors: registry.addInterceptor(new TimingInterceptor()).addPathPatterns("/api/**").excludePathPatterns("/actuator/**").',
         'preHandle: return false to abort — write response directly.',
         'afterCompletion: cleanup ThreadLocal, log duration; receives exception if thrown.',

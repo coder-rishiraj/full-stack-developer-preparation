@@ -15,6 +15,16 @@ import type {
 
 const COMPLETED: StudyStatus[] = ['first_pass', 'interview_ready']
 
+/** Core Java language round: C1.* plus JVM and concurrency — not C10 Redis. */
+export function isJavaLanguageRound(t: { track: string; sectionId: string }) {
+  return (
+    t.track === 'C' &&
+    (t.sectionId.startsWith('C1.') ||
+      t.sectionId.startsWith('C2.') ||
+      t.sectionId.startsWith('C3.'))
+  )
+}
+
 export function getTopicProgress(
   state: UserState,
   topicId: string,
@@ -131,7 +141,7 @@ export function dsaSummary(state: UserState) {
 export function interviewReadiness(state: UserState) {
   const areaTopics: Record<string, (t: TopicMeta) => boolean> = {
     DSA: (t) => t.track === 'A',
-    Java: (t) => t.track === 'C' && ['C1', 'C2', 'C3'].includes(t.sectionId),
+    Java: (t) => isJavaLanguageRound(t),
     Backend: (t) => t.track === 'C',
     Frontend: (t) => t.track === 'B',
     LLD: (t) => t.track === 'D' && ['D1', 'D2', 'D3'].includes(t.sectionId),
@@ -139,7 +149,7 @@ export function interviewReadiness(state: UserState) {
       t.track === 'D' &&
       (t.kind === 'system-design' ||
         ['D4', 'D5', 'D6', 'D7', 'D8', 'D9', 'D10'].includes(t.sectionId)),
-    Databases: (t) => t.sectionId === 'C7' || t.tags.includes('postgresql'),
+    Databases: (t) => t.sectionId.startsWith('C7') || t.tags.includes('postgresql'),
     'Distributed Systems': (t) => t.track === 'D',
     'Applied AI': (t) => t.track === 'E',
   }

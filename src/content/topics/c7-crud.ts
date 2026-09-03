@@ -68,7 +68,7 @@ RETURNING id, email, created_at;`,
       code: `UPDATE accounts
 SET balance = balance - 100
 WHERE id = 1 AND balance >= 100;
--- check ROW_COUNT = 1
+-- application checks the command's affected-row count is 1
 
 DELETE FROM sessions
 WHERE expires_at < NOW();`,
@@ -95,7 +95,7 @@ userRepository.deleteById(id);         // DELETE`,
         'DELETE sets xmax — row invisible to new snapshots until VACUUM.',
         'Sequential scan vs index scan on WHERE — depends on selectivity and indexes.',
         'Foreign keys: DELETE/UPDATE on parent RESTRICT/CASCADE per FK definition.',
-        'Triggers fire BEFORE/AFINSTEAD OF row-level on DML.',
+        'Triggers can fire BEFORE, AFTER, or INSTEAD OF supported DML events.',
       ],
     },
   ],
@@ -138,7 +138,7 @@ userRepository.deleteById(id);         // DELETE`,
     expectations: [
       'Basic SELECT/INSERT/UPDATE/DELETE syntax',
       'WHERE importance on mutations',
-      'RETURNING and ROW_COUNT checks',
+      'RETURNING and driver affected-row checks',
     ],
     commonQuestions: [
       'Difference DELETE and TRUNCATE?',
@@ -181,7 +181,7 @@ userRepository.deleteById(id);         // DELETE`,
     {
       level: 'advanced',
       question: 'Prevent lost update on balance?',
-      answerHint: 'Transaction + UPDATE ... WHERE balance >= amount AND id=? checking ROW_COUNT or optimistic version column.',
+      answerHint: 'Transaction + conditional UPDATE, then check the JDBC/Spring affected-row count; alternatively use an optimistic version column. ROW_COUNT is available through GET DIAGNOSTICS only inside PL/pgSQL.',
     },
   ],
   flashcards: [

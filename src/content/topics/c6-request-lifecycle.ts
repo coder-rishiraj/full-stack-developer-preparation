@@ -51,7 +51,7 @@ export const requestLifecycleContent: TopicContent = {
 // 5. UserController.get(@PathVariable Long id)
 //    - PathVariableMethodArgumentResolver resolves id
 // 6. UserService.findById → UserResponse
-// 7. MappingJackson2HttpMessageConverter writes JSON
+// 7. A Jackson-backed HttpMessageConverter writes JSON
 // 8. ApiTimingInterceptor.afterCompletion
 // 9. Filters complete; response sent`,
     },

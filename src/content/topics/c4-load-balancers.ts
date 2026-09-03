@@ -86,7 +86,7 @@ class HealthController {
       'Cold instances may get traffic before warmed up',
     ],
     alternatives: [
-      'Client-side load balancing (gRPC, Eureka + Ribbon)',
+      'Client-side load balancing (gRPC, Spring Cloud LoadBalancer, service discovery)',
       'DNS round-robin only (weak health awareness)',
       'Service mesh data plane balancing',
     ],

@@ -113,7 +113,7 @@ HttpRequest req = HttpRequest.newBuilder()
       'Difference TLS and SSL (SSL deprecated)?',
     ],
     misconceptions: [
-      'HTTPS encrypts URL path (SNI/domain visible; path encrypted in TLS 1.3 mostly)',
+      'HTTPS encrypts the URL path and query; the destination IP remains visible and the hostname may be exposed through DNS and SNI unless newer privacy mechanisms are used',
       'HTTPS means site is trustworthy/safe content',
       'Self-signed OK for production public sites',
     ],

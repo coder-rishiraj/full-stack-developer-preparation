@@ -12,7 +12,7 @@ export const autoConfigurationContent: TopicContent = {
       type: 'list',
       ordered: true,
       items: [
-        'SpringFactoriesLoader / AutoConfiguration.imports lists auto-config class names.',
+        'Boot 3+ discovers auto-configuration class names from META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports; spring.factories is Boot 2 migration knowledge, not the modern registration path.',
         'AutoConfigurationImportSelector loads candidates; AutoConfigurationSorter orders them (e.g. DataSource before JdbcTemplate).',
         'Each @AutoConfiguration class has @Conditional* — skip if condition false.',
         'Properties from application.yml bind via @EnableConfigurationProperties.',

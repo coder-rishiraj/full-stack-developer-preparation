@@ -17,7 +17,11 @@ export const jvmJdkJreContent: TopicContent = {
       headers: ['Component', 'Contains', 'Who needs it'],
       rows: [
         ['JVM', 'Execution engine, memory, GC, threads', 'Every running Java app'],
-        ['JRE (legacy term)', 'JVM + rt.jar / java.base modules', 'Runtime-only deployments (pre-modular)'],
+        [
+          'Runtime environment',
+          'JVM + Java modules/libraries; historically distributed as a separate JRE',
+          'Running applications; Java 9+ often uses a JDK or jlink image',
+        ],
         ['JDK', 'JRE + javac, jdb, jcmd, jmap, jstack, jlink', 'Developers and CI build pipelines'],
       ],
     },
