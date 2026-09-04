@@ -31,21 +31,24 @@ export const TRACKS: TrackInfo[] = [
     id: 'C',
     name: 'Java & Backend Engineering',
     shortName: 'Backend',
-    description: 'Java, Spring Boot, PostgreSQL, Redis, Kafka, AWS.',
+    description:
+      'Java, Spring Boot, PostgreSQL, Redis, Kafka, Docker/DevOps, AWS, observability.',
     accent: 'var(--track-c)',
   },
   {
     id: 'D',
     name: 'LLD, System Design & Distributed Systems',
     shortName: 'System Design',
-    description: 'OOD, patterns, LLD, HLD, distributed systems.',
+    description:
+      'OOD, patterns, LLD, distributed systems, HLD method, and practice designs.',
     accent: 'var(--track-d)',
   },
   {
     id: 'E',
     name: 'Applied AI Engineering',
     shortName: 'Applied AI',
-    description: 'LLM apps, RAG, evaluation — secondary until core is strong.',
+    description:
+      'LLM APIs, prompting, RAG, agents/MCP, evals, production AI — months 9–12 after core is strong.',
     accent: 'var(--track-e)',
   },
 ]

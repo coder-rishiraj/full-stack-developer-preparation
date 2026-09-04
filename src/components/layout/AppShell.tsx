@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, Outlet, useLocation } from 'react-router-dom'
+import { GlobalSearch } from './GlobalSearch'
 import { Sidebar } from './Sidebar'
 import { useUserStore } from '@/stores/user-store'
 
@@ -18,7 +19,10 @@ export function AppShell() {
   const location = useLocation()
   const [mobileOpen, setMobileOpen] = useState(false)
   const isPrintRoute = location.pathname.startsWith('/print/')
-  const isStudy = location.pathname.includes('/study') || location.pathname.includes('/revision')
+  // Topic study/revision views only — not the app's /revision queue page.
+  const isFocusedStudy = /\/topics\/[^/]+\/(study|revision)\/?$/.test(
+    location.pathname,
+  )
 
   useEffect(() => {
     void hydrate()
@@ -53,7 +57,7 @@ export function AppShell() {
       <div
         className={`print-hidden fixed inset-y-0 left-0 z-40 transform transition-transform md:static md:translate-x-0 ${
           mobileOpen ? 'translate-x-0' : '-translate-x-full'
-        } ${isStudy ? 'md:hidden' : ''}`}
+        } ${isFocusedStudy ? 'md:hidden' : ''}`}
       >
         <Sidebar />
       </div>
@@ -74,19 +78,23 @@ export function AppShell() {
         >
           <button
             type="button"
-            className="rounded-md border border-[var(--border)] px-2 py-1 text-sm md:hidden"
+            className="shrink-0 rounded-md border border-[var(--border)] px-2 py-1 text-sm md:hidden"
             onClick={() => setMobileOpen(true)}
             aria-label="Open navigation"
           >
             Menu
           </button>
-          {isStudy && (
-            <Link to="/" className="text-sm text-[var(--accent)] hover:underline">
+          {isFocusedStudy && (
+            <Link
+              to="/"
+              className="shrink-0 text-sm text-[var(--accent)] hover:underline"
+            >
               ← Exit focused mode
             </Link>
           )}
-          <div className="ml-auto text-xs text-[var(--text-faint)]">
-            Desktop-first study · A4 print ready
+          <GlobalSearch />
+          <div className="hidden shrink-0 text-xs text-[var(--text-faint)] sm:block">
+            A4 print ready
           </div>
         </header>
         <main className="flex-1 overflow-y-auto">

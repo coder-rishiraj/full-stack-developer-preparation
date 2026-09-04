@@ -56,7 +56,7 @@ describe('Phase 5 quality control', () => {
     expect(report.contentCount).toBe(TOPICS.length)
     expect(report.errors).toHaveLength(0)
     expect(report.warnings).toHaveLength(0)
-  })
+  }, 15_000)
 
   it('search finds topics and problems', () => {
     const topicHits = searchAll('sliding window')

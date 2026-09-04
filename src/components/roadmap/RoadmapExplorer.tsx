@@ -1,6 +1,11 @@
 import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { getTopicMeta, SECTIONS, TRACKS } from '@/content/taxonomy'
+import {
+  curriculumStats,
+  getTopicMeta,
+  SECTIONS,
+  TRACKS,
+} from '@/content/taxonomy'
 import {
   groupSectionsForDisplay,
   topicsInDisplaySection,
@@ -28,7 +33,7 @@ import { useUserStore } from '@/stores/user-store'
 
 const COMPLETED: StudyStatus[] = ['first_pass', 'interview_ready']
 
-export function RoadmapPage() {
+export function RoadmapExplorer() {
   const state = useUserStore()
   const [month, setMonth] = useState<number | ''>('')
   const [track, setTrack] = useState<TrackId | ''>('')
@@ -77,6 +82,13 @@ export function RoadmapPage() {
   const completedCount = topics.filter((topic) =>
     COMPLETED.includes(getTopicProgress(state, topic.id).status),
   ).length
+  const catalog = curriculumStats()
+  const p0Remaining = topics.filter(
+    (topic) =>
+      topic.curriculumLevel === 'classified-item' &&
+      topic.executionPriority === 'p0' &&
+      !COMPLETED.includes(getTopicProgress(state, topic.id).status),
+  ).length
 
   function resetFilters() {
     setMonth('')
@@ -87,35 +99,26 @@ export function RoadmapPage() {
   }
 
   return (
-    <div className="mx-auto max-w-6xl space-y-6 px-4 py-6 md:px-6">
+    <section className="space-y-4">
       <div>
-        <h1 className="text-2xl font-semibold">12-Month Roadmap</h1>
+        <h2 className="text-lg font-semibold">12-month plan</h2>
         <p className="text-sm text-[var(--text-muted)]">
-          5 tracks → 170 sections (B1: 43 JavaScript, B2: 35 TypeScript, B3: 37 Browser) → classified
-          study items → nested concepts. Knowledge importance and job-switch
-          urgency are separate.
+          {catalog.sections} sections · {catalog.total} classified ·{' '}
+          {catalog.nestedConcepts} nested. Filter by month, track, knowledge
+          tier, execution priority, or status — then open a phase to browse the
+          full syllabus.
         </p>
       </div>
 
-      <section className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        <RoadmapStat label="Classified study items" value={classifiedCount} />
-        <RoadmapStat label="Nested concepts" value={nestedCount} />
-        <RoadmapStat
-          label="Completed"
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <PlanStat label="Classified (filtered)" value={classifiedCount} />
+        <PlanStat label="Nested (filtered)" value={nestedCount} />
+        <PlanStat
+          label="Completed (filtered)"
           value={`${completedCount}/${topics.length}`}
         />
-        <RoadmapStat
-          label="P0 remaining"
-          value={
-            topics.filter(
-              (topic) =>
-                topic.curriculumLevel === 'classified-item' &&
-                topic.executionPriority === 'p0' &&
-                !COMPLETED.includes(getTopicProgress(state, topic.id).status),
-            ).length
-          }
-        />
-      </section>
+        <PlanStat label="P0 remaining" value={p0Remaining} />
+      </div>
 
       <div
         className="print-hidden flex flex-wrap items-center gap-2"
@@ -204,11 +207,6 @@ export function RoadmapPage() {
         )}
       </div>
 
-      <p className="text-xs text-[var(--text-faint)]">
-        Every matching item is available below—there is no preview cap. Open a
-        phase, track, and section to browse its full syllabus.
-      </p>
-
       <div className="space-y-4">
         {phases.map((phase) => {
           const phaseTopics = topicsForPhase(topics, phase)
@@ -224,11 +222,11 @@ export function RoadmapPage() {
           )
         })}
       </div>
-    </div>
+    </section>
   )
 }
 
-function RoadmapStat({
+function PlanStat({
   label,
   value,
 }: {
@@ -305,7 +303,7 @@ function PhaseTree({
             <p className="text-[10px] font-semibold uppercase tracking-wider text-[var(--text-faint)]">
               Phase {phase.id} · {monthLabel}
             </p>
-            <h2 className="font-semibold">{phase.title}</h2>
+            <h3 className="font-semibold">{phase.title}</h3>
             <p className="mt-1 text-sm text-[var(--text-muted)]">
               {phase.focus}
             </p>
@@ -350,31 +348,40 @@ function PhaseTree({
                       Track {track.id} — {track.shortName}
                     </strong>
                     <span className="text-xs text-[var(--text-faint)]">
-                      {trackTopics.filter((topic) => topic.curriculumLevel === 'classified-item').length}{' '}
+                      {
+                        trackTopics.filter(
+                          (topic) =>
+                            topic.curriculumLevel === 'classified-item',
+                        ).length
+                      }{' '}
                       items · {trackTopics.length} concepts
                     </span>
                   </span>
                 </summary>
                 <div className="space-y-2 border-t border-[var(--border)] p-3">
-                  {groupSectionsForDisplay(sectionsForTopics(trackTopics)).map((group) => {
-                    const sectionTopics = topicsInDisplaySection(
-                      trackTopics,
-                      group,
-                    )
-                    return (
-                      <SectionTree
-                        key={group.id}
-                        sectionId={group.id}
-                        sectionTitle={group.title}
-                        topics={sectionTopics}
-                        subsections={
-                          group.sections.length > 1 ? group.sections : undefined
-                        }
-                        state={state}
-                        defaultOpen={filtersActive}
-                      />
-                    )
-                  })}
+                  {groupSectionsForDisplay(sectionsForTopics(trackTopics)).map(
+                    (group) => {
+                      const sectionTopics = topicsInDisplaySection(
+                        trackTopics,
+                        group,
+                      )
+                      return (
+                        <SectionTree
+                          key={group.id}
+                          sectionId={group.id}
+                          sectionTitle={group.title}
+                          topics={sectionTopics}
+                          subsections={
+                            group.sections.length > 1
+                              ? group.sections
+                              : undefined
+                          }
+                          state={state}
+                          defaultOpen={filtersActive}
+                        />
+                      )
+                    },
+                  )}
                 </div>
               </details>
             )
@@ -434,17 +441,19 @@ function SectionTree({
 
   const rows = subsections?.length
     ? subsections.flatMap((subsection) => {
-        const slice = topics.filter((topic) => topic.sectionId === subsection.id)
+        const slice = topics.filter(
+          (topic) => topic.sectionId === subsection.id,
+        )
         if (slice.length === 0) return []
-        return [{ kind: 'label' as const, subsection }, ...slice.map((topic) => ({ kind: 'topic' as const, topic }))]
+        return [
+          { kind: 'label' as const, subsection },
+          ...slice.map((topic) => ({ kind: 'topic' as const, topic })),
+        ]
       })
     : topics.map((topic) => ({ kind: 'topic' as const, topic }))
 
   return (
-    <details
-      open={defaultOpen}
-      className="rounded-md bg-[var(--bg-muted)]"
-    >
+    <details open={defaultOpen} className="rounded-md bg-[var(--bg-muted)]">
       <summary className="cursor-pointer list-none px-3 py-2">
         <div className="flex items-center justify-between gap-3">
           <span className="min-w-0 truncate text-sm font-semibold">
@@ -463,7 +472,10 @@ function SectionTree({
         {rows.map((row) => {
           if (row.kind === 'label') {
             return (
-              <li key={`${row.subsection.id}-label`} className="px-1 pt-2 first:pt-0">
+              <li
+                key={`${row.subsection.id}-label`}
+                className="px-1 pt-2 first:pt-0"
+              >
                 <p className="text-[11px] font-semibold uppercase tracking-wide text-[var(--text-faint)]">
                   {row.subsection.id} — {row.subsection.title}
                 </p>

@@ -56,11 +56,24 @@ export function getCustomTopic(state: UserState, id: string): CustomTopic | unde
   return state.customTopics[id]
 }
 
+export function defaultCustomSectionId(track: TrackId): string {
+  return `CUSTOM-${track}`
+}
+
+export function createCustomSectionId(track: TrackId, title: string): string {
+  const slug = slugifyTopicTitle(title)
+  return `CUSTOM-${track}-${slug}`
+}
+
+export function isCustomSectionId(sectionId: string): boolean {
+  return sectionId.startsWith('CUSTOM-')
+}
+
 export function customTopicToMeta(topic: CustomTopic): TopicMeta {
   return {
     id: topic.id,
     track: topic.track,
-    sectionId: `CUSTOM-${topic.track}`,
+    sectionId: topic.sectionId || defaultCustomSectionId(topic.track),
     sectionTitle: topic.sectionTitle || 'My Topics',
     title: topic.title,
     priority: topic.priority,
@@ -145,6 +158,7 @@ export function createCustomTopicId(title: string): string {
 export function buildCustomTopicInput(input: {
   title: string
   track: TrackId
+  sectionId?: string
   sectionTitle?: string
   priority?: Priority
   executionPriority?: ExecutionPriority
@@ -157,11 +171,15 @@ export function buildCustomTopicInput(input: {
   quickRevision?: string[]
 }): CustomTopic {
   const now = new Date().toISOString()
+  const sectionTitle = input.sectionTitle?.trim() || 'My Topics'
   return {
     id: createCustomTopicId(input.title),
     title: input.title.trim(),
     track: input.track,
-    sectionTitle: input.sectionTitle?.trim() || 'My Topics',
+    sectionId:
+      input.sectionId?.trim() ||
+      defaultCustomSectionId(input.track),
+    sectionTitle,
     priority: input.priority ?? 'tier2',
     executionPriority: input.executionPriority ?? 'p2',
     targetMonths: input.targetMonths?.length ? input.targetMonths : [1],

@@ -9,15 +9,12 @@ const linkClass = ({ isActive }: { isActive: boolean }) =>
   }`
 
 const NAV = [
-  { to: '/', label: 'Dashboard', end: true },
-  { to: '/roadmap', label: 'Roadmap' },
-  { to: '/my-topics', label: 'My Topics' },
+  { to: '/', label: 'Home', end: true },
   { to: '/dsa', label: 'DSA Problems' },
   { to: '/revision', label: 'Revision' },
   { to: '/interview', label: 'Interview Prep' },
   { to: '/capstone', label: 'Capstone Project' },
   { to: '/print', label: 'Print Center' },
-  { to: '/search', label: 'Search' },
   { to: '/favorites', label: 'Favorites' },
   { to: '/settings', label: 'Settings' },
 ]
@@ -39,7 +36,7 @@ export function Sidebar() {
 
       <nav className="flex-1 overflow-y-auto px-2 py-3" aria-label="Primary">
         <div className="mb-3 space-y-0.5">
-          {NAV.slice(0, 3).map((item) => (
+          {NAV.slice(0, 1).map((item) => (
             <NavLink key={item.to} to={item.to} end={item.end} className={linkClass}>
               {item.label}
             </NavLink>
@@ -65,7 +62,7 @@ export function Sidebar() {
         </div>
 
         <div className="space-y-0.5">
-          {NAV.slice(3).map((item) => (
+          {NAV.slice(1).map((item) => (
             <NavLink key={item.to} to={item.to} end={item.end} className={linkClass}>
               {item.label}
             </NavLink>

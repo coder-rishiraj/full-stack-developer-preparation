@@ -15,48 +15,60 @@ export const ROADMAP_PHASES: RoadmapPhase[] = [
     startMonth: 1,
     endMonth: 2,
     title: 'Foundations',
-    focus: 'DSA foundations, Core Java, JavaScript fundamentals, OOD, and early HLD',
-    outcome: 'Build reliable coding habits and complete the first pass of core language fundamentals.',
+    focus:
+      'DSA foundations, Core Java, JavaScript fundamentals, OOD/LLD starters, and early system-design thinking',
+    outcome:
+      'Build reliable coding habits and complete the first pass of core language fundamentals.',
   },
   {
     id: 2,
     startMonth: 3,
     endMonth: 4,
     title: 'Core engineering depth',
-    focus: 'Graphs and DP, Spring, PostgreSQL, TypeScript, browser internals, and LLD',
-    outcome: 'Solve medium interview problems and explain an end-to-end web request confidently.',
+    focus:
+      'Graphs and DP, Spring, PostgreSQL, TypeScript, browser internals, LLD, and distributed-systems foundations',
+    outcome:
+      'Solve medium interview problems and explain an end-to-end web request confidently.',
   },
   {
     id: 3,
     startMonth: 5,
     endMonth: 6,
     title: 'Production systems',
-    focus: 'DSA mastery, Redis, Kafka, React depth, distributed systems, and HLD',
-    outcome: 'Design and reason about scalable production features with explicit trade-offs.',
+    focus:
+      'DSA mastery, Redis, Kafka, React depth, data/API architecture, reliability patterns, and HLD practice',
+    outcome:
+      'Design and reason about scalable production features with explicit trade-offs.',
   },
   {
     id: 4,
     startMonth: 7,
     endMonth: 8,
     title: 'Delivery and interview execution',
-    focus: 'Timed DSA, Docker, AWS, observability, mock interviews, and capstone deployment',
-    outcome: 'Deploy the capstone and perform consistently under timed interview constraints.',
+    focus:
+      'Timed DSA, Docker/DevOps, AWS/Cloud, observability, mock interviews, and capstone deployment',
+    outcome:
+      'Deploy the capstone and perform consistently under timed interview constraints.',
   },
   {
     id: 5,
     startMonth: 9,
     endMonth: 10,
-    title: 'Interview readiness and Applied AI',
-    focus: 'Weak-area revision, system-design mocks, applications, and Applied AI foundations',
-    outcome: 'Reach interview-ready status in core tracks and add one practical AI feature.',
+    title: 'Interview readiness and Applied AI foundations',
+    focus:
+      'Weak-area revision, system-design mocks, applications, and Applied AI foundations (LLM APIs, prompting, RAG, agents, MCP)',
+    outcome:
+      'Reach interview-ready status in core tracks and build grounded LLM applications with tools and retrieval.',
   },
   {
     id: 6,
     startMonth: 11,
     endMonth: 12,
-    title: 'Targeted revision and applications',
-    focus: 'Company-specific preparation, mocks, referrals, interviews, and negotiation',
-    outcome: 'Drive preparation from real interview feedback and close the remaining weak areas.',
+    title: 'Advanced Applied AI and offer cycle',
+    focus:
+      'Production AI, evals, security, multimodal/open models, portfolio projects, company-specific mocks, and negotiation',
+    outcome:
+      'Ship an evaluated AI portfolio project and drive preparation from real interview feedback.',
   },
 ]
 

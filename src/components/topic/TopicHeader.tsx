@@ -35,13 +35,28 @@ export function TopicHeader({
   onToggleBookmark: () => void
   compact?: boolean
 }) {
+  const trackListTo = `/tracks/${meta.track}?section=${encodeURIComponent(meta.sectionId)}`
+
   return (
     <header className="print-avoid-break space-y-3">
+      <div className="print-hidden" data-screen-only>
+        <Link
+          to={trackListTo}
+          className="inline-flex items-center gap-1 text-sm text-[var(--accent)] hover:underline"
+        >
+          ← Back to Track {meta.track} list
+        </Link>
+      </div>
       <div className="flex flex-wrap items-center gap-2">
-        <TrackBadge track={meta.track} />
-        <span className="text-xs text-[var(--text-faint)]">
+        <Link to={trackListTo} className="hover:opacity-90">
+          <TrackBadge track={meta.track} />
+        </Link>
+        <Link
+          to={trackListTo}
+          className="rounded border border-[var(--border)] bg-[var(--bg-muted)] px-1.5 py-0.5 text-xs text-[var(--text-muted)] hover:border-[var(--border-strong)] hover:text-[var(--text)]"
+        >
           {meta.sectionId} · {meta.sectionTitle}
-        </span>
+        </Link>
         <PriorityBadge priority={meta.priority} />
         <ExecutionPriorityBadge priority={meta.executionPriority} />
         <StatusBadge status={progress.status} />

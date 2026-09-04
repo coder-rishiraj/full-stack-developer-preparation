@@ -105,11 +105,22 @@ export const useUserStore = create<UserStore>((set, get) => ({
   hydrate: async () => {
     const loaded = await loadUserState()
     if (loaded) {
+      const customTopics = Object.fromEntries(
+        Object.entries(loaded.customTopics ?? {}).map(([id, topic]) => [
+          id,
+          {
+            ...topic,
+            sectionId:
+              topic.sectionId?.trim() ||
+              `CUSTOM-${topic.track}`,
+          },
+        ]),
+      )
       set({
         ...EMPTY_USER_STATE,
         ...loaded,
         topicOverlays: loaded.topicOverlays ?? {},
-        customTopics: loaded.customTopics ?? {},
+        customTopics,
         hydrated: true,
       })
     } else {

@@ -1,7 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { AppShell } from '@/components/layout/AppShell'
 import { DashboardPage } from '@/pages/DashboardPage'
-import { RoadmapPage } from '@/pages/RoadmapPage'
 import { TrackPage } from '@/pages/TrackPage'
 import { TopicPage } from '@/pages/TopicPage'
 import { DsaExplorerPage } from '@/pages/DsaExplorerPage'
@@ -16,10 +15,10 @@ import { PrintPreviewPage } from '@/pages/PrintTopicPage'
 import { PrintTopicRoutePage } from '@/pages/PrintTopicRoutePage'
 import { PrintDsaSheetPage } from '@/pages/PrintDsaSheetPage'
 import { PrintRevisionSheetPage } from '@/pages/PrintRevisionSheetPage'
-import { SearchPage } from '@/pages/SearchPage'
+import { PrintCurriculumIndexPage } from '@/pages/PrintCurriculumIndexPage'
+import { PrintCurriculumOutlinePage } from '@/pages/PrintCurriculumOutlinePage'
 import { SettingsPage } from '@/pages/SettingsPage'
 import { FavoritesPage } from '@/pages/FavoritesPage'
-import { MyTopicsPage } from '@/pages/MyTopicsPage'
 
 export function AppRouter() {
   return (
@@ -27,8 +26,8 @@ export function AppRouter() {
       <Routes>
         <Route element={<AppShell />}>
           <Route index element={<DashboardPage />} />
-          <Route path="roadmap" element={<RoadmapPage />} />
-          <Route path="my-topics" element={<MyTopicsPage />} />
+          <Route path="roadmap" element={<Navigate to="/" replace />} />
+          <Route path="my-topics" element={<Navigate to="/" replace />} />
           <Route path="tracks/:trackId" element={<TrackPage />} />
           <Route path="topics/:topicId" element={<TopicPage mode="full" />} />
           <Route path="topics/:topicId/study" element={<TopicPage mode="study" />} />
@@ -45,7 +44,9 @@ export function AppRouter() {
           <Route path="print/topic/:topicId" element={<PrintTopicRoutePage />} />
           <Route path="print/dsa-sheet" element={<PrintDsaSheetPage />} />
           <Route path="print/revision" element={<PrintRevisionSheetPage />} />
-          <Route path="search" element={<SearchPage />} />
+          <Route path="print/curriculum-index" element={<PrintCurriculumIndexPage />} />
+          <Route path="print/curriculum-outline" element={<PrintCurriculumOutlinePage />} />
+          <Route path="search" element={<Navigate to="/" replace />} />
           <Route path="favorites" element={<FavoritesPage />} />
           <Route path="settings" element={<SettingsPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />

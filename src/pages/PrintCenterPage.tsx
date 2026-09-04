@@ -49,6 +49,16 @@ export function PrintCenterPage() {
         <h2 className="mb-2 font-semibold">Sheets</h2>
         <ul className="space-y-2 text-sm">
           <li>
+            <Link className="text-[var(--accent)] underline" to="/print/curriculum-index">
+              Complete curriculum index (Tracks A–E)
+            </Link>
+          </li>
+          <li>
+            <Link className="text-[var(--accent)] underline" to="/print/curriculum-outline">
+              Compact topics and subtopics outline
+            </Link>
+          </li>
+          <li>
             <Link className="text-[var(--accent)] underline" to="/print/dsa-sheet">
               DSA problem checklist ({PROBLEMS.length} — NeetCode 250 + CSES)
             </Link>

@@ -145,8 +145,11 @@ export function TopicPage({ mode = 'full' }: { mode?: 'full' | 'study' | 'revisi
           <Badge tone="info">Custom topic</Badge>
           <TrackBadge track={meta.track} />
           <PriorityBadge priority={meta.priority} />
-          <Link className="text-xs text-[var(--accent)] hover:underline" to="/my-topics">
-            Manage My Topics
+          <Link
+            className="text-xs text-[var(--accent)] hover:underline"
+            to={`/tracks/${meta.track}?section=${encodeURIComponent(meta.sectionId)}`}
+          >
+            Back to track section
           </Link>
           <button
             type="button"
@@ -154,7 +157,7 @@ export function TopicPage({ mode = 'full' }: { mode?: 'full' | 'study' | 'revisi
             onClick={() => {
               if (confirm(`Delete “${meta.title}”?`)) {
                 deleteCustomTopic(meta.id)
-                navigate('/my-topics')
+                navigate(`/tracks/${meta.track}`)
               }
             }}
           >

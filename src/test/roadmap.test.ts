@@ -65,4 +65,20 @@ describe('roadmap phases', () => {
     const phaseOne = topicsForPhase(TOPICS, ROADMAP_PHASES[0])
     expect(new Set(phaseOne.map((topic) => topic.track)).size).toBeGreaterThan(1)
   })
+
+  it('keeps Applied AI out of early phases and loads it in months 9–12', () => {
+    const phaseOne = topicsForPhase(TOPICS, ROADMAP_PHASES[0])
+    const phaseFive = topicsForPhase(TOPICS, ROADMAP_PHASES[4])
+    const phaseSix = topicsForPhase(TOPICS, ROADMAP_PHASES[5])
+    const earlyE = phaseOne.filter((topic) => topic.track === 'E')
+    const lateE = [...phaseFive, ...phaseSix].filter(
+      (topic) => topic.track === 'E',
+    )
+
+    expect(earlyE).toHaveLength(0)
+    expect(lateE.length).toBeGreaterThan(50)
+    expect(ROADMAP_PHASES[3].focus).toMatch(/Docker\/DevOps/)
+    expect(ROADMAP_PHASES[4].focus).toMatch(/Applied AI/)
+    expect(ROADMAP_PHASES[5].focus).toMatch(/Production AI/)
+  })
 })

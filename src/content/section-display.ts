@@ -141,6 +141,7 @@ export function topicsInDisplaySection(
   group: DisplaySection,
 ): TopicMeta[] {
   const ids = new Set(group.sections.map((section) => section.id))
+  ids.add(group.id)
   return topics.filter((topic) => ids.has(topic.sectionId))
 }
 

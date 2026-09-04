@@ -1,9 +1,9 @@
 import type { Priority } from '@/domain/types'
 import type { SectionSeed, TopicSeed } from './build'
 
-const M13 = [1, 3]
-const M69 = [6, 9]
-const M912 = [9, 12]
+const M910 = [9, 10]
+const M1011 = [10, 11]
+const M1112 = [11, 12]
 
 function item(
   id: string,
@@ -18,11 +18,10 @@ function item(
     priority,
     months:
       months ??
-      (priority === 'tier1' ? M13 : priority === 'tier2' ? M69 : M912),
+      (priority === 'tier1' ? M910 : priority === 'tier2' ? M1011 : M1112),
     tags: ['applied-ai', ...(tags ?? [])],
-    executionPriority:
-      executionPriority ??
-      (priority === 'tier1' ? 'p0' : priority === 'tier2' ? 'p1' : 'later'),
+    // Track E stays deferred in the job-switch queue until core tracks are strong.
+    executionPriority: executionPriority ?? 'later',
     ...rest,
   }
 }
@@ -48,6 +47,20 @@ function section(
   topics: TopicSeed[],
   kind: SectionSeed['defaultKind'] = 'theory',
 ): SectionSeed {
+  const major = Number(id.split('.')[0]?.slice(1) || '1')
+  const phaseMonths = (priority: Priority): number[] => {
+    // E1–E7: Applied AI foundations through agents/MCP in months 9–10
+    // E8–E11: open models, multimodal, evals, production, security in 10–12
+    // E12: project ladder in months 11–12
+    if (major <= 7) {
+      return priority === 'tier3' ? M1112 : M910
+    }
+    if (major <= 11) {
+      return priority === 'tier1' ? M1011 : M1112
+    }
+    return M1112
+  }
+
   return {
     id,
     track: 'E',
@@ -55,7 +68,10 @@ function section(
     order,
     defaultKind: kind,
     defaultDepth: 'deep',
-    topics,
+    topics: topics.map((topic) => ({
+      ...topic,
+      months: phaseMonths(topic.priority),
+    })),
   }
 }
 

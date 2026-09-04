@@ -66,10 +66,15 @@ function sanitizeCustomTopic(raw: unknown): CustomTopic | null {
   const months = Array.isArray(t.targetMonths)
     ? t.targetMonths.filter((n): n is number => typeof n === 'number')
     : [1]
+  const track = t.track as CustomTopic['track']
   return {
     id: t.id,
     title: t.title,
-    track: t.track as CustomTopic['track'],
+    track,
+    sectionId:
+      typeof t.sectionId === 'string' && t.sectionId.trim()
+        ? t.sectionId.trim()
+        : `CUSTOM-${track}`,
     sectionTitle: typeof t.sectionTitle === 'string' ? t.sectionTitle : 'My Topics',
     priority,
     executionPriority,

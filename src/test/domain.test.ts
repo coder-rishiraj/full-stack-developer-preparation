@@ -315,6 +315,7 @@ describe('import/export', () => {
           id: 'custom-demo-abc',
           title: 'Demo custom',
           track: 'A' as const,
+          sectionId: 'CUSTOM-A',
           sectionTitle: 'My Topics',
           priority: 'tier2' as const,
           executionPriority: 'p2' as const,
@@ -335,6 +336,7 @@ describe('import/export', () => {
       'edge: empty window',
     ])
     expect(restored.customTopics['custom-demo-abc']?.title).toBe('Demo custom')
+    expect(restored.customTopics['custom-demo-abc']?.sectionId).toBe('CUSTOM-A')
   })
 
   it('lists custom topics even when the map is missing', () => {

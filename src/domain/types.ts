@@ -251,6 +251,8 @@ export type CustomTopic = {
   id: string
   title: string
   track: TrackId
+  /** Curriculum section id (e.g. B4.1) or custom section id (CUSTOM-B-…). */
+  sectionId: string
   sectionTitle: string
   priority: Priority
   executionPriority: ExecutionPriority

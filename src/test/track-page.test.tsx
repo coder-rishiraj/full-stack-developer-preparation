@@ -1,12 +1,12 @@
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { describe, expect, it } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { TrackPage } from '@/pages/TrackPage'
 
-function renderTrack(trackId: string) {
+function renderTrack(trackId: string, search = '') {
   return render(
-    <MemoryRouter initialEntries={[`/tracks/${trackId}`]}>
+    <MemoryRouter initialEntries={[`/tracks/${trackId}${search}`]}>
       <Routes>
         <Route path="/tracks/:trackId" element={<TrackPage />} />
       </Routes>
@@ -15,6 +15,13 @@ function renderTrack(trackId: string) {
 }
 
 describe('TrackPage curriculum accordions', () => {
+  beforeEach(() => {
+    sessionStorage.clear()
+  })
+
+  afterEach(() => {
+    sessionStorage.clear()
+  })
   it('expands nested frontend curriculum levels independently', async () => {
     const user = userEvent.setup()
     renderTrack('B')
@@ -496,5 +503,68 @@ describe('TrackPage curriculum accordions', () => {
     await waitFor(() => expect(details).toHaveAttribute('open'))
     await user.click(screen.getByRole('button', { name: 'Collapse all' }))
     await waitFor(() => expect(details).not.toHaveAttribute('open'))
+  })
+
+  it('offers inline add controls on the track page', () => {
+    renderTrack('B')
+    expect(screen.getByRole('button', { name: '+ Add section' })).toBeInTheDocument()
+  })
+
+  it('opens the requested section from the query string', async () => {
+    renderTrack('B', '?section=B1.1')
+
+    const group = screen
+      .getByRole('heading', { name: 'B1 — JavaScript' })
+      .closest('details')
+    const subsection = screen
+      .getByRole('heading', { name: 'B1.1 — JavaScript Foundations' })
+      .closest('details')
+
+    await waitFor(() => expect(group).toHaveAttribute('open'))
+    await waitFor(() => expect(subsection).toHaveAttribute('open'))
+    expect(screen.getByText('What JavaScript Is')).toBeInTheDocument()
+  })
+
+  it('restores previously expanded sections when returning to the track', async () => {
+    const user = userEvent.setup()
+    const first = renderTrack('B')
+
+    await user.click(
+      screen.getByRole('heading', { name: 'B1 — JavaScript' }).closest('summary')!,
+    )
+    await waitFor(() =>
+      expect(
+        screen.getByRole('heading', { name: 'B1 — JavaScript' }).closest('details'),
+      ).toHaveAttribute('open'),
+    )
+    await user.click(
+      screen
+        .getByRole('heading', { name: 'B1.1 — JavaScript Foundations' })
+        .closest('summary')!,
+    )
+    await waitFor(() =>
+      expect(
+        screen
+          .getByRole('heading', { name: 'B1.1 — JavaScript Foundations' })
+          .closest('details'),
+      ).toHaveAttribute('open'),
+    )
+
+    first.unmount()
+    renderTrack('B')
+
+    await waitFor(() =>
+      expect(
+        screen.getByRole('heading', { name: 'B1 — JavaScript' }).closest('details'),
+      ).toHaveAttribute('open'),
+    )
+    await waitFor(() =>
+      expect(
+        screen
+          .getByRole('heading', { name: 'B1.1 — JavaScript Foundations' })
+          .closest('details'),
+      ).toHaveAttribute('open'),
+    )
+    expect(screen.getByText('What JavaScript Is')).toBeInTheDocument()
   })
 })
