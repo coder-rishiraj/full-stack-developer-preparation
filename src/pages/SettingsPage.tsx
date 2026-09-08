@@ -5,6 +5,8 @@ import { useUserStore } from '@/stores/user-store'
 export function SettingsPage() {
   const theme = useUserStore((s) => s.theme)
   const setTheme = useUserStore((s) => s.setTheme)
+  const interviewDate = useUserStore((s) => s.interviewDate)
+  const setInterviewDate = useUserStore((s) => s.setInterviewDate)
   const exportJson = useUserStore((s) => s.exportJson)
   const importJson = useUserStore((s) => s.importJson)
   const resetAll = useUserStore((s) => s.resetAll)
@@ -53,6 +55,20 @@ export function SettingsPage() {
           <option value="dark">Dark</option>
         </select>
         <p className="text-xs text-[var(--text-faint)]">Print always uses a light handbook theme.</p>
+      </section>
+
+      <section className="space-y-2">
+        <h2 className="font-semibold">Interview date</h2>
+        <input
+          type="date"
+          className="rounded border border-[var(--border)] bg-[var(--bg-elevated)] px-2 py-1.5 text-sm"
+          value={interviewDate ?? ''}
+          onChange={(e) => setInterviewDate(e.target.value || undefined)}
+        />
+        <p className="text-xs text-[var(--text-muted)]">
+          Fills Rev 8 (Sunday before interview) on every studied topic’s revision
+          calendar.
+        </p>
       </section>
 
       <section className="space-y-2">

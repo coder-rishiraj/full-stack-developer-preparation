@@ -21,9 +21,9 @@ export function RevisionScheduleCard({
       <section className="rounded-lg border border-[var(--border)] bg-[var(--bg-elevated)] p-4">
         <h2 className="font-semibold">Revision schedule</h2>
         <p className="mt-1 text-sm text-[var(--text-muted)]">
-          Mark this topic as Learning or First Pass to populate the Memora default
-          pattern: same night, day 2, day 3, next Sunday, second Sunday, month-end
-          Sunday, and quarter-end window.
+          Mark this topic as Learning or First Pass to populate the revision
+          calendar: same day, next day, day 3, next Sundays, month-end Sunday,
+          quarter Sunday, and pre-interview (when an interview date is set).
         </p>
       </section>
     )

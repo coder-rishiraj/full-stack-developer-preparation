@@ -255,8 +255,19 @@ describe('revision engine', () => {
     expect(byId.rev4).toBe('2026-06-28')
     expect(byId.rev5).toBe('2026-07-05')
     expect(byId.rev6).toBe('2026-07-26')
-    expect(byId.rev7).toBe('2026-09-24')
+    expect(byId.rev7).toBe('2026-09-27')
+    expect(byId.rev8).toBeUndefined()
     expect(slots).toHaveLength(7)
+  })
+
+  it('fills Rev 8 on the Sunday before the interview date', () => {
+    const studied = new Date(2026, 5, 22)
+    const slots = buildRevisionSchedule(studied, undefined, {
+      interviewDate: '2026-10-15',
+    })
+    const byId = Object.fromEntries(slots.map((slot) => [slot.id, slot.date]))
+    expect(byId.rev8).toBe('2026-10-11')
+    expect(slots).toHaveLength(8)
   })
 })
 

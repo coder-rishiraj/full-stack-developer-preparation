@@ -6,6 +6,8 @@ import {
   applyStudyRevisionSchedule,
   buildRevisionSchedule,
   completeNextRevisionSlot,
+  isStudiedStatus,
+  mergeSchedulePreservingCompletion,
   nextRevisionFromSchedule,
 } from '@/domain/revision-schedule'
 import { buildCustomTopicInput } from '@/domain/user-content'
@@ -23,6 +25,7 @@ type UserStore = UserState & {
   hydrated: boolean
   hydrate: () => Promise<void>
   setTheme: (theme: UserState['theme']) => void
+  setInterviewDate: (interviewDate: string | undefined) => void
   setTopicStatus: (topicId: string, status: StudyStatus) => void
   setTopicConfidence: (topicId: string, confidence: Confidence) => void
   markTopicRevised: (topicId: string) => void
@@ -53,6 +56,7 @@ const ACTION_KEYS = new Set([
   'hydrated',
   'hydrate',
   'setTheme',
+  'setInterviewDate',
   'setTopicStatus',
   'setTopicConfidence',
   'markTopicRevised',
@@ -133,10 +137,50 @@ export const useUserStore = create<UserStore>((set, get) => ({
     schedulePersist(get)
   },
 
+  setInterviewDate: (interviewDate) => {
+    const normalized =
+      interviewDate && /^\d{4}-\d{2}-\d{2}$/.test(interviewDate)
+        ? interviewDate
+        : undefined
+    const topics = { ...get().topics }
+    for (const [id, progress] of Object.entries(topics)) {
+      if (
+        !isStudiedStatus(progress.status) &&
+        progress.status !== 'needs_revision'
+      ) {
+        continue
+      }
+      if (!progress.revisionSchedule?.length && progress.status === 'not_started') {
+        continue
+      }
+      const studiedAt = progress.firstStudied
+        ? new Date(progress.firstStudied)
+        : progress.lastStudied
+          ? new Date(progress.lastStudied)
+          : new Date()
+      const fresh = buildRevisionSchedule(studiedAt, undefined, {
+        interviewDate: normalized,
+      })
+      const revisionSchedule = mergeSchedulePreservingCompletion(
+        progress.revisionSchedule,
+        fresh,
+      )
+      topics[id] = {
+        ...progress,
+        revisionSchedule,
+        nextRevision: nextRevisionFromSchedule(revisionSchedule),
+      }
+    }
+    set({ interviewDate: normalized, topics })
+    schedulePersist(get)
+  },
+
   setTopicStatus: (topicId, status) => {
     const now = new Date()
     const existing = get().topics[topicId] ?? defaultTopicProgress()
-    const scheduled = applyStudyRevisionSchedule(existing, status, now)
+    const scheduled = applyStudyRevisionSchedule(existing, status, now, {
+      interviewDate: get().interviewDate,
+    })
     const topics = {
       ...get().topics,
       [topicId]: {
@@ -204,7 +248,9 @@ export const useUserStore = create<UserStore>((set, get) => ({
     const now = new Date()
     const existing = get().topics[topicId] ?? defaultTopicProgress()
     if (existing.status === 'not_started') return
-    const revisionSchedule = buildRevisionSchedule(now)
+    const revisionSchedule = buildRevisionSchedule(now, undefined, {
+      interviewDate: get().interviewDate,
+    })
     set({
       topics: {
         ...get().topics,

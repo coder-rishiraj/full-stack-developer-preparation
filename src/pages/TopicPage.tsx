@@ -81,7 +81,7 @@ export function TopicPage({ mode = 'full' }: { mode?: 'full' | 'study' | 'revisi
         <TopicHeader
           meta={meta}
           progress={progress}
-          compact={mode !== 'full'}
+          mode={mode}
           bookmarked={bookmarked}
           onStatus={(s: StudyStatus) => setTopicStatus(meta.id, s)}
           onConfidence={(c: Confidence) => setTopicConfidence(meta.id, c)}
@@ -100,7 +100,7 @@ export function TopicPage({ mode = 'full' }: { mode?: 'full' | 'study' | 'revisi
         <TopicHeader
           meta={meta}
           progress={progress}
-          compact={mode !== 'full'}
+          mode={mode}
           bookmarked={bookmarked}
           onStatus={(s: StudyStatus) => setTopicStatus(meta.id, s)}
           onConfidence={(c: Confidence) => setTopicConfidence(meta.id, c)}
@@ -130,7 +130,7 @@ export function TopicPage({ mode = 'full' }: { mode?: 'full' | 'study' | 'revisi
       <TopicHeader
         meta={meta}
         progress={progress}
-        compact={mode !== 'full'}
+        mode={mode}
         bookmarked={bookmarked}
         onStatus={(s: StudyStatus) => setTopicStatus(meta.id, s)}
         onConfidence={(c: Confidence) => setTopicConfidence(meta.id, c)}
@@ -180,26 +180,6 @@ export function TopicPage({ mode = 'full' }: { mode?: 'full' | 'study' | 'revisi
           className="print-hidden flex flex-wrap gap-2 border-b border-[var(--border)] pb-3"
           data-screen-only
         >
-          <button
-            type="button"
-            className="rounded border border-[var(--border)] px-2 py-1 text-xs"
-            onClick={() => setTopicStatus(meta.id, 'first_pass')}
-          >
-            Mark Complete
-          </button>
-          <button
-            type="button"
-            className="rounded border border-[var(--border)] px-2 py-1 text-xs"
-            onClick={() => setTopicStatus(meta.id, 'needs_revision')}
-          >
-            Add to Revision
-          </button>
-          <Link
-            className="rounded border border-[var(--border)] px-2 py-1 text-xs"
-            to={`/print/preview?topic=${meta.id}${mode === 'revision' ? '&mode=quick' : ''}`}
-          >
-            Print
-          </Link>
           <TopicNav nav={nav} mode={mode} inline />
         </div>
       )}

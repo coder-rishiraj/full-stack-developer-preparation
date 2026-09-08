@@ -270,6 +270,8 @@ export type CustomTopic = {
 export type UserState = {
   version: 1
   theme: 'light' | 'dark' | 'system'
+  /** Optional interview target date `YYYY-MM-DD` — fills Rev 8 on study schedules. */
+  interviewDate?: string
   topics: Record<string, TopicProgress>
   problems: Record<string, ProblemProgress>
   notes: Record<string, string>

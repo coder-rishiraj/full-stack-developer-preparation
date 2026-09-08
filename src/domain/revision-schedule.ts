@@ -4,7 +4,8 @@ export type StrategyKind =
   | 'offset'
   | 'weekly'
   | 'month_end'
-  | 'quarter_window'
+  | 'quarter_sunday'
+  | 'before_interview'
 
 export type StrategyRule = {
   id: string
@@ -19,11 +20,11 @@ export type StrategyRule = {
   windowDays?: number
 }
 
-/** Memora default revision pattern (rev1–rev7). Exam window is omitted until a target date exists. */
+/** Memora default revision pattern (rev1–rev8). */
 export const DEFAULT_REVISION_RULES: StrategyRule[] = [
   {
     id: 'rev1',
-    name: 'Same night',
+    name: 'Same day',
     task: 'Active recall only — no reading before recall',
     kind: 'offset',
     enabled: true,
@@ -31,7 +32,7 @@ export const DEFAULT_REVISION_RULES: StrategyRule[] = [
   },
   {
     id: 'rev2',
-    name: 'Day 2',
+    name: 'Next day',
     task: "Recall yesterday's topic, then patch weak points",
     kind: 'offset',
     enabled: true,
@@ -57,11 +58,11 @@ export const DEFAULT_REVISION_RULES: StrategyRule[] = [
   {
     id: 'rev5',
     name: 'Second Sunday',
-    task: 'Two-week spaced recall for topics that need another pass',
+    task: 'Next available Sunday after rev 4',
     kind: 'weekly',
     enabled: true,
     weekday: 0,
-    weeksAfterStudy: 2,
+    weeksAfterStudy: 1,
   },
   {
     id: 'rev6',
@@ -73,12 +74,20 @@ export const DEFAULT_REVISION_RULES: StrategyRule[] = [
   },
   {
     id: 'rev7',
-    name: 'Quarter end',
-    task: 'Quarter wrap-up before the next block of study',
-    kind: 'quarter_window',
+    name: 'Quarter Sunday',
+    task: 'Last Sunday of the quarter month (Mar / Jun / Sep / Dec)',
+    kind: 'quarter_sunday',
     enabled: true,
+    weekday: 0,
     months: [3, 6, 9, 12],
-    windowDays: 7,
+  },
+  {
+    id: 'rev8',
+    name: 'Before interview',
+    task: 'Final pass on the Sunday before your interview',
+    kind: 'before_interview',
+    enabled: true,
+    weekday: 0,
   },
 ]
 
@@ -141,6 +150,13 @@ function lastWeekdayOfMonth(year: number, month: number, weekday: number): strin
   return toDateOnly(last)
 }
 
+function nextWeekdayOnOrBefore(value: string, weekday: number): string {
+  const date = parseDateOnly(value)
+  const delta = (date.getDay() - weekday + 7) % 7
+  date.setDate(date.getDate() - delta)
+  return toDateOnly(date)
+}
+
 function weekAnchorDate(studied: string, rule: StrategyRule): string {
   const weekday = rule.weekday ?? 0
   const weeks = Math.min(Math.max(rule.weeksAfterStudy ?? 0, 0), 520)
@@ -169,41 +185,49 @@ function nextMonthEndAfter(current: string, rule: StrategyRule): string {
   return lastWeekdayOfMonth(date.getFullYear(), date.getMonth() + 1, rule.weekday ?? 0)
 }
 
-function quarterWindowStart(studied: string, rule: StrategyRule): string | undefined {
+function quarterSundayDate(studied: string, rule: StrategyRule): string | undefined {
   const months = (rule.months ?? [3, 6, 9, 12]).filter((m) => m >= 1 && m <= 12)
-  const windowDays = Math.min(Math.max(rule.windowDays ?? 7, 1), 31)
-  const startDate = parseDateOnly(studied)
-  for (let year = startDate.getFullYear(); year <= startDate.getFullYear() + 3; year++) {
+  const weekday = rule.weekday ?? 0
+  const start = parseDateOnly(studied)
+  for (let year = start.getFullYear(); year <= start.getFullYear() + 3; year++) {
     for (const month of months) {
-      const end = lastDayOfMonth(year, month)
-      const start = new Date(end)
-      start.setDate(start.getDate() - (windowDays - 1))
-      const endStr = toDateOnly(end)
-      const startStr = toDateOnly(start)
-      if (compareDateOnly(endStr, studied) < 0) continue
-      return compareDateOnly(studied, startStr) > 0 ? studied : startStr
+      const candidate = lastWeekdayOfMonth(year, month, weekday)
+      if (compareDateOnly(candidate, studied) >= 0) return candidate
     }
   }
   return undefined
 }
 
-function nextQuarterWindowStartAfter(after: string, rule: StrategyRule): string | undefined {
+function nextQuarterSundayAfter(after: string, rule: StrategyRule): string | undefined {
   const months = (rule.months ?? [3, 6, 9, 12]).filter((m) => m >= 1 && m <= 12)
-  const windowDays = Math.min(Math.max(rule.windowDays ?? 7, 1), 31)
+  const weekday = rule.weekday ?? 0
   const afterDate = parseDateOnly(after)
   for (let year = afterDate.getFullYear(); year <= afterDate.getFullYear() + 4; year++) {
     for (const month of months) {
-      const end = lastDayOfMonth(year, month)
-      const start = new Date(end)
-      start.setDate(start.getDate() - (windowDays - 1))
-      const startStr = toDateOnly(start)
-      if (compareDateOnly(startStr, after) > 0) return startStr
+      const candidate = lastWeekdayOfMonth(year, month, weekday)
+      if (compareDateOnly(candidate, after) > 0) return candidate
     }
   }
   return undefined
 }
 
-function naturalDateForRule(studied: string, rule: StrategyRule): string | undefined {
+function beforeInterviewDate(
+  studied: string,
+  interviewDate: string | undefined,
+  rule: StrategyRule,
+): string | undefined {
+  if (!interviewDate) return undefined
+  if (compareDateOnly(interviewDate, studied) <= 0) return undefined
+  const dayBefore = addDays(interviewDate, -1)
+  const candidate = nextWeekdayOnOrBefore(dayBefore, rule.weekday ?? 0)
+  return compareDateOnly(candidate, studied) >= 0 ? candidate : undefined
+}
+
+function naturalDateForRule(
+  studied: string,
+  rule: StrategyRule,
+  interviewDate?: string,
+): string | undefined {
   switch (rule.kind) {
     case 'offset':
       return addDays(studied, Math.min(Math.max(rule.offsetDays ?? 0, 0), 365))
@@ -211,8 +235,10 @@ function naturalDateForRule(studied: string, rule: StrategyRule): string | undef
       return weekAnchorDate(studied, rule)
     case 'month_end':
       return monthEndDate(studied, rule)
-    case 'quarter_window':
-      return quarterWindowStart(studied, rule)
+    case 'quarter_sunday':
+      return quarterSundayDate(studied, rule)
+    case 'before_interview':
+      return beforeInterviewDate(studied, interviewDate, rule)
   }
 }
 
@@ -224,14 +250,22 @@ function bumpDateForRule(current: string, rule: StrategyRule): string | undefine
       return nextWeekdayAfter(current, rule.weekday ?? 0)
     case 'month_end':
       return nextMonthEndAfter(current, rule)
-    case 'quarter_window':
-      return nextQuarterWindowStartAfter(current, rule)
+    case 'quarter_sunday':
+      return nextQuarterSundayAfter(current, rule)
+    case 'before_interview':
+      // Cannot bump past interview — skip if clash cannot resolve before interview.
+      return undefined
   }
+}
+
+export type BuildScheduleOptions = {
+  interviewDate?: string
 }
 
 export function buildRevisionSchedule(
   studiedOn: Date,
   rules: StrategyRule[] = DEFAULT_REVISION_RULES,
+  options: BuildScheduleOptions = {},
 ): RevisionSlot[] {
   const studied = toDateOnly(studiedOn)
   const occupied = new Set<string>()
@@ -240,25 +274,36 @@ export function buildRevisionSchedule(
 
   for (const rule of rules) {
     if (!rule.enabled) continue
-    const natural = naturalDateForRule(studied, rule)
+    const natural = naturalDateForRule(studied, rule, options.interviewDate)
     if (!natural) continue
 
+    const relaxOrder = rule.kind === 'before_interview'
     let date = natural
     let bumped = false
     for (let guard = 0; guard < 4096; guard++) {
-      if (!occupied.has(date) && compareDateOnly(date, earliestAllowed) >= 0) break
+      const orderOk = relaxOrder || compareDateOnly(date, earliestAllowed) >= 0
+      if (!occupied.has(date) && orderOk) break
       const next = bumpDateForRule(date, rule)
       if (!next) {
+        date = ''
+        break
+      }
+      if (
+        rule.kind === 'before_interview' &&
+        options.interviewDate &&
+        compareDateOnly(next, options.interviewDate) >= 0
+      ) {
         date = ''
         break
       }
       date = next
       bumped = true
     }
-    if (!date || occupied.has(date) || compareDateOnly(date, earliestAllowed) < 0) continue
+    if (!date || occupied.has(date)) continue
+    if (!relaxOrder && compareDateOnly(date, earliestAllowed) < 0) continue
 
     occupied.add(date)
-    earliestAllowed = addDays(date, 1)
+    if (!relaxOrder) earliestAllowed = addDays(date, 1)
     slots.push({
       id: rule.id,
       name: rule.name,
@@ -300,10 +345,25 @@ export function completeNextRevisionSlot(
   )
 }
 
+export function mergeSchedulePreservingCompletion(
+  previous: RevisionSlot[] | undefined,
+  next: RevisionSlot[],
+): RevisionSlot[] {
+  const done = new Map(
+    (previous ?? [])
+      .filter((slot) => slot.completedAt)
+      .map((slot) => [slot.id, slot.completedAt!]),
+  )
+  return next.map((slot) =>
+    done.has(slot.id) ? { ...slot, completedAt: done.get(slot.id) } : slot,
+  )
+}
+
 export function applyStudyRevisionSchedule(
   existing: TopicProgress,
   status: StudyStatus,
   at: Date = new Date(),
+  options: BuildScheduleOptions = {},
 ): Pick<TopicProgress, 'revisionSchedule' | 'nextRevision'> {
   if (status === 'not_started') {
     return { revisionSchedule: [], nextRevision: undefined }
@@ -312,7 +372,7 @@ export function applyStudyRevisionSchedule(
     const shouldBuild =
       !existing.revisionSchedule?.length || existing.status === 'not_started'
     const revisionSchedule = shouldBuild
-      ? buildRevisionSchedule(at)
+      ? buildRevisionSchedule(at, DEFAULT_REVISION_RULES, options)
       : existing.revisionSchedule
     return {
       revisionSchedule,

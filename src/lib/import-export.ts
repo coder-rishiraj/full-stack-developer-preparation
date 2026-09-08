@@ -152,6 +152,11 @@ export function importUserState(json: string): UserState {
   return {
     version: 1,
     theme: state.theme ?? 'system',
+    interviewDate:
+      typeof state.interviewDate === 'string' &&
+      /^\d{4}-\d{2}-\d{2}$/.test(state.interviewDate)
+        ? state.interviewDate
+        : undefined,
     topics: sanitizeTopicProgressMap(state.topics),
     problems: state.problems ?? {},
     notes: state.notes ?? {},
