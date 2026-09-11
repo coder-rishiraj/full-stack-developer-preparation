@@ -1,4 +1,5 @@
 import type { SectionSeed } from './build'
+import { TRACK_A_GRAPH_SECTIONS } from './track-a-graphs'
 
 /** Track A — DSA & Problem Solving (metadata only; content in Phase 4). */
 export const TRACK_A_SECTIONS: SectionSeed[] = [
@@ -155,36 +156,12 @@ export const TRACK_A_SECTIONS: SectionSeed[] = [
       { id: 'a7-two-heap-pattern', title: 'Two-Heap Pattern', priority: 'tier2', months: [3, 4], tags: ['heaps'] },
     ],
   },
-  {
-    id: 'A8',
-    track: 'A',
-    title: 'Graphs',
-    order: 8,
-    defaultKind: 'dsa-pattern',
-    defaultDepth: 'deep',
-    topics: [
-      { id: 'a8-graph-representation', title: 'Graph Representation', priority: 'tier1', months: [3, 4], tags: ['graphs'] },
-      { id: 'a8-bfs', title: 'Graph BFS/DFS', priority: 'tier1', months: [3, 4], tags: ['graphs', 'bfs', 'dfs'], prereqs: ['a8-graph-representation'] },
-      { id: 'a8-dfs', title: 'Graph DFS', priority: 'tier1', curriculumLevel: 'nested-concept', parentTopicId: 'a8-bfs', months: [3, 4], tags: ['graphs', 'dfs'], prereqs: ['a8-graph-representation'] },
-      { id: 'a8-connected-components', title: 'Connected Components', priority: 'tier1', months: [3, 4], tags: ['graphs'] },
-      { id: 'a8-cycle-detection', title: 'Graph Cycle Detection', priority: 'tier1', months: [3, 4], tags: ['graphs'] },
-      { id: 'a8-topological-sorting', title: 'Topological Sorting', priority: 'tier1', months: [3, 4], tags: ['graphs'] },
-      { id: 'a8-multi-source-bfs', title: 'Multi-source BFS', priority: 'tier1', months: [3, 4], tags: ['graphs', 'bfs'] },
-      { id: 'a8-union-find', title: 'Union-Find / DSU', priority: 'tier1', months: [3, 4], tags: ['graphs', 'dsu'] },
-      { id: 'a8-dijkstra', title: 'Dijkstra', priority: 'tier1', months: [3, 4], tags: ['graphs', 'shortest-path'] },
-      { id: 'a8-bellman-ford', title: 'Bellman-Ford', priority: 'tier2', months: [4, 5], tags: ['graphs', 'shortest-path'] },
-      { id: 'a8-floyd-warshall', title: 'Floyd-Warshall', priority: 'tier2', months: [4, 5], tags: ['graphs', 'shortest-path'] },
-      { id: 'a8-mst-kruskal', title: 'Minimum Spanning Tree (Kruskal/Prim)', priority: 'tier2', months: [4, 5], tags: ['graphs', 'mst'], related: ['a8-union-find'] },
-      { id: 'a8-mst-prim', title: 'MST — Prim', priority: 'tier2', curriculumLevel: 'nested-concept', parentTopicId: 'a8-mst-kruskal', months: [4, 5], tags: ['graphs', 'mst'] },
-      { id: 'a8-bipartite', title: 'Bipartite Graphs', priority: 'tier2', months: [4, 5], tags: ['graphs'] },
-      { id: 'a8-scc', title: 'Strongly Connected Components', priority: 'tier2', months: [5, 6], tags: ['graphs'] },
-    ],
-  },
+  ...TRACK_A_GRAPH_SECTIONS,
   {
     id: 'A9',
     track: 'A',
     title: 'Recursion & Backtracking',
-    order: 9,
+    order: 25,
     defaultKind: 'dsa-pattern',
     defaultDepth: 'deep',
     topics: [
@@ -202,7 +179,7 @@ export const TRACK_A_SECTIONS: SectionSeed[] = [
     id: 'A10',
     track: 'A',
     title: 'Greedy',
-    order: 10,
+    order: 26,
     defaultKind: 'dsa-pattern',
     defaultDepth: 'medium',
     topics: [
@@ -216,7 +193,7 @@ export const TRACK_A_SECTIONS: SectionSeed[] = [
     id: 'A11',
     track: 'A',
     title: 'Dynamic Programming',
-    order: 11,
+    order: 27,
     defaultKind: 'dsa-pattern',
     defaultDepth: 'deep',
     topics: [
@@ -239,7 +216,7 @@ export const TRACK_A_SECTIONS: SectionSeed[] = [
     id: 'A12',
     track: 'A',
     title: 'Tries & Advanced Structures',
-    order: 12,
+    order: 28,
     defaultKind: 'dsa-pattern',
     defaultDepth: 'medium',
     topics: [
@@ -254,7 +231,7 @@ export const TRACK_A_SECTIONS: SectionSeed[] = [
     id: 'A13',
     track: 'A',
     title: 'Bit Manipulation',
-    order: 13,
+    order: 29,
     defaultKind: 'dsa-pattern',
     defaultDepth: 'medium',
     topics: [
@@ -271,7 +248,7 @@ export const TRACK_A_SECTIONS: SectionSeed[] = [
     id: 'A14',
     track: 'A',
     title: 'Coding Interview Execution',
-    order: 14,
+    order: 30,
     defaultKind: 'theory',
     defaultDepth: 'medium',
     topics: [

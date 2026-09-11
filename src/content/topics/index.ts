@@ -16,6 +16,7 @@ import { TRACK_C_AWS_SECTIONS } from '@/content/curriculum/track-c-aws'
 import { TRACK_C_OBSERVABILITY_SECTIONS } from '@/content/curriculum/track-c-observability'
 import { TRACK_D_SYSTEM_DESIGN_SECTIONS } from '@/content/curriculum/track-d-system-design'
 import { TRACK_E_APPLIED_AI_SECTIONS } from '@/content/curriculum/track-e-applied-ai'
+import { TRACK_A_GRAPH_SECTIONS } from '@/content/curriculum/track-a-graphs'
 import { TRACK_C_SPRING_SECTIONS } from '@/content/curriculum/track-c-spring'
 import { TRACK_C_JAVA_SECTIONS } from '@/content/curriculum/track-c-java'
 import { TRACK_B_CSS_SECTIONS } from '@/content/curriculum/track-b-css'
@@ -40,6 +41,10 @@ import { createAwsTopicContent } from './_aws-topic-factory'
 import { createObservabilityTopicContent } from './_observability-topic-factory'
 import { createSystemDesignTopicContent } from './_system-design-topic-factory'
 import { createAppliedAiTopicContent } from './_applied-ai-topic-factory'
+import { createGraphTopicContent } from './_graph-topic-factory'
+import { GRAPH_REFERENCE_CONTENT } from './_graph-reference-pack'
+import { GRAPH_ALGO_PACK_EXTRA } from './_graph-algo-pack-extra'
+import { GRAPH_CORE_PACK } from './_graph-core-pack'
 import { createSpringTopicContent } from './_spring-topic-factory'
 import { createReactTopicContent } from './_react-topic-factory'
 
@@ -93,6 +98,7 @@ function registerGeneratedLoaders(
 }
 
 registerGeneratedLoaders(TRACK_B_REACT_SECTIONS, createReactTopicContent)
+registerGeneratedLoaders(TRACK_A_GRAPH_SECTIONS, createGraphTopicContent)
 registerGeneratedLoaders(TRACK_B_CSS_SECTIONS, createCssTopicContent)
 registerGeneratedLoaders(TRACK_B_FSD_SECTIONS, createFsdTopicContent)
 registerGeneratedLoaders(TRACK_C_JAVA_SECTIONS, createJavaTopicContent)
@@ -113,6 +119,19 @@ registerGeneratedLoaders(TRACK_C_AWS_SECTIONS, createAwsTopicContent)
 registerGeneratedLoaders(TRACK_C_OBSERVABILITY_SECTIONS, createObservabilityTopicContent)
 registerGeneratedLoaders(TRACK_D_SYSTEM_DESIGN_SECTIONS, createSystemDesignTopicContent)
 registerGeneratedLoaders(TRACK_E_APPLIED_AI_SECTIONS, createAppliedAiTopicContent)
+
+/*
+ * Detailed Graph Algorithms Reference pack (Problem → Intuition → Steps →
+ * complete Java templates → complexity). Overrides factory scaffolds and any
+ * thinner hand-authored a8-* modules for the same ids.
+ */
+for (const [id, content] of Object.entries({
+  ...GRAPH_ALGO_PACK_EXTRA,
+  ...GRAPH_REFERENCE_CONTENT,
+  ...GRAPH_CORE_PACK, // core pack wins — standard commented Java
+})) {
+  LOADER_BY_ID[id] = async () => ({ content })
+}
 
 const CACHE: Record<string, TopicContent> = {}
 

@@ -2,21 +2,21 @@ import type { TopicContent } from '@/domain/types'
 
 export const content: TopicContent = {
   whatIsIt:
-    'Graph cycle detection determines whether a path revisits a node in a way that forms a loop—undirected graphs use DFS with parent tracking; directed graphs use three-color DFS, Kahn’s topological sort (in-degree), or Union-Find only for undirected. A tree is acyclic and connected.',
+    'Directed-graph cycle detection asks whether a directed path returns to a node still on the current recursion path (back edge). Prefer three-color DFS (WHITE/GRAY/BLACK) or Kahn’s indegree BFS: if topo order size < V, a cycle exists. Undirected cycle detection (DFS/BFS + parent) lives under A8.4 — do not reuse the directed GRAY rule on undirected graphs.',
   whyExists:
-    'Cycles break topological ordering, imply redundant dependencies (impossible course schedule), and invalidate “valid tree” claims. Detecting them early prevents infinite DFS and answers feasibility questions in scheduling, deadlock detection, and Union-Find Kruskal (adding cycle edge).',
+    'Cycles break topological ordering, imply impossible dependency schedules, and invalidate DAG assumptions for DAG DP / shortest path. Detecting them early answers feasibility in course schedules, build systems, and deadlock-style graphs.',
   mentalModel:
-    'Undirected: walking edges, if you meet a visited room that isn’t where you just came from, you’ve looped. Directed: if you reach a room still “in progress” (on the recursion stack), you’ve found a back edge forming a cycle.',
+    'Directed: if you reach a node still “in progress” (GRAY / on the recursion stack), you’ve found a back edge forming a cycle. Undirected sibling topics use parent tracking instead — a visited neighbor that is not the parent means a cycle.',
   howItWorks: [
     {
       type: 'list',
       ordered: true,
       items: [
-        'Undirected DFS: for neighbor v of u, if v visited and v != parent → cycle.',
         'Directed DFS: WHITE/GRAY/BLACK; edge to GRAY = back edge = cycle.',
-        'Directed Kahn: topo order size < V ⇒ cycle.',
-        'Union-Find undirected: if union(u,v) and find(u)==find(v) before union → edge creates cycle.',
-        'BFS undirected: track parent; same visited-non-parent rule.',
+        'Directed Kahn: compute indegrees; process 0-indegree queue; topo order size < V ⇒ cycle.',
+        'Print cycle (interview follow-up): keep parent[] during GRAY DFS and reconstruct when a back edge is found.',
+        'Negative weight cycles: see Bellman-Ford’s Nth relaxation (A8.11) — different problem than “any directed cycle.”',
+        'For undirected graphs: use A8.4 templates (DFS/BFS + parent), not GRAY-stack alone.',
       ],
     },
     {
@@ -107,11 +107,11 @@ boolean dfsDir(int u, List<List<Integer>> adj, int[] color) {
     space: 'O(V) auxiliary',
   },
   patternRecognition: [
-    'Course schedule / can finish tasks → directed cycle.',
-    'Graph valid tree → no cycle + connected.',
-    'Linked list cycle (different—Floyd)—not graph DFS parent.',
-    'Kruskal: skip edge if Union-Find same set.',
-    'Redundant connection: last edge that closes cycle.',
+    'Course schedule / can finish tasks → directed cycle (this section).',
+    'Valid tree / redundant connection → undirected cycle (A8.4) + connectivity.',
+    'Linked list cycle (Floyd)—not graph DFS parent.',
+    'Kruskal: skip edge if Union-Find same set (undirected).',
+    'Print the cycle path → keep parent[] while GRAY and reconstruct on back edge.',
   ],
   commonMistakes: [
     'Using parent check on directed graph.',

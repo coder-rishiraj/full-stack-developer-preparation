@@ -22,6 +22,32 @@ describe('TrackPage curriculum accordions', () => {
   afterEach(() => {
     sessionStorage.clear()
   })
+
+  it('groups Graphs as A8 numbered subsections', async () => {
+    const user = userEvent.setup()
+    renderTrack('A')
+
+    const graphsTitle = screen.getByRole('heading', {
+      name: 'A8 — Graphs',
+    })
+    const graphsGroup = graphsTitle.closest('details')
+    const graphsSummary = graphsTitle.closest('summary')
+    expect(graphsGroup).not.toHaveAttribute('open')
+
+    await user.click(graphsSummary!)
+    await waitFor(() => expect(graphsGroup).toHaveAttribute('open'))
+    expect(
+      screen.getByRole('heading', {
+        name: 'A8.1 — Graph Foundations & Representations',
+      }),
+    ).toBeInTheDocument()
+    expect(
+      screen.getByRole('heading', {
+        name: 'A8.17 — Classic & Advanced Graph Problems (GFG)',
+      }),
+    ).toBeInTheDocument()
+  })
+
   it('expands nested frontend curriculum levels independently', async () => {
     const user = userEvent.setup()
     renderTrack('B')

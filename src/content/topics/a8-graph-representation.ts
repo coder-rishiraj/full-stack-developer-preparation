@@ -23,7 +23,12 @@ export const content: TopicContent = {
       type: 'callout',
       variant: 'tip',
       title: 'Build adjacency list in Java',
-      text: 'List<List<Integer>> adj = new ArrayList<>(); for (int i=0;i<n;i++) adj.add(new ArrayList<>()); for (int[] e : edges) { adj.get(e[0]).add(e[1]); adj.get(e[1]).add(e[0]); }',
+      text: `List<List<Integer>> adj = new ArrayList<>();
+for (int i = 0; i < n; i++) adj.add(new ArrayList<>());
+for (int[] e : edges) {
+    adj.get(e[0]).add(e[1]);
+    adj.get(e[1]).add(e[0]);
+}`,
     },
   ],
   architecture: {

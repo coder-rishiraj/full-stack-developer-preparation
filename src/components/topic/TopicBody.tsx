@@ -266,14 +266,14 @@ export function TopicBody({
       )}
       {opts.flashcards && content.flashcards.length > 0 && (
         <Section title="Flashcards">
-          <div className="grid gap-2 sm:grid-cols-2">
+          <div className="grid gap-2 sm:grid-cols-2 print:grid-cols-1">
             {content.flashcards.map((fc) => (
               <div
                 key={fc.front}
                 className="print-avoid-break rounded-md border border-[var(--border)] p-3 text-sm"
               >
                 <div className="font-semibold">{fc.front}</div>
-                <div className="mt-1 text-[var(--text-muted)]">{fc.back}</div>
+                <div className="mt-1 whitespace-pre-wrap text-[var(--text-muted)]">{fc.back}</div>
               </div>
             ))}
           </div>

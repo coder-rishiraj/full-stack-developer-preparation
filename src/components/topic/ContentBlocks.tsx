@@ -38,7 +38,7 @@ function ContentBlockView({ block }: { block: ContentBlock }) {
           {block.title && (
             <div className="mb-1 font-semibold text-[var(--text)]">{block.title}</div>
           )}
-          <p className="text-[var(--text-muted)]">{block.text}</p>
+          <p className="whitespace-pre-wrap text-[var(--text-muted)]">{block.text}</p>
         </div>
       )
     case 'table':

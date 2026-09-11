@@ -23,7 +23,12 @@ const AUTHORITATIVE_SECTION_COUNTS: Record<
   readonly [tier1: number, tier2: number, tier3: number]
 > = {
   A1: [8, 1, 0], A2: [10, 1, 0], A3: [6, 2, 0], A4: [7, 0, 0],
-  A5: [7, 0, 0], A6: [10, 2, 0], A7: [5, 1, 0], A8: [8, 5, 0],
+  A5: [7, 0, 0], A6: [10, 2, 0], A7: [5, 1, 0],
+  'A8.1': [1, 0, 0], 'A8.2': [1, 0, 0], 'A8.3': [1, 0, 0], 'A8.4': [1, 0, 0],
+  'A8.5': [1, 0, 0], 'A8.6': [1, 0, 0], 'A8.7': [1, 0, 0], 'A8.8': [1, 0, 0],
+  'A8.9': [1, 0, 0], 'A8.10': [1, 0, 0], 'A8.11': [0, 2, 0], 'A8.12': [0, 1, 0],
+  'A8.13': [0, 1, 0], 'A8.14': [0, 2, 0], 'A8.15': [0, 0, 2], 'A8.16': [1, 0, 0],
+  'A8.17': [0, 1, 1],
   A9: [8, 0, 0], A10: [4, 0, 0], A11: [9, 2, 1], A12: [0, 3, 2],
   A13: [3, 2, 0], A14: [10, 0, 0], 'B1.1': [7, 0, 0], 'B1.2': [7, 1, 0],
   'B1.3': [8, 2, 0], 'B1.4': [3, 1, 0], 'B1.5': [9, 2, 0], 'B1.6': [6, 0, 0],
@@ -363,16 +368,16 @@ describe('import/export', () => {
 describe('Phase 2 curriculum hierarchy', () => {
   it('includes full A–E topic list with unique ids', () => {
     const stats = curriculumStats()
-    expect(stats.total).toBe(1281)
-    expect(stats.sections).toBe(591)
-    expect(stats.byTier).toEqual({ tier1: 1003, tier2: 256, tier3: 22 })
-    expect(stats.byTrack).toEqual({ A: 117, B: 647, C: 329, D: 111, E: 77 })
+    expect(stats.total).toBe(1289)
+    expect(stats.sections).toBe(607)
+    expect(stats.byTier).toEqual({ tier1: 1006, tier2: 258, tier3: 25 })
+    expect(stats.byTrack).toEqual({ A: 125, B: 647, C: 329, D: 111, E: 77 })
     expect(new Set(TOPICS.map((t) => t.id)).size).toBe(TOPICS.length)
     expect(SECTIONS.length).toBe(stats.sections)
   })
 
   it('matches every authoritative section count and keeps nested concepts attached', () => {
-    expect(Object.keys(AUTHORITATIVE_SECTION_COUNTS)).toHaveLength(591)
+    expect(Object.keys(AUTHORITATIVE_SECTION_COUNTS)).toHaveLength(607)
 
     for (const [sectionId, expected] of Object.entries(
       AUTHORITATIVE_SECTION_COUNTS,
@@ -397,6 +402,46 @@ describe('Phase 2 curriculum hierarchy', () => {
       expect(parent?.sectionId, topic.id).toBe(topic.sectionId)
       expect(parent?.curriculumLevel, topic.id).toBe('classified-item')
     }
+  })
+
+  it('models Graphs as 17 deep sections covering the full GFG-style catalog', () => {
+    const graphSections = SECTIONS.filter((section) => /^A8\.\d+$/.test(section.id))
+    const graphTopics = TOPICS.filter((topic) => topic.sectionId.startsWith('A8.'))
+    const classified = graphTopics.filter(
+      (topic) => topic.curriculumLevel === 'classified-item',
+    )
+    const nested = graphTopics.filter(
+      (topic) => topic.curriculumLevel === 'nested-concept',
+    )
+
+    expect(graphSections).toHaveLength(17)
+    expect(graphTopics).toHaveLength(139)
+    expect(classified).toHaveLength(21)
+    expect(nested).toHaveLength(118)
+    expect(getTopicMeta('a8-graph-representation')?.sectionId).toBe('A8.1')
+    expect(getTopicMeta('a8-dfs')?.parentTopicId).toBe('a8-bfs')
+    expect(getTopicMeta('a8-cycle-undirected')?.sectionId).toBe('A8.4')
+    expect(getTopicMeta('a8-cycle-detection')?.sectionId).toBe('A8.5')
+    expect(getTopicMeta('a8-shortest-path-dag')?.parentTopicId).toBe(
+      'a8-topological-sorting',
+    )
+    expect(getTopicMeta('a8-kosaraju')?.parentTopicId).toBe('a8-scc')
+    expect(getTopicMeta('a8-bridges')?.sectionId).toBe('A8.14')
+    expect(getTopicMeta('a8-mst-prim')?.parentTopicId).toBe('a8-mst-kruskal')
+    expect(getTopicMeta('a8-water-jug')?.sectionId).toBe('A8.3')
+    expect(getTopicMeta('a8-johnsons-algorithm')?.sectionId).toBe('A8.11')
+    expect(getTopicMeta('a8-boruvka-mst')?.parentTopicId).toBe('a8-mst-kruskal')
+    expect(getTopicMeta('a8-hopcroft-karp')?.parentTopicId).toBe('a8-max-flow')
+    expect(getTopicMeta('a8-graph-coloring')?.sectionId).toBe('A8.17')
+    expect(getTopicMeta('a8-traveling-salesman')?.parentTopicId).toBe(
+      'a8-graph-coloring',
+    )
+
+    const graphGroup = groupSectionsForDisplay(SECTIONS).find(
+      (group) => group.id === 'A8',
+    )
+    expect(graphGroup?.title).toBe('Graphs')
+    expect(graphGroup?.sections).toHaveLength(17)
   })
 
   it('models React as 24 deep sections with nested atomic concepts', () => {

@@ -7,6 +7,7 @@ export type DisplaySection = {
 }
 
 const TRACK_SUBSECTION_PREFIX: Record<string, { id: string; title: string }> = {
+  A8: { id: 'A8', title: 'Graphs' },
   B1: { id: 'B1', title: 'JavaScript' },
   B2: { id: 'B2', title: 'TypeScript' },
   B3: { id: 'B3', title: 'Browser & Web Platform' },
@@ -76,7 +77,8 @@ export function groupSectionsForDisplay(
     const prefix = dot > 0 ? section.id.slice(0, dot) : section.id
     const isSubsection =
       dot > 0 &&
-      (prefix === 'B1' ||
+      (prefix === 'A8' ||
+        prefix === 'B1' ||
         prefix === 'B2' ||
         prefix === 'B3' ||
         prefix === 'B4' ||

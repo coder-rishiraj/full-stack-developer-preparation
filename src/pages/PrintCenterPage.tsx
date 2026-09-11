@@ -49,6 +49,21 @@ export function PrintCenterPage() {
         <h2 className="mb-2 font-semibold">Sheets</h2>
         <ul className="space-y-2 text-sm">
           <li>
+            <Link className="text-[var(--accent)] underline" to="/print/graph-core">
+              Core graph algorithms (25 — memorize with commented Java)
+            </Link>
+          </li>
+          <li>
+            <Link className="text-[var(--accent)] underline" to="/print/graph-algorithms">
+              All graph algorithm topics (full curriculum — Java/C++)
+            </Link>
+          </li>
+          <li>
+            <Link className="text-[var(--accent)] underline" to="/print/graphs">
+              Graphs handbook (full A8 curriculum notes)
+            </Link>
+          </li>
+          <li>
             <Link className="text-[var(--accent)] underline" to="/print/curriculum-index">
               Complete curriculum index (Tracks A–E)
             </Link>

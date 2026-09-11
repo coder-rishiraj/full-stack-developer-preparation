@@ -17,6 +17,9 @@ import { PrintDsaSheetPage } from '@/pages/PrintDsaSheetPage'
 import { PrintRevisionSheetPage } from '@/pages/PrintRevisionSheetPage'
 import { PrintCurriculumIndexPage } from '@/pages/PrintCurriculumIndexPage'
 import { PrintCurriculumOutlinePage } from '@/pages/PrintCurriculumOutlinePage'
+import { PrintGraphsHandbookPage } from '@/pages/PrintGraphsHandbookPage'
+import { PrintGraphAlgorithmsPage } from '@/pages/PrintGraphAlgorithmsPage'
+import { PrintGraphCorePage } from '@/pages/PrintGraphCorePage'
 import { SettingsPage } from '@/pages/SettingsPage'
 import { FavoritesPage } from '@/pages/FavoritesPage'
 
@@ -46,6 +49,9 @@ export function AppRouter() {
           <Route path="print/revision" element={<PrintRevisionSheetPage />} />
           <Route path="print/curriculum-index" element={<PrintCurriculumIndexPage />} />
           <Route path="print/curriculum-outline" element={<PrintCurriculumOutlinePage />} />
+          <Route path="print/graphs" element={<PrintGraphsHandbookPage />} />
+          <Route path="print/graph-core" element={<PrintGraphCorePage />} />
+          <Route path="print/graph-algorithms" element={<PrintGraphAlgorithmsPage />} />
           <Route path="search" element={<Navigate to="/" replace />} />
           <Route path="favorites" element={<FavoritesPage />} />
           <Route path="settings" element={<SettingsPage />} />

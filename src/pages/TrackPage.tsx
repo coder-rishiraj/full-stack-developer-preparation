@@ -351,7 +351,7 @@ export function TrackPage() {
             </summary>
 
             {groupOpen && (
-              <div className="mb-3">
+              <div className="mb-3 flex flex-wrap items-center gap-3">
                 <AddCustomTopicControl
                   trackId={track.id}
                   sectionId={defaultSectionId}
@@ -359,6 +359,28 @@ export function TrackPage() {
                   label={hasSubsections ? 'Add topic to section' : 'Add topic'}
                   onCreated={(_id, sectionId) => openAfterCreate(sectionId)}
                 />
+                {group.id === 'A8' && (
+                  <>
+                    <Link
+                      to="/print/graph-core"
+                      className="text-sm text-[var(--accent)] underline"
+                    >
+                      Core algorithms (memorize)
+                    </Link>
+                    <Link
+                      to="/print/graph-algorithms"
+                      className="text-sm text-[var(--accent)] underline"
+                    >
+                      All graph topics
+                    </Link>
+                    <Link
+                      to="/print/graphs"
+                      className="text-sm text-[var(--accent)] underline"
+                    >
+                      Print full Graphs handbook
+                    </Link>
+                  </>
+                )}
               </div>
             )}
 
