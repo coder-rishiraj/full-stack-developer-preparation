@@ -68,18 +68,6 @@ export function Sidebar() {
             </NavLink>
           ))}
         </div>
-
-        <div className="mt-3 border-t border-[var(--border)] pt-3">
-          <div className="mb-1 px-2.5 text-[10px] font-semibold uppercase tracking-wider text-[var(--text-faint)]">
-            Other
-          </div>
-          <a
-            href="/nidhi/index.html"
-            className="block rounded-md px-2.5 py-1.5 text-sm text-[var(--text-muted)] hover:bg-[var(--bg-muted)] hover:text-[var(--text)]"
-          >
-            Nidhi — Europe plan
-          </a>
-        </div>
       </nav>
     </aside>
   )

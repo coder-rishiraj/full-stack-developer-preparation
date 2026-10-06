@@ -25,6 +25,21 @@ export function DashboardPage() {
 
   return (
     <div className="mx-auto max-w-6xl space-y-6 px-4 py-6 md:px-6">
+      <a
+        href="/nidhi/index.html"
+        className="block rounded-lg border border-[var(--accent)] bg-[var(--accent-soft)] px-4 py-4 hover:border-[var(--border-strong)]"
+      >
+        <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--accent)]">
+          Europe plan
+        </div>
+        <div className="mt-1 text-lg font-semibold tracking-tight text-[var(--text)]">
+          Open the plan and course
+        </div>
+        <p className="mt-1 text-sm text-[var(--text-muted)]">
+          16-week talent acquisition plan, Excel course, and interview practice.
+        </p>
+      </a>
+
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <h1 className="text-2xl font-semibold tracking-tight">Home</h1>
