@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2 Power BI — Nidhi's course</title>
+<link rel="stylesheet" href="assets/course.css?v=3">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand"><a href="index.html">Nidhi Tiwari</a><span>2 · Power BI</span></div>
+  <div class="top-actions">
+    <div class="pbar"><i></i></div>
+    <span class="pnum"></span>
+    <a class="btn" href="index.html">Course home</a>
+  </div>
+</div>
+
+<div class="layout">
+<nav class="side" id="sideNav"></nav>
+<main>
+
+<p class="kicker">Chapter 2</p>
+<h1>Power BI: model, DAX, report, Service, Fabric</h1>
+<p class="lead">Power BI is five things that get taught as one, which is why people bounce off it. Separate them and it is straightforward: a <strong>model</strong> (tables and relationships), <strong>measures</strong> (DAX), a <strong>report</strong> (the visuals), the <strong>Service</strong> (publishing, security and refresh), and the <strong>modern Power BI ecosystem</strong> around Fabric, Copilot and governed semantic models. This chapter does all five, with a working DAX engine, a clickable report, interview answers, and practice scenarios that make filter context visible rather than mystical.</p>
+
+<div class="warn">
+  <p><strong>Install Power BI Desktop before starting.</strong> It is free and Windows-only. On a Mac you need Windows in Parallels, Boot Camp on older hardware, a borrowed Windows laptop, or a cheap cloud Windows machine. Everything on this page runs in the browser, but it is a model of Power BI, not a substitute — you need to have clicked the real thing before an interview.</p>
+</div>
+
+<div class="gold">
+  <p><strong>The standard for this chapter.</strong> By the end you should be able to build a clean hiring semantic model, write the core measures without copying, design a one-page report, publish it, explain refresh and RLS, diagnose a slow visual, and answer a case interview about sharing sensitive HR data. If you can do those things out loud, you do not sound like someone who watched a dashboard tutorial. You sound like someone who can own reporting.</p>
+</div>
+
+<!-- 1 -->
+<section class="lesson" data-lesson="pbi.why" data-n="01">
+  <p class="goal">What it is actually for</p>
+  <h3>Why Power BI, when Excel works</h3>
+  <table class="t wrap">
+    <thead><tr><th>Excel</th><th>Power BI</th></tr></thead>
+    <tbody>
+      <tr><td>You send a file. Everyone has a different copy.</td><td>You publish once. Everyone sees the same live report.</td></tr>
+      <tr><td>Slows down past a few hundred thousand rows.</td><td>Handles millions comfortably.</td></tr>
+      <tr><td>A manager asking "just for Dublin?" means a new file.</td><td>The manager clicks Dublin themselves.</td></tr>
+      <tr><td>Refresh is manual work on a Monday.</td><td>Scheduled refresh, eight times a day, without you.</td></tr>
+      <tr><td>Perfect for building, checking and one-off analysis.</td><td>Perfect for a recurring report other people read.</td></tr>
+    </tbody>
+  </table>
+  <p>The honest summary to give in an interview: <strong>"Excel for analysis I am doing once, Power BI for a report other people need every week."</strong> That answer shows judgement; saying Power BI is simply better does not.</p>
+  <div class="note">
+    <p><strong>The three parts of the application.</strong> They are tabs down the left of Power BI Desktop, and knowing which one you are in solves most confusion.</p>
+    <ul class="clean">
+      <li><strong>Report view</strong> — the canvas. Visuals, slicers, layout.</li>
+      <li><strong>Table view</strong> — the data, as a grid. Where calculated columns are added.</li>
+      <li><strong>Model view</strong> — the tables as boxes with lines between them. Where relationships live.</li>
+    </ul>
+  </div>
+  <div id="q1"></div>
+</section>
+
+<!-- 2 -->
+<section class="lesson" data-lesson="pbi.pq" data-n="02">
+  <p class="goal">Getting data in, properly</p>
+  <h3>Power Query, again</h3>
+  <p>Good news: the Get Data and Transform Data experience is <em>the same Power Query</em> you learned in chapter 1.4. Same ribbon, same Applied Steps, same transforms. Nothing new to learn.</p>
+  <ul class="clean">
+    <li><strong>Import vs DirectQuery.</strong> Import copies the data into the file — fast, and what you want in almost every case. DirectQuery queries the source live — slower, and for data too large or too sensitive to copy. If asked, the answer is Import unless the data is enormous or must not leave the source.</li>
+    <li><strong>Do the cleaning in Power Query, not in DAX.</strong> This is the rule that separates a good model from a slow one. Splitting a column, trimming text, fixing types: Power Query. Calculating a rate that responds to slicers: DAX.</li>
+    <li><strong>Close &amp; Apply</strong> loads it into the model.</li>
+  </ul>
+  <h4>The data connection choices</h4>
+  <table class="t wrap">
+    <thead><tr><th>Choice</th><th>Use it when</th><th>Interview sentence</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Import</strong></td><td>The normal case: Excel, CSV, ATS exports, small databases. Data is copied into the model and refreshed on a schedule.</td><td>"I default to Import because it is fast and stable for HR reporting."</td></tr>
+      <tr><td><strong>DirectQuery</strong></td><td>The source must stay live, the table is too large to import, or policy says data cannot be copied. Every click sends queries back to the source.</td><td>"DirectQuery is not a speed button; it is a source-policy and scale choice."</td></tr>
+      <tr><td><strong>Live connection</strong></td><td>The company already has a governed semantic model or Analysis Services model, and you are only building the report layer.</td><td>"If the model already exists, I connect to it rather than redefining metrics."</td></tr>
+      <tr><td><strong>Composite model</strong></td><td>Some tables are imported and some stay DirectQuery. Powerful, but easier to make slow or confusing.</td><td>"I would use it only with a clear reason and test performance."</td></tr>
+      <tr><td><strong>Direct Lake</strong></td><td>Fabric-backed data lives in OneLake and the semantic model reads Delta tables directly without a normal import copy.</td><td>"Direct Lake is a Fabric pattern; for this course you only needs to recognise it."</td></tr>
+    </tbody>
+  </table>
+  <h4>The hard-won version of that rule</h4>
+  <table class="t wrap">
+    <thead><tr><th>Need</th><th>Where</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>Clean the Source column</td><td>Power Query</td><td>Happens once at refresh, not on every click.</td></tr>
+      <tr><td>Split title from city</td><td>Power Query</td><td>Same. It is a property of the row, not of the question.</td></tr>
+      <tr><td>Days to hire per candidate</td><td>Calculated column</td><td>A fact about one row, stored with it.</td></tr>
+      <tr><td>Average days to hire</td><td><strong>Measure</strong></td><td>It must change when someone clicks a slicer, so it cannot be stored.</td></tr>
+      <tr><td>Offer acceptance rate</td><td><strong>Measure</strong></td><td>Same, and a stored ratio would be wrong the moment it is filtered.</td></tr>
+    </tbody>
+  </table>
+  <div class="note">
+    <p><strong>Power Query skills that make your look senior.</strong> Append stacks same-shaped files; merge joins lookup data; unpivot turns month columns into rows; parameters stop hard-coded file paths; query folding means Power Query can push work back to the source database; privacy levels stop accidental data leakage across sources. You do not need to say all of that in one breath, but you should recognise every phrase.</p>
+  </div>
+  <div id="q2"></div>
+</section>
+
+<!-- 3 -->
+<section class="lesson" data-lesson="pbi.model" data-n="03">
+  <p class="goal">The concept everything else rests on</p>
+  <h3>The model, and star schema</h3>
+  <p>A model is tables plus relationships. The shape to aim for has a name — a <strong>star schema</strong> — and it is simpler than it sounds.</p>
+  <div class="svg-wrap">
+    <svg viewBox="0 0 640 260" role="img" aria-label="Star schema: a fact table in the middle joined to three dimension tables">
+      <rect x="240" y="100" width="160" height="62" rx="4" fill="#1f6b47" />
+      <text x="320" y="124" text-anchor="middle" fill="#fff" font-size="13" font-weight="700" font-family="system-ui">Candidates</text>
+      <text x="320" y="142" text-anchor="middle" fill="#bfe3cf" font-size="11" font-family="system-ui">fact · one row per person</text>
+
+      <rect x="30" y="18" width="140" height="54" rx="4" fill="#fff" stroke="#1f6b47" stroke-width="1.5" />
+      <text x="100" y="40" text-anchor="middle" fill="#1f3b2c" font-size="12.5" font-weight="650" font-family="system-ui">Roles</text>
+      <text x="100" y="57" text-anchor="middle" fill="#6b7a71" font-size="10.5" font-family="system-ui">RoleID · title · city</text>
+
+      <rect x="470" y="18" width="140" height="54" rx="4" fill="#fff" stroke="#1f6b47" stroke-width="1.5" />
+      <text x="540" y="40" text-anchor="middle" fill="#1f3b2c" font-size="12.5" font-weight="650" font-family="system-ui">Recruiters</text>
+      <text x="540" y="57" text-anchor="middle" fill="#6b7a71" font-size="10.5" font-family="system-ui">name · team</text>
+
+      <rect x="250" y="206" width="140" height="48" rx="4" fill="#fff" stroke="#1f6b47" stroke-width="1.5" />
+      <text x="320" y="226" text-anchor="middle" fill="#1f3b2c" font-size="12.5" font-weight="650" font-family="system-ui">Calendar</text>
+      <text x="320" y="243" text-anchor="middle" fill="#6b7a71" font-size="10.5" font-family="system-ui">every date</text>
+
+      <line x1="170" y1="52" x2="248" y2="104" stroke="#1f6b47" stroke-width="1.5" />
+      <line x1="470" y1="52" x2="392" y2="104" stroke="#1f6b47" stroke-width="1.5" />
+      <line x1="320" y1="162" x2="320" y2="206" stroke="#1f6b47" stroke-width="1.5" />
+      <text x="196" y="88" fill="#1f6b47" font-size="10.5" font-family="system-ui">1 → ∞</text>
+      <text x="408" y="88" fill="#1f6b47" font-size="10.5" font-family="system-ui">1 → ∞</text>
+      <text x="330" y="188" fill="#1f6b47" font-size="10.5" font-family="system-ui">1 → ∞</text>
+    </svg>
+    <p class="cap">One fact table in the middle, lookup tables around it, filters flowing inward.</p>
+  </div>
+  <ul class="clean">
+    <li><strong>Fact table</strong> — the events. One row per candidate application. Long and thin, and it grows.</li>
+    <li><strong>Dimension tables</strong> — the lookups. One row per role, per recruiter, per date. Short and wide, and they describe things.</li>
+    <li><strong>Relationships</strong> run <em>one-to-many</em>, from the one side (Roles) to the many side (Candidates). Filters flow in that direction: picking Dublin in Roles filters Candidates. The reverse does not happen by default, and that is deliberate.</li>
+  </ul>
+  <h4>How to create one</h4>
+  <p>Model view, drag <code>RoleID</code> from Roles onto <code>RoleID</code> in Candidates. That is it. Power BI will often detect it automatically, which is convenient and worth checking rather than trusting.</p>
+  <table class="t wrap">
+    <thead><tr><th>Thing</th><th>What to know</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Cardinality</strong></td><td>One-to-many is what you want. Many-to-many is a sign the model needs a bridge table and should be avoided while learning.</td></tr>
+      <tr><td><strong>Cross-filter direction</strong></td><td>Leave it <em>Single</em>. Setting it to Both causes ambiguous filter paths and numbers nobody can explain.</td></tr>
+      <tr><td><strong>Active relationship</strong></td><td>Only one can be active between two tables. If you need a second (applied date and joined date both to Calendar), the second is inactive and is switched on inside a measure with <code>USERELATIONSHIP</code>.</td></tr>
+      <tr><td><strong>A date table</strong></td><td>Mark a proper Calendar table as the date table. Without one, time intelligence functions do not work properly. <code>CALENDARAUTO()</code> makes one in a line.</td></tr>
+      <tr><td><strong>Hidden technical columns</strong></td><td>Keys, sort columns and helper flags can be hidden from report view. The reader sees business terms, not plumbing.</td></tr>
+      <tr><td><strong>Sort by column</strong></td><td>Month names sort alphabetically unless a MonthNumber column tells Power BI the real order.</td></tr>
+      <tr><td><strong>Bridge table</strong></td><td>Used when the real world is many-to-many, such as candidates with several skills and roles requiring several skills. The bridge stores the pairs.</td></tr>
+    </tbody>
+  </table>
+  <div class="warn">
+    <p><strong>The single most common modelling mistake</strong> is putting everything in one wide table — every candidate row also carrying the role title, the city, the manager, the recruiter's team. It works on six rows and becomes unmanageable at scale: the same role title typed 400 times, no single place to fix it, and a Source slicer that cannot be built cleanly. If an interviewer asks about star schema, this is the answer: <em>separate the events from the things, join on an ID.</em></p>
+  </div>
+  <h4>The model checklist before any visual exists</h4>
+  <ul class="clean">
+    <li>Every relationship has an ID on both sides, not a text title that someone can spell three ways.</li>
+    <li>Fact tables contain events and numbers; dimensions contain the descriptions people slice by.</li>
+    <li>Columns are named for humans: <code>Applied Date</code>, not <code>appl_dt_v2</code>.</li>
+    <li>Raw source columns you do not want readers dragging into visuals are hidden.</li>
+    <li>Measures live in one place, ideally a dedicated Measures table, so the Fields pane is not a junk drawer.</li>
+    <li>The model has a documented grain: <em>Candidates has one row per candidate application.</em> Grain is the first sentence of trust.</li>
+  </ul>
+  <div id="q3"></div>
+</section>
+
+<!-- 4 -->
+<section class="lesson" data-lesson="pbi.ctx" data-n="04">
+  <p class="goal">The idea that unlocks DAX</p>
+  <h3>Filter context</h3>
+  <p>This is the whole thing. Every DAX measure is written <em>once</em> and gives a different answer in every place it appears, because <strong>a measure is evaluated against whatever rows are currently visible</strong>. Those visible rows are the filter context.</p>
+  <p>So <code>COUNTROWS(Candidates)</code> is <em>not</em> "6". It is "however many candidate rows the user can currently see". On a card with nothing clicked it is 6. In a table row for LinkedIn it is 4. With a Dublin slicer on it is 4. One formula, many answers.</p>
+  <h4>Prove it — this is a real DAX engine</h4>
+  <p>Click the slicers to change the filter context, then run the <em>same</em> measure again. Nothing about the formula changes; the answer does.</p>
+  <div id="dax1"></div>
+  <div class="note">
+    <p><strong>Where filter context comes from,</strong> all at once and all combining: the slicers on the page, the row and column a value sits in inside a table or matrix, a visual-level or page-level filter, another visual that has been clicked (cross-filtering), and anything a measure adds itself with CALCULATE.</p>
+    <p><strong>Row context</strong> is the other one, and it is different. A calculated column is evaluated row by row, so inside it <code>Candidates[Accepted] - Candidates[Applied]</code> means <em>this row's</em> dates. A measure has no row context, which is why that same expression fails in a measure and needs an aggregator like <code>AVERAGEX</code> around it. If you can say that sentence in an interview, you are ahead of most candidates.</p>
+  </div>
+  <div id="q4"></div>
+</section>
+
+<!-- 5 -->
+<section class="lesson" data-lesson="pbi.dax" data-n="05">
+  <p class="goal">The functions and patterns that matter</p>
+  <h3>Writing measures</h3>
+  <p>DAX has hundreds of functions and a recruiting report needs a small, well-understood core. Here they are, grouped by what they are for. The point is not to memorise syntax like a poem; it is to know the pattern well enough to choose the right one under pressure.</p>
+  <table class="t wrap">
+    <thead><tr><th>Function</th><th>Does</th><th>Example measure</th></tr></thead>
+    <tbody>
+      <tr class="lead"><td colspan="3">Counting and summing</td></tr>
+      <tr><td><code>COUNTROWS</code></td><td>Rows in the current context. The default counter.</td><td><code>Applicants = COUNTROWS(Candidates)</code></td></tr>
+      <tr><td><code>COUNT</code> / <code>COUNTA</code></td><td>Non-blank values in a column. Counts stage dates.</td><td><code>Offers = COUNT(Candidates[Offer])</code></td></tr>
+      <tr><td><code>COUNTBLANK</code></td><td>Blanks in a column. Useful for missing stage hygiene.</td><td><code>Unscreened = COUNTBLANK(Candidates[Screened])</code></td></tr>
+      <tr><td><code>DISTINCTCOUNT</code></td><td>How many different values.</td><td><code>Roles worked = DISTINCTCOUNT(Candidates[RoleID])</code></td></tr>
+      <tr><td><code>SUM</code></td><td>Adds a column.</td><td><code>Agency spend = SUM(Candidates[FeeEUR])</code></td></tr>
+      <tr><td><code>AVERAGE</code></td><td>Mean of a column, blanks skipped.</td><td><code>Avg days = AVERAGE(Candidates[HireDays])</code></td></tr>
+      <tr class="lead"><td colspan="3">Division, done safely</td></tr>
+      <tr><td><code>DIVIDE</code></td><td><strong>Always use this instead of <code>/</code>.</strong> Returns blank, not an error, when the denominator is zero.</td><td><code>Acceptance = DIVIDE([Accepts],[Offers])</code></td></tr>
+      <tr class="lead"><td colspan="3">Changing the filter context</td></tr>
+      <tr><td><code>CALCULATE</code></td><td>The most important function in DAX. Evaluates something under a <em>different</em> filter.</td><td><code>LinkedIn = CALCULATE(COUNTROWS(Candidates), Candidates[Source]="LinkedIn")</code></td></tr>
+      <tr><td><code>ALL</code></td><td>Removes filters. The way to get a grand total to divide by.</td><td><code>Share = DIVIDE(COUNTROWS(Candidates), CALCULATE(COUNTROWS(Candidates), ALL(Candidates)))</code></td></tr>
+      <tr><td><code>REMOVEFILTERS</code></td><td>The clearer modern way to remove filters in many measures.</td><td><code>Total roles = CALCULATE([Applicants], REMOVEFILTERS(Roles))</code></td></tr>
+      <tr><td><code>KEEPFILTERS</code></td><td>Adds a filter without replacing an existing one on the same column.</td><td>Advanced, but useful when measures must respect slicers.</td></tr>
+      <tr><td><code>FILTER</code></td><td>Returns a filtered table. For conditions too complex for a plain CALCULATE argument.</td><td><code>Slow = COUNTROWS(FILTER(Candidates, Candidates[HireDays] &gt; 30))</code></td></tr>
+      <tr><td><code>VALUES</code> / <code>DISTINCT</code></td><td>The distinct values currently visible.</td><td>Used inside other measures.</td></tr>
+      <tr><td><code>SELECTEDVALUE</code></td><td>What the user picked, if they picked exactly one. Good for dynamic titles.</td><td><code>SELECTEDVALUE(Candidates[Source], "All sources")</code></td></tr>
+      <tr><td><code>USERELATIONSHIP</code></td><td>Temporarily uses an inactive relationship inside CALCULATE.</td><td>Applied-date report vs joined-date report from one Calendar table.</td></tr>
+      <tr class="lead"><td colspan="3">Iterators — the X functions</td></tr>
+      <tr><td><code>SUMX</code> / <code>AVERAGEX</code></td><td>Go row by row, work something out, then aggregate. Needed whenever the calculation must happen per row <em>before</em> being summarised.</td><td><code>AVERAGEX(Candidates, Candidates[Accepted] - Candidates[Applied])</code></td></tr>
+      <tr><td><code>CONCATENATEX</code></td><td>Joins a column into a sentence. A live list of who is open.</td><td><code>CONCATENATEX(FILTER(Candidates, Candidates[Outcome]="Open"), Candidates[Name], ", ")</code></td></tr>
+      <tr class="lead"><td colspan="3">Logic and tidying</td></tr>
+      <tr><td><code>IF</code> / <code>NOT</code> / <code>ISBLANK</code></td><td>As expected. <code>&amp;&amp;</code> is AND and <code>||</code> is OR in DAX.</td><td><code>IF([Offers] = 0, "No offers yet", FORMAT([Acceptance], "0%"))</code></td></tr>
+      <tr><td><code>SWITCH(TRUE())</code></td><td>Cleaner than a stack of nested IFs for bands and labels.</td><td>Ageing bucket: 0–7, 8–14, 15+ days.</td></tr>
+      <tr><td><code>COALESCE</code></td><td>Returns the first non-blank value.</td><td><code>COALESCE([Acceptance], 0)</code></td></tr>
+      <tr><td><code>BLANK</code></td><td>A real blank, which visuals hide. Better than 0, which looks like a measurement.</td><td><code>IF([Offers]=0, BLANK(), [Acceptance])</code></td></tr>
+      <tr><td><code>FORMAT</code></td><td>Number to text with a format. For titles and labels.</td><td><code>FORMAT([Acceptance], "0%")</code></td></tr>
+      <tr class="lead"><td colspan="3">Time intelligence — needs a marked date table</td></tr>
+      <tr><td><code>DATESYTD</code></td><td>Year to date.</td><td><code>CALCULATE([Joiners], DATESYTD(Calendar[Date]))</code></td></tr>
+      <tr><td><code>SAMEPERIODLASTYEAR</code></td><td>This period, last year, for a like-for-like comparison.</td><td><code>CALCULATE([Joiners], SAMEPERIODLASTYEAR(Calendar[Date]))</code></td></tr>
+      <tr><td><code>DATEADD</code></td><td>Shift a period. Last month, last quarter.</td><td><code>CALCULATE([Joiners], DATEADD(Calendar[Date], -1, MONTH))</code></td></tr>
+    </tbody>
+  </table>
+  <div class="note">
+    <p><strong>Measures vs calculated columns, stated once.</strong> A <strong>calculated column</strong> is computed at refresh, stored in the file, and takes memory. Use it for a property of a row — days to hire, a seniority flag. A <strong>measure</strong> is computed at the moment of looking and stores nothing. Use it for anything aggregated or any ratio. <em>When in doubt, write a measure</em> — the mistake of storing a rate in a column is much more expensive than the reverse.</p>
+    <p><strong>Measure branching is how experts stay sane.</strong> First write base measures such as <code>Applicants</code>, <code>Offers</code>, <code>Accepts</code> and <code>Joiners</code>. Then build ratios from them: <code>Acceptance Rate = DIVIDE([Accepts], [Offers])</code>. If the definition changes later, you edit one base measure instead of hunting through twenty visuals.</p>
+  </div>
+
+  <h4>Write them yourself</h4>
+  <p>These are graded against the real engine. Reference the tables as <code>Candidates</code> and the columns as <code>Candidates[Name]</code>.</p>
+  <div id="daxt1"></div>
+</section>
+
+<!-- 6 -->
+<section class="lesson" data-lesson="pbi.calculate" data-n="06">
+  <p class="goal">The one function worth real practice</p>
+  <h3>CALCULATE, in detail</h3>
+  <p>Everything else in DAX is ordinary. CALCULATE is the one that takes practice, because it does something no Excel function does: <strong>it changes the filter context before evaluating</strong>.</p>
+  <div class="fml">CALCULATE( <b>what to work out</b> , <b>filter 1</b> , <b>filter 2</b> , … )</div>
+  <p>Three things it does, in order of how surprising they are:</p>
+  <ol class="steps">
+    <li><strong>It adds filters.</strong> <code>CALCULATE(COUNTROWS(Candidates), Candidates[Source]="LinkedIn")</code> counts only LinkedIn, wherever it is placed.</li>
+    <li><strong>It replaces filters on the same column.</strong> If the page is already sliced to Referral and the measure says Source = "LinkedIn", the answer is LinkedIn — the measure wins. This surprises everybody once.</li>
+    <li><strong>It removes filters, with ALL.</strong> <code>CALCULATE(COUNTROWS(Candidates), ALL(Candidates))</code> ignores every slicer and gives the grand total. This is how a percent-of-total is built: the numerator respects the filter, the denominator does not.</li>
+  </ol>
+  <h4>Watch all three happen</h4>
+  <p>Click the <strong>Referral</strong> slicer, then run each example in turn. The first follows the slicer, the second overrides it, the third ignores it entirely.</p>
+  <div id="dax2"></div>
+  <div class="note">
+    <p><strong>The percent-of-total pattern,</strong> written out, because it is the one you will use most:</p>
+    <div class="fml">Source share =
+DIVIDE(
+    COUNTROWS(Candidates),
+    CALCULATE(COUNTROWS(Candidates), ALL(Candidates))
+)</div>
+    <p>The numerator is the current context — one row of a table, so one source. The denominator strips all filters, so it is always the full six. Put this measure in a table with Source in the rows and each line shows its share, totalling 100%.</p>
+  </div>
+  <div id="q6"></div>
+</section>
+
+<!-- 7 -->
+<section class="lesson" data-lesson="pbi.report" data-n="07">
+  <p class="goal">The canvas</p>
+  <h3>Building the report</h3>
+  <p>Visuals come from the Visualizations pane; fields are dragged into the wells beneath it. The visuals actually worth using:</p>
+  <table class="t wrap">
+    <thead><tr><th>Visual</th><th>For</th><th>Note</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Card</strong></td><td>One big number</td><td>The top row of the report. Four to six, no more.</td></tr>
+      <tr><td><strong>KPI</strong></td><td>A number against a target</td><td>Only if there is a real target. Otherwise it is a card with decoration.</td></tr>
+      <tr><td><strong>Clustered bar</strong></td><td>Comparing categories</td><td>Bar, not column, when the labels are words.</td></tr>
+      <tr><td><strong>Line</strong></td><td>Anything over time</td><td>Needs the Calendar table on the axis, not a text month.</td></tr>
+      <tr><td><strong>Matrix</strong></td><td>A cross-tab, source by role</td><td>The pivot table of Power BI. Supports drill-down.</td></tr>
+      <tr><td><strong>Table</strong></td><td>The detail list</td><td>The chase list at the bottom.</td></tr>
+      <tr><td><strong>Funnel</strong></td><td>The hiring funnel</td><td>Exactly what it was designed for.</td></tr>
+      <tr><td><strong>Slicer</strong></td><td>Letting the reader filter</td><td>Source, role, recruiter, date. The whole reason to use Power BI.</td></tr>
+      <tr><td><strong>Map</strong></td><td>Locations</td><td>Needs the City column from Roles. Impressive, and genuinely useful for multi-country hiring.</td></tr>
+    </tbody>
+  </table>
+  <h4>A working report, in the browser</h4>
+  <p>This is a model of your report page. <strong>Click the slicers.</strong> Every card, bar and matrix cell recalculates — and nothing beneath it was written per-visual. That is filter context doing the work.</p>
+  <div id="pbi1"></div>
+  <div class="note">
+    <p><strong>Four report-building things that are not obvious.</strong></p>
+    <ul class="clean">
+      <li><strong>Edit interactions</strong> (Format &rarr; Edit interactions) controls what happens when a visual is clicked. By default clicking a bar cross-filters everything else. Sometimes that is wrong — a summary card should usually stay put — and this is where it is switched off.</li>
+      <li><strong>Drill-through</strong> lets a reader right-click a role and land on a detail page filtered to it. It is what turns a dashboard into something people explore instead of asking your about.</li>
+      <li><strong>Bookmarks</strong> save a view — a set of filters and a layout. Useful for a "this is the story" button in a presentation.</li>
+      <li><strong>Tooltips</strong> can be a whole report page. Hover a bar and a mini-report appears. Cheap, and it looks expert.</li>
+    </ul>
+  </div>
+  <h4>The layout rules, same as Excel</h4>
+  <ul class="clean">
+    <li>Cards across the top, charts in the middle, detail table at the bottom. People read top-left to bottom-right.</li>
+    <li>Chart titles are findings, not axis names. This matters more in Power BI because the title is the only text on the page.</li>
+    <li>One page. A second page is for drill-through detail, not for the overflow of page one.</li>
+    <li>Two colours and a grey. Use the theme, not hand-picked colours per visual.</li>
+    <li>Put the refresh date on the page. The first question anyone asks is how current it is.</li>
+  </ul>
+  <div id="q7"></div>
+</section>
+
+<!-- 8 -->
+<section class="lesson" data-lesson="pbi.service" data-n="08">
+  <p class="goal">Publishing, and the part interviewers probe</p>
+  <h3>The Power BI Service</h3>
+  <p>Desktop builds it; the Service is where other people use it. Knowing the vocabulary here is a disproportionate advantage, because most people who "know Power BI" have only ever used Desktop.</p>
+  <table class="t wrap">
+    <thead><tr><th>Term</th><th>What it is</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Workspace</strong></td><td>A shared folder where reports live. Permissions are set here. "My Workspace" is private and is not where team reports belong.</td></tr>
+      <tr><td><strong>Semantic model</strong> (dataset)</td><td>The model and measures, uploaded. Several reports can share one, which is the point — one definition of "time to hire" for the whole company.</td></tr>
+      <tr><td><strong>Report</strong></td><td>The pages of visuals, connected to a semantic model.</td></tr>
+      <tr><td><strong>Dashboard</strong></td><td>A single page of pinned tiles, possibly from several reports. Older concept; the report is usually the better thing to share.</td></tr>
+      <tr><td><strong>App</strong></td><td>A packaged, published version of a workspace for a wide audience. What you would give a whole HR department.</td></tr>
+      <tr><td><strong>Scheduled refresh</strong></td><td>Up to eight times a day on a Pro licence. Set it, and the report updates without you.</td></tr>
+      <tr><td><strong>Gateway</strong></td><td>A small program installed on-premises so the cloud can reach a local file or database. The answer to "how does it refresh if the data is on our server?"</td></tr>
+      <tr><td><strong>Row-level security</strong> (RLS)</td><td>Different people see different rows of the same report. <strong>This is the HR answer.</strong> A hiring manager sees only their own requisitions. Set with a DAX filter on a role, tested with "View as role".</td></tr>
+      <tr><td><strong>Sensitivity label</strong></td><td>Marks a report Confidential and carries that into exports. Expected on anything with candidate or pay data.</td></tr>
+    </tbody>
+  </table>
+  <div class="warn">
+    <p><strong>Row-level security is the question you should hope for.</strong> HR data is the most sensitive data in a company — salaries, performance, candidate records. "How would you share a hiring dashboard with twenty managers without everyone seeing everyone's data?" The answer is row-level security: a role with a DAX filter such as <code>Roles[HiringManager] = USERPRINCIPALNAME()</code>, so each manager's own email filters the model to their own requisitions. One report, twenty different views, nothing duplicated.</p>
+    <p>Then add the thing that marks real experience: <em>"and I would test it with View as role before publishing, because getting that wrong is a data breach, not a bug."</em></p>
+  </div>
+  <div id="q8"></div>
+</section>
+
+<!-- 9 -->
+<section class="lesson" data-lesson="pbi.security" data-n="09">
+  <p class="goal">Sensitive HR data without panic</p>
+  <h3>Security, governance and sharing</h3>
+  <p>Power BI is not just making a page pretty. In a company it is a controlled way to let people see data they are allowed to see, using one agreed version of the numbers. This is where a Talent Acquisition Partner can sound unusually strong, because hiring data is full of names, salaries, notes, offers, rejection reasons and manager opinions.</p>
+  <table class="t wrap">
+    <thead><tr><th>Control</th><th>What you should know</th><th>HR example</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Workspace roles</strong></td><td>Admin, Member, Contributor and Viewer control who can manage or only consume content.</td><td>HR analytics team edits; hiring managers view.</td></tr>
+      <tr><td><strong>App</strong></td><td>The clean way to distribute approved content from a workspace to a wider audience.</td><td>"Hiring Manager Pack" with one report and one help page.</td></tr>
+      <tr><td><strong>Endorsement</strong></td><td>Promoted or Certified content tells people which report is trusted.</td><td>Stop five different acceptance-rate reports circulating.</td></tr>
+      <tr><td><strong>Sensitivity labels</strong></td><td>Mark content Confidential and carry protection into export paths where the tenant supports it.</td><td>Candidate-stage and offer data should not be treated like a public headcount chart.</td></tr>
+      <tr><td><strong>RLS</strong></td><td>Filters rows per viewer. The model stays one model; the visible rows change per user.</td><td>A manager sees only their requisitions.</td></tr>
+      <tr><td><strong>OLS</strong></td><td>Object-level security hides tables or columns.</td><td>A viewer can see status and source but not offer salary or recruiter notes.</td></tr>
+      <tr><td><strong>Lineage view</strong></td><td>Shows where a report comes from and what will break if a semantic model changes.</td><td>Before editing "Candidates", check which HR reports depend on it.</td></tr>
+    </tbody>
+  </table>
+  <div class="say">"I would share the app, not the workspace, use groups rather than individual permissions, label it Confidential, and use RLS for manager-specific views."</div>
+  <div id="q9"></div>
+</section>
+
+<!-- 10 -->
+<section class="lesson" data-lesson="pbi.refresh" data-n="10">
+  <p class="goal">The report must update when you are asleep</p>
+  <h3>Refresh, gateways and data quality</h3>
+  <p>A report that refreshes cleanly is a product. A report that needs your to open a file every Monday is an ornament. Refresh is where many Power BI beginners fall apart because they built the page without thinking about where the data lives.</p>
+  <table class="t wrap">
+    <thead><tr><th>Problem</th><th>Power BI answer</th><th>What to say</th></tr></thead>
+    <tbody>
+      <tr><td>ATS export is saved to SharePoint every morning.</td><td>Connect to the SharePoint/OneDrive file location, publish, schedule refresh.</td><td>"The path must be stable; the file cannot live on my Desktop."</td></tr>
+      <tr><td>Data sits in an internal SQL Server.</td><td>Install and configure an on-premises data gateway.</td><td>"The Service needs a gateway to reach a private network source."</td></tr>
+      <tr><td>Refresh fails because a column was renamed.</td><td>Check refresh history, fix the Power Query step, and add a data-quality check.</td><td>"Refresh history is the first place I look."</td></tr>
+      <tr><td>The table has years of history and refresh takes hours.</td><td>Incremental refresh partitions the table and refreshes only the recent period.</td><td>"Refresh less data, not the same old data every time."</td></tr>
+      <tr><td>Different people use different definitions.</td><td>Publish one shared semantic model and build reports from it.</td><td>"Governance means one definition of time to hire."</td></tr>
+    </tbody>
+  </table>
+  <div class="note">
+    <p><strong>The minimum refresh checklist.</strong> Data source credentials set. Gateway online if needed. Scheduled refresh enabled. Refresh history checked after first publish. Owner set to a team account or workspace process, not one person's forgotten login. Page shows the last refresh date.</p>
+  </div>
+  <div id="q10"></div>
+</section>
+
+<!-- 11 -->
+<section class="lesson" data-lesson="pbi.performance" data-n="11">
+  <p class="goal">Fast reports feel trustworthy</p>
+  <h3>Performance and troubleshooting</h3>
+  <p>You do not need to be a Power BI engineer, but you should know the first moves when a report is slow. The impressive part is not naming every internal engine. It is having calm instincts.</p>
+  <table class="t wrap">
+    <thead><tr><th>Symptom</th><th>Likely cause</th><th>First fix</th></tr></thead>
+    <tbody>
+      <tr><td>Every visual takes seconds to load.</td><td>Too many visuals, too many high-cardinality fields, or DirectQuery hitting a slow source.</td><td>Use Performance Analyzer, reduce visuals, test the expensive visual first.</td></tr>
+      <tr><td>File is huge.</td><td>Unneeded columns, repeated text, high-cardinality IDs, calculated columns used where measures would do.</td><td>Remove columns in Power Query, hide not enough; do not import what is not used.</td></tr>
+      <tr><td>Slicer has thousands of names.</td><td>Wrong field for a slicer.</td><td>Use role, city, recruiter, date range; not candidate name.</td></tr>
+      <tr><td>DAX measure is slow.</td><td>Complex iterator over too many rows or bad model shape.</td><td>Check the model first; star schema before heroic DAX.</td></tr>
+      <tr><td>Report breaks after refresh.</td><td>Source schema drift, renamed headers, changed date type.</td><td>Fix Applied Steps and add a small QA table of row counts and blank checks.</td></tr>
+    </tbody>
+  </table>
+  <div class="gold">
+    <p><strong>Performance sentence.</strong> "I would start with the model and the visual design: remove unused columns, keep the star schema, avoid high-cardinality slicers, use Performance Analyzer, and only then look for a clever DAX rewrite."</p>
+  </div>
+  <div id="q11"></div>
+</section>
+
+<!-- 12 -->
+<section class="lesson" data-lesson="pbi.modern" data-n="12">
+  <p class="goal">Current features worth knowing</p>
+  <h3>Modern Power BI features that sound real</h3>
+  <p>These are not all required for your first report. They are the vocabulary that lets your survive a modern interview without pretending to be a Fabric architect.</p>
+  <table class="t wrap">
+    <thead><tr><th>Feature</th><th>What it does</th><th>How you should position it</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Field parameters</strong></td><td>Let the reader switch the field or measure used in a visual.</td><td>Good for a toggle between source, role, recruiter and city.</td></tr>
+      <tr><td><strong>Visual calculations</strong></td><td>DAX written directly on a visual for things like running totals and moving averages over what the visual already displays.</td><td>Useful for visual-only analysis; core business metrics still belong in measures.</td></tr>
+      <tr><td><strong>Calculation groups</strong></td><td>Reduce repeated measures, especially time intelligence such as Current, Previous, YoY.</td><td>Advanced model feature; know the reason, not the full build yet.</td></tr>
+      <tr><td><strong>DAX query view</strong></td><td>Lets your write and inspect DAX queries against a model.</td><td>Great for testing a measure outside the visual.</td></tr>
+      <tr><td><strong>Copilot</strong></td><td>Can help explain DAX, build pages or work with semantic models when the tenant and capacity allow it.</td><td>Helpful assistant, not a replacement for a clean model and verified metrics.</td></tr>
+      <tr><td><strong>Dataflows Gen2</strong></td><td>Reusable Power Query transformations in Fabric/Service, upstream of reports.</td><td>If several reports clean the same ATS export, move cleaning upstream.</td></tr>
+      <tr><td><strong>Deployment pipelines</strong></td><td>Promote content from development to test to production.</td><td>For governed teams; not needed for your first personal report.</td></tr>
+      <tr><td><strong>Fabric and OneLake</strong></td><td>Microsoft's wider analytics platform around Power BI, lakehouses, warehouses, pipelines and Direct Lake models.</td><td>Recognise the ecosystem and keep your own promise modest.</td></tr>
+    </tbody>
+  </table>
+  <div class="warn">
+    <p><strong>The trap is feature-chasing.</strong> A weak model with Copilot is still a weak model. A confusing report with visual calculations is still confusing. The order is always: correct data, clean model, clear measures, readable report, governed sharing, then advanced features.</p>
+  </div>
+  <div id="q12"></div>
+</section>
+
+<!-- 13 -->
+<section class="lesson" data-lesson="pbi.practice" data-n="13">
+  <p class="goal">Interview-grade scenarios</p>
+  <h3>Practice cases: answer like you own the report</h3>
+  <p>These are the questions that turn Power BI from "I know the tool" into "I can use this at work." Say the answer before clicking. The point is the judgement, not the mouse path.</p>
+  <div id="q13a"></div>
+  <div id="q13b"></div>
+  <div id="d13"></div>
+</section>
+
+<!-- 14 -->
+<section class="lesson" data-lesson="pbi.cert" data-n="14">
+  <p class="goal">Only if there is time</p>
+  <h3>PL-300, honestly</h3>
+  <p>PL-300 is the Microsoft Power BI Data Analyst certification. It is a real, respected exam, and the current skills map is the same shape as this chapter: prepare data, model data, visualise and analyse data, and manage and secure Power BI assets.</p>
+  <p><strong>But the order matters.</strong> A certificate with no file behind it is weaker than a file with no certificate. The sequence is: build the real report first, be able to talk about it, and only then consider the exam as a tiebreaker. If you have to choose between spending four weeks on PL-300 and four weeks building and explaining two real dashboards, you should build the dashboards.</p>
+  <div class="note">
+    <p><strong>What "I know Power BI" should mean when you say it.</strong> You have published a report to a workspace, set a scheduled refresh, can explain a star schema, can write measures for conversion and cost, can use RLS for hiring-manager views, and can name what you would check when refresh or performance breaks. That is a serious bar, and clearing it puts your ahead of most people who list Power BI on a CV.</p>
+  </div>
+  <div id="d9"></div>
+</section>
+
+<section>
+  <h2>Before moving on</h2>
+  <div class="note">
+    <p>The deliverable for this chapter is a published report with Candidates and Roles as a proper star schema, a marked Calendar table, at least twelve measures including CALCULATE, DIVIDE and a percent-of-total, a page of cards and three visuals with slicers that work, a tooltip or drill-through page, a scheduled refresh, a last-refresh label, and a written RLS plan for hiring managers. Extra reps: <a href="labs-more.html">craft and job labs</a>.</p>
+  </div>
+</section>
+
+<div class="pager">
+  <a class="btn" href="reference.html"><span class="lbl">Reference</span>&larr; Function reference</a>
+  <a class="btn btn-go" href="metrics.html"><span class="lbl">Chapter 3</span>Recruiting metrics &rarr;</a>
+</div>
+
+</main>
+</div>
+
+<script src="assets/engine.js?v=3"></script>
+<script src="assets/sheet.js?v=3"></script>
+<script src="assets/data.js?v=3"></script>
+<script src="assets/dax.js?v=3"></script>
+<script src="assets/course.js?v=3"></script>
+<script>
+var REC = CourseData.records();
+
+Quiz.mount("q1", {
+  title: "Check yourself", lessonId: "pbi.why",
+  items: [
+    { q: "When does you keep the work in Excel instead of Power BI?",
+      opts: ["Never — Power BI is always better", "Analysis you are doing once; Power BI for a report other people need every week", "When there are more than 100 rows", "When the manager likes pies"],
+      a: 1, why: "<b>Judgement, not fashion.</b>" },
+    { q: "Which Desktop view holds relationships?",
+      opts: ["Report", "Table", "Model", "Service"],
+      a: 2, why: "<b>Model view — boxes and lines.</b>" }
+  ]
+});
+Quiz.mount("q2", {
+  title: "Check yourself", lessonId: "pbi.pq",
+  items: [
+    { q: "Trim Source and split title from city. Where?",
+      opts: ["A DAX measure", "Power Query, so it runs once at refresh", "A bookmark", "Row-level security"],
+      a: 1, why: "<b>Clean in Power Query. Measures for questions that change with slicers.</b>" },
+    { q: "Default connectivity for your size of file?",
+      opts: ["DirectQuery", "Import", "Live connection to Excel", "Streaming"],
+      a: 1, why: "<b>Import unless the data must not be copied.</b>" }
+  ]
+});
+Quiz.mount("q4", {
+  title: "Check yourself", lessonId: "pbi.ctx",
+  items: [
+    { q: "COUNTROWS(Candidates) on a card with LinkedIn selected is:",
+      opts: ["Always 6", "4 — the measure sees currently visible rows", "0", "An error"],
+      a: 1, why: "<b>Filter context.</b> One formula, many answers." },
+    { q: "A measure has:",
+      opts: ["Row context like a calculated column", "No row context — so Accepted-Applied needs an aggregator", "Only page filters", "VBA"],
+      a: 1, why: "<b>That sentence is the interview.</b>" }
+  ]
+});
+Quiz.mount("q7", {
+  title: "Check yourself", lessonId: "pbi.report",
+  items: [
+    { q: "Four to six cards, then charts, then a detail table. Why that order?",
+      opts: ["Power BI requires it", "People read top-left to bottom-right; cards are the headline", "Cards are slower so they go first", "For print"],
+      a: 1, why: "<b>Layout is the same rule as the Excel dashboard.</b>" },
+    { q: "A second page is for:",
+      opts: ["Overflow from page one", "Drill-through detail", "The same visuals in a different colour", "DAX code"],
+      a: 1, why: "<b>One story per page.</b>" }
+  ]
+});
+
+Quiz.mount("q3", {
+  title: "Check yourself", lessonId: "pbi.model",
+  items: [
+    { q: "Why separate Roles from Candidates instead of one wide table?",
+      opts: ["It looks tidier", "One place to fix a role's details, a clean slicer, and no repeated typing — the role title is a property of the role, not of each candidate", "Power BI requires two tables", "It is faster to type"],
+      a: 1,
+      why: "<b>Separate the events from the things.</b> Candidates is the fact table (events), Roles is a dimension (things). The role title lives once, so correcting it corrects every candidate row at the same time." },
+    { q: "Which direction do filters flow across a one-to-many relationship?",
+      opts: ["Many to one", "From the one side to the many side — picking a role filters its candidates", "Both ways always", "Neither"],
+      a: 1,
+      why: "<b>One to many.</b> Roles filters Candidates, not the other way round. Setting cross-filtering to Both to force the reverse creates ambiguous paths and numbers that cannot be explained \u2014 leave it Single." },
+    { q: "Days to hire per candidate: measure or calculated column?",
+      opts: ["Measure", "Calculated column — it is a fact about one row", "Either", "Neither"],
+      a: 1,
+      why: "<b>A calculated column.</b> It is a property of that single row, so it can be stored. The <em>average</em> days to hire is a measure, because it has to change when someone clicks a slicer." }
+  ]
+});
+
+DaxBox.mount("dax1", {
+  title: "DAX sandbox — filter context",
+  note: "The same measure, under different filters. Click a slicer, then press an example again.",
+  rows: REC,
+  slicers: [
+    { field: "Source", values: ["LinkedIn", "Referral", "Agency"] },
+    { field: "RoleID", values: ["BE-1", "FE-1"] },
+    { field: "Outcome", values: ["Joined", "Open"] }
+  ],
+  value: "COUNTROWS(Candidates)",
+  examples: [
+    "COUNTROWS(Candidates)",
+    "COUNT(Candidates[Offer])",
+    "COUNT(Candidates[Accepted])",
+    "DIVIDE(COUNT(Candidates[Accepted]), COUNT(Candidates[Offer]))",
+    "SUM(Candidates[FeeEUR])",
+    "DISTINCTCOUNT(Candidates[RoleID])",
+    "AVERAGE(Candidates[HireDays])",
+    'CONCATENATEX(Candidates, Candidates[Name], ", ")'
+  ]
+});
+
+DaxTask.mount("daxt1", {
+  title: "Write these twelve measures", lessonId: "pbi.dax", rows: REC,
+  items: [
+    { name: "Applicants", ask: "Count every candidate row.", want: 6,
+      answer: "COUNTROWS(Candidates)", requires: ["COUNTROWS"], good: "6. The default counter, and it respects whatever filter is applied." },
+    { name: "Offers", ask: "Count the rows that have an Offer date.", want: 4,
+      answer: "COUNT(Candidates[Offer])", requires: ["COUNT"], good: "4. COUNT ignores the blanks." },
+    { name: "Acceptance", ask: "Accepts divided by offers. Use the safe divide.", want: 0.75, tol: 0.001,
+      answer: "DIVIDE(COUNT(Candidates[Accepted]), COUNT(Candidates[Offer]))", requires: ["DIVIDE"],
+      good: "0.75. DIVIDE rather than <code>/</code> so an empty month gives a blank instead of an error." },
+    { name: "LinkedIn applicants", ask: "Count only the LinkedIn rows, no matter what the page is filtered to. Use CALCULATE.", want: 4,
+      answer: 'CALCULATE(COUNTROWS(Candidates), Candidates[Source]="LinkedIn")', requires: ["CALCULATE"],
+      good: "4. This measure forces its own filter, so it reads 4 even on a page sliced to Referral." },
+    { name: "Slow hires", ask: "Count the people who took more than 30 days to accept. The column is <code>Candidates[HireDays]</code>, and this needs FILTER because it is a condition on a calculated column.", want: 2,
+      answer: "COUNTROWS(FILTER(Candidates, Candidates[HireDays] > 30))", requires: ["FILTER"],
+      good: "2 \u2014 Dev at 32 days and Eva at 39. Asha was 23, and the three who never accepted are blank, so they are not counted." },
+    { name: "Avg days to hire", ask: "The average of <code>Candidates[HireDays]</code>, ignoring the blanks.", want: 31.333, tol: 0.01,
+      answer: "AVERAGE(Candidates[HireDays])", requires: ["AVERAGE"],
+      good: "31.3 days. AVERAGE skips blanks \u2014 if it treated them as zero this would read 15.7 and be wrong by half." },
+    { name: "Joiners", ask: "Count the rows that have a Joined date.", want: 2,
+      answer: "COUNT(Candidates[Joined])", requires: ["COUNT"],
+      good: "2. Asha and Dev started." },
+    { name: "Joining rate", ask: "Joiners divided by accepts. Use the safe divide.", want: 0.6667, tol: 0.001,
+      answer: "DIVIDE(COUNT(Candidates[Joined]), COUNT(Candidates[Accepted]))", requires: ["DIVIDE"],
+      good: "0.667. Eva accepted but did not join, so the rate is two out of three." },
+    { name: "Agency spend", ask: "Add the fee column.", want: 4000,
+      answer: "SUM(Candidates[FeeEUR])", requires: ["SUM"],
+      good: "4000. The fee sits on Eva even though Eva never started." },
+    { name: "Fee per joiner", ask: "Total fee divided by joiners. Use DIVIDE.", want: 2000,
+      answer: "DIVIDE(SUM(Candidates[FeeEUR]), COUNT(Candidates[Joined]))", requires: ["DIVIDE"],
+      good: "2000. Cost measures need the right denominator." },
+    { name: "Open candidates", ask: "Count only rows where Outcome is Open. Use CALCULATE.", want: 1,
+      answer: 'CALCULATE(COUNTROWS(Candidates), Candidates[Outcome]="Open")', requires: ["CALCULATE"],
+      good: "1. Farah is still open." },
+    { name: "Accepted not joined", ask: "Count candidates with an Accepted date and no Joined date. Use FILTER.", want: 1,
+      answer: "COUNTROWS(FILTER(Candidates, NOT(ISBLANK(Candidates[Accepted])) && ISBLANK(Candidates[Joined])))", requires: ["FILTER"],
+      good: "1. Eva is the renege." }
+  ]
+});
+
+DaxBox.mount("dax2", {
+  title: "CALCULATE: add, replace, remove",
+  note: "Click Referral in the slicer first. Then run each of the three in order and read the answers against each other.",
+  rows: REC,
+  slicers: [{ field: "Source", values: ["LinkedIn", "Referral", "Agency"] }],
+  value: "COUNTROWS(Candidates)",
+  examples: [
+    "COUNTROWS(Candidates)",
+    'CALCULATE(COUNTROWS(Candidates), Candidates[Source]="LinkedIn")',
+    "CALCULATE(COUNTROWS(Candidates), ALL(Candidates))",
+    "DIVIDE(COUNTROWS(Candidates), CALCULATE(COUNTROWS(Candidates), ALL(Candidates)))",
+    'CALCULATE(SUM(Candidates[FeeEUR]), ALL(Candidates))',
+    'SELECTEDVALUE(Candidates[Source], "All sources")'
+  ]
+});
+
+Quiz.mount("q6", {
+  title: "Check yourself", lessonId: "pbi.calculate",
+  items: [
+    { q: "The page is sliced to Referral. A card shows <code>CALCULATE(COUNTROWS(Candidates), Candidates[Source]=\"LinkedIn\")</code>. What does it show?",
+      opts: ["0, because no row is both", "4 — the measure's own filter replaces the slicer's filter on that same column", "1, the referral count", "An error"],
+      a: 1,
+      why: "<b>CALCULATE replaces, it does not combine, when the filter is on the same column.</b> The measure wins. This is the behaviour that surprises everyone once and then never again \u2014 and it is why a measure with a hard-coded source should be named so nobody expects it to follow the slicer." },
+    { q: "Why does a percent-of-total need ALL in the denominator?",
+      opts: ["To make it faster", "Because the numerator should follow the filter while the denominator must stay at the grand total — ALL strips the filter", "ALL is optional", "To avoid division by zero"],
+      a: 1,
+      why: "<b>Two different contexts in one formula.</b> Numerator: this row's source. Denominator: everything. Without ALL the two are identical and every row reads 100%." },
+    { q: "Why <code>DIVIDE(a, b)</code> rather than <code>a / b</code>?",
+      opts: ["It is shorter", "DIVIDE returns blank instead of an error when b is zero, so an early-month report looks empty rather than broken", "They are identical", "DIVIDE is faster"],
+      a: 1,
+      why: "<b>Graceful on a zero denominator.</b> A report with no offers yet shows a blank card, which is correct, instead of a cell full of error text, which looks like the report is broken." }
+  ]
+});
+
+PBIMock.mount("pbi1", { title: "Hiring overview — BE-1 and FE-1", rows: REC });
+
+Quiz.mount("q8", {
+  title: "Check yourself", lessonId: "pbi.service",
+  items: [
+    { q: "Twenty hiring managers need the same report, but each should only see their own requisitions. How?",
+      opts: ["Twenty separate files", "Row-level security: one role with a DAX filter on the manager's email, tested with View as role", "Tell them not to look", "Twenty workspaces"],
+      a: 1,
+      why: "<b>Row-level security.</b> <code>Roles[HiringManager] = USERPRINCIPALNAME()</code> filters the model to the signed-in person. One report, twenty views, nothing duplicated \u2014 and it is tested with View as role before publishing, because getting it wrong is a data breach." },
+    { q: "The data lives in a file on the company's own server. How does a published report refresh?",
+      opts: ["It cannot", "Through an on-premises data gateway", "By email", "Manually only"],
+      a: 1,
+      why: "<b>A gateway</b> is a small program installed inside the network that lets the Service reach local data. Knowing this word separates people who have published from people who have only used Desktop." },
+    { q: "What is a semantic model, in one line?",
+      opts: ["A page of visuals", "The uploaded tables, relationships and measures — several reports can share one, so the company has one definition of each metric", "A refresh schedule", "A workspace"],
+      a: 1,
+      why: "<b>The model, published.</b> The value of sharing one is that \u201ctime to hire\u201d means the same thing in every report in the company \u2014 which is a governance argument, and governance arguments are what senior roles are hired for." }
+  ]
+});
+
+Quiz.mount("q9", {
+  title: "Security cases", lessonId: "pbi.security",
+  items: [
+    { q: "A hiring manager should consume the approved report but not edit it. Best sharing route?",
+      opts: ["Make them Workspace Admin", "Publish an app or give Viewer access, ideally through a security group", "Send the PBIX file", "Give them Build permission on every model"],
+      a: 1,
+      why: "<b>Least privilege.</b> Consumers should not become editors just to read a report." },
+    { q: "A report contains offer salary and candidate notes. What should happen before sharing?",
+      opts: ["Nothing if it is only HR", "Apply the right sensitivity label, restrict access, and consider hiding sensitive columns or using OLS/RLS", "Export it to Excel", "Put a red title on the page"],
+      a: 1,
+      why: "<b>Confidential data needs controls, not vibes.</b> Labels, permissions and security rules belong in the answer." },
+    { q: "Five versions of acceptance rate exist across HR. What is the governance fix?",
+      opts: ["Pick the prettiest report", "Use one shared semantic model and endorse the trusted report", "Ask everyone to calculate faster", "Delete the old reports quietly"],
+      a: 1,
+      why: "<b>One metric definition.</b> A shared semantic model is how the organisation stops arguing about the denominator." },
+    { q: "Why use groups rather than adding named people one by one?",
+      opts: ["It looks neater", "Joiners, leavers and team moves can be managed centrally and audited", "Power BI requires groups", "Groups make DAX faster"],
+      a: 1,
+      why: "<b>Access should survive people changes.</b> Security groups are boring in exactly the right way." }
+  ]
+});
+
+Quiz.mount("q10", {
+  title: "Refresh cases", lessonId: "pbi.refresh",
+  items: [
+    { q: "The data source is a file on Nidhi's Desktop. What is wrong?",
+      opts: ["Nothing", "The Service cannot reliably refresh from your local personal path; move it to SharePoint/OneDrive or a governed source", "Desktop files refresh faster", "It needs DirectQuery"],
+      a: 1,
+      why: "<b>Stable source path.</b> A report should not depend on one laptop being awake." },
+    { q: "The data is in an internal SQL Server behind the company network. What is needed for Service refresh?",
+      opts: ["A gateway", "A bookmark", "A tooltip page", "A pie chart"],
+      a: 0,
+      why: "<b>Gateway.</b> It lets the cloud service reach private network sources." },
+    { q: "A refresh that used to work now fails after the ATS export changed a column name. First place to inspect?",
+      opts: ["Colour theme", "Refresh history and Power Query Applied Steps", "RLS roles", "Bookmarks"],
+      a: 1,
+      why: "<b>Follow the failure.</b> Refresh history tells what broke; Applied Steps usually tells where." },
+    { q: "A 50-million-row fact table takes hours to refresh, but only recent rows change. Best Power BI feature?",
+      opts: ["Incremental refresh", "More cards", "A matrix", "A sensitivity label"],
+      a: 0,
+      why: "<b>Refresh the changing partitions.</b> Incremental refresh exists for exactly this shape." }
+  ]
+});
+
+Quiz.mount("q11", {
+  title: "Performance cases", lessonId: "pbi.performance",
+  items: [
+    { q: "A page has 28 visuals and loads slowly. What is the first design response?",
+      opts: ["Add more slicers", "Reduce visuals, split detail into drill-through, and use Performance Analyzer to find the expensive visual", "Switch every measure to a column", "Make the background darker"],
+      a: 1,
+      why: "<b>Slow pages often have too much on them.</b> Performance is partly design." },
+    { q: "The model imports candidate CV text and long recruiter notes, but the report never uses them. What should you do?",
+      opts: ["Hide them only", "Remove them upstream in Power Query unless there is a real reporting need", "Turn on bidirectional filtering", "Use FORMAT"],
+      a: 1,
+      why: "<b>Do not import what the model does not need.</b> Hidden columns still take space." },
+    { q: "A slicer contains candidate names and thousands of values. Better slicer?",
+      opts: ["Candidate name is always best", "Role, city, source, recruiter or date range", "Fee amount", "Email address"],
+      a: 1,
+      why: "<b>Slicers are for useful segmentation.</b> Candidate-level detail belongs in a table or drill-through page." },
+    { q: "A measure is hard to explain and gives odd totals. First suspicion?",
+      opts: ["Power BI is broken", "Wrong grain/model shape or a measure that ignores filter context", "The colour theme", "The Service"],
+      a: 1,
+      why: "<b>Totals reveal modelling mistakes.</b> Check grain and context before blaming the tool." }
+  ]
+});
+
+Quiz.mount("q12", {
+  title: "Modern feature judgement", lessonId: "pbi.modern",
+  items: [
+    { q: "When is a visual calculation a good fit?",
+      opts: ["Core business definition reused everywhere", "A visual-only running total or moving average over what is already displayed", "Security filtering", "Replacing the model"],
+      a: 1,
+      why: "<b>Visual-local work.</b> Core metrics still belong in model measures." },
+    { q: "Copilot gives a measure that looks plausible. What next?",
+      opts: ["Trust it because it is AI", "Test it against hand-checked numbers and the model definition", "Publish immediately", "Delete the base measures"],
+      a: 1,
+      why: "<b>AI is not governance.</b> A measure is only real after it reconciles to known totals." },
+    { q: "What are field parameters useful for?",
+      opts: ["Switching a visual between fields/measures such as Source, Role, Recruiter and City", "Encrypting candidate data", "Refreshing SQL Server", "Replacing relationships"],
+      a: 0,
+      why: "<b>Reader-controlled perspective.</b> One visual, several sensible angles." },
+    { q: "Where does Fabric fit in your story?",
+      opts: ["You should claim to be a Fabric architect", "You should recognise OneLake, Dataflows, pipelines and Direct Lake, while keeping your project promise to Power BI reporting", "Ignore it entirely", "Use it instead of GDPR"],
+      a: 1,
+      why: "<b>Honest awareness beats fake depth.</b> Know the ecosystem without overclaiming." }
+  ]
+});
+
+Quiz.mount("q13a", {
+  title: "Scenario set A", lessonId: "pbi.practice",
+  items: [
+    { q: "The VP asks: 'Why do your LinkedIn hires look high?' Best answer?",
+      opts: ["LinkedIn is always best", "LinkedIn is both high volume and both joiners here, but I would compare conversion and cost before shifting budget", "Agency is bad forever", "The chart says so"],
+      a: 1,
+      why: "<b>Volume plus yield.</b> A good analyst does not recommend budget from one bar alone." },
+    { q: "A manager wants a private copy of the report with their own filters saved. What should you avoid?",
+      opts: ["Personal bookmarks", "Creating separate PBIX files per manager", "Slicers", "Dynamic titles"],
+      a: 1,
+      why: "<b>No duplicated truth.</b> One report with RLS and bookmarks beats twenty drifting files." },
+    { q: "The acceptance-rate card shows 100% after selecting one accepted candidate. Is that wrong?",
+      opts: ["Always wrong", "Maybe not; the measure is answering inside the current filter context", "Power BI rounded badly", "Cards cannot be filtered"],
+      a: 1,
+      why: "<b>Ask what context is active.</b> The same measure can be correct and misleading if the visual context is too narrow." },
+    { q: "A report user says the total row in a matrix is not the sum of visible percentages. Best explanation?",
+      opts: ["Power BI cannot total", "Measures recalculate at the total context; totals are not always sums of row percentages", "Use Excel instead", "It is a refresh issue"],
+      a: 1,
+      why: "<b>Totals have their own context.</b> This is one of the classic DAX interview questions." }
+  ]
+});
+
+Quiz.mount("q13b", {
+  title: "Scenario set B", lessonId: "pbi.practice",
+  items: [
+    { q: "The HR director asks for gender diversity by stage. What is the first governance question?",
+      opts: ["Which colour palette?", "Do we have a lawful, appropriate, minimised source for this sensitive data and a clear purpose?", "Can Copilot infer it?", "Can we scrape LinkedIn?"],
+      a: 1,
+      why: "<b>Sensitive data first.</b> Diversity reporting is important, but the data basis must be legitimate." },
+    { q: "The report has an RLS role. What must you do before publishing to managers?",
+      opts: ["Trust the DAX", "Use View as role / test as users and verify each manager sees only their own requisitions", "Export to PDF", "Add a map"],
+      a: 1,
+      why: "<b>Security needs proof.</b> Getting RLS wrong is a breach, not a small bug." },
+    { q: "A recruiter asks for candidate-level detail exported to Excel. What should you check?",
+      opts: ["Whether export is permitted, whether the user has rights, and whether the fields are appropriate for export", "Whether the font is nice", "Whether a pie chart exists", "Nothing; export everything"],
+      a: 0,
+      why: "<b>Export is still data sharing.</b> The control question follows the data out of the report." },
+    { q: "The business wants a dashboard tomorrow, but the source data has inconsistent stages. What is the honest answer?",
+      opts: ["Build it anyway", "Show a limited report with clear caveats and fix stage definitions before making decisions from conversion rates", "Invent missing stages", "Use DirectQuery"],
+      a: 1,
+      why: "<b>Data quality is part of the job.</b> A pretty funnel built on dirty stages creates false confidence." }
+  ]
+});
+
+Drill.mount("d13", {
+  id: "pbi-case-answer", lessonId: "pbi.practice", seconds: 90,
+  title: "Ninety-second case answer",
+  prompt: "\u201cWe have 20 hiring managers across Dublin, Amsterdam and Berlin. They all need the same hiring dashboard, but nobody should see anyone else\u2019s candidate pipeline. How would you build and share it?\u201d",
+  model: "<p>\u201cI would keep one governed semantic model rather than twenty copies. The model would be a star schema: candidate applications as the fact table, with role, recruiter, manager, location and calendar dimensions around it. The key security field is the hiring manager or manager email on the role dimension.</p><p>I would publish the report to a team workspace, distribute it as an app, and use row-level security so the signed-in manager filters the model to their own requisitions. Access would be granted through groups, not individual one-off sharing. Because this is candidate data, I would apply the right sensitivity label and avoid exposing notes, salary or unnecessary personal details.</p><p>Before launch I would test with View as role for several managers, check refresh history after publishing, put the last-refresh date on the report, and document the metric definitions so acceptance rate and time to hire mean the same thing for every country.\u201d</p>"
+});
+
+Drill.mount("d9", {
+  id: "pbi-say", lessonId: "pbi.cert", seconds: 60,
+  title: "The Power BI answer",
+  prompt: "\u201cTell me about your Power BI experience.\u201d Sixty seconds. Cover the model, one measure, and how it is shared — and be honest about the limits.",
+  model: "<p>\u201cI built a hiring report on two tables: Candidates as the fact table, one row per application with the stage dates, and Roles as a dimension, one row per requisition, joined one-to-many on RoleID. Keeping them separate means a role title lives in one place and the slicers are clean.</p><p>The measures are the interesting part. Applicants is COUNTROWS, offers and accepts are COUNTs of the stage dates, and acceptance is DIVIDE rather than a slash so an empty month returns blank instead of an error. The one I am most pleased with is source share \u2014 a DIVIDE where the denominator uses ALL to strip the filters, so each row of the table shows its share of the total rather than 100%.</p><p>It publishes to a workspace with a scheduled refresh, and I would set row-level security so each hiring manager sees only their own requisitions \u2014 and test it with View as role first, because getting that wrong with candidate data is a breach rather than a bug.</p><p>What I would say honestly: I have not worked with a dataset in the millions of rows, so I have not had to think hard about performance. What I know is to do the cleaning in Power Query rather than DAX and to keep the model a star schema, and I would want someone to review my first large model.\u201d</p><p class=\"tiny\">The last paragraph is the one that builds trust. Naming the edge of your experience, with the correct instinct about what you would do, is far stronger than implying you have done everything.</p>"
+});
+
+Course.init({ id: "powerbi" });
+</script>
+</body>
+</html>

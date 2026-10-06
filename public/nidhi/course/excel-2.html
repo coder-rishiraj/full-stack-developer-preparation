@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>1.2 Logic and counting — Nidhi's course</title>
+<link rel="stylesheet" href="assets/course.css?v=3">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand"><a href="index.html">Nidhi Tiwari</a><span>1.2 · Logic and counting</span></div>
+  <div class="top-actions">
+    <div class="pbar"><i></i></div>
+    <span class="pnum"></span>
+    <a class="btn" href="index.html">Course home</a>
+  </div>
+</div>
+
+<div class="layout">
+<nav class="side" id="sideNav"></nav>
+<main>
+
+<p class="kicker">Chapter 1.2</p>
+<h1>Logic and counting</h1>
+<p class="lead">This chapter builds the recruiting funnel. By the end of it you will have counted six stages, calculated three rates, and be able to say what each number means and what you would do about it. That block of numbers is the thing an interviewer actually asks to see.</p>
+
+<figure class="ill">
+  <svg viewBox="0 0 660 190" role="img" aria-label="The funnel: 6 applicants, 5 screened, 4 interviews, 4 offers, 3 accepts, 2 joiners">
+    <g font-family="sans-serif">
+      <g>
+        <rect x="10" y="30" width="96" height="120" fill="#1e4d38"/>
+        <text x="58" y="88" font-size="30" fill="#fff" text-anchor="middle" font-family="Georgia,serif">6</text>
+        <text x="58" y="168" font-size="10.5" fill="#57534e" text-anchor="middle">Applicants</text>
+      </g>
+      <g>
+        <rect x="116" y="40" width="96" height="100" fill="#2a6349"/>
+        <text x="164" y="88" font-size="30" fill="#fff" text-anchor="middle" font-family="Georgia,serif">5</text>
+        <text x="164" y="168" font-size="10.5" fill="#57534e" text-anchor="middle">Screened</text>
+        <text x="164" y="182" font-size="9.5" fill="#9f3a32" text-anchor="middle">Farah never was</text>
+      </g>
+      <g>
+        <rect x="222" y="50" width="96" height="80" fill="#3a7a5b"/>
+        <text x="270" y="88" font-size="30" fill="#fff" text-anchor="middle" font-family="Georgia,serif">4</text>
+        <text x="270" y="168" font-size="10.5" fill="#57534e" text-anchor="middle">Interviews</text>
+      </g>
+      <g>
+        <rect x="328" y="50" width="96" height="80" fill="#4f8f6d"/>
+        <text x="376" y="88" font-size="30" fill="#fff" text-anchor="middle" font-family="Georgia,serif">4</text>
+        <text x="376" y="168" font-size="10.5" fill="#57534e" text-anchor="middle">Offers</text>
+        <text x="376" y="182" font-size="9.5" fill="#8a5a12" text-anchor="middle">no drop here</text>
+      </g>
+      <g>
+        <rect x="434" y="60" width="96" height="60" fill="#6aa586"/>
+        <text x="482" y="88" font-size="30" fill="#fff" text-anchor="middle" font-family="Georgia,serif">3</text>
+        <text x="482" y="168" font-size="10.5" fill="#57534e" text-anchor="middle">Accepts</text>
+        <text x="482" y="182" font-size="9.5" fill="#57534e" text-anchor="middle">Ben declined</text>
+      </g>
+      <g>
+        <rect x="540" y="70" width="96" height="40" fill="#8fbfa5"/>
+        <text x="588" y="88" font-size="30" fill="#1c1917" text-anchor="middle" font-family="Georgia,serif">2</text>
+        <text x="588" y="168" font-size="10.5" fill="#57534e" text-anchor="middle">Joiners</text>
+        <text x="588" y="182" font-size="9.5" fill="#9f3a32" text-anchor="middle">Eva reneged</text>
+      </g>
+      <text x="10" y="20" font-size="10" fill="#a8a29e">Each bar is a COUNT of a date column. Every drop has a name and a reason.</text>
+    </g>
+  </svg>
+  <figcaption>The whole chapter in one picture. Six COUNTs, then the ratios between them.</figcaption>
+</figure>
+
+<!-- 1 -->
+<section class="lesson" data-lesson="excel-2.if" data-n="01">
+  <p class="goal">The workhorse</p>
+  <h3>IF, and why every recruiting formula needs one</h3>
+  <p>The shape is always the same three parts:</p>
+  <div class="fml">=IF( <b>something that is true or false</b> , <b>what to show if true</b> , <b>what to show if false</b> )</div>
+  <p>In recruiting, the test is almost always <em>did this stage happen yet?</em>, because a pipeline is mostly made of things that have not happened. Without the test, a duration against an empty cell returns a meaningless number in the tens of thousands:</p>
+  <table class="t wrap">
+    <thead><tr><th>Formula</th><th>Farah, who has no Accepted date</th></tr></thead>
+    <tbody>
+      <tr><td><code>=I7-E7</code></td><td><code>-46106</code> — you subtracted a real date from zero</td></tr>
+      <tr><td><code>=IF(I7="","",I7-E7)</code></td><td>blank, which is the honest answer</td></tr>
+    </tbody>
+  </table>
+  <p><code>""</code> means an empty piece of text. Reading it as "nothing" is close enough. Two notes that matter later: a cell holding <code>""</code> looks empty but COUNTA counts it as filled, and it is not the same as a genuinely empty cell. That is fine here, because the thing reading this column will be COUNT, which only counts numbers.</p>
+
+  <h4>Nesting, and when to stop</h4>
+  <p>IF can hold another IF in its false branch. Two deep is readable. Four deep is a formula nobody — including your, in March — can debug.</p>
+  <div class="fml">=IF(N2&lt;=20,"Fast",IF(N2&lt;=35,"Normal","Slow"))</div>
+  <p><strong>IFS</strong> does the same thing without the nesting. It takes pairs — test, result, test, result — and the first test that is true wins, so order matters. <code>TRUE</code> as the last test is the catch-all:</p>
+  <div class="fml">=IFS(N2&lt;=20,"Fast", N2&lt;=35,"Normal", TRUE,"Slow")</div>
+  <p>Prefer IFS from three branches up. And if there are more than four, the right answer is not a formula at all — it is a small lookup table and an XLOOKUP, which is chapter 1.3.</p>
+
+  <h4>Worked example</h4>
+  <div id="s1a"></div>
+
+  <h4>Your turn</h4>
+  <div id="s1b"></div>
+</section>
+
+<!-- 2 -->
+<section class="lesson" data-lesson="excel-2.andor" data-n="02">
+  <p class="goal">Two conditions at once</p>
+  <h3>AND, OR, NOT</h3>
+  <p>These do not display anything useful on their own — they return TRUE or FALSE, and live inside an IF.</p>
+  <ul class="clean">
+    <li><strong>AND(…)</strong> is TRUE only when every test is true. "Still open <em>and</em> older than fourteen days."</li>
+    <li><strong>OR(…)</strong> is TRUE when at least one is. "Declined <em>or</em> reneged" — the two ways a win becomes a loss.</li>
+    <li><strong>NOT(…)</strong> flips it. Mostly used as <code>NOT(ISBLANK(x))</code>, meaning "this stage did happen".</li>
+    <li><strong>XOR(…)</strong> is TRUE when exactly one is. It exists. You will never need it. Recognise it and move on.</li>
+  </ul>
+  <p>The one that will actually earn its keep every Monday morning is an ageing flag:</p>
+  <div class="fml">=IF(AND([@Outcome]="Open", TODAY()-[@Applied]&gt;14), "CHASE", "")</div>
+  <p>One column, filled down the whole table, and your Monday list writes itself. In the practice data only Farah lights up — applied on 20 March, never screened, and this course's clock says it is 1 May. Six weeks. That is the single most useful formula in this chapter, because it turns a spreadsheet from a record of the past into a to-do list.</p>
+  <div class="note">
+    <p><strong>A subtlety worth knowing.</strong> <code>AND</code> inside a single cell works as expected. People sometimes expect <code>AND</code> to work across a whole column at once — <code>=AND(Candidates[Outcome]="Open")</code> — which collapses the column into one TRUE/FALSE and is almost never what was meant. To test every row and count the hits, use COUNTIFS, which is lesson 4.</p>
+  </div>
+
+  <h4>Your turn</h4>
+  <div id="s2"></div>
+  <div id="q2"></div>
+</section>
+
+<!-- 3 -->
+<section class="lesson" data-lesson="excel-2.iferror" data-n="03">
+  <p class="goal">Rates that do not go red</p>
+  <h3>IFERROR, and dividing safely</h3>
+  <p>Every rate is a division, and every division can meet a zero. A role with no offers yet has an acceptance rate that is not zero — it is <em>undefined</em>, and showing 0% would be a lie, because 0% means "we made offers and everyone said no".</p>
+  <div class="fml">=IFERROR( accepts / offers , "" )</div>
+  <p>Blank is the honest display. There are three tools and they are not interchangeable:</p>
+  <table class="t wrap">
+    <thead><tr><th>Tool</th><th>Catches</th><th>Use when</th></tr></thead>
+    <tbody>
+      <tr><td><code>IFERROR(x, alt)</code></td><td>Every error</td><td>Divisions. The error is expected and means "not applicable yet".</td></tr>
+      <tr><td><code>IFNA(x, alt)</code></td><td>Only <code>#N/A</code></td><td>Lookups, when a missing key is acceptable — but you still wants to see a <code>#VALUE!</code> if the formula itself is broken. Safer than IFERROR.</td></tr>
+      <tr><td><code>IF(offers=0,"",accepts/offers)</code></td><td>Nothing — it avoids the error</td><td>When you want to be explicit about the one case you are handling. Longer, clearer, and it cannot accidentally hide a different bug.</td></tr>
+    </tbody>
+  </table>
+  <p><strong>The rule from chapter 1.1, restated because it matters:</strong> wrap divisions, investigate lookups. An <code>#N/A</code> buried under an IFERROR is a broken record that nobody will ever find.</p>
+
+  <h4>Your turn</h4>
+  <div id="s3"></div>
+  <div id="q3"></div>
+</section>
+
+<!-- 4 -->
+<section class="lesson" data-lesson="excel-2.count" data-n="04">
+  <p class="goal">The funnel itself</p>
+  <h3>The COUNT family</h3>
+  <p>Five functions, and choosing the wrong one is how two reports of the same pipeline disagree.</p>
+  <table class="t wrap">
+    <thead><tr><th>Function</th><th>Counts</th><th>On the practice data</th></tr></thead>
+    <tbody>
+      <tr><td><code>COUNT</code></td><td>Numbers and dates only. Ignores text and blanks.</td><td><code>=COUNT(Candidates[Offer])</code> → <strong>4</strong>. This is the one that counts a funnel stage.</td></tr>
+      <tr><td><code>COUNTA</code></td><td>Anything not empty, including text.</td><td><code>=COUNTA(Candidates[Name])</code> → <strong>6</strong>. Use it for "how many rows".</td></tr>
+      <tr><td><code>COUNTBLANK</code></td><td>Empty cells.</td><td><code>=COUNTBLANK(Candidates[Joined])</code> → <strong>4</strong>. Four of six have not started.</td></tr>
+      <tr><td><code>COUNTIF</code></td><td>Rows meeting one condition.</td><td><code>=COUNTIF(Candidates[Source],"LinkedIn")</code> → <strong>4</strong></td></tr>
+      <tr><td><code>COUNTIFS</code></td><td>Rows meeting several conditions, all of them.</td><td><code>=COUNTIFS(Candidates[Source],"LinkedIn",Candidates[Outcome],"Joined")</code> → <strong>2</strong></td></tr>
+    </tbody>
+  </table>
+  <p><strong>Why COUNT and not COUNTA for a stage.</strong> If one cell in the Offer column contains the word "pending" instead of a date, COUNTA counts it and COUNT does not. COUNT is asking "on how many dated occasions did this happen", which is the real question. COUNTA is asking "how many cells have something in them", which is a question about the spreadsheet, not about the hiring.</p>
+
+  <h4>Criteria, written properly</h4>
+  <p>The criteria argument is a small language, and it goes in quotes:</p>
+  <table class="t">
+    <thead><tr><th>Criteria</th><th>Means</th></tr></thead>
+    <tbody>
+      <tr><td><code>"LinkedIn"</code></td><td>Exactly that. Case-insensitive, so "linkedin" also matches.</td></tr>
+      <tr><td><code>"&gt;30"</code></td><td>Greater than 30. The operator goes inside the quotes.</td></tr>
+      <tr><td><code>"&gt;="&amp;TODAY()-30</code></td><td>Within the last thirty days. Note the <code>&amp;</code> — an operator in quotes joined to a live value.</td></tr>
+      <tr><td><code>"&lt;&gt;"</code></td><td>Not blank.</td></tr>
+      <tr><td><code>""</code></td><td>Blank.</td></tr>
+      <tr><td><code>"Link*"</code></td><td>Starts with "Link". <code>*</code> is any number of characters, <code>?</code> is exactly one.</td></tr>
+    </tbody>
+  </table>
+  <p>That third row is worth re-reading. <code>"&gt;="&amp;TODAY()-30</code> is how a rolling window is written, and a rolling window — "applications in the last thirty days" — is most of what a hiring manager asks for.</p>
+
+  <h4>Try it</h4>
+  <div id="pg4"></div>
+
+  <h4>Your turn — build the funnel</h4>
+  <p>Six stages. This is the block that goes on your dashboard, and the numbers must come out 6, 5, 4, 4, 3, 2.</p>
+  <div id="s4"></div>
+</section>
+
+<!-- 5 -->
+<section class="lesson" data-lesson="excel-2.sum" data-n="05">
+  <p class="goal">Money and totals</p>
+  <h3>SUM, SUMIF, SUMIFS</h3>
+  <p>Identical thinking to the COUNT family, with one trap: <strong>in SUMIFS the column being added comes first</strong>, while in SUMIF it comes last. That inconsistency is Excel's fault and it catches everybody.</p>
+  <div class="fml">=SUMIF( <b>range to test</b> , <b>criteria</b> , <b>range to add</b> )
+=SUMIFS( <b>range to add</b> , <b>range to test</b> , <b>criteria</b> , … )</div>
+  <p>Use SUMIFS always, even for a single condition. One habit, one argument order, and it extends to a second condition without rewriting.</p>
+  <p>The number this produces in your file is agency spend, and it is the most politically useful number you will own:</p>
+  <div class="fml">=SUMIFS(Candidates[FeeEUR], Candidates[Source], "Agency")   <b>→ 4000</b></div>
+  <p>€4,000, on Eva, who accepted and never started. The fee is owed regardless. When you say in an interview "I reduced agency dependency", <em>this</em> is the number that made the argument — not a sentiment.</p>
+
+  <h4>Your turn</h4>
+  <div id="s5"></div>
+  <div id="q5s"></div>
+</section>
+
+<!-- 6 -->
+<section class="lesson" data-lesson="excel-2.avg" data-n="06">
+  <p class="goal">And the honest version of it</p>
+  <h3>Averages, and what an average hides</h3>
+  <p><code>AVERAGE</code> ignores blanks and text, which is usually helpful and occasionally a trap. Average time to hire across the three people who accepted is 31.3 days. Across all six candidates it is meaningless, because three of them have not got there.</p>
+  <p><code>AVERAGEIFS</code> restricts it properly, and takes the same argument order as SUMIFS — the column to average first:</p>
+  <div class="fml">=AVERAGEIFS(Candidates[HireDays], Candidates[Outcome], "Joined")   <b>→ 27.5</b></div>
+  <p>27.5 days for the two who actually started, against 31.3 for everyone who accepted. The difference is Eva, who took 39 days to accept and then never arrived. Two defensible numbers, two different stories. <strong>Which one you quote is a choice you have to be able to defend</strong>, and an interviewer who knows the field will ask.</p>
+  <h4>The four summaries, and when each lies</h4>
+  <table class="t wrap">
+    <thead><tr><th>Function</th><th>Gives</th><th>Lies when</th></tr></thead>
+    <tbody>
+      <tr><td><code>AVERAGE</code></td><td>The mean, 31.3</td><td>One extreme value drags it. One 90-day aerospace hire moves the average of ten roles by nine days.</td></tr>
+      <tr><td><code>MEDIAN</code></td><td>The middle value, 32</td><td>Rarely. With small numbers of hires, the median is usually the more honest headline.</td></tr>
+      <tr><td><code>MAX</code></td><td>The worst case, 39</td><td>Never lies, and is the number the hiring manager remembers.</td></tr>
+      <tr><td><code>MIN</code></td><td>The best case, 23</td><td>When quoted alone. A recruiter quoting only their fastest hire is telling on themselves.</td></tr>
+    </tbody>
+  </table>
+  <p><strong>Report the median and the max together.</strong> "Median 32 days, worst case 39" is one sentence, cannot be argued with, and is far more useful than a mean. <code>MODE</code> returns the most frequent value and is almost useless on durations — keep it for "which source appears most", where COUNTIFS is better anyway.</p>
+
+  <h4>Your turn</h4>
+  <div id="s6"></div>
+  <div id="q6"></div>
+</section>
+
+<!-- 7 -->
+<section class="lesson" data-lesson="excel-2.rates" data-n="07">
+  <p class="goal">The capstone</p>
+  <h3>The rates, and the sentence that goes with them</h3>
+  <p>Counts tell your what happened. Rates tell your where to act. Three of them matter and they are frequently confused — including by interviewers, which is an opportunity.</p>
+  <table class="t wrap">
+    <thead><tr><th>Rate</th><th>Formula</th><th>Here</th><th>What a bad one means</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Offer acceptance</strong></td><td>accepts ÷ offers</td><td>3 / 4 = <strong>75%</strong></td><td>Pay is wrong, the process was slow, or the manager undersold the role at the final stage.</td></tr>
+      <tr><td><strong>Joining rate</strong></td><td>joiners ÷ accepts</td><td>2 / 3 = <strong>67%</strong></td><td>A renege. Usually a counter-offer during a long notice period, and the fix is contact during notice, not better interviewing.</td></tr>
+      <tr><td><strong>Screen-to-interview</strong></td><td>interviews ÷ screened</td><td>4 / 5 = <strong>80%</strong></td><td>If it is low, you are sending the wrong people — a sourcing problem, not a manager problem.</td></tr>
+    </tbody>
+  </table>
+  <p>The distinction between the first two is the single most common thing recruiters get wrong, and it is worth being precise about: <strong>acceptance is about the offer, joining is about everything after it.</strong> A team with 95% acceptance and 70% joining does not have an offer problem. It has a notice-period problem, and the fix is a completely different conversation.</p>
+
+  <div class="say">"Acceptance is 75 percent, but one of the three who accepted never started, so our joining rate is 67. The renege was the agency candidate, after a six-week notice period, and we paid the €4,000 anyway. I'd rather fix the gap between accept and start than brief another agency role."</div>
+  <p class="tiny">That is the paragraph the whole chapter exists to produce. Numbers, then the cause, then the decision.</p>
+
+  <h4>Your turn — finish the dashboard block</h4>
+  <p>The six counts are already filled in. Add the three rates, each one safe against a zero denominator.</p>
+  <div id="s7"></div>
+
+  <div id="d7"></div>
+</section>
+
+<!-- 8 -->
+<section class="lesson" data-lesson="excel-2.read" data-n="08">
+  <p class="goal">Reading someone else's file</p>
+  <h3>Auditing a formula you did not write</h3>
+  <p>You will inherit spreadsheets. Often from someone who has left. Four moves, in order:</p>
+  <ol class="steps">
+    <li><strong>Press <kbd>Ctrl</kbd>+<kbd>`</kbd></strong> to show every formula instead of its result. The shape of the file becomes visible immediately — including the cell where someone typed a number over a formula. Try the <em>Show formulas</em> button on any grid in this course.</li>
+    <li><strong>Look for typed constants in a calculated column.</strong> One hard-coded 47 in a column of formulas is the usual reason a total is wrong, and it is invisible until this step.</li>
+    <li><strong>Check the ranges reach the bottom.</strong> A SUM over <code>B2:B99</code> in a sheet with 400 rows is the classic. Tables prevent this, which is why 1.1 lesson 6 exists.</li>
+    <li><strong>Trace Precedents</strong> — Formulas &gt; Trace Precedents — draws arrows to every cell feeding the selected one. The fastest way to find a link to a workbook on someone's old laptop.</li>
+  </ol>
+  <div class="warn">
+    <p><strong>What to say when you find a mistake in a report someone else has been sending for a year.</strong> Not "this is wrong". Try: "I rebuilt the time-to-fill calculation and I get a different number — can I show you the two and check which definition we want?" The number is probably wrong. The relationship is worth more than being right loudly.</p>
+  </div>
+  <h4>Find the bug</h4>
+  <p>This sheet has three deliberate mistakes. The totals look plausible, which is what makes them dangerous. Switch on <em>Show formulas</em> and hunt.</p>
+  <div id="s8"></div>
+  <div id="q8"></div>
+</section>
+
+<section>
+  <h2>Before moving on</h2>
+  <div class="note">
+    <p>On a blank sheet, from memory: the six funnel counts, the three rates wrapped against a zero, and an ageing flag that marks Farah. Then say the paragraph in lesson 7 out loud without reading it. Extra reps are in the <a href="labs-excel.html">Excel labs</a>.</p>
+  </div>
+</section>
+
+<div class="pager">
+  <a class="btn" href="excel-1.html"><span class="lbl">Chapter 1.1</span>&larr; Excel foundations</a>
+  <a class="btn btn-go" href="excel-3.html"><span class="lbl">Chapter 1.3</span>Lookups and text &rarr;</a>
+</div>
+
+</main>
+</div>
+
+<script src="assets/engine.js?v=3"></script>
+<script src="assets/sheet.js?v=3"></script>
+<script src="assets/data.js?v=3"></script>
+<script src="assets/course.js?v=3"></script>
+<script>
+var D = CourseData;
+var FULL = D.candidates(D.ALL, {});
+
+function base(opts) { return D.candidates(D.ALL, opts); }
+
+/* 1 — IF */
+Sheet.mount("s1a", base({
+  id: "e2-if-demo", rows: 8, cols: 16, height: 250,
+  title: "The same duration, with and without the test", note: "Inspect only. Look at row 7 — Farah.",
+  open: [],
+  cells: {
+    N1: "No test", N2: "=I2-E2", N3: "=I3-E3", N4: "=I4-E4", N5: "=I5-E5", N6: "=I6-E6", N7: "=I7-E7",
+    O1: "With IF", O2: '=IF(I2="","",I2-E2)', O3: '=IF(I3="","",I3-E3)', O4: '=IF(I4="","",I4-E4)',
+    O5: '=IF(I5="","",I5-E5)', O6: '=IF(I6="","",I6-E6)', O7: '=IF(I7="","",I7-E7)',
+    P1: "Speed", P2: '=IFS(O2="","—",O2<=25,"Fast",O2<=35,"Normal",TRUE,"Slow")',
+    P3: '=IFS(O3="","—",O3<=25,"Fast",O3<=35,"Normal",TRUE,"Slow")',
+    P4: '=IFS(O4="","—",O4<=25,"Fast",O4<=35,"Normal",TRUE,"Slow")',
+    P5: '=IFS(O5="","—",O5<=25,"Fast",O5<=35,"Normal",TRUE,"Slow")',
+    P6: '=IFS(O6="","—",O6<=25,"Fast",O6<=35,"Normal",TRUE,"Slow")',
+    P7: '=IFS(O7="","—",O7<=25,"Fast",O7<=35,"Normal",TRUE,"Slow")'
+  },
+  extraFormats: { N: "general", O: "general", P: "text" },
+  widths: { N: 80, O: 80, P: 76 }
+}));
+
+Sheet.mount("s1b", base({
+  id: "e2-if-task", rows: 8, cols: 16, height: 250,
+  title: "Candidates", note: "Gold cells, then fill down.",
+  open: ["N2:N7", "O2:O7"], fillTo: 7, lessonId: "excel-2.if",
+  cells: { N1: "Started?", O1: "Band" },
+  extraFormats: { N: "text", O: "text" },
+  widths: { N: 92, O: 92 },
+  tasks: [
+    { cell: "N2", ask: 'Show <code>Yes</code> if this person has a Joined date, otherwise <code>No</code>. Then fill down — four of the six should say No.',
+      want: "Yes", answer: '=IF(J2="","No","Yes")', requires: ["IF"],
+      good: "Asha says Yes. Fill it down: Asha and Dev are the only two." },
+    { cell: "O2", ask: 'Three bands from Asha\'s 23-day time to hire: <code>Fast</code> if 25 days or under, <code>Normal</code> up to 35, <code>Slow</code> above. Use IFS, and remember you have to calculate the duration inside the formula.',
+      want: "Fast", answer: '=IFS(I2-E2<=25,"Fast",I2-E2<=35,"Normal",TRUE,"Slow")', requires: ["IFS"],
+      good: "Fast — 23 days. Fill it down and notice Cara and Farah give nonsense, because they have no Accepted date. That is the next thing to fix, and it is why the test comes first." }
+  ]
+}));
+
+/* 2 — AND/OR */
+Sheet.mount("s2", base({
+  id: "e2-andor", rows: 8, cols: 16, height: 250,
+  title: "Candidates", note: "TODAY() is 1 May 2026 here, so the ageing is stable.",
+  open: ["N2:N7", "O2:O7"], fillTo: 7, lessonId: "excel-2.andor",
+  cells: { N1: "Chase?", O1: "Lost?" },
+  extraFormats: { N: "text", O: "text" },
+  widths: { N: 88, O: 88 },
+  tasks: [
+    { cell: "N2", ask: 'Mark <code>CHASE</code> when the outcome is still Open <strong>and</strong> it is more than 14 days since they applied. Blank otherwise. Use AND.',
+      want: "", answer: '=IF(AND(K2="Open",TODAY()-E2>14),"CHASE","")', requires: ["AND"],
+      good: "Asha is blank, correctly — Asha is not open. Fill it down: only Farah should say CHASE." },
+    { cell: "O2", ask: 'Mark <code>LOST</code> if the outcome is Declined <strong>or</strong> Reneged — the two ways a win turns into a loss. Use OR.',
+      want: "", answer: '=IF(OR(K2="Declined",K2="Reneged"),"LOST","")', requires: ["OR"],
+      good: "Fill it down and Ben and Eva are flagged. Those two rows are the ones worth a post-mortem." }
+  ]
+}));
+
+Quiz.mount("q2", {
+  title: "Check yourself", lessonId: "excel-2.andor",
+  items: [
+    { q: "You want to count candidates who are both from LinkedIn and joined. Which is right?",
+      opts: ['=COUNTIF(Candidates[Source],"LinkedIn") and then eyeball it',
+             '=IF(AND(Candidates[Source]="LinkedIn",Candidates[Outcome]="Joined"),1,0)',
+             '=COUNTIFS(Candidates[Source],"LinkedIn",Candidates[Outcome],"Joined")',
+             '=SUMIF(Candidates[Source],"LinkedIn")'],
+      a: 2,
+      why: "<b>COUNTIFS</b> tests every row and counts the ones where all conditions hold — the answer is 2. The AND version collapses the whole column into a single TRUE/FALSE, which is the classic beginner mistake." },
+    { q: "Why does the ageing flag need AND rather than two separate columns?",
+      opts: ["It is faster", "Because a role that is closed should not be chased, however old it is", "Because TODAY() only works inside AND", "Two columns would be wrong"],
+      a: 1,
+      why: "<b>Both conditions have to hold.</b> Asha applied in March too, but Asha has already started — chasing that row would be absurd. The <em>Open</em> test is what makes the flag a to-do list instead of a list of old rows." }
+  ]
+});
+
+/* 3 — IFERROR */
+Sheet.mount("s3", {
+  id: "e2-iferror", rows: 9, cols: 6, headerRows: 1,
+  title: "Two roles, one with no offers yet", note: "The gold column is the acceptance rate.",
+  open: ["D2:D3"],
+  widths: { A: 90, B: 80, C: 80, D: 130 },
+  data: [["Role", "Offers", "Accepts", "Acceptance"], ["BE-1", 3, 2], ["FE-1", 0, 0]],
+  formats: { D: "pct" },
+  lessonId: "excel-2.iferror",
+  tasks: [
+    { cell: "D2", ask: "Acceptance rate for BE-1, protected against a zero denominator.",
+      want: 0.6667, tol: 0.001, answer: '=IFERROR(C2/B2,"")', requires: ["IFERROR"],
+      good: "67%." },
+    { cell: "D3", ask: "The same formula for FE-1, which has made no offers at all. It must come out blank — not 0%, which would wrongly say everyone refused.",
+      want: "", answer: '=IFERROR(C3/B3,"")', requires: ["IFERROR"],
+      good: "Blank. Undefined and zero are different claims, and a hiring manager will read 0% as a disaster." }
+  ]
+});
+
+Quiz.mount("q3", {
+  title: "Check yourself", lessonId: "excel-2.iferror",
+  items: [
+    { q: "FE-1 has zero offers. Showing 0% acceptance would mean:",
+      opts: ["Nothing yet, which is fine", "We offered and everyone said no — a lie if no offers were made", "The role is closed", "A rounding issue"],
+      a: 1, why: "<b>Undefined is blank.</b> Wrap the division." },
+    { q: "IFERROR on a lookup that should always find a RoleID is:",
+      opts: ["Best practice", "Dangerous — it hides a broken key", "Required by Excel", "The same as IFNA"],
+      a: 1, why: "<b>Wrap divisions. Investigate lookups.</b>" }
+  ]
+});
+
+/* 4 — counting */
+Sheet.playground("pg4", {
+  title: "Counting sandbox", note: "The Candidates table is loaded. Every answer is checkable by eye.",
+  data: FULL.data, formats: FULL.formats,
+  tables: { Candidates: { range: "A1:L7", header: true } },
+  examples: [
+    '=COUNTA(Candidates[Name])',
+    '=COUNT(Candidates[Screened])',
+    '=COUNTBLANK(Candidates[Joined])',
+    '=COUNTIF(Candidates[Source],"LinkedIn")',
+    '=COUNTIF(Candidates[Source],"Link*")',
+    '=COUNTIFS(Candidates[Source],"LinkedIn",Candidates[Outcome],"Joined")',
+    '=COUNTIFS(Candidates[RoleID],"BE-1",Candidates[Offer],"<>")',
+    '=COUNTIF(Candidates[Applied],">="&TODAY()-70)'
+  ],
+  value: '=COUNT(Candidates[Screened])'
+});
+
+Sheet.mount("s4", base({
+  id: "e2-funnel", rows: 10, cols: 16, height: 260,
+  title: "Candidates", note: "Build the funnel in column O.",
+  open: ["O2:O7"], lessonId: "excel-2.count",
+  cells: {
+    N1: "Stage", O1: "Count",
+    N2: "Applicants", N3: "Screened", N4: "Interviews", N5: "Offers", N6: "Accepts", N7: "Joiners"
+  },
+  extraFormats: { N: "text", O: "general" },
+  widths: { N: 98, O: 76 },
+  tasks: [
+    { cell: "O2", ask: "Applicants — how many rows are there? Count the names, not the dates.",
+      want: 6, answer: "=COUNTA(Candidates[Name])", requires: ["COUNT"],
+      good: "6." },
+    { cell: "O3", ask: "Screened — count the dates in the Screened column.",
+      want: 5, answer: "=COUNT(Candidates[Screened])", requires: ["COUNT"],
+      good: "5. Farah is the gap, and you are the one actionable thing in this dataset." },
+    { cell: "O4", ask: "Interviews.", want: 4, answer: "=COUNT(Candidates[Interview])", requires: ["COUNT"], good: "4." },
+    { cell: "O5", ask: "Offers.", want: 4, answer: "=COUNT(Candidates[Offer])", requires: ["COUNT"],
+      good: "4 — the same as interviews. Everyone interviewed got an offer, which either means excellent screening or an undemanding manager." },
+    { cell: "O6", ask: "Accepts.", want: 3, answer: "=COUNT(Candidates[Accepted])", requires: ["COUNT"], good: "3. Ben said no." },
+    { cell: "O7", ask: "Joiners — people who actually started.", want: 2, answer: "=COUNT(Candidates[Joined])", requires: ["COUNT"],
+      good: "2. That is the funnel: 6, 5, 4, 4, 3, 2. Every number on your dashboard comes from these six." }
+  ]
+}));
+
+/* 5 — sums */
+Sheet.mount("s5", base({
+  id: "e2-sum", rows: 9, cols: 16, height: 250,
+  title: "Candidates", note: "Agency spend, two ways.",
+  open: ["O2:O4"], lessonId: "excel-2.sum",
+  cells: { N1: "Measure", O1: "Value", N2: "All fees", N3: "Agency fees", N4: "Fees with no joiner" },
+  extraFormats: { N: "text", O: "eur" },
+  widths: { N: 136, O: 92 },
+  tasks: [
+    { cell: "O2", ask: "Total fees across every candidate.",
+      want: 4000, answer: "=SUM(Candidates[FeeEUR])", requires: ["SUM"], good: "€4,000 in total." },
+    { cell: "O3", ask: "Only the fees on agency-sourced candidates. Use SUMIFS, with the column being added first.",
+      want: 4000, answer: '=SUMIFS(Candidates[FeeEUR],Candidates[Source],"Agency")', requires: ["SUMIFS"],
+      good: "€4,000 — all of it. Every euro of agency spend in this dataset bought one person who never arrived." },
+    { cell: "O4", ask: "Fees paid on candidates who have no Joined date. Two conditions: the Joined column is blank, and there is a fee above zero.",
+      want: 4000, answer: '=SUMIFS(Candidates[FeeEUR],Candidates[Joined],"",Candidates[FeeEUR],">0")', requires: ["SUMIFS"],
+      good: "€4,000 of spend with nothing to show for it. This is the single most persuasive number in the whole dataset." }
+  ]
+}));
+
+Quiz.mount("q5s", {
+  title: "Check yourself", lessonId: "excel-2.sum",
+  items: [
+    { q: "SUMIFS starts with:",
+      opts: ["The criteria", "The range to add", "The range to test", "A pivot"],
+      a: 1, why: "<b>Add first, then pairs.</b> SUMIF is the other way round — so you write SUMIFS even for one condition." },
+    { q: "Eva’s €4,000 fee after a renege. Does it still count?",
+      opts: ["No — you did not join", "Yes — the fee is owed, and that is the argument against briefing another agency role", "Only 50%", "Hide it"],
+      a: 1, why: "<b>Spend that produced no joiner is still spend.</b>" }
+  ]
+});
+
+/* 6 — averages */
+Sheet.mount("s6", base({
+  id: "e2-avg", rows: 10, cols: 17, height: 260,
+  title: "Candidates", note: "HireDays is already calculated in column N.",
+  open: ["P2:P5"], lessonId: "excel-2.avg",
+  cells: {
+    N1: "HireDays", N2: '=IF([@Accepted]="","",[@Accepted]-[@Applied])',
+    N3: '=IF([@Accepted]="","",[@Accepted]-[@Applied])', N4: '=IF([@Accepted]="","",[@Accepted]-[@Applied])',
+    N5: '=IF([@Accepted]="","",[@Accepted]-[@Applied])', N6: '=IF([@Accepted]="","",[@Accepted]-[@Applied])',
+    N7: '=IF([@Accepted]="","",[@Accepted]-[@Applied])',
+    O1: "Summary", P1: "Days",
+    O2: "Average", O3: "Median", O4: "Worst", O5: "Average, joiners only"
+  },
+  extraFormats: { N: "general", O: "text", P: "n1" },
+  widths: { N: 86, O: 150, P: 72 },
+  tasks: [
+    { cell: "P2", ask: "Average of the HireDays column in N. Blanks look after themselves.",
+      want: 31.33, tol: 0.05, answer: "=AVERAGE(N2:N7)", requires: ["AVERAGE"],
+      good: "31.3 days across the three who accepted." },
+    { cell: "P3", ask: "The median of the same column.",
+      want: 32, answer: "=MEDIAN(N2:N7)", requires: ["MEDIAN"],
+      good: "32. With three values the median is the middle one — and on small samples it is the more honest headline." },
+    { cell: "P4", ask: "The worst case.",
+      want: 39, answer: "=MAX(N2:N7)", requires: ["MAX"],
+      good: "39 days — Eva, who then did not start. Always quote this next to the average." },
+    { cell: "P5", ask: "Average HireDays for the two people who actually joined. Use AVERAGEIFS against the Outcome column.",
+      want: 27.5, tol: 0.05, answer: '=AVERAGEIFS(N2:N7,Candidates[Outcome],"Joined")', requires: ["AVERAGEIFS"],
+      good: "27.5 days. Four days faster than the headline, because the slowest acceptance never became a hire." }
+  ]
+}));
+
+Quiz.mount("q6", {
+  title: "Check yourself", lessonId: "excel-2.avg",
+  items: [
+    { q: "Your average time to hire is 31.3 days and your median is 32. Nine roles took about a month and one aerospace role took 95 days. What should you report?",
+      opts: ["The average — it is the standard measure", "The median and the worst case, and name the outlier", "Only the median", "Exclude the aerospace role"],
+      a: 1,
+      why: "<b>Median plus worst case, with the outlier named.</b> Quietly excluding the 95-day role is the thing that destroys trust when someone finds it. Naming it is what a partner does: \"median 32 days; the aerospace role took 95 and here is why.\"" },
+    { q: "Why is average time to hire across all six candidates misleading?",
+      opts: ["Six is too few", "Three of them have no accepted date, so they are not in the measure at all", "AVERAGE counts blanks as zero", "It should be a median"],
+      a: 1,
+      why: "<b>AVERAGE ignores blanks</b>, so it is silently reporting on three people, not six. That is correct arithmetic and a misleading label — call the column \"average for accepted candidates\" and the problem disappears." }
+  ]
+});
+
+/* 7 — rates capstone */
+Sheet.mount("s7", {
+  id: "e2-rates", rows: 12, cols: 5, headerRows: 1,
+  title: "The dashboard block", note: "Counts given. Add the three rates.",
+  open: ["B9:B11"],
+  widths: { A: 180, B: 110 },
+  data: [
+    ["Measure", "Value"],
+    ["Applicants", 6], ["Screened", 5], ["Interviews", 4],
+    ["Offers", 4], ["Accepts", 3], ["Joiners", 2]
+  ],
+  cells: { A9: "Offer acceptance", A10: "Joining rate", A11: "Screen to interview" },
+  cellFormats: { B9: "pct", B10: "pct", B11: "pct" },
+  lessonId: "excel-2.rates",
+  tasks: [
+    { cell: "B9", ask: "Offer acceptance: accepts ÷ offers, safe against a zero.",
+      want: 0.75, tol: 0.001, answer: '=IFERROR(B6/B5,"")', requires: ["IFERROR"], good: "75%." },
+    { cell: "B10", ask: "Joining rate: joiners ÷ accepts. Not joiners ÷ offers — that is a different question.",
+      want: 0.6667, tol: 0.001, answer: '=IFERROR(B7/B6,"")', requires: ["IFERROR"],
+      good: "67%. Two of the three who accepted actually arrived." },
+    { cell: "B11", ask: "Screen to interview: interviews ÷ screened.",
+      want: 0.8, tol: 0.001, answer: '=IFERROR(B4/B3,"")', requires: ["IFERROR"],
+      good: "80%. All three rates done — that is the block that goes on your dashboard sheet." }
+  ]
+});
+
+Drill.mount("d7", {
+  id: "e2-say", lessonId: "excel-2.rates", seconds: 60,
+  title: "Say it, then write it",
+  prompt: "A hiring manager asks how the Backend search is going. You have thirty seconds and the numbers above. Give the counts, name the cause of the biggest drop, and end with what you will do next. Do not read the model answer first.",
+  model: "<p>\u201cSix people in, five screened, four interviewed, four offers, three accepted, two actually started. Acceptance is 75 percent, which is healthy. The problem is after the acceptance \u2014 one of the three never turned up, so our joining rate is 67 percent. That was the agency candidate, during a six-week notice period, and we owe the \u20ac4,000 regardless. The other gap is mine: Farah applied six weeks ago and has not been screened. I\u2019m screening Farah today, and before we brief another agency role I want to understand why Eva dropped.\u201d</p><p class=\"tiny\">Numbers, cause, decision, in that order. Note that you own the Farah gap out loud \u2014 that is what makes the rest of it credible.</p>"
+});
+
+/* 8 — audit */
+Sheet.mount("s8", {
+  id: "e2-audit", rows: 11, cols: 5, headerRows: 1,
+  title: "An inherited report with three bugs", note: "Switch on Show formulas. The totals look fine.",
+  open: ["D2:D4"],
+  widths: { A: 120, B: 90, C: 90, D: 150 },
+  data: [
+    ["Source", "Applicants", "Joiners", "Your notes"],
+    ["LinkedIn", 4, 2],
+    ["Referral", 1, 0],
+    ["Agency", 1, 0]
+  ],
+  cells: {
+    A6: "Total applicants", B6: "=SUM(B2:B3)",
+    A7: "Total joiners", B7: 2,
+    A8: "Joiner rate", B8: "=B7/B6"
+  },
+  cellFormats: { B8: "pct" },
+  lessonId: "excel-2.read",
+  tasks: [
+    { cell: "D2", ask: 'Bug one is in B6. Write a correct total of applicants here.',
+      want: 6, answer: "=SUM(B2:B4)", requires: ["SUM"],
+      good: "6, not 5. The original SUM stopped at B3 and silently missed the Agency row — the single most common spreadsheet bug there is." },
+    { cell: "D3", ask: "Bug two is in B7. Write the total joiners as a formula rather than a typed number.",
+      want: 2, answer: "=SUM(C2:C4)", requires: ["SUM"],
+      good: "It happens to be 2 today. It was a typed constant, so the day someone adds a joiner it becomes wrong and nobody finds out." },
+    { cell: "D4", ask: "Bug three: B8 divides by the broken total. Write the rate correctly from your own two answers.",
+      want: 0.3333, tol: 0.001, answer: "=IFERROR(D3/D2,\"\")",
+      good: "33%, not the 40% the original reported. Three small bugs, one wrong headline, and it had been going out monthly." }
+  ]
+});
+
+Quiz.mount("q8", {
+  title: "Check yourself", lessonId: "excel-2.read",
+  items: [
+    { q: "What is the fastest way to spot a typed-in number sitting in a column of formulas?",
+      opts: ["Check every cell", "Ctrl+` to display formulas instead of results", "Sort the column", "Use IFERROR"],
+      a: 1,
+      why: "<b>Ctrl+` toggles formula view.</b> A constant among formulas is instantly visible. It is the first thing to do with any inherited file." },
+    { q: "You find that a report your manager has sent for a year overstates the joining rate. What do you do?",
+      opts: ["Send a correction to everyone on the distribution list", "Say nothing", "Show your manager both calculations privately and ask which definition they want", "Fix it silently"],
+      a: 2,
+      why: "<b>Privately, as a question about definitions.</b> You are almost certainly right, and being right loudly in front of an audience costs more than it gains. Fixing it silently is worse \u2014 the numbers then change with no explanation." }
+  ]
+});
+
+Course.init({ id: "excel-2" });
+</script>
+</body>
+</html>

@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>1.4 Analysis and the dashboard — Nidhi's course</title>
+<link rel="stylesheet" href="assets/course.css?v=3">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand"><a href="index.html">Nidhi Tiwari</a><span>1.4 · Analysis and the dashboard</span></div>
+  <div class="top-actions">
+    <div class="pbar"><i></i></div>
+    <span class="pnum"></span>
+    <a class="btn" href="index.html">Course home</a>
+  </div>
+</div>
+
+<div class="layout">
+<nav class="side" id="sideNav"></nav>
+<main>
+
+<p class="kicker">Chapter 1.4</p>
+<h1>Analysis and the dashboard</h1>
+<p class="lead">This chapter produces the small dashboard you can already explain. The next chapter is the real one: you rebuild the Ferra HR workbook Cursor already made, cell by cell. Here you learn sort, filter, pivots, charts and Power Query so that file does not intimidate your.</p>
+
+<!-- 1 -->
+<section class="lesson" data-lesson="excel-4.sort" data-n="01">
+  <p class="goal">Before any analysis</p>
+  <h3>Sorting, filtering and duplicates</h3>
+  <p>Unglamorous and used daily. The things worth actually knowing:</p>
+  <table class="t wrap">
+    <thead><tr><th>Task</th><th>How</th><th>The trap</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Sort by several columns</strong></td><td>Data &rarr; Sort, then Add Level. Sort by Source, then by Applied.</td><td>Sorting a selection rather than the whole table scrambles the rows against each other. In a proper Table this cannot happen — another reason to use one.</td></tr>
+      <tr><td><strong>Filter</strong></td><td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>L</kbd>, then the dropdown arrows.</td><td>A filtered view is <em>not</em> a saved report. Anyone opening the file sees it filtered and may not notice. Never send a filtered file as a report.</td></tr>
+      <tr><td><strong>SUBTOTAL</strong></td><td><code>=SUBTOTAL(109, Candidates[FeeEUR])</code></td><td>This is the one people do not know. <code>SUM</code> ignores filters; <code>SUBTOTAL</code> with a code of 109 sums only the <em>visible</em> rows. Put it above a filtered list and the total follows the filter.</td></tr>
+      <tr><td><strong>Remove Duplicates</strong></td><td>Data &rarr; Remove Duplicates</td><td>It <strong>deletes rows permanently</strong>. Always copy the sheet first. And tick only the columns that define a duplicate — ticking every column means only perfectly identical rows go, which is rarely what is meant.</td></tr>
+      <tr><td><strong>Find duplicates without deleting</strong></td><td><code>=COUNTIF(Candidates[Email],[@Email])&gt;1</code></td><td>Safer: it flags them so a human decides. This is the one to use on candidate data, where a duplicate might be two real people with the same name.</td></tr>
+    </tbody>
+  </table>
+  <div class="warn">
+    <p><strong>On deduplicating candidates.</strong> Two rows with the same name are not necessarily the same person, and the same person can legitimately appear twice if they applied to two roles. The right key is an email address or a candidate ID, never a name. Deleting a row because the name matched is how a real applicant disappears from a process.</p>
+  </div>
+  <div id="s1"></div>
+</section>
+
+<!-- 2 -->
+<section class="lesson" data-lesson="excel-4.pivot" data-n="02">
+  <p class="goal">The fastest way to answer a question</p>
+  <h3>PivotTables</h3>
+  <p>A PivotTable answers "how many X by Y" in about four seconds, with no formulas. Insert &rarr; PivotTable, then drag fields into four boxes:</p>
+  <table class="t wrap">
+    <thead><tr><th>Box</th><th>What goes there</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Rows</strong></td><td>What to group by, down the side</td><td>Source</td></tr>
+      <tr><td><strong>Columns</strong></td><td>A second grouping, across the top</td><td>RoleID</td></tr>
+      <tr><td><strong>Values</strong></td><td>What to measure</td><td>Count of Name</td></tr>
+      <tr><td><strong>Filters</strong></td><td>A whole-table filter above the pivot</td><td>Recruiter</td></tr>
+    </tbody>
+  </table>
+  <h4>Try it — this is a real pivot engine</h4>
+  <p>Change the dropdowns and watch the table rebuild. This is the same mental model as the real thing: pick a grouping, pick a measure, pick how to summarise it.</p>
+  <div id="pv1"></div>
+  <div class="note">
+    <p><strong>The four settings that make a pivot look professional.</strong></p>
+    <ol class="steps">
+      <li><strong>Summarise Values By</strong> — right-click a number. It defaults to Count for text and Sum for numbers, and the default is often wrong. Sum of HireDays is a meaningless number; Average of HireDays is time to hire.</li>
+      <li><strong>Show Values As &rarr; % of Grand Total</strong> — turns counts into a source mix in one click. Try it in the dropdown above.</li>
+      <li><strong>PivotTable Options &rarr; Preserve cell formatting / For empty cells show 0</strong> — stops the layout jumping on refresh and removes blank gaps.</li>
+      <li><strong>Refresh.</strong> A pivot does <em>not</em> update when the data changes. <kbd>Alt</kbd>+<kbd>F5</kbd>, or Data &rarr; Refresh All. Forgetting this is the single most common way a wrong number reaches a manager.</li>
+    </ol>
+  </div>
+  <h4>Grouping dates, and GETPIVOTDATA</h4>
+  <p>Drop a date field into Rows and Excel offers to group by Years, Quarters and Months — that is a hiring-by-month chart with no formula at all. Right-click &rarr; Group to change it.</p>
+  <p>And when you need one number <em>out</em> of a pivot to put on a dashboard, clicking the cell writes <code>GETPIVOTDATA</code>. It looks alarming and it is simply "fetch this specific number from that pivot". It is more robust than a cell reference because it survives the pivot changing shape.</p>
+  <div id="q2"></div>
+</section>
+
+<!-- 3 -->
+<section class="lesson" data-lesson="excel-4.cf" data-n="03">
+  <p class="goal">Make the eye go to the right cell</p>
+  <h3>Conditional formatting</h3>
+  <p>Home &rarr; Conditional Formatting. Four kinds are worth knowing, and one rule about all of them.</p>
+  <ul class="clean">
+    <li><strong>Highlight Cell Rules</strong> — greater than, text contains, duplicate values. The quick one.</li>
+    <li><strong>Data bars</strong> — an in-cell bar. Excellent for time to hire: the long bars are the problem roles and no one has to read a number.</li>
+    <li><strong>Colour scales</strong> — green-to-red across a range. Use sparingly; on a dense table it becomes decoration.</li>
+    <li><strong>Icon sets</strong> — the traffic lights. Good for a status column a manager skims.</li>
+    <li><strong>Use a formula</strong> — the powerful one. <em>New Rule &rarr; Use a formula to determine which cells to format.</em></li>
+  </ul>
+  <h4>The formula rule, properly explained</h4>
+  <p>To shade the <strong>whole row</strong> of anyone open for more than fourteen days, select <code>A2:L7</code> and write one formula:</p>
+  <div class="fml">=AND($K2="Open", TODAY()-$E2&gt;14)</div>
+  <p><strong>The dollar signs are the entire trick.</strong> <code>$K2</code> locks the column but not the row, so as the rule is applied across the row it keeps looking at column K, and as it moves down the rows it follows the row. Write <code>K2</code> without the dollar and the rule drifts sideways into the wrong columns; write <code>$K$2</code> and every row is judged by Asha's outcome.</p>
+  <div class="note">
+    <p><strong>The rule about all conditional formatting:</strong> it must encode a decision, not a mood. "Red means this needs chasing today" is useful. A rainbow across every number is noise, and a manager learns to ignore the whole file. One or two rules per sheet.</p>
+  </div>
+  <h4>See the logic for yourself</h4>
+  <p>The grid below has the flag formula as a column, which is exactly what the conditional format is doing invisibly. Build it, then look at who gets flagged.</p>
+  <div id="s3"></div>
+</section>
+
+<!-- 4 -->
+<section class="lesson" data-lesson="excel-4.charts" data-n="04">
+  <p class="goal">Charts that survive a manager</p>
+  <h3>Choosing and building charts</h3>
+  <table class="t wrap">
+    <thead><tr><th>Question</th><th>Chart</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>How many applicants per source?</td><td><strong>Bar</strong> (horizontal)</td><td>Long category names fit. Bar beats column whenever labels are words.</td></tr>
+      <tr><td>Is time to hire improving?</td><td><strong>Line</strong></td><td>Time on the x-axis means line. Always.</td></tr>
+      <tr><td>Where do candidates drop out?</td><td><strong>Funnel</strong>, or a bar sorted descending</td><td>Shows the fall between stages, which is the actual question.</td></tr>
+      <tr><td>What is the source mix?</td><td><strong>Stacked bar</strong> — one bar, 100%</td><td>Better than a pie: comparable across months and readable at four or more categories.</td></tr>
+      <tr><td>Offers vs accepts per recruiter</td><td><strong>Clustered column</strong></td><td>Two series side by side, easy to compare.</td></tr>
+    </tbody>
+  </table>
+  <div class="warn">
+    <p><strong>Three chart habits to drop.</strong> <strong>Pie charts with more than four slices</strong> — nobody can compare similar-sized wedges; use a bar. <strong>Dual axes</strong> — two different scales on one chart can be made to show almost any relationship, which is why they are not trusted. <strong>3-D anything</strong> — the perspective distorts the values it is meant to communicate.</p>
+  </div>
+  <h4>Finishing a chart, in order</h4>
+  <ol class="steps">
+    <li><strong>Delete the chart title Excel generated</strong> and write a sentence instead. Not "Applicants by Source" but "Referrals are 17% of applicants and 50% of joiners". The title should be the finding.</li>
+    <li><strong>Delete the legend</strong> if there is one series. It is redundant ink.</li>
+    <li><strong>Delete the gridlines</strong> and add data labels instead, if the exact numbers matter.</li>
+    <li><strong>Sort the bars</strong> by value, descending. An unsorted bar chart makes the reader do work the chart should have done.</li>
+    <li><strong>Start the axis at zero.</strong> A truncated axis exaggerates differences. On a line chart of a rate this is the one that misleads most.</li>
+  </ol>
+  <h4>The same data, two titles</h4>
+  <div class="grid2">
+    <div class="note">
+      <p class="kicker">What most people submit</p>
+      <p><strong>"Applicants by Source"</strong></p>
+      <p class="tiny">Describes the axes. The reader has to work out what it means, and most will not bother.</p>
+    </div>
+    <div class="note gold">
+      <p class="kicker">What gets your hired</p>
+      <p><strong>"Referrals are 1 in 6 applicants but half of all joiners — worth a formal referral scheme"</strong></p>
+      <p class="tiny">States the finding and the recommendation. Same chart, same data. This sentence is the skill.</p>
+    </div>
+  </div>
+  <h4>Sparklines and in-cell charts</h4>
+  <p>Insert &rarr; Sparklines puts a tiny chart inside a single cell. A column of sparklines beside a table of roles shows each role's trend without five separate charts. Cheap, and it looks considered.</p>
+  <div id="d4"></div>
+  <div id="q4c"></div>
+</section>
+
+<!-- 5 -->
+<section class="lesson" data-lesson="excel-4.pq" data-n="05">
+  <p class="goal">The skill that saves your a day a month</p>
+  <h3>Power Query</h3>
+  <p>Everything in chapter 1.3 cleaned data <em>once</em>. Power Query records the cleaning as steps and replays them on a new file. Learning it is the difference between a monthly report that costs your a morning and one that costs a click.</p>
+  <h4>The loop, in five steps</h4>
+  <ol class="steps">
+    <li><strong>Get Data</strong> &rarr; From File &rarr; From Workbook (or Text/CSV). Point it at the ATS export.</li>
+    <li><strong>Transform Data</strong> — this opens the Power Query editor. Never click Load straight away; cleaning happens here, not in the sheet.</li>
+    <li><strong>Clean.</strong> Every click is recorded in the Applied Steps list on the right. Promote headers, remove the junk columns, set each column's data type, trim the text, replace values, filter out blanks.</li>
+    <li><strong>Close &amp; Load To</strong> &rarr; Table, on a new sheet. The result arrives as a proper Table, already named.</li>
+    <li><strong>Next month: Data &rarr; Refresh All.</strong> Every step re-runs. Nothing is retyped.</li>
+  </ol>
+  <table class="t wrap">
+    <thead><tr><th>Transform</th><th>What it does</th><th>When you need it</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Use First Row as Headers</strong></td><td>Promotes row 1 to column names</td><td>Almost every export.</td></tr>
+      <tr><td><strong>Change Type</strong></td><td>Sets a column to date, whole number, text</td><td>Always. This is the step that fixes dates-stored-as-text at the source instead of with DATEVALUE.</td></tr>
+      <tr><td><strong>Remove Columns</strong></td><td>Drops the fifty fields nobody reads</td><td>Every export has them.</td></tr>
+      <tr><td><strong>Split Column by Delimiter</strong></td><td>Title and city in one step</td><td>Replaces the whole LEFT/SEARCH exercise, permanently.</td></tr>
+      <tr><td><strong>Replace Values / Trim</strong></td><td>Fixes the dirty source column</td><td>Replaces the mapping-table trick for known typos.</td></tr>
+      <tr><td><strong>Merge Queries</strong></td><td>Joins two tables on a key</td><td>This is XLOOKUP as a step. Left Outer keeps every candidate even without a matching role.</td></tr>
+      <tr><td><strong>Append Queries</strong></td><td>Stacks tables on top of each other</td><td>Twelve monthly exports into one table. The moment this clicks, the yearly report takes minutes.</td></tr>
+      <tr><td><strong>Unpivot Columns</strong></td><td>Turns columns into rows</td><td>The one to remember. An export with a column per month is unusable; Unpivot turns it into Month / Value and makes it analysable. Interviewers notice this answer.</td></tr>
+      <tr><td><strong>Group By</strong></td><td>Aggregates inside the query</td><td>When you only needs the summary, not 40,000 rows.</td></tr>
+    </tbody>
+  </table>
+  <div class="note">
+    <p><strong>Merge vs Append, said once so it sticks.</strong> <strong>Merge</strong> adds <em>columns</em> — the same rows, more facts about each. <strong>Append</strong> adds <em>rows</em> — more records of the same shape. Merge for "bring the manager name in", Append for "add March to the file".</p>
+    <p>It is written in a language called M. You do not need to write M. You need to click the steps and know that the Advanced Editor is where the recorded code lives if something breaks.</p>
+  </div>
+  <div id="q5"></div>
+</section>
+
+<!-- 6 -->
+<section class="lesson" data-lesson="excel-4.layout" data-n="06">
+  <p class="goal">Structure before numbers</p>
+  <h3>How to lay out a dashboard</h3>
+  <p>The structure is the thing being assessed, more than the formulas. Four sheets, each with one job:</p>
+  <table class="t wrap">
+    <thead><tr><th>Sheet</th><th>Contains</th><th>Rule</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Data</strong></td><td>The Candidates table. One row per person, one fact per column.</td><td>Typed facts only. No formulas, no colour, no blank rows, no merged cells.</td></tr>
+      <tr><td><strong>Roles</strong></td><td>One row per requisition.</td><td>The lookup table. Also typed only.</td></tr>
+      <tr><td><strong>Calc</strong></td><td>Pivots and helper formulas.</td><td>The working. Nobody else needs to read it, and it can be hidden.</td></tr>
+      <tr><td><strong>Dashboard</strong></td><td>Headline, cards, two or three charts, a flagged list.</td><td><strong>Not one typed number.</strong> Every cell points at Data or Calc.</td></tr>
+    </tbody>
+  </table>
+  <h4>The reading order of the dashboard sheet</h4>
+  <ol class="steps">
+    <li><strong>A sentence at the top.</strong> The finding, in words, built with <code>&amp;</code> and <code>TEXT</code> so it updates itself. "6 applicants, 4 offers, 75% acceptance, 31 days average."</li>
+    <li><strong>A row of cards.</strong> Four to six big numbers: applicants, offers, acceptance, time to hire, agency spend. One number each, large, with a label beneath.</li>
+    <li><strong>The funnel.</strong> The six stage counts, as a sorted bar. This is the chart a hiring manager actually looks at.</li>
+    <li><strong>Two supporting charts.</strong> Source mix and time to hire by role. No more than two.</li>
+    <li><strong>The action list at the bottom.</strong> Everyone flagged for chasing, pulled in live with FILTER. This is the part that makes it a working tool rather than a report.</li>
+  </ol>
+  <div class="warn">
+    <p><strong>Things that quietly mark a file as amateur.</strong> Merged cells (they break sorting, filtering and every formula that touches them — use centre-across-selection instead). Numbers typed on the dashboard. Gridlines left on. Sheets named Sheet1. Eight colours. A chart with the title Excel generated. No date anywhere saying when the data is from.</p>
+  </div>
+  <h4>Build the whole thing</h4>
+  <p>This is the chapter's deliverable: a dashboard block where every cell is a formula pointing at the table. Ten cells. When all ten are right, you have the portfolio piece.</p>
+  <div id="s6"></div>
+</section>
+
+<!-- 7 -->
+<section class="lesson" data-lesson="excel-4.protect" data-n="07">
+  <p class="goal">Giving the file to someone else</p>
+  <h3>Making it hard to break</h3>
+  <ul class="clean">
+    <li><strong>Data validation</strong> (Data &rarr; Data Validation &rarr; List) turns Source and Outcome into dropdowns. This is the real fix for the dirty-source problem — stop the bad data being typed in the first place. Point the list at a small lookup range so new values can be added without editing the rule.</li>
+    <li><strong>Protect Sheet</strong> — unlock the few cells meant to be edited, then protect. Nobody overwrites a formula by accident.</li>
+    <li><strong>Freeze Panes</strong> (View &rarr; Freeze Panes &rarr; Freeze Top Row) so headers stay visible. Ten seconds, and the file feels maintained.</li>
+    <li><strong>Named ranges</strong> for anything a formula refers to repeatedly. <code>=SUM(AgencyFees)</code> reads better than <code>=SUM(Calc!$M$2:$M$400)</code> and does not break when the sheet moves.</li>
+    <li><strong>A notes cell</strong> saying where the data came from and when it was pulled. It takes one line and it answers the first question anyone asks.</li>
+  </ul>
+  <h4>The keyboard, for speed</h4>
+  <table class="t">
+    <thead><tr><th>Keys</th><th>Does</th></tr></thead>
+    <tbody>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>T</kbd></td><td>Turn a range into a Table. The first thing to do with any export.</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>L</kbd></td><td>Toggle filters.</td></tr>
+      <tr><td><kbd>Alt</kbd>+<kbd>=</kbd></td><td>AutoSum.</td></tr>
+      <tr><td><kbd>Alt</kbd>+<kbd>F5</kbd></td><td>Refresh a pivot.</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>&darr;</kbd></td><td>Select to the bottom of the data.</td></tr>
+      <tr><td><kbd>F4</kbd></td><td>Cycle the dollar signs while editing a reference.</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>`</kbd></td><td>Show every formula at once. The first thing to press in an inherited file.</td></tr>
+    </tbody>
+  </table>
+  <div id="d7"></div>
+</section>
+
+<section>
+  <h2>Before moving on</h2>
+  <div class="note">
+    <p>You should now have a real file saved: four sheets, a dashboard with no typed numbers, two charts with sentences for titles, and a flagged action list. That six-person file is the warm-up. Do the <a href="labs-excel.html">Excel labs</a> if any formula still feels slow. Next you rebuild the actual Ferra HR workbook so the file you screen-shares is one you can defend cell by cell.</p>
+  </div>
+</section>
+
+<div class="pager">
+  <a class="btn" href="excel-3.html"><span class="lbl">Chapter 1.3</span>&larr; Lookups and text</a>
+  <a class="btn btn-go" href="labs-excel.html"><span class="lbl">Labs</span>Excel practice pack &rarr;</a>
+</div>
+
+</main>
+</div>
+
+<script src="assets/engine.js?v=3"></script>
+<script src="assets/sheet.js?v=3"></script>
+<script src="assets/data.js?v=3"></script>
+<script src="assets/course.js?v=3"></script>
+<script>
+var D = CourseData;
+var REC = D.records();
+
+/* 1 — SUBTOTAL and duplicate flagging */
+Sheet.mount("s1", D.candidates(["Name", "Source", "FeeEUR"], {
+  id: "e4-sort", rows: 10, cols: 8, height: 250,
+  title: "Fees, and a duplicate hiding in the names",
+  note: "Row 8 is a second Asha, added on purpose.",
+  open: ["E2:E7", "F2"], fillTo: 7, lessonId: "excel-4.sort",
+  cells: { A8: "Asha", B8: "Agency", C8: 3000, E1: "Seen before?", F1: "Visible total" },
+  extraFormats: { E: "text", F: "eur" },
+  widths: { E: 110, F: 120 },
+  tasks: [
+    { cell: "E2", ask: "Flag anyone whose name appears more than once in <code>A2:A8</code>. Use COUNTIF and return <code>DUPLICATE</code> or blank.",
+      want: "DUPLICATE", answer: '=IF(COUNTIF($A$2:$A$8,A2)>1,"DUPLICATE","")', requires: ["COUNTIF"],
+      good: "Asha is flagged. Fill it down and row 8 is flagged too. Note the <code>$</code> signs \u2014 the range must stay still while the test value moves. This flags rather than deletes, which is the only safe way to treat candidate records." },
+    { cell: "F2", ask: "Total the fees in <code>C2:C8</code> with SUBTOTAL so it would follow a filter. The function number for a filtered sum is <code>109</code>.",
+      want: 7000, answer: "=SUBTOTAL(109,C2:C8)", requires: ["SUBTOTAL"],
+      good: "\u20ac7,000. In real Excel this number drops as rows are filtered out, while SUM would stubbornly keep showing \u20ac7,000." }
+  ]
+}));
+
+/* 2 — pivot */
+Pivot.mount("pv1", {
+  rows: REC,
+  rowFields: ["Source", "RoleID", "Outcome", "Recruiter", "City", "Manager"],
+  valueFields: ["Name", "FeeEUR", "HireDays"],
+  agg: "Count",
+  comment: function (rf, vf, agg) {
+    if (vf === "HireDays" && agg === "Sum") {
+      return "<strong>Sum of HireDays is meaningless.</strong> Adding people's individual waiting times together produces a number with no interpretation. Switch to Average and it becomes time to hire.";
+    }
+    if (vf === "HireDays" && agg === "Average") {
+      return "Average of HireDays by " + rf + " is a real metric. Blanks are ignored, so this is the average across people who actually accepted.";
+    }
+    if (vf === "FeeEUR" && agg === "Count") {
+      return "<strong>Count of FeeEUR counts rows, not money.</strong> Switch to Sum. This is exactly the default that catches people out.";
+    }
+    if (vf === "FeeEUR" && agg === "Sum") {
+      return "Agency spend by " + rf + ". Only one candidate carried a fee, so everything else is zero \u2014 which is itself the finding.";
+    }
+    return "Count of Name by " + rf + " \u2014 the headcount question. Try <em>% of grand total</em> to turn it into a mix.";
+  }
+});
+
+Quiz.mount("q2", {
+  title: "Check yourself", lessonId: "excel-4.pivot",
+  items: [
+    { q: "You adds twenty new candidates to the table. The PivotTable still shows the old numbers. Why?",
+      opts: ["The table is broken", "A pivot does not update until it is refreshed", "You need to rebuild it", "Pivots cannot handle new rows"],
+      a: 1,
+      why: "<b>A pivot works from a cached snapshot.</b> <kbd>Alt</kbd>+<kbd>F5</kbd>, or Data \u2192 Refresh All. This is the most common cause of a wrong number reaching a manager, and it is why you should check the refresh before sending anything." },
+    { q: "A pivot of HireDays shows <code>Sum of HireDays: 94</code>. What is wrong?",
+      opts: ["Nothing", "Sum is the wrong summary — adding waiting times gives a meaningless number; it should be Average", "The data is wrong", "It should be a count"],
+      a: 1,
+      why: "<b>The default summary is often wrong.</b> Right-click \u2192 Summarise Values By \u2192 Average. 94 days total means nothing; 31.3 days average is time to hire." },
+    { q: "Why use a Table (<kbd>Ctrl</kbd>+<kbd>T</kbd>) as the pivot source rather than a range?",
+      opts: ["It looks nicer", "The Table grows with new rows, so the pivot source does not need editing", "Pivots require tables", "It is faster"],
+      a: 1,
+      why: "<b>A range is fixed at the rows it had when you pointed at it.</b> A Table expands, so new rows are inside the pivot's source automatically \u2014 you only has to refresh, not re-point." }
+  ]
+});
+
+/* 3 — conditional formatting logic made visible */
+Sheet.mount("s3", D.candidates(["Name", "Source", "Applied", "Outcome"], {
+  id: "e4-cf", rows: 10, cols: 9, height: 250,
+  title: "The logic behind a row-shading rule",
+  note: "TODAY() is pinned to 1 May 2026 everywhere in this course.",
+  open: ["F2:F7", "G2:G7"], fillTo: 7, lessonId: "excel-4.cf",
+  cells: { F1: "Days open", G1: "Chase?" },
+  extraFormats: { F: "general", G: "text" },
+  widths: { F: 96, G: 92 },
+  tasks: [
+    { cell: "F2", ask: "How many days since each person applied? Use TODAY().",
+      want: 60, answer: "=TODAY()-C2", requires: ["TODAY"],
+      good: "60 days for Asha. Fill down \u2014 Dev and Eva are at 89, Farah at 42." },
+    { cell: "G2", ask: "Now the condition the conditional format uses: outcome is <code>Open</code> AND it has been more than 14 days. Return <code>CHASE</code> or blank.",
+      want: "", answer: '=IF(AND(D2="Open",F2>14),"CHASE","")', requires: ["AND"],
+      good: "Blank for Asha \u2014 Asha joined. Fill it down and only Farah says CHASE. In real Excel this same expression goes in New Rule \u2192 Use a formula, written as <code>=AND($D2=\"Open\",TODAY()-$C2>14)</code>, and the whole row turns amber instead." }
+  ]
+}));
+
+Drill.mount("d4", {
+  id: "e4-chart", lessonId: "excel-4.charts", seconds: 30,
+  title: "Write the title, not the axes",
+  prompt: "Your bar chart shows applicants by source: LinkedIn 4, Referral 1, Agency 1. Joiners by source: LinkedIn 1, Referral 1, Agency 0. Write the chart title as a finding, in one sentence, with a recommendation.",
+  model: "<p><strong>\u201cReferrals convert at 100% but are only 1 in 6 applicants \u2014 a formal referral scheme is the cheapest way to add joiners.\u201d</strong></p><p>Why that works: it names the number (100%), names the constraint (1 in 6), and ends with the action. A manager can agree or disagree with it, which is what makes it useful.</p><p>The caveat to say out loud if asked: one referral out of one is not statistically anything. The honest version is \u201con this sample referrals convert best, and it is worth tracking for a quarter before I would spend money on it\u201d \u2014 and saying that, unprompted, is a stronger signal than the chart.</p><p class=\"tiny\">Compare with \u201cApplicants by Source\u201d, which tells the reader nothing they could not see from the axes.</p>"
+});
+
+Quiz.mount("q4c", {
+  title: "Check yourself", lessonId: "excel-4.charts",
+  items: [
+    { q: "Applicants by source with long labels. Which chart?",
+      opts: ["Pie with six slices", "Horizontal bar", "3-D column", "Dual axis"],
+      a: 1, why: "<b>Bar beats pie when labels are words.</b>" },
+    { q: "The chart title should be:",
+      opts: ["Applicants by Source", "A finding plus a recommendation", "The file name", "The axis units"],
+      a: 1, why: "<b>The title is the sentence you want the manager to remember.</b>" }
+  ]
+});
+
+Quiz.mount("q5", {
+  title: "Check yourself", lessonId: "excel-4.pq",
+  items: [
+    { q: "Twelve monthly ATS exports, same columns, need to become one table. Merge or Append?",
+      opts: ["Merge", "Append", "Either", "Neither — use XLOOKUP"],
+      a: 1,
+      why: "<b>Append</b> stacks rows of the same shape. Merge adds columns by matching a key. Twelve files of the same shape is more <em>rows</em>, so Append." },
+    { q: "An export has one column per month: Jan, Feb, Mar. Which transform makes it analysable?",
+      opts: ["Group By", "Unpivot Columns", "Split Column", "Remove Duplicates"],
+      a: 1,
+      why: "<b>Unpivot</b> turns those columns into two columns, Month and Value, which is the shape every pivot and chart needs. Knowing this answer marks someone who has actually used Power Query." },
+    { q: "Where should a date column stored as text be fixed?",
+      opts: ["With DATEVALUE in the sheet", "In Power Query, with Change Type", "Manually", "It cannot be"],
+      a: 1,
+      why: "<b>Fix it at the source step.</b> Change Type in the query fixes it on every future refresh. A DATEVALUE column in the sheet fixes it once and has to be re-created next month." }
+  ]
+});
+
+/* 6 — the dashboard */
+Sheet.mount("s6", D.candidates(D.ALL, {
+  id: "e4-dash", rows: 14, cols: 19, height: 400,
+  title: "The dashboard block",
+  note: "Column N is the helper column from chapter 1.3, already built. P and Q are the dashboard — ten formulas, no typed numbers.",
+  open: ["Q2:Q9", "Q11", "Q12"], lessonId: "excel-4.layout",
+  cells: {
+    N1: "HireDays",
+    N2: '=IF([@Accepted]="","",[@Accepted]-[@Applied])',
+    N3: '=IF([@Accepted]="","",[@Accepted]-[@Applied])',
+    N4: '=IF([@Accepted]="","",[@Accepted]-[@Applied])',
+    N5: '=IF([@Accepted]="","",[@Accepted]-[@Applied])',
+    N6: '=IF([@Accepted]="","",[@Accepted]-[@Applied])',
+    N7: '=IF([@Accepted]="","",[@Accepted]-[@Applied])',
+    P1: "Dashboard", Q1: "Value",
+    P2: "Applicants", P3: "Screened", P4: "Interviews", P5: "Offers",
+    P6: "Accepts", P7: "Joiners", P8: "Offer acceptance", P9: "Avg days to accept",
+    P10: "Agency spend", Q10: "=SUM(Candidates[FeeEUR])",
+    P11: "Still to chase", P12: "Headline"
+  },
+  cellFormats: { Q8: "pct", Q9: "n1", Q10: "eur" },
+  extraFormats: { N: "general", P: "text", Q: "general" },
+  widths: { N: 90, P: 150, Q: 190 },
+  tasks: [
+    { cell: "Q2", ask: "Applicants — count the rows that have an Applied date.",
+      want: 6, answer: "=COUNTA(Candidates[Applied])", requires: ["COUNTA"], good: "6." },
+    { cell: "Q3", ask: "Screened. Dates are numbers, so COUNT works on a date column.",
+      want: 5, answer: "=COUNT(Candidates[Screened])", good: "5. Farah was never screened." },
+    { cell: "Q4", ask: "Interviews.", want: 4, answer: "=COUNT(Candidates[Interview])", good: "4." },
+    { cell: "Q5", ask: "Offers.", want: 4, answer: "=COUNT(Candidates[Offer])", good: "4." },
+    { cell: "Q6", ask: "Accepts.", want: 3, answer: "=COUNT(Candidates[Accepted])", good: "3." },
+    { cell: "Q7", ask: "Joiners.", want: 2, answer: "=COUNT(Candidates[Joined])",
+      good: "2. Eva accepted and then reneged, which is why accepts and joiners differ \u2014 and why both belong on the dashboard." },
+    { cell: "Q8", ask: "Offer acceptance — accepts \u00f7 offers, protected against a zero denominator.",
+      want: 0.75, tol: 0.001, answer: '=IFERROR(Q6/Q5,"")', requires: ["IFERROR"],
+      good: "75%. Note it points at the two cards above it, not back at the table \u2014 one source of truth per number." },
+    { cell: "Q9", ask: "Average days from applying to accepting. Average the helper column <code>N2:N7</code> — AVERAGE ignores the blanks on its own.",
+      want: 31.333, tol: 0.01, answer: "=AVERAGE(N2:N7)", requires: ["AVERAGE"],
+      good: "31.3 days, from the three people who accepted. AVERAGE skipped the three blanks rather than treating them as zero \u2014 which is exactly why the helper column uses <code>\"\"</code> and not <code>0</code>." },
+    { cell: "Q11", ask: "A live list of everyone still open. TEXTJOIN plus FILTER.",
+      want: "Farah", answer: '=TEXTJOIN(", ",TRUE,FILTER(Candidates[Name],Candidates[Outcome]="Open"))', requires: ["TEXTJOIN"],
+      good: "Farah. That is the action list, and it maintains itself." },
+    { cell: "Q12", ask: 'The headline sentence: <code>6 applicants, 75% acceptance</code>. Join the cards with <code>&amp;</code>, and wrap the rate in <code>TEXT(Q8,"0%")</code> so it keeps its format.',
+      want: "6 applicants, 75% acceptance",
+      answer: '=Q2&" applicants, "&TEXT(Q8,"0%")&" acceptance"', requires: ["TEXT"],
+      good: "That is the dashboard finished. Ten formulas, no typed numbers, and a headline that rewrites itself when the data changes. Save this file \u2014 it is the portfolio piece." }
+  ]
+}));
+
+Drill.mount("d7", {
+  id: "e4-say", lessonId: "excel-4.protect", seconds: 60,
+  title: "The portfolio walkthrough",
+  prompt: "Sixty seconds, screen shared, dashboard open. Walk an interviewer through it: what it is, how it is built, what it changed. Then stop talking.",
+  model: "<p>\u201cThis is a hiring tracker I built for six open roles. Four sheets: Data is one row per candidate with the stage dates, Roles is one row per requisition, Calc holds the pivots, and the Dashboard has no typed numbers in it at all \u2014 every cell is a formula pointing back at the table, so when I paste a new export in and refresh, the whole thing moves.</p><p>The top line is a sentence that rewrites itself. Then six cards for the funnel: six applicants, five screened, four interviewed, four offers, three accepts, two joiners. The two numbers I care about are the 75% offer acceptance and the gap between accepts and joiners \u2014 one person accepted and then took another offer, and that gap is invisible if you only report acceptance.</p><p>Bottom left is the action list: anyone open for more than fourteen days, pulled in with FILTER. That is the part I actually use on a Monday.</p><p>What it changed: it surfaced that the agency role was costing four thousand euros and converting worse than referrals, and that two candidates had sat unscreened for over a month. We moved one role off the agency and the dashboard paid for itself.\u201d</p><p class=\"tiny\">Structure, then the two numbers worth caring about, then the decision. Sixty seconds. The instinct to keep talking after the last sentence is the thing to resist \u2014 let them ask.</p>"
+});
+
+Course.init({ id: "excel-4" });
+</script>
+</body>
+</html>

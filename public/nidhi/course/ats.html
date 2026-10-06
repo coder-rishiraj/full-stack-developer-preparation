@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>4 ATS and Workday — Nidhi's course</title>
+<link rel="stylesheet" href="assets/course.css?v=3">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand"><a href="index.html">Nidhi Tiwari</a><span>4 · ATS and Workday</span></div>
+  <div class="top-actions">
+    <div class="pbar"><i></i></div>
+    <span class="pnum"></span>
+    <a class="btn" href="index.html">Course home</a>
+  </div>
+</div>
+
+<div class="layout">
+<nav class="side" id="sideNav"></nav>
+<main>
+
+<p class="kicker">Chapter 4</p>
+<h1>ATS, Workday and the data behind them</h1>
+<p class="lead">Job adverts in Europe name specific systems — Workday, SuccessFactors, Greenhouse, SmartRecruiters — and you will not have used most of them. That is fine and normal. What is not fine is being unable to talk about what an ATS <em>is</em>, because the concepts transfer completely and the vocabulary is learnable in an afternoon.</p>
+
+<div class="warn">
+  <p><strong>The honesty rule for this chapter.</strong> You must not write "Workday" in your professional experience unless you have used it at work. What you can truthfully say is: <em>"I have used [whatever you actually uses]. I have not used Workday, but I understand the model — requisitions, candidate records, stages, dispositions — and I have read the Workday Recruiting documentation. I would expect to be productive in it inside two weeks."</em> That answer is strong. An inflated claim that collapses in week one is not.</p>
+</div>
+
+<!-- 1 -->
+<section class="lesson" data-lesson="ats.what" data-n="01">
+  <p class="goal">One model, many brand names</p>
+  <h3>What an ATS actually is</h3>
+  <p>Every applicant tracking system, without exception, is the same four things. Learn these once and every system is a skin over them.</p>
+  <table class="t wrap">
+    <thead><tr><th>Object</th><th>What it holds</th><th>In your Excel tracker</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Requisition</strong></td><td>An approved open job. Has an ID, a title, a hiring manager, a location, a headcount, an approval chain and a status.</td><td>The Roles sheet.</td></tr>
+      <tr><td><strong>Candidate</strong></td><td>A person. One record, which may be attached to several requisitions over time.</td><td>A person's name in Candidates.</td></tr>
+      <tr><td><strong>Application</strong></td><td>The link between a candidate and a requisition. <strong>This is the row that actually matters</strong> — the same person applying to two roles is two applications.</td><td>One row of the Candidates sheet.</td></tr>
+      <tr><td><strong>Stage</strong></td><td>Where an application has got to, and when it got there. The stage <em>history</em> is what makes time-in-stage reporting possible.</td><td>The date columns E to J.</td></tr>
+    </tbody>
+  </table>
+  <div class="note">
+    <p><strong>The insight that makes your sound experienced:</strong> the unit of recruiting data is the <em>application</em>, not the candidate. Count candidates and the same strong person applying to three roles looks like three people. Count applications and the funnel is correct but a headcount of "unique people in our pipeline" needs a DISTINCTCOUNT. Knowing which question needs which is exactly the sort of thing that separates someone who has reported on an ATS from someone who has only used one.</p>
+  </div>
+  <h4>See the difference</h4>
+  <div id="s1"></div>
+</section>
+
+<!-- 2 -->
+<section class="lesson" data-lesson="ats.systems" data-n="02">
+  <p class="goal">Reading a job advert</p>
+  <h3>The systems you will see named</h3>
+  <table class="t wrap">
+    <thead><tr><th>System</th><th>Who uses it</th><th>What to know</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Workday Recruiting</strong></td><td>Large enterprises. Very common in Ireland and the Netherlands.</td><td>Part of a full HCM suite, so recruiting shares one worker record with HR, payroll and performance. Reporting is done in Workday's own report builder, not SQL. "Business process" is its word for a configured workflow with approvals.</td></tr>
+      <tr><td><strong>SAP SuccessFactors</strong></td><td>Large, often German or German-influenced enterprises.</td><td>Workday's main rival. Same idea: a module inside a wider HR suite.</td></tr>
+      <tr><td><strong>Greenhouse</strong></td><td>Tech companies and scale-ups.</td><td>Recruiting-only and opinionated about good practice: structured interview kits, scorecards per attribute, a strong reporting layer. If you want to learn one modern ATS's philosophy, this is the one.</td></tr>
+      <tr><td><strong>SmartRecruiters</strong></td><td>European mid-market. Berlin-headquartered.</td><td>Appears constantly in European job adverts and rarely elsewhere. Worth recognising.</td></tr>
+      <tr><td><strong>Lever, Ashby</strong></td><td>Scale-ups.</td><td>Ashby in particular is built around analytics, which makes it relevant to the roles you are targeting.</td></tr>
+      <tr><td><strong>Teamtailor, Personio</strong></td><td>Nordics; German-speaking SMEs</td><td>Personio is the default for small German companies. Another European-only name.</td></tr>
+    </tbody>
+  </table>
+  <div class="note">
+    <p><strong>What to actually do about this.</strong> Pick <em>one</em> and get hands on it. Greenhouse and SmartRecruiters both publish extensive public documentation and help centres; reading a product's reporting documentation for two hours teaches the vocabulary properly. Several vendors offer free trials or demo environments. Two hours of reading plus an afternoon in a trial is enough to talk fluently, and it is honest, because you are describing what you have read and tried rather than claiming production experience.</p>
+  </div>
+  <div id="f2"></div>
+  <div id="q2"></div>
+</section>
+</section>
+
+<!-- 3 -->
+<section class="lesson" data-lesson="ats.hygiene" data-n="03">
+  <p class="goal">Why your reports will be wrong</p>
+  <h3>Data hygiene, and dispositions</h3>
+  <p>An ATS report is only as good as what recruiters typed. This is the single biggest reason recruiting analytics is hard, and being able to name the failure modes is a strong interview signal.</p>
+  <table class="t wrap">
+    <thead><tr><th>Failure</th><th>Effect on the report</th><th>Fix</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Stages skipped</strong></td><td>A candidate dragged straight from Applied to Offer has no screen or interview date, so the funnel loses them and conversion rates are wrong.</td><td>Make the stage progression a required workflow, not a drag-and-drop convenience.</td></tr>
+      <tr><td><strong>Rejection reasons left blank</strong></td><td>No way to answer <em>why</em> candidates fail. The most valuable field in the system, routinely empty.</td><td>Make the disposition reason mandatory on rejection. It is one dropdown.</td></tr>
+      <tr><td><strong>Free-text source</strong></td><td>"LinkedIn", "linkedin", "LI", "Linkdin" become four sources, and source-of-hire reporting is meaningless.</td><td>A closed dropdown. Never a text box.</td></tr>
+      <tr><td><strong>Candidates never dispositioned</strong></td><td>Hundreds of applications sit at Applied forever. Time-in-stage averages are destroyed and, in the EU, this is also a GDPR retention problem.</td><td>An automated nudge, and a monthly sweep.</td></tr>
+      <tr><td><strong>Duplicate candidate records</strong></td><td>The same person as three records. Unique-candidate counts are wrong and the candidate gets three rejection emails.</td><td>Deduplicate on email, never on name.</td></tr>
+      <tr><td><strong>Offer dates vs offer-accepted dates</strong></td><td>Conflating them makes acceptance rate uninterpretable.</td><td>Two separate fields, and know which one the report is using.</td></tr>
+    </tbody>
+  </table>
+  <p><strong>Disposition</strong> is the ATS word for closing an application with a reason: rejected at screen, withdrew, offer declined, position cancelled. The reason codes are the richest data in the system and are almost always underused.</p>
+  <div class="note">
+    <p><strong>The answer to "how would you improve our recruiting data?"</strong> \u2014 and it should not be about dashboards. "Before building anything I would audit three fields: is source a closed dropdown, is a rejection reason mandatory, and is every application dispositioned within thirty days. Those three control whether any report afterwards is trustworthy. A dashboard on bad data is worse than no dashboard, because people believe it."</p>
+  </div>
+  <h4>Find the damage</h4>
+  <div id="s3"></div>
+</section>
+
+<!-- 4 -->
+<section class="lesson" data-lesson="ats.report" data-n="04">
+  <p class="goal">Getting data out</p>
+  <h3>Reporting from an ATS</h3>
+  <ol class="steps">
+    <li><strong>Built-in reports.</strong> Every system ships a funnel, a time-to-fill and a source report. Fine for a quick answer, inflexible, and rarely what a manager asked for.</li>
+    <li><strong>Custom report builder.</strong> Pick an object (applications), pick fields, add filters, group. This is where most of your ATS work will happen. Workday's version is powerful and idiosyncratic; Greenhouse's is straightforward.</li>
+    <li><strong>Export to CSV, then Excel or Power BI.</strong> What you will do most. The export is the input to everything in chapters 1 and 2.</li>
+    <li><strong>Scheduled export.</strong> The system drops a file somewhere weekly and Power Query picks it up. This is the point at which your monthly report stops costing your a morning.</li>
+    <li><strong>API or data warehouse.</strong> Someone technical pipes the ATS into a database and you query it. Worth knowing the phrase; not your job to build it.</li>
+  </ol>
+  <div class="warn">
+    <p><strong>The export trap.</strong> Most ATS exports give one row per application with the <em>current</em> stage, not the stage history. With only the current stage you can report the funnel today and cannot report <em>time in stage</em> at all. If a system offers a stage-history or stage-transition export, that is the one to ask for. Knowing to ask is itself the expertise.</p>
+  </div>
+  <div id="q4"></div>
+</section>
+
+<!-- 5 -->
+<section class="lesson" data-lesson="ats.gdpr" data-n="05">
+  <p class="goal">Non-negotiable in Europe</p>
+  <h3>GDPR as it applies to recruiting</h3>
+  <p>Candidate data is personal data. In the EU that is not a policy preference, it is law with real fines. You do not need to be a lawyer; you need to know the handful of things that come up weekly and never guess about the rest.</p>
+  <table class="t wrap">
+    <thead><tr><th>Principle</th><th>In practice, for a recruiter</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Lawful basis</strong></td><td>Processing needs a reason. For applicants it is usually legitimate interest or pre-contractual necessity; for keeping a CV in a talent pool after a rejection it is <em>consent</em>, which must be asked for explicitly and can be withdrawn.</td></tr>
+      <tr><td><strong>Data minimisation</strong></td><td>Only collect what is needed to assess the person. Date of birth, marital status and a photograph are not needed, and in several countries asking is itself a problem.</td></tr>
+      <tr><td><strong>Retention limits</strong></td><td>Candidate data cannot be kept forever. Typical policies are 6 to 24 months after a decision, varying by country. There must be a policy and it must actually be run.</td></tr>
+      <tr><td><strong>Right of access</strong></td><td>A candidate can ask for everything held about them — <strong>including interview notes</strong>. This is the one that changes behaviour: write notes that are evidence-based and job-relevant, because they may be read by the candidate.</td></tr>
+      <tr><td><strong>Right to erasure</strong></td><td>A candidate can ask to be deleted, and the request must be actioned across every system and spreadsheet. Which is precisely why candidate data should not live in personal files.</td></tr>
+      <tr><td><strong>Special category data</strong></td><td>Health, ethnicity, religion, trade union membership, sexual orientation: Article 9, far stricter. Diversity data is collected voluntarily, anonymously, aggregated, and kept entirely separate from the hiring decision.</td></tr>
+      <tr><td><strong>Automated decisions</strong></td><td>A candidate has the right not to be subject to a solely automated decision with significant effect. An AI tool that auto-rejects without human review is legally dangerous. A human must make the decision.</td></tr>
+      <tr><td><strong>Transfers outside the EU</strong></td><td>Sending candidate data to a non-EU system needs a legal basis. Relevant to any US-headquartered tool \u2014 and to pasting a CV into a US AI service.</td></tr>
+    </tbody>
+  </table>
+  <div class="warn">
+    <p><strong>The rule for this whole course, repeated because it matters most here.</strong> Never put a real candidate's name, CV, phone number, pay details or interview notes into a practice file, a portfolio, a public AI tool, or anything you keep personally. Not anonymised. Not "just for practice". Every exercise in this course uses six invented people for exactly this reason, and saying so in an interview is a point in your favour, not an admission.</p>
+  </div>
+  <div id="q5"></div>
+</section>
+
+<!-- 6 -->
+<section class="lesson" data-lesson="ats.talk" data-n="06">
+  <p class="goal">The interview answer</p>
+  <h3>Talking about a system you have not used</h3>
+  <div id="d6"></div>
+</section>
+
+<section>
+  <h2>Before moving on</h2>
+  <div class="note">
+    <p>You should be able to draw the four ATS objects on a whiteboard, explain why the application rather than the candidate is the unit of data, name three European ATS products, list three data-hygiene fields you would audit first, and state the GDPR rules on retention, access to interview notes and special category data. Extra reps: <a href="labs-more.html">craft and job labs</a>.</p>
+  </div>
+</section>
+
+<div class="pager">
+  <a class="btn" href="metrics.html"><span class="lbl">Chapter 3</span>&larr; Recruiting metrics</a>
+  <a class="btn btn-go" href="sourcing.html"><span class="lbl">Chapter 5</span>Sourcing and Boolean &rarr;</a>
+</div>
+
+</main>
+</div>
+
+<script src="assets/engine.js?v=3"></script>
+<script src="assets/sheet.js?v=3"></script>
+<script src="assets/data.js?v=3"></script>
+<script src="assets/course.js?v=3"></script>
+<script>
+var D = CourseData;
+
+/* 1 — applications vs candidates */
+Sheet.mount("s1", {
+  id: "ats-unit", rows: 11, cols: 9, headerRows: 1, height: 290,
+  title: "An export as an ATS really gives it — one row per application",
+  note: "Cara applied to two roles, and Dev appears twice because the first application was cancelled.",
+  open: ["F2", "F3", "F4"], lessonId: "ats.what",
+  widths: { A: 74, B: 70, C: 98, D: 86, E: 96, F: 92, G: 170 },
+  formats: { A: "text", B: "text", C: "text", D: "text", E: "text", F: "general", G: "text" },
+  data: [
+    ["Name", "RoleID", "Email", "Stage", "Disposition"],
+    ["Asha", "BE-1", "asha@x.test", "Joined", "Hired"],
+    ["Ben", "BE-1", "ben@x.test", "Offer", "Declined"],
+    ["Cara", "BE-1", "cara@x.test", "Screen", "Rejected"],
+    ["Cara", "FE-1", "cara@x.test", "Interview", ""],
+    ["Dev", "FE-1", "dev@x.test", "Applied", "Req cancelled"],
+    ["Dev", "FE-1", "dev@x.test", "Joined", "Hired"],
+    ["Eva", "FE-1", "eva@x.test", "Offer", "Reneged"],
+    ["Farah", "BE-1", "farah@x.test", "Applied", ""]
+  ],
+  cells: { G1: "Why it differs", G2: "applications", G3: "unique people", G4: "unique by email" },
+  tasks: [
+    { cell: "F2", ask: "How many <strong>applications</strong> are in this export? Count the rows with a RoleID.",
+      want: 8, answer: "=COUNTA(B2:B9)", requires: ["COUNTA"],
+      good: "8 applications. This is the number the funnel should be built on." },
+    { cell: "F3", ask: "How many <strong>unique people</strong>? Count the distinct names.",
+      want: 6, answer: "=COUNTA(UNIQUE(A2:A9))", requires: ["UNIQUE"],
+      good: "6 people, 8 applications. Reporting 8 as \u201ccandidates in the pipeline\u201d overstates it by a third." },
+    { cell: "F4", ask: "Now the same count on email rather than name — the key that is actually safe to deduplicate on.",
+      want: 6, answer: "=COUNTA(UNIQUE(C2:C9))", requires: ["UNIQUE"],
+      good: "Also 6 here, but email is the key to trust: two different people can share a name, and the same person can change theirs. Deduplicating candidates on name is how a real applicant disappears from a process." }
+  ]
+});
+
+Flips.mount("f2", [
+  { t: "Requisition", hint: "What is it?", b: "An <strong>approved open job</strong>. Has an ID, title, hiring manager, location, headcount and an approval chain. Not the same as a job advert \u2014 one requisition can be advertised in five places." },
+  { t: "Application", hint: "Why does it matter most?", b: "The <strong>link between a candidate and a requisition</strong>, and the unit of recruiting data. One person applying to three roles is three applications. Funnels are built on applications; pipeline headcount needs a distinct count of people." },
+  { t: "Disposition", hint: "What is it?", b: "<strong>Closing an application with a reason</strong> \u2014 rejected at screen, withdrew, offer declined, requisition cancelled. The reason codes are the richest data in any ATS and are almost always left blank." },
+  { t: "Business process", hint: "Which system says this?", b: "<strong>Workday's</strong> word for a configured workflow with approval steps. If an advert says \u201cconfiguring business processes\u201d, it means Workday and it means workflow configuration." },
+  { t: "Scorecard", hint: "What is it for?", b: "A <strong>structured interview rating</strong> against defined attributes, one per interviewer. Greenhouse built its product around them. They make interviews comparable, which is both fairer and analysable." },
+  { t: "Talent pool / CRM", hint: "How is it different?", b: "People who have <strong>not applied</strong> to anything \u2014 sourced, or past applicants kept for the future. Keeping someone here after a rejection needs <strong>consent</strong> under GDPR, and that consent can be withdrawn." },
+  { t: "Stage history", hint: "Why ask for it?", b: "The record of <strong>when</strong> each application entered each stage. Without it you can report the funnel as it is today but cannot report time in stage at all. Most default exports omit it \u2014 knowing to ask is the expertise." },
+  { t: "Offer vs offer accepted", hint: "Why two fields?", b: "<strong>Two different dates.</strong> Offer extended and offer accepted. Conflating them makes acceptance rate meaningless and time to hire wrong. Always check which one a report is using." }
+]);
+
+Quiz.mount("q2", {
+  title: "Check yourself", lessonId: "ats.systems",
+  items: [
+    { q: "Workday Recruiting is:",
+      opts: ["A standalone ATS like Greenhouse", "A module inside a full HCM — recruiting shares a worker record with HR and payroll", "A Boolean engine", "Only for Germany"],
+      a: 1, why: "<b>That is why reporting lives in Workday’s own builder, not SQL.</b>" },
+    { q: "Which European mid-market name appears constantly in adverts?",
+      opts: ["Taleo only", "SmartRecruiters (Berlin-headquartered)", "Workday only", "Greenhouse only"],
+      a: 1, why: "<b>Recognise the name. Do not claim production experience.</b>" }
+  ]
+});
+
+/* 3 — data hygiene damage */
+Sheet.mount("s3", {
+  id: "ats-dirty", rows: 11, cols: 10, headerRows: 1, height: 300,
+  title: "A real-looking export, with real-looking damage",
+  note: "Four sources, a skipped stage, and two applications nobody ever closed.",
+  open: ["G2", "G3", "G4", "G5"], lessonId: "ats.hygiene",
+  widths: { A: 74, B: 104, C: 86, D: 86, E: 94, F: 24, G: 86, H: 230 },
+  formats: { A: "text", B: "text", C: "date", D: "date", E: "text", G: "general", H: "text" },
+  data: [
+    ["Name", "Source", "Screened", "Offer", "Disposition"],
+    ["Asha", "LinkedIn", "2026-03-04", "2026-03-20", "Hired"],
+    ["Ben", "referral ", "2026-03-05", "2026-03-22", "Declined"],
+    ["Cara", "Linkdin", "", "2026-03-18", ""],
+    ["Dev", " LINKEDIN", "2026-02-03", "2026-03-01", "Hired"],
+    ["Eva", "Agency", "2026-02-06", "2026-03-10", "Reneged"],
+    ["Farah", "linkedin", "", "", ""]
+  ],
+  cells: {
+    H1: "What it tells your",
+    H2: "sources, if counted raw",
+    H3: "offered without a screen date",
+    H4: "applications never closed",
+    H5: "really from LinkedIn"
+  },
+  tasks: [
+    { cell: "G2", ask: "How many <em>distinct</em> values are in the Source column as it stands?",
+      want: 5, answer: "=COUNTA(UNIQUE(B2:B7))", requires: ["UNIQUE"],
+      good: "5 \u2014 for what is really three sources. Source-of-hire reporting on this column is worthless, and a closed dropdown would have prevented all of it." },
+    { cell: "G3", ask: "How many people have an Offer date but no Screened date? Use COUNTIFS with a blank test on one column and a not-blank test on the other.",
+      want: 1, answer: '=COUNTIFS(C2:C7,"",D2:D7,"<>")', requires: ["COUNTIFS"],
+      good: "1 \u2014 Cara was dragged past the screen stage. You are invisible in a screen-to-interview conversion rate, which makes that rate wrong rather than merely incomplete." },
+    { cell: "G4", ask: "How many applications have no Disposition at all?",
+      want: 2, answer: '=COUNTIF(E2:E7,"")', requires: ["COUNTIF"],
+      good: "2 \u2014 Cara and Farah. They sit in the funnel forever, destroying time-in-stage averages, and in the EU they are a retention problem as well as a reporting one." },
+    { cell: "G5", ask: "Now count the real LinkedIn applicants despite the four spellings. A wildcard on <code>*link*</code> does it in one formula.",
+      want: 4, answer: '=COUNTIF(B2:B7,"*link*")', requires: ["COUNTIF"],
+      good: "4. That is the right answer and the wrong solution \u2014 a wildcard patches the report every month, while a dropdown in the ATS fixes it once. Say that distinction out loud in an interview: <em>\u201cI can clean it in the report, but I would rather fix the field.\u201d</em>" }
+  ]
+});
+
+Quiz.mount("q4", {
+  title: "Check yourself", lessonId: "ats.report",
+  items: [
+    { q: "You need time-in-stage reporting. The standard export gives one row per application with the current stage. Is that enough?",
+      opts: ["Yes", "No — you need a stage-history or stage-transition export, which records when each stage was entered", "Yes, if you add a date column", "Only in Workday"],
+      a: 1,
+      why: "<b>The current stage is a snapshot.</b> Time in stage needs the <em>transitions</em>. Most default exports omit them, so you have to ask specifically \u2014 and knowing to ask is itself the expertise being tested." },
+    { q: "Why export to Excel rather than use the built-in ATS reports?",
+      opts: ["Built-in reports are always wrong", "They are fine for standard questions but inflexible; a manager's actual question usually needs joining, reshaping or a metric the system does not have", "Excel is faster", "To avoid licences"],
+      a: 1,
+      why: "<b>Flexibility, not accuracy.</b> The built-in funnel report is fine. \u201cShow me acceptance by recruiter for roles above \u20ac70k opened since January, excluding the cancelled ones\u201d is not a built-in report anywhere." },
+    { q: "What turns your monthly report from a morning's work into a click?",
+      opts: ["A faster laptop", "A scheduled export that lands in the same place, picked up by a Power Query refresh", "Hiring an intern", "Copying faster"],
+      a: 1,
+      why: "<b>Scheduled export plus Power Query.</b> The steps are recorded once and replay on refresh. This is the single highest-return automation available to a recruiting analyst, and it is why chapter 1.4 spent time on Power Query." }
+  ]
+});
+
+Quiz.mount("q5", {
+  title: "Check yourself", lessonId: "ats.gdpr",
+  items: [
+    { q: "A rejected candidate asks for everything held about them. Does that include the interview notes?",
+      opts: ["No, notes are internal", "Yes — the right of access covers interview notes, which is why they must be evidence-based and job-relevant", "Only if they pay", "Only in Germany"],
+      a: 1,
+      why: "<b>Yes.</b> This is the rule that should change how notes are written. \u201cNot enough depth on system design \u2014 could not explain their own caching choice\u201d is defensible evidence. \u201cSeemed a bit odd\u201d is not, and is exactly what a subject access request exposes." },
+    { q: "You want to keep a strong rejected candidate's CV for a future role. What do you need?",
+      opts: ["Nothing, you already has it", "Explicit consent to keep it in a talent pool, which the candidate can withdraw", "The hiring manager's approval", "To anonymise it"],
+      a: 1,
+      why: "<b>Consent, asked for explicitly.</b> The lawful basis that covered assessing their application does not cover keeping them on file afterwards. And consent can be withdrawn, which means the talent pool needs a working deletion process." },
+    { q: "An AI screening tool can auto-reject candidates below a score. Is that acceptable in the EU?",
+      opts: ["Yes, it is efficient", "Not as a solely automated decision with significant effect — a human has to make the decision", "Yes with consent", "Only for junior roles"],
+      a: 1,
+      why: "<b>A human must decide.</b> Candidates have the right not to be subject to a solely automated decision with significant effect. The tool can rank and summarise; a person rejects. The EU AI Act also treats recruitment as high-risk, which tightens this further." }
+  ]
+});
+
+Drill.mount("d6", {
+  id: "ats-say", lessonId: "ats.talk", seconds: 45,
+  title: "\u201cDo you have Workday experience?\u201d",
+  prompt: "You do not. Answer in forty-five seconds without either lying or apologising.",
+  model: "<p>\u201cNot Workday specifically, no. I have worked in [your actual system], and the model is the same everywhere \u2014 requisitions, candidate records, applications linking the two, stages with history, and dispositions with reason codes. What I have done is read the Workday Recruiting documentation and the report-builder guide, so I know it is a module inside the wider HCM, that reporting is done in its own report builder rather than SQL, and that \u2018business process\u2019 means a configured workflow with approvals.</p><p>What I would bring on day one is the reporting side. Whatever the system, I will be exporting applications and stage history and building the analysis outside it, and that part does not change. I would expect to be independent in Workday inside two weeks, and I would want to spend the first of those weeks auditing the data hygiene \u2014 whether source is a dropdown, whether rejection reasons are mandatory \u2014 because that determines whether anything I build afterwards is trustworthy.\u201d</p><p class=\"tiny\">Three moves: answer the question honestly in the first four words, show you have done real homework with specific vocabulary, then redirect to the thing you are genuinely strong at. The data-hygiene audit at the end is the part that sounds like someone who has done this before.</p>"
+});
+
+Course.init({ id: "ats" });
+</script>
+</body>
+</html>

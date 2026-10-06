@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Function reference — Nidhi's course</title>
+<link rel="stylesheet" href="assets/course.css?v=3">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand"><a href="index.html">Nidhi Tiwari</a><span>Function reference</span></div>
+  <div class="top-actions">
+    <div class="pbar"><i></i></div>
+    <span class="pnum"></span>
+    <a class="btn" href="index.html">Course home</a>
+  </div>
+</div>
+
+<div class="layout">
+<nav class="side" id="sideNav"></nav>
+<main>
+
+<p class="kicker">Reference · come back to this</p>
+<h1>Every function, running</h1>
+<p class="lead">Not a list to memorise. <strong>Every example below is live</strong> — edit any formula and the answer recalculates against the practice data. Break one on purpose and read the error. That is how these stop being vocabulary and start being tools.</p>
+
+<div class="note">
+  <p><strong>What is loaded.</strong> <code>Candidates</code> (6 rows, columns A–L), <code>Roles</code> (2 rows, at N1), and <code>Pay</code> — five salary points, at V1 — so the percentile examples have something real to work on. <code>TODAY()</code> is pinned to <strong>1 May 2026</strong> so every answer here is stable.</p>
+</div>
+
+<div id="peek"></div>
+
+<section class="lesson" data-lesson="ref.count" data-n="01">
+  <p class="goal">The daily ones</p>
+  <h3>Counting and summing</h3>
+  <p>If you only ever learns one group, this is it. Ninety per cent of recruiting reporting is a conditional count.</p>
+  <div id="g-count"></div>
+</section>
+
+<section class="lesson" data-lesson="ref.logic" data-n="02">
+  <p class="goal">Decisions</p>
+  <h3>Logic and error handling</h3>
+  <div id="g-logic"></div>
+</section>
+
+<section class="lesson" data-lesson="ref.lookup" data-n="03">
+  <p class="goal">Joining two tables</p>
+  <h3>Lookup</h3>
+  <div id="g-lookup"></div>
+</section>
+
+<section class="lesson" data-lesson="ref.text" data-n="04">
+  <p class="goal">Cleaning and building strings</p>
+  <h3>Text</h3>
+  <div id="g-text"></div>
+</section>
+
+<section class="lesson" data-lesson="ref.dates" data-n="05">
+  <p class="goal">Every recruiting metric is a date difference</p>
+  <h3>Dates</h3>
+  <div id="g-dates"></div>
+</section>
+
+<section class="lesson" data-lesson="ref.arrays" data-n="06">
+  <p class="goal">Modern Excel</p>
+  <h3>Dynamic arrays</h3>
+  <p>These return several values. In the Result column below they are shown separated by <code>·</code>; in a real sheet they spill down into the cells beneath.</p>
+  <div id="g-arrays"></div>
+</section>
+
+<section class="lesson" data-lesson="ref.stats" data-n="07">
+  <p class="goal">Pay bands and distributions</p>
+  <h3>Statistics</h3>
+  <p>This group matters more in HR than people expect, because <strong>pay is always described as a distribution</strong>. A band is a minimum, a midpoint and a maximum; a market rate is a percentile; a person's position in the band is a ratio. Knowing the difference between a mean and a median in a salary conversation is a credibility question.</p>
+  <div id="g-stats"></div>
+  <div class="note">
+    <p><strong>Why the median, not the average, for salary.</strong> One very senior person pulls the average up and makes everyone else look underpaid relative to it. The median is the middle person, and it does not move when an outlier is added. If someone quotes an average salary, the first question is what the median is.</p>
+    <p><strong>Compa-ratio</strong> is salary ÷ band midpoint. 1.0 means paid at the midpoint, 0.85 means well below it. It is the number a compensation partner will ask your for, and it is one division.</p>
+  </div>
+</section>
+
+<section class="lesson" data-lesson="ref.math" data-n="08">
+  <p class="goal">Rounding, which matters for money</p>
+  <h3>Maths and rounding</h3>
+  <div id="g-math"></div>
+</section>
+
+<section class="lesson" data-lesson="ref.info" data-n="09">
+  <p class="goal">Diagnosing a broken file</p>
+  <h3>Information and type checks</h3>
+  <p>These are your debugging tools. When a number will not add up, <code>ISNUMBER</code> and <code>LEN</code> find out why in about ten seconds.</p>
+  <div id="g-info"></div>
+</section>
+
+<section class="lesson" data-lesson="ref.errors" data-n="10">
+  <p class="goal">Reading the error, not panicking at it</p>
+  <h3>The eight errors and what each one means</h3>
+  <table class="t wrap">
+    <thead><tr><th>Error</th><th>It means</th><th>Do this</th></tr></thead>
+    <tbody>
+      <tr><td><code>#DIV/0!</code></td><td>Divided by zero or by an empty cell.</td><td>Expected early in a month when there are no offers yet. Wrap it: <code>=IFERROR(a/b,"")</code>.</td></tr>
+      <tr><td><code>#N/A</code></td><td>A lookup found nothing.</td><td>Check the key for a trailing space or a text-vs-number mismatch. Use XLOOKUP's fourth argument to label it instead of hiding it.</td></tr>
+      <tr><td><code>#VALUE!</code></td><td>Wrong kind of thing — arithmetic on text.</td><td>Usually a number stored as text. Test it with <code>ISNUMBER</code>.</td></tr>
+      <tr><td><code>#REF!</code></td><td>The formula points at a cell that no longer exists.</td><td>Something was deleted. Undo if it just happened; otherwise rebuild the reference.</td></tr>
+      <tr><td><code>#NAME?</code></td><td>Excel does not recognise a word in the formula.</td><td>A misspelt function name, a missing quote, or a table name that does not exist.</td></tr>
+      <tr><td><code>#NUM!</code></td><td>A number that is impossible.</td><td>A square root of a negative, or a percentile outside 0–1.</td></tr>
+      <tr><td><code>#SPILL!</code></td><td>A dynamic array has nowhere to land.</td><td>Clear the cells below. Do not shorten the formula.</td></tr>
+      <tr><td><code>#CALC!</code></td><td>An array operation produced nothing.</td><td>Usually a FILTER that matched no rows — give it a third argument: <code>FILTER(a,b,"None")</code>.</td></tr>
+    </tbody>
+  </table>
+  <div class="note">
+    <p><strong>The rule about IFERROR.</strong> It hides <em>every</em> error, not the one expected. Wrapping a whole dashboard in IFERROR means a genuinely broken formula looks like a blank cell and nobody finds out for a month. Wrap the single division that can legitimately divide by zero, and leave the rest visible.</p>
+  </div>
+  <div id="q10"></div>
+</section>
+
+<section class="lesson" data-lesson="ref.free" data-n="11">
+  <p class="goal">Anything at all</p>
+  <h3>Free sandbox</h3>
+  <p>All three tables are loaded. Nothing to get right — type anything and see what happens.</p>
+  <div id="pgfree"></div>
+  <p class="tiny">Some things worth trying: <code>=COUNTIFS(Candidates[Source],"LinkedIn",Candidates[Outcome],"Joined")</code> · <code>=FILTER(Candidates[Name],Candidates[FeeEUR]&gt;0)</code> · <code>=XLOOKUP("ZZ",Roles[RoleID],Roles[Title],"nope")</code> · <code>=MEDIAN(Pay[SalaryEUR])</code> · <code>=1/0</code></p>
+</section>
+
+<div class="pager">
+  <a class="btn" href="project.html"><span class="lbl">Chapter 1.5</span>&larr; The Ferra dashboard</a>
+  <a class="btn btn-go" href="powerbi.html"><span class="lbl">Chapter 2</span>Power BI &rarr;</a>
+</div>
+
+</main>
+</div>
+
+<script src="assets/engine.js?v=3"></script>
+<script src="assets/sheet.js?v=3"></script>
+<script src="assets/data.js?v=3"></script>
+<script src="assets/course.js?v=3"></script>
+<script>
+var D = CourseData;
+var ROLE_KEYS = ["RoleID", "Title", "Department", "HiringManager", "Location", "Opened", "Status"];
+var PAY = [["Band", "SalaryEUR"], ["Associate", 58000], ["Mid", 62000], ["Senior", 68000], ["Lead", 74000], ["Principal", 92000]];
+
+/* One sheet of data, three tables on it: Candidates at A1, Roles at N1, Pay at V1.
+   Everything on this page — the preview grid, every live row, the sandbox — reads it. */
+var cand = D.candidates(D.ALL, {});
+var ROLE_ROWS = [ROLE_KEYS].concat(D.ROLE_COLS.RoleID.v.map(function (_, i) {
+  return ROLE_KEYS.map(function (k) { return D.ROLE_COLS[k].v[i]; });
+}));
+
+var TABLES = {
+  Candidates: { range: "A1:L7", header: true },
+  Roles: { range: "N1:T3", header: true },
+  Pay: { range: "V1:W6", header: true }
+};
+
+var SHEET_DATA = (function () {
+  var rows = [];
+  for (var i = 0; i < 7; i++) {
+    var row = (cand.data[i] || []).slice();
+    while (row.length < 13) row.push("");           /* M is the gap column */
+    var rr = ROLE_ROWS[i] || [];
+    for (var j = 0; j < 7; j++) row.push(rr[j] === undefined ? "" : rr[j]);
+    row.push("");                                    /* U is the gap column */
+    var pr = PAY[i] || [];
+    row.push(pr[0] === undefined ? "" : pr[0]);
+    row.push(pr[1] === undefined ? "" : pr[1]);
+    rows.push(row);
+  }
+  return rows;
+})();
+
+var FORMATS = {};
+Object.keys(cand.formats).forEach(function (k) { FORMATS[k] = cand.formats[k]; });
+["N", "O", "P", "Q", "R", "V"].forEach(function (k) { FORMATS[k] = "text"; });
+FORMATS.S = "date";
+FORMATS.T = "text";
+FORMATS.W = "eur";
+
+var WIDTHS = {};
+Object.keys(cand.widths).forEach(function (k) { WIDTHS[k] = cand.widths[k]; });
+WIDTHS.M = 24; WIDTHS.U = 24;
+ROLE_KEYS.forEach(function (k, j) { WIDTHS[String.fromCharCode(78 + j)] = D.ROLE_COLS[k].w; });
+WIDTHS.V = 92; WIDTHS.W = 96;
+
+var wb = new Fx.Workbook({ formats: FORMATS, tables: TABLES });
+wb.load(SHEET_DATA, "A1");
+
+/* A look at what is loaded, so the examples are never abstract. */
+Sheet.mount("peek", {
+  id: "ref-peek", readonly: true, rows: 7, cols: 23, height: 215, headerRows: 1,
+  title: "The three tables these examples run against",
+  note: "Read-only. Scroll right for Roles at column N and Pay at column V.",
+  data: SHEET_DATA, formats: FORMATS, widths: WIDTHS, tables: TABLES
+});
+
+/* The runnable reference table. */
+function refTable(hostId, rows) {
+  var host = document.getElementById(hostId);
+  if (!host) return;
+  var wrap = document.createElement("div");
+  wrap.className = "scroll";
+  var t = document.createElement("table");
+  t.className = "t wrap ref";
+  t.innerHTML = "<thead><tr><th>Function</th><th>What it does</th><th>Live example — edit it</th><th>Result</th></tr></thead>";
+  var tb = document.createElement("tbody");
+  rows.forEach(function (r) {
+    if (r.head) {
+      var hr = document.createElement("tr");
+      hr.className = "lead";
+      hr.innerHTML = '<td colspan="4">' + r.head + "</td>";
+      tb.appendChild(hr);
+      return;
+    }
+    var tr = document.createElement("tr");
+    var c1 = document.createElement("td");
+    c1.innerHTML = "<code>" + r.n + "</code>" + (r.sig ? '<div class="tiny">' + r.sig + "</div>" : "");
+    var c2 = document.createElement("td");
+    c2.innerHTML = r.w;
+    var c3 = document.createElement("td");
+    var inp = document.createElement("input");
+    inp.className = "ref-in";
+    inp.value = r.ex;
+    inp.spellcheck = false;
+    c3.appendChild(inp);
+    var c4 = document.createElement("td");
+    var out = document.createElement("span");
+    out.className = "ref-out";
+    c4.appendChild(out);
+    function run() {
+      var v = wb.evalFormula(inp.value, 20, 2);
+      if (Fx.isErr(v)) { out.textContent = v.e; out.className = "ref-out bad"; return; }
+      if (Fx.isMat(v)) {
+        out.textContent = Fx.flat(v).map(function (x) { return Fx.formatValue(x, r.fmt || "general"); }).join(" · ");
+        out.className = "ref-out ok";
+        return;
+      }
+      var txt = Fx.formatValue(v, r.fmt || "general");
+      out.textContent = txt === "" ? "(blank)" : txt;
+      out.className = "ref-out ok";
+    }
+    inp.addEventListener("input", run);
+    run();
+    tr.appendChild(c1); tr.appendChild(c2); tr.appendChild(c3); tr.appendChild(c4);
+    tb.appendChild(tr);
+  });
+  t.appendChild(tb);
+  wrap.appendChild(t);
+  host.appendChild(wrap);
+}
+
+refTable("g-count", [
+  { n: "SUM", sig: "SUM(range)", w: "Adds numbers. Ignores text and blanks.", ex: "=SUM(Candidates[FeeEUR])", fmt: "eur" },
+  { n: "COUNT", sig: "COUNT(range)", w: "Counts <strong>numbers only</strong>. Dates are numbers, so it counts dates.", ex: "=COUNT(Candidates[Offer])" },
+  { n: "COUNTA", sig: "COUNTA(range)", w: "Counts anything not empty, including text.", ex: "=COUNTA(Candidates[Name])" },
+  { n: "COUNTBLANK", sig: "COUNTBLANK(range)", w: "Counts the empties. Useful for data quality: how many rows are missing a screen date?", ex: "=COUNTBLANK(Candidates[Screened])" },
+  { n: "COUNTIF", sig: "COUNTIF(range, criteria)", w: "Counts with one condition. The workhorse.", ex: '=COUNTIF(Candidates[Source],"LinkedIn")' },
+  { n: "COUNTIFS", sig: "COUNTIFS(r1, c1, r2, c2, …)", w: "Counts with several conditions, all of which must hold.", ex: '=COUNTIFS(Candidates[Source],"LinkedIn",Candidates[Outcome],"Joined")' },
+  { n: "COUNTIFS", sig: "with a blank test", w: 'How many were never screened. <code>""</code> means empty.', ex: '=COUNTIFS(Candidates[Screened],"")' },
+  { n: "COUNTIFS", sig: "with a wildcard", w: "<code>*</code> matches any characters. Case is ignored.", ex: '=COUNTIF(Candidates[Source],"*link*")' },
+  { n: "SUMIF", sig: "SUMIF(test range, criteria, sum range)", w: "Adds only the matching rows.", ex: '=SUMIF(Candidates[Source],"Agency",Candidates[FeeEUR])', fmt: "eur" },
+  { n: "SUMIFS", sig: "SUMIFS(sum range, r1, c1, …)", w: "Same, several conditions. Note the sum range comes <strong>first</strong> here and <strong>last</strong> in SUMIF — the most-forgotten detail in Excel.", ex: '=SUMIFS(Candidates[FeeEUR],Candidates[Outcome],"Reneged")', fmt: "eur" },
+  { n: "AVERAGE", sig: "AVERAGE(range)", w: "The mean. Across all six candidates, including the five with no fee.", ex: "=AVERAGE(Candidates[FeeEUR])", fmt: "eur" },
+  { n: "AVERAGE", sig: "and blanks", w: "<strong>Blanks are skipped, not counted as zero.</strong> This is three values, not four — and it is exactly why the helper columns in this course return <code>\"\"</code> rather than <code>0</code>.", ex: '=AVERAGE(1,3,"",5)' },
+  { n: "AVERAGEIF", sig: "AVERAGEIF(range, criteria, avg range)", w: "Conditional mean.", ex: '=AVERAGEIF(Candidates[Source],"LinkedIn",Candidates[FeeEUR])', fmt: "eur" },
+  { n: "SUBTOTAL", sig: "SUBTOTAL(code, range)", w: "Like SUM but <strong>follows the filter</strong>. 109 = sum of visible rows, 103 = count. Nothing is filtered here, so it matches SUM.", ex: "=SUBTOTAL(109,Candidates[FeeEUR])", fmt: "eur" },
+  { n: "SUMPRODUCT", sig: "SUMPRODUCT(a, b)", w: "Multiplies pairs and adds the results. The old way to do conditional maths, and still common in inherited files.", ex: '=SUMPRODUCT((Candidates[Source]="LinkedIn")*1)' },
+  { n: "MAXIFS", sig: "MAXIFS(max range, r1, c1)", w: "Biggest value among matching rows.", ex: '=MAXIFS(Candidates[FeeEUR],Candidates[Source],"Agency")', fmt: "eur" }
+]);
+
+refTable("g-logic", [
+  { n: "IF", sig: "IF(test, then, else)", w: "One decision. <code>L6</code> is Eva's agency fee; change it to <code>L2</code> for Asha and watch the other branch.", ex: '=IF(L6>0,"Agency cost","Free")' },
+  { n: "IF", sig: "nested", w: "A second decision inside the else. Readable up to about three levels.", ex: '=IF(A2="Asha","first",IF(A2="Ben","second","later"))' },
+  { n: "AND", sig: "AND(a, b, …)", w: "TRUE only if everything is true.", ex: '=AND(K2="Joined",J2<>"")' },
+  { n: "OR", sig: "OR(a, b, …)", w: "TRUE if at least one is true.", ex: '=OR(K3="Declined",K3="Reneged")' },
+  { n: "NOT", sig: "NOT(a)", w: "Flips it.", ex: '=NOT(K2="Open")' },
+  { n: "XOR", sig: "XOR(a, b)", w: "TRUE if exactly one is true. Rare.", ex: "=XOR(TRUE,TRUE)" },
+  { n: "IFS", sig: "IFS(t1, v1, t2, v2, …)", w: "Several tests in order, first match wins. Cleaner than deep nesting. End with <code>TRUE</code> as a catch-all.", ex: '=IFS(K2="Joined","done",K2="Open","chase",TRUE,"closed")' },
+  { n: "SWITCH", sig: "SWITCH(value, m1, r1, …, default)", w: "Matching one value against a list. Good for mapping codes to labels.", ex: '=SWITCH(B2,"BE-1","Backend","FE-1","Frontend","Unknown")' },
+  { n: "IFERROR", sig: "IFERROR(formula, fallback)", w: "Catches <em>any</em> error. Use it on one division, not a whole dashboard.", ex: '=IFERROR(1/0,"no offers yet")' },
+  { n: "IFNA", sig: "IFNA(formula, fallback)", w: "Catches <strong>only</strong> #N/A. Safer than IFERROR around a lookup — a real #VALUE! still shows.", ex: '=IFNA(XLOOKUP("ZZ",Roles[RoleID],Roles[Title]),"no such role")' }
+]);
+
+refTable("g-lookup", [
+  { n: "XLOOKUP", sig: "XLOOKUP(find, in, return, if_not_found)", w: "The one to use. Exact by default, looks any direction, no column counting.", ex: '=XLOOKUP("BE-1",Roles[RoleID],Roles[HiringManager],"No role")' },
+  { n: "XLOOKUP", sig: "the not-found branch", w: "What a bad key does when the fourth argument is supplied. Compare with removing it.", ex: '=XLOOKUP("BE1",Roles[RoleID],Roles[HiringManager],"No role")' },
+  { n: "XLOOKUP", sig: "no fourth argument", w: "Without it, a missing key is #N/A.", ex: '=XLOOKUP("BE1",Roles[RoleID],Roles[HiringManager])' },
+  { n: "VLOOKUP", sig: "VLOOKUP(find, block, col#, FALSE)", w: "Legacy. Counts columns from the left of the block, so an inserted column breaks it silently. Read it, do not write it.", ex: '=VLOOKUP("FE-1",N1:T3,4,FALSE)' },
+  { n: "HLOOKUP", sig: "HLOOKUP(find, block, row#, FALSE)", w: "The same idea sideways. Rare, and almost always a sign the data is the wrong shape.", ex: '=HLOOKUP("Title",N1:T3,2,FALSE)' },
+  { n: "MATCH", sig: "MATCH(find, range, 0)", w: "<em>Where</em> is it? Returns a position. The <code>0</code> for exact match should always be there.", ex: '=MATCH("FE-1",Roles[RoleID],0)' },
+  { n: "INDEX", sig: "INDEX(range, position)", w: "<em>What</em> is at this position?", ex: "=INDEX(Roles[Title],2)" },
+  { n: "INDEX + MATCH", sig: "INDEX(ret, MATCH(find, key, 0))", w: "The twenty-year-old correct answer, still everywhere.", ex: '=INDEX(Roles[Location],MATCH("BE-1",Roles[RoleID],0))' },
+  { n: "XMATCH", sig: "XMATCH(find, range)", w: "MATCH, modernised — exact by default.", ex: '=XMATCH("Agency",Candidates[Source])' },
+  { n: "CHOOSE", sig: "CHOOSE(n, a, b, c)", w: "Pick the nth item from a written list.", ex: '=CHOOSE(2,"Screen","Interview","Offer")' }
+]);
+
+refTable("g-text", [
+  { n: "TRIM", sig: "TRIM(text)", w: "Removes leading, trailing and doubled spaces. Run it on every text column of every export.", ex: '=TRIM("  referral  ")' },
+  { n: "LEN", sig: "LEN(text)", w: "Character count. The diagnostic that finds invisible spaces.", ex: '=LEN("referral ")' },
+  { n: "UPPER / LOWER / PROPER", sig: "", w: "Case. Note PROPER gives <em>Linkedin</em>, not <em>LinkedIn</em> — for a known list, use a lookup instead.", ex: '=PROPER("LINKEDIN")' },
+  { n: "LEFT", sig: "LEFT(text, n)", w: "First n characters.", ex: '=LEFT("Backend Engineer - Dublin",7)' },
+  { n: "RIGHT", sig: "RIGHT(text, n)", w: "Last n characters.", ex: '=RIGHT("Backend Engineer - Dublin",6)' },
+  { n: "MID", sig: "MID(text, start, n)", w: "n characters from a position.", ex: '=MID("Backend Engineer - Dublin",20,6)' },
+  { n: "FIND", sig: "FIND(what, in)", w: "Position of something. <strong>Case-sensitive.</strong>", ex: '=FIND("E","Backend Engineer")' },
+  { n: "SEARCH", sig: "SEARCH(what, in)", w: "Same, but case-insensitive and allows wildcards. Usually the better choice.", ex: '=SEARCH("-","Backend Engineer - Dublin")' },
+  { n: "TEXTBEFORE", sig: "TEXTBEFORE(text, delimiter)", w: "Everything before a separator. Replaces the whole LEFT/SEARCH dance.", ex: '=TEXTBEFORE("Backend Engineer - Dublin"," - ")' },
+  { n: "TEXTAFTER", sig: "TEXTAFTER(text, delimiter)", w: "Everything after it.", ex: '=TEXTAFTER("Backend Engineer - Dublin"," - ")' },
+  { n: "TEXTSPLIT", sig: "TEXTSPLIT(text, delimiter)", w: "Splits into several cells at once.", ex: '=TEXTSPLIT("Backend Engineer - Dublin"," - ")' },
+  { n: "SUBSTITUTE", sig: "SUBSTITUTE(text, old, new)", w: "Replaces text by content. Good for one known typo.", ex: '=SUBSTITUTE("Linkdin","Linkdin","LinkedIn")' },
+  { n: "REPLACE", sig: "REPLACE(text, start, n, new)", w: "Replaces by <em>position</em>. Rarer, and brittle.", ex: '=REPLACE("BE-1",1,2,"FE")' },
+  { n: "CONCAT / &", sig: "a & b", w: "Joins. Punctuation goes inside quotes.", ex: '=A2&" - "&C2' },
+  { n: "TEXTJOIN", sig: "TEXTJOIN(sep, ignore_blanks, range)", w: "Joins a whole range with a separator, skipping blanks.", ex: '=TEXTJOIN(", ",TRUE,Candidates[Name])' },
+  { n: "TEXT", sig: "TEXT(value, format)", w: "Formats a number <em>as text</em>. Essential when putting a rate inside a sentence, because joining loses the format.", ex: '=TEXT(0.75,"0%")' },
+  { n: "VALUE", sig: "VALUE(text)", w: "Turns a number-stored-as-text into a real number.", ex: '=VALUE("3000")+1000', fmt: "comma" },
+  { n: "EXACT", sig: "EXACT(a, b)", w: "Case-sensitive comparison. <code>=</code> is not.", ex: '=EXACT("LinkedIn","linkedin")' },
+  { n: "REPT", sig: "REPT(text, n)", w: "Repeats text. A poor man's in-cell bar chart.", ex: '=REPT("|",4)' },
+  { n: "CLEAN", sig: "CLEAN(text)", w: "Strips non-printing characters from an old CSV.", ex: '=CLEAN("Referral")' }
+]);
+
+refTable("g-dates", [
+  { n: "TODAY", sig: "TODAY()", w: "Today's date, recalculating every day. Pinned to 1 May 2026 in this course so answers stay checkable.", ex: "=TODAY()", fmt: "date" },
+  { n: "the subtraction", sig: "later − earlier", w: "<strong>There is no \u201cdays between\u201d function and none is needed.</strong> Dates are numbers; subtracting gives days. This single idea is every recruiting metric.", ex: "=I2-E2" },
+  { n: "ageing", sig: "TODAY() − date", w: "How long has this been open? The basis of every chase list.", ex: "=TODAY()-E7" },
+  { n: "DATE", sig: "DATE(y, m, d)", w: "Builds a date from parts. The safe way to write a literal date.", ex: "=DATE(2026,3,2)", fmt: "date" },
+  { n: "the serial number", sig: "", w: "What a date really is underneath: days since 30 Dec 1899.", ex: "=DATE(2026,3,2)+0" },
+  { n: "YEAR / MONTH / DAY", sig: "", w: "Pull a part out. MONTH is how a by-month report gets grouped.", ex: "=MONTH(E2)" },
+  { n: "EOMONTH", sig: "EOMONTH(date, months)", w: "End of the month, n months away. <code>0</code> means this month. Reporting periods.", ex: "=EOMONTH(E2,0)", fmt: "date" },
+  { n: "EDATE", sig: "EDATE(date, months)", w: "The same day, n months away. Probation end dates, notice periods.", ex: "=EDATE(E2,6)", fmt: "date" },
+  { n: "NETWORKDAYS", sig: "NETWORKDAYS(start, end)", w: "<strong>Working</strong> days between two dates. Use this, not plain subtraction, for an SLA — \u201ctwo days to respond\u201d means two working days.", ex: "=NETWORKDAYS(E2,F2)" },
+  { n: "WORKDAY", sig: "WORKDAY(start, n)", w: "The date n working days from now. \u201cWhen is this reply due?\u201d", ex: "=WORKDAY(TODAY(),5)", fmt: "date" },
+  { n: "WEEKDAY", sig: "WEEKDAY(date)", w: "1 = Sunday by default. Useful for flagging weekend activity.", ex: "=WEEKDAY(E2)" },
+  { n: "WEEKNUM", sig: "WEEKNUM(date)", w: "Week of the year, for weekly reporting.", ex: "=WEEKNUM(E2)" },
+  { n: "DAYS", sig: "DAYS(end, start)", w: "The explicit version of the subtraction, if it reads better.", ex: "=DAYS(I2,E2)" },
+  { n: "DATEDIF", sig: 'DATEDIF(start, end, "m")', w: 'Whole months or years between dates. <code>"y"</code> for years, <code>"m"</code> months, <code>"d"</code> days. Tenure.', ex: '=DATEDIF(E4,TODAY(),"m")' },
+  { n: "YEARFRAC", sig: "YEARFRAC(start, end)", w: "The gap as a fraction of a year. Tenure as a decimal.", ex: "=YEARFRAC(E4,TODAY())", fmt: "n2" }
+]);
+
+refTable("g-arrays", [
+  { n: "UNIQUE", sig: "UNIQUE(range)", w: "The distinct values.", ex: "=UNIQUE(Candidates[Source])" },
+  { n: "SORT", sig: "SORT(range)", w: "Sorted. Wrap UNIQUE in it for a tidy list.", ex: "=SORT(UNIQUE(Candidates[Source]))" },
+  { n: "FILTER", sig: "FILTER(range, condition, if_empty)", w: "The rows that match. Give it the third argument so an empty result is a word, not <code>#CALC!</code>.", ex: '=FILTER(Candidates[Name],Candidates[Outcome]="Joined","none")' },
+  { n: "FILTER", sig: "two conditions", w: "Multiply conditions for AND, add them for OR.", ex: '=FILTER(Candidates[Name],(Candidates[Source]="LinkedIn")*(Candidates[Outcome]="Joined"),"none")' },
+  { n: "FILTER", sig: "empty result", w: "What the third argument saves your from.", ex: '=FILTER(Candidates[Name],Candidates[Source]="Jobboard","no one from there")' },
+  { n: "COUNTIFS over an array", sig: "", w: "The self-maintaining summary: distinct values down the side, counts across. This is one formula returning three answers.", ex: "=COUNTIFS(Candidates[Source],SORT(UNIQUE(Candidates[Source])))" },
+  { n: "SORTBY", sig: "SORTBY(range, by range)", w: "Sort one column by another — names in applied-date order.", ex: "=SORTBY(Candidates[Name],Candidates[Applied])" },
+  { n: "SEQUENCE", sig: "SEQUENCE(n)", w: "1 to n. Building blocks for calendars and numbering.", ex: "=SEQUENCE(5)" },
+  { n: "TRANSPOSE", sig: "TRANSPOSE(range)", w: "Flips rows and columns.", ex: "=TRANSPOSE(Roles[RoleID])" },
+  { n: "VSTACK", sig: "VSTACK(a, b)", w: "Stacks ranges on top of each other — twelve monthly exports into one list.", ex: "=VSTACK(Roles[RoleID],Roles[Title])" },
+  { n: "TOCOL", sig: "TOCOL(range)", w: "Flattens into one column, dropping blanks.", ex: "=TOCOL(Candidates[Accepted])", fmt: "date" },
+  { n: "ROWS / COLUMNS", sig: "", w: "How big is the result? The clean way to count what a FILTER returned.", ex: '=ROWS(FILTER(Candidates[Name],Candidates[Source]="LinkedIn"))' }
+]);
+
+refTable("g-stats", [
+  { n: "MEDIAN", sig: "MEDIAN(range)", w: "The middle value. <strong>The right average for salary</strong>, because one senior outlier does not move it.", ex: "=MEDIAN(Pay[SalaryEUR])", fmt: "eur" },
+  { n: "AVERAGE", sig: "", w: "The mean, for comparison. Note it sits above the median here — that gap <em>is</em> the outlier.", ex: "=AVERAGE(Pay[SalaryEUR])", fmt: "eur" },
+  { n: "the gap", sig: "", w: "Mean minus median. If this is large, quoting the average is misleading.", ex: "=AVERAGE(Pay[SalaryEUR])-MEDIAN(Pay[SalaryEUR])", fmt: "eur" },
+  { n: "PERCENTILE", sig: "PERCENTILE(range, k)", w: "The value at a given point in the distribution. <code>0.5</code> is the median. Market pay data is always quoted as P25, P50, P75.", ex: "=PERCENTILE(Pay[SalaryEUR],0.75)", fmt: "eur" },
+  { n: "QUARTILE", sig: "QUARTILE(range, q)", w: "Quarters: 1 = P25, 2 = median, 3 = P75, 4 = max.", ex: "=QUARTILE(Pay[SalaryEUR],1)", fmt: "eur" },
+  { n: "PERCENTRANK", sig: "PERCENTRANK(range, value)", w: "The reverse: where does this salary sit in the distribution?", ex: "=PERCENTRANK(Pay[SalaryEUR],68000)", fmt: "pct" },
+  { n: "compa-ratio", sig: "salary ÷ midpoint", w: "A person's position in their band. 1.0 is the midpoint. The number a compensation partner asks for.", ex: "=68000/MEDIAN(Pay[SalaryEUR])", fmt: "n2" },
+  { n: "MIN / MAX", sig: "", w: "The band edges.", ex: "=MAX(Pay[SalaryEUR])-MIN(Pay[SalaryEUR])", fmt: "eur" },
+  { n: "MODE", sig: "MODE(range)", w: "The most common value. Occasionally useful on a rating scale.", ex: "=MODE(1,2,2,3)" },
+  { n: "STDEV", sig: "STDEV(range)", w: "Spread. A big standard deviation on salaries in one role is a pay-equity question.", ex: "=STDEV(Pay[SalaryEUR])", fmt: "eur" },
+  { n: "LARGE / SMALL", sig: "LARGE(range, n)", w: "The nth biggest. Top-3 lists without sorting the data.", ex: "=LARGE(Pay[SalaryEUR],2)", fmt: "eur" },
+  { n: "RANK", sig: "RANK(value, range)", w: "Position in a league table.", ex: "=RANK(68000,Pay[SalaryEUR])" }
+]);
+
+refTable("g-math", [
+  { n: "ROUND", sig: "ROUND(value, digits)", w: "Normal rounding. <code>0</code> digits for whole numbers, <code>-3</code> rounds to thousands.", ex: "=ROUND(68499,-3)", fmt: "comma" },
+  { n: "ROUNDUP / ROUNDDOWN", sig: "", w: "Always up, always down, regardless of the digit.", ex: "=ROUNDUP(31.1,0)" },
+  { n: "TRUNC", sig: "TRUNC(value)", w: "Chops the decimals off without rounding. 31.9 becomes 31.", ex: "=TRUNC(31.9)" },
+  { n: "CEILING", sig: "CEILING(value, step)", w: "Up to the next multiple. Rounding a salary offer to the nearest thousand.", ex: "=CEILING(68500,1000)", fmt: "comma" },
+  { n: "FLOOR", sig: "FLOOR(value, step)", w: "Down to the previous multiple.", ex: "=FLOOR(68500,1000)", fmt: "comma" },
+  { n: "ABS", sig: "ABS(value)", w: "Drops the minus sign. Useful when a date subtraction comes out backwards.", ex: "=ABS(E2-I2)" },
+  { n: "INT", sig: "INT(value)", w: "Rounds down to a whole number.", ex: "=INT(31.9)" },
+  { n: "MOD", sig: "MOD(a, b)", w: "The remainder. Alternating row colours, every-nth-row logic.", ex: "=MOD(7,2)" },
+  { n: "POWER / SQRT", sig: "", w: "Powers and square roots.", ex: "=SQRT(16)" },
+  { n: "the percentage change", sig: "(new − old) / old", w: "<strong>No function for this, and people get the order wrong.</strong> New minus old, divided by <em>old</em>.", ex: "=(5-4)/4", fmt: "pct" }
+]);
+
+refTable("g-info", [
+  { n: "ISNUMBER", sig: "ISNUMBER(value)", w: "Is this really a number? The first thing to check when a SUM is too low.", ex: '=ISNUMBER("3000")' },
+  { n: "ISNUMBER", sig: "on a real number", w: "For comparison.", ex: "=ISNUMBER(3000)" },
+  { n: "ISTEXT", sig: "ISTEXT(value)", w: "The other half of the same check.", ex: "=ISTEXT(A2)" },
+  { n: "ISBLANK", sig: "ISBLANK(cell)", w: "Truly empty. Careful: a cell holding <code>\"\"</code> from a formula is <em>not</em> blank, which is a classic source of confusion.", ex: "=ISBLANK(F7)" },
+  { n: "ISERROR", sig: "ISERROR(formula)", w: "Did that go wrong? For auditing rather than hiding.", ex: "=ISERROR(1/0)" },
+  { n: "ISNA", sig: "ISNA(formula)", w: "Specifically a failed lookup.", ex: '=ISNA(XLOOKUP("ZZ",Roles[RoleID],Roles[Title]))' },
+  { n: "N", sig: "N(value)", w: "Text becomes 0, numbers stay. Shows what a range of text-numbers does to a SUM.", ex: '=N("3000")' },
+  { n: "the length check", sig: "LEN", w: '\u201cLinkedIn\u201d is 8 characters. If LEN says 9, there is a space nobody can see.', ex: '=LEN("LinkedIn ")' }
+]);
+
+Quiz.mount("q10", {
+  title: "Read the error", lessonId: "ref.errors",
+  items: [
+    { q: "An XLOOKUP on RoleID returns #N/A for three rows out of four hundred. Most likely cause?",
+      opts: ["Excel is broken", "Those three keys have a trailing space or a typo", "XLOOKUP cannot handle 400 rows", "The table needs refreshing"],
+      a: 1,
+      why: "<b>A key mismatch, almost always whitespace or case of the underlying value.</b> Check with <code>LEN</code>. The fix is TRIM at the source — ideally in Power Query so it never comes back." },
+    { q: "Your acceptance-rate cell shows #DIV/0! on the first of the month. Is that a bug?",
+      opts: ["Yes, the formula is wrong", "No — there are no offers yet, so the denominator is genuinely zero; wrap that one division in IFERROR", "Yes, you should type 0", "No, ignore it"],
+      a: 1,
+      why: "<b>It is a legitimate state, not a bug.</b> <code>=IFERROR(accepts/offers,\"\")</code> on that one cell. Typing a 0 would be worse — zero per cent acceptance and no offers yet are different facts." },
+    { q: "Why is IFNA often better than IFERROR around a lookup?",
+      opts: ["It is faster", "IFNA catches only #N/A, so a genuine #VALUE! or #REF! still shows up instead of being hidden", "IFERROR is deprecated", "No difference"],
+      a: 1,
+      why: "<b>IFERROR hides everything.</b> Around a lookup the expected failure is #N/A; anything else is a real problem you want to see. Being precise about which error is tolerated is what separates a maintainable file from a silently broken one." }
+  ]
+});
+
+Sheet.playground("pgfree", {
+  title: "Sandbox", note: "Candidates, Roles and Pay are all loaded.",
+  data: SHEET_DATA, formats: FORMATS, tables: TABLES,
+  examples: [
+    '=COUNTIFS(Candidates[Source],"LinkedIn",Candidates[Outcome],"Joined")',
+    '=FILTER(Candidates[Name],Candidates[FeeEUR]>0,"none")',
+    '=MEDIAN(Pay[SalaryEUR])',
+    '=TEXTJOIN(", ",TRUE,SORT(Candidates[Name]))',
+    '=1/0'
+  ],
+  value: '=COUNTIFS(Candidates[Source],"LinkedIn",Candidates[Outcome],"Joined")'
+});
+
+Course.init({ id: "reference" });
+</script>
+</body>
+</html>

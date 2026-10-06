@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>5 Sourcing and Boolean — Nidhi's course</title>
+<link rel="stylesheet" href="assets/course.css?v=3">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand"><a href="index.html">Nidhi Tiwari</a><span>5 · Sourcing and Boolean</span></div>
+  <div class="top-actions">
+    <div class="pbar"><i></i></div>
+    <span class="pnum"></span>
+    <a class="btn" href="index.html">Course home</a>
+  </div>
+</div>
+
+<div class="layout">
+<nav class="side" id="sideNav"></nav>
+<main>
+
+<p class="kicker">Chapter 5</p>
+<h1>Sourcing and Boolean search</h1>
+<p class="lead">Analytics gets your shortlisted; sourcing is what you do on the job. It is also the most demonstrable skill in recruiting — a search string either returns the right people or it does not, and that can be shown in an interview in sixty seconds.</p>
+
+<!-- 1 -->
+<section class="lesson" data-lesson="src.logic" data-n="01">
+  <p class="goal">Four operators, that is all</p>
+  <h3>Boolean, properly</h3>
+  <p>Boolean search is the same logic as <code>AND</code> and <code>OR</code> in Excel, which you already knows. Four operators and two pieces of punctuation.</p>
+  <table class="t wrap">
+    <thead><tr><th>Operator</th><th>Effect</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td><strong>AND</strong></td><td>Both must appear. Narrows.</td><td><code>python AND dublin</code></td></tr>
+      <tr><td><strong>OR</strong></td><td>Either will do. Widens. <strong>Always bracket an OR group.</strong></td><td><code>(python OR django)</code></td></tr>
+      <tr><td><strong>NOT</strong></td><td>Excludes. Use sparingly — it is the operator that loses good people.</td><td><code>NOT recruiter</code></td></tr>
+      <tr><td><strong>" "</strong></td><td>An exact phrase.</td><td><code>"backend engineer"</code></td></tr>
+      <tr><td><strong>( )</strong></td><td>Grouping. Without it the engine's precedence decides, and it will not decide what you meant.</td><td><code>(python OR go) AND dublin</code></td></tr>
+      <tr><td><strong>*</strong></td><td>Wildcard on some engines, not on LinkedIn. Use OR instead.</td><td><code>recruit*</code></td></tr>
+    </tbody>
+  </table>
+  <div class="warn">
+    <p><strong>The bracket mistake, which everybody makes once.</strong></p>
+    <p><code>python OR java AND dublin</code> does not mean what it looks like. AND binds tighter than OR, so it reads as <em>python, OR (java in Dublin)</em> — returning every Python developer on the planet. The fix is one pair of brackets: <code>(python OR java) AND dublin</code>.</p>
+  </div>
+  <h4>The anatomy of a good string</h4>
+  <p>Four blocks, joined by AND, each block an OR group:</p>
+  <div class="fml">("backend engineer" OR "backend developer" OR "software engineer")
+AND (python OR django OR flask)
+AND (dublin OR "co. dublin" OR leinster)
+AND NOT (recruiter OR "talent acquisition" OR student OR intern)</div>
+  <p>Read it as four questions: <em>what do they do, what do they know, where are they, and who do I definitely not want.</em> Every good string is that shape, and the fourth block is the one people forget — a search for recruiting terms without it returns mostly other recruiters.</p>
+  <div id="q1"></div>
+</section>
+
+<!-- 2 -->
+<section class="lesson" data-lesson="src.build" data-n="02">
+  <p class="goal">Build one and see who comes back</p>
+  <h3>The search simulator</h3>
+  <p>Twelve invented profiles. The brief: <strong>a backend engineer in Dublin who writes Python.</strong> Four of the twelve are worth calling. Click terms to build a string and watch which profiles survive.</p>
+  <p class="tiny">Start with just a job title and see how wide it is. Then narrow. The counter underneath tells your whether you have gone too far.</p>
+  <div id="bb1"></div>
+  <div class="note">
+    <p><strong>What "good" looks like.</strong> A clean string returns the people worth calling and few others. A string that returns everyone is a job-title search and has done no work. A string that returns three perfect people and excludes a fourth good one is <em>worse</em> than a slightly wide one — because you will never know who you missed. When in doubt, be a little too wide and skim.</p>
+    <p>That asymmetry is the key judgement in sourcing: <strong>a false positive costs your thirty seconds, a false negative costs your a candidate.</strong> It is why NOT should be used for obvious noise — recruiters, students — and never for anything subtle.</p>
+  </div>
+</section>
+
+<!-- 3 -->
+<section class="lesson" data-lesson="src.where" data-n="03">
+  <p class="goal">Where to run the search</p>
+  <h3>Platforms, and what each is for</h3>
+  <table class="t wrap">
+    <thead><tr><th>Where</th><th>Strength</th><th>Catch</th></tr></thead>
+    <tbody>
+      <tr><td><strong>LinkedIn Recruiter</strong></td><td>The default in Europe. Filters for location, current title, seniority, company, languages and open-to-work.</td><td>Expensive, and you will not have a licence while job hunting. Everything below is the free alternative.</td></tr>
+      <tr><td><strong>LinkedIn free + Boolean</strong></td><td>The search box accepts AND, OR, NOT, quotes and brackets. Surprisingly powerful.</td><td>Capped results and no bulk messaging. Enough to prove the skill.</td></tr>
+      <tr><td><strong>X-ray via Google</strong></td><td><code>site:linkedin.com/in "backend engineer" python dublin</code> searches public profiles through Google, free.</td><td>Google's index is patchy and results drift. Still the single best free sourcing trick, and worth demonstrating.</td></tr>
+      <tr><td><strong>GitHub</strong></td><td>For engineers: real code, real activity. Search by language and location.</td><td>Many good engineers have no public code. Absence proves nothing.</td></tr>
+      <tr><td><strong>Stack Overflow, Kaggle, Behance, Dribbble</strong></td><td>Portfolio platforms by discipline. Behance and Dribbble for designers, Kaggle for data scientists.</td><td>Self-selecting populations.</td></tr>
+      <tr><td><strong>Meetup, conference speaker lists</strong></td><td>People who speak at a Python meetup in Dublin are findable, senior and demonstrably interested.</td><td>Small numbers, but very high quality. Underused.</td></tr>
+      <tr><td><strong>Alumni and company lists</strong></td><td>"Who left company X in the last year" is a strong signal, as is a university's alumni search.</td><td>Needs judgement about timing and tone.</td></tr>
+    </tbody>
+  </table>
+  <div class="note">
+    <p><strong>The X-ray string, since it is free and you should be able to type it from memory:</strong></p>
+    <div class="fml">site:linkedin.com/in ("backend engineer" OR "software engineer") python (dublin OR ireland) -recruiter</div>
+    <p>Note Google uses <code>-</code> rather than NOT, and <code>site:</code> restricts to one domain. Being able to write this unprompted in an interview is a concrete, checkable demonstration of sourcing skill — far better than saying you are "good at sourcing".</p>
+  </div>
+  <div id="q3"></div>
+</section>
+
+<!-- 4 -->
+<section class="lesson" data-lesson="src.outreach" data-n="04">
+  <p class="goal">The part that decides whether it works</p>
+  <h3>Outreach that gets replies</h3>
+  <p>A perfect search with generic outreach produces nothing. Response rates are the measurable output, and the difference between a 5% and a 30% reply rate is entirely in the message.</p>
+  <div class="grid2">
+    <div class="note">
+      <p class="kicker">What gets ignored</p>
+      <p style="font-size: 13.5px;">"Hi, I came across your profile and was impressed by your background. I'm recruiting for an exciting opportunity with a market-leading client. Are you open to new opportunities? Let me know a good time to chat."</p>
+      <p class="tiny">No specifics, no role, no company, no reason it is them. It is obviously sent to four hundred people, because it was.</p>
+    </div>
+    <div class="note gold">
+      <p class="kicker">What gets replies</p>
+      <p style="font-size: 13.5px;">"Hi Róisín — I saw your talk at PyCon Ireland on migrating a monolith to services. We're hiring a backend engineer at [company] in Dublin doing exactly that migration, Python and Postgres, €75–90k, hybrid two days. Worth a twenty-minute call? If the timing is wrong, no problem — happy to send the spec for later."</p>
+      <p class="tiny">One specific reason it is them, the actual role, the actual pay, the actual location, a small ask, and an easy exit.</p>
+    </div>
+  </div>
+  <table class="t wrap">
+    <thead><tr><th>Element</th><th>Why it matters</th></tr></thead>
+    <tbody>
+      <tr><td><strong>One specific detail about them</strong></td><td>Proves a human read the profile. One line is enough, and it must be real — a fabricated compliment is worse than none.</td></tr>
+      <tr><td><strong>The actual company name</strong></td><td>"A market-leading client" means an agency fishing. Naming the company is a trust signal.</td></tr>
+      <tr><td><strong>The salary range</strong></td><td>The highest-leverage line in the message. It saves everyone's time, and from June 2026 the EU Pay Transparency Directive makes it an obligation rather than a courtesy.</td></tr>
+      <tr><td><strong>Location and working pattern</strong></td><td>Remote, hybrid or onsite is a dealbreaker for many people and takes six words.</td></tr>
+      <tr><td><strong>A small, specific ask</strong></td><td>"Twenty minutes" is answerable. "Let me know a good time to chat" is a task.</td></tr>
+      <tr><td><strong>An easy no</strong></td><td>Permission to decline raises reply rates, and a polite no today is a warm contact next year.</td></tr>
+      <tr><td><strong>Short</strong></td><td>Under 120 words. It will be read on a phone.</td></tr>
+    </tbody>
+  </table>
+  <div id="d4"></div>
+</section>
+
+<!-- 5 -->
+<section class="lesson" data-lesson="src.measure" data-n="05">
+  <p class="goal">Where this joins chapter 3</p>
+  <h3>Measuring sourcing</h3>
+  <p>This is the bridge between the sourcing skill and the analytics skill, and it is what makes your unusual: most sourcers do not measure, and most analysts cannot source.</p>
+  <table class="t wrap">
+    <thead><tr><th>Metric</th><th>Definition</th><th>A reasonable figure</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Response rate</strong></td><td>Replies ÷ messages sent</td><td>Generic outreach: 5–15%. Well-targeted and specific: 25–40%. The gap is the message, not the list.</td></tr>
+      <tr><td><strong>Positive response rate</strong></td><td>Interested replies ÷ messages</td><td>The one that matters. A 40% reply rate that is all polite declines is a targeting problem.</td></tr>
+      <tr><td><strong>Sourced → screen</strong></td><td>Reached screening ÷ replied</td><td>Tests whether the string found the right people or merely responsive ones.</td></tr>
+      <tr><td><strong>Sourced → hire</strong></td><td>Hires ÷ messages sent</td><td>Often 1–2%, which is why volume matters — but improving the message beats sending more.</td></tr>
+      <tr><td><strong>Time to first response</strong></td><td>Days from message to reply</td><td>Tells your when to follow up. Most replies arrive in 48 hours; one follow-up after a week is worth sending, two is not.</td></tr>
+    </tbody>
+  </table>
+  <h4>Work out whether a change helped</h4>
+  <div id="c5"></div>
+  <div class="note">
+    <p><strong>The portfolio piece for this chapter.</strong> A one-page sourcing report on an invented search: the brief, the string you used, how many profiles it returned, how many you contacted, the reply rate, and one sentence on what you would change next time. It is small, it is entirely fictional, and it demonstrates both skills at once. Almost nobody brings one.</p>
+  </div>
+  <div id="q5"></div>
+</section>
+
+<!-- 6 -->
+<section class="lesson" data-lesson="src.ethics" data-n="06">
+  <p class="goal">The European constraints</p>
+  <h3>Sourcing legally in Europe</h3>
+  <ul class="clean">
+    <li><strong>A public profile is not consent.</strong> Looking is fine. Storing someone's details in a talent pool needs a lawful basis, and after a first contact that basis is usually consent. In practice: contact, and only add them to a pool if they say yes.</li>
+    <li><strong>Tell them where you found them</strong> if asked. GDPR gives people the right to know the source of their data, and "I found your talk at PyCon" is a better opening line anyway.</li>
+    <li><strong>No scraping.</strong> Bulk-harvesting LinkedIn profiles into a spreadsheet breaches LinkedIn's terms and creates a database with no lawful basis. It is also the fastest way to lose an account.</li>
+    <li><strong>Never store a CV or contact details in a personal file.</strong> This is the course rule, and it applies with full force here. Your sourcing notes live in the company's ATS, not in your own spreadsheet.</li>
+    <li><strong>Pay transparency is arriving.</strong> The EU Pay Transparency Directive must be in national law by June 2026 and requires pay information to candidates, with a ban on asking about salary history. Mentioning that you already include ranges in outreach shows you are ahead of it.</li>
+    <li><strong>No discriminatory filters.</strong> Filtering by age, nationality, gender or a photograph is unlawful in the EU. "Native speaker" in an advert is a well-known trap — the lawful phrasing is a required proficiency level such as C1.</li>
+  </ul>
+  <div id="q6"></div>
+</section>
+
+<section>
+  <h2>Before moving on</h2>
+  <div class="note">
+    <p>You should be able to write a four-block Boolean string from memory, write a Google X-ray string from memory, explain why AND binds tighter than OR, draft a 100-word outreach message with all seven elements, quote a realistic response rate, and name the GDPR constraint on talent pools. Extra reps: <a href="labs-more.html">craft and job labs</a>.</p>
+  </div>
+</section>
+
+<div class="pager">
+  <a class="btn" href="ats.html"><span class="lbl">Chapter 4</span>&larr; ATS and Workday</a>
+  <a class="btn btn-go" href="roles.html"><span class="lbl">Chapter 6</span>Roles to recognise &rarr;</a>
+</div>
+
+</main>
+</div>
+
+<script src="assets/engine.js?v=3"></script>
+<script src="assets/sheet.js?v=3"></script>
+<script src="assets/data.js?v=3"></script>
+<script src="assets/course.js?v=3"></script>
+<script>
+Quiz.mount("q1", {
+  title: "Check yourself", lessonId: "src.logic",
+  items: [
+    { q: "What does <code>python OR java AND dublin</code> actually return?",
+      opts: ["Python or Java developers in Dublin", "Everyone who mentions Python anywhere, plus Java developers in Dublin — because AND binds tighter than OR", "Nothing", "Only Java developers"],
+      a: 1,
+      why: "<b>AND binds tighter than OR</b>, so it reads as <em>python</em> OR <em>(java AND dublin)</em>. One pair of brackets fixes it: <code>(python OR java) AND dublin</code>. Bracket every OR group, every time, and this never happens." },
+    { q: "Which block of a four-block string do people most often leave out?",
+      opts: ["The job title", "The skill", "The NOT block — without it a search for recruiting-adjacent terms returns mostly other recruiters", "The location"],
+      a: 2,
+      why: "<b>The exclusion block.</b> Recruiters, students and interns describe themselves using exactly the same keywords as the people being searched for. Three exclusions clean up most of the noise." },
+    { q: "Your string returns 3 perfect people. A colleague's returns those 3 plus 15 irrelevant ones. Whose is better?",
+      opts: ["Hers, obviously", "It depends — if hers is excluding a good fourth person you will never know, and skimming 15 bad profiles costs half a minute", "The colleague's, always", "They are the same"],
+      a: 1,
+      why: "<b>The costs are asymmetric.</b> A false positive costs thirty seconds; a false negative costs a candidate you never learn about. That is why NOT is reserved for obvious noise and why slightly wide beats slightly narrow." }
+  ]
+});
+
+Quiz.mount("q3", {
+  title: "Check yourself", lessonId: "src.where",
+  items: [
+    { q: "The free X-ray pattern you should type from memory starts with:",
+      opts: ["linkedin.com search", "site:linkedin.com/in plus the Boolean", "Chrome extension", "Workday"],
+      a: 1, why: "<b>Google’s site: operator.</b> Google uses - not NOT." },
+    { q: "Why not list LinkedIn Recruiter as professional experience?",
+      opts: ["It is too common", "You will not have a licence while job hunting unless you have used it at work", "It is obsolete", "Boolean does not work there"],
+      a: 1, why: "<b>Do not claim a tool you have not run a search in.</b>" }
+  ]
+});
+Quiz.mount("q5", {
+  title: "Check yourself", lessonId: "src.measure",
+  items: [
+    { q: "Generic outreach reply rate vs a specific message?",
+      opts: ["Both 40%", "Generic 5–15%, specific 25–40% — the gap is the message", "Generic is higher", "Cannot be measured"],
+      a: 1, why: "<b>The message is the lever, not the list size.</b>" },
+    { q: "A 40% reply rate that is all polite declines means:",
+      opts: ["Success", "A targeting problem — they are polite, not interested", "Need more follow-ups", "The string is perfect"],
+      a: 1, why: "<b>Positive response rate is the one that matters.</b>" }
+  ]
+});
+
+BoolBuilder.mount("bb1", {
+  lessonId: "src.build",
+  facets: [
+    { key: "title", label: "Job title", options: ["backend", "software engineer", "developer"] },
+    { key: "skill", label: "Skill", options: ["python", "django"] },
+    { key: "place", label: "Location", options: ["dublin", "berlin"] },
+    { key: "out", label: "Exclude", mode: "NOT", options: ["recruiter", "student", "intern", "manager"] }
+  ],
+  profiles: [
+    { name: "R\u00f3is\u00edn M.", text: "Senior Backend Engineer at a fintech in Dublin \u2014 Python, Django, Postgres, 7 years", good: true },
+    { name: "Tom\u00e1s B.", text: "Backend developer in Dublin \u2014 Python and AWS, 5 years, open to new roles", good: true },
+    { name: "Aoife K.", text: "Software engineer in Dublin working in Python on payments platforms, 6 years", good: true },
+    { name: "Niamh D.", text: "Developer based in Dublin \u2014 Python and Flask, 4 years at a scale-up", good: true },
+    { name: "Cathal F.", text: "Technical Recruiter in Dublin, hiring backend and Python engineers", flag: "a recruiter, not a candidate" },
+    { name: "Se\u00e1n O.", text: "Computer science student in Dublin learning Python, seeking an internship", flag: "a student" },
+    { name: "Lukas W.", text: "Backend Engineer in Berlin \u2014 Python, 6 years", flag: "wrong city" },
+    { name: "Maeve C.", text: "Frontend developer in Dublin \u2014 React and TypeScript", flag: "wrong skill" },
+    { name: "Darragh L.", text: "Data scientist in Dublin \u2014 Python, pandas, scikit-learn", flag: "not an engineering role" },
+    { name: "Orla S.", text: "Backend Engineer in Dublin \u2014 Java and Spring, 8 years", flag: "wrong language" },
+    { name: "Padraig H.", text: "Python intern in Dublin at a startup", flag: "too junior" },
+    { name: "Ciara N.", text: "Engineering Manager in Dublin \u2014 previously backend Python, 10 years", flag: "no longer hands-on" }
+  ]
+});
+
+Drill.mount("d4", {
+  id: "src-msg", lessonId: "src.outreach", seconds: 120,
+  title: "Write the message",
+  prompt: "Write outreach to R\u00f3isn\u00edn M. \u2014 Senior Backend Engineer in Dublin, Python and Django, seven years, spoke at PyCon Ireland on breaking up a monolith. The role: Backend Engineer at Kestrel Pay in Dublin, Python and Postgres, service migration, \u20ac75\u201390k, hybrid two days. Under 120 words. Two minutes.",
+  model: "<p><strong>Subject: Your PyCon talk \u2014 and a migration at Kestrel Pay</strong></p><p>\u201cHi R\u00f3is\u00edn,</p><p>I watched your PyCon Ireland talk on breaking the monolith apart \u2014 the bit about keeping the old read path alive during the cutover was the part I had not heard anyone talk about honestly.</p><p>We\u2019re hiring a backend engineer at Kestrel Pay in Dublin to do more or less that migration: Python and Postgres, pulling payments out of a monolith. \u20ac75\u201390k, hybrid two days a week.</p><p>Worth twenty minutes to hear how it is actually structured? And if the timing is wrong, no problem at all \u2014 I can send you the spec to keep for later.</p><p>Nidhi\u201d</p><p class=\"tiny\">Check it against the seven elements: one real specific detail (and a specific detail <em>within</em> the talk, which is the part that proves you watched it), the company named, the range stated, the location and pattern, a twenty-minute ask, an explicit easy no, and 103 words. The subject line does work too \u2014 it is about them, not about an opportunity.</p>"
+});
+
+Calc.mount("c5", {
+  title: "Did the new message help?",
+  fields: [
+    { key: "sentA", label: "Old message: sent", value: 80 },
+    { key: "repA", label: "Old message: replies", value: 9 },
+    { key: "sentB", label: "New message: sent", value: 60 },
+    { key: "repB", label: "New message: replies", value: 19 },
+    { key: "posB", label: "New message: interested replies", value: 11 }
+  ],
+  outputs: [
+    { label: "Old reply rate", calc: function (v) { return v.sentA ? Math.round(v.repA / v.sentA * 100) + "%" : "\u2014"; } },
+    { label: "New reply rate", calc: function (v) { return v.sentB ? Math.round(v.repB / v.sentB * 100) + "%" : "\u2014"; } },
+    { label: "Positive rate", calc: function (v) { return v.sentB ? Math.round(v.posB / v.sentB * 100) + "%" : "\u2014"; } },
+    { label: "Messages per interested reply", calc: function (v) { return v.posB ? (Math.round(v.sentB / v.posB * 10) / 10) : "\u2014"; } }
+  ],
+  commentary: function (v) {
+    var a = v.sentA ? v.repA / v.sentA : 0;
+    var b = v.sentB ? v.repB / v.sentB : 0;
+    var small = v.sentB < 30 || v.sentA < 30;
+    var dir = b > a
+      ? "The new message replies at " + Math.round(b * 100) + "% against " + Math.round(a * 100) + "%."
+      : "The new message is not beating the old one yet.";
+    var caveat = small
+      ? " <strong>But the samples are small.</strong> At these volumes a handful of replies either way swings the rate by ten points, so this is a signal to keep going, not a result to present."
+      : " At these volumes the difference is worth acting on.";
+    var pos = v.repB ? " Of the replies, " + Math.round(v.posB / v.repB * 100) + "% were actually interested \u2014 and that is the number to report, because a high reply rate made entirely of polite declines is a targeting problem, not a success." : "";
+    return "<strong>" + dir + "</strong>" + caveat + pos;
+  }
+});
+
+Quiz.mount("q6", {
+  title: "Check yourself", lessonId: "src.ethics",
+  items: [
+    { q: "You find 200 good profiles and wants to save their names and headlines into a spreadsheet to work through. Is that fine?",
+      opts: ["Yes, the profiles are public", "No — bulk-collecting profile data into a personal file breaches LinkedIn's terms and creates a database with no lawful basis", "Only if you delete it later", "Only with a Recruiter licence"],
+      a: 1,
+      why: "<b>Public does not mean free to collect.</b> Looking is fine; building a database is processing. Work from the platform, and record people in the company's ATS once there has been contact \u2014 which is also where a deletion request can actually be honoured." },
+    { q: "A job advert says \u201cnative English speaker\u201d. What is wrong with it?",
+      opts: ["Nothing", "It is indirect nationality discrimination in the EU — the lawful phrasing is a proficiency level such as C1", "It is too vague", "It should say fluent"],
+      a: 1,
+      why: "<b>\u201cNative speaker\u201d is a well-known trap.</b> It filters by nationality rather than ability. State the level the job actually needs \u2014 C1, or \u201cable to run a client meeting in German\u201d \u2014 which is both lawful and more useful." },
+    { q: "Why include the salary range in outreach?",
+      opts: ["It is friendly", "It saves both sides time, raises reply rates, and from June 2026 the EU Pay Transparency Directive makes pay information an obligation", "It is required by LinkedIn", "It is not advisable"],
+      a: 1,
+      why: "<b>All three reasons.</b> The directive must be in national law by June 2026, and it also bans asking about salary history. Already working this way is a small, concrete piece of evidence that you follow European employment developments." }
+  ]
+});
+
+Course.init({ id: "sourcing" });
+</script>
+</body>
+</html>

@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Syllabus — Nidhi Tiwari</title>
+<style>
+  :root {
+    --ink: #1c1917;
+    --muted: #4b4540;
+    --line: #d9d0c3;
+    --paper: #f4efe6;
+    --sheet: #fffdf8;
+    --serif: "Iowan Old Style", Palatino, "Palatino Linotype", Georgia, serif;
+    --sans: "Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    color: var(--ink);
+    background: var(--paper);
+    font-family: var(--sans);
+    font-size: 12.5px;
+    line-height: 1.32;
+  }
+  a { color: inherit; }
+  .screen-bar {
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 12px; padding: 10px 18px;
+    background: #fffdf8; border-bottom: 1px solid var(--line);
+  }
+  .screen-bar a, .screen-bar button {
+    font: inherit; font-size: 13px; cursor: pointer;
+    border: 1px solid var(--line); background: #fff;
+    border-radius: 999px; padding: 6px 12px; text-decoration: none;
+  }
+  .screen-bar button.go {
+    background: #1e4d38; color: #fff; border-color: #1e4d38;
+  }
+  .page {
+    width: 210mm;
+    margin: 18px auto 40px;
+    background: var(--sheet);
+    border: 1px solid var(--line);
+    box-shadow: 0 18px 50px rgba(40, 32, 20, 0.08);
+    padding: 8mm 9mm 7mm;
+  }
+  header.hero {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 10px;
+    align-items: end;
+    padding-bottom: 6px;
+    margin-bottom: 6px;
+    border-bottom: 3px solid #1e4d38;
+  }
+  .kicker {
+    margin: 0 0 3px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-size: 9.5px;
+    font-weight: 700;
+    color: #1e4d38;
+  }
+  h1 {
+    font-family: var(--serif);
+    font-size: 23px;
+    line-height: 1;
+    margin: 0 0 4px;
+    letter-spacing: -0.02em;
+  }
+  .lede { margin: 0; color: var(--muted); max-width: 46em; }
+  .meta {
+    text-align: right;
+    background: #1e4d38;
+    color: #f4faf6;
+    border-radius: 8px;
+    padding: 8px 11px;
+    min-width: 168px;
+  }
+  .meta b { display: block; font-family: var(--serif); font-size: 15px; }
+  .meta span { display: block; font-size: 11px; opacity: 0.88; }
+
+  .protect {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
+    margin: 0 0 6px;
+  }
+  .protect div {
+    border-radius: 8px;
+    padding: 7px 8px 6px;
+    color: #1c1917;
+  }
+  .protect b { display: block; font-size: 12px; }
+  .protect span { display: block; font-size: 11px; color: #3f3a36; }
+  .c-green { background: #9fd4b3; }
+  .c-gold { background: #f0c65a; }
+  .c-blue { background: #9ec4e0; }
+  .c-rose { background: #eba396; }
+
+  .band {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin: 1px 0 4px;
+    color: #1e4d38;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
+    margin-bottom: 5px;
+  }
+  .card {
+    border-radius: 8px;
+    padding: 6px 7px 7px;
+    min-height: 0;
+    break-inside: avoid;
+  }
+  .card.wide { grid-column: span 2; }
+  .card h2 {
+    font-family: var(--serif);
+    font-size: 14px;
+    line-height: 1.1;
+    margin: 0 0 5px;
+  }
+  .num {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 1px 6px;
+    border-radius: 99px;
+    margin-bottom: 3px;
+    background: rgba(255,255,255,0.55);
+  }
+  .chips { display: flex; flex-wrap: wrap; gap: 3px; }
+  .chips i {
+    font-style: normal;
+    font-size: 10px;
+    line-height: 1.2;
+    background: rgba(255,255,255,0.78);
+    border: 1px solid rgba(28,25,23,0.08);
+    border-radius: 99px;
+    padding: 1px 6px;
+  }
+  .g { background: #b7e0c6; }
+  .y { background: #f3d27a; }
+  .b { background: #b4d4ec; }
+  .r { background: #f0b8b0; }
+  .p { background: #d4bce8; }
+  .t { background: #9fd9d0; }
+  .n { background: #e4d6b8; }
+
+  .foot {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 5px;
+    margin-top: 5px;
+  }
+  .foot .box {
+    border-radius: 8px;
+    padding: 7px 9px;
+  }
+  .foot h3 {
+    font-family: var(--serif);
+    font-size: 13.5px;
+    margin: 0 0 3px;
+  }
+  .foot p { margin: 0; font-size: 11.5px; color: #3f3a36; }
+  .rule { background: #1c1917; color: #f6f1e8; }
+  .rule p { color: #ece6da; }
+  .rule h3 { color: #f6edd9; }
+
+  .hint { text-align: center; color: #7a736b; font-size: 12px; margin: 8px 0 24px; }
+
+  @media (max-width: 860px) {
+    .page { width: auto; min-height: 0; margin: 10px; padding: 16px; }
+    .protect, .grid, .foot, header.hero { grid-template-columns: 1fr 1fr; }
+    .card.wide { grid-column: span 2; }
+    .meta { text-align: left; }
+  }
+  @media print {
+    .screen-bar, .hint { display: none !important; }
+    body { background: #fff; }
+    .page {
+      width: auto; min-height: 0; margin: 0; padding: 0;
+      border: 0; box-shadow: none;
+    }
+    @page { size: A4 portrait; margin: 8mm; }
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<div class="screen-bar">
+  <div>
+    <a href="index.html">Course</a>
+    <a href="../index.html">The plan</a>
+  </div>
+  <button class="go" type="button" onclick="window.print()">Print this page</button>
+</div>
+
+<article class="page">
+  <header class="hero">
+    <div>
+      <p class="kicker">Syllabus · one page · Oct 2026 – Jan 2027</p>
+      <h1>Talent Acquisition Partner — Europe.</h1>
+      <p class="lede">Nidhi Satish Tiwari. Every topic the course covers, in order. Pin it up. Tick as you go. The lessons live in the course; this sheet is the map.</p>
+    </div>
+    <div class="meta">
+      <b>Self-paced</b>
+      <span>Excel first, then the job</span>
+      <span>Pin it. Tick as you go.</span>
+    </div>
+  </header>
+
+  <div class="protect">
+    <div class="c-green"><b>1 · The workbook</b><span>A live Excel file you can open in an interview</span></div>
+    <div class="c-blue"><b>2 · Power BI</b><span>One published recruiting page, not a certificate</span></div>
+    <div class="c-gold"><b>3 · Boolean</b><span>Strings you can write without notes</span></div>
+    <div class="c-rose"><b>4 · The roles</b><span>Enough technology to run an intake meeting</span></div>
+  </div>
+
+  <p class="band">1 · Excel</p>
+  <div class="grid">
+    <section class="card g">
+      <div class="num">1.1</div>
+      <h2>Foundations</h2>
+      <div class="chips">
+        <i>The grid</i><i>Data types</i><i>Dates that subtract</i><i>Operators</i><i>$A$1 vs A1</i><i>Tables</i><i>Errors</i><i>Shortcuts</i><i>Number formats</i>
+      </div>
+    </section>
+    <section class="card g">
+      <div class="num">1.2</div>
+      <h2>Logic and counting</h2>
+      <div class="chips">
+        <i>IF / IFS</i><i>AND / OR</i><i>IFERROR</i><i>COUNT family</i><i>COUNTIFS</i><i>SUMIFS</i><i>AVERAGEIFS</i><i>Rates that survive zero</i>
+      </div>
+    </section>
+    <section class="card g">
+      <div class="num">1.3</div>
+      <h2>Lookups and text</h2>
+      <div class="chips">
+        <i>XLOOKUP</i><i>INDEX / MATCH</i><i>VLOOKUP to read</i><i>TRIM CLEAN</i><i>LEFT RIGHT MID</i><i>TEXTJOIN</i><i>FILTER</i><i>UNIQUE</i>
+      </div>
+    </section>
+    <section class="card g">
+      <div class="num">1.4</div>
+      <h2>Analysis</h2>
+      <div class="chips">
+        <i>Sort &amp; filter</i><i>SUBTOTAL</i><i>Duplicates</i><i>PivotTables</i><i>Conditional format</i><i>Charts</i><i>Power Query</i><i>Dashboard layout</i>
+      </div>
+    </section>
+    <section class="card y wide">
+      <div class="num">1.5 · the portfolio</div>
+      <h2>The Ferra dashboard — rebuild it yourself</h2>
+      <div class="chips">
+        <i>Source tabs as Tables</i><i>Crosswalks</i><i>Filter Engine</i><i>* and &gt;0 criteria</i><i>Match flags &amp; ranks</i><i>Executive Summary</i><i>Role Explorer</i><i>Headcount vs flows</i><i>Funnel conversions</i><i>Source of hire</i><i>TAT &amp; aging</i><i>Interviews</i><i>Attrition</i><i>Insights</i><i>Notes &amp; Method</i>
+      </div>
+    </section>
+    <section class="card n">
+      <div class="num">1.6</div>
+      <h2>Function list</h2>
+      <div class="chips">
+        <i>~90 functions</i><i>Runnable against Asha &amp; Ben</i><i>Lookup when stuck</i>
+      </div>
+    </section>
+    <section class="card n">
+      <div class="num">∞</div>
+      <h2>Sandbox</h2>
+      <div class="chips">
+        <i>Locks off</i><i>Same six people</i><i>Try anything</i>
+      </div>
+    </section>
+  </div>
+
+  <p class="band">2–5 · The numbers and the craft</p>
+  <div class="grid">
+    <section class="card b">
+      <div class="num">2</div>
+      <h2>Power BI</h2>
+      <div class="chips">
+        <i>Why not only Excel</i><i>Power Query</i><i>Import vs DirectQuery</i><i>Star schema</i><i>Semantic model</i><i>Measures vs columns</i><i>Filter context</i><i>DAX</i><i>CALCULATE</i><i>DIVIDE</i><i>Report canvas</i><i>Drill-through</i><i>Service &amp; refresh</i><i>Gateway</i><i>RLS</i><i>Sensitivity labels</i><i>Performance</i><i>Fabric vocabulary</i><i>Interview cases</i>
+      </div>
+    </section>
+    <section class="card y">
+      <div class="num">3</div>
+      <h2>Recruiting metrics</h2>
+      <div class="chips">
+        <i>The funnel</i><i>Time to fill ≠ hire</i><i>Quality of hire</i><i>Cost per hire</i><i>Source of hire</i><i>Acceptance vs joining</i><i>Diversity without theatre</i><i>A scorecard</i>
+      </div>
+    </section>
+    <section class="card r">
+      <div class="num">4</div>
+      <h2>ATS and Workday</h2>
+      <div class="chips">
+        <i>Requisition to hire</i><i>Objects</i><i>Dispositions</i><i>Greenhouse / Lever</i><i>Stage hygiene</i><i>Why funnels break</i><i>GDPR in the ATS</i>
+      </div>
+    </section>
+    <section class="card t">
+      <div class="num">5</div>
+      <h2>Sourcing</h2>
+      <div class="chips">
+        <i>AND OR NOT</i><i>Boolean strings</i><i>X-ray search</i><i>Where people actually are</i><i>Outreach that gets replies</i><i>Measuring a channel</i><i>What not to scrape</i>
+      </div>
+    </section>
+  </div>
+
+  <p class="band">6–10 · The job, then the interview</p>
+  <div class="grid">
+    <section class="card p">
+      <div class="num">6</div>
+      <h2>Roles to recognise</h2>
+      <div class="chips">
+        <i>Frontend / backend</i><i>Full stack</i><i>DevOps / SRE</i><i>Data roles</i><i>ML / AI</i><i>Security</i><i>Java ≠ JavaScript</i><i>Your manufacturing ground</i>
+      </div>
+    </section>
+    <section class="card b">
+      <div class="num">7</div>
+      <h2>Europe, GDPR, pay</h2>
+      <div class="chips">
+        <i>IE / NL / DE / UK</i><i>Visa floors</i><i>Notice &amp; probation</i><i>Works councils</i><i>Lawful basis</i><i>Retention</i><i>The European CV</i>
+      </div>
+    </section>
+    <section class="card y">
+      <div class="num">8</div>
+      <h2>Strategic TA</h2>
+      <div class="chips">
+        <i>Partner, not order-taker</i><i>Workforce planning</i><i>The intake meeting</i><i>Salary bands</i><i>EVP</i><i>The hard conversation</i>
+      </div>
+    </section>
+    <section class="card r">
+      <div class="num">9</div>
+      <h2>AI, used carefully</h2>
+      <div class="chips">
+        <i>Where it helps</i><i>Job descriptions</i><i>What never goes in</i><i>The interview answer</i><i>IBM course, after the dashboards</i>
+      </div>
+    </section>
+    <section class="card t wide">
+      <div class="num">10</div>
+      <h2>Interview rehearsal</h2>
+      <div class="chips">
+        <i>Your story in one paragraph</i><i>STAR</i><i>Twenty questions with a timer</i><i>Why Europe / why us</i><i>Salary: €70–80k IE</i><i>The manufacturing-to-software gap</i><i>The 20-engineer case</i><i>Questions you ask them</i>
+      </div>
+    </section>
+    <section class="card n wide">
+      <div class="num">Proof</div>
+      <h2>Two projects, both labelled as projects</h2>
+      <div class="chips">
+        <i>Ferra HR dashboard, rebuilt by your</i><i>Hire 20 engineers in Dublin / Amsterdam / Berlin</i><i>Dummy data only</i>
+      </div>
+    </section>
+  </div>
+
+  <div class="foot">
+    <div class="box n">
+      <h3>Not on this syllabus</h3>
+      <p>VBA, CIPD, SHRM, payroll, Tally, US employment law, prompt-engineering certificates, and PL-300 before the portfolio exists. Real skills. The wrong first four months.</p>
+    </div>
+    <div class="box rule">
+      <h3>The rule that does not bend</h3>
+      <p>No real candidate name, CV, phone, pay or interview note goes into a practice file, a portfolio, or a public AI tool.</p>
+    </div>
+  </div>
+</article>
+
+<p class="hint">One A4 portrait page. Print with background graphics turned on so the colours come through.</p>
+
+</body>
+</html>

@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The dashboard project — Nidhi's course</title>
+<link rel="stylesheet" href="assets/course.css?v=3">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand"><a href="index.html">Nidhi Tiwari</a><span>Portfolio · the Ferra dashboard</span></div>
+  <div class="top-actions">
+    <div class="pbar"><i></i></div>
+    <span class="pnum"></span>
+    <a class="btn" href="index.html">Course home</a>
+  </div>
+</div>
+
+<div class="layout">
+<nav class="side" id="sideNav"></nav>
+<main>
+
+<p class="kicker">The portfolio piece · after Excel 1.4</p>
+<h1>Build the HR Recruitment &amp; Attrition dashboard yourself.</h1>
+<p class="lead">A Cursor-built workbook already exists with this exact shape. That file is the spec, not the portfolio. In an interview you have to open a file you can defend cell by cell. This chapter is the build: every sheet, every formula, why it is there, and how to type it. You repeat the same steps on your Ferra workbooks on your own laptop. Real candidate names never come onto this website.</p>
+
+<div class="warn">
+  <p><strong>Two files, two rules.</strong> On this page you practise on a tiny invented plant — six requisitions, three roles, three months. On your laptop you rebuild the full Ferra dashboard from <em>HR Dashboard - Rec-Nidhi</em> and the Outlook calendar export. You do not paste those names, phone numbers, salaries or CVs into this course, into a public AI tool, or into a portfolio you email. The interviewer sees the structure and the formulas. The people stay at work.</p>
+</div>
+
+<section class="lesson" data-lesson="project.spec" data-n="01">
+  <p class="goal">What “done” looks like</p>
+  <h3>The workbook you are copying</h3>
+  <p>The finished file is an Excel workbook in two colours of tab. Navy tabs are what a director reads. Grey tabs are the source. One hidden sheet in the middle does the matching so the director's page can be all formulas.</p>
+  <table class="t wrap">
+    <thead><tr><th>Layer</th><th>Sheets</th><th>Rule</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Source data</strong> (grey)</td><td>Monthly Snapshot, Requisition Tracker, Role Funnel YTD, Monthly Role Funnel, Resignations, Upcoming Joiners, Time to Fill, Interview Log, and the other calendar sheets</td><td>Copied from your existing files. One row per fact. Turned into Tables. No charts here.</td></tr>
+      <tr><td><strong>Filter Engine</strong> (hidden)</td><td>One sheet</td><td>Pick lists, criteria, and a 1/0 flag on every requisition and interview. Nothing a human reads.</td></tr>
+      <tr><td><strong>Presentation</strong> (navy)</td><td>Executive Summary, Role Explorer, Headcount &amp; Movement, Recruitment Overview, Funnel &amp; Conversions, Source Analysis, Role Performance, Department Analysis, TAT &amp; Aging, Interview Effectiveness, Weekly &amp; Monthly Activity, Attrition Analysis, Insights &amp; Actions, Notes &amp; Method</td><td>No typed numbers. Every card is a formula. Charts sit on the same tables they describe.</td></tr>
+    </tbody>
+  </table>
+  <figure class="ill">
+    <svg viewBox="0 0 640 168" role="img" aria-label="Source sheets feed a hidden Filter Engine which feeds the presentation tabs">
+      <g font-family="system-ui" font-size="11">
+        <rect x="8" y="20" width="170" height="128" fill="#fffdf9" stroke="#e4ddd2"/>
+        <text x="18" y="40" fill="#57534e">Source (grey tabs)</text>
+        <text x="18" y="60" fill="#1c1917">Monthly Snapshot</text>
+        <text x="18" y="78" fill="#1c1917">Requisition Tracker</text>
+        <text x="18" y="96" fill="#1c1917">Role Funnel YTD</text>
+        <text x="18" y="114" fill="#1c1917">Interview Log</text>
+        <text x="18" y="132" fill="#57534e">+ resignations, TAT…</text>
+        <path d="M178 84 h28" stroke="#1e4d38" marker-end="url(#ap)"/>
+        <rect x="212" y="44" width="160" height="80" fill="#f4f0e7" stroke="#e4ddd2"/>
+        <text x="222" y="68" fill="#8a5a12" font-weight="650">Filter Engine</text>
+        <text x="222" y="86" fill="#57534e">hidden</text>
+        <text x="222" y="104" fill="#57534e">criteria + ranks</text>
+        <path d="M372 84 h28" stroke="#1e4d38" marker-end="url(#ap)"/>
+        <rect x="406" y="16" width="226" height="136" fill="#e7f0ea" stroke="#c9ddd0"/>
+        <text x="416" y="38" fill="#1e4d38" font-weight="650">Presentation</text>
+        <text x="416" y="58" fill="#1c1917">Executive Summary</text>
+        <text x="416" y="76" fill="#1c1917">Role Explorer</text>
+        <text x="416" y="94" fill="#1c1917">Funnel · Source · TAT</text>
+        <text x="416" y="112" fill="#1c1917">Attrition · Insights</text>
+        <text x="416" y="130" fill="#57534e">all formulas</text>
+      </g>
+      <defs><marker id="ap" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 z" fill="#1e4d38"/></marker></defs>
+    </svg>
+    <figcaption>Data flows one way. If a number on a navy tab cannot be traced to a grey tab, it does not belong.</figcaption>
+  </figure>
+  <div class="note">
+    <p><strong>Why we built it this way, not as one giant “Dashboard” sheet.</strong> A single sheet with everything on it cannot answer “show me CAM in March” without tearing the layout apart. Splitting source from presentation means you can paste a new month into the grey tabs, refresh, and the navy tabs move. The hidden engine is how two drop-downs can drive sixteen cards at once. That is the sentence you give when someone asks why it is not just a PivotTable.</p>
+  </div>
+</section>
+
+<section class="lesson" data-lesson="project.files" data-n="02">
+  <p class="goal">Know which file is which</p>
+  <h3>Where every grey tab comes from</h3>
+  <p>Your laptop already holds the ingredients. You copy them into a new workbook named something you can say out loud: <em>HR Recruitment Dashboard 2026 — Nidhi Tiwari.xlsx</em>. You never overwrites the originals.</p>
+  <table class="t wrap">
+    <thead><tr><th>New sheet name</th><th>Copy from</th><th>One row equals</th></tr></thead>
+    <tbody>
+      <tr><td>Monthly Snapshot</td><td>The Data sheet of the Rec-Nidhi workbook</td><td>A month: headcount, raised, closed, joiners, exits, notice, to-be-joined. Lower down: role blocks for open / closed / joinees.</td></tr>
+      <tr><td>Requisition Tracker</td><td>The Updated sheet</td><td>One requisition: openings, target days, actual days, sourced through offers, source channel, hiring status.</td></tr>
+      <tr><td>Role Funnel YTD</td><td>The Jan-to-Aug / Jan-to-Sep sheet</td><td>One role for the year: openings, the whole funnel, joined, awaiting joining, declines, drop-offs.</td></tr>
+      <tr><td>Monthly Role Funnel</td><td>The Month Wise sheet</td><td>One block per month, stages down the side, roles across.</td></tr>
+      <tr><td>Resignations</td><td>Employee resignation Monthwise</td><td>One leaver: department, tenure, reason, regrettable flag, status (Left / NP).</td></tr>
+      <tr><td>Upcoming Joiners</td><td>Upcoming Joinnes (keep the misspelling in a note, not in the tab name)</td><td>One accepted person with a future start date.</td></tr>
+      <tr><td>Time to Fill</td><td>Open &amp; Close</td><td>Target and actual days by position.</td></tr>
+      <tr><td>Interview Log</td><td>Built from the Outlook export (NISH.CSV)</td><td>One scheduled assessment: date, candidate first name, role, round, mode, recruiter, canceled Yes/No, panel.</td></tr>
+    </tbody>
+  </table>
+  <p>The calendar export also yields Candidate Pipeline, Interviewer Load, Calendar Roles, Interview Monthly, Induction Joiners and Calendar Activities. Same rule: one fact per row, then a Table.</p>
+  <div class="gold">
+    <p><strong>First action on every copied sheet:</strong> click the header row, <kbd>Ctrl</kbd>+<kbd>T</kbd>, “My table has headers”, name the Table in Table Design. <code>Reqs</code>, <code>FunnelYTD</code>, <code>Snap</code>, <code>Leavers</code>, <code>ILog</code>. Formulas will use those names. If you skip this, every later SUMIFS will break the first time you insert a row.</p>
+  </div>
+</section>
+
+<section class="lesson" data-lesson="project.clean" data-n="03">
+  <p class="goal">The unglamorous hour that saves the file</p>
+  <h3>Cleaning, before a single chart</h3>
+  <p>The source workbooks were built for reading, not for formulas. Three things always break a dashboard if you skip them.</p>
+  <ol class="steps">
+    <li><strong>One spelling per role.</strong> The snapshot says Deburrer in one block and Deburer in another. Upcoming Joiners says “SCM -Lead” while the tracker says “Sr. Engineer - SCM”. You make a small sheet called <em>Crosswalk</em> with three columns: Requisition name, Snapshot name, Calendar name. INDEX/MATCH from there. You do not “fix” the source by overwriting history — you map it.</li>
+    <li><strong>Numbers that look like numbers.</strong> Left-aligned days-to-fill are text. <code>=VALUE()</code> or Power Query Change Type, then replace the column. SUM of text is a silent undercount. You already knows this from chapter 1.1.</li>
+    <li><strong>Totals that actually total.</strong> On the real file, several SUM rows stopped short of the last role and the last months, so they under-counted. You rewrite those totals as <code>=SUM(B14:M26)</code> covering the whole block, or you delete the total row and lets your presentation sheet total instead. A wrong total on a source sheet poisons every card above it.</li>
+  </ol>
+  <p>Two more corrections the original build had to make, so you make them on purpose:</p>
+  <ul class="clean">
+    <li>On Time to Fill, some Actual Days cells pointed at columns that do not exist and showed zero for still-open roles. Blank them. Zero days is a lie; a blank is “not recorded.”</li>
+    <li>Never invent a benchmark, a target, or a “typical manufacturing rate” to fill a gap. If the source cannot support a metric, the cell is an em dash <code>—</code>, not a guess. That is why the finished file looks honest in an interview.</li>
+  </ul>
+  <div id="q3"></div>
+</section>
+
+<section class="lesson" data-lesson="project.engine" data-n="04">
+  <p class="goal">The sheet nobody sees and everybody depends on</p>
+  <h3>Step: build the Filter Engine</h3>
+  <p>Role Explorer has two drop-downs: a role and a month. Every card must follow both. Excel cannot put a drop-down inside SUMIFS directly, so a hidden sheet turns the two picks into <em>criteria</em> the COUNTIFS family understands.</p>
+  <h4>Why these two formulas exist</h4>
+  <p><code>COUNTIFS</code> has no “ignore this filter” switch. The trick is to feed it a criterion that matches everything when the user picks All.</p>
+  <table class="t wrap">
+    <thead><tr><th>Pick</th><th>What we store in a cell</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>Role = All roles</td><td><code>"*"</code></td><td><code>COUNTIF(range,"*")</code> matches every non-blank. The filter is off.</td></tr>
+      <tr><td>Role = CAM Programmer</td><td><code>"CAM Programmer"</code></td><td>Only that role matches.</td></tr>
+      <tr><td>Month = All months</td><td><code>">0"</code></td><td>Month numbers are 1–12. Greater than zero means every month.</td></tr>
+      <tr><td>Month = Mar</td><td><code>"=3"</code></td><td>Built with <code>"="&amp;INDEX(...)</code> so March is the number 3, not the text "Mar".</td></tr>
+    </tbody>
+  </table>
+  <pre>=IF(I2="All roles","*",I2)
+=IF(I4="All months",">0","="&amp;IFERROR(INDEX(F3:F14,MATCH(I4,E3:E14,0)),0))</pre>
+  <p>Then, on every requisition row, a match flag:</p>
+  <pre>=IF(AND(COUNTIF(Reqs[@Position], Engine!I3)&gt;0, COUNTIF(K2, Engine!I5)&gt;0), 1, 0)</pre>
+  <p>And a running rank of the matches, so the presentation sheet can pull “the 1st matching row, the 2nd…” with INDEX/MATCH:</p>
+  <pre>=IF(L2=1, SUM($L$2:L2), "")</pre>
+  <p>That running SUM is why the rank is 1, 2, 3 on the matching rows and blank on the rest. <code>MATCH(1, ranks, 0)</code> then finds the first match, <code>MATCH(2, ranks, 0)</code> the second.</p>
+  <h4>Try it on the practice plant</h4>
+  <p>Three roles, six requisitions. Column G is the month-number helper — the real file uses <code>=MONTH([@Raised])</code>. J2 is the role pick, J4 the month pick. Gold cells: the two criteria, then the match flags. Fill the flags down after the first one works.</p>
+  <div id="s4"></div>
+</section>
+
+<section class="lesson" data-lesson="project.exec" data-n="05">
+  <p class="goal">The page a director opens first</p>
+  <h3>Step: Executive Summary</h3>
+  <p>Eight cards across the top, then a role-and-month pair of drop-downs, then a monthly movement table with a combo chart (joiners and exits as columns, headcount as a line). Nothing on this sheet is typed.</p>
+  <table class="t wrap">
+    <thead><tr><th>Card</th><th>Formula, in English</th><th>Why this source, not another</th></tr></thead>
+    <tbody>
+      <tr><td>Headcount</td><td>The latest reported closing headcount on Monthly Snapshot</td><td>A stock. Summing months would triple-count people who stayed.</td></tr>
+      <tr><td>Joiners YTD</td><td><code>=SUM(Snap[Joiners])</code> across reported months</td><td>A flow. Summing is correct.</td></tr>
+      <tr><td>Exits YTD</td><td><code>=SUM(Snap[Exits])</code></td><td>Same.</td></tr>
+      <tr><td>Requisitions raised</td><td>Snapshot “open requisitions” row, summed</td><td>The headline the source itself presents. Role Funnel YTD will not always agree — Notes &amp; Method will say so, not a silent average of the two.</td></tr>
+      <tr><td>Positions closed</td><td>Snapshot closed row</td><td>Same honesty rule.</td></tr>
+      <tr><td>Offers released</td><td><code>=SUM(FunnelYTD[Offers])</code></td><td>Role Funnel YTD is the year-to-date role list.</td></tr>
+      <tr><td>Candidates sourced</td><td><code>=SUM(FunnelYTD[Sourced])</code></td><td>Same sheet, so yield is apples to apples.</td></tr>
+      <tr><td>Sourced to joined yield</td><td><code>=IFERROR(SUM(FunnelYTD[Joined])/SUM(FunnelYTD[Sourced]),"—")</code></td><td>DIVIDE-by-hand with a dash, never a #DIV/0! on a director's page.</td></tr>
+    </tbody>
+  </table>
+  <p>The four cards under the drop-downs — open positions, closed, joinees, upcoming — cannot use those summary rows, because the summary rows are not split by role and month. Flatten the snapshot role blocks on the Filter Engine: one row per role per month, three value columns, then:</p>
+  <pre>=SUMIFS(Engine[Open], Engine[Role], Engine!I12, Engine[MonthNum], Engine!I14)</pre>
+  <p>where I12 and I14 are the same All-versus-specific criteria trick. Upcoming joiners have a future date, not a month in the reporting period, so that card follows the role only.</p>
+  <div class="gold">
+    <p><strong>The disagreement you must not hide.</strong> On the real Ferra file, the snapshot's summary rows and the role blocks do not always add to the same number. The cards at the top read the summary. The drop-down cards read the blocks. Notes &amp; Method records the gap. Averaging them would be a lie, and an interviewer who knows the plant would catch it.</p>
+  </div>
+  <p>Monthly movement table: Month, Closing headcount, Raised, Closed, Joiners, Exits, Net change <code>=Joiners-Exits</code>, Serving notice, To be joined. Combo chart: clustered columns on Joiners and Exits, line on Closing headcount on a secondary axis. Title in a sentence: “Joiners versus exits, headcount as the line.”</p>
+  <div id="s5"></div>
+</section>
+
+<section class="lesson" data-lesson="project.explorer" data-n="06">
+  <p class="goal">The page that earns the drop-downs</p>
+  <h3>Step: Role Explorer</h3>
+  <p>This is the sheet you screen-shares. Two drop-downs at the top. Sixteen cards. A register of matching requisitions. A pipeline. Offer outcomes. Days-to-fill. The latest interviews. Every number recalculates when either pick changes.</p>
+  <h4>How a card follows both drop-downs</h4>
+  <p>Openings raised, from the tracker:</p>
+  <pre>=SUMIFS(Reqs[Openings], Reqs[Position], Engine!I3, Engine[ReqMonth], Engine!I5)</pre>
+  <p>I3 is <code>*</code> or a role. I5 is <code>&gt;0</code> or <code>=3</code>. ReqMonth is a helper column <code>=MONTH([@Raised])</code>.</p>
+  <p>Closed requisitions need a third criterion:</p>
+  <pre>=COUNTIFS(Reqs[Position], Engine!I3, Engine[ReqMonth], Engine!I5, Reqs[Status], "Close")</pre>
+  <p>Average actual days, ignoring blanks:</p>
+  <pre>=IFERROR(AVERAGEIFS(Reqs[ActualDays], Reqs[Position], Engine!I3, Engine[ReqMonth], Engine!I5, Reqs[ActualDays], "&gt;=0"), "—")</pre>
+  <p>Some cards <em>cannot</em> follow the month, because Role Funnel YTD is year-to-date only. Those cards — open at latest month, actually joined, awaiting joining, declines, drop-offs — SUMIFS on the role criterion alone. The footnote on the card says so. Hiding that would make March look like a year.</p>
+  <h4>Pulling the matching rows onto the page</h4>
+  <p>The register uses the rank column from the engine. For the first matching requisition's source channel:</p>
+  <pre>=IFERROR(INDEX(Reqs[Source], MATCH(1, Engine[ReqRank], 0)), "")</pre>
+  <p>Copy down with MATCH(2), MATCH(3)… Over-or-under target is a local formula on the pulled days:</p>
+  <pre>=IF(OR(E10="", F10=""), "", F10-E10)</pre>
+  <h4>The pipeline table</h4>
+  <p>Nine stages from the tracker: Sourced, Screening, Sent to HM, Shortlisted, 1st, 2nd, Final, Selected, Offers. Each row is a SUMIFS like the cards. Two extra columns:</p>
+  <pre>=IF($B$12=0, "—", B12/$B$12)     /* share of sourced */
+=IF(B11=0, "—", B12/B11)          /* step conversion */</pre>
+  <p>Bar chart on the Candidates column. Title: “Pipeline for the current selection.”</p>
+  <h4>Interviews, and the calendar name problem</h4>
+  <p>The tracker says “Sr. Engineer - SCM”. The calendar says “SCM”. A COUNTIFS on the raw strings returns zero and looks like nobody interviewed. The engine has a Calendar role column filled from the crosswalk. Empty must become a sentinel (“— no calendar role —”) so All-roles does not accidentally match blanks.</p>
+  <pre>=COUNTIFS(ILog[Role], Engine!I7, Engine[IvMonth], Engine!I5, ILog[Canceled], "No")</pre>
+  <p>Candidates interviewed are counted <em>once per role</em>, not once in the whole log. Two people can share a first name. A global unique count would merge them. On one role they are distinct; across all roles the higher count is the true one. Notes &amp; Method says this in one sentence.</p>
+  <div id="s6"></div>
+</section>
+
+<section class="lesson" data-lesson="project.headcount" data-n="07">
+  <p class="goal">Stocks are not flows</p>
+  <h3>Step: Headcount &amp; Movement</h3>
+  <p>This sheet exists because a director will add joiners and subtract exits and expect headcount to move by that amount — and on the real file, it does not. You report both, side by side, labelled.</p>
+  <table class="t wrap">
+    <thead><tr><th>Column</th><th>Formula</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>Opening headcount</td><td>Previous month's closing. First month: <code>=Closing-Joiners+Exits</code></td><td>The snapshot does not give an opening. This is the only honest reconstruction.</td></tr>
+      <tr><td>Joiners / Exits / Notice / To be joined</td><td>Live references to the snapshot row, e.g. <code>=Snap!C6</code></td><td>If next month's export updates the snapshot, this sheet follows.</td></tr>
+      <tr><td>Net change</td><td><code>=Joiners-Exits</code></td><td>A flow identity. Not forced to equal the headcount movement.</td></tr>
+      <tr><td>Closing</td><td>The snapshot's headcount cell. If that cell is zero, derive <code>=Opening+Joiners-Exits</code> and label the row “Derived.”</td><td>A zero headcount in a plant of hundreds is a missing export, not an empty factory.</td></tr>
+      <tr><td>Attrition % of opening</td><td><code>=IF(Opening=0,"—",Exits/Opening)</code></td><td>Standard monthly attrition. Annualising it would be a different metric; you do not mix them.</td></tr>
+    </tbody>
+  </table>
+  <p>The total row is labelled <em>Total, stocks at latest month</em> so nobody sums closing headcount across months. Line chart of closing headcount. Clustered columns of joiners and exits. Below: the Upcoming Joiners table as live references, not a paste.</p>
+  <div id="q7"></div>
+</section>
+
+<section class="lesson" data-lesson="project.funnel" data-n="08">
+  <p class="goal">Every rate named, with the arithmetic showing</p>
+  <h3>Step: Funnel &amp; Conversions</h3>
+  <p>Year-to-date stages from Role Funnel YTD, summed across roles. Each conversion row states the definition in a column next to the rate, so an interviewer can disagree with the definition instead of guessing it.</p>
+  <table class="t wrap">
+    <thead><tr><th>Conversion</th><th>Definition you write on the sheet</th></tr></thead>
+    <tbody>
+      <tr><td>Sourced to screened</td><td>Screened / Sourced</td></tr>
+      <tr><td>Screened to profiles sent</td><td>Sent to HM / Screened</td></tr>
+      <tr><td>Profiles sent to shortlisted</td><td>Shortlisted / Sent to HM</td></tr>
+      <tr><td>Screened to interviewed</td><td>1st round / Screened</td></tr>
+      <tr><td>Interview turnout</td><td>Interviews held / interviews scheduled (from the log, canceled = No)</td></tr>
+      <tr><td>Interviewed to selected</td><td>Selected / 1st round</td></tr>
+      <tr><td>Selected to offered</td><td>Offers / Selected</td></tr>
+      <tr><td>Offer acceptance</td><td>(Offers − offer declines) / Offers</td></tr>
+      <tr><td>Offer to join</td><td>Joined / Offers</td></tr>
+      <tr><td>Overall yield</td><td>Joined / Sourced</td></tr>
+    </tbody>
+  </table>
+  <pre>=IF(Sourced=0,"—",Screened/Sourced)
+=IF(Offers=0,"—",(Offers-Declines)/Offers)</pre>
+  <p>Horizontal bar of the YTD funnel. Then a monthly trend from Monthly Role Funnel — one row per month, stages as columns — with a line on Sourced and clustered columns on Offers and Joined.</p>
+  <p>Dropout view: roles with Backed &gt; 0 from the monthly funnel, plus Role Funnel YTD's decline and not-interested-after-selection columns. Sort descending. This is Eva's lesson at plant scale: acceptance is not joining.</p>
+  <div id="s8"></div>
+</section>
+
+<section class="lesson" data-lesson="project.source" data-n="09">
+  <p class="goal">Source of hire, not source of applicants</p>
+  <h3>Step: Source Analysis</h3>
+  <p>One table, grouped on the Requisition Tracker's Source column, names reproduced exactly — including ugly combined entries. You do not rename “Naukri / Referral” into two rows unless you can split the underlying requisitions.</p>
+  <p>For each source:</p>
+  <pre>=COUNTIFS(Reqs[Source], A2)
+=SUMIFS(Reqs[Openings], Reqs[Source], A2)
+=SUMIFS(Reqs[Sourced], Reqs[Source], A2)
+=SUMIFS(Reqs[Offers], Reqs[Source], A2)
+=IF(Offers=0,"—",Sourced/Offers)          /* sourced per offer */
+=IF(Sourced=0,"—",Offers/Sourced)        /* sourced to offer */
+=IFERROR(AVERAGEIFS(Reqs[ActualDays], Reqs[Source], A2, Reqs[ActualDays], "&gt;=0"), "—")</pre>
+  <p>Bar of openings or offers by source, not a pie. The column that matters in the interview is sourced-per-offer: a channel that sends volume without offers is the agency-fee lesson from Eva, measured.</p>
+</section>
+
+<section class="lesson" data-lesson="project.rest" data-n="10">
+  <p class="goal">The sheets that fill the rest of the story</p>
+  <h3>Step: Overview, Role Performance, Department, Weekly</h3>
+  <p>Four more navy tabs use the same engine. They exist so a director who is not looking at one role still has a page.</p>
+  <table class="t wrap">
+    <thead><tr><th>Sheet</th><th>What it shows</th><th>How, and why not another source</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Recruitment Overview</strong></td><td>Year cards (raised, closed, sourced, offers, joined) plus a month-by-month table of the same from the snapshot</td><td>YTD cards from Role Funnel YTD. Monthly rows from Monthly Snapshot. Combo chart: raised and closed as columns, joiners as a line. This is the “how was the year, month by month” page, not a second Role Explorer.</td></tr>
+      <tr><td><strong>Role Performance</strong></td><td>One row per role from Funnel YTD: openings, closed, sourced, selected, offers, joined, awaiting, declines, drop-offs, then closure rate, sourced-per-offer, yield</td><td><code>=IF(Openings=0,"—",Closed/Openings)</code> and <code>=IF(Offers=0,"—",Sourced/Offers)</code>. Sort by sourced-per-offer descending so the unhireable spec floats. Bar of yield, not a rainbow of every column.</td></tr>
+      <tr><td><strong>Department Analysis</strong></td><td>Snapshot role blocks rolled up by department via the crosswalk (Production, Quality, Maintenance, SCM, Design…)</td><td>Without the map, CNC and CAM would sit in different buckets every month because the snapshot spelling drifts. Joiners and exits for a department only where the snapshot actually splits them; otherwise the cell is an em dash.</td></tr>
+      <tr><td><strong>Weekly &amp; Monthly Activity</strong></td><td>Calendar events by week, interviews by month, induction joiners</td><td>COUNTIFS on the calendar sheets. A week with twenty assessments and two offers is a bottleneck page, not a recruiting-success page — label it as load, not as funnel.</td></tr>
+    </tbody>
+  </table>
+  <p>Role Performance is the sheet Insights &amp; Actions will rank. If you skip it, the insights tab has nothing live to sort and you will type a paragraph, which is the amateur version of this file.</p>
+</section>
+
+<section class="lesson" data-lesson="project.tat" data-n="11">
+  <p class="goal">Days from the row, not from TODAY()</p>
+  <h3>Step: TAT &amp; Aging</h3>
+  <p>The tracker stores elapsed days, not a close date. Ageing from <code>=TODAY()-[@Raised]</code> would contradict the source. You use the recorded Actual Days column.</p>
+  <table class="t wrap">
+    <thead><tr><th>Card</th><th>Formula</th></tr></thead>
+    <tbody>
+      <tr><td>Average target days</td><td><code>=AVERAGEIFS(Reqs[TargetDays], Reqs[TargetDays], "&gt;0")</code></td></tr>
+      <tr><td>Average actual days</td><td><code>=AVERAGEIFS(Reqs[ActualDays], Reqs[ActualDays], "&gt;=0")</code></td></tr>
+      <tr><td>Average variance</td><td><code>=AVERAGE(IF((Actual&gt;="")*(Target&gt;=""), Actual-Target))</code> or a helper column <code>=[@ActualDays]-[@TargetDays]</code> then AVERAGEIFS on that</td></tr>
+      <tr><td>On time / Late</td><td>COUNTIFS on the helper: variance ≤ 0 versus &gt; 0</td></tr>
+      <tr><td>On-time rate</td><td>On time / timed requisitions</td></tr>
+    </tbody>
+  </table>
+  <p>Delay bands: on or ahead, 1–30 late, 31–60 late, &gt;60 late. Aging of <em>active</em> requisitions only: 0–30, 31–60, 61–90, 91–120, &gt;120. A requisition with no actual days yet sits in the first band, and the footnote says so.</p>
+  <p>Overrun flag, already on the engine: <code>=IF(AND(ISNUMBER(Target), ISNUMBER(Actual), Actual&gt;Target), 1, 0)</code>. Role Explorer's “Ran past target days” is COUNTIFS of match-flag = 1 and overrun = 1.</p>
+</section>
+
+<section class="lesson" data-lesson="project.iv" data-n="12">
+  <p class="goal">The calendar is a different grain</p>
+  <h3>Step: Interview Effectiveness</h3>
+  <p>The log is events, not people. One candidate can appear three times. You always say which you are counting.</p>
+  <ul class="clean">
+    <li><strong>Scheduled</strong> = COUNTA of the log.</li>
+    <li><strong>Held</strong> = COUNTIF Canceled = "No".</li>
+    <li><strong>Canceled</strong> = COUNTIF Canceled = "Yes".</li>
+    <li><strong>Turnout</strong> = Held / Scheduled.</li>
+    <li><strong>By round, by mode, by recruiter, by panel member</strong> = COUNTIFS on those columns. Panel load is a separate sheet (Interviewer Load) because one event has several names in one cell — you split them in Power Query, or you use the pre-split sheet from the calendar build.</li>
+  </ul>
+  <p>Monthly: COUNTIFS on MONTH(Date). Combo of scheduled versus held. You do not treat a canceled interview as a rejected candidate.</p>
+</section>
+
+<section class="lesson" data-lesson="project.attrition" data-n="13">
+  <p class="goal">Two exit numbers, both shown</p>
+  <h3>Step: Attrition Analysis</h3>
+  <p>Monthly Snapshot has an exits row. Resignations has named leavers, including some dated after the reporting period. You put both on cards: “Exits reported” and “Leavers named”, and Notes explains the gap.</p>
+  <pre>=COUNTIFS(Leavers[Regrettable], "Regrettable*")
+=COUNTIFS(Leavers[Status], "Left")
+=AVERAGE(Leavers[TenureYears])
+=Exits / OpeningHeadcount        /* monthly attrition */</pre>
+  <p>Breakdowns you actually builds: by department, by reason, by regrettable flag, by tenure band. Replacement ratio for a department = joiners in the roles that department hires, divided by exits from that department. The related roles are listed on the sheet (Production → CNC, setter, deburrer, maintenance, production manager, and so on). Without that list the ratio is theatre.</p>
+  <p>Chart: columns of exits, line of attrition %. Dual axis, attrition formatted as %.</p>
+</section>
+
+<section class="lesson" data-lesson="project.insights" data-n="14">
+  <p class="goal">Ranked evidence, not adjectives</p>
+  <h3>Step: Insights &amp; Actions</h3>
+  <p>This sheet is not a slide of opinions. Each row is a rank with the metric that put it there.</p>
+  <ul class="clean">
+    <li><strong>Roles performing well</strong> — sort Role Funnel YTD by closure rate (Closed / Openings), then by Joined. Top five. Evidence sentence built with TEXTJOIN or typed from the numbers, e.g. “Closed 4 of 5 openings (80%); 3 joined from 40 sourced.”</li>
+    <li><strong>Roles needing focus</strong> — sort by sourced per offer, descending. A role with sourced and zero offers bubbles to the top with an em dash, not a huge fake ratio. That is the spec-is-unhireable conversation from chapter 8, with a number.</li>
+    <li><strong>Slow requisitions</strong> — largest Actual − Target among timed rows. Name the role, the days, the status.</li>
+    <li><strong>Channels</strong> — highest sourced-per-offer and highest offer yield, from Source Analysis. Two rows, opposite stories.</li>
+    <li><strong>Commentary</strong> — only what is already written in the Monthly Snapshot notes column, quoted. You do not invent a narrative the source does not support.</li>
+  </ul>
+  <div id="d13"></div>
+</section>
+
+<section class="lesson" data-lesson="project.notes" data-n="15">
+  <p class="goal">The sheet that makes your look senior</p>
+  <h3>Step: Notes &amp; Method</h3>
+  <p>Interviewers who have built a file will skip to this tab. It must exist.</p>
+  <ol class="steps">
+    <li>A table of every sheet, its origin file, and what one row means.</li>
+    <li>The requisition-to-calendar crosswalk, printed.</li>
+    <li>The upcoming-joiner-to-snapshot crosswalk, printed.</li>
+    <li>Definitions: opening headcount, overrun, turnout, offer acceptance, overall yield, replacement ratio, the em dash.</li>
+    <li>Where the source sheets disagree, with both numbers and one sentence of why. You do not pick a winner.</li>
+    <li>Corrections you applied (totals that were short, broken Actual Days formulas).</li>
+    <li>What the file cannot show: named candidates against a requisition, hiring-manager SLA, approval chain, notice period on offers, reasons for a backout. If the column is not in the source, it is not on a card.</li>
+  </ol>
+  <p>Then layout: freeze the header on every presentation sheet, landscape, fit to one page wide, navy tab colour, Calibri, three colours, no merged cells in tables, print titles on, a date in the header stating the reporting period. Gridlines off on navy tabs, on on grey tabs.</p>
+</section>
+
+<section class="lesson" data-lesson="project.talk" data-n="16">
+  <p class="goal">Two minutes, then stop</p>
+  <h3>How you walk it in an interview</h3>
+  <div id="d15"></div>
+  <div class="note">
+    <p><strong>Checklist before you call it done.</strong> Fourteen navy tabs, all formulas. Filter Engine hidden, drop-downs working, All-roles and All-months widening the view. Notes &amp; Method filled. No typed KPI. No pie chart. No real candidate's full name on a file that leaves the building. Saved as your name, dated, and you can rebuild the Filter Engine from a blank sheet in twenty minutes.</p>
+  </div>
+</section>
+
+<section class="lesson" data-lesson="project.formulas" data-n="17">
+  <p class="goal">Copy these onto the real file</p>
+  <h3>Every formula the Cursor workbook used</h3>
+  <p>Sheet names below match the finished file. <code>Engine</code> is the hidden Filter Engine. <code>Reqs</code>, <code>FunnelYTD</code>, <code>Snap</code>, <code>ILog</code>, <code>Leavers</code> are Table names. On your laptop you type these once, then fill down.</p>
+  <h4>Filter Engine</h4>
+  <pre>I2  selected role (data validation list: All roles + unique Reqs[Position])
+I3  =IF($I$2="All roles","*",$I$2)
+I4  selected month (All months + Jan … latest)
+I5  =IF($I$4="All months",">0","="&amp;IFERROR(INDEX($F$3:$F$14,MATCH($I$4,$E$3:$E$14,0)),0))
+I6  calendar role  =IFERROR(INDEX(Map[Calendar],MATCH($I$2,Map[Requisition],0)),"— no calendar role —")
+I7  =IF($I$2="All roles","*",$I$6)
+I8  selected department, same * trick
+I11 selected role for Executive Summary (own picker)
+I12 =IF($I$11="All roles","*",$I$11)
+I13 selected month for Executive Summary
+I14 =IF($I$13="All months",">0","="&amp;IFERROR(INDEX($F$3:$F$14,MATCH($I$13,$E$3:$E$14,0)),0))</pre>
+  <p>Helper columns on the Requisition Tracker (one row, fill down):</p>
+  <pre>K  =IFERROR(MONTH(Reqs[@Raised]),0)
+L  =IF(AND(COUNTIF(Reqs[@Position],Engine!$I$3)&gt;0, COUNTIF(K2,Engine!$I$5)&gt;0),1,0)
+M  =IF(L2=1,SUM($L$2:L2),"")
+N  =IF(L2=1,Reqs[@ActualDays],"")
+O  =IF(AND(ISNUMBER(Reqs[@TargetDays]),ISNUMBER(Reqs[@ActualDays]),Reqs[@ActualDays]&gt;Reqs[@TargetDays]),1,0)</pre>
+  <p>Helper columns on the Interview Log:</p>
+  <pre>P  =IFERROR(MONTH(ILog[@Date]),0)
+Q  =IF(AND(COUNTIF(ILog[@Role],Engine!$I$7)&gt;0, COUNTIF(P2,Engine!$I$5)&gt;0, ILog[@Canceled]="No"),1,0)
+R  =IF(Q2=1,SUM($Q$2:Q2),"")</pre>
+  <h4>Role Explorer cards (follow both drop-downs unless noted)</h4>
+  <pre>Openings raised     =SUMIFS(Reqs[Openings], Reqs[Position], Engine!$I$3, K:K, Engine!$I$5)
+Reqs closed         =COUNTIFS(Reqs[Position], Engine!$I$3, K:K, Engine!$I$5, Reqs[Status], "Close")
+Reqs active         =COUNTIFS(Reqs[Position], Engine!$I$3, K:K, Engine!$I$5, Reqs[Status], "Active")
+Sourced             =SUMIFS(Reqs[Sourced], Reqs[Position], Engine!$I$3, K:K, Engine!$I$5)
+Offers              =SUMIFS(Reqs[Offers], Reqs[Position], Engine!$I$3, K:K, Engine!$I$5)
+Avg actual days     =IFERROR(AVERAGEIFS(Reqs[ActualDays], Reqs[Position], Engine!$I$3, K:K, Engine!$I$5, Reqs[ActualDays], "&gt;=0"),"—")
+Ran past target     =COUNTIFS(L:L,1, O:O,1)
+Interviews held     =COUNTIFS(ILog[Role], Engine!$I$7, P:P, Engine!$I$5, ILog[Canceled], "No")</pre>
+  <p>These four ignore the month, because Role Funnel YTD is year-to-date. Footnote each card.</p>
+  <pre>Open at latest month =SUMIFS(FunnelYTD[OpenNow], FunnelYTD[Role], Engine!$I$3)
+Actually joined      =SUMIFS(FunnelYTD[Joined], FunnelYTD[Role], Engine!$I$3)
+Awaiting joining     =SUMIFS(FunnelYTD[Awaiting], FunnelYTD[Role], Engine!$I$3)
+Declines / drop-offs =SUMIFS(FunnelYTD[Declines], FunnelYTD[Role], Engine!$I$3)</pre>
+  <p>Matching register, first row (then MATCH 2, 3, …):</p>
+  <pre>=IFERROR(INDEX(Reqs[Position], MATCH(1, M:M, 0)), "")
+=IFERROR(INDEX(Reqs[Source], MATCH(1, M:M, 0)), "")
+=IFERROR(INDEX(Reqs[TargetDays], MATCH(1, M:M, 0)), "")
+=IFERROR(INDEX(Reqs[ActualDays], MATCH(1, M:M, 0)), "")
+Variance on the pulled pair: =IF(OR(target="",actual=""),"",actual-target)</pre>
+  <h4>Executive Summary</h4>
+  <pre>Headcount (stock)        =INDEX(Snap[Headcount], COUNTA(Snap[Headcount]))
+Joiners YTD (flow)       =SUM(Snap[Joiners])
+Exits YTD                =SUM(Snap[Exits])
+Raised / closed          =SUM of the snapshot summary rows named as such
+Offers / sourced         =SUM(FunnelYTD[Offers])  and  =SUM(FunnelYTD[Sourced])
+Yield                    =IFERROR(SUM(FunnelYTD[Joined])/SUM(FunnelYTD[Sourced]),"—")
+Open / closed / joinees  =SUMIFS on the flattened role×month block, criteria Engine!I12 and I14
+Upcoming joiners         =COUNTIFS(Joiners[Role], Engine!I12)   /* role only */</pre>
+  <h4>Headcount, funnel, TAT, attrition</h4>
+  <pre>Opening (first month) =Closing-Joiners+Exits
+Opening (later)       =previous row's Closing
+Net                   =Joiners-Exits
+Attrition %           =IF(Opening=0,"—",Exits/Opening)
+Screened / Sourced    =IF(Sourced=0,"—",Screened/Sourced)
+Offer acceptance      =IF(Offers=0,"—",(Offers-Declines)/Offers)
+Offer to join         =IF(Offers=0,"—",Joined/Offers)
+Overall yield         =IF(Sourced=0,"—",Joined/Sourced)
+TAT on time           =COUNTIFS(VarianceCol,"&lt;=0")
+TAT late              =COUNTIFS(VarianceCol,"&gt;0")
+Aging 0–30 active     =COUNTIFS(Reqs[Status],"Active", Reqs[ActualDays],"&lt;=30")
+Aging 31–60           =COUNTIFS(Reqs[Status],"Active", Reqs[ActualDays],"&gt;=31", Reqs[ActualDays],"&lt;=60")
+  /* same pattern 61–90, 91–120, then "&gt;120" */
+Regrettable leavers   =COUNTIFS(Leavers[Regrettable],"Regrettable*")
+Replacement ratio     =JoinersInDeptRoles / ExitsFromDept</pre>
+  <div class="warn">
+    <p><strong>The em dash is a formula, not decoration.</strong> <code>=IF(denom=0,"—",num/denom)</code>. A typed “N/A” will not update when next month's export lands. A #DIV/0! on a navy tab is how the file fails the interview before you have spoken.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Order of work, on your laptop</h2>
+  <div class="gold">
+    <ol class="clean">
+      <li>Duplicate the Rec-Nidhi workbook and the calendar export. Work only on copies.</li>
+      <li>Create the new file. Copy source sheets. Name them. Ctrl+T. Name the Tables.</li>
+      <li>Build Crosswalk. Fix types. Rewrite short totals. Blank the fake-zero Actual Days.</li>
+      <li>Filter Engine: pick lists, the two IF criteria, month helper, match flags, ranks, flattened snapshot blocks.</li>
+      <li>Role Explorer first — if the drop-downs move the cards, the engine is right. Then Executive Summary, then the rest in the order above.</li>
+      <li>Notes &amp; Method last, after you have seen every disagreement.</li>
+      <li>Print preview every navy tab. Then the two-minute walkthrough, out loud, with the timer in this chapter.</li>
+    </ol>
+  </div>
+</section>
+
+<div class="pager">
+  <a class="btn" href="excel-4.html"><span class="lbl">Chapter 1.4</span>&larr; Analysis and the dashboard</a>
+  <a class="btn btn-go" href="reference.html"><span class="lbl">Next</span>Function reference &rarr;</a>
+</div>
+
+</main>
+</div>
+
+<script src="assets/engine.js?v=3"></script>
+<script src="assets/sheet.js?v=3"></script>
+<script src="assets/data.js?v=3"></script>
+<script src="assets/course.js?v=3"></script>
+<script>
+Quiz.mount("q3", {
+  title: "Check yourself",
+  lessonId: "project.clean",
+  items: [
+    { q: "The snapshot says Deburrer in one block and Deburer in another. What do you do?",
+      opts: ["Pick one spelling and overwrite the source so they match", "Leave both, and map them on a Crosswalk sheet so formulas see one role", "Delete the smaller block", "Average the two rows"],
+      a: 1,
+      why: "<b>The source is a record of what was reported.</b> Overwriting it destroys the audit trail. A crosswalk is how two dirty systems talk without either pretending to be clean." },
+    { q: "Role Funnel YTD says 40 joined. The snapshot joiners row says 47. What goes on the Executive Summary card?",
+      opts: ["43.5, the average", "47, because it is the bigger number", "The snapshot's 47, with Notes & Method recording that Role Funnel YTD is 40 and why you did not average them", "40, because a funnel is more precise"],
+      a: 2,
+      why: "<b>Pick the source the card claims to use, and write the disagreement down.</b> Averaging two official numbers creates a third number nobody can find in the plant's files." }
+  ]
+});
+
+Sheet.mount("s4", {
+  id: "proj-engine", rows: 12, cols: 10, headerRows: 1, fillTo: 7,
+  title: "Practice plant — Requisition Tracker + criteria",
+  note: "A–G are locked. Gold: I2 role criterion, I4 month criterion, H2:H7 match flags. J2 is the role pick, J4 the month pick.",
+  open: ["I2", "I4", "H2:H7", "J2", "J4"],
+  widths: { A: 72, B: 130, C: 70, D: 72, E: 64, F: 64, G: 48, H: 64, I: 120, J: 140 },
+  data: [
+    ["Month", "Position", "Openings", "Sourced", "Offers", "Status", "Mo#", "Match"],
+    ["Jan", "CAM Programmer", 2, 14, 1, "Close", 1],
+    ["Jan", "CNC Operator", 3, 20, 0, "Active", 1],
+    ["Feb", "CAM Programmer", 1, 8, 1, "Close", 2],
+    ["Feb", "SCM", 1, 6, 1, "Close", 2],
+    ["Mar", "CNC Operator", 2, 11, 1, "Active", 3],
+    ["Mar", "CAM Programmer", 1, 5, 0, "Active", 3]
+  ],
+  cells: {
+    I1: "Role criterion",
+    I3: "Month criterion",
+    J1: "Role pick",
+    J2: "CAM Programmer",
+    J3: "Month pick",
+    J4: "Feb"
+  },
+  formats: { C: "general", D: "general", E: "general", G: "general", H: "general" },
+  lessonId: "project.engine",
+  tasks: [
+    { cell: "I2", ask: "Role criterion. J2 currently says CAM Programmer. Return * when J2 is All roles, otherwise return the pick.",
+      want: "CAM Programmer", answer: '=IF(J2="All roles","*",J2)', requires: ["IF"],
+      good: "It returns CAM Programmer while that is the pick. Change J2 to All roles after the flags work and every H cell should become 1 for February." },
+    { cell: "I4", ask: "Month criterion. J4 is Feb. Return the text >0 when J4 is All months, otherwise \"=\" and the month number (Jan=1, Feb=2, Mar=3). For Feb that is the text =2.",
+      want: "=2", answer: '=IF(J4="All months",">0","="&IF(J4="Jan",1,IF(J4="Feb",2,3)))', requires: ["IF"],
+      good: "The criterion is the text =2, which COUNTIF can use against column G." },
+    { cell: "H2", ask: "Match flag. 1 if this row's position matches I2 and its Mo# matches I4. Lock the criteria with $ so fill-down works: =IF(AND(COUNTIF(B2,$I$2)>0,COUNTIF(G2,$I$4)>0),1,0)",
+      want: 0, answer: "=IF(AND(COUNTIF(B2,$I$2)>0,COUNTIF(G2,$I$4)>0),1,0)", requires: ["COUNTIF"],
+      good: "0 — January, and the month pick is February. Fill down." },
+    { cell: "H4", ask: "February CAM. Fill down from H2, or type the same shape.",
+      want: 1, answer: "=IF(AND(COUNTIF(B4,$I$2)>0,COUNTIF(G4,$I$4)>0),1,0)",
+      good: "1. That is the requisition Role Explorer would show first." },
+    { cell: "H5", ask: "February SCM. Same month, wrong role.",
+      want: 0, answer: "=IF(AND(COUNTIF(B5,$I$2)>0,COUNTIF(G5,$I$4)>0),1,0)",
+      good: "0. Two criteria, both required. Only H4 is 1: February CAM, 8 sourced, 1 offer, already closed." }
+  ]
+});
+
+Sheet.mount("s5", {
+  id: "proj-exec", rows: 10, cols: 5, headerRows: 1,
+  title: "Practice plant — monthly snapshot rows",
+  note: "Type the four gold formulas. Do not type 6, 3, 2 or 0.75.",
+  open: ["B8", "B9", "B10", "D2"],
+  widths: { A: 140, B: 90, C: 90, D: 110 },
+  data: [
+    ["Month", "Joiners", "Exits", "Yield"],
+    ["Jan", 2, 1],
+    ["Feb", 1, 0],
+    ["Mar", 3, 1]
+  ],
+  cells: { A6: "Joiners YTD", A7: "Exits YTD", A8: "Joiners YTD (formula)", A9: "Exits YTD (formula)", A10: "Net YTD", D1: "Sourced to joined" },
+  formats: { B: "general", C: "general", D: "pct" },
+  lessonId: "project.exec",
+  tasks: [
+    { cell: "B8", ask: "Joiners YTD from the three months. SUM, not a typed 6.",
+      want: 6, answer: "=SUM(B2:B4)", requires: ["SUM"],
+      good: "6. A flow, so summing is legal." },
+    { cell: "B9", ask: "Exits YTD.",
+      want: 2, answer: "=SUM(C2:C4)",
+      good: "2." },
+    { cell: "B10", ask: "Net YTD: joiners minus exits, from the two cells you just wrote.",
+      want: 4, answer: "=B8-B9",
+      good: "4. This is not closing headcount. Closing would be a stock from the snapshot." },
+    { cell: "D2", ask: "Sourced-to-joined yield for a plant that sourced 64 and joined 6. IFERROR with a dash if sourced is 0. You may type 64 and 6 into the formula this once, or use 64 in E2 and 6 in E3 if you like — simplest: =IFERROR(6/64,\"—\").",
+      want: 0.09375, tol: 0.001, answer: "=IFERROR(6/64,\"—\")", requires: ["IFERROR"],
+      good: "9.4%. Ugly, and honest. That is overall yield from a manufacturing funnel." }
+  ]
+});
+
+Sheet.mount("s6", {
+  id: "proj-rx", rows: 10, cols: 6, headerRows: 1,
+  title: "Pipeline for CAM in February (already filtered)",
+  note: "The engine has done the filtering. These are the stage counts. Write share of sourced and step conversion.",
+  open: ["C2:D6"],
+  widths: { A: 140, B: 90, C: 110, D: 120 },
+  data: [
+    ["Stage", "Candidates", "Share of sourced", "Step conversion"],
+    ["Sourced", 8],
+    ["Screening", 6],
+    ["Sent to HM", 4],
+    ["Selected", 2],
+    ["Offers", 1]
+  ],
+  formats: { B: "general", C: "pct", D: "pct" },
+  lessonId: "project.explorer",
+  tasks: [
+    { cell: "C2", ask: "Share of sourced for the Sourced row. Should be 100%.",
+      want: 1, tol: 0.001, answer: "=IF($B$2=0,\"—\",B2/$B$2)",
+      good: "100%. Lock $B$2 so it survives fill-down." },
+    { cell: "C3", ask: "Screening as a share of sourced. Fill down from C2 or write it.",
+      want: 0.75, tol: 0.001, answer: "=IF($B$2=0,\"—\",B3/$B$2)",
+      good: "75%." },
+    { cell: "D2", ask: "The first stage has no predecessor. Return a blank: =\"\"",
+      want: "", answer: "=\"\"",
+      good: "Blank. Fill D3 downward from the next task." },
+    { cell: "D3", ask: "Screening as a share of the previous stage.",
+      want: 0.75, tol: 0.001, answer: "=IF(B2=0,\"—\",B3/B2)",
+      good: "75%. Same number as share-of-sourced on this tiny funnel, because the previous stage is still Sourced." },
+    { cell: "D4", ask: "Sent to HM / Screening.",
+      want: 0.6667, tol: 0.01, answer: "=IF(B3=0,\"—\",B4/B3)",
+      good: "67%. This is the drop that would send your back to the hiring manager, not to more job boards." },
+    { cell: "D5", ask: "Selected / Sent to HM.",
+      want: 0.5, tol: 0.001, answer: "=IF(B4=0,\"—\",B5/B4)",
+      good: "50%." },
+    { cell: "D6", ask: "Offers / Selected.",
+      want: 0.5, tol: 0.001, answer: "=IF(B5=0,\"—\",B6/B5)",
+      good: "50%. One of two selected did not get an offer — a calibration question, not a sourcing one." }
+  ]
+});
+
+Quiz.mount("q7", {
+  title: "Check yourself",
+  lessonId: "project.headcount",
+  items: [
+    { q: "Closing headcount rose by 4 over the year. Joiners minus exits is +7. What does you put on the sheet?",
+      opts: ["Change joiners until they agree", "Report closing as +4 from the snapshot, net as +7 from joiners and exits, and write the gap on Notes & Method", "Use +7 because HR knows joiners better", "Hide the headcount row"],
+      a: 1,
+      why: "<b>Two official series that disagree stay two series.</b> Forcing them to match is how a dashboard loses the plant. The gap is itself a finding." },
+    { q: "Why must the total row of a headcount table not sum the Closing column?",
+      opts: ["It would look messy", "Closing is a stock — summing January's 80 and February's 82 counts many of the same people twice", "Excel cannot SUM a column of formulas", "Directors prefer averages"],
+      a: 1,
+      why: "<b>Flows sum. Stocks do not.</b> The total row shows first opening, last closing, and summed joiners and exits. Labelling it “stocks at latest month” is the whole lesson." }
+  ]
+});
+
+Sheet.mount("s8", {
+  id: "proj-funnel", rows: 8, cols: 4, headerRows: 1,
+  title: "YTD funnel totals (practice plant)",
+  note: "Write the three rates a director will ask for.",
+  open: ["B6", "B7", "B8"],
+  widths: { A: 180, B: 90 },
+  data: [
+    ["Stage", "Count"],
+    ["Sourced", 64],
+    ["Offers", 8],
+    ["Declines", 2],
+    ["Joined", 6]
+  ],
+  cells: { A6: "Offer acceptance", A7: "Offer to join", A8: "Overall yield" },
+  formats: { B: "general" },
+  cellFormats: { B6: "pct", B7: "pct", B8: "pct" },
+  lessonId: "project.funnel",
+  tasks: [
+    { cell: "B6", ask: "Offer acceptance: (Offers − Declines) / Offers.",
+      want: 0.75, tol: 0.001, answer: "=IF(B3=0,\"—\",(B3-B4)/B3)",
+      good: "75%. Two of eight offers died." },
+    { cell: "B7", ask: "Offer to join: Joined / Offers. Not joined / accepts — we do not have accepts on this sheet.",
+      want: 0.75, tol: 0.001, answer: "=IF(B3=0,\"—\",B5/B3)",
+      good: "75%. Same number as acceptance here, which means nobody reneged. On the real file these two will split, and that split is Eva." },
+    { cell: "B8", ask: "Overall yield: Joined / Sourced.",
+      want: 0.09375, tol: 0.001, answer: "=IF(B2=0,\"—\",B5/B2)",
+      good: "9.4%. Six people at a desk from 64 sourced. That is the number you put next to a request for twenty joiners." }
+  ]
+});
+
+Drill.mount("d13", {
+  id: "proj-insight", lessonId: "project.insights", seconds: 40,
+  title: "Say the CAM insight out loud.",
+  prompt: "Forty seconds. You must use sourced-per-offer or a conversion, and you must say what you would do on Monday. Practice-plant numbers are allowed: CAM in February, 8 sourced, 1 offer, already closed.",
+  model: "<p>\"CAM in February is the clean role: eight sourced, one offer, closed. CNC is the opposite — twenty sourced in January and no offer, still active. I would not brief more CNC sourcing until the manager drops a mandatory or we reopen the band. The dashboard is already ranking that as sourced-per-offer of twenty-to-zero, which is the unhireable spec, not a lazy recruiter.\"</p><p class=\"tiny\">A number, a comparison, a Monday action. That is Insights &amp; Actions in one breath.</p>"
+});
+
+Drill.mount("d15", {
+  id: "proj-talk", lessonId: "project.talk", seconds: 120,
+  title: "Walk the workbook.",
+  prompt: "Two minutes. Start on Executive Summary, click a drop-down, land on Role Explorer, name one disagreement from Notes. Then stop.",
+  model: "<p>\"This is a hiring and attrition workbook for 2026. Grey tabs are the source — the monthly snapshot, the requisition tracker, the year-to-date funnel, the resignation list, and the interview calendar. Navy tabs are all formulas. I never type a KPI.</p><p>The first page is the year: headcount, joiners, exits, yield. These two boxes filter a role and a month; the four cards under them follow both. If I pick CAM and leave months on All, you see that role across the year.</p><p>Role Explorer is where I work. Same drop-downs. Sixteen cards, the matching requisitions, the pipeline, and days against target. The calendar uses different role names, so a hidden sheet maps them rather than returning zero interviews.</p><p>One thing the source does not agree with itself on: the snapshot's joiner total is not the same as Role Funnel YTD joined. I report both and I write the gap on Notes &amp; Method. I do not average them.</p><p>What I would do Monday from this file is the Insights tab — the roles with sourced-per-offer through the roof and no offers, which is a spec conversation, not more job boards.\"</p><p class=\"tiny\">Structure, a live filter, one honest gap, one action. Two minutes is enough. Filling a third minute with colours is how the interview cools.</p>"
+});
+
+Course.init({ id: "project" });
+</script>
+</body>
+</html>

@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3 Recruiting metrics — Nidhi's course</title>
+<link rel="stylesheet" href="assets/course.css?v=3">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand"><a href="index.html">Nidhi Tiwari</a><span>3 · Recruiting metrics</span></div>
+  <div class="top-actions">
+    <div class="pbar"><i></i></div>
+    <span class="pnum"></span>
+    <a class="btn" href="index.html">Course home</a>
+  </div>
+</div>
+
+<div class="layout">
+<nav class="side" id="sideNav"></nav>
+<main>
+
+<p class="kicker">Chapter 3</p>
+<h1>Recruiting metrics</h1>
+<p class="lead">Excel and Power BI are how you calculate. This chapter is what to calculate and, more importantly, what each number is <em>for</em>. The difference between a recruiter and a recruiting analyst is that the analyst knows which metric answers which question — and which metric is being misused.</p>
+
+<!-- 1 -->
+<section class="lesson" data-lesson="m.funnel" data-n="01">
+  <p class="goal">The shape of every hiring process</p>
+  <h3>The funnel</h3>
+  <p>Every recruiting number is a count at a stage or a ratio between two stages. Once the funnel is drawn, the metrics are obvious.</p>
+  <div class="svg-wrap">
+    <svg viewBox="0 0 660 230" role="img" aria-label="Hiring funnel from applicants to joiners">
+      <g font-family="system-ui" font-size="12">
+        <rect x="20" y="20" width="600" height="28" fill="#1f6b47" rx="2"/>
+        <text x="30" y="39" fill="#fff" font-weight="650">Applicants · 6</text>
+        <rect x="70" y="54" width="500" height="28" fill="#2d8159" rx="2"/>
+        <text x="80" y="73" fill="#fff" font-weight="650">Screened · 5</text>
+        <rect x="120" y="88" width="400" height="28" fill="#3f9a6d" rx="2"/>
+        <text x="130" y="107" fill="#fff" font-weight="650">Interviewed · 4</text>
+        <rect x="170" y="122" width="300" height="28" fill="#55b183" rx="2"/>
+        <text x="180" y="141" fill="#fff" font-weight="650">Offered · 4</text>
+        <rect x="220" y="156" width="200" height="28" fill="#79c6a0" rx="2"/>
+        <text x="230" y="175" fill="#14482f" font-weight="650">Accepted · 3</text>
+        <rect x="270" y="190" width="100" height="28" fill="#a7dcc1" rx="2"/>
+        <text x="280" y="209" fill="#14482f" font-weight="650">Joined · 2</text>
+      </g>
+    </svg>
+    <p class="cap">The practice data as a funnel. Note the two places it narrows most: screen-to-interview, and accept-to-join.</p>
+  </div>
+  <p><strong>The ratios between neighbouring stages are the diagnostic.</strong> A single low ratio tells your where the process is failing, and each one has a different owner:</p>
+  <table class="t wrap">
+    <thead><tr><th>Ratio</th><th>If it is low, the problem is</th><th>Whose problem</th></tr></thead>
+    <tbody>
+      <tr><td>Applicant &rarr; screen</td><td>The advert is attracting the wrong people, or the screening bar is wrong</td><td>Hers — sourcing and the job advert</td></tr>
+      <tr><td>Screen &rarr; interview</td><td>You and the hiring manager disagree about what "good" means</td><td><strong>A calibration conversation</strong>, not a sourcing problem</td></tr>
+      <tr><td>Interview &rarr; offer</td><td>The interview is finding problems a screen should have caught, or the bar moved</td><td>Shared — usually a scorecard problem</td></tr>
+      <tr><td>Offer &rarr; accept</td><td>Pay, the competition, or how the candidate was treated</td><td>Compensation and the manager's selling</td></tr>
+      <tr><td>Accept &rarr; join</td><td>A long notice period and nobody staying in touch</td><td>Hers — onboarding contact between accept and start</td></tr>
+    </tbody>
+  </table>
+  <div class="note">
+    <p><strong>The sentence that makes this a strategic answer.</strong> "I look at the conversion between each pair of stages rather than the overall rate, because the overall rate tells me something is wrong and the stage ratio tells me what. In this data the screen-to-interview rate is 80% but the accept-to-join rate is 67% — so the problem is not sourcing, it is the gap between accepting and starting."</p>
+  </div>
+  <div id="c1"></div>
+</section>
+
+<!-- 2 -->
+<section class="lesson" data-lesson="m.time" data-n="02">
+  <p class="goal">The most-quoted and most-misused metric</p>
+  <h3>Time to hire, time to fill, time in stage</h3>
+  <p>Three different numbers that get called "time to hire" interchangeably. Knowing the difference is a credibility marker.</p>
+  <table class="t wrap">
+    <thead><tr><th>Metric</th><th>Measured from &rarr; to</th><th>What it is for</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Time to hire</strong></td><td>Candidate applied &rarr; candidate accepted</td><td>How fast the <em>process</em> moves once someone is in it. This is the recruiter's efficiency metric.</td></tr>
+      <tr><td><strong>Time to fill</strong></td><td>Requisition opened &rarr; candidate accepted</td><td>How long the <em>business</em> waits. Includes the time spent finding anyone at all. This is the number a hiring manager cares about.</td></tr>
+      <tr><td><strong>Time to start / productivity</strong></td><td>Requisition opened &rarr; first day</td><td>Includes notice periods. The only one that reflects when work actually gets done.</td></tr>
+      <tr><td><strong>Time in stage</strong></td><td>Entered a stage &rarr; left it</td><td><strong>The useful one.</strong> It localises the delay instead of averaging it away.</td></tr>
+    </tbody>
+  </table>
+  <div class="warn">
+    <p><strong>Why you should quote the median, not the mean.</strong> One role that took 180 days drags the average up and makes a healthy process look broken. The median is the typical experience. The professional answer is to report <em>both</em>: "median 31 days, mean 44 — the gap is one Berlin role that sat open for four months while we waited on a visa, and I would exclude it from the trend."</p>
+    <p>Identifying and explaining the outlier, rather than hiding it or letting it distort the headline, is the behaviour being assessed.</p>
+  </div>
+  <h4>Calculate it</h4>
+  <div id="c2"></div>
+  <h4>Where the delay actually is</h4>
+  <p>Time in stage on the practice data, calculated from the stage dates. Build it, then read what it says.</p>
+  <div id="s2"></div>
+</section>
+
+<!-- 3 -->
+<section class="lesson" data-lesson="m.quality" data-n="03">
+  <p class="goal">The hard one, and the one that matters</p>
+  <h3>Quality of hire</h3>
+  <p>Speed and cost are easy to measure and almost beside the point. A fast, cheap, wrong hire is the most expensive thing a recruiting function can produce. Quality of hire is hard because it is only knowable months later — and that is exactly why most teams do not measure it, which is the opportunity.</p>
+  <table class="t wrap">
+    <thead><tr><th>Proxy</th><th>How</th><th>Honest limitation</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Passed probation</strong></td><td>Percentage still employed after 3 or 6 months</td><td>A low bar. It catches disasters, not mediocrity.</td></tr>
+      <tr><td><strong>First-year retention</strong></td><td>Percentage still there at 12 months</td><td>The standard. Separate voluntary from involuntary leavers — they mean opposite things.</td></tr>
+      <tr><td><strong>Hiring manager satisfaction</strong></td><td>One question at 90 days: "would you hire this person again?"</td><td>Subjective, but cheap and surprisingly predictive. The trend across many hires is what matters, not one score.</td></tr>
+      <tr><td><strong>Time to productivity</strong></td><td>Weeks until the manager says the person is fully contributing</td><td>Needs a definition per role or it is noise.</td></tr>
+      <tr><td><strong>Performance rating at first review</strong></td><td>Compare to the company distribution</td><td>Ratings are inconsistent between managers, so compare within a team, not across.</td></tr>
+      <tr><td><strong>Early attrition</strong></td><td>Percentage leaving within 6 months</td><td>The sharpest signal. A spike here is a recruiting or onboarding failure, not an employee failure.</td></tr>
+    </tbody>
+  </table>
+  <div class="note">
+    <p><strong>The composite worth proposing.</strong> One simple index: <em>passed probation (yes/no), manager would rehire (yes/no), still here at 12 months (yes/no)</em>. Three booleans, scored out of three, averaged across a cohort. It is crude and defensible, it can be collected with a two-question form, and proposing it in an interview demonstrates you think past the metrics that are easy to count.</p>
+    <p>The line to have ready: <strong>"Most teams measure how fast and how cheap, because that data is already in the ATS. Almost nobody measures whether the hire was any good, because that data has to be collected on purpose. I would rather be accountable for the second one."</strong></p>
+  </div>
+  <div id="c3"></div>
+  <div id="q3m"></div>
+</section>
+
+<!-- 4 -->
+<section class="lesson" data-lesson="m.cost" data-n="04">
+  <p class="goal">What finance asks about</p>
+  <h3>Cost per hire, and agency spend</h3>
+  <p>The standard definition, from the SHRM/ANSI standard, is worth knowing precisely because people quote it loosely:</p>
+  <div class="fml">Cost per hire = ( <b>internal costs</b> + <b>external costs</b> ) ÷ <b>number of hires</b></div>
+  <ul class="clean">
+    <li><strong>External</strong>: agency fees, job board subscriptions, LinkedIn Recruiter licences, advertising, careers-event costs, assessment tools, background checks, relocation.</li>
+    <li><strong>Internal</strong>: the recruiting team's salaries, referral bonuses, the share of the ATS cost, and — the one everyone forgets — <strong>interviewer time</strong>.</li>
+  </ul>
+  <p>Interviewer time is the honest one. Four engineers at an hour each, plus prep and debrief, on a salary of €90,000, is roughly €250 of real cost per candidate interviewed. Interview twelve people for one role and that is €3,000 of engineering time — frequently more than the advertising budget, and entirely invisible in most cost-per-hire figures.</p>
+  <div class="warn">
+    <p><strong>Cost per hire alone is a dangerous metric,</strong> because the cheapest way to improve it is to stop investing in hiring. Always pair it with quality and time: <em>"cost per hire fell 30% because we moved two roles off agencies, and first-year retention held at 92%."</em> That is a defensible claim. "Cost per hire fell 30%" on its own invites the question of what was sacrificed.</p>
+  </div>
+  <h4>The agency decision, with real numbers</h4>
+  <p>A 20% agency fee on a €70,000 role is €14,000. Change the inputs and see when an agency is actually the rational choice.</p>
+  <div id="c4"></div>
+  <div id="q4m"></div>
+  <div class="note">
+    <p><strong>The answer that shows judgement.</strong> Agencies are not evil and not always wrong. They are right when the role is genuinely hard to source, when it is urgent enough that the cost of the vacancy exceeds the fee, or when you have no network in that market. They are wrong as a default, and as a substitute for building a pipeline. Saying "I would use an agency for the first hire in a new country and build direct sourcing behind it" is a far better answer than either extreme.</p>
+  </div>
+</section>
+
+<!-- 5 -->
+<section class="lesson" data-lesson="m.source" data-n="05">
+  <p class="goal">Where good people actually come from</p>
+  <h3>Source effectiveness</h3>
+  <p>The mistake is counting applicants by source. Volume is not value. <strong>Count joiners by source, then compare the two.</strong></p>
+  <p>On the practice data: LinkedIn is 4 of 6 applicants (67%) and 1 of 2 joiners (50%). Referral is 1 of 6 applicants (17%) and 1 of 2 joiners (50%). Referrals produce half the hires from a sixth of the volume — which, if it held over a larger sample, is the argument for a referral scheme.</p>
+  <table class="t wrap">
+    <thead><tr><th>Metric</th><th>Definition</th><th>What it answers</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Source mix</strong></td><td>Applicants by source, as a percentage</td><td>Where the volume comes from. Weakest of the three.</td></tr>
+      <tr><td><strong>Source of hire</strong></td><td>Joiners by source</td><td>Where the <em>results</em> come from. This is the one to report.</td></tr>
+      <tr><td><strong>Source quality</strong></td><td>Joiners ÷ applicants, per source</td><td>Which channel converts. A channel with 5% of applicants and 30% of hires deserves investment.</td></tr>
+      <tr><td><strong>Cost per source</strong></td><td>Spend ÷ joiners, per source</td><td>Which channel is worth the money. Referrals usually win and nobody budgets for them.</td></tr>
+      <tr><td><strong>Applicant-to-interview per source</strong></td><td>Interviews ÷ applicants, per source</td><td>Which channel wastes your screening time. A job board producing 200 applicants and 2 interviews is a cost, not a source.</td></tr>
+    </tbody>
+  </table>
+  <h4>Build the source table</h4>
+  <p>Distinct sources down the side, three columns across. This is the <code>UNIQUE</code> plus <code>COUNTIFS</code> pattern from chapter 1.3 doing real work.</p>
+  <div id="s5"></div>
+</section>
+
+<!-- 6 -->
+<section class="lesson" data-lesson="m.diversity" data-n="06">
+  <p class="goal">Carefully, and legally</p>
+  <h3>Diversity metrics in Europe</h3>
+  <p>This is a genuine area of expertise and a genuine legal minefield, and the two are related. What matters is knowing the boundary.</p>
+  <table class="t wrap">
+    <thead><tr><th>Measure</th><th>Status in the EU</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Gender, aggregated</strong></td><td>Generally collectable and widely reported. The EU Pay Transparency Directive requires gender pay gap reporting, with obligations phasing in from June 2026.</td></tr>
+      <tr><td><strong>Ethnicity</strong></td><td><strong>Varies enormously.</strong> Routine in the UK and Ireland; in France collecting ethnic statistics is essentially prohibited; Germany is very restrictive. Never assume a UK approach transfers.</td></tr>
+      <tr><td><strong>Disability</strong></td><td>Special category data under GDPR Article 9. Voluntary, anonymous, aggregated, and strictly separate from a hiring decision.</td></tr>
+      <tr><td><strong>Age</strong></td><td>Usually derivable and usually should not be. Do not put date of birth in a tracker.</td></tr>
+    </tbody>
+  </table>
+  <p><strong>The three rules that keep your safe and credible.</strong></p>
+  <ol class="steps">
+    <li><strong>Aggregate only, never individual.</strong> A diversity report says "34% of applicants, 21% of hires". It never says which candidate was which.</li>
+    <li><strong>Measure the funnel, not just the intake.</strong> This is the insight most people miss. If a group is 40% of applicants and 15% of hires, the problem is not sourcing — it is somewhere in the screening or interviewing, and the stage ratios will show where. Reporting intake alone hides the actual bias.</li>
+    <li><strong>Suppress small numbers.</strong> Below about five people a percentage identifies individuals. The convention is not to report cells under 5. Knowing this unprompted signals real experience with sensitive data.</li>
+  </ol>
+  <div class="warn">
+    <p><strong>Never build a diversity report in a personal file with real candidate data in it.</strong> Not anonymised, not "just for practice". This is special category data under GDPR. Practise the <em>technique</em> on the invented data in this course, and talk about the <em>approach</em> in interviews. The numbers in a portfolio must be fictional.</p>
+  </div>
+  <div id="q6"></div>
+</section>
+
+<!-- 7 -->
+<section class="lesson" data-lesson="m.scorecard" data-n="07">
+  <p class="goal">What to actually put on the dashboard</p>
+  <h3>The monthly scorecard</h3>
+  <p>Not every metric that can be calculated should be reported. A scorecard that a hiring manager reads has about eight numbers, each with a comparison and, where it matters, a sentence.</p>
+  <table class="t wrap">
+    <thead><tr><th>Number</th><th>Shown as</th><th>Why it is on the page</th></tr></thead>
+    <tbody>
+      <tr><td>Open requisitions</td><td>Count, split by stage</td><td>The workload, at a glance.</td></tr>
+      <tr><td>Joiners this month</td><td>Count vs plan</td><td>The output. Against plan, or it is just a number.</td></tr>
+      <tr><td>Median time to fill</td><td>Days, vs last quarter</td><td>Trend matters; the absolute figure means nothing without one.</td></tr>
+      <tr><td>Offer acceptance</td><td>Percentage, vs last quarter</td><td>An early warning about pay and candidate experience.</td></tr>
+      <tr><td>Source of hire</td><td>Stacked bar</td><td>Justifies next year's budget.</td></tr>
+      <tr><td>Agency spend</td><td>€, vs budget</td><td>The number finance will ask about first.</td></tr>
+      <tr><td>Roles open &gt; 60 days</td><td>A named list</td><td><strong>Prompts action instead of describing history.</strong> The most valuable thing on the page.</td></tr>
+      <tr><td>First-year retention of last year's hires</td><td>Percentage</td><td>The only quality signal, and the one that keeps the rest honest.</td></tr>
+    </tbody>
+  </table>
+  <div class="note">
+    <p><strong>Every number gets a comparison.</strong> "Time to fill: 38 days" is unreadable. "Time to fill: 38 days, up from 31 last quarter, driven by two Berlin roles waiting on visas" is a report. The comparison and the cause are the work; the number is just the prompt.</p>
+  </div>
+  <div id="d7"></div>
+</section>
+
+<section>
+  <h2>Before moving on</h2>
+  <div class="note">
+    <p>You should be able to define time to hire, time to fill, cost per hire and quality of hire without hesitating, explain why the median beats the mean on time to fill, say which stage ratio points at which owner, and name the small-numbers suppression rule for diversity data. Extra reps: <a href="labs-more.html">craft and job labs</a>.</p>
+  </div>
+</section>
+
+<div class="pager">
+  <a class="btn" href="powerbi.html"><span class="lbl">Chapter 2</span>&larr; Power BI</a>
+  <a class="btn btn-go" href="ats.html"><span class="lbl">Chapter 4</span>ATS and Workday &rarr;</a>
+</div>
+
+</main>
+</div>
+
+<script src="assets/engine.js?v=3"></script>
+<script src="assets/sheet.js?v=3"></script>
+<script src="assets/data.js?v=3"></script>
+<script src="assets/course.js?v=3"></script>
+<script>
+var D = CourseData;
+
+function pct(x) { return isFinite(x) ? Math.round(x * 100) + "%" : "—"; }
+
+Calc.mount("c1", {
+  title: "Funnel calculator — change any number",
+  fields: [
+    { key: "app", label: "Applicants", value: 6 },
+    { key: "scr", label: "Screened", value: 5 },
+    { key: "int", label: "Interviewed", value: 4 },
+    { key: "off", label: "Offered", value: 4 },
+    { key: "acc", label: "Accepted", value: 3 },
+    { key: "joi", label: "Joined", value: 2 }
+  ],
+  outputs: [
+    { label: "App → screen", calc: function (v) { return pct(v.scr / v.app); } },
+    { label: "Screen → interview", calc: function (v) { return pct(v.int / v.scr); } },
+    { label: "Interview → offer", calc: function (v) { return pct(v.off / v.int); } },
+    { label: "Offer acceptance", calc: function (v) { return pct(v.acc / v.off); } },
+    { label: "Accept → join", calc: function (v) { return pct(v.joi / v.acc); } },
+    { label: "Overall app → join", calc: function (v) { return pct(v.joi / v.app); } }
+  ],
+  commentary: function (v) {
+    var stages = [
+      ["applicant to screen", v.scr / v.app, "the advert or the sourcing is bringing in the wrong people"],
+      ["screen to interview", v.int / v.scr, "you and the hiring manager do not agree on what good looks like \u2014 that is a calibration conversation, not a sourcing problem"],
+      ["interview to offer", v.off / v.int, "the interview is catching things the screen should have, or the bar moved mid-process"],
+      ["offer to accept", v.acc / v.off, "pay, a competing offer, or how the candidate was treated"],
+      ["accept to join", v.joi / v.acc, "a long notice period with nobody keeping in touch"]
+    ].filter(function (s) { return isFinite(s[1]); });
+    if (!stages.length) return "";
+    stages.sort(function (a, b) { return a[1] - b[1]; });
+    var worst = stages[0];
+    var extra = v.acc > v.joi
+      ? " Note that accepts and joiners differ \u2014 someone accepted and did not start, which is invisible if only acceptance is reported."
+      : "";
+    return "<strong>Weakest step: " + worst[0] + " at " + pct(worst[1]) + ".</strong> If that is the lowest ratio, the likely cause is that " + worst[2] + "." + extra;
+  }
+});
+
+Calc.mount("c2", {
+  title: "Time to hire vs time to fill",
+  fields: [
+    { key: "open", label: "Days: requisition open → first applicant", value: 12 },
+    { key: "proc", label: "Days: applied → accepted", value: 31 },
+    { key: "notice", label: "Notice period (days)", value: 60 },
+    { key: "outlier", label: "One slow role took (days)", value: 180 },
+    { key: "n", label: "Number of hires", value: 6 }
+  ],
+  outputs: [
+    { label: "Time to hire", calc: function (v) { return Math.round(v.proc) + " d"; } },
+    { label: "Time to fill", calc: function (v) { return Math.round(v.open + v.proc) + " d"; } },
+    { label: "Time to start", calc: function (v) { return Math.round(v.open + v.proc + v.notice) + " d"; } },
+    { label: "Mean with outlier", calc: function (v) {
+        var mean = ((v.n - 1) * (v.open + v.proc) + v.outlier) / v.n;
+        return Math.round(mean) + " d";
+      } }
+  ],
+  commentary: function (v) {
+    var median = v.open + v.proc;
+    var mean = ((v.n - 1) * median + v.outlier) / v.n;
+    var gap = Math.round(mean - median);
+    if (gap <= 0) return "With no outlier, the mean and median agree and either is safe to quote.";
+    return "<strong>The mean is " + gap + " days higher than the typical role</strong>, entirely because of one slow requisition. " +
+      "Quoting the mean (" + Math.round(mean) + " days) makes the process look worse than it is; quoting only the median (" + median +
+      " days) hides a real problem. Report both and name the cause \u2014 that is the professional answer.";
+  }
+});
+
+Calc.mount("c3", {
+  title: "Quality of hire index",
+  fields: [
+    { key: "hires", label: "Hires in the cohort", value: 20 },
+    { key: "prob", label: "Passed probation", value: 19 },
+    { key: "rehire", label: "Manager would rehire", value: 16 },
+    { key: "year", label: "Still there at 12 months", value: 17 }
+  ],
+  outputs: [
+    { label: "Passed probation", calc: function (v) { return pct(v.prob / v.hires); } },
+    { label: "Would rehire", calc: function (v) { return pct(v.rehire / v.hires); } },
+    { label: "12-month retention", calc: function (v) { return pct(v.year / v.hires); } },
+    { label: "Index (out of 3)", calc: function (v) {
+        var s = (v.prob + v.rehire + v.year) / (v.hires * 3) * 3;
+        return (Math.round(s * 100) / 100).toFixed(2);
+      } }
+  ],
+  commentary: function (v) {
+    var p = v.prob / v.hires, r = v.rehire / v.hires, y = v.year / v.hires;
+    if (p > 0.9 && r < 0.85) {
+      return "<strong>This is the interesting pattern.</strong> Almost everyone passed probation, but managers would not rehire " +
+        Math.round((1 - r) * v.hires) + " of them. Probation is catching disasters and missing mediocrity \u2014 which is the argument " +
+        "for asking the rehire question at 90 days rather than relying on probation alone.";
+    }
+    if (y < p - 0.1) return "<strong>People are passing probation and then leaving.</strong> That points at onboarding or at the role not matching what was sold in the process \u2014 both recruiting-adjacent, and both fixable.";
+    return "A healthy cohort. The index is useful as a trend across cohorts, not as an absolute score \u2014 its value is that it moves when something changes.";
+  }
+});
+
+Calc.mount("c4", {
+  title: "Agency fee vs direct sourcing",
+  fields: [
+    { key: "salary", label: "Salary (€)", value: 70000, step: 1000 },
+    { key: "fee", label: "Agency fee (%)", value: 20 },
+    { key: "weeks", label: "Weeks the role stays open without help", value: 8 },
+    { key: "value", label: "Weekly cost of the vacancy (€)", value: 1500, step: 100 },
+    { key: "hours", label: "Your hours to source it directly", value: 30 },
+    { key: "rate", label: "Your fully-loaded hourly cost (€)", value: 45 }
+  ],
+  outputs: [
+    { label: "Agency fee", calc: function (v) { return "\u20ac" + Math.round(v.salary * v.fee / 100).toLocaleString("en-IE"); } },
+    { label: "Direct sourcing cost", calc: function (v) { return "\u20ac" + Math.round(v.hours * v.rate).toLocaleString("en-IE"); } },
+    { label: "Cost of the delay", calc: function (v) { return "\u20ac" + Math.round(v.weeks * v.value).toLocaleString("en-IE"); } },
+    { label: "Direct, all in", calc: function (v) { return "\u20ac" + Math.round(v.hours * v.rate + v.weeks * v.value).toLocaleString("en-IE"); } }
+  ],
+  commentary: function (v) {
+    var agency = v.salary * v.fee / 100;
+    var direct = v.hours * v.rate + v.weeks * v.value;
+    var diff = Math.round(Math.abs(agency - direct)).toLocaleString("en-IE");
+    if (direct < agency) {
+      return "<strong>Direct sourcing is \u20ac" + diff + " cheaper here</strong>, even counting the vacancy cost of the delay. " +
+        "And unlike the fee, your hours build a pipeline you keep.";
+    }
+    return "<strong>The agency is \u20ac" + diff + " cheaper here</strong>, because the vacancy is costing more per week than the fee saves. " +
+      "This is the honest case for using one: urgency, or a market you have no network in. The judgement answer is to use the agency for " +
+      "this hire and build direct sourcing behind it, so the second hire in that market does not need one.";
+  }
+});
+
+/* time in stage */
+Sheet.mount("s2", D.candidates(["Name", "Applied", "Screened", "Interview", "Offer", "Accepted"], {
+  id: "m-stage", rows: 10, cols: 12, height: 260,
+  title: "Time in stage",
+  note: "Each column is the days spent waiting for the next step.",
+  open: ["H2:H7", "I2:I7", "J2:J7"], fillTo: 7, lessonId: "m.time",
+  cells: { H1: "To screen", I1: "To interview", J1: "To offer", L1: "Medians" },
+  extraFormats: { H: "general", I: "general", J: "general", L: "text" },
+  widths: { H: 92, I: 100, J: 90, L: 90 },
+  tasks: [
+    { cell: "H2", ask: "Days from applying to being screened. Blank if never screened.",
+      want: 2, answer: '=IF(C2="","",C2-B2)', requires: ["IF"],
+      good: "2 days for Asha. Fill down \u2014 Farah stays blank because Farah was never screened, which is correct: there is no completed time in stage; Farah is still in it." },
+    { cell: "I2", ask: "Days from screen to interview.",
+      want: 8, answer: '=IF(OR(C2="",D2=""),"",D2-C2)', requires: ["IF"],
+      good: "8 days. Cara is blank \u2014 Cara was screened and never interviewed." },
+    { cell: "J2", ask: "Days from interview to offer.",
+      want: 8, answer: '=IF(OR(D2="",E2=""),"",E2-D2)', requires: ["IF"],
+      good: "8 days. Now look down the three columns: the screen-to-interview wait is the longest and most variable. That is where the process is slow \u2014 and the overall \u201ctime to hire\u201d figure would have hidden it completely." }
+  ]
+}));
+
+/* source effectiveness */
+Sheet.mount("s5", D.candidates(D.ALL, {
+  id: "m-source", rows: 11, cols: 19, height: 300,
+  title: "Source effectiveness",
+  note: "One formula per column. All three spill down the three sources.",
+  open: ["N2", "O2", "P2", "Q2"], lessonId: "m.source",
+  cells: { N1: "Source", O1: "Applicants", P1: "Joiners", Q1: "Conversion" },
+  extraFormats: { N: "text", O: "general", P: "general", Q: "pct" },
+  widths: { N: 110, O: 96, P: 84, Q: 100 },
+  tasks: [
+    { cell: "N2", ask: "The distinct sources, sorted.",
+      want: "Agency", answer: "=SORT(UNIQUE(Candidates[Source]))", requires: ["UNIQUE"],
+      good: "Agency, LinkedIn, Referral." },
+    { cell: "O2", ask: "Applicants from each source. Point the criteria at the spilled block.",
+      want: 1, answer: "=COUNTIFS(Candidates[Source],N2#)", requires: ["COUNTIFS"],
+      good: "1, 4, 1." },
+    { cell: "P2", ask: "Joiners from each source — count the rows with that source <em>and</em> a Joined date.",
+      want: 0, answer: '=COUNTIFS(Candidates[Source],N2#,Candidates[Joined],"<>")', requires: ["COUNTIFS"],
+      good: "0 from Agency, 1 from LinkedIn, 1 from Referral." },
+    { cell: "Q2", ask: "Conversion — joiners ÷ applicants, per source. Use IFERROR so a source with no applicants is blank.",
+      want: 0, tol: 0.001, answer: '=IFERROR(P2#/O2#,"")', requires: ["IFERROR"],
+      good: "0%, 25%, 100%. <strong>That is the finding:</strong> LinkedIn brought four times the volume and the same number of hires. Referral converted at 100% off one applicant \u2014 which on this sample size is a reason to watch it for a quarter, not yet a reason to spend money. Saying that caveat out loud is what makes the analysis trustworthy." }
+  ]
+}));
+
+Quiz.mount("q6", {
+  title: "Check yourself", lessonId: "m.diversity",
+  items: [
+    { q: "A group is 40% of applicants and 15% of hires. What does you investigate?",
+      opts: ["Sourcing — you need more applicants from that group", "The stage ratios, to find where in the funnel the drop happens", "Nothing, 15% is fine", "The job advert"],
+      a: 1,
+      why: "<b>Sourcing is clearly working</b> \u2014 40% of applicants. The loss is inside the process, and the stage conversion rates will show whether it is at screen, interview or offer. Reporting intake alone would have hidden this completely, which is why the funnel view is the whole point." },
+    { q: "A report cell shows \"2 of 3 hires from this group were women (67%)\". What is wrong?",
+      opts: ["Nothing", "The numbers are small enough to identify individuals — the convention is to suppress cells under about five", "The percentage is wrong", "It should be a chart"],
+      a: 1,
+      why: "<b>Small-number suppression.</b> With three people, a percentage plus any other field in the report can identify someone. Knowing this rule unprompted is a strong signal of real experience with sensitive data." },
+    { q: "You want to practise building a diversity dashboard. What data should you use?",
+      opts: ["Your real candidates, anonymised", "Invented data", "A public dataset of real people", "Your own team's records"],
+      a: 1,
+      why: "<b>Invented data, always.</b> Diversity data is special category data under GDPR Article 9. Anonymisation is harder than it looks and re-identification from a few fields is routine. Practise the technique on fiction; discuss the approach in interviews." }
+  ]
+});
+
+Quiz.mount("q3m", {
+  title: "Check yourself", lessonId: "m.quality",
+  items: [
+    { q: "Why is quality of hire rarely on the dashboard?",
+      opts: ["It does not matter", "The data is not in the ATS — it has to be collected on purpose after the person starts", "Excel cannot calculate it", "GDPR forbids it"],
+      a: 1, why: "<b>Speed and cost are easy because they are already in the extract.</b>" },
+    { q: "A defensible starter index is:",
+      opts: ["A 40-item engagement survey", "Passed probation, manager would rehire, still here at 12 months", "Glassdoor stars", "Time to fill"],
+      a: 1, why: "<b>Three booleans, scored out of three.</b>" }
+  ]
+});
+Quiz.mount("q4m", {
+  title: "Check yourself", lessonId: "m.cost",
+  items: [
+    { q: "Cost per hire in the standard definition is divided by:",
+      opts: ["Offers", "Applicants", "Number of hires (joiners)", "Requisitions"],
+      a: 2, why: "<b>Joiners. Dividing by offers understates the cost of filling a seat.</b>" },
+    { q: "The internal cost everyone forgets:",
+      opts: ["Coffee", "Interviewer time", "Printer toner", "The pie chart"],
+      a: 1, why: "<b>Twelve interviews can cost more than the advert.</b>" }
+  ]
+});
+
+Drill.mount("d7", {
+  id: "m-say", lessonId: "m.scorecard", seconds: 45,
+  title: "\u201cWhich recruiting metric matters most?\u201d",
+  prompt: "A very common interview question, and a trap \u2014 any single answer sounds naive. Forty-five seconds.",
+  model: "<p>\u201cIt depends what decision is being made, so I would not pick one. But if I had to defend a single number it would be <strong>quality of hire</strong>, because speed and cost are easy to measure and easy to improve by doing a worse job. The cheapest, fastest hire can be the most expensive thing you do all year.</p><p>Day to day I watch the stage conversion rates rather than the headline numbers, because the overall rate tells me something is wrong and the stage ratio tells me what. A weak screen-to-interview rate means the hiring manager and I disagree about the bar, which is a calibration conversation. A weak offer-to-accept rate means pay or candidate experience, which is a different conversation with different people.</p><p>And I would report time to fill as a median with the mean beside it, because one visa-delayed role will drag the average and make a healthy process look broken \u2014 then name that role rather than hide it.\u201d</p><p class=\"tiny\">Three moves: refuse the false choice, give a defensible single answer with a reason, then show the day-to-day diagnostic. The visa detail signals that you have thought about European hiring specifically.</p>"
+});
+
+Course.init({ id: "metrics" });
+</script>
+</body>
+</html>

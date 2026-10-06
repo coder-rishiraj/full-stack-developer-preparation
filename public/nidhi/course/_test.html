@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><title>engine test</title>
+<style>body{font:14px ui-monospace,monospace;padding:16px}.p{color:#176}.f{color:#b22;font-weight:700}</style>
+</head>
+<body>
+<div id="out"></div>
+<script src="assets/engine.js?v=3"></script>
+<script src="assets/sheet.js?v=3"></script>
+<script src="assets/data.js?v=3"></script>
+<script>
+var cfg = CourseData.candidates(CourseData.ALL, {});
+var wb = new Fx.Workbook({formats: cfg.formats, tables: cfg.tables});
+wb.load(cfg.data, "A1");
+var rolesCfg = CourseData.roles(null, {});
+/* put Roles at N1 so both tables are in one workbook for lookup tests */
+wb.addTable("Roles", {range:"N1:T3", header:true});
+wb.load(rolesCfg.data, "N1");
+
+var T = [];
+function t(f, want, tol) { T.push([f, want, tol]); }
+
+/* counting */
+t('=COUNTA(Candidates[Name])', 6);
+t('=COUNT(Candidates[Applied])', 6);
+t('=COUNT(Candidates[Screened])', 5);
+t('=COUNT(Candidates[Interview])', 4);
+t('=COUNT(Candidates[Offer])', 4);
+t('=COUNT(Candidates[Accepted])', 3);
+t('=COUNT(Candidates[Joined])', 2);
+t('=COUNTBLANK(Candidates[Joined])', 4);
+t('=COUNTIF(Candidates[Source],"LinkedIn")', 4);
+t('=COUNTIF(Candidates[Source],"linkedin")', 4);
+t('=COUNTIFS(Candidates[Source],"LinkedIn",Candidates[Outcome],"Joined")', 2);
+t('=COUNTIF(Candidates[Outcome],"Open")', 1);
+t('=COUNTIF(Candidates[Source],"Link*")', 4);
+t('=COUNTIFS(Candidates[RoleID],"BE-1")', 4);
+/* sums and averages */
+t('=SUM(Candidates[FeeEUR])', 4000);
+t('=SUMIF(Candidates[Source],"Agency",Candidates[FeeEUR])', 4000);
+t('=SUMIFS(Candidates[FeeEUR],Candidates[Outcome],"Reneged")', 4000);
+t('=AVERAGE(Candidates[FeeEUR])', 666.67, 0.02);
+t('=MAX(Candidates[FeeEUR])', 4000);
+t('=MIN(Candidates[FeeEUR])', 0);
+/* dates */
+t('=I2-E2', 23);
+t('=I5-E5', 32);
+t('=I6-E6', 39);
+t('=AVERAGE(I2-E2,I5-E5,I6-E6)', 31.333, 0.01);
+t('=DATEDIF(E2,I2,"d")', 23);
+t('=NETWORKDAYS(E2,I2)', 18);
+t('=YEAR(E2)', 2026);
+t('=MONTH(E2)', 3);
+t('=DAY(E2)', 2);
+t('=TEXT(J2,"mmm yyyy")', "Apr 2026");
+t('=TODAY()-E7', 42);
+t('=EOMONTH(E2,0)', Fx.dateSerial(2026,3,31));
+t('=EDATE(J2,6)', Fx.dateSerial(2026,10,20));
+t('=DATE(2026,3,2)', Fx.dateSerial(2026,3,2));
+/* logic */
+t('=IF(I2="","",I2-E2)', 23);
+t('=IF(I3="","",I3-E3)', "");
+t('=AND(K7="Open",TODAY()-E7>14)', true);
+t('=OR(K2="Joined",K2="Open")', true);
+t('=NOT(ISBLANK(F7))', false);
+t('=ISBLANK(F7)', true);
+t('=IFS(I2-E2<=30,"Fast",TRUE,"Slow")', "Fast");
+t('=IFERROR(1/0,"Check")', "Check");
+t('=DIVIDE(3,4)', 0.75);
+t('=IFERROR(COUNT(Candidates[Accepted])/COUNT(Candidates[Offer]),"")', 0.75);
+/* lookups */
+t('=XLOOKUP(B2,Roles[RoleID],Roles[HiringManager],"No role")', "Maya Shah");
+t('=XLOOKUP(B5,Roles[RoleID],Roles[Location],"No role")', "Amsterdam");
+t('=XLOOKUP("ZZ-9",Roles[RoleID],Roles[Title],"No role")', "No role");
+t('=MATCH("FE-1",Roles[RoleID],0)', 2);
+t('=INDEX(Roles[Title],2)', "Frontend Engineer");
+t('=INDEX(Roles[Department],MATCH(B2,Roles[RoleID],0))', "Engineering");
+t('=VLOOKUP("FE-1",N2:T3,2,FALSE)', "Frontend Engineer");
+/* text */
+t('=TRIM("  asha  ")', "asha");
+t('=PROPER("asha")', "Asha");
+t('=UPPER(A2)', "ASHA");
+t('=LEN(A2)', 4);
+t('=LEFT(B2,2)', "BE");
+t('=RIGHT(B2,1)', "1");
+t('=MID("Backend Engineer - Dublin",20,6)', "Dublin");
+t('=SEARCH("-",B2)', 3);
+t('=SUBSTITUTE("Linkdin","Linkdin","LinkedIn")', "LinkedIn");
+t('=TEXTJOIN(", ",TRUE,Candidates[Name])', "Asha, Ben, Cara, Dev, Eva, Farah");
+t('=CONCAT(A2," (",C2,")")', "Asha (LinkedIn)");
+t('=A2&" - "&C2', "Asha - LinkedIn");
+t('=TEXTBEFORE("Backend Engineer - Dublin"," - ")', "Backend Engineer");
+/* dynamic arrays */
+t('=COUNTA(UNIQUE(Candidates[Source]))', 3);
+t('=ROWS(UNIQUE(Candidates[Source]))', 3);
+t('=TEXTJOIN("|",TRUE,SORT(UNIQUE(Candidates[Source])))', "Agency|LinkedIn|Referral");
+t('=INDEX(SORT(UNIQUE(Candidates[Source])),1)', "Agency");
+t('=TEXTJOIN(",",TRUE,FILTER(Candidates[Name],Candidates[Outcome]="Joined"))', "Asha,Dev");
+t('=TEXTJOIN(",",TRUE,FILTER(Candidates[Name],Candidates[Screened]=""))', "Farah");
+t('=ROWS(FILTER(Candidates[Name],Candidates[Source]="LinkedIn"))', 4);
+/* array criteria must spill one answer per criterion */
+t('=TEXTJOIN("|",TRUE,COUNTIFS(Candidates[Source],SORT(UNIQUE(Candidates[Source]))))', "1|4|1");
+t('=SUM(COUNTIFS(Candidates[Source],UNIQUE(Candidates[Source])))', 6);
+t('=TEXTJOIN("|",TRUE,SUMIFS(Candidates[FeeEUR],Candidates[Source],SORT(UNIQUE(Candidates[Source]))))', "4000|0|0");
+/* SUBTOTAL picks its function by code */
+t('=SUBTOTAL(109,Candidates[FeeEUR])', 4000);
+t('=SUBTOTAL(9,Candidates[FeeEUR])', 4000);
+t('=SUBTOTAL(103,Candidates[Name])', 6);
+t('=SUBTOTAL(102,Candidates[Accepted])', 3);
+t('=SUBTOTAL(999,Candidates[FeeEUR])', "#VALUE!");
+t('=ROUND(STDEV(1,2,3,4),3)', 1.291);
+t('=VAR.P(2,4,4,4,5,5,7,9)', 4);
+/* the dashboard headline pattern */
+t('=6&" applicants, "&TEXT(0.75,"0%")&" acceptance"', "6 applicants, 75% acceptance");
+t('=TEXT(0.6667,"0.0%")', "66.7%");
+t('=TEXT(4000,"#,##0")', "4,000");
+t('=TEXT(31.333,"0.0")', "31.3");
+t('=TEXT(-0.25,"0%")', "-25%");
+t('=TEXT(DATE(2026,3,2),"d mmm yyyy")', "2 Mar 2026");
+/* pay-band statistics */
+t('=MEDIAN(60000,68000,72000,80000,95000)', 72000);
+t('=PERCENTILE(Candidates[FeeEUR],0.5)', 0);
+t('=PERCENTILE(Candidates[FeeEUR],1)', 4000);
+t('=QUARTILE(Candidates[FeeEUR],4)', 4000);
+t('=QUARTILE(Candidates[FeeEUR],5)', "#NUM!");
+t('=MAXIFS(Candidates[FeeEUR],Candidates[Source],"Agency")', 4000);
+t('=MINIFS(Candidates[FeeEUR],Candidates[Source],"LinkedIn")', 0);
+t('=TRUNC(31.99)', 31);
+t('=CEILING(68500,1000)', 69000);
+t('=FLOOR(68500,1000)', 68000);
+t('=ROWS(VSTACK(Candidates[Name],Candidates[Name]))', 12);
+t('=TEXTJOIN("|",TRUE,TEXTSPLIT("Backend Engineer - Dublin"," - "))', "Backend Engineer|Dublin");
+t('=ROWS(TOCOL(Candidates[Accepted]))', 3);
+/* maths */
+t('=ROUND(31.3333,1)', 31.3);
+t('=ROUND(2.5,0)', 3);
+t('=10%', 0.1);
+t('=2+3*4', 14);
+t('=(2+3)*4', 20);
+t('=MEDIAN(Candidates[FeeEUR])', 0);
+t('=4/3', 1.3333, 0.001);
+/* structured refs in a row context: put a formula in M2 */
+wb.cells["V2"] = {raw:'=IF([@Accepted]="","",[@Accepted]-[@Applied])'};
+wb.recalc();
+t('=V2', 23);
+
+var out = document.getElementById("out");
+var pass = 0, fail = 0, lines = [];
+T.forEach(function (row) {
+  var f = row[0], want = row[1], tol = row[2] === undefined ? 0.0001 : row[2];
+  var v = wb.evalFormula(f, 22, 2);
+  var got = Fx.isMat(v) ? Fx.scalar(v) : v;
+  var ok;
+  if (Fx.isErr(got)) ok = (want === got.e);
+  else if (typeof want === "number") ok = typeof got === "number" && Math.abs(got - want) <= tol;
+  else if (typeof want === "boolean") ok = got === want;
+  else if (want === "") ok = got === "" || got === null;
+  else ok = String(got) === String(want);
+  if (ok) pass++; else fail++;
+  lines.push('<div class="' + (ok ? "p" : "f") + '">' + (ok ? "ok  " : "FAIL") + "  " +
+    f.replace(/</g,"&lt;") + "  =>  " + JSON.stringify(Fx.isErr(got) ? got.e : got) +
+    (ok ? "" : "   want " + JSON.stringify(want)) + "</div>");
+});
+out.innerHTML = "<h3>" + pass + " passed, " + fail + " failed</h3>" + lines.join("");
+window.__result = {pass: pass, fail: fail, fails: lines.filter(function(l){return l.indexOf('FAIL')>=0;})};
+</script>
+</body>
+</html>

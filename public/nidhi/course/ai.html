@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>9 AI, used carefully — Nidhi's course</title>
+<link rel="stylesheet" href="assets/course.css?v=3">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand"><a href="index.html">Nidhi Tiwari</a><span>9 · AI, used carefully</span></div>
+  <div class="top-actions">
+    <div class="pbar"><i></i></div>
+    <span class="pnum"></span>
+    <a class="btn" href="index.html">Course home</a>
+  </div>
+</div>
+
+<div class="layout">
+<nav class="side" id="sideNav"></nav>
+<main>
+
+<p class="kicker">Chapter 9</p>
+<h1>AI drafts. You decide.</h1>
+<p class="lead">Every European talent team is being asked what it is doing with generative AI. Very few recruiters can answer carefully. The careful answer is a short list of jobs the tool is good at, a hard list of jobs it must not do, and one certificate taken after your own files exist. This chapter is that answer, practised.</p>
+
+<section class="lesson" data-lesson="ai.use" data-n="01">
+  <p class="goal">Six jobs it is actually good at</p>
+  <h3>Where it helps</h3>
+  <p>The tool is a fast intern who has never met the hiring manager and has never seen the search results. You give it structure. You keep the facts. You throw away anything it invented.</p>
+  <table class="t wrap">
+    <thead><tr><th>Job</th><th>What you paste in</th><th>What you do with the output</th></tr></thead>
+    <tbody>
+      <tr><td><strong>A job description</strong></td><td>The intake notes: mandatory skills, false matches, city, three true reasons to join</td><td>Reads it against what Maya actually said. Deletes benefits the company does not offer. Shortens the mandatory list.</td></tr>
+      <tr><td><strong>A Boolean draft</strong></td><td>The role, the city, the stack, the people to exclude</td><td>Asks for five strings from narrow to wide. Runs them. Keeps the one that returns the right people. The tool has not seen the results.</td></tr>
+      <tr><td><strong>Screen questions</strong></td><td>The mandatory skills only — never the candidate's CV</td><td>Uses them as a prompt for your own conversation, not as a script you read.</td></tr>
+      <tr><td><strong>A hiring-manager summary</strong></td><td>Notes you took on the call</td><td>Structure: relevant work, gap, pay, notice, location, recommendation. If a sentence was not in the CV or the call, it comes out.</td></tr>
+      <tr><td><strong>Market homework</strong></td><td>The role and the city</td><td>Asks for the kinds of companies that employ this role, then checks they exist. Invented employers are common.</td></tr>
+      <tr><td><strong>Your own English</strong></td><td>A message you already wrote</td><td>Takes the tighter version only if it still sounds like you. You send that one.</td></tr>
+    </tbody>
+  </table>
+  <div class="note">
+    <p><strong>The prompt that actually works</strong> is boring: "Here are the intake notes. Write a job description of 250 words. Mandatory skills only, no more than five. Do not invent benefits. End with a published salary range of €X–€Y. Flag anything you made up." Specific, bounded, and it asks the model to confess.</p>
+  </div>
+  <div id="q1"></div>
+</section>
+
+<section class="lesson" data-lesson="ai.jd" data-n="02">
+  <p class="goal">Do the work once, by hand, so you can judge the machine</p>
+  <h3>Rewrite this job description</h3>
+  <p>Maya sent the draft on the left. It is a real kind of bad: a tool list, no Tuesday, invented culture, no band, eight mandatories. Rewrite it in the box from the intake notes underneath. Then compare with a model. The point is not to sound like a copywriter. The point is to practise the judgement you will use on anything a model produces.</p>
+  <div class="grid2">
+    <div class="card">
+      <h4>What Maya forwarded</h4>
+      <p style="font-size:14.5px">"We are looking for a passionate Backend Engineer to join our fast-paced, family-like culture in Dublin. Must have 5+ years Java, Spring, Kafka, Kubernetes, Terraform, AWS, microservices, and excellent communication. Competitive salary. Great benefits. Be a self-starter who thrives in ambiguity and wears many hats. Apply now with CV and expected salary."</p>
+    </div>
+    <div class="card">
+      <h4>What you actually said in the intake</h4>
+      <p style="font-size:14.5px">They will own the payments API. Must: Java or Kotlin, SQL, production on-call. Should: Kafka. Nice: Kubernetes. Last good hire had four years, not five, and had never used Terraform. Band €72–80k. Can sponsor if it clears €68,911. Hybrid, three days in Dublin. They will work with Maya and two other backend engineers. Do not say family-like — the last person who left said the hours were the problem.</p>
+    </div>
+  </div>
+  <div id="d2"></div>
+</section>
+
+<section class="lesson" data-lesson="ai.no" data-n="03">
+  <p class="goal">The list that keeps your employable</p>
+  <h3>Where it stops</h3>
+  <p>Four hard rules. They are not personal ethics; they are GDPR, discrimination law, and the thing that gets a recruiter fired.</p>
+  <div class="grid2">
+    <div class="warn">
+      <p><strong>No real candidate data in a public tool.</strong> Not a CV, not a phone number, not a salary, not interview notes, not "anonymised" if you would still recognise them. Practice data stays fictional, like Asha and Ben. A company tool with a data-processing agreement is a different conversation, and even then you ask before pasting.</p>
+    </div>
+    <div class="warn">
+      <p><strong>No automatic rejection.</strong> A model repeats the bias in the histories it saw. A human owns the decision, and you must be able to explain it. If you cannot say why someone was screened out, the tool does not get to be the reason.</p>
+    </div>
+    <div class="warn">
+      <p><strong>No score the candidate cannot understand.</strong> "The AI scored you 41" is not a reason. "You have not shipped a production service with on-call" is a reason. The second one also survives a subject-access request.</p>
+    </div>
+    <div class="warn">
+      <p><strong>No invented facts,</strong> about candidates or about you. The model will fabricate employers, metrics and certifications. You check every claim against the CV, the call, or your own tracker. The same rule as the rest of this plan.</p>
+    </div>
+  </div>
+  <figure class="ill">
+    <svg viewBox="0 0 640 120" role="img" aria-label="AI drafts, human decides, nothing personal leaves the building">
+      <rect x="8" y="24" width="150" height="72" fill="#fffdf9" stroke="#e4ddd2"/>
+      <text x="20" y="52" font-size="12" font-family="sans-serif" fill="#1c1917">Intake notes</text>
+      <text x="20" y="70" font-size="11" font-family="sans-serif" fill="#57534e">no CV in here</text>
+      <path d="M158 60 h28" stroke="#1e4d38" marker-end="url(#a9)"/>
+      <rect x="192" y="24" width="150" height="72" fill="#e6eff4" stroke="#c5d6e0"/>
+      <text x="204" y="52" font-size="12" font-family="sans-serif" fill="#1d4e6b">Model drafts</text>
+      <text x="204" y="70" font-size="11" font-family="sans-serif" fill="#57534e">fast, often wrong</text>
+      <path d="M342 60 h28" stroke="#1e4d38" marker-end="url(#a9)"/>
+      <rect x="376" y="24" width="150" height="72" fill="#e7f0ea" stroke="#c9ddd0"/>
+      <text x="388" y="52" font-size="12" font-family="sans-serif" fill="#1e4d38">You edit</text>
+      <text x="388" y="70" font-size="11" font-family="sans-serif" fill="#57534e">facts only</text>
+      <path d="M526 60 h28" stroke="#1e4d38" marker-end="url(#a9)"/>
+      <rect x="560" y="24" width="72" height="72" fill="#f6edd9" stroke="#ead7b0"/>
+      <text x="572" y="58" font-size="12" font-family="sans-serif" fill="#8a5a12">Send</text>
+      <defs><marker id="a9" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 z" fill="#1e4d38"/></marker></defs>
+    </svg>
+    <figcaption>The CV never enters the box in the middle. The draft always passes through you.</figcaption>
+  </figure>
+  <div id="q3"></div>
+</section>
+
+<section class="lesson" data-lesson="ai.talk" data-n="04">
+  <p class="goal">The answer they are actually testing</p>
+  <h3>What to say when they ask about AI</h3>
+  <p>Interviewers are not looking for a prompt library. They are looking for someone who will not leak a candidate's data and will not hide behind a score. Forty-five seconds, then compare.</p>
+  <div id="d4"></div>
+</section>
+
+<section class="lesson" data-lesson="ai.course" data-n="05">
+  <p class="goal">The one certificate that earns its line</p>
+  <h3>IBM's course, and the one to take in pieces</h3>
+  <p>Two Coursera specialisations were considered. Only one belongs on the CV in these four months.</p>
+  <table class="t wrap">
+    <thead><tr><th></th><th>IBM — Generative AI for HR Professionals</th><th>Minnesota — HR for People Managers</th></tr></thead>
+    <tbody>
+      <tr><td>What it is</td><td>Three courses, about 29 hours. Models, applying them to HR work, and the responsible-use side.</td><td>Five courses, around six months at four hours a week. Recruiting, performance, compensation, a capstone.</td></tr>
+      <tr><td>When</td><td><strong>After</strong> the Excel file and the Power BI page exist.</td><td>Compensation if you have time, once the dashboards exist. Not all five. Not before Excel.</td></tr>
+      <tr><td>On the CV</td><td>One line under Certifications, with the year. IBM's name does real work.</td><td>No. It goes into how you answer a pay question.</td></tr>
+      <tr><td>The catch</td><td>Useless if you cannot point at a tracker and a report of your own.</td><td>US employment law throughout — at-will, FLSA, EEOC. Quoting that in Dublin will land badly.</td></tr>
+    </tbody>
+  </table>
+  <p>The free path still does more of the job than either paid course: W3Schools and GeeksforGeeks for Excel, Microsoft Learn for Power BI. PL-300 waits until after you are hired. A LinkedIn Recruiter course you cannot practise on is a waste of money. Any certificate in prompting is a waste of a line.</p>
+  <div class="gold">
+    <p><strong>What "done" looks like for IBM.</strong> You finish the three courses. You rewrite one job description from your own intake notes using the method it taught, and you keep both versions. In an interview you can say what you changed and why. That is the portfolio, not the badge.</p>
+  </div>
+  <div id="q5"></div>
+</section>
+
+<section>
+  <h2>Before moving on</h2>
+  <div class="note">
+    <p>You should be able to name six uses, four hard stops, and the sentence for the interview. You should have one rewritten JD in your own words. Extra reps: <a href="labs-more.html">craft and job labs</a>. You should not have put a real CV into anything.</p>
+  </div>
+</section>
+
+<div class="pager">
+  <a class="btn" href="strategy.html"><span class="lbl">Chapter 8</span>&larr; Strategic TA</a>
+  <a class="btn btn-go" href="interview.html"><span class="lbl">Chapter 10</span>Interview rehearsal &rarr;</a>
+</div>
+
+</main>
+</div>
+
+<script src="assets/engine.js?v=3"></script>
+<script src="assets/sheet.js?v=3"></script>
+<script src="assets/data.js?v=3"></script>
+<script src="assets/course.js?v=3"></script>
+<script>
+Quiz.mount("q1", {
+  title: "Check yourself",
+  lessonId: "ai.use",
+  items: [
+    { q: "You want help writing screen questions for Farah. What do you paste into the tool?",
+      opts: ["Farah's CV", "The mandatory skills from the intake, and nothing about Farah", "Farah's LinkedIn URL", "The whole job description plus the CV so the questions are personalised"],
+      a: 1,
+      why: "<b>The CV never goes in.</b> Questions that test the job's mandatory skills transfer from candidate to candidate. Personalising them from a CV is how private data leaks, and it is also how the model starts inventing experience Farah does not have." },
+    { q: "The model returns five Boolean strings. What is the next step?",
+      opts: ["Use the longest one — more terms means more precision", "Run them, look at who comes back, and keep the string that returns the right people", "Combine all five into one mega-string", "Post the best-looking one in the interview as proof"],
+      a: 1,
+      why: "<b>The tool has not seen the search results.</b> A string is good only if the right humans appear. That check is hers, every time." }
+  ]
+});
+
+Drill.mount("d2", {
+  id: "ai-jd", lessonId: "ai.jd", seconds: 180,
+  title: "Rewrite Maya's JD from the intake.",
+  prompt: "Write the posting you would actually publish. Mandatory list short. Band on the page. No \"family-like.\" No expected-salary question — the Pay Transparency Directive is why.",
+  placeholder: "Backend Engineer, Dublin…",
+  model: "<p><strong>Backend Engineer — Payments API · Dublin · Hybrid (3 days)</strong></p><p>€72,000–€80,000 gross. We can sponsor a Critical Skills permit on a two-year offer at this band.</p><p>You will own the payments API that other teams call when money moves. You will ship in Java or Kotlin, write SQL that you are willing to run in production, and sit in the on-call rotation with Maya and two other backend engineers.</p><p><strong>You must have:</strong> Java or Kotlin in production; SQL; experience being on-call.</p><p><strong>You will probably also have:</strong> Kafka. Kubernetes is useful and not required. We will not screen you out for missing Terraform — the last person who did this job well had never used it.</p><p>Three days a week in Dublin. Apply with a CV. Please do not include your current salary; we will talk about the band on the first call.</p><p class=\"tiny\">The Tuesday job is in the first paragraph. Five mandatories became three. The band is published. The false match from the intake is named so the right people stay in. \"Family-like\" is gone because it was a lie. Expected salary is gone because asking for it is the thing Europe is banning.</p>"
+});
+
+Quiz.mount("q3", {
+  title: "Check yourself",
+  lessonId: "ai.no",
+  items: [
+    { q: "A colleague pastes a candidate's CV into ChatGPT to \"summarise for the manager, it's faster.\" What does you say?",
+      opts: ["Fine if they delete the name", "Stop — that is personal data in a public tool, and a summary the model invents can still go to the manager", "Fine if they use the paid plan", "Fine for rejected candidates only"],
+      a: 1,
+      why: "<b>A name-strip is not anonymisation if the rest of the CV identifies the person,</b> and a public tool is a processor you have not contracted. The faster summary is the notes you already took, structured. That is also the version that survives a subject-access request." },
+    { q: "An ATS vendor offers \"AI ranking\" that auto-rejects the bottom 40%. Why does you refuse to switch it on?",
+      opts: ["It is too expensive", "You cannot explain the rejection, the model will repeat historic bias, and an automated decision about a person is exactly what GDPR treats as high-risk", "It might reject good people and you would have to source more", "Managers prefer to reject people themselves"],
+      a: 1,
+      why: "<b>Explainability, bias, and Article 22 sit together.</b> \"The model said so\" is not a reason a candidate — or a regulator — will accept. Ranking as a suggestion you review is a different product. Auto-reject is not." },
+    { q: "The model writes that you \"reduced time-to-fill by 40% at Ferra.\" The resume has no such number. What do you do?",
+      opts: ["Put it on the CV — the model has seen lots of HR resumes so it is probably typical", "Leave it off until you can rebuild the number from your own tracker", "Put it in LinkedIn only", "Use \"approximately 40%\""],
+      a: 1,
+      why: "<b>Invented metrics are how interviews die.</b> A blank is better. The same rule as the rest of the plan, applied to a very confident intern." }
+  ]
+});
+
+Drill.mount("d4", {
+  id: "ai-talk", lessonId: "ai.talk", seconds: 45,
+  title: "\"How are you using AI in your work?\"",
+  prompt: "Forty-five seconds. Specific uses, hard stops, no certificate mentioned unless they ask.",
+  model: "<p>\"I use it to draft, and I decide. Job descriptions from intake notes, Boolean strings I then run myself, screen questions from the mandatory skills, and summaries from notes I took — never from a CV pasted into a public tool.</p><p>I do not put candidate data into anything that is not a contracted company system. I do not let a model reject people, and I do not use a score I cannot explain. If a sentence was not in the CV or the call, it does not go to the hiring manager.</p><p>The test I use is simple: could I defend this decision if the candidate asked for their file tomorrow? If the answer depends on a model, I have not finished the work.\"</p><p class=\"tiny\">Uses, stops, and a test a European interviewer will recognise as GDPR-shaped. No buzzwords, no certificate.</p>"
+});
+
+Quiz.mount("q5", {
+  title: "Check yourself", lessonId: "ai.course",
+  items: [
+    { q: "When does IBM Generative AI for HR go on the calendar?",
+      opts: ["Before Excel", "After your own tracker and report exist", "Instead of Power BI", "Never"],
+      a: 1, why: "<b>A badge with no file is weaker than a file with no badge.</b>" },
+    { q: "Minnesota HR for People Managers on the CV?",
+      opts: ["Yes, all five courses", "No — US employment law, and it is not the line that gets your hired", "Yes, as experience", "Instead of IBM"],
+      a: 1, why: "<b>Compensation module if you have time. Not a CV line.</b>" }
+  ]
+});
+
+Course.init({ id: "ai" });
+</script>
+</body>
+</html>

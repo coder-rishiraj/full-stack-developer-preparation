@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Excel sandbox — Nidhi's course</title>
+<link rel="stylesheet" href="assets/course.css?v=3">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand"><a href="index.html">Nidhi Tiwari</a><span>Excel sandbox · type anything</span></div>
+  <div class="top-actions">
+    <div class="pbar"><i></i></div>
+    <span class="pnum"></span>
+    <a class="btn" href="index.html">Course home</a>
+  </div>
+</div>
+
+<div class="layout">
+<nav class="side" id="sideNav"></nav>
+<main>
+
+<p class="kicker">Always on</p>
+<h1>A recruiting workbook, in the browser.</h1>
+<p class="lead">This is the practice file with the locks off. Click a cell, type a formula, press Enter, fill down. Everything you learn in chapters 1.1–1.4 can be tried here against the same six people. It is not Microsoft Excel — rebuild the finished version there — but it is the place to think.</p>
+
+<div class="note">
+  <p><strong>How to use it.</strong> The Candidates table is named <code>Candidates</code>, the Roles table is named <code>Roles</code>. Structured references work: <code>=COUNTIF(Candidates[Source],"LinkedIn")</code>. Grey is not locked here. If you break a formula, reload, or use Reset on the course home. TODAY is pinned to 1 May 2026 so every answer stays stable.</p>
+</div>
+
+<section class="lesson" data-lesson="sandbox.candidates" data-n="01" data-check="I can drive this grid without the lesson holding my hand">
+  <p class="goal">The live file</p>
+  <h3>Candidates</h3>
+  <p>Columns A–L are the facts. N onwards is blank on purpose. Common things to type: hire days in N, a manager lookup in O, a CHASE flag in P, funnel counts below the table.</p>
+  <div id="s1"></div>
+  <div id="pg1"></div>
+</section>
+
+<section class="lesson" data-lesson="sandbox.roles" data-n="02" data-check="I can look a role up from a candidate row">
+  <p class="goal">The small table</p>
+  <h3>Roles</h3>
+  <p>XLOOKUP from a candidate's RoleID into this table is the join Power BI will do with a relationship. Try it in O2 on the sheet above: <code>=XLOOKUP(B2,Roles[RoleID],Roles[HiringManager],"No role")</code>.</p>
+  <div id="s2"></div>
+</section>
+
+<section class="lesson" data-lesson="sandbox.dash" data-n="03" data-check="I can build the six funnel numbers from formulas only">
+  <p class="goal">No typed numbers</p>
+  <h3>Dashboard sheet</h3>
+  <p>Every value here should be a formula pointing at Candidates. If you type 6, you have missed the point. The gold cells are the six stage counts plus the two rates a hiring manager actually reads.</p>
+  <div id="s3"></div>
+</section>
+
+<div class="pager">
+  <a class="btn" href="index.html"><span class="lbl">Back</span>Course home</a>
+  <a class="btn btn-go" href="excel-1.html"><span class="lbl">Chapter 1.1</span>Start the Excel course &rarr;</a>
+</div>
+
+</main>
+</div>
+
+<script src="assets/engine.js?v=3"></script>
+<script src="assets/sheet.js?v=3"></script>
+<script src="assets/data.js?v=3"></script>
+<script src="assets/course.js?v=3"></script>
+<script>
+var D = CourseData;
+
+Sheet.mount("s1", D.candidates(D.ALL, {
+  id: "sandbox-cand", rows: 14, cols: 20, height: 340,
+  title: "Candidates", note: "Unlocked. Fill N onwards. Roles sit in R–X so XLOOKUP can see them.",
+  open: null, readonly: false,
+  cells: {
+    N1: "HireDays", O1: "Manager", P1: "Stale?",
+    R1: "RoleID", S1: "Title", T1: "Department", U1: "HiringManager", V1: "Location", W1: "Opened", X1: "Status",
+    R2: "BE-1", S2: "Backend Engineer", T2: "Engineering", U2: "Maya Shah", V2: "Dublin", W2: "2026-01-15", X2: "Open",
+    R3: "FE-1", S3: "Frontend Engineer", T3: "Engineering", U3: "Leo Berger", V3: "Amsterdam", W3: "2026-01-20", X3: "Open"
+  },
+  extraFormats: { N: "general", O: "text", P: "text", R: "text", S: "text", T: "text", U: "text", V: "text", W: "date", X: "text" },
+  extraTables: { Roles: { range: "R1:X3", header: true } },
+  widths: { N: 86, O: 110, P: 80, R: 66, S: 130, U: 100 }
+}));
+
+Sheet.playground("pg1", {
+  title: "Formula bar for this table",
+  note: "Chips run against Candidates. Edit them.",
+  data: D.candidates(D.ALL, {}).data,
+  tables: { Candidates: { range: "A1:L7", header: true } },
+  formats: D.candidates(D.ALL, {}).formats,
+  examples: [
+    '=COUNTA(Candidates[Name])',
+    '=COUNTIF(Candidates[Source],"LinkedIn")',
+    '=COUNTIFS(Candidates[Source],"LinkedIn",Candidates[Outcome],"Joined")',
+    '=COUNT(Candidates[Joined])',
+    '=COUNTBLANK(Candidates[Screened])',
+    '=FILTER(Candidates[Name],Candidates[Outcome]="Open")',
+    '=TEXTJOIN(", ",TRUE,UNIQUE(Candidates[Source]))',
+    '=IFERROR(I2-E2,"")'
+  ],
+  value: '=COUNTA(Candidates[Name])'
+});
+
+Sheet.mount("s2", D.roles(null, {
+  id: "sandbox-roles", rows: 6, cols: 8,
+  title: "Roles", note: "Unlocked. RoleID is the key.",
+  open: null, readonly: false
+}));
+
+Sheet.mount("s3", (function () {
+  var cfg = D.candidates(["Name", "Screened", "Interview", "Offer", "Accepted", "Joined"], {
+    id: "sandbox-dash", rows: 16, cols: 8, height: 280,
+    title: "Dashboard built on the same people",
+    note: "Facts in A–F. Gold cells in H. Do not type a number into H.",
+    open: ["H2:H9"],
+    extraFormats: { I: "general" },
+    widths: { H: 130, I: 88 }
+  });
+  cfg.cells = {
+    H1: "Metric", I1: "Value",
+    H2: "Applicants", H3: "Screened", H4: "Interviews", H5: "Offers",
+    H6: "Accepts", H7: "Joiners", H8: "Offer acceptance", H9: "Joining rate"
+  };
+  cfg.cellFormats = { I8: "pct", I9: "pct" };
+  cfg.lessonId = "sandbox.dash";
+  cfg.tasks = [
+    { cell: "I2", ask: "Applicants: count the names.",
+      want: 6, answer: "=COUNTA(Candidates[Name])", requires: ["COUNTA"],
+      good: "Six." },
+    { cell: "I3", ask: "Screened: COUNT the dates, not COUNTA.",
+      want: 5, answer: "=COUNT(Candidates[Screened])", requires: ["COUNT"],
+      good: "Five. Farah is the blank." },
+    { cell: "I4", ask: "Interviewed.",
+      want: 4, answer: "=COUNT(Candidates[Interview])",
+      good: "Four." },
+    { cell: "I5", ask: "Offers.",
+      want: 4, answer: "=COUNT(Candidates[Offer])",
+      good: "Four." },
+    { cell: "I6", ask: "Accepts.",
+      want: 3, answer: "=COUNT(Candidates[Accepted])",
+      good: "Three. Ben said no." },
+    { cell: "I7", ask: "Joiners.",
+      want: 2, answer: "=COUNT(Candidates[Joined])",
+      good: "Two. Eva accepted and never arrived." },
+    { cell: "I8", ask: "Offer acceptance: I6 divided by I5. Do not type 0.75.",
+      want: 0.75, tol: 0.001, answer: "=I6/I5",
+      good: "75%." },
+    { cell: "I9", ask: "Joining rate: joiners divided by accepts.",
+      want: 0.6667, tol: 0.01, answer: "=I7/I6",
+      good: "67%. The gap between 75 and 67 is Eva." }
+  ];
+  cfg.open = ["I2:I9"];
+  return cfg;
+})());
+
+Course.init({ id: "sandbox" });
+</script>
+</body>
+</html>

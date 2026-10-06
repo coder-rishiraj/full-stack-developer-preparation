@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>1.3 Lookups and text — Nidhi's course</title>
+<link rel="stylesheet" href="assets/course.css?v=3">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand"><a href="index.html">Nidhi Tiwari</a><span>1.3 · Lookups and text</span></div>
+  <div class="top-actions">
+    <div class="pbar"><i></i></div>
+    <span class="pnum"></span>
+    <a class="btn" href="index.html">Course home</a>
+  </div>
+</div>
+
+<div class="layout">
+<nav class="side" id="sideNav"></nav>
+<main>
+
+<p class="kicker">Chapter 1.3</p>
+<h1>Lookups and text</h1>
+<p class="lead">Two tables have to talk to each other, and real data arrives dirty. This chapter is the difference between a spreadsheet that works on the practice data and one that survives an actual ATS export.</p>
+
+<!-- 1 -->
+<section class="lesson" data-lesson="excel-3.xlookup" data-n="01">
+  <p class="goal">The one lookup worth learning</p>
+  <h3>XLOOKUP</h3>
+  <p>The Candidates table knows a <code>RoleID</code> — <code>BE-1</code>. The Roles table knows that BE-1 is a Backend Engineer in Dublin whose hiring manager is Maya Shah. XLOOKUP carries facts from the small table to the big one.</p>
+  <div class="fml">=XLOOKUP( <b>what to look for</b> , <b>where to look</b> , <b>what to bring back</b> , <b>what if not found</b> )</div>
+  <p>Read it as a sentence: <em>look for this RoleID, in the Roles table's RoleID column, and bring me back the matching HiringManager; if there is no match, say "No role".</em></p>
+  <div class="fml">=XLOOKUP([@RoleID], Roles[RoleID], Roles[HiringManager], <b>"No role"</b>)</div>
+  <p><strong>The fourth argument is the one everybody skips, and it is the most valuable.</strong> Without it, a typo'd RoleID gives <code>#N/A</code>, which is correct but ugly, and in a column of 400 rows it is noise. With <code>"No role"</code>, the broken rows are instantly readable and filterable — you can filter the column to "No role" and see exactly which records need fixing. That turns an error into a worklist.</p>
+  <table class="t wrap">
+    <thead><tr><th>Why it beat VLOOKUP</th><th>Detail</th></tr></thead>
+    <tbody>
+      <tr><td>It looks in any direction</td><td>VLOOKUP can only return a column to the <em>right</em> of the key. XLOOKUP does not care.</td></tr>
+      <tr><td>No column counting</td><td>VLOOKUP needs "the 4th column". Insert a column and it silently returns the wrong field. XLOOKUP names the column it wants.</td></tr>
+      <tr><td>Exact match by default</td><td>VLOOKUP defaults to <em>approximate</em>, which is how a wrong-but-plausible answer gets into a report with nobody noticing.</td></tr>
+      <tr><td>Built-in not-found</td><td>No IFERROR wrapper needed, so a genuine error is still visible.</td></tr>
+    </tbody>
+  </table>
+
+  <h4>Worked example, then your turn</h4>
+  <p>The Roles table sits in rows 10 to 12 of the same sheet. Scroll the grid down to see it.</p>
+  <div id="s1"></div>
+  <div id="pg1"></div>
+</section>
+
+<!-- 2 -->
+<section class="lesson" data-lesson="excel-3.legacy" data-n="02">
+  <p class="goal">Reading other people's files</p>
+  <h3>VLOOKUP and INDEX/MATCH</h3>
+  <p>You should not write these. You will absolutely have to read them, because every file you inherit is full of them.</p>
+  <h4>VLOOKUP, decoded</h4>
+  <div class="fml">=VLOOKUP( <b>key</b> , <b>whole block including the key column</b> , <b>which column number to return</b> , <b>FALSE for exact</b> )</div>
+  <p>The two things to check whenever you see one. First, is the last argument <code>FALSE</code> or <code>0</code>? If it is <code>TRUE</code> or missing, it is doing an approximate match on unsorted data, and the answers may be quietly wrong. Second, count the columns — <code>3</code> means the third column <em>of the block</em>, not of the sheet, and if anyone has inserted a column since it was written, it is now returning the wrong field.</p>
+  <h4>INDEX and MATCH, decoded</h4>
+  <p>Two simple functions that combine into a lookup. Each is useful alone:</p>
+  <ul class="clean">
+    <li><code>=MATCH("FE-1", Roles[RoleID], 0)</code> → <strong>2</strong>. "Which position is this in?" The <code>0</code> means exact match, and it should always be there.</li>
+    <li><code>=INDEX(Roles[Title], 2)</code> → <strong>Frontend Engineer</strong>. "Give me the item at position 2."</li>
+    <li>Nest them: <code>=INDEX(Roles[Title], MATCH([@RoleID], Roles[RoleID], 0))</code> — find the position, then fetch the value at it.</li>
+  </ul>
+  <p>Read from the inside out, always. MATCH runs first and hands its answer to INDEX. This combination was the correct professional answer for twenty years before XLOOKUP existed, which is why it is everywhere.</p>
+  <div class="note">
+    <p><strong>What to say in an interview if asked which you use.</strong> "XLOOKUP, because it is exact by default and does not break when someone inserts a column. I can read VLOOKUP and INDEX/MATCH in existing files, and if a company is on an older Excel I use INDEX/MATCH." That answer says you know all three and has a reason for your choice, which is the actual question being asked.</p>
+  </div>
+  <div id="s2"></div>
+  <div id="q2"></div>
+</section>
+
+<!-- 3 -->
+<section class="lesson" data-lesson="excel-3.clean" data-n="03">
+  <p class="goal">Real exports are filthy</p>
+  <h3>Cleaning text</h3>
+  <p>Here is what an ATS export of a Source column actually looks like, and what each problem does:</p>
+  <table class="t wrap">
+    <thead><tr><th>Value</th><th>Problem</th><th>Consequence</th></tr></thead>
+    <tbody>
+      <tr><td><code>LinkedIn</code></td><td>None</td><td>—</td></tr>
+      <tr><td><code>referral&nbsp;</code></td><td>Trailing space, lower case</td><td>COUNTIF on "Referral" misses it. Case is fine — COUNTIF ignores it — but the space is fatal.</td></tr>
+      <tr><td><code>Linkdin</code></td><td>Typo at the source</td><td>Appears as a separate source in every PivotTable. The one a formula cannot fix.</td></tr>
+      <tr><td><code>&nbsp;LINKEDIN</code></td><td>Leading space, shouting</td><td>Same as above.</td></tr>
+    </tbody>
+  </table>
+  <p>Four values, one real source, and a PivotTable that reports four sources. The fixes:</p>
+  <ul class="clean">
+    <li><code>TRIM</code> removes leading, trailing and doubled-up spaces. Run it on every text column of every export, always.</li>
+    <li><code>CLEAN</code> strips non-printing characters — the invisible junk a CSV from an old system leaves behind.</li>
+    <li><code>PROPER</code> gives Title Case, <code>UPPER</code> and <code>LOWER</code> the obvious. <code>PROPER</code> on <code>"LINKEDIN"</code> gives <code>"Linkedin"</code>, not <code>"LinkedIn"</code> — so for a fixed list of known values, a lookup is better than a case function.</li>
+    <li><code>LEN</code> is the diagnostic. <code>=LEN(A2)</code> against a value that looks like 8 characters and reports 9 has found the invisible space.</li>
+    <li><code>SUBSTITUTE</code> fixes a known typo: <code>=SUBSTITUTE(A2,"Linkdin","LinkedIn")</code>. Fine for one known error, unmanageable for twenty — at that point build a small mapping table and XLOOKUP it, which is the exercise below.</li>
+  </ul>
+  <p><strong>The professional move is to not do this by hand every month.</strong> One <code>TRIM</code> column is fine once. A monthly export needs Power Query, where the cleaning steps are recorded and replay themselves on every refresh. That is lesson 1.4.</p>
+
+  <h4>Your turn — clean a real-looking mess</h4>
+  <div id="s3"></div>
+</section>
+
+<!-- 4 -->
+<section class="lesson" data-lesson="excel-3.split" data-n="04">
+  <p class="goal">One column holding two facts</p>
+  <h3>Splitting text apart</h3>
+  <p>Job titles arrive as <code>Backend Engineer - Dublin</code>. You need the title and the city as separate columns, because nothing can be grouped or filtered while they are glued together.</p>
+  <table class="t wrap">
+    <thead><tr><th>Function</th><th>Does</th><th>On "Backend Engineer - Dublin"</th></tr></thead>
+    <tbody>
+      <tr><td><code>LEFT(text, n)</code></td><td>First n characters</td><td><code>=LEFT(A2,7)</code> → <code>Backend</code></td></tr>
+      <tr><td><code>RIGHT(text, n)</code></td><td>Last n characters</td><td><code>=RIGHT(A2,6)</code> → <code>Dublin</code></td></tr>
+      <tr><td><code>MID(text, start, n)</code></td><td>n characters from a position</td><td><code>=MID(A2,20,6)</code> → <code>Dublin</code></td></tr>
+      <tr><td><code>FIND / SEARCH</code></td><td>The position of something. FIND is case-sensitive, SEARCH is not and allows wildcards.</td><td><code>=SEARCH("-",A2)</code> → <code>18</code></td></tr>
+      <tr><td><code>TEXTBEFORE / TEXTAFTER</code></td><td>Everything before or after a delimiter. Microsoft 365 only.</td><td><code>=TEXTBEFORE(A2," - ")</code> → <code>Backend Engineer</code></td></tr>
+    </tbody>
+  </table>
+  <p>Counting characters by hand — <code>LEFT(A2,16)</code> — works until a title is a different length. The robust version finds the separator and measures from it:</p>
+  <div class="fml">=TRIM(LEFT(A2, SEARCH("-",A2)-1))      <b>everything before the dash</b>
+=TRIM(MID(A2, SEARCH("-",A2)+1, 99))   <b>everything after it</b></div>
+  <p>Read the first one from the inside: SEARCH finds the dash at 18, minus 1 is 17, LEFT takes 17 characters, TRIM removes the trailing space. It survives any title length. <code>TEXTBEFORE</code> and <code>TEXTAFTER</code> do the same thing in one step and should be preferred when available — but the SEARCH version is worth understanding, because it is what you will find in other people's files.</p>
+  <div class="note">
+    <p><strong>Two faster ways when it is a one-off.</strong> <strong>Flash Fill</strong> (<kbd>Ctrl</kbd>+<kbd>E</kbd>): type the answer for the first row, start typing the second, and Excel offers the rest. It is magic, it is not a formula, and it does not update when the data changes — fine for a one-off, wrong for a monthly file. <strong>Text to Columns</strong> (Data ribbon) splits a whole column by a delimiter in one go, overwriting as it lands. Both are good tools. Neither belongs in a file that refreshes.</p>
+  </div>
+  <div id="s4"></div>
+  <div id="pg4"></div>
+</section>
+
+<!-- 5 -->
+<section class="lesson" data-lesson="excel-3.join" data-n="05">
+  <p class="goal">Labels and messages</p>
+  <h3>Joining text back together</h3>
+  <ul class="clean">
+    <li><strong><code>&amp;</code></strong> is the quickest: <code>=A2&amp;" · "&amp;C2</code> → <code>Asha · LinkedIn</code>. Spaces and punctuation must be inside quotes, which is the thing people forget.</li>
+    <li><strong><code>CONCAT</code></strong> joins a list or a range. No separators.</li>
+    <li><strong><code>TEXTJOIN(separator, ignore_blanks, …)</code></strong> is the useful one. The second argument <code>TRUE</code> skips empty cells, which means no stray commas.</li>
+  </ul>
+  <div class="fml">=TEXTJOIN(", ", TRUE, Candidates[Name])   <b>→ Asha, Ben, Cara, Dev, Eva, Farah</b></div>
+  <p>Where this earns its keep is a dynamic summary line on the dashboard — a sentence that rewrites itself when the data changes:</p>
+  <div class="fml">="Still open: "&amp;TEXTJOIN(", ",TRUE,FILTER(Candidates[Name],Candidates[Outcome]="Open"))</div>
+  <p>That is one cell that always says who is outstanding. Combined with the number format trick — <code>&amp;TEXT(value,"0%")</code> to put a formatted number inside a sentence — you can write a dashboard headline that never goes stale:</p>
+  <div class="fml">="Acceptance "&amp;TEXT(B9,"0%")&amp;" across "&amp;B5&amp;" offers"</div>
+  <p><strong>Why <code>TEXT</code> is needed there.</strong> Joining a number into text loses its formatting — <code>="Rate "&amp;0.75</code> gives <code>Rate 0.75</code>, not <code>Rate 75%</code>. <code>TEXT(B9,"0%")</code> applies the format as part of the join. This is the single most common reason a dashboard headline looks half-finished.</p>
+  <div id="s5"></div>
+  <div id="q5j"></div>
+</section>
+
+<!-- 6 -->
+<section class="lesson" data-lesson="excel-3.arrays" data-n="06">
+  <p class="goal">Modern Excel, and it is genuinely better</p>
+  <h3>FILTER, UNIQUE and SORT</h3>
+  <p>These return <em>several</em> answers from one formula. Type it in one cell and the results "spill" into the cells below, with a faint border round the block. Change the data and the block resizes itself. There is no equivalent in older Excel, which is why this course asks for Microsoft 365.</p>
+  <table class="t wrap">
+    <thead><tr><th>Formula</th><th>Returns</th></tr></thead>
+    <tbody>
+      <tr><td><code>=FILTER(Candidates[Name], Candidates[Outcome]="Open")</code></td><td>Farah</td></tr>
+      <tr><td><code>=FILTER(Candidates[Name], Candidates[Screened]="")</code></td><td>Everyone never screened — the Monday list</td></tr>
+      <tr><td><code>=UNIQUE(Candidates[Source])</code></td><td>LinkedIn, Referral, Agency — the distinct values</td></tr>
+      <tr><td><code>=SORT(UNIQUE(Candidates[Source]))</code></td><td>The same three, alphabetically</td></tr>
+      <tr><td><code>=COUNTA(UNIQUE(Candidates[Source]))</code></td><td>3 — how many different sources are in use</td></tr>
+    </tbody>
+  </table>
+  <p>The combination worth remembering is <strong>UNIQUE down the side, COUNTIFS across</strong>. That builds a live summary table without a PivotTable, and unlike a PivotTable it never needs refreshing:</p>
+  <div class="fml">N2: =SORT(UNIQUE(Candidates[Source]))          <b>spills the source names</b>
+O2: =COUNTIFS(Candidates[Source], N2#)        <b>counts each one</b></div>
+  <p>The <code>#</code> in <code>N2#</code> means "the whole spilled block that starts at N2". So when a fourth source appears in the data, both columns grow together. That is a self-maintaining report.</p>
+  <div class="warn">
+    <p><strong><code>#SPILL!</code></strong> means the result needs cells that are not empty. Something is in the way below the formula. Clear the obstruction — do not shorten the formula. And a dynamic array cannot spill inside a Table, so these live <em>beside</em> the table, not in it.</p>
+  </div>
+  <div id="s6"></div>
+  <div id="q6"></div>
+</section>
+
+<!-- 7 -->
+<section class="lesson" data-lesson="excel-3.capstone" data-n="07">
+  <p class="goal">The chapter's deliverable</p>
+  <h3>Enriching the Candidates table</h3>
+  <p>Everything so far, in one place. The finished Candidates sheet has five calculated columns, and this is the exact set you should be able to rebuild from a blank sheet before you leave this chapter.</p>
+  <table class="t wrap">
+    <thead><tr><th>Column</th><th>Formula</th><th>Why it exists</th></tr></thead>
+    <tbody>
+      <tr><td><strong>HireDays</strong></td><td><code>=IF([@Accepted]="","",[@Accepted]-[@Applied])</code></td><td>Time to hire per person.</td></tr>
+      <tr><td><strong>Manager</strong></td><td><code>=XLOOKUP([@RoleID],Roles[RoleID],Roles[HiringManager],"No role")</code></td><td>So you can group by manager without typing it 400 times.</td></tr>
+      <tr><td><strong>City</strong></td><td><code>=XLOOKUP([@RoleID],Roles[RoleID],Roles[Location],"?")</code></td><td>Location reporting, and a map in Power BI later.</td></tr>
+      <tr><td><strong>Chase</strong></td><td><code>=IF(AND([@Outcome]="Open",TODAY()-[@Applied]&gt;14),"CHASE","")</code></td><td>Your Monday morning list.</td></tr>
+      <tr><td><strong>Label</strong></td><td><code>=[@Name]&amp;" · "&amp;[@Source]&amp;" · "&amp;[@Outcome]</code></td><td>A readable one-line summary for a chart tooltip or a message.</td></tr>
+    </tbody>
+  </table>
+  <p>Note that not one of them contains a typed fact. Every one is derived. That is the standard: <strong>if a human typed it, it is data and it belongs in columns A to L; if Excel worked it out, it is a formula and it belongs to the right.</strong></p>
+  <div id="s7"></div>
+  <div id="d7"></div>
+</section>
+
+<section>
+  <h2>Before moving on</h2>
+  <div class="note">
+    <p>From a blank sheet: an XLOOKUP with a sensible not-found message, a TRIM-and-map clean of a dirty source column, a split of a title from a city, and a FILTER that lists who is still open. Then be able to say in one sentence why XLOOKUP is better than VLOOKUP — the real answer is <em>exact by default and it does not break when a column is inserted</em>. Extra reps: <a href="labs-excel.html">Excel labs</a>.</p>
+  </div>
+</section>
+
+<div class="pager">
+  <a class="btn" href="excel-2.html"><span class="lbl">Chapter 1.2</span>&larr; Logic and counting</a>
+  <a class="btn btn-go" href="excel-4.html"><span class="lbl">Chapter 1.4</span>Analysis and the dashboard &rarr;</a>
+</div>
+
+</main>
+</div>
+
+<script src="assets/engine.js?v=3"></script>
+<script src="assets/sheet.js?v=3"></script>
+<script src="assets/data.js?v=3"></script>
+<script src="assets/course.js?v=3"></script>
+<script>
+var D = CourseData;
+var R = D.ROLE_COLS;
+/* Only text columns go in the embedded block, so no column format can misread them. */
+var ROLE_KEYS = ["RoleID", "Title", "Department", "HiringManager", "Location"];
+var ROLE_TABLE = { Roles: { range: "A10:E12", header: true } };
+
+/* A Roles block parked at A10:E12 of the same sheet, so both tables live together. */
+function withRoles(extra) {
+  var cells = { A9: "Roles table" };
+  ROLE_KEYS.forEach(function (k, j) {
+    var L = String.fromCharCode(65 + j);
+    cells[L + "10"] = k;
+    R[k].v.forEach(function (v, i) { cells[L + (11 + i)] = v; });
+  });
+  Object.keys(extra || {}).forEach(function (k) { cells[k] = extra[k]; });
+  return cells;
+}
+
+/* Candidates in rows 1–7, Roles in rows 9–11, for the sandbox. */
+function bothTables() {
+  var c = D.candidates(D.ALL, {});
+  var rows = c.data.map(function (r) { return r.slice(); });
+  rows.push(["", "", "", "", ""]);
+  rows.push(ROLE_KEYS.slice());
+  R.RoleID.v.forEach(function (_, i) {
+    rows.push(ROLE_KEYS.map(function (k) { return R[k].v[i]; }));
+  });
+  return { data: rows, formats: c.formats, widths: c.widths };
+}
+
+/* 1 — XLOOKUP */
+Sheet.mount("s1", D.candidates(D.ALL, {
+  id: "e3-xlookup", rows: 13, cols: 16, height: 300,
+  title: "Candidates (rows 1–7) and Roles (rows 10–12)",
+  note: "Scroll the grid. Column N is written for you; O and P are yours.",
+  open: ["O2:O7", "P2:P7"], fillTo: 7, lessonId: "excel-3.xlookup",
+  extraTables: ROLE_TABLE,
+  cells: withRoles({
+    N1: "Title", N2: '=XLOOKUP([@RoleID],Roles[RoleID],Roles[Title],"No role")',
+    N3: '=XLOOKUP([@RoleID],Roles[RoleID],Roles[Title],"No role")',
+    N4: '=XLOOKUP([@RoleID],Roles[RoleID],Roles[Title],"No role")',
+    N5: '=XLOOKUP([@RoleID],Roles[RoleID],Roles[Title],"No role")',
+    N6: '=XLOOKUP([@RoleID],Roles[RoleID],Roles[Title],"No role")',
+    N7: '=XLOOKUP([@RoleID],Roles[RoleID],Roles[Title],"No role")',
+    O1: "Manager", P1: "City"
+  }),
+  extraFormats: { N: "text", O: "text", P: "text" },
+  widths: { N: 130, O: 110, P: 94 },
+  tasks: [
+    { cell: "O2", ask: "Bring back the hiring manager for this row's role. Give it a sensible not-found message.",
+      want: "Maya Shah", answer: '=XLOOKUP([@RoleID],Roles[RoleID],Roles[HiringManager],"No role")', requires: ["XLOOKUP"],
+      good: "Maya Shah. Fill it down — Dev and Eva get Leo Berger because they are on FE-1." },
+    { cell: "P2", ask: "And the city for this row's role.",
+      want: "Dublin", answer: '=XLOOKUP([@RoleID],Roles[RoleID],Roles[Location],"?")', requires: ["XLOOKUP"],
+      good: "Dublin. Note you did not have to count columns — you named the one you wanted." }
+  ]
+}));
+
+var BOTH = bothTables();
+Sheet.playground("pg1", {
+  title: "Lookup sandbox", note: "Both tables are loaded. Try breaking the key on purpose — the second example has a typo in it.",
+  data: BOTH.data, formats: BOTH.formats,
+  tables: { Candidates: { range: "A1:L7", header: true }, Roles: { range: "A9:E11", header: true } },
+  examples: [
+    '=XLOOKUP("BE-1",Roles[RoleID],Roles[HiringManager],"No role")',
+    '=XLOOKUP("BE1",Roles[RoleID],Roles[HiringManager],"No role")',
+    '=XLOOKUP("FE-1",Roles[RoleID],Roles[Location])',
+    '=MATCH("FE-1",Roles[RoleID],0)',
+    '=INDEX(Roles[Title],2)',
+    '=INDEX(Roles[Title],MATCH("FE-1",Roles[RoleID],0))',
+    '=XLOOKUP("ZZ-9",Roles[RoleID],Roles[Title],"Not a real role")'
+  ],
+  value: '=XLOOKUP("BE1",Roles[RoleID],Roles[HiringManager],"No role")'
+});
+
+/* 2 — legacy lookups */
+Sheet.mount("s2", D.candidates(["Name", "RoleID"], {
+  id: "e3-legacy", rows: 9, cols: 12,
+  title: "Roles as a plain block in D1:F3", note: "No table names — exactly how an old file looks.",
+  open: ["H2:H4"], lessonId: "excel-3.legacy", table: false,
+  cells: {
+    D1: "RoleID", E1: "Title", F1: "Manager",
+    D2: "BE-1", E2: "Backend Engineer", F2: "Maya Shah",
+    D3: "FE-1", E3: "Frontend Engineer", F3: "Leo Berger",
+    H1: "Answers"
+  },
+  extraFormats: { D: "text", E: "text", F: "text", H: "text" },
+  widths: { D: 68, E: 136, F: 104, H: 150 },
+  tasks: [
+    { cell: "H2", ask: "Find the <em>position</em> of <code>FE-1</code> in the range <code>D2:D3</code> using MATCH with an exact match.",
+      want: 2, answer: '=MATCH("FE-1",D2:D3,0)', requires: ["MATCH"],
+      good: "Position 2. MATCH answers \u201cwhere is it\u201d, not \u201cwhat is it\u201d." },
+    { cell: "H3", ask: "Now use INDEX to pull the title at position 2 from <code>E2:E3</code>.",
+      want: "Frontend Engineer", answer: "=INDEX(E2:E3,2)", requires: ["INDEX"],
+      good: "Frontend Engineer." },
+    { cell: "H4", ask: "Combine them: the manager for the RoleID in <code>B5</code>, using INDEX and MATCH together.",
+      want: "Leo Berger", answer: "=INDEX(F2:F3,MATCH(B5,D2:D3,0))", requires: ["INDEX", "MATCH"],
+      good: "Leo Berger \u2014 B5 is Dev, who is on FE-1. Read it inside out: MATCH found row 2, INDEX fetched it." }
+  ]
+}));
+
+Quiz.mount("q2", {
+  title: "Check yourself", lessonId: "excel-3.legacy",
+  items: [
+    { q: "You inherit <code>=VLOOKUP(A2,Roles!A:F,4)</code>. What are the two things to check?",
+      opts: ["Nothing, it is fine", "The missing last argument means approximate matching, and column 4 breaks if a column is inserted", "Whether Roles is a Table", "Whether A2 is text"],
+      a: 1,
+      why: "<b>A missing fourth argument defaults to approximate match</b> — on unsorted role IDs that can return a confidently wrong answer. And a hard-coded <code>4</code> points at whatever is fourth today." },
+    { q: "Why does XLOOKUP not need IFERROR?",
+      opts: ["It never errors", "Its fourth argument already says what to show when nothing is found", "IFERROR does not work with it", "It returns zero instead"],
+      a: 1,
+      why: "<b>The not-found argument is built in,</b> which is better than IFERROR because it only handles the not-found case and still lets a real error show." }
+  ]
+});
+
+/* 3 — cleaning */
+Sheet.mount("s3", {
+  id: "e3-clean", rows: 10, cols: 8, headerRows: 1,
+  title: "A Source column straight out of an ATS", note: "Four spellings, one real source.",
+  open: ["C2:C7", "D2:D7"], fillTo: 7, lessonId: "excel-3.clean",
+  widths: { A: 78, B: 116, C: 90, D: 124, F: 116, G: 100 },
+  formats: { A: "text", B: "text", C: "general", D: "text", F: "text", G: "text" },
+  data: [
+    ["Name", "RawSource", "Length", "Cleaned"],
+    ["Asha", "LinkedIn"],
+    ["Ben", "referral "],
+    ["Cara", "Linkdin"],
+    ["Dev", " LINKEDIN"],
+    ["Eva", "Agency"],
+    ["Farah", "linkedin"]
+  ],
+  cells: {
+    F1: "Mapping table", F2: "Wrong", G2: "Right",
+    F3: "linkedin", G3: "LinkedIn",
+    F4: "linkdin", G4: "LinkedIn",
+    F5: "referral", G5: "Referral",
+    F6: "agency", G6: "Agency"
+  },
+  tables: { Map: { range: "F2:G6", header: true } },
+  tasks: [
+    { cell: "C2", ask: "How many characters is each raw value really? Use LEN. Fill it down and compare Asha's 8 with Ben's and Dev's.",
+      want: 8, answer: "=LEN(B2)", requires: ["LEN"],
+      good: "8 for Asha. Fill down: Ben is 9 and Dev is 9, because of spaces that cannot be seen." },
+    { cell: "D2", ask: "Now the real fix. TRIM the spaces, LOWER the case, then XLOOKUP the result in the mapping table in F:G to get one correct spelling. Not-found should say <code>CHECK</code>.",
+      want: "LinkedIn", answer: '=XLOOKUP(LOWER(TRIM(B2)),Map[Wrong],Map[Right],"CHECK")', requires: ["XLOOKUP", "TRIM"],
+      good: "LinkedIn. Fill it down \u2014 all four misspellings collapse into one source, including the genuine typo that no case function could fix. This mapping-table pattern is how real source cleaning is done." }
+  ]
+});
+
+/* 4 — splitting */
+Sheet.mount("s4", {
+  id: "e3-split", rows: 8, cols: 7, headerRows: 1,
+  title: "One column, two facts", note: "Titles are different lengths on purpose.",
+  open: ["B2:B5", "C2:C5"], fillTo: 5, lessonId: "excel-3.split",
+  widths: { A: 220, B: 150, C: 110, D: 76 },
+  formats: { A: "text", B: "text", C: "text", D: "general" },
+  data: [
+    ["RawRole", "Title", "City", "Dash at"],
+    ["Backend Engineer - Dublin"],
+    ["Frontend Engineer - Amsterdam"],
+    ["Site Reliability Engineer - Berlin"],
+    ["QA Engineer - Dublin"]
+  ],
+  cells: { D2: '=SEARCH("-",A2)', D3: '=SEARCH("-",A3)', D4: '=SEARCH("-",A4)', D5: '=SEARCH("-",A5)' },
+  tasks: [
+    { cell: "B2", ask: "The title — everything before the dash, with no trailing space. Use SEARCH to find the dash rather than counting characters, so it survives the longer titles below.",
+      want: "Backend Engineer", answer: '=TRIM(LEFT(A2,SEARCH("-",A2)-1))', requires: ["SEARCH"],
+      good: "Backend Engineer. Fill it down \u2014 it handles \u201cSite Reliability Engineer\u201d too, which a hard-coded LEFT(A2,16) would have cut in half." },
+    { cell: "C2", ask: "The city — everything after the dash, trimmed.",
+      want: "Dublin", answer: '=TRIM(MID(A2,SEARCH("-",A2)+1,99))', requires: ["MID", "SEARCH"],
+      good: "Dublin. Fill down and every city comes out clean. TEXTAFTER(A2,\" - \") does the same in one step if you have it." }
+  ]
+});
+
+Sheet.playground("pg4", {
+  title: "Text sandbox", note: "A2 is \u201cBackend Engineer - Dublin\u201d in this sandbox.",
+  data: [["RawRole"], ["Backend Engineer - Dublin"]],
+  formats: { A: "text" },
+  examples: [
+    '=LEN(A2)', '=SEARCH("-",A2)', '=LEFT(A2,7)', '=RIGHT(A2,6)',
+    '=MID(A2,20,6)', '=TRIM(LEFT(A2,SEARCH("-",A2)-1))',
+    '=TEXTBEFORE(A2," - ")', '=TEXTAFTER(A2," - ")', '=UPPER(A2)', '=PROPER("LINKEDIN")'
+  ],
+  value: '=SEARCH("-",A2)'
+});
+
+/* 5 — joining */
+Sheet.mount("s5", D.candidates(D.ALL, {
+  id: "e3-join", rows: 9, cols: 16, height: 260,
+  title: "Candidates", note: "Build readable labels and a live sentence.",
+  open: ["N2:N7", "O2"], fillTo: 7, lessonId: "excel-3.join",
+  cells: { N1: "Label", O1: "Headline" },
+  extraFormats: { N: "text", O: "text" },
+  widths: { N: 200, O: 300 },
+  tasks: [
+    { cell: "N2", ask: 'A one-line label: name, then <code> · </code>, then source, then <code> · </code>, then outcome. Use <code>&amp;</code>.',
+      want: "Asha · LinkedIn · Joined", answer: '=[@Name]&" · "&[@Source]&" · "&[@Outcome]',
+      good: "Asha \u00b7 LinkedIn \u00b7 Joined. Fill it down \u2014 that column is what a chart tooltip should show." },
+    { cell: "O2", ask: 'A sentence that lists everyone still open, built with TEXTJOIN and FILTER: <code>Still open: Farah</code>.',
+      want: "Still open: Farah", answer: '="Still open: "&TEXTJOIN(", ",TRUE,FILTER(Candidates[Name],Candidates[Outcome]="Open"))', requires: ["TEXTJOIN"],
+      good: "One cell that always names whoever is outstanding, however the data changes. That belongs at the top of your dashboard." }
+  ]
+}));
+
+Quiz.mount("q5j", {
+  title: "Check yourself", lessonId: "excel-3.join",
+  items: [
+    { q: "Why wrap 0.75 in TEXT(...,\"0%\") inside a headline?",
+      opts: ["Faster", "Joining a number drops its format — otherwise the sentence says 0.75 not 75%", "Excel requires it", "For GDPR"],
+      a: 1, why: "<b>TEXT is format inside a sentence.</b>" },
+    { q: "TEXTJOIN’s second argument TRUE means:",
+      opts: ["Sort the names", "Skip blanks so the list does not end in a stray comma", "Uppercase", "Spill"],
+      a: 1, why: "<b>Ignore blanks.</b>" }
+  ]
+});
+
+/* 6 — dynamic arrays */
+Sheet.mount("s6", D.candidates(D.ALL, {
+  id: "e3-arrays", rows: 11, cols: 16, height: 280,
+  title: "Candidates", note: "Dynamic arrays spill downwards. Watch the pale green cells.",
+  open: ["N2", "O2", "Q2"], lessonId: "excel-3.arrays",
+  cells: { N1: "Sources", O1: "Count", Q1: "Open now" },
+  extraFormats: { N: "text", O: "general", Q: "text" },
+  widths: { N: 110, O: 76, Q: 120 },
+  tasks: [
+    { cell: "N2", ask: "List each distinct source once, sorted. One formula — it will spill down by itself.",
+      want: "Agency", answer: "=SORT(UNIQUE(Candidates[Source]))", requires: ["UNIQUE"],
+      good: "Agency, LinkedIn, Referral \u2014 three cells from one formula. The pale green cells below are the spill." },
+    { cell: "O2", ask: "Count how many applicants came from each of those sources. Point the criteria at the spilled block with <code>N2#</code>.",
+      want: 1, answer: "=COUNTIFS(Candidates[Source],N2#)", requires: ["COUNTIFS"],
+      good: "1, 4, 1 \u2014 matching the sources beside them. Add a fourth source to the data and both columns grow on their own." },
+    { cell: "Q2", ask: "List the names of everyone whose Outcome is <code>Open</code>.",
+      want: "Farah", answer: '=FILTER(Candidates[Name],Candidates[Outcome]="Open")', requires: ["FILTER"],
+      good: "Farah, and only Farah. Change your outcome in the data and this list updates itself." }
+  ]
+}));
+
+Quiz.mount("q6", {
+  title: "Check yourself", lessonId: "excel-3.arrays",
+  items: [
+    { q: "A FILTER formula returns #SPILL!. What is wrong?",
+      opts: ["The filter matched nothing", "Cells below the formula are not empty, so the result has nowhere to go", "FILTER needs Ctrl+Shift+Enter", "The table is not named"],
+      a: 1,
+      why: "<b>Something is in the way.</b> Clear the cells below it. Shortening the formula will not help, and a dynamic array also cannot spill inside a Table \u2014 put it beside the table instead." },
+    { q: "What does the <code>#</code> in <code>=COUNTIFS(Candidates[Source],N2#)</code> mean?",
+      opts: ["A comment", "The whole spilled block that begins at N2", "Round the number", "A sheet reference"],
+      a: 1,
+      why: "<b>The spill operator</b> refers to the entire result block, however big it becomes. That is what makes the pair of columns self-maintaining." }
+  ]
+});
+
+/* 7 — capstone */
+Sheet.mount("s7", D.candidates(D.ALL, {
+  id: "e3-capstone", rows: 13, cols: 19, height: 320,
+  title: "The finished Candidates sheet", note: "Five calculated columns. Roles is in rows 10–12.",
+  open: ["N2:N7", "O2:O7", "P2:P7", "Q2:Q7", "R2:R7"], fillTo: 7, lessonId: "excel-3.capstone",
+  extraTables: ROLE_TABLE,
+  cells: withRoles({ N1: "HireDays", O1: "Manager", P1: "City", Q1: "Chase", R1: "Label" }),
+  extraFormats: { N: "general", O: "text", P: "text", Q: "text", R: "text" },
+  widths: { N: 84, O: 104, P: 92, Q: 72, R: 190 },
+  tasks: [
+    { cell: "N2", ask: "HireDays — accepted minus applied, blank if never accepted.",
+      want: 23, answer: '=IF([@Accepted]="","",[@Accepted]-[@Applied])', requires: ["IF"], good: "23." },
+    { cell: "O2", ask: "Manager, from the Roles table.",
+      want: "Maya Shah", answer: '=XLOOKUP([@RoleID],Roles[RoleID],Roles[HiringManager],"No role")', requires: ["XLOOKUP"], good: "Maya Shah." },
+    { cell: "P2", ask: "City, from the Roles table.",
+      want: "Dublin", answer: '=XLOOKUP([@RoleID],Roles[RoleID],Roles[Location],"?")', requires: ["XLOOKUP"], good: "Dublin." },
+    { cell: "Q2", ask: "Chase flag — open and older than 14 days.",
+      want: "", answer: '=IF(AND([@Outcome]="Open",TODAY()-[@Applied]>14),"CHASE","")', requires: ["AND"],
+      good: "Blank for Asha. Fill all five columns down and only Farah is flagged." },
+    { cell: "R2", ask: "Label — name, source and outcome joined with <code> · </code>.",
+      want: "Asha · LinkedIn · Joined", answer: '=[@Name]&" · "&[@Source]&" · "&[@Outcome]',
+      good: "That is the Candidates sheet finished. Every column to the right of L is derived, and not one fact was typed twice." }
+  ]
+}));
+
+Drill.mount("d7", {
+  id: "e3-say", lessonId: "excel-3.capstone", seconds: 45,
+  title: "The interview version",
+  prompt: "An interviewer says: \u201cYou mention advanced Excel. Walk me through a file you have built.\u201d You have forty-five seconds and cannot show the screen. Describe the structure, one formula, and what decision it drove.",
+  model: "<p>\u201cI keep a recruitment tracker with three sheets. Candidates is one row per person with the stage dates. Roles is one row per requisition. The dashboard only has formulas \u2014 no typed numbers \u2014 so it moves when the data moves.</p><p>The columns to the right of the data are all calculated. Time to hire is the accepted date minus the applied date, wrapped in an IF so open candidates stay blank rather than showing nonsense. The hiring manager and city come in from the Roles sheet with XLOOKUP on the role ID, with a \u2018No role\u2019 fallback so a bad ID shows up as a filterable value instead of a sea of #N/A. And there is one flag column: open for more than fourteen days, which is my Monday list.</p><p>That flag is the one that changed behaviour. It surfaced a candidate who had sat unscreened for six weeks \u2014 so the file stopped being a record and started being a prompt.\u201d</p><p class=\"tiny\">Structure, one formula explained precisely, then the decision it caused. The last sentence is the one that separates your from everyone who says \u201cadvanced Excel\u201d.</p>"
+});
+
+Course.init({ id: "excel-3" });
+</script>
+</body>
+</html>

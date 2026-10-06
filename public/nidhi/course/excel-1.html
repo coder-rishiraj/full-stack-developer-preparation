@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>1.1 Excel foundations — Nidhi's course</title>
+<link rel="stylesheet" href="assets/course.css?v=3">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand"><a href="index.html">Nidhi Tiwari</a><span>1.1 · Excel foundations</span></div>
+  <div class="top-actions">
+    <div class="pbar"><i></i></div>
+    <span class="pnum"></span>
+    <a class="btn" href="index.html">Course home</a>
+  </div>
+</div>
+
+<div class="layout">
+<nav class="side" id="sideNav"></nav>
+<main>
+
+<p class="kicker">Chapter 1.1</p>
+<h1>Excel foundations</h1>
+<p class="lead">The aim of this chapter is not "learn Excel". It is to make the grid stop being mysterious, so that when a later lesson says <em>put this in N2 and fill it down</em>, you do it without thinking. Nine lessons. Every one has something to type.</p>
+
+<div class="note">
+  <p><strong>How the grids work.</strong> Click a cell. Its address appears on the left of the bar above the grid and its contents appear in the bar itself. Type to replace, press <kbd>Enter</kbd> to confirm, <kbd>Esc</kbd> to abandon. Arrow keys move. The small green square at the bottom-right of the selected cell is the fill handle — drag it down. Grey cells are locked so the practice data cannot be broken by accident; cells with a gold outline are the exercise.</p>
+</div>
+
+<!-- ───────────────────────── 1 ───────────────────────── -->
+<section class="lesson" data-lesson="excel-1.grid" data-n="01">
+  <p class="goal">The furniture</p>
+  <h3>Workbook, sheet, cell, range</h3>
+  <p>A <strong>workbook</strong> is the file. A <strong>worksheet</strong> is one tab inside it. A <strong>cell</strong> is a single box, named by its column letter then its row number: <code>D2</code>. A <strong>range</strong> is a rectangular block, written with a colon: <code>A1:L7</code> means every cell from A1 down-and-across to L7.</p>
+  <p>Your real workbook will have three sheets, and this is worth deciding now because changing it later is painful:</p>
+  <table class="t wrap">
+    <thead><tr><th>Sheet</th><th>What lives on it</th><th>Rule</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Candidates</strong></td><td>One row per person. Every fact about that person.</td><td>Nothing but data. No totals, no blank spacer rows, no notes in the margin.</td></tr>
+      <tr><td><strong>Roles</strong></td><td>One row per requisition.</td><td>Same rule. This is the small table the big one looks things up in.</td></tr>
+      <tr><td><strong>Dashboard</strong></td><td>Only formulas and charts that point at the other two.</td><td>Never type a number here. If a number is typed here, it will one day be wrong and nobody will know.</td></tr>
+    </tbody>
+  </table>
+  <p>That separation — data on one sheet, answers on another — is the single habit that distinguishes a spreadsheet someone can trust from one they cannot. It is also the exact idea Power BI is built on, so learning it here makes chapter 2 easier.</p>
+
+  <figure class="ill">
+    <svg viewBox="0 0 640 150" role="img" aria-label="Three sheets: Candidates and Roles feed the Dashboard">
+      <rect x="6" y="26" width="170" height="92" fill="#fffdf9" stroke="#e4ddd2"/>
+      <rect x="6" y="26" width="170" height="20" fill="#f4f0e7" stroke="#e4ddd2"/>
+      <text x="16" y="40" font-size="11" font-family="sans-serif" fill="#57534e">Candidates · 6 rows</text>
+      <g fill="#ece6db">
+        <rect x="14" y="54" width="154" height="9"/><rect x="14" y="68" width="154" height="9"/>
+        <rect x="14" y="82" width="154" height="9"/><rect x="14" y="96" width="154" height="9"/>
+      </g>
+      <rect x="200" y="26" width="140" height="56" fill="#fffdf9" stroke="#e4ddd2"/>
+      <rect x="200" y="26" width="140" height="20" fill="#f4f0e7" stroke="#e4ddd2"/>
+      <text x="210" y="40" font-size="11" font-family="sans-serif" fill="#57534e">Roles · 2 rows</text>
+      <g fill="#ece6db"><rect x="208" y="54" width="124" height="9"/><rect x="208" y="68" width="124" height="9"/></g>
+      <path d="M176 72 h18 M340 54 h18" stroke="#1e4d38" stroke-width="1.5" fill="none" marker-end="url(#ar)"/>
+      <path d="M194 72 C 300 72 320 120 376 120" stroke="#1e4d38" stroke-width="1.5" fill="none"/>
+      <path d="M358 54 C 366 54 368 60 376 60" stroke="#1e4d38" stroke-width="1.5" fill="none"/>
+      <rect x="380" y="26" width="250" height="110" fill="#e7f0ea" stroke="#c9ddd0"/>
+      <text x="392" y="44" font-size="11" font-family="sans-serif" fill="#1e4d38">Dashboard · formulas only</text>
+      <g fill="#fff" stroke="#c9ddd0">
+        <rect x="392" y="54" width="54" height="30"/><rect x="454" y="54" width="54" height="30"/>
+        <rect x="516" y="54" width="54" height="30"/><rect x="578" y="54" width="42" height="30"/>
+        <rect x="392" y="92" width="228" height="34"/>
+      </g>
+      <text x="400" y="73" font-size="13" font-family="Georgia,serif" fill="#1e4d38">6</text>
+      <text x="462" y="73" font-size="13" font-family="Georgia,serif" fill="#1e4d38">4</text>
+      <text x="524" y="73" font-size="13" font-family="Georgia,serif" fill="#1e4d38">75%</text>
+      <text x="586" y="73" font-size="13" font-family="Georgia,serif" fill="#1e4d38">31</text>
+      <text x="402" y="113" font-size="10" font-family="sans-serif" fill="#57534e">Joiners by source</text>
+      <defs><marker id="ar" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 z" fill="#1e4d38"/></marker></defs>
+    </svg>
+    <figcaption>Data flows one way. The dashboard reads; it never holds a fact of its own.</figcaption>
+  </figure>
+
+  <h4>Try it</h4>
+  <p>This is the practice data. Click around it. Watch the address change in the box on the left of the formula bar. Then do the two things below in the empty column N.</p>
+  <div id="s1"></div>
+
+  <div class="gold">
+    <p><strong>Why a range matters more than it looks.</strong> <code>E2:E7</code> is six cells. If you later insert a row inside it, Excel stretches the range for you. If you insert a row <em>below</em> it, it does not stretch, and the formula silently misses the new person. That single behaviour is why lesson 6 exists.</p>
+  </div>
+</section>
+
+<!-- ───────────────────────── 2 ───────────────────────── -->
+<section class="lesson" data-lesson="excel-1.types" data-n="02">
+  <p class="goal">The thing beginners lose days to</p>
+  <h3>Three data types, and how to tell which one you have</h3>
+  <p>Excel holds exactly three kinds of thing, and almost every "Excel is broken" moment is one of them being the wrong one.</p>
+  <div class="grid3">
+    <div class="card">
+      <h4>Number</h4>
+      <p>Right-aligned by default. Can be added, averaged, compared. <code>4000</code>.</p>
+    </div>
+    <div class="card">
+      <h4>Text</h4>
+      <p>Left-aligned by default. Cannot be added. <code>LinkedIn</code>, and also <code>"4000 "</code> with a space in it.</p>
+    </div>
+    <div class="card">
+      <h4>Date</h4>
+      <p>Right-aligned, because a date <em>is</em> a number wearing a costume. Next lesson.</p>
+    </div>
+  </div>
+  <p><strong>The alignment test.</strong> Type something and look at which side of the cell it sits on. If a column of numbers has one value hugging the left edge, that value is text, and every SUM in the file is already wrong. No warning appears. This is the most common real-world data bug in HR reporting, because exports from an ATS routinely deliver numbers as text.</p>
+  <p>Two ways to tell for certain, and both are worth knowing:</p>
+  <ul class="clean">
+    <li><code>=ISNUMBER(A2)</code> returns TRUE or FALSE. Blunt and reliable.</li>
+    <li><code>=ISTEXT(A2)</code> for the opposite. A number stored as text returns TRUE here, which is the moment the penny drops.</li>
+  </ul>
+  <p>And two ways to fix it: multiply by 1, or run <code>=VALUE(A2)</code>. In a real export, Power Query's <em>Change Type</em> step (lesson 1.4) fixes the whole column at once and keeps fixing it every month.</p>
+
+  <h4>Worked example</h4>
+  <p>Column B below looks like a column of fees. It is not. B3 and B5 were typed with a trailing space, which makes them text. Column C shows the test, column D shows the fix.</p>
+  <div id="s2"></div>
+  <p class="tiny">The SUM in B8 ignores the two text cells and reports 1,000. The SUM in D8, over the converted column, reports the true 8,000 — and no error or warning appeared anywhere. In a report to a hiring manager, a missing €7,000 of agency spend is a credibility event.</p>
+
+  <div id="q2"></div>
+</section>
+
+<!-- ───────────────────────── 3 ───────────────────────── -->
+<section class="lesson" data-lesson="excel-1.dates" data-n="03">
+  <p class="goal">Everything in recruiting is a date difference</p>
+  <h3>Dates are numbers</h3>
+  <p>Excel stores a date as a count of days since the start of 1900. <strong>2 March 2026 is the number 46083.</strong> The date you see is a format laid over that number, exactly like €4,000 is a format over 4000. The grid below proves it — column I is the same dates with the costume taken off.</p>
+  <p>This one fact explains the whole of recruiting analytics:</p>
+  <div class="fml">= Accepted - Applied   <b>→ 46106 − 46083 → 23</b></div>
+  <p>Time to hire is not a special function. It is subtraction. Every metric in chapter 3 is this idea with a different pair of columns.</p>
+  <p>Which also explains the failures:</p>
+  <table class="t wrap">
+    <thead><tr><th>What you see</th><th>What happened</th><th>Fix</th></tr></thead>
+    <tbody>
+      <tr><td><code>46083</code> where a date should be</td><td>The cell is formatted as a number. The value is right.</td><td>Format the cell as a date. Ctrl+1.</td></tr>
+      <tr><td><code>#VALUE!</code> when subtracting</td><td>One "date" is text. Often it arrived as <code>02-03-2026</code> from a system that uses a different locale.</td><td><code>=DATEVALUE()</code>, or fix the type in Power Query.</td></tr>
+      <tr><td>A negative duration</td><td>The dates are the wrong way round, or someone typed the offer date before the application date.</td><td>Wrap it: <code>=IF(I2&lt;E2,"check dates",I2-E2)</code>.</td></tr>
+      <tr><td>A huge negative number</td><td>You subtracted a date from a blank. A blank counts as zero, so the answer is minus 46,000-odd.</td><td>Test for the blank first. That is the next lesson's IF.</td></tr>
+    </tbody>
+  </table>
+  <p><strong>Never type a space into a cell to mean "nothing happened".</strong> A space is text. It breaks the subtraction, it breaks COUNT, and it is invisible. Leave the cell genuinely empty. This is why the practice data has real blanks for Farah.</p>
+
+  <h4>Worked example</h4>
+  <p>Column N is already written. Click N2 and read the formula. Then click N7 — Farah has no accepted date, and the formula handles it rather than returning nonsense.</p>
+  <div id="s3"></div>
+
+  <h4>Your turn</h4>
+  <p>Now build two more durations yourself. The pattern is the same; only the columns change.</p>
+  <div id="s3b"></div>
+
+  <div class="note">
+    <p><strong>The date functions worth knowing, in order of usefulness to you.</strong> <code>TODAY()</code> for ageing a pipeline. <code>NETWORKDAYS</code> when a manager says "but that included Christmas" — it counts working days only, so Asha's 23 calendar days become 18 working days. <code>EOMONTH</code> and <code>EDATE</code> for probation-end and review dates. <code>DATEDIF</code> for months and years of tenure. <code>TEXT(date,"mmm yyyy")</code> to turn a date into a chart label.</p>
+  </div>
+  <div id="pg3"></div>
+</section>
+
+<!-- ───────────────────────── 4 ───────────────────────── -->
+<section class="lesson" data-lesson="excel-1.ops" data-n="04">
+  <p class="goal">So the arithmetic is never a surprise</p>
+  <h3>Operators and the order they run in</h3>
+  <p>A formula always starts with <code>=</code>. That is how Excel knows to calculate rather than store. Everything after it is built from these:</p>
+  <table class="t">
+    <thead><tr><th>Operator</th><th>Does</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td><code>+ - * /</code></td><td>Arithmetic</td><td><code>=3*4</code> → 12</td></tr>
+      <tr><td><code>^</code></td><td>Power</td><td><code>=2^3</code> → 8</td></tr>
+      <tr><td><code>%</code></td><td>Divides by 100</td><td><code>=10%</code> → 0.1</td></tr>
+      <tr><td><code>&amp;</code></td><td>Joins text</td><td><code>="Asha"&amp;" · "&amp;"LinkedIn"</code></td></tr>
+      <tr><td><code>= &lt;&gt; &lt; &gt; &lt;= &gt;=</code></td><td>Compares, returning TRUE or FALSE</td><td><code>=C2="LinkedIn"</code> → TRUE</td></tr>
+    </tbody>
+  </table>
+  <p>The order is the one from school: powers, then multiply and divide, then add and subtract. <code>=2+3*4</code> is 14, not 20. Parentheses override it, and in a recruiting formula they are nearly always needed, because a rate is a division of a sum:</p>
+  <div class="fml">=(B2+B3)/C2        <b>not</b>        =B2+B3/C2</div>
+  <p><strong>Percentages are where this bites.</strong> An offer acceptance rate of 3 out of 4 is <code>=3/4</code>, which is 0.75. It is not 75 until a <em>format</em> is applied. If you type <code>=3/4*100</code> and then formats as a percentage, you get 7500%. Pick one: calculate the ratio and format as percent, or calculate the ratio times 100 and label it "%". The first is correct Excel practice, because charts and Power BI both expect the ratio.</p>
+  <p><strong>ROUND changes the value, formatting only changes the display.</strong> <code>=ROUND(31.333,1)</code> really is 31.3 and will add up as 31.3. A cell formatted to one decimal still holds 31.3333 and will add up as that. For a number going into a report, round it — so that the parts visibly sum to the total you are showing.</p>
+
+  <h4>Try it</h4>
+  <div id="pg4"></div>
+  <h4>Your turn</h4>
+  <div id="s4"></div>
+</section>
+
+<!-- ───────────────────────── 5 ───────────────────────── -->
+<section class="lesson" data-lesson="excel-1.refs" data-n="05">
+  <p class="goal">The reason a formula breaks when copied</p>
+  <h3>Relative, absolute and mixed references</h3>
+  <p>When a formula is copied down a column, Excel moves its references with it. That is usually exactly what is wanted — row 2's formula should look at row 2 — and occasionally catastrophic.</p>
+  <table class="t wrap">
+    <thead><tr><th>Written</th><th>Called</th><th>When copied down</th><th>Use for</th></tr></thead>
+    <tbody>
+      <tr><td><code>E2</code></td><td>Relative</td><td>Becomes E3, E4, E5</td><td>The normal case: this row's data.</td></tr>
+      <tr><td><code>$E$2</code></td><td>Absolute</td><td>Stays E2 forever</td><td>One fixed cell everything divides by — a total, a target, a conversion rate.</td></tr>
+      <tr><td><code>E$2</code></td><td>Mixed, row locked</td><td>Column can move, row cannot</td><td>Copying across a row of months.</td></tr>
+      <tr><td><code>$E2</code></td><td>Mixed, column locked</td><td>Row can move, column cannot</td><td>Rare in your work. Recognise it.</td></tr>
+    </tbody>
+  </table>
+  <p>The <kbd>F4</kbd> key cycles a reference through all four states while editing — on a Mac, <kbd>fn</kbd>+<kbd>F4</kbd> or <kbd>Cmd</kbd>+<kbd>T</kbd>. Worth learning, because typing dollar signs by hand is how typos happen.</p>
+
+  <figure class="ill">
+    <svg viewBox="0 0 620 170" role="img" aria-label="Relative references shift when filled down; absolute ones do not">
+      <text x="8" y="14" font-size="11" font-family="sans-serif" fill="#9f3a32">Relative denominator — wrong</text>
+      <text x="330" y="14" font-size="11" font-family="sans-serif" fill="#1e4d38">Absolute denominator — right</text>
+      <g font-family="ui-monospace,monospace" font-size="11">
+        <g>
+          <rect x="8" y="24" width="150" height="26" fill="#fff" stroke="#e4ddd2"/><text x="16" y="41" fill="#1c1917">=B2/B6</text>
+          <rect x="8" y="50" width="150" height="26" fill="#fff" stroke="#e4ddd2"/><text x="16" y="67" fill="#9f3a32">=B3/B7</text>
+          <rect x="8" y="76" width="150" height="26" fill="#fff" stroke="#e4ddd2"/><text x="16" y="93" fill="#9f3a32">=B4/B8</text>
+          <rect x="8" y="102" width="150" height="26" fill="#fff" stroke="#e4ddd2"/><text x="16" y="119" fill="#9f3a32">=B5/B9</text>
+          <text x="8" y="146" font-size="10" font-family="sans-serif" fill="#57534e">B7, B8, B9 are empty →</text>
+          <text x="8" y="158" font-size="10" font-family="sans-serif" fill="#9f3a32">#DIV/0!</text>
+        </g>
+        <g>
+          <rect x="330" y="24" width="160" height="26" fill="#fff" stroke="#e4ddd2"/><text x="338" y="41">=B2/$B$6</text>
+          <rect x="330" y="50" width="160" height="26" fill="#fff" stroke="#e4ddd2"/><text x="338" y="67" fill="#1e4d38">=B3/$B$6</text>
+          <rect x="330" y="76" width="160" height="26" fill="#fff" stroke="#e4ddd2"/><text x="338" y="93" fill="#1e4d38">=B4/$B$6</text>
+          <rect x="330" y="102" width="160" height="26" fill="#fff" stroke="#e4ddd2"/><text x="338" y="119" fill="#1e4d38">=B5/$B$6</text>
+          <text x="330" y="146" font-size="10" font-family="sans-serif" fill="#57534e">every row divides by the same total</text>
+        </g>
+      </g>
+      <path d="M180 76 h120" stroke="#a8a29e" stroke-width="1" stroke-dasharray="3 3"/>
+      <text x="200" y="70" font-size="10" font-family="sans-serif" fill="#a8a29e">one dollar sign</text>
+    </svg>
+    <figcaption>Both columns were filled down from the same first cell. Only the right-hand one is a share-of-total.</figcaption>
+  </figure>
+
+  <h4>Your turn — and use the fill handle</h4>
+  <p>Column N should hold each source's share of all six applicants. The count is already in N2:N4. Write the share in O2 using an absolute reference to the total in N6, then <strong>drag the green handle</strong> at the bottom-right of O2 down to O4 — or select O2 and press <em>Fill down</em>. If the dollar signs are right, all three answers appear. If they are not, rows 3 and 4 break, which is the lesson.</p>
+  <div id="s5"></div>
+
+  <div id="q5"></div>
+</section>
+
+<!-- ───────────────────────── 6 ───────────────────────── -->
+<section class="lesson" data-lesson="excel-1.tables" data-n="06">
+  <p class="goal">Do this before writing a single formula</p>
+  <h3>Tables and structured references</h3>
+  <p>Select the data and press <kbd>Ctrl</kbd>+<kbd>T</kbd> — <kbd>Cmd</kbd>+<kbd>T</kbd> on a Mac — tick "my table has headers", then rename it in Table Design to <code>Candidates</code>. It takes four seconds and changes five things:</p>
+  <ol class="clean">
+    <li><strong>New rows are included automatically.</strong> Add a seventh candidate and every formula, chart and PivotTable that points at the table already knows. This is the big one. Range-based files break the week someone adds a row.</li>
+    <li><strong>Formulas read like English.</strong> <code>Candidates[Source]</code> instead of <code>C2:C7</code>. Six months later you can still tell what the formula means.</li>
+    <li><strong>Filter buttons appear</strong> on every header.</li>
+    <li><strong>The header row freezes</strong> when scrolling.</li>
+    <li><strong>Formulas fill down the column by themselves</strong> when typed in the first row.</li>
+  </ol>
+  <p>Inside a table, <code>[@Applied]</code> means "the Applied cell on this row". So the time-to-hire column becomes:</p>
+  <div class="fml">=IF([@Accepted]="","",[@Accepted]-[@Applied])</div>
+  <p>That is the same formula as <code>=IF(I2="","",I2-E2)</code>, and it is better for one reason beyond readability: if someone inserts a column, it still points at the right thing. The letter-based version points at whatever is now in column I.</p>
+  <table class="t wrap">
+    <thead><tr><th>Syntax</th><th>Means</th></tr></thead>
+    <tbody>
+      <tr><td><code>Candidates[Source]</code></td><td>The whole Source column, data only, growing as rows are added.</td></tr>
+      <tr><td><code>[@Source]</code></td><td>The Source cell on the current row. Only valid inside the table, or beside it.</td></tr>
+      <tr><td><code>Candidates[#Headers]</code></td><td>The header row. Occasionally useful, rarely needed.</td></tr>
+      <tr><td><code>Candidates[#All]</code></td><td>Headers plus data. Mostly appears by accident when clicking.</td></tr>
+    </tbody>
+  </table>
+  <p><strong>One trap.</strong> A table cannot contain a blank row in the middle, and it should not contain merged cells. Merged cells break sorting, filtering, PivotTables and copy-paste. There is no situation in a data sheet where merging is the right answer. Centre across selection if it has to look pretty.</p>
+
+  <h4>Your turn — with table syntax</h4>
+  <p>The data below is a real table named <code>Candidates</code>. Write the same two answers twice: once with cell references, once with structured references. They should agree.</p>
+  <div id="s6"></div>
+  <div id="pg6"></div>
+</section>
+
+<!-- ───────────────────────── 7 ───────────────────────── -->
+<section class="lesson" data-lesson="excel-1.errors" data-n="07">
+  <p class="goal">So an error is information, not a wall</p>
+  <h3>Reading the seven errors</h3>
+  <p>Every Excel error names its own cause. Learning the seven means never again deleting a formula and starting over.</p>
+  <table class="t wrap">
+    <thead><tr><th>Error</th><th>It means</th><th>In your file it will be because</th></tr></thead>
+    <tbody>
+      <tr><td><code>#DIV/0!</code></td><td>Divided by zero or by a blank.</td><td>An acceptance rate for a role with no offers yet. Wrap it in IFERROR.</td></tr>
+      <tr><td><code>#N/A</code></td><td>A lookup found nothing.</td><td>A RoleID typo — <code>BE1</code> instead of <code>BE-1</code>, or a trailing space.</td></tr>
+      <tr><td><code>#VALUE!</code></td><td>The wrong type of thing.</td><td>Text where a number belongs. Usually a date that arrived as text.</td></tr>
+      <tr><td><code>#NAME?</code></td><td>Excel does not recognise a word.</td><td>A misspelled function, a missing quote mark, or XLOOKUP in an old Excel.</td></tr>
+      <tr><td><code>#REF!</code></td><td>The reference no longer exists.</td><td>Someone deleted a column the formula pointed at.</td></tr>
+      <tr><td><code>#SPILL!</code></td><td>A dynamic array has nowhere to land.</td><td>Something is already sitting in the cells below a FILTER.</td></tr>
+      <tr><td><code>#####</code></td><td>Not an error at all.</td><td>The column is too narrow. Double-click the column edge.</td></tr>
+    </tbody>
+  </table>
+  <p><strong>IFERROR is a tool and a temptation.</strong> <code>=IFERROR(x,"")</code> hides the error, which is right when the error is expected — a rate with no denominator yet. It is wrong when the error means the data is broken, because it hides that too. The rule: wrap divisions, investigate lookups.</p>
+
+  <h4>Try breaking things</h4>
+  <p>Every cell in column N below is editable. Type each of these and watch what comes back. Fixing them is the exercise.</p>
+  <div id="s7"></div>
+  <div id="q7"></div>
+</section>
+
+<!-- ───────────────────────── 8 ───────────────────────── -->
+<section class="lesson" data-lesson="excel-1.keys" data-n="08">
+  <p class="goal">Speed that an interviewer notices</p>
+  <h3>The shortcuts worth muscle memory</h3>
+  <p>Not a list of two hundred. These twelve, which cover most of what you will do daily. Windows keys shown; Mac uses <kbd>Cmd</kbd> for <kbd>Ctrl</kbd> in nearly all of them.</p>
+  <table class="t wrap">
+    <thead><tr><th>Keys</th><th>What it does</th><th>Why it matters</th></tr></thead>
+    <tbody>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>T</kbd></td><td>Turn the selection into a Table</td><td>Lesson 6. The first thing to do with any export.</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>↓</kbd></td><td>Select to the bottom of the data</td><td>Selecting 4,000 rows without dragging.</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>↓</kbd></td><td>Jump to the last filled cell</td><td>How many rows did this export actually have?</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>1</kbd></td><td>Format Cells dialog</td><td>Date and number formats live here.</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>;</kbd></td><td>Insert today's date as a fixed value</td><td>Logging when something happened, without TODAY() changing it tomorrow.</td></tr>
+      <tr><td><kbd>Alt</kbd>+<kbd>=</kbd></td><td>AutoSum</td><td>A total at the bottom of a column in one keystroke.</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>L</kbd></td><td>Toggle filters</td><td>Fast look at one role or one source.</td></tr>
+      <tr><td><kbd>F4</kbd></td><td>Cycle <code>A1</code> → <code>$A$1</code> → <code>A$1</code> → <code>$A1</code></td><td>Lesson 5, without typing dollars.</td></tr>
+      <tr><td><kbd>F2</kbd></td><td>Edit the cell in place</td><td>Inspecting a formula without retyping it.</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>V</kbd></td><td>Paste Special</td><td>Paste values only — essential before sending a file outside the company.</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>Z</kbd> / <kbd>Ctrl</kbd>+<kbd>Y</kbd></td><td>Undo, redo</td><td>Undo does not survive a save and close. Experiment in a copy.</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>`</kbd></td><td>Show all formulas instead of values</td><td>The fastest way to audit an inherited file. Try the <em>Show formulas</em> button on any grid here.</td></tr>
+    </tbody>
+  </table>
+  <div class="note">
+    <p><strong>Paste Special &gt; Values deserves its own sentence.</strong> When you send a workbook to someone outside the company, the formulas carry their references — and sometimes a hidden sheet full of data you did not mean to share. Paste as values into a fresh file, check what is in it, then send that.</p>
+  </div>
+  <div id="q8"></div>
+  <div id="m8"></div>
+</section>
+
+<!-- ───────────────────────── 9 ───────────────────────── -->
+<section class="lesson" data-lesson="excel-1.format" data-n="09">
+  <p class="goal">So it survives being read by a stranger</p>
+  <h3>Formatting that earns its keep</h3>
+  <p>Formatting is not decoration here. It is the difference between a hiring manager understanding a number and asking your to explain it.</p>
+  <ul class="clean">
+    <li><strong>Number formats.</strong> <kbd>Ctrl</kbd>+<kbd>1</kbd>. Dates as <code>dd mmm yyyy</code>, because 03/02/2026 means two different days in Dublin and Chicago. Percentages to nought or one decimal, never four. Currency with the € symbol so nobody has to ask. Durations as plain numbers with the word "days" in the column heading, not in the cells.</li>
+    <li><strong>Freeze panes.</strong> View &gt; Freeze Panes &gt; Freeze Top Row. Non-negotiable on any sheet longer than a screen. A table (lesson 6) does this for free.</li>
+    <li><strong>Wrap text and autofit.</strong> Double-click the right-hand edge of a column header to autofit it. Wrap the header row, not the data.</li>
+    <li><strong>Column headings are names, not sentences.</strong> <code>HireDays</code>, not <code>No. of days taken to hire the candidate</code>. The long version belongs in a Notes cell at the top of the sheet.</li>
+    <li><strong>One font, two sizes, three colours.</strong> Bold the header row, right-align the numbers, and stop. A spreadsheet with a rainbow in it reads as uncertain.</li>
+    <li><strong>Print setup,</strong> because someone will print it. Page Layout &gt; Fit to one page wide, landscape, and set Print Titles so the header repeats on every page.</li>
+  </ul>
+  <div class="warn">
+    <p><strong>Two things never to do in a data sheet.</strong> Never merge cells — it breaks sorting, filtering and PivotTables, and there is always a better option. Never use colour as the only carrier of meaning; put the word in a column too, because colour does not survive a photocopy, a colour-blind reader, or a PivotTable.</p>
+  </div>
+
+  <h4>The finished shape of your Candidates sheet</h4>
+  <p>This is what you are building towards in chapter 1.2 and 1.3. Columns A to L are the facts. Columns N onward are calculated and never typed.</p>
+  <div id="s9"></div>
+  <div id="q9"></div>
+  <p class="tiny">Every one of those calculated columns is taught in the next two chapters. Nothing in this course asks your to type a number that Excel could have worked out.</p>
+</section>
+
+<section>
+  <h2>Before moving on</h2>
+  <div class="note">
+    <p>You should be able to, on a blank sheet, without notes: create a Table and name it, write a date subtraction that handles a blank, explain out loud why <code>$B$6</code> has dollar signs, and say what <code>#N/A</code> means and where to look for the cause. If any of those four is shaky, the lesson for it is above and takes ten minutes. Then do the <a href="labs-excel.html">Excel labs</a> — one extra graded exercise for every habit.</p>
+  </div>
+</section>
+
+<div class="pager">
+  <a class="btn" href="index.html"><span class="lbl">Back</span>Course home</a>
+  <a class="btn btn-go" href="excel-2.html"><span class="lbl">Chapter 1.2</span>Logic and counting &rarr;</a>
+</div>
+
+</main>
+</div>
+
+<script src="assets/engine.js?v=3"></script>
+<script src="assets/sheet.js?v=3"></script>
+<script src="assets/data.js?v=3"></script>
+<script src="assets/course.js?v=3"></script>
+<script>
+var D = CourseData;
+
+/* ---- 1. the grid ---- */
+Sheet.mount("s1", D.candidates(["Name", "RoleID", "Source", "Applied", "Accepted", "Outcome"], {
+  id: "e1-grid", rows: 9, cols: 9,
+  title: "Candidates", note: "Columns A to F are locked. Column H is yours.",
+  open: ["H2:H9"],
+  cells: { H1: "Scratch" }, lessonId: "excel-1.grid",
+  tasks: [
+    { cell: "H2", ask: "Type <code>=A2</code> — a formula that just points at another cell. It should show Asha.", want: "Asha", answer: "=A2",
+      good: "That is the simplest formula there is: go and get the contents of A2." },
+    { cell: "H3", ask: "Now the range: <code>=COUNTA(A2:A7)</code> counts the filled cells in a range. How many candidates are there?", want: 6, answer: "=COUNTA(A2:A7)", requires: ["COUNTA"],
+      good: "Six. A2:A7 is a range, and COUNTA counted what was in it." }
+  ]
+}));
+
+/* ---- 2. data types ---- */
+Sheet.mount("s2", {
+  id: "e1-types", rows: 9, cols: 6, headerRows: 1,
+  title: "A fee column with two text cells hiding in it", note: "Inspect only — click the cells and read the formula bar.",
+  open: [],
+  formats: { A: "text", B: "text", C: "text", D: "general" },
+  widths: { A: 80, B: 100, C: 90, D: 110 },
+  data: [
+    ["Name", "FeeRaw", "ISNUMBER", "Fixed"],
+    ["Asha", "0", "", ""],
+    ["Ben", "3000 ", "", ""],
+    ["Cara", "0", "", ""],
+    ["Dev", "1000", "", ""],
+    ["Eva", "4000 ", "", ""],
+    ["Farah", "0", "", ""]
+  ],
+  cells: {
+    C2: "=ISNUMBER(B2)", C3: "=ISNUMBER(B3)", C4: "=ISNUMBER(B4)",
+    C5: "=ISNUMBER(B5)", C6: "=ISNUMBER(B6)", C7: "=ISNUMBER(B7)",
+    D2: "=VALUE(B2)", D3: "=VALUE(B3)", D4: "=VALUE(B4)",
+    D5: "=VALUE(B5)", D6: "=VALUE(B6)", D7: "=VALUE(B7)",
+    A8: "Total", B8: "=SUM(B2:B7)", D8: "=SUM(D2:D7)"
+  },
+  cellFormats: { B8: "comma", D8: "comma" }
+});
+
+Quiz.mount("q2", {
+  title: "Check yourself", lessonId: "excel-1.types",
+  items: [
+    { q: "An ATS export has a column of salaries. Every value is sitting against the left edge of its cell. What do you do first?",
+      opts: ["SUM the column and report the total", "Treat them as text and convert the column before using it", "Widen the column", "Change the font"],
+      a: 1,
+      why: "<b>Left-aligned numbers are text.</b> SUM will silently skip them and report a total that is too low with no error. Convert first — multiply by 1, use VALUE, or set the type in Power Query." },
+    { q: "Which of these is NOT a reason a cell that looks blank is causing trouble?",
+      opts: ["It contains a single space", "It contains an empty string from a formula", "It is genuinely empty", "It contains a non-printing character from a CSV"],
+      a: 2,
+      why: "<b>A genuinely empty cell is fine</b> — that is what the practice data uses for Farah. The other three all look blank, count as filled by COUNTA, and break date arithmetic." }
+  ]
+});
+
+/* ---- 3. dates ---- */
+Sheet.mount("s3", D.candidates(["Name", "Applied", "Screened", "Offer", "Accepted", "Joined"], {
+  id: "e1-dates-demo", rows: 8, cols: 9,
+  title: "Time to hire, already written", note: "Inspect only. Click N2, then N7.",
+  open: [],
+  cells: {
+    H1: "HireDays", H2: '=IF(E2="","",E2-B2)', H3: '=IF(E3="","",E3-B3)', H4: '=IF(E4="","",E4-B4)',
+    H5: '=IF(E5="","",E5-B5)', H6: '=IF(E6="","",E6-B6)', H7: '=IF(E7="","",E7-B7)',
+    I1: "Serial", I2: "=B2", I3: "=B3", I4: "=B4", I5: "=B5", I6: "=B6", I7: "=B7"
+  },
+  extraFormats: { H: "general", I: "general" },
+  widths: { H: 86, I: 72 }
+}));
+
+Sheet.mount("s3b", D.candidates(["Name", "Applied", "Screened", "Interview", "Offer", "Accepted", "Joined"], {
+  id: "e1-dates-task", rows: 8, cols: 11,
+  title: "Candidates", note: "Write into the gold cells, then fill down.",
+  open: ["I2:J7"], fillTo: 7, lessonId: "excel-1.dates",
+  cells: { I1: "DaysToScreen", J1: "DaysOfferToStart" },
+  extraFormats: { I: "general", J: "general" },
+  widths: { I: 104, J: 124 },
+  tasks: [
+    { cell: "I2", ask: "Days from applying to being screened, for Asha. Return a blank if the candidate was never screened.",
+      want: 2, answer: '=IF(C2="","",C2-B2)', requires: ["IF"],
+      good: "Two days. Fill it down and Farah correctly stays blank instead of showing -46100." },
+    { cell: "J2", ask: "Days from offer to actually starting, for Asha. Blank if either date is missing.",
+      want: 31, answer: '=IF(OR(E2="",G2=""),"",G2-E2)', requires: ["IF"],
+      good: "31 days between Asha's offer and Asha's first day. That gap is notice period, and it is the number hiring managers forget exists." }
+  ]
+}));
+
+Sheet.playground("pg3", {
+  title: "Date function sandbox",
+  note: "The practice table is loaded. Click a chip, then change it.",
+  data: D.candidates(D.ALL, {}).data,
+  tables: { Candidates: { range: "A1:L7", header: true } },
+  formats: D.candidates(D.ALL, {}).formats,
+  examples: [
+    '=I2-E2',
+    '=NETWORKDAYS(E2,I2)',
+    '=TEXT(J2,"mmm yyyy")',
+    '=TODAY()-E7',
+    '=EOMONTH(J2,0)',
+    '=EDATE(J2,6)',
+    '=DATEDIF(E5,J5,"d")',
+    '=YEAR(E2)&"-"&MONTH(E2)'
+  ],
+  value: '=I2-E2'
+});
+
+/* ---- 4. operators ---- */
+Sheet.playground("pg4", {
+  title: "Operator sandbox", note: "Order of calculation, percentages, ROUND.",
+  data: D.candidates(D.ALL, {}).data,
+  tables: { Candidates: { range: "A1:L7", header: true } },
+  examples: ['=2+3*4', '=(2+3)*4', '=3/4', '=3/4*100', '=10%', '=ROUND(31.3333,1)', '=A2&" · "&C2', '=C2="LinkedIn"'],
+  value: '=2+3*4'
+});
+
+Sheet.mount("s4", {
+  id: "e1-ops", rows: 8, cols: 6, headerRows: 1,
+  title: "Offer acceptance, by hand", note: "No functions needed. Just arithmetic and parentheses.",
+  open: ["B5:B7"],
+  widths: { A: 150, B: 110 },
+  data: [["Measure", "Value"], ["Offers", 4], ["Accepts", 3], ["Joiners", 2]],
+  cellFormats: { B6: "pct", B7: "n1" },
+  lessonId: "excel-1.ops",
+  tasks: [
+    { cell: "B5", ask: "Offer acceptance as a ratio, from B2 and B3. Do not type 0.75 — divide the cells.",
+      want: 0.75, tol: 0.001, answer: "=B3/B2",
+      good: "0.75. Format it as a percentage and it reads 75% — the value stays 0.75, which is what every chart wants." },
+    { cell: "B6", ask: "The same thing again here. This cell is already formatted as a percentage, so you will see 75%.",
+      want: 0.75, tol: 0.001, answer: "=B3/B2",
+      good: "Same number, different costume. This is why multiplying by 100 as well would give 7500%." },
+    { cell: "B7", ask: "The proportion of offers that turned into someone actually starting, rounded to one decimal place. Use ROUND.",
+      want: 0.5, tol: 0.001, answer: "=ROUND(B4/B2,1)", requires: ["ROUND"],
+      good: "0.5 — half of all offers produced a human being at a desk. ROUND changed the value, not just the display." }
+  ]
+});
+
+Quiz.mount("q5", {
+  title: "Check yourself", lessonId: "excel-1.refs",
+  items: [
+    { q: "You write <code>=N2/N6</code> in O2 and fills it down to O4. N6 holds the grand total. What happens?",
+      opts: ["All three rows are correct", "Rows 3 and 4 divide by N7 and N8, which are empty, giving #DIV/0!", "Excel locks N6 automatically", "It returns #REF!"],
+      a: 1,
+      why: "<b>Relative references move.</b> Filling down shifted the denominator too. <code>$N$6</code> pins it. This is the single most common broken formula in real HR spreadsheets." },
+    { q: "What does F4 do while editing a reference?",
+      opts: ["Recalculates the sheet", "Repeats the last action", "Cycles the reference through relative, absolute and the two mixed forms", "Opens Format Cells"],
+      a: 2,
+      why: "<b>F4 cycles A1 → $A$1 → A$1 → $A1.</b> On a Mac it may need fn+F4, or Cmd+T." }
+  ]
+});
+
+/* ---- 5. references ---- */
+Sheet.mount("s5", {
+  id: "e1-refs", rows: 8, cols: 6, headerRows: 1,
+  title: "Share of applicants by source", note: "Write O2, then drag the green handle down to O4.",
+  open: ["C2:C4"],
+  widths: { A: 110, B: 96, C: 110 },
+  data: [["Source", "Applicants", "Share"], ["LinkedIn", 4], ["Referral", 1], ["Agency", 1]],
+  cells: { A6: "Total", B6: "=SUM(B2:B4)" },
+  formats: { C: "pct" },
+  fillTo: 4, lessonId: "excel-1.refs",
+  tasks: [
+    { cell: "C2", ask: "LinkedIn's share of all applicants. The total is in B6 — lock it so this survives being filled down.",
+      want: 0.6667, tol: 0.001, answer: "=B2/$B$6",
+      good: "67%. Now fill it down." },
+    { cell: "C3", ask: "Fill down from C2 rather than typing this one. It should be 17%.",
+      want: 0.1667, tol: 0.001, answer: "=B3/$B$6",
+      good: "17%, and the denominator stayed on B6 because of the dollar signs." },
+    { cell: "C4", ask: "And the third. 17% again.",
+      want: 0.1667, tol: 0.001, answer: "=B4/$B$6",
+      good: "All three shares sum to 100%. That is a share-of-total done correctly." }
+  ]
+});
+
+/* ---- 6. tables ---- */
+Sheet.mount("s6", D.candidates(D.ALL, {
+  id: "e1-tables", rows: 9, cols: 16,
+  title: "Candidates — a real Table", note: "Structured references work in the gold cells.",
+  open: ["N2", "O2", "Q2", "R2"], height: 260,
+  cells: { N1: "Count, cell ref", O1: "Count, table ref", Q1: "Asha, cell ref", R1: "Asha, table ref" },
+  widths: { N: 112, O: 118, Q: 108, R: 116 },
+  extraFormats: { N: "general", O: "general", Q: "general", R: "general" },
+  lessonId: "excel-1.tables",
+  tasks: [
+    { cell: "N2", ask: "Count the LinkedIn applicants using the cell range <code>C2:C7</code>.",
+      want: 4, answer: '=COUNTIF(C2:C7,"LinkedIn")', requires: ["COUNTIF"],
+      good: "Four. Correct — but it will miss a seventh candidate added in row 8." },
+    { cell: "O2", ask: "The same count using <code>Candidates[Source]</code> instead.",
+      want: 4, answer: '=COUNTIF(Candidates[Source],"LinkedIn")', requires: ["Candidates["],
+      good: "Same answer, and this one grows with the table. This is the version to write from now on." },
+    { cell: "Q2", ask: "Asha is on row 2. Your time to hire by cell reference: accepted minus applied.",
+      want: 23, answer: "=I2-E2",
+      good: "23 days." },
+    { cell: "R2", ask: "The same 23, using <code>[@Accepted]</code> and <code>[@Applied]</code>, blanked if you never accepted. The <code>@</code> means <em>this row</em>, so it only works beside the row it describes.",
+      want: 23, answer: '=IF([@Accepted]="","",[@Accepted]-[@Applied])', requires: ["[@"],
+      good: "The same 23 — and this version survives someone inserting a column in the middle of the table." }
+  ]
+}));
+
+Sheet.playground("pg6", {
+  title: "Structured reference sandbox", note: "Try the two styles side by side.",
+  data: D.candidates(D.ALL, {}).data,
+  tables: { Candidates: { range: "A1:L7", header: true } },
+  formats: D.candidates(D.ALL, {}).formats,
+  examples: [
+    '=COUNTA(Candidates[Name])',
+    '=COUNT(Candidates[Offer])',
+    '=SUM(Candidates[FeeEUR])',
+    '=COUNTIF(Candidates[Outcome],"Joined")',
+    '=TEXTJOIN(", ",TRUE,Candidates[Name])',
+    '=COUNTIFS(Candidates[Source],"LinkedIn",Candidates[Outcome],"Joined")'
+  ],
+  value: '=COUNTA(Candidates[Name])'
+});
+
+/* ---- 7. errors ---- */
+Sheet.mount("s7", {
+  id: "e1-errors", rows: 10, cols: 5, headerRows: 1,
+  title: "Error laboratory", note: "Column C is all yours. Break it on purpose.",
+  open: ["C2:C9"],
+  widths: { A: 180, B: 90, C: 170 },
+  data: [
+    ["Try typing this into column C", "Gives", "Your attempt"],
+    ["=B2/B3", "#DIV/0!", ""],
+    ["=XLOOKUP(\"BE1\",A2:A3,B2:B3)", "#N/A", ""],
+    ["=COUNTIFF(B2:B3,1)", "#NAME?", ""],
+    ["=\"text\"+1", "#VALUE!", ""]
+  ],
+  cells: { B2: 10, B3: 0 },
+  lessonId: "excel-1.errors",
+  tasks: [
+    { cell: "C2", ask: "First cause one: divide B2 by B3. B3 is zero.",
+      want: "#DIV/0!", formula: true, answer: "=B2/B3", tol: 0,
+      good: "#DIV/0!. Now fix it in the next cell rather than deleting it." },
+    { cell: "C3", ask: "Now make that same division return an empty cell instead of an error, using IFERROR.",
+      want: "", answer: '=IFERROR(B2/B3,"")', requires: ["IFERROR"],
+      good: "Blank instead of a red error. This is the only kind of error worth hiding: an expected one." },
+    { cell: "C4", ask: "Cause a <code>#NAME?</code> by misspelling a function — try <code>=COUNTIFF(B2:B3,1)</code>.",
+      want: "#NAME?", answer: "=COUNTIFF(B2:B3,1)", tol: 0,
+      good: "#NAME? always means Excel did not recognise a word. Nine times out of ten it is a typo or a missing quote." }
+  ]
+});
+
+Quiz.mount("q7", {
+  title: "Check yourself", lessonId: "excel-1.errors",
+  items: [
+    { q: "A lookup of RoleID returns #N/A for one candidate out of 400. What is the most likely cause?",
+      opts: ["Excel is out of memory", "A trailing space or a typo in that one RoleID", "The formula needs IFERROR", "The table is too large"],
+      a: 1,
+      why: "<b>#N/A means the key was not found.</b> One row out of 400 points at a data problem in that row, usually a space. Wrapping it in IFERROR would hide a genuine broken record — investigate lookups, wrap only divisions." },
+    { q: "When is IFERROR the right answer?",
+      opts: ["Always — errors look unprofessional", "Never", "When the error is expected, like a rate for a role with no offers yet", "Only on lookups"],
+      a: 2,
+      why: "<b>Wrap divisions, investigate lookups.</b> An acceptance rate for a role with zero offers is legitimately undefined, so a blank is the honest display." }
+  ]
+});
+
+/* ---- 9. the finished shape ---- */
+Sheet.mount("s9", D.candidates(D.ALL, {
+  id: "e1-shape", rows: 8, cols: 18, height: 250,
+  title: "Where this is going", note: "Facts in A–L. Everything from N onward is calculated.",
+  open: [],
+  cells: {
+    N1: "HireDays", N2: '=IF([@Accepted]="","",[@Accepted]-[@Applied])',
+    N3: '=IF([@Accepted]="","",[@Accepted]-[@Applied])', N4: '=IF([@Accepted]="","",[@Accepted]-[@Applied])',
+    N5: '=IF([@Accepted]="","",[@Accepted]-[@Applied])', N6: '=IF([@Accepted]="","",[@Accepted]-[@Applied])',
+    N7: '=IF([@Accepted]="","",[@Accepted]-[@Applied])',
+    O1: "Manager", O2: '=XLOOKUP([@RoleID],Roles[RoleID],Roles[HiringManager],"No role")',
+    O3: '=XLOOKUP([@RoleID],Roles[RoleID],Roles[HiringManager],"No role")',
+    O4: '=XLOOKUP([@RoleID],Roles[RoleID],Roles[HiringManager],"No role")',
+    O5: '=XLOOKUP([@RoleID],Roles[RoleID],Roles[HiringManager],"No role")',
+    O6: '=XLOOKUP([@RoleID],Roles[RoleID],Roles[HiringManager],"No role")',
+    O7: '=XLOOKUP([@RoleID],Roles[RoleID],Roles[HiringManager],"No role")',
+    P1: "Stale?", P2: '=IF(AND([@Outcome]="Open",TODAY()-[@Applied]>14),"CHASE","")',
+    P3: '=IF(AND([@Outcome]="Open",TODAY()-[@Applied]>14),"CHASE","")',
+    P4: '=IF(AND([@Outcome]="Open",TODAY()-[@Applied]>14),"CHASE","")',
+    P5: '=IF(AND([@Outcome]="Open",TODAY()-[@Applied]>14),"CHASE","")',
+    P6: '=IF(AND([@Outcome]="Open",TODAY()-[@Applied]>14),"CHASE","")',
+    P7: '=IF(AND([@Outcome]="Open",TODAY()-[@Applied]>14),"CHASE","")',
+    R1: "Roles", R2: "RoleID", S2: "HiringManager",
+    R3: "BE-1", S3: "Maya Shah", R4: "FE-1", S4: "Leo Berger"
+  },
+  extraFormats: { N: "general", O: "text", P: "text", R: "text", S: "text" },
+  widths: { N: 86, O: 100, P: 72, R: 70, S: 108 },
+  extraTables: { Roles: { range: "R2:S4", header: true } }
+}));
+
+Quiz.mount("q8", {
+  title: "Check yourself", lessonId: "excel-1.keys",
+  items: [
+    { q: "You need to turn an ATS export into a Table. Which keys?",
+      opts: ["Ctrl+1", "Ctrl+T", "Ctrl+Shift+L", "Alt+="],
+      a: 1,
+      why: "<b>Ctrl+T (Cmd+T on a Mac).</b> First thing on every export." },
+    { q: "Why paste values before sending a file outside the company?",
+      opts: ["It looks neater", "Formulas can carry hidden sheets and live links you did not mean to share", "Values calculate faster", "PDF is not allowed"],
+      a: 1,
+      why: "<b>Paste Special → Values into a fresh file, then check it.</b> A formula is a pipe to whatever it pointed at." },
+    { q: "Ctrl+` (backtick) does what?",
+      opts: ["Inserts today’s date", "Shows every formula instead of its result — the first move on an inherited file", "Freezes the top row", "Opens Power Query"],
+      a: 1,
+      why: "<b>Show formulas.</b> Typed-over numbers become obvious immediately." }
+  ]
+});
+
+MatchDrill.mount("m8", {
+  lessonId: "excel-1.keys",
+  options: ["Ctrl+T", "Ctrl+1", "F4", "Ctrl+Shift+L", "Ctrl+`", "Ctrl+Shift+V"],
+  items: [
+    { q: "Turn the selection into a Table", a: "Ctrl+T" },
+    { q: "Format Cells dialog", a: "Ctrl+1" },
+    { q: "Cycle A1 → $A$1 while editing", a: "F4" },
+    { q: "Toggle filters", a: "Ctrl+Shift+L" },
+    { q: "Show all formulas", a: "Ctrl+`" },
+    { q: "Paste Special (values)", a: "Ctrl+Shift+V" }
+  ]
+});
+
+Quiz.mount("q9", {
+  title: "Check yourself", lessonId: "excel-1.format",
+  items: [
+    { q: "Why format dates as dd mmm yyyy rather than 03/02/2026?",
+      opts: ["It uses less space", "03/02 is 3 February in Dublin and 2 March in Chicago — a recruiting file cannot afford that", "Excel requires it", "Hiring managers prefer text"],
+      a: 1,
+      why: "<b>Locale trap.</b> Spell the month." },
+    { q: "Merged cells on a Candidates sheet?",
+      opts: ["Fine for the title", "Never — they break sort, filter, pivots and copy. Centre-across-selection if it has to look pretty", "Only on the dashboard", "Required for print"],
+      a: 1,
+      why: "<b>Never in a data sheet.</b> Merged cells are how a file becomes untrustworthy." }
+  ]
+});
+
+Course.init({ id: "excel-1" });
+</script>
+</body>
+</html>

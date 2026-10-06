@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Practice labs — Power BI, craft, the job — Nidhi's course</title>
+<link rel="stylesheet" href="assets/course.css?v=3">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand"><a href="index.html">Nidhi Tiwari</a><span>Labs · Power BI, craft, Europe, interview</span></div>
+  <div class="top-actions">
+    <div class="pbar"><i></i></div>
+    <span class="pnum"></span>
+    <a class="btn" href="index.html">Course home</a>
+  </div>
+</div>
+
+<div class="layout">
+<nav class="side" id="sideNav"></nav>
+<main>
+
+<p class="kicker">After the teaching chapters · extra reps</p>
+<h1>Labs for everything that is not Excel.</h1>
+<p class="lead">Each block is a full lesson: the rule, the numbers on the six invented people, the trap, a sentence you can say in an interview, then a measure, a sheet, a Boolean, a match, or a timed answer. Skip a quiz only when you can answer it standing up. Real candidate data still never comes onto this site.</p>
+
+<section class="lesson" data-lesson="labs-more.dax" data-n="01">
+  <p class="goal">Measures, not columns</p>
+  <h3>Power BI: write the measures again</h3>
+  <p>A <strong>calculated column</strong> is a fact about one row (days to hire). A <strong>measure</strong> is a question that must change when a slicer is clicked (average days, acceptance rate). <code>DIVIDE</code> rather than <code>/</code> so a month with no offers is blank, not an error. <code>CALCULATE</code> replaces a filter on the same column; it does not stack a second one. <code>ALL</code> in a denominator is how a percent-of-total stays a percent of the grand total.</p>
+  <p>On this practice file: six applicants, four offers, three accepts, two joiners, €4,000 of fees. Acceptance is DIVIDE of accepts over offers = 0.75. Write the measures. Then answer the quiz as if a hiring manager is watching the slicer.</p>
+  <div class="gold"><p><strong>Interview line.</strong> “Days to hire is a column. Average days to hire is a measure. If it must move when someone clicks Dublin, it is a measure.”</p></div>
+  <div id="dax1"></div>
+  <div id="q01"></div>
+</section>
+
+<section class="lesson" data-lesson="labs-more.ttf" data-n="02">
+  <p class="goal">Two clocks, two stories</p>
+  <h3>Time to fill is not time to hire</h3>
+  <p><strong>Time to hire</strong> is the candidate’s wait: accepted (or offer) minus applied. <strong>Time to fill</strong> is the seat’s wait: the person starts minus the requisition opened. They disagree on purpose. Dev applied in February to a role opened in January — his hire-days are 32, the seat waited longer. Asha is the clean 23. Quote both, and say which question the manager asked.</p>
+  <p>Joined minus Accepted is notice, not time to hire. Asha: 20 Apr − 25 Mar = 26 days. Eva has no join date, so notice is blank. Mixing notice into time to hire is how a dashboard blames the recruiter for Irish statutory notice.</p>
+  <div class="gold"><p><strong>Interview line.</strong> “Time to hire is the process. Time to fill is the vacancy. Notice sits in between and it is not my speed.”</p></div>
+  <div id="s02"></div>
+</section>
+
+<section class="lesson" data-lesson="labs-more.cost" data-n="03">
+  <p class="goal">The fee that survived a renege</p>
+  <h3>Cost per hire, honestly</h3>
+  <p>Internal cost is hours × loaded rate. Agency cost is the fee, owed even when Eva never starts. Cost per hire = total cost / joiners, not / offers. Two joiners here. If you divide by four offers you are lying about productivity.</p>
+  <div id="c03"></div>
+  <div id="s03"></div>
+</section>
+
+<section class="lesson" data-lesson="labs-more.source" data-n="04">
+  <p class="goal">Volume is not yield</p>
+  <h3>Source of hire vs source of applicants</h3>
+  <p>LinkedIn is four of six applicants and both joiners. Referral is one applicant and one joiner (100% conversion, sample size one). Agency is one applicant, one accept, zero joiners, €4,000. Source of hire without conversion is a vanity chart.</p>
+  <div id="s04"></div>
+  <div id="q04"></div>
+</section>
+
+<section class="lesson" data-lesson="labs-more.ats" data-n="05">
+  <p class="goal">A stage is not a person</p>
+  <h3>ATS: why funnel reports lie</h3>
+  <p>A requisition is the job. An application is a person on a job. An offer is a later object. If you count “interviewed” from a stage history that people can skip, or from events rather than people, the funnel will not add up. Disposition is why someone left the process — “not a fit” is lazy; “missing CNC 5-axis, three years” is usable. Do not write Workday as professional experience unless you have used it at work.</p>
+  <div id="q05"></div>
+</section>
+
+<section class="lesson" data-lesson="labs-more.bool" data-n="06">
+  <p class="goal">Bracket every OR</p>
+  <h3>Boolean that returns the right people</h3>
+  <p>AND narrows. OR widens and must sit in brackets. NOT loses good people — use it for job-seeker noise (“recruiter”, “hiring”), not for skills you are unsure about. Quotes for a phrase. Build the string, then read who it kept.</p>
+  <div id="bb06"></div>
+  <div id="q06"></div>
+</section>
+
+<section class="lesson" data-lesson="labs-more.roles" data-n="07">
+  <p class="goal">False matches cost weeks</p>
+  <h3>Roles: Java is not JavaScript</h3>
+  <p>Frontend paints the screen (React, CSS). Backend serves data (Java, Python, Go, APIs). Full stack is both, and often neither at the depth the manager wanted. A data analyst is not a data engineer. ML engineer is not “someone who used ChatGPT”. Your manufacturing ground (CNC, CAM, CMM) is a strength for industrial TA roles — it is not a substitute for knowing what a backend engineer does in Dublin.</p>
+  <div id="m07"></div>
+</section>
+
+<section class="lesson" data-lesson="labs-more.europe" data-n="08">
+  <p class="goal">The numbers you must not mix up</p>
+  <h3>Visas, notice, GDPR</h3>
+  <p>Ireland Critical Skills listed occupations from €40,904; other eligible roles from <strong>€68,911</strong>. Netherlands highly skilled migrant 30+ is <strong>€5,942 a month</strong> excluding holiday allowance, recognised sponsor. Germany EU Blue Card 2026 standard <strong>€50,700</strong>. GDPR: purpose, minimisation, retention, access, erasure. Candidate data is not practice data. US employment law from a Coursera course does not transfer.</p>
+  <div id="q08"></div>
+  <div id="s08"></div>
+</section>
+
+<section class="lesson" data-lesson="labs-more.strategy" data-n="09">
+  <p class="goal">Reset the brief before sourcing</p>
+  <h3>Intake, workforce, the hard conversation</h3>
+  <p>A partner looks at the market, resets expectations, chooses channels, sizes the funnel, watches conversion. An order-taker takes a JD and posts it. If sourced-per-offer is huge and offers are zero, that is a spec conversation on Monday, not more job boards.</p>
+  <div id="d09"></div>
+  <div id="q09"></div>
+</section>
+
+<section class="lesson" data-lesson="labs-more.ai" data-n="10">
+  <p class="goal">Helpful, then it stops</p>
+  <h3>AI: what you will and will not paste</h3>
+  <p>Allowed on invented or already-public text: Boolean drafts, JD structure, interview-question lists, a market note. Never: a real CV, phone, pay, interview notes, or anything that could identify a candidate. If the tool invents a skill, you have to catch it — that is the job. IBM’s Generative AI for HR comes after your own files exist.</p>
+  <div id="q10"></div>
+  <div id="d10"></div>
+</section>
+
+<section class="lesson" data-lesson="labs-more.iv" data-n="11">
+  <p class="goal">One paragraph, then stop</p>
+  <h3>Interview: story, salary, the gap</h3>
+  <p>Salary for a TA Partner in Ireland: €70,000–€80,000 gross, sponsorable. Never open at €50,000. The manufacturing-to-software gap is answered with the 20-engineer case, labelled as a project, plus the Ferra dashboard you rebuilt yourself. STAR: situation, task, action, result — the result needs a number.</p>
+  <div id="d11"></div>
+  <div id="q11"></div>
+</section>
+
+<section>
+  <h2>Then back to the portfolio</h2>
+  <div class="gold">
+    <p>Excel labs, these labs, then <a href="project.html">the Ferra dashboard</a> on your laptop. The 20-engineer Europe case is the second project. Dummy data only.</p>
+  </div>
+</section>
+
+<div class="pager">
+  <a class="btn" href="labs-excel.html"><span class="lbl">Excel labs</span>&larr; Every Excel habit</a>
+  <a class="btn btn-go" href="project.html"><span class="lbl">Portfolio</span>The Ferra dashboard &rarr;</a>
+</div>
+
+</main>
+</div>
+
+<script src="assets/engine.js?v=3"></script>
+<script src="assets/sheet.js?v=3"></script>
+<script src="assets/data.js?v=3"></script>
+<script src="assets/dax.js?v=3"></script>
+<script src="assets/course.js?v=3"></script>
+<script>
+var D = CourseData;
+var REC = D.records();
+
+DaxTask.mount("dax1", {
+  title: "Write four measures",
+  lessonId: "labs-more.dax",
+  rows: REC,
+  items: [
+    { name: "Applicants", ask: "How many candidate rows? COUNTROWS.", want: 6,
+      answer: "COUNTROWS(Candidates)", requires: ["COUNTROWS"],
+      good: "6." },
+    { name: "Offers", ask: "How many dated offers? COUNT of the Offer column.", want: 4,
+      answer: "COUNT(Candidates[Offer])", requires: ["COUNT"],
+      good: "4." },
+    { name: "Acceptance", ask: "Accepts over offers, DIVIDE, so a zero is blank.", want: 0.75,
+      answer: "DIVIDE(COUNT(Candidates[Accepted]), COUNT(Candidates[Offer]))", requires: ["DIVIDE"],
+      good: "0.75." },
+    { name: "LinkedIn only", ask: "Applicants from LinkedIn even if the page is sliced elsewhere. CALCULATE.", want: 4,
+      answer: 'CALCULATE(COUNTROWS(Candidates), Candidates[Source]="LinkedIn")', requires: ["CALCULATE"],
+      good: "4. The measure’s filter replaces a slicer on Source." }
+  ]
+});
+
+Quiz.mount("q01", {
+  title: "Check yourself", lessonId: "labs-more.dax",
+  items: [
+    { q: "Days-to-hire for each person: measure or calculated column?",
+      opts: ["Measure — it must follow slicers", "Calculated column — it is a fact about one row", "Either", "A calculated table"],
+      a: 1,
+      why: "<b>A column.</b> It belongs on the row. The <em>average</em> of those days is the measure." },
+    { q: "Percent of total by source: why ALL in the denominator?",
+      opts: ["Speed", "Numerator follows the filter; denominator must stay the grand total", "ALL is optional", "To skip blanks"],
+      a: 1,
+      why: "<b>Two contexts in one formula.</b> Without ALL every slice reads 100%." }
+  ]
+});
+
+Sheet.mount("s02", D.candidates(["Name", "Applied", "Accepted", "Joined"], {
+  id: "lab-ttf", rows: 10, cols: 10, height: 260,
+  title: "Two clocks",
+  note: "Role opened dates sit in F1:G3 — BE-1 on 15 Jan, FE-1 on 20 Jan. Asha and Dev are BE-1; map via Role in the next columns if needed. Simpler: time to hire is Accepted−Applied; time to start from offer is Joined−Accepted.",
+  open: ["F2:G7"], fillTo: 7, lessonId: "labs-more.ttf",
+  cells: { F1: "Time to hire", G1: "Notice (join−accept)" },
+  extraFormats: { F: "general", G: "general" },
+  widths: { F: 110, G: 140 },
+  tasks: [
+    { cell: "F2", ask: "Asha: Accepted minus Applied. Blank if no Accepted.",
+      want: 23, answer: '=IF(C2="","",C2-B2)', requires: ["IF"],
+      good: "23. That is time to hire." },
+    { cell: "G2", ask: "Asha: Joined minus Accepted. Blank if either is missing. This is notice, not time to hire.",
+      want: 26, answer: '=IF(OR(C2="",D2=""),"",D2-C2)', requires: ["IF"],
+      good: "26 days of notice. Time to fill for the seat would add the opening-to-applied wait on top." },
+    { cell: "F7", ask: "Farah’s time to hire.",
+      want: "", answer: '=IF(C7="","",C7-B7)',
+      good: "Blank. You have not been hired. A huge negative would be the amateur version." }
+  ]
+}));
+
+Calc.mount("c03", {
+  title: "Cost per hire — move the sliders",
+  fields: [
+    { key: "hours", label: "Internal hours", value: 40, min: 0 },
+    { key: "rate", label: "Loaded € / hour", value: 35, min: 0 },
+    { key: "fee", label: "Agency fees €", value: 4000, min: 0 },
+    { key: "joiners", label: "Joiners", value: 2, min: 0 }
+  ],
+  outputs: [
+    { label: "Internal cost", calc: function (v) { return "€" + (v.hours * v.rate); } },
+    { label: "Total cost", calc: function (v) { return "€" + (v.hours * v.rate + v.fee); } },
+    { label: "Cost per hire", calc: function (v) { return v.joiners ? "€" + Math.round((v.hours * v.rate + v.fee) / v.joiners) : "—"; } }
+  ],
+  commentary: function (v) {
+    if (!v.joiners) return "Zero joiners: cost per hire is undefined, not zero.";
+    return "On the practice file the fee is Eva’s €4,000, owed after a renege, and there are two joiners. Dividing by offers would understate the cost of actually filling a seat.";
+  }
+});
+
+Sheet.mount("s03", {
+  id: "lab-cph", rows: 9, cols: 4, headerRows: 1,
+  title: "Cost per hire from the practice file",
+  note: "Internal 40 hours × €35, agency €4,000, two joiners.",
+  open: ["B7", "B8"],
+  widths: { A: 180, B: 90 },
+  data: [["Item", "Value"], ["Hours", 40], ["Rate EUR", 35], ["Agency fee", 4000], ["Joiners", 2]],
+  cells: { A7: "Total cost", A8: "Cost per hire" },
+  formats: { B: "general" },
+  lessonId: "labs-more.cost",
+  tasks: [
+    { cell: "B7", ask: "Hours × rate plus fee. Do not type 5400.",
+      want: 5400, answer: "=B2*B3+B4",
+      good: "€5,400." },
+    { cell: "B8", ask: "Total / joiners (B5). IFERROR if joiners are 0.",
+      want: 2700, answer: '=IFERROR(B7/B5,"")', requires: ["IFERROR"],
+      good: "€2,700 per joiner. The renege sits in the fee and not in the joiner count — which is honest." }
+  ]
+});
+
+Sheet.mount("s04", D.candidates(D.ALL, {
+  id: "lab-src", rows: 10, cols: 16, height: 250,
+  title: "Source conversion",
+  open: ["N2", "O2", "P2"], lessonId: "labs-more.source",
+  cells: { N1: "Source", O1: "Applicants", P1: "Joiners" },
+  extraFormats: { N: "text", O: "general", P: "general" },
+  widths: { N: 100, O: 90, P: 80 },
+  tasks: [
+    { cell: "N2", ask: "SORT UNIQUE of Source.",
+      want: "Agency", answer: "=SORT(UNIQUE(Candidates[Source]))", requires: ["UNIQUE"],
+      good: "Agency, LinkedIn, Referral." },
+    { cell: "O2", ask: "Applicants per spilled source.",
+      want: 1, answer: "=COUNTIFS(Candidates[Source],N2#)", requires: ["COUNTIFS"],
+      good: "1, 4, 1." },
+    { cell: "P2", ask: "Joiners: that source AND Outcome Joined.",
+      want: 0, answer: '=COUNTIFS(Candidates[Source],N2#,Candidates[Outcome],"Joined")',
+      good: "0 from Agency, the first spilled row. LinkedIn 2, Referral 0. Both joiners were LinkedIn." }
+  ]
+}));
+
+Quiz.mount("q04", {
+  title: "Check yourself", lessonId: "labs-more.source",
+  items: [
+    { q: "LinkedIn is 4 of 6 applicants and both joiners. What does you say?",
+      opts: ["LinkedIn is the only channel that works — switch everything there", "Volume and hires both came from LinkedIn; Referral converted 1/1 on a sample of one, so watch it; Agency cost a renege", "Agency is cheapest", "Stop LinkedIn, it is too noisy"],
+      a: 1,
+      why: "<b>Volume, yield, and sample size in one breath.</b> That is source analysis." },
+    { q: "Source of hire on a pie of two joiners. Why is that a weak chart?",
+      opts: ["Pies are always wrong", "Two people cannot support a channel strategy, and it hides applicant volume", "Excel cannot make pies", "Hires should be a line chart"],
+      a: 1,
+      why: "<b>n=2.</b> Show applicants and joiners side by side, and say the sample is small." }
+  ]
+});
+
+Quiz.mount("q05", {
+  title: "Check yourself", lessonId: "labs-more.ats",
+  items: [
+    { q: "Why can “interviewed this month” from an ATS exceed “people in process”?",
+      opts: ["The ATS is broken", "It is counting interview events, and one person can have three", "Managers over-report", "Time zones"],
+      a: 1,
+      why: "<b>Grain.</b> Events vs people. Always say which you counted." },
+    { q: "Which disposition is usable next week?",
+      opts: ["Not a fit", "Rejected", "Missing 5-axis CNC, under three years", "Overqualified"],
+      a: 2,
+      why: "<b>A reason a second recruiter can act on.</b> The others are labels." },
+    { q: "When does Workday go on your CV under experience?",
+      opts: ["After this course", "After you watch a YouTube demo", "Only if you have used it at work — training is training", "Never, it is too common"],
+      a: 2,
+      why: "<b>Do not list tools you have not run a requisition in.</b> Training stays under training." }
+  ]
+});
+
+BoolBuilder.mount("bb06", {
+  lessonId: "labs-more.bool",
+  facets: [
+    { key: "title", label: "Title", options: ["backend", "frontend", "recruiter"] },
+    { key: "skill", label: "Skill", options: ["java", "javascript", "react", "cnc"] },
+    { key: "place", label: "Place", options: ["dublin", "amsterdam", "pune"] },
+    { key: "not", label: "Exclude", mode: "NOT", options: ["recruiter", "hiring manager"] }
+  ],
+  profiles: [
+    { name: "Asha", text: "Backend engineer, Java APIs, Dublin, 6 years", good: true },
+    { name: "Dev", text: "Frontend engineer, React and JavaScript, Amsterdam", good: true },
+    { name: "Priya", text: "Technical recruiter in Dublin hiring engineers", flag: "a recruiter" },
+    { name: "Karthik", text: "CAM programmer, CNC 5-axis, Pune plant", flag: "manufacturing — right for Ferra, wrong for a Dublin backend brief" }
+  ]
+});
+
+Quiz.mount("q06", {
+  title: "Check yourself", lessonId: "labs-more.bool",
+  items: [
+    { q: "What is wrong with python OR django AND dublin without brackets?",
+      opts: ["Nothing", "OR and AND mix; you may get every python in the world plus django-in-Dublin", "NOT is missing", "Dublin should be quoted"],
+      a: 1,
+      why: "<b>Bracket every OR group.</b> (python OR django) AND dublin." },
+    { q: "You are hiring a Java backend in Dublin. Should the string include NOT JavaScript?",
+      opts: ["Yes, to avoid frontend people", "No — Java developers often list JavaScript; NOT will drop good people", "Yes, always", "Only on LinkedIn"],
+      a: 1,
+      why: "<b>NOT on a neighbouring skill is how you empty the pond.</b> Screen titles, don’t NOT the language." }
+  ]
+});
+
+MatchDrill.mount("m07", {
+  lessonId: "labs-more.roles",
+  options: ["Frontend", "Backend", "Data analyst", "Data engineer", "ML engineer", "Manufacturing / CNC"],
+  items: [
+    { q: "React, CSS, the thing the user sees", a: "Frontend" },
+    { q: "Java APIs, databases, the thing other software talks to", a: "Backend" },
+    { q: "SQL, dashboards, already-clean tables", a: "Data analyst" },
+    { q: "Pipelines, Spark, warehouses, making tables exist", a: "Data engineer" },
+    { q: "Training models, not “uses ChatGPT at work”", a: "ML engineer" },
+    { q: "5-axis, CAM, CMM — your existing ground", a: "Manufacturing / CNC" }
+  ]
+});
+
+Quiz.mount("q08", {
+  title: "Check yourself", lessonId: "labs-more.europe",
+  items: [
+    { q: "Ireland, a typical HR / TA hire not on the Critical Skills list. Which floor matters?",
+      opts: ["€40,904", "€68,911", "€36,605 General Permit is always enough", "There is no floor for HR"],
+      a: 1,
+      why: "<b>€68,911</b> for other eligible occupations. Listed Critical Skills can be lower. HR admin titles can be ineligible — check the list, do not guess." },
+    { q: "Netherlands highly skilled migrant, you are over 30. The 2026 monthly figure excluding holiday pay is?",
+      opts: ["€4,357", "€5,942", "€68,911", "€50,700"],
+      a: 1,
+      why: "<b>€5,942 a month</b>, recognised sponsor. Under 30 is €4,357." },
+    { q: "A public AI tool is fine for which of these?",
+      opts: ["A real candidate’s CV, names removed", "Invented Boolean and a public JD", "Interview notes with initials only", "Last month’s offer salaries"],
+      a: 1,
+      why: "<b>Invented or already public.</b> Initials and “anonymised” CVs still re-identify. That is GDPR, not fussiness." }
+  ]
+});
+
+Sheet.mount("s08", {
+  id: "lab-visa", rows: 8, cols: 4, headerRows: 1,
+  title: "Does the offer clear the floor?",
+  note: "Compare annual offer to the Ireland other-eligible floor 68911.",
+  open: ["C2:C4"],
+  widths: { A: 140, B: 90, C: 90 },
+  data: [["City", "Offer EUR", "Clears floor?"], ["Dublin", 76000], ["Dublin", 62000], ["Amsterdam", 72000]],
+  cells: { E1: "Floor", E2: 68911 },
+  lessonId: "labs-more.europe",
+  tasks: [
+    { cell: "C2", ask: "YES if B2 ≥ $E$2, else NO. Dublin 76k.",
+      want: "YES", answer: '=IF(B2>=$E$2,"YES","NO")', requires: ["IF"],
+      good: "YES." },
+    { cell: "C3", ask: "Dublin 62k against the same floor.",
+      want: "NO", answer: '=IF(B3>=$E$2,"YES","NO")',
+      good: "NO. A 62k Irish TA offer may not be sponsorable for your profile. That is why you do not open at 50k." },
+    { cell: "C4", ask: "Amsterdam 72k — this floor is Irish. Return N/A, not a fake YES. Type =\"N/A\" or a formula that says the floor does not apply.",
+      want: "N/A", answer: '="N/A"',
+      good: "N/A. Netherlands uses a monthly IND figure, not 68911. Mixing floors is how people give immigration advice by accident." }
+  ]
+});
+
+Drill.mount("d09", {
+  id: "lab-intake", lessonId: "labs-more.strategy", seconds: 40,
+  title: "The spec is unhireable.",
+  prompt: "Forty seconds. CNC, twenty sourced, zero offers, still open. What do you say to the manager on Monday?",
+  model: "<p>\"We have sourced twenty people against this CNC brief and not got to offer. That is not a sourcing gap — it is the brief. I need one mandatory dropped or the band reopened before I spend another week on the same pond. If we keep the spec, we should say out loud that this seat stays empty.\"</p><p class=\"tiny\">Number, diagnosis, decision needed. Not “I’ll try Naukri again.”</p>"
+});
+
+Quiz.mount("q09", {
+  title: "Check yourself", lessonId: "labs-more.strategy",
+  items: [
+    { q: "Workforce planning starts with which question?",
+      opts: ["Where shall we post?", "What work must exist in six months, and what happens if hiring slips?", "What did we hire last year?", "What is the agency’s SLA?"],
+      a: 1,
+      why: "<b>The work, then the seats, then the plan.</b> Posting is a later step." },
+    { q: "EVP in one sentence?",
+      opts: ["The job advert", "Why a person who already has a job would take this one", "The salary band", "The values poster"],
+      a: 1,
+      why: "<b>Why they move.</b> Pay is part of it; it is not the whole of it." }
+  ]
+});
+
+Quiz.mount("q10", {
+  title: "Check yourself", lessonId: "labs-more.ai",
+  items: [
+    { q: "The tool writes a Boolean that includes a skill the candidate never had. What do you do?",
+      opts: ["Send it — speed matters", "Check against the actual profile before anything leaves your desk", "Paste the CV back in so it can correct itself", "Use a different tool"],
+      a: 1,
+      why: "<b>You are still the recruiter.</b> Invented skills are the failure mode." },
+    { q: "When does the IBM HR-AI course belong in the plan?",
+      opts: ["First, to get the certificate on LinkedIn", "After your Excel file and dashboard exist", "Never", "Instead of Excel"],
+      a: 1,
+      why: "<b>After you have files.</b> Otherwise you have a certificate and nothing to apply it to." }
+  ]
+});
+
+Drill.mount("d10", {
+  id: "lab-ai", lessonId: "labs-more.ai", seconds: 30,
+  title: "“What do you use AI for?”",
+  prompt: "Thirty seconds. Include a stop.",
+  model: "<p>\"Drafting Boolean, structuring a JD, and a first pass at interview questions — then I edit. I do not paste candidate CVs, pay, or interview notes into a public tool. If it invents a fact, that is on me if I let it through.\"</p>"
+});
+
+Drill.mount("d11", {
+  id: "lab-story", lessonId: "labs-more.iv", seconds: 60,
+  title: "Your story in one minute.",
+  prompt: "Ferra, the dashboard, the gap, Europe, stop.",
+  model: "<p>\"I run manufacturing hiring at Ferra — requisitions, funnel, stakeholders, the tracker. I rebuilt our HR dashboard myself so I can defend every KPI. I have not hired software engineers in Europe yet; I have a documented 20-engineer case and I already recruit technical production roles. I want Ireland, the Netherlands or Germany, TA Partner, and the offer has to be sponsorable.\"</p><p class=\"tiny\">True, bounded, a project not a claim. That is the gap answer.</p>"
+});
+
+Quiz.mount("q11", {
+  title: "Check yourself", lessonId: "labs-more.iv",
+  items: [
+    { q: "Expected salary, Ireland TA Partner, first time you are asked?",
+      opts: ["€50,000 to be competitive", "€70,000–€80,000 gross, flexible on mix, must be sponsorable", "Whatever the band is", "€120,000"],
+      a: 1,
+      why: "<b>€70–80k, sponsorable.</b> Opening at 50k leaves your under the floor that matters." },
+    { q: "How does you label the 20-engineer work?",
+      opts: ["As experience — you have effectively done it", "As a project / case", "As a Ferra achievement", "You should not mention it"],
+      a: 1,
+      why: "<b>A case, not a claim.</b> Inflating it is how the interview ends." }
+  ]
+});
+
+Course.init({ id: "labs-more" });
+</script>
+</body>
+</html>

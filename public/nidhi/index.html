@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nidhi — Europe plan</title>
+<style>
+  :root {
+    --ink: #1c1917;
+    --muted: #57534e;
+    --faint: #a8a29e;
+    --line: #e4ddd2;
+    --paper: #f3efe6;
+    --sheet: #fffdf9;
+    --accent: #1e4d38;
+    --accent-soft: #e7f0ea;
+    --warn: #9f3a32;
+    --warn-soft: #f8ebe8;
+    --gold: #8a5a12;
+    --gold-soft: #f6edd9;
+    --shadow: 0 18px 50px rgba(40, 32, 20, 0.08);
+    --nav: 232px;
+    --serif: "Iowan Old Style", Palatino, "Palatino Linotype", Georgia, serif;
+    --sans: "Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--paper);
+    font-family: var(--sans);
+    font-size: 16.5px;
+    line-height: 1.5;
+  }
+  a { color: var(--accent); }
+  button, input, select, textarea { font: inherit; color: inherit; }
+  h1, h2, h3, h4 { font-family: var(--serif); font-weight: 600; letter-spacing: -0.02em; }
+  h1 { font-size: 52px; line-height: 0.95; margin: 0; }
+  h2 { font-size: 32px; line-height: 1.1; margin: 0 0 10px; }
+  h3 { font-size: 22px; margin: 0 0 8px; }
+  p { margin: 0 0 12px; }
+  .muted { color: var(--muted); }
+  .kicker {
+    margin: 0 0 8px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: center;
+    padding: 12px 22px;
+    background: rgba(243, 239, 230, 0.92);
+    border-bottom: 1px solid var(--line);
+    backdrop-filter: blur(10px);
+  }
+  .brand { font-family: var(--serif); font-size: 18px; }
+  .brand span { color: var(--muted); font-family: var(--sans); font-size: 13px; margin-left: 8px; }
+  .top-actions { display: flex; gap: 8px; align-items: center; }
+  .progress-label { font-size: 13px; color: var(--muted); min-width: 92px; text-align: right; }
+  .meter {
+    width: 140px;
+    height: 8px;
+    background: #e7e1d6;
+    border-radius: 99px;
+    overflow: hidden;
+  }
+  .meter > div { height: 100%; width: 0; background: var(--accent); }
+
+  button.btn {
+    border: 1px solid var(--line);
+    background: #fff;
+    border-radius: 999px;
+    padding: 7px 14px;
+    cursor: pointer;
+  }
+  button.btn:hover { border-color: #c9bfb0; }
+  button.btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+  .layout {
+    display: grid;
+    grid-template-columns: var(--nav) minmax(0, 1fr);
+    align-items: start;
+  }
+  main { min-width: 0; }
+  nav.side {
+    position: sticky;
+    top: 58px;
+    height: calc(100vh - 58px);
+    overflow: auto;
+    padding: 22px 14px 40px 22px;
+  }
+  nav.side a {
+    display: block;
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 14px;
+    padding: 6px 0;
+    border-left: 2px solid transparent;
+    padding-left: 10px;
+  }
+  nav.side a.active, nav.side a:hover { color: var(--ink); border-left-color: var(--accent); }
+
+  main { padding: 28px 28px 80px 8px; max-width: 980px; }
+  section { margin: 0 0 54px; scroll-margin-top: 76px; }
+  .sheet {
+    background: var(--sheet);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+    padding: 28px 28px 22px;
+  }
+  .hero { padding-bottom: 22px; border-bottom: 2px solid var(--accent); }
+  .lede { font-size: 19px; max-width: 640px; margin-top: 16px; }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-top: 22px;
+  }
+  .stat {
+    background: var(--sheet);
+    border: 1px solid var(--line);
+    padding: 14px 14px 12px;
+  }
+  .stat b {
+    display: block;
+    font-family: var(--serif);
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .stat span { color: var(--muted); font-size: 13px; display: block; line-height: 1.35; }
+
+  .note, .warn, .gold {
+    border: 1px solid var(--line);
+    padding: 14px 16px;
+    margin: 14px 0;
+  }
+  .note { background: var(--accent-soft); border-color: #c9ddd0; }
+  .warn { background: var(--warn-soft); border-color: #efd0cb; }
+  .gold { background: var(--gold-soft); border-color: #ead7b0; }
+  .note strong, .warn strong, .gold strong { font-weight: 650; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+  ul.clean { margin: 8px 0 0; padding-left: 18px; }
+  ul.clean li { margin: 4px 0; }
+  ol.clean { margin: 8px 0 0; padding-left: 20px; }
+  ol.clean li { margin: 6px 0; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14.5px;
+    background: var(--sheet);
+  }
+  th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); font-weight: 650; }
+  tr.lead td { background: #f4faf6; }
+
+  .tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 14px; }
+  .tabs button {
+    border: 1px solid var(--line);
+    background: #fff;
+    border-radius: 999px;
+    padding: 7px 12px;
+    cursor: pointer;
+  }
+  .tabs button[aria-selected="true"] {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+  }
+  .panel[hidden] { display: none; }
+  .pay-head { display: flex; justify-content: space-between; gap: 12px; align-items: end; }
+  .big {
+    font-family: var(--serif);
+    font-size: 34px;
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+  .tag {
+    display: inline-block;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border: 1px solid var(--line);
+    border-radius: 99px;
+    padding: 2px 8px;
+    color: var(--muted);
+    margin-right: 6px;
+  }
+  .tag.good { color: var(--accent); border-color: #b7d2c4; background: var(--accent-soft); }
+  .tag.bad { color: var(--warn); border-color: #efd0cb; background: var(--warn-soft); }
+
+  .skill {
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    gap: 12px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .skill .n {
+    font-family: var(--serif);
+    font-size: 28px;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  details.week {
+    background: var(--sheet);
+    border: 1px solid var(--line);
+    margin: 0 0 8px;
+  }
+  details.week[open] { box-shadow: var(--shadow); }
+  details.week summary {
+    cursor: pointer;
+    list-style: none;
+    display: grid;
+    grid-template-columns: 92px 1fr auto;
+    gap: 10px;
+    align-items: center;
+    padding: 12px 14px;
+  }
+  details.week summary::-webkit-details-marker { display: none; }
+  details.now { border-color: var(--accent); }
+  .when { font-size: 12px; color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; }
+  .week-body { padding: 0 16px 14px 16px; }
+  label.task {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 7px 0;
+    border-top: 1px solid var(--line);
+  }
+  label.task input { margin-top: 4px; accent-color: var(--accent); }
+  label.task.done span { color: var(--faint); text-decoration: line-through; }
+
+  .copy {
+    background: #f7f4ee;
+    border: 1px solid var(--line);
+    padding: 12px 14px;
+    font-size: 15px;
+  }
+  .row-actions { display: flex; gap: 8px; margin-top: 8px; }
+
+  .companies { display: grid; grid-template-columns: 1fr 1fr 1.15fr; gap: 12px; }
+  .co {
+    background: var(--sheet);
+    border: 1px solid var(--line);
+    padding: 14px;
+  }
+  .co h3 { font-size: 18px; }
+  .co li { margin: 3px 0; }
+
+  .tracker-form, .tracker-table input, .tracker-table select {
+    border: 1px solid var(--line);
+    background: #fff;
+    padding: 7px 8px;
+    width: 100%;
+  }
+  .tracker-form { display: grid; grid-template-columns: 1.3fr .8fr 1.2fr .7fr .8fr auto; gap: 8px; margin-bottom: 10px; }
+  .tiny { font-size: 13px; color: var(--muted); }
+  a.study-link {
+    display: inline-block;
+    margin-top: 8px;
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 999px;
+    padding: 8px 14px;
+    font-size: 15px;
+  }
+  footer.sources { font-size: 13px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 16px; }
+  footer.sources li { margin: 4px 0; }
+
+  @media (max-width: 980px) {
+    .layout { grid-template-columns: 1fr; }
+    nav.side { display: none; }
+    main { padding: 18px 14px 64px; }
+    h1 { font-size: 40px; }
+    .stats, .grid-2, .grid-3, .companies, .tracker-form { grid-template-columns: 1fr; }
+    details.week summary { grid-template-columns: 1fr; }
+    .meter { display: none; }
+  }
+  @media print {
+    .topbar, nav.side, .row-actions, .tracker-form, button { display: none !important; }
+    .layout { display: block; }
+    main { max-width: none; padding: 0; }
+    details.week { break-inside: avoid; }
+    details.week .week-body { display: block; }
+    body { background: #fff; }
+    .sheet, .stat, .co, details.week { box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">Nidhi Tiwari <span>Europe plan · 5 Oct 2026 – 24 Jan 2027</span></div>
+  <div class="top-actions">
+    <span class="progress-label" id="progressLabel">0 done</span>
+    <div class="meter" aria-hidden="true"><div id="meterBar"></div></div>
+    <button class="btn" type="button" onclick="window.print()">Print</button>
+  </div>
+</header>
+
+<div class="layout">
+<nav class="side" id="sideNav">
+  <a href="#start">Start here</a>
+  <a href="#position">How to introduce her</a>
+  <a href="#roles">Roles to apply for</a>
+  <a href="#pay">Pay and visas</a>
+  <a href="#skills">Skills, in order</a>
+  <a href="course/index.html">The course</a>
+  <a href="course/syllabus.html">Syllabus</a>
+  <a href="#weeks">16-week plan</a>
+  <a href="#project">The project</a>
+  <a href="#companies">Where to apply</a>
+  <a href="#interviews">Interview stories</a>
+  <a href="#papers">Papers to gather</a>
+  <a href="#tracker">Application tracker</a>
+  <a href="#sources">Sources</a>
+</nav>
+
+<main>
+<section id="start">
+  <div class="sheet hero">
+    <p class="kicker">Private briefing · checked 4 October 2026</p>
+    <h1>Get into Europe as a Talent Acquisition Partner.</h1>
+    <p class="lede">Nidhi already recruits. The next four months are for turning that into a European, data-backed, technical hiring profile — then applying while the preparation is still going.</p>
+    <div class="stats">
+      <div class="stat"><b>5+ yrs</b><span>HR and recruiting. The last year is aerospace and manufacturing hiring at Ferra.</span></div>
+      <div class="stat"><b>€70k</b><span>The number to ask for in Ireland. It sits on the visa line, not just the salary guide.</span></div>
+      <div class="stat"><b>Ireland</b><span>First country. English-speaking, and a €68,911 offer can change the permit.</span></div>
+      <div class="stat"><b>Feb–Apr</b><span>Realistic offer window. Preparation ends in January. Visas take longer.</span></div>
+    </div>
+  </div>
+
+  <div class="warn" style="margin-top:16px">
+    <strong>What “a job after four months” actually means.</strong>
+    Eight weeks to build the missing skills. Applications from late November. A signed offer often lands in February, March or April 2027, and the visa starts after that. Waiting until she feels fully ready, then applying for the first time in February, wastes the calendar.
+  </div>
+
+  <div class="note">
+    <strong>This week, starting Monday 5 October.</strong> Open <a href="course/index.html">the course</a> and start chapter 1.1 — Excel, with a working spreadsheet on the page. In parallel: pull passport, degree certificates, experience letters and the last three payslips into one folder, and send five short notes to talent-acquisition people in Dublin, Amsterdam or Berlin. Do not open with “please refer me.”
+  </div>
+  <p><a class="study-link" href="course/index.html">Open the course — start with Excel</a> <a class="study-link" href="course/syllabus.html" style="background:#8a5a12">Print the one-page syllabus</a></p>
+</section>
+
+<section id="position">
+  <p class="kicker">Positioning</p>
+  <h2>Retire the current headline.</h2>
+  <p>The resume currently leads with “Senior HR Executive | Talent Acquisition | Non-IT &amp; Bulk Hiring.” That wording sends her to the wrong jobs. European employers hiring at €60–80k are looking for a partner who can hire scarce people and explain the funnel, not a bulk-hiring executive.</p>
+  <div class="grid-2">
+    <div class="warn">
+      <p class="kicker" style="color:var(--warn)">Stop leading with</p>
+      <p>Non-IT. Bulk hiring. HR Executive. Payroll. Tally. “I will hire whoever you give me.”</p>
+    </div>
+    <div class="note">
+      <p class="kicker">Lead with</p>
+      <p>Talent Acquisition Partner. Engineering and manufacturing hiring. Technical recruitment. Strategic sourcing. Talent analytics.</p>
+    </div>
+  </div>
+  <h3 style="margin-top:18px">Headline she can paste</h3>
+  <div class="copy" id="headlineCopy">Talent Acquisition Partner | Engineering, Manufacturing &amp; Technology Hiring | Strategic Sourcing | Talent Analytics</div>
+  <div class="row-actions"><button class="btn" type="button" data-copy="headlineCopy">Copy headline</button></div>
+
+  <h3 style="margin-top:22px">The true story, in one paragraph</h3>
+  <p>She has recruited since 2021: BYJU’S, Skillvert, Infinity Learn, and now Ferra Aerospace, where she owns hiring across engineering, production, quality, CAM, project management, supply chain, planning and related roles. She sources, screens technical profiles, deals with hiring managers, negotiates offers and keeps the MIS. Amazon was HR operations on US timesheets and employee cases, not recruiting — useful as proof she has worked inside a global technology company, and nothing more. Internships at Verzeo and My Travely stay off the headline.</p>
+  <div class="gold">
+    <strong>Only numbers she can defend.</strong> The resume has no hire counts, time-to-fill or offer-acceptance rates. Before those go on a European CV she should rebuild them from her own trackers. A blank is better than a number she cannot explain in an interview.
+  </div>
+</section>
+
+<section id="roles">
+  <p class="kicker">Target roles</p>
+  <h2>Search these titles. Ignore the rest for now.</h2>
+  <table>
+    <thead>
+      <tr><th>Search this</th><th>Why it fits</th><th>When</th></tr>
+    </thead>
+    <tbody>
+      <tr class="lead"><td>Talent Acquisition Partner</td><td>The title European multinationals actually use for her level of ownership.</td><td>From week 12</td></tr>
+      <tr class="lead"><td>Technical Recruiter / Technical TA Partner</td><td>The bridge from aerospace hiring into technology companies.</td><td>From week 12</td></tr>
+      <tr class="lead"><td>Engineering or Manufacturing Recruiter</td><td>Closest to the work she already does at Ferra. Best first yes.</td><td>From week 12</td></tr>
+      <tr><td>Senior TA Specialist / Senior Corporate Recruiter</td><td>Same work, different title. Apply when the description is full-cycle.</td><td>From week 12</td></tr>
+      <tr><td>Talent Sourcer</td><td>A way in at a strong company if the partner title is refused.</td><td>Selective</td></tr>
+      <tr><td>HR Business Partner</td><td>She has not owned employee relations, reward or a business unit’s people agenda.</td><td>Not now</td></tr>
+      <tr><td>TA Manager</td><td>Needs European or multinational scope she does not have yet.</td><td>Year 2–3</td></tr>
+    </tbody>
+  </table>
+  <p class="tiny" style="margin-top:8px">Apple, Meta, Google and Microsoft hire recruiters. She does not need to code. She does need to tell a backend engineer from a frontend engineer before those companies are a serious target. That is month 2.</p>
+</section>
+
+<section id="pay">
+  <p class="kicker">Money and permission to work</p>
+  <h2>Ask for the visa floor, not a modest salary.</h2>
+  <p>All figures below are gross, before tax. A normal market salary can still be too low for the visa. That is the whole game for a non-EU candidate.</p>
+
+  <div class="tabs" role="tablist">
+    <button type="button" role="tab" id="tab-ie" aria-selected="true" aria-controls="panel-ie">Ireland</button>
+    <button type="button" role="tab" id="tab-nl" aria-selected="false" aria-controls="panel-nl">Netherlands</button>
+    <button type="button" role="tab" id="tab-de" aria-selected="false" aria-controls="panel-de">Germany</button>
+    <button type="button" role="tab" id="tab-uk" aria-selected="false" aria-controls="panel-uk">United Kingdom</button>
+    <button type="button" role="tab" id="tab-tech" aria-selected="false" aria-controls="panel-tech">Big tech later</button>
+  </div>
+
+  <div class="sheet panel" id="panel-ie" role="tabpanel">
+    <div class="pay-head">
+      <div>
+        <span class="tag good">First choice</span>
+        <h3>Ireland · Dublin</h3>
+      </div>
+      <div class="big">€70,000</div>
+    </div>
+    <p>Morgan McKinley’s 2026 guide puts a Dublin Talent Acquisition Partner with 5+ years at <strong>€60,000–€70,000</strong>. Three to five years sits at €55,000–€60,000. Nidhi is at the boundary: long enough on paper, but Amazon was not recruiting and the specialised engineering work is recent. Quote <strong>€65,000–€75,000</strong>. The number that matters for immigration is <strong>€68,911</strong>.</p>
+    <ul class="clean">
+      <li>Talent acquisition is not on Ireland’s Critical Skills occupations list. HR administrative occupations are on the ineligible list. The offer must be a professional recruiting role, not “HR admin.”</li>
+      <li>At <strong>€68,911 or more</strong>, a role that is not ineligible can use a Critical Skills Employment Permit: no labour-market test, and a faster route to Stamp 4. The job offer needs to be for two years.</li>
+      <li>Below that, the route is usually a General Employment Permit. The 2026 minimum is €36,605, but the employer must usually run a labour-market test and show no suitable EEA candidate. That is slower and easier for the company to abandon.</li>
+      <li>A €60,000 offer can be a fair market salary and still a weak visa. Prefer €70,000 when the company will sponsor.</li>
+    </ul>
+  </div>
+
+  <div class="sheet panel" id="panel-nl" role="tabpanel" hidden>
+    <div class="pay-head">
+      <div>
+        <span class="tag good">Second choice</span>
+        <h3>Netherlands · Amsterdam</h3>
+      </div>
+      <div class="big">€71,300</div>
+    </div>
+    <p>Market pay for a TA Partner is often around €60,000–€75,000. The IND highly skilled migrant rule for 2026 is stricter, and the employer must be a recognised sponsor.</p>
+    <ul class="clean">
+      <li><strong>Age 30 or over:</strong> €5,942 gross per month, excluding the 8% holiday allowance. That is about <strong>€71,304 a year</strong> before holiday pay. Holiday pay is extra and does not count toward the threshold.</li>
+      <li><strong>Under 30:</strong> €4,357 a month, about €52,284 a year, again excluding holiday allowance.</li>
+      <li>Her B.Com starts in 2013. She should check her date of birth against the day the employer files, and assume the higher band unless she is clearly under 30.</li>
+      <li>Do not accept a Dutch offer of €60,000 if she is 30 or older. It can be a normal salary and still fail the permit.</li>
+    </ul>
+  </div>
+
+  <div class="sheet panel" id="panel-de" role="tabpanel" hidden>
+    <div class="pay-head">
+      <div>
+        <span class="tag">Third, unless she learns German</span>
+        <h3>Germany</h3>
+      </div>
+      <div class="big">€55–70k</div>
+    </div>
+    <p>This is the best industrial market for her Ferra experience: Airbus, Siemens, Bosch, Rheinmetall, and the supplier network. English-only multinational roles exist. Most HR jobs want German.</p>
+    <ul class="clean">
+      <li>The 2026 EU Blue Card standard threshold is <strong>€50,700</strong> gross. The lower figure of €45,934 applies to shortage occupations, recent graduates and some IT specialists. HR is not a shortage occupation, and her MBA finished in 2021, so plan on €50,700.</li>
+      <li>The job has to match the qualification. An MBA in finance and marketing can support a business role, but a visa officer still has to accept that talent acquisition matches the degree. Do not treat this as automatic.</li>
+      <li>Market offers for TA partners are often €50,000–€65,000, with €65,000–€75,000 possible in Berlin or at a multinational. Target <strong>€60,000–€70,000</strong> so the offer clears the Blue Card with room.</li>
+      <li>If Germany becomes the priority, 25 minutes of German a day starts now. B1 changes the number of jobs. Four months will not produce B2 from zero, so English-speaking employers stay the 2027 target.</li>
+    </ul>
+  </div>
+
+  <div class="sheet panel" id="panel-uk" role="tabpanel" hidden>
+    <div class="pay-head">
+      <div>
+        <span class="tag bad">Do not rely on this</span>
+        <h3>United Kingdom</h3>
+      </div>
+      <div class="big">£45–65k</div>
+    </div>
+    <p>London and multinational TA roles can pay in this band, sometimes higher. Sponsorship is the problem, not the salary guide.</p>
+    <ul class="clean">
+      <li>Since July 2025 the standard Skilled Worker floor is the higher of <strong>£41,700</strong> and the job’s going rate, and most new sponsorships need a degree-level occupation.</li>
+      <li>If the role is classed as an HR or recruitment manager, published going-rate tables put that occupation near <strong>£52,900</strong>. A recruiter or consultant classification may not be sponsorable at all for a new applicant.</li>
+      <li>Apply to UK roles that state sponsorship. Do not make Britain the plan.</li>
+    </ul>
+  </div>
+
+  <div class="sheet panel" id="panel-tech" role="tabpanel" hidden>
+    <div class="pay-head">
+      <div>
+        <span class="tag">After the first European job</span>
+        <h3>Apple, Meta, Google and the rest</h3>
+      </div>
+      <div class="big">Later</div>
+    </div>
+    <p>She can work in these companies. They employ recruiters, sourcers and talent partners. She cannot walk in next month as a senior technical recruiter for software. Meta does not need a CNC specialist.</p>
+    <ul class="clean">
+      <li>First European job: Talent Acquisition Partner or Technical Recruiter at a multinational, an aerospace or industrial firm, or a technology company one tier down. Expect <strong>€60,000–€80,000</strong> gross, with Ireland and the Netherlands pushed to the visa floors above.</li>
+      <li>After one to three years of European technical hiring, senior TA and big-tech packages move up because they add bonus and stock. Reported UK packages at stronger recruiter levels can pass £100,000 total. That is a destination, not the number to say in a November screen.</li>
+      <li>Companies worth a stretch application once month 2 is done: Google, Meta, Apple, Microsoft, Amazon, Salesforce, Stripe, Uber, HubSpot, ServiceNow, Workday, LinkedIn, Datadog, Atlassian, Booking.com, Adyen, Spotify.</li>
+    </ul>
+  </div>
+
+  <h3 style="margin-top:18px">What to say when they ask for expected salary</h3>
+  <div class="copy" id="salaryCopy">For a Talent Acquisition Partner role I’m looking at €70,000 to €80,000 gross in Ireland, or the local equivalent that meets the work-permit threshold. I’m flexible on the mix of base, bonus and relocation, and I need the offer to be sponsorable.</div>
+  <div class="row-actions"><button class="btn" type="button" data-copy="salaryCopy">Copy this answer</button></div>
+  <p class="tiny">Never open at €50,000. Compare offers on gross pay, bonus, pension, health insurance, leave, relocation and who pays the visa — not on the headline alone. Take-home is much lower after tax.</p>
+</section>
+
+<section id="skills">
+  <p class="kicker">What to learn</p>
+  <h2>Eight skills. In this order.</h2>
+  <p>She does not need another general HR certificate. CIPD and SHRM are real qualifications. They are the wrong use of these four months. The order is below. The actual lessons live in the course: a working spreadsheet on the page, diagrams, graded exercises, a Power BI mock, Boolean against twelve profiles, and an interview rehearsal with timers.</p>
+  <p><a class="study-link" href="course/index.html">Open the course</a></p>
+
+  <div class="skill"><div class="n">01</div><div><h3>Excel that can survive an interview</h3><p>XLOOKUP, INDEX/MATCH, SUMIFS, COUNTIFS, IF/IFS, dates, PivotTables, conditional formatting, and a basic Power Query clean. Then rebuild the Ferra HR dashboard herself — Filter Engine, live cards, funnel conversions — from the course project chapter. “Advanced Excel” on a CV without a file is useless.</p></div></div>
+  <div class="skill"><div class="n">02</div><div><h3>One Power BI recruiting dashboard</h3><p>Power Query, a simple model, relationships, and a few measures: COUNTROWS, DISTINCTCOUNT, DIVIDE, CALCULATE. The dashboard shows the funnel, time to fill, source of hire, offer acceptance, ageing roles and hires by location. HR-analytics level. Not a data-analyst certificate.</p></div></div>
+  <div class="skill"><div class="n">03</div><div><h3>What the metrics mean</h3><p>Time to fill is not time to hire. Offer acceptance is not joining rate. Source of hire is not source of applicants. She should be able to say which number she would show a hiring manager, and what she would do if interview-to-offer collapses.</p></div></div>
+  <div class="skill"><div class="n">04</div><div><h3>Sourcing</h3><p>Boolean search, LinkedIn Recruiter concepts (projects, pools, InMail, alerts), Google X-ray, and a basic look at GitHub for engineers. Example she should be able to write without notes: <em>("Manufacturing Engineer" OR "Production Engineer") AND (Aerospace OR Aviation) AND (CNC OR CMM)</em>. And the software version in week 5.</p></div></div>
+  <div class="skill"><div class="n">05</div><div><h3>Enough technology to recruit it</h3><p>No programming. She needs to know Java is not JavaScript, React is not Node, a data analyst is not a data engineer, and AWS is not Kubernetes. Roles to recognise: frontend, backend, full stack, DevOps, SRE, data engineer, data scientist, ML engineer, product manager, engineering manager.</p></div></div>
+  <div class="skill"><div class="n">06</div><div><h3>European recruiting</h3><p>GDPR in hiring: purpose, minimisation, retention, access and erasure. Notice periods, probation, permanent versus contractor, right to work, and who pays for the visa. Works councils in Germany at a concept level. She is not becoming a lawyer.</p></div></div>
+  <div class="skill"><div class="n">07</div><div><h3>TA partner behaviour</h3><p>Workforce planning, build versus buy, permanent versus contractor, salary benchmarking, and talent mapping. The sentence to practise: “I looked at the market, reset the hiring manager’s expectations, chose the channels, sized the funnel, and watched conversion.” That replaces “the manager gave me a requirement and I sourced.”</p></div></div>
+  <div class="skill"><div class="n">08</div><div><h3>AI, used carefully</h3><p>Job descriptions, Boolean drafts, candidate summaries, interview questions, and market notes. She also needs the limits: biased screening, invented candidate facts, and personal data pasted into a public tool. No prompt-engineering certificate.</p></div></div>
+
+  <div class="gold">
+    <strong>Workday, Greenhouse, SuccessFactors, Lever, SmartRecruiters, iCIMS.</strong> Learn the flow: requisition, posting, application, screen, interview, feedback, offer, checks, hire. Put this under training. Do not write “Workday” in professional experience unless she has used it at work.
+  </div>
+
+  <div class="grid-2" style="margin-top:16px">
+    <div class="note">
+      <p class="kicker">The one course worth paying for</p>
+      <p><strong>IBM — <a href="https://www.coursera.org/specializations/generative-ai-for-human-resources">Generative AI for Human Resources (HR) Professionals</a>.</strong> Three courses, about 29 hours. Take it in weeks 10 and 11, after the Excel file and the Power BI page exist. Every European talent team is being asked what it is doing with AI, and very few recruiters can answer carefully. This is the one line under <em>Certifications</em> that earns its place.</p>
+    </div>
+    <div class="gold">
+      <p class="kicker">The one to take selectively</p>
+      <p><strong>University of Minnesota — <a href="https://www.coursera.org/specializations/human-resource-management">HR for People Managers</a>.</strong> Five courses, six months at four hours a week — too long as a whole. Take <em>Recruiting, Hiring and Onboarding</em> and <em>Managing Employee Compensation</em> only, audited free if she likes. Warning: the employment law in it is American. The frameworks transfer, the law does not.</p>
+    </div>
+  </div>
+  <p class="tiny">Everything else she needs is free: W3Schools and GeeksforGeeks for Excel, Microsoft Learn for Power BI. The course is where those topics are taught against her practice file, not as a reading list.</p>
+
+  <div class="warn">
+    <strong>Leave these alone until she has a European job.</strong> Tally, payroll courses, a generic HR diploma, an MBA-style theory course, Python, the PL-300 exam, ten AI certificates, and trying to memorise every ATS.
+  </div>
+</section>
+
+<section id="weeks">
+  <p class="kicker">Calendar</p>
+  <h2>Sixteen weeks, with the work named.</h2>
+  <p>About 25 hours a week: three hours on weekday evenings and five hours on each weekend day. If she has less time, protect Excel, sourcing, the technology week, the CV, and applications. Tick a task only when the file or the message exists.</p>
+  <p class="tiny" id="weekStatus"></p>
+  <div id="weeksMount"></div>
+</section>
+
+<section id="project">
+  <p class="kicker">Proof</p>
+  <h2>Two projects. The first is the file she already has a spec for.</h2>
+  <p>A Cursor-built Ferra HR dashboard already exists. That file is the spec, not the portfolio. In an interview she has to open a workbook she can defend cell by cell. The course chapter <a href="course/project.html">The Ferra dashboard</a> is the build-along: every sheet, every formula, why it is there. She rebuilds it on her laptop from the Rec-Nidhi workbook and the calendar export. Real names stay at work.</p>
+  <div class="sheet">
+    <p><strong>Ferra dashboard — what “done” looks like.</strong></p>
+    <ol class="clean">
+      <li>Grey source tabs as Tables (snapshot, tracker, funnel, resignations, interviews).</li>
+      <li>A hidden Filter Engine: role and month drop-downs, <code>*</code> / <code>&gt;0</code> criteria, match flags, ranks.</li>
+      <li>Navy presentation tabs, all formulas: Executive Summary, Role Explorer, Headcount, Funnel, Source, Role Performance, Department, TAT, Interviews, Activity, Attrition, Insights, Notes &amp; Method.</li>
+      <li>Notes record every place the source sheets disagree. No typed KPIs. No real candidate personal data on any file that leaves the building.</li>
+      <li>A two-minute walkthrough she can say with the file open.</li>
+    </ol>
+  </div>
+  <h2 style="margin-top:28px">Then: hire 20 engineers in Europe.</h2>
+  <p>This is the answer to “you have hired manufacturing people, why should we let you hire software?” It is a case, not a claim that she has already done it. Label it as a project.</p>
+  <div class="sheet">
+    <p><strong>Brief.</strong> A European product company needs 20 engineers in six months: 8 backend, 6 frontend, 3 DevOps, 3 data. Locations: Dublin, Amsterdam, Berlin. She produces all of the following.</p>
+    <ol class="clean">
+      <li>Workforce note: why these 20, and what slips if hiring slips.</li>
+      <li>Four short job descriptions, written the way a European company writes them.</li>
+      <li>A candidate persona for each role, including who is a false match.</li>
+      <li>Boolean strings and one X-ray string per role.</li>
+      <li>Channel plan: LinkedIn, GitHub, referrals, communities. What she will not waste time on.</li>
+      <li>A one-page market comparison of Dublin, Amsterdam and Berlin: supply, language, visa, and pay.</li>
+      <li>A salary band for each role, with the source named and dated.</li>
+      <li>A funnel: how many screens, interviews and offers she needs for 20 joiners, and the assumption behind each step.</li>
+      <li>The Excel tracker, filled with realistic dummy data. No real candidate personal data.</li>
+      <li>The Power BI dashboard built on that file.</li>
+      <li>An interview loop: who meets the candidate, in what order, and what “no” looks like.</li>
+      <li>A GDPR note: what she stores, for how long, and what she will not put into a public AI tool.</li>
+      <li>A one-page note to the hiring director: forecast, risks, and the decision she needs from them.</li>
+    </ol>
+  </div>
+</section>
+
+<section id="companies">
+  <p class="kicker">Employers</p>
+  <h2>Build a list of 150. Start with the middle column.</h2>
+  <div class="companies">
+    <div class="co">
+      <h3>Stretch</h3>
+      <p class="tiny">Apply after week 6, and only to recruiter roles.</p>
+      <ul class="clean">
+        <li>Google</li><li>Meta</li><li>Apple</li><li>Microsoft</li><li>Amazon</li><li>Salesforce</li><li>Stripe</li><li>Uber</li><li>LinkedIn</li>
+      </ul>
+    </div>
+    <div class="co">
+      <h3>Best first yes</h3>
+      <p class="tiny">Her Ferra work is an asset here, not a detour.</p>
+      <ul class="clean">
+        <li>Airbus</li><li>Rolls-Royce</li><li>Safran</li><li>Thales</li><li>Siemens</li><li>Bosch</li><li>Schneider Electric</li><li>ABB</li><li>Honeywell</li><li>GE Aerospace</li><li>ASML</li><li>Rheinmetall</li>
+      </ul>
+    </div>
+    <div class="co">
+      <h3>Technology, one tier down</h3>
+      <p class="tiny">Often a better door into technical recruiting than a cold Meta application.</p>
+      <ul class="clean">
+        <li>Booking.com</li><li>Adyen</li><li>Spotify</li><li>HubSpot</li><li>ServiceNow</li><li>Workday</li><li>Datadog</li><li>Atlassian</li><li>Cloudflare</li><li>MongoDB</li><li>SAP</li><li>Zalando</li>
+      </ul>
+    </div>
+  </div>
+  <div class="note">
+    <strong>Every application needs a sponsor filter.</strong> Country, visa mentioned or not, salary if shown, and whether the employer is a known sponsor (IND recognised sponsor in the Netherlands; employment-permit employer in Ireland). EURES and Indeed list jobs. They do not give a non-EU citizen the right to take the job. Fifteen to twenty-five carefully chosen applications a week beat two hundred Easy Applies.
+  </div>
+  <p>Also register with agencies that place in-house recruiters: Morgan McKinley and Brightwater in Ireland, plus the in-house recruiting desks of larger European search firms. Ask them which of their clients sponsor.</p>
+</section>
+
+<section id="interviews">
+  <p class="kicker">Interviews</p>
+  <h2>Twenty stories, told in English, with numbers.</h2>
+  <p>Each story needs the situation, what she decided, what she did herself, and the result. If she cannot remember the result, she reconstructs it from old trackers or she drops the story. Speaking them aloud matters more than writing them perfectly.</p>
+  <div class="grid-2">
+    <ol class="clean">
+      <li>The hardest role she closed at Ferra, and why it was hard.</li>
+      <li>A bulk-hiring push at Skillvert or BYJU’S that she actually ran.</li>
+      <li>A hiring manager who wanted a candidate who does not exist.</li>
+      <li>An offer the candidate declined, and what she changed next.</li>
+      <li>A compensation conversation where the band was wrong.</li>
+      <li>Candidates going quiet, and the follow-up that worked.</li>
+      <li>A role that had to be filled in a very short window.</li>
+      <li>A pipeline that looked busy and was actually empty.</li>
+      <li>A time she shortened time-to-fill, with the before and after.</li>
+      <li>A sourcing channel she stopped using, and the evidence.</li>
+    </ol>
+    <ol class="clean" start="11">
+      <li>Disagreement with a senior stakeholder. What she held, what she conceded.</li>
+      <li>Several roles at once, and how she chose where to spend the day.</li>
+      <li>A metric she showed a manager, and the decision it caused.</li>
+      <li>A hire that turned out poorly. What she would screen differently.</li>
+      <li>A candidate she kept informed when the process was slow.</li>
+      <li>A process she changed: scheduling, feedback, or the tracker.</li>
+      <li>A technical role she did not understand on day one. How she learned it.</li>
+      <li>A moment she changed a hiring manager’s mind.</li>
+      <li>How she widened a shortlist beyond the obvious profile.</li>
+      <li>A failure at BYJU’S, Skillvert or Ferra, and the rule she kept.</li>
+    </ol>
+  </div>
+  <div class="gold">
+    <strong>English is the job.</strong> Screening calls, pushback, pay conversations and a five-minute readout of a funnel all happen in English. If that is not already easy, thirty minutes of speaking practice every day outranks another online course. Record the twenty stories. Listen back once.
+  </div>
+</section>
+
+<section id="papers">
+  <p class="kicker">Documents</p>
+  <h2>In one folder before week 3.</h2>
+  <p>International employers and visa desks ask early. Hunting for a stamp in the middle of an offer is how offers die.</p>
+  <ul class="clean">
+    <li>Passport, with enough validity for a move in 2027.</li>
+    <li>MBA, M.Com and B.Com certificates and transcripts.</li>
+    <li>Experience and relieving letters for BYJU’S, Skillvert, Amazon, Infinity Learn and Ferra. If Ferra will not issue one while she is employed, a letter of employment with title, dates and duties.</li>
+    <li>Last three payslips and a short note of current compensation, so she can explain it without guessing.</li>
+    <li>Two people who will take a reference call in English.</li>
+    <li>A Europass-style CV only if an employer asks. The main CV is the rewritten one from week 9.</li>
+  </ul>
+  <p class="tiny">For a non-regulated job, an employer can judge the degree itself. Some visa files still want a recognition statement. Check ENIC-NARIC for the destination country when an offer is real, not in week 1.</p>
+</section>
+
+<section id="tracker">
+  <p class="kicker">From week 12</p>
+  <h2>Application tracker</h2>
+  <p>Stored only in this browser. Add a role when she has actually submitted it, or when a recruiter has a live conversation — not when she has bookmarked a company.</p>
+  <form class="tracker-form" id="trackerForm">
+    <input name="company" placeholder="Company" required>
+    <select name="country" aria-label="Country">
+      <option>Ireland</option>
+      <option>Netherlands</option>
+      <option>Germany</option>
+      <option>UK</option>
+      <option>Other</option>
+    </select>
+    <input name="role" placeholder="Role" required>
+    <input name="salary" placeholder="Salary">
+    <select name="stage" aria-label="Stage">
+      <option>Applied</option>
+      <option>Recruiter screen</option>
+      <option>Hiring manager</option>
+      <option>Case / task</option>
+      <option>Offer</option>
+      <option>Rejected</option>
+      <option>Withdrawn</option>
+    </select>
+    <button class="btn primary" type="submit">Add</button>
+  </form>
+  <table class="tracker-table" id="trackerTable">
+    <thead>
+      <tr><th>Company</th><th>Country</th><th>Role</th><th>Salary</th><th>Stage</th><th></th></tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+  <p class="tiny" id="trackerEmpty">Nothing submitted yet. That is correct until the week of 21 December.</p>
+</section>
+
+<footer class="sources" id="sources">
+  <p class="kicker">Checked 4 October 2026 · confirm again before she signs</p>
+  <ul>
+    <li>Dublin TA Partner pay: Morgan McKinley 2026 salary guide, 5+ years €60,000–€70,000; 3–5 years €55,000–€60,000.</li>
+    <li>Ireland permits: Department of Enterprise, Critical Skills Employment Permit. Listed occupations from €40,904. Other eligible roles from €68,911, two-year offer, not on the ineligible list. General Employment Permit minimum €36,605 from 1 March 2026, usually with a labour-market test. Human resources administrative occupations are ineligible.</li>
+    <li>Netherlands: IND required amounts for 2026. Highly skilled migrant 30 or older €5,942 a month; under 30 €4,357. Both exclude holiday allowance. Employer must be a recognised sponsor.</li>
+    <li>Germany: EU Blue Card 2026 standard threshold €50,700 gross. Reduced threshold €45,934.20 does not apply to a typical HR hire. Make it in Germany and the German foreign office.</li>
+    <li>United Kingdom: Skilled Worker general threshold £41,700 or the occupation going rate, whichever is higher, for standard cases since 22 July 2025. HR and recruitment manager going rates are published by occupation code and must be checked on the sponsor’s SOC code. Degree-level skill rules have narrowed which recruiter jobs can be sponsored.</li>
+  </ul>
+  <p>Salary sites and recruiter guides describe the market. They are not an offer. Visa thresholds move, sometimes in January. This page is a plan, not immigration advice.</p>
+</footer>
+</main>
+</div>
+
+<script>
+const WEEKS = [
+  ["5–11 Oct", "Excel for a real funnel", [
+    "Learn XLOOKUP, SUMIFS, COUNTIFS, IF/IFS, and date differences on a recruiting sheet, not a generic tutorial.",
+    "Build the tracker: candidate, source, role, recruiter, applied, screened, interview, offer, accepted, joined.",
+    "Add time to hire, time to fill, offer acceptance, joining rate, and a source pivot.",
+    "Open course chapter 1.5 and build the Filter Engine on a copy of the Ferra files. Real names stay on her laptop.",
+    "Explain the sheet out loud in English for five minutes. Record it."
+  ]],
+  ["12–18 Oct", "Power BI dashboard", [
+    "Finish Role Explorer, Funnel, TAT and Notes & Method on the Ferra workbook. Screen-share it once, two minutes.",
+    "Model the Excel file: one candidates table, one roles table, a relationship on role.",
+    "Measures for applicants, screens, interviews, offers, accepts, joiners, and acceptance rate.",
+    "One page: funnel, time to fill, source of hire, ageing open roles, hires by location.",
+    "Write three sentences a hiring manager could read without a translator."
+  ]],
+  ["19–25 Oct", "How an ATS actually works", [
+    "Draw the Workday-style flow from requisition to hire, including who owns each step.",
+    "Read one public Greenhouse or Lever help article on stages, scorecards and offer approval.",
+    "List disposition reasons she would use, and which ones are lazy.",
+    "Add “ATS workflow — training, Oct 2026” to a skills note. Do not add it to Ferra."
+  ]],
+  ["26 Oct–1 Nov", "Sourcing reps", [
+    "Write 10 Boolean strings: five aerospace/manufacturing, five that she will need later for software.",
+    "Write 5 Google X-ray searches limited to LinkedIn profiles in Ireland, the Netherlands or Germany.",
+    "Draft 3 passive outreach notes. Specific reason, specific role, no “exciting opportunity.”",
+    "Map one competitor’s engineers or production leaders for a role she already hires at Ferra."
+  ]],
+  ["2–8 Nov", "Software roles, as a recruiter", [
+    "One page each: frontend, backend, full stack, DevOps/SRE, QA. What they do, what a false match looks like.",
+    "Stack pairs she must not confuse: Java/JavaScript, React/Node, AWS/Kubernetes, SQL/Spark.",
+    "Rewrite one Ferra-style intake as if the role were a backend engineer in Dublin.",
+    "A Boolean string for that backend role, then ten public profiles she would screen in or out, with the reason."
+  ]],
+  ["9–15 Nov", "Data, AI and security roles", [
+    "Separate data analyst, analytics engineer, data engineer, data scientist, ML engineer. One paragraph each.",
+    "Know what SQL, Spark, Airflow, Snowflake, Databricks, PyTorch and an LLM are for, at recruiter depth.",
+    "Security engineer, SOC analyst, cloud security: what the hiring manager is usually missing.",
+    "Add these titles to the project brief. Still no coding exercises."
+  ]],
+  ["16–22 Nov", "Europe, GDPR, permits", [
+    "Write a one-page GDPR note for recruiting: what she collects, why, how long, what a candidate can ask for.",
+    "A comparison card for Ireland, the Netherlands and Germany: notice period norms, probation, leave, visa path.",
+    "Memorise the two numbers: Ireland €68,911 and Netherlands €5,942 a month if she is 30 or older.",
+    "Read one real European TA job description and highlight every phrase she cannot yet say honestly."
+  ]],
+  ["23–29 Nov", "Sound like a partner", [
+    "Draft the workforce-planning answer: headcount, timing, build versus buy, permanent versus contractor.",
+    "Prepare six stakeholder stories from the list of twenty. Say them, do not only type them.",
+    "A salary-benchmark note for one role she hires now, with the source and the date.",
+    "Practise the line: market, expectations, channels, funnel size, conversion.",
+    "Start Minnesota’s Managing Employee Compensation on Coursera. Frameworks only — the law in it is American."
+  ]],
+  ["30 Nov–6 Dec", "Rewrite the CV", [
+    "New header. No “Non-IT” and no “Bulk Hiring” in the title.",
+    "Ferra first, with scope she can prove: functions hired, ownership, stakeholders, funnel.",
+    "Amazon described as HR operations. BYJU’S keeps the six-month top-performer line.",
+    "Every bullet starts with an action. Numbers only where she can point to the source. Two pages maximum."
+  ]],
+  ["7–13 Dec", "Rebuild LinkedIn", [
+    "Paste the new headline. About section matches the CV, including the Ferra dates and scope.",
+    "Feature the dashboard and the Boolean examples as a project, clearly marked as a project.",
+    "Skills ordered for recruiter search: talent acquisition, technical recruiting, engineering recruitment, sourcing, workforce planning.",
+    "Turn on open-to-work for recruiters only, locations Ireland, Netherlands, Germany. Titles from the target list.",
+    "Start IBM’s Generative AI for HR Professionals on Coursera. Four to five hours this week."
+  ]],
+  ["14–20 Dec", "The list and the case", [
+    "Spreadsheet of 80 employers to start: 15 stretch, 25 industrial, 40 technology. Columns for country, sponsor, careers URL.",
+    "Finish the 20-engineer case through the executive summary. Dummy data only.",
+    "Ask two people who know her work to read the CV for anything inflated.",
+    "Five conversations booked with people who already recruit in Europe. Not applications yet, except a perfect industrial role.",
+    "Finish the IBM course. Rewrite one job description with its method, then add one line under Certifications."
+  ]],
+  ["21–27 Dec", "Applications start, lightly", [
+    "15 applications. Each one checked for sponsorship and for a title on her list.",
+    "Tailor the top third of the CV. Do not rewrite the whole thing per company.",
+    "Tracker updated the same day. No phantom applications.",
+    "Holiday week: protect the 15. Do not invent a certificate to feel productive."
+  ]],
+  ["28 Dec–3 Jan", "Pipeline, not more courses", [
+    "20 applications, biased to Ireland and to industrial firms.",
+    "Ten new conversations: recruiters, employees, hiring managers. One specific sentence on why that company.",
+    "Follow up anything silent after seven days. One follow-up, then move.",
+    "Record two interview answers and fix the vague sentences."
+  ]],
+  ["4–10 Jan 2027", "Interview week", [
+    "The remaining fourteen stories, spoken once each.",
+    "A 10-minute walkthrough of the Power BI page with no slides.",
+    "A mock intake call: someone plays a hiring manager who wants a mythical candidate. She pushes back.",
+    "Keep applications at 20. Screens replace study if they appear."
+  ]],
+  ["11–17 Jan", "Raise the volume", [
+    "25 applications if the sponsor filter still leaves enough real roles. Quality stays.",
+    "Re-read every rejection for a pattern: title, country, visa, or CV. Change one thing, not ten.",
+    "Ask for referrals only after a real conversation.",
+    "German: if she still wants Germany as a first country, this is the moment to judge whether daily practice is happening. If it is not, Ireland and the Netherlands stay first."
+  ]],
+  ["18–24 Jan", "Hold the number", [
+    "Review every live process. Know the salary band and the permit route before the next call.",
+    "Use the salary script. Do not anchor at €50,000.",
+    "If there are fewer than five live conversations, the following two weeks stay on applications, not on a new course.",
+    "Write what is true now versus in October: CV, dashboard, Boolean, and one technology intake. That is the before and after."
+  ]]
+];
+
+const TASK_KEY = "nidhi-europe-tasks-v1";
+const TRACK_KEY = "nidhi-europe-tracker-v1";
+const done = new Set(JSON.parse(localStorage.getItem(TASK_KEY) || "[]"));
+
+function saveDone() {
+  localStorage.setItem(TASK_KEY, JSON.stringify([...done]));
+  const total = document.querySelectorAll("label.task").length;
+  const n = done.size;
+  document.getElementById("progressLabel").textContent = n + " / " + total;
+  document.getElementById("meterBar").style.width = (total ? (n / total) * 100 : 0) + "%";
+}
+
+function mountWeeks() {
+  const mount = document.getElementById("weeksMount");
+  const start = new Date("2026-10-05T00:00:00");
+  const now = new Date();
+  let current = Math.floor((now - start) / (7 * 24 * 3600 * 1000));
+  if (current < 0) current = 0;
+  if (current > 15) current = 15;
+  const status = document.getElementById("weekStatus");
+  if (now < start) status.textContent = "Week 1 starts Monday 5 October 2026.";
+  else status.textContent = "You are in week " + (current + 1) + " of 16.";
+
+  WEEKS.forEach((week, i) => {
+    const det = document.createElement("details");
+    det.className = "week" + (i === current ? " now" : "");
+    if (i === current) det.open = true;
+    const sum = document.createElement("summary");
+    sum.innerHTML = "<span class='when'>Week " + (i + 1) + " · " + week[0] + "</span><strong>" + week[1] + "</strong><span class='tiny'>" + week[2].length + " tasks</span>";
+    det.appendChild(sum);
+    const body = document.createElement("div");
+    body.className = "week-body";
+    week[2].forEach((text, j) => {
+      const id = "w" + i + "t" + j;
+      const label = document.createElement("label");
+      label.className = "task" + (done.has(id) ? " done" : "");
+      const box = document.createElement("input");
+      box.type = "checkbox";
+      box.checked = done.has(id);
+      box.addEventListener("change", () => {
+        if (box.checked) done.add(id); else done.delete(id);
+        label.classList.toggle("done", box.checked);
+        saveDone();
+      });
+      const span = document.createElement("span");
+      span.textContent = text;
+      label.append(box, span);
+      body.appendChild(label);
+    });
+    det.appendChild(body);
+    mount.appendChild(det);
+  });
+  saveDone();
+}
+
+function setupTabs() {
+  const tabs = document.querySelectorAll(".tabs button");
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      tabs.forEach((t) => t.setAttribute("aria-selected", "false"));
+      tab.setAttribute("aria-selected", "true");
+      document.querySelectorAll(".panel").forEach((p) => { p.hidden = true; });
+      document.getElementById(tab.getAttribute("aria-controls")).hidden = false;
+    });
+  });
+}
+
+function setupCopy() {
+  document.querySelectorAll("[data-copy]").forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      const text = document.getElementById(btn.dataset.copy).innerText;
+      try {
+        await navigator.clipboard.writeText(text);
+        const old = btn.textContent;
+        btn.textContent = "Copied";
+        setTimeout(() => { btn.textContent = old; }, 1200);
+      } catch (e) {
+        btn.textContent = "Select and copy";
+      }
+    });
+  });
+}
+
+function loadTracker() {
+  return JSON.parse(localStorage.getItem(TRACK_KEY) || "[]");
+}
+function renderTracker() {
+  const rows = loadTracker();
+  const body = document.querySelector("#trackerTable tbody");
+  body.innerHTML = "";
+  document.getElementById("trackerEmpty").hidden = rows.length > 0;
+  rows.forEach((row, i) => {
+    const tr = document.createElement("tr");
+    ["company", "country", "role", "salary", "stage"].forEach((key) => {
+      const td = document.createElement("td");
+      td.textContent = row[key] || "";
+      tr.appendChild(td);
+    });
+    const td = document.createElement("td");
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "btn";
+    b.textContent = "Remove";
+    b.addEventListener("click", () => {
+      const next = loadTracker();
+      next.splice(i, 1);
+      localStorage.setItem(TRACK_KEY, JSON.stringify(next));
+      renderTracker();
+    });
+    td.appendChild(b);
+    tr.appendChild(td);
+    body.appendChild(tr);
+  });
+}
+
+function setupNav() {
+  const links = [...document.querySelectorAll("#sideNav a")];
+  const sections = links.map((a) => document.querySelector(a.getAttribute("href")));
+  const onScroll = () => {
+    let current = sections[0];
+    sections.forEach((sec) => {
+      if (sec && sec.getBoundingClientRect().top < 120) current = sec;
+    });
+    links.forEach((a) => a.classList.toggle("active", a.getAttribute("href") === "#" + current.id));
+  };
+  document.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+}
+
+document.getElementById("trackerForm").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const data = Object.fromEntries(new FormData(e.target).entries());
+  const rows = loadTracker();
+  rows.unshift(data);
+  localStorage.setItem(TRACK_KEY, JSON.stringify(rows));
+  e.target.reset();
+  renderTracker();
+});
+
+mountWeeks();
+setupTabs();
+setupCopy();
+renderTracker();
+setupNav();
+</script>
+</body>
+</html>

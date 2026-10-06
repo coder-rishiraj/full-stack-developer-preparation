@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nidhi — the course</title>
+<link rel="stylesheet" href="assets/course.css?v=3">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand"><a href="../index.html">Nidhi Tiwari</a><span>Talent Acquisition course · Oct 2026 – Jan 2027</span></div>
+  <div class="top-actions">
+    <div class="pbar"><i></i></div>
+    <span class="pnum"></span>
+    <a class="btn" href="syllabus.html">Syllabus</a>
+    <a class="btn" href="../index.html">The plan</a>
+  </div>
+</div>
+
+<div class="layout">
+<nav class="side" id="sideNav"></nav>
+<main>
+
+<p class="kicker">Start here</p>
+<h1>Everything a European Talent&nbsp;Acquisition Partner has to be able to do.</h1>
+<p class="lead">This is not a reading list. Every concept has a worked example, a diagram where one helps, and an exercise you do inside a working spreadsheet on the page, which marks itself. There is a sandbox with the locks off when you want to try something that is not in the lesson. Finish the course and the result is not a certificate — it is a workbook, a report and a set of answers you can say out loud in an interview.</p>
+
+<p><a class="btn btn-go" href="syllabus.html">Print the one-page syllabus</a> <a class="btn" href="labs-excel.html">Excel labs</a> <a class="btn" href="labs-more.html">Craft labs</a></p>
+
+<div class="grid2">
+  <div class="note">
+    <p class="kicker">What is in here</p>
+    <p><strong>15 chapters plus two lab packs.</strong> Excel from the first cell to a dashboard, then extra graded reps for every habit. A full rebuild of the Ferra HR workbook. Power BI, recruiting metrics, ATS, Boolean, roles, GDPR, strategy, AI, and an interview rehearsal.</p>
+  </div>
+  <div class="gold">
+    <p class="kicker">What it costs</p>
+    <p><strong>Nothing, and no sign-up.</strong> It works offline. Progress and every cell you type are saved in this browser only. There is no account and nothing is uploaded anywhere.</p>
+  </div>
+</div>
+
+<section class="lesson" data-lesson="home.how" data-n="01" data-check="I understand how to work through this">
+  <p class="goal">Read this once</p>
+  <h3>How to use the course</h3>
+  <p>Every lesson has the same four parts, in the same order. Do them in order. Skipping to the exercise and guessing teaches nothing.</p>
+  <ol class="steps">
+    <li><strong>The concept, in plain English.</strong> What the thing is, and the recruiting problem it solves. If a lesson cannot name the problem, it should not exist.</li>
+    <li><strong>A worked example.</strong> The formula, already typed into a live grid on this page, with the answer visible. Click the cell and read the formula in the bar above the grid. Change a number and watch it move.</li>
+    <li><strong>Your turn.</strong> An empty cell with a gold outline and a question. Type the formula. Press <kbd>Enter</kbd>. The page tells your whether it is right, and if not, what is wrong with it — not just that it is wrong.</li>
+    <li><strong>The tick box.</strong> At the bottom of each lesson: <em>I can do this without looking.</em> Tick it only when that is true. The bar at the top of the page is the honest measure of how far you have got.</li>
+  </ol>
+  <div class="warn">
+    <p><strong>The grids on this page are real but they are not Excel.</strong> They run a formula engine written for this course. It understands around ninety functions, tables, dates and dynamic arrays, which is enough for everything taught here. It will not do everything Excel does. The point is to practise the thinking anywhere, including on a phone on a bus — then rebuild the same file in real Excel, where the muscle memory has to live.</p>
+  </div>
+</section>
+
+<section class="lesson" data-lesson="home.setup" data-n="02" data-check="My tools are installed and ready">
+  <p class="goal">Before you start</p>
+  <h3>The tools you actually needs</h3>
+  <table class="t wrap">
+    <thead><tr><th>Tool</th><th>Why</th><th>Cost</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Excel for Microsoft 365</strong></td><td>XLOOKUP, FILTER, UNIQUE and TEXTJOIN do not exist in Excel 2016. Half this course needs them. Google Sheets is an acceptable substitute for everything except Power Query.</td><td>Subscription, or a free web version at office.com with most features.</td></tr>
+      <tr><td><strong>Power BI Desktop</strong></td><td>Where chapter 2 is built. Windows only.</td><td>Free. On a Mac you need Windows, a virtual machine, or a borrowed laptop — sort that out before Power BI, not after it.</td></tr>
+      <tr><td><strong>A Power BI account</strong></td><td>Only needed to publish. Sign-up requires a work or college email; personal Gmail is refused.</td><td>Free tier is enough to see the Service.</td></tr>
+      <tr><td><strong>A notebook</strong></td><td>For the sentences you will say in interviews. Typing them is not the same as saying them.</td><td>—</td></tr>
+    </tbody>
+  </table>
+  <div class="warn">
+    <p><strong>One rule, and it does not bend.</strong> No real candidate's name, CV, phone number, pay, or interview notes ever goes into a practice file, a portfolio, or a public AI tool. Not anonymised, not "just for practice". Everything in this course uses six invented people. If you want to show a recruiter your dashboard, it shows Asha and Ben.</p>
+  </div>
+</section>
+
+<section id="data">
+  <h2>The practice data</h2>
+  <p>One dataset runs through the Excel, Power BI and metrics chapters: six invented candidates and two invented roles. Small enough to check every answer by hand, awkward enough to be realistic — there is a blank where someone never got screened, an agency fee on a person who never started, and a date pattern that makes time-to-hire and time-to-fill disagree. The Ferra dashboard project uses a separate invented plant so you are not mixing software-hiring practice data with manufacturing requisitions.</p>
+
+  <div id="sheetCand"></div>
+  <div id="sheetRoles"></div>
+
+  <div class="gold">
+    <p><strong>The answers, so you can always check yourself.</strong> 6 applicants, 5 screened, 4 interviewed, 4 offers, 3 accepts, 2 joiners. Offer acceptance 3/4 = 75%. Of the three who accepted, two actually started, so the joining rate is 67%. Asha's time to hire is 23 days, Dev's is 32, Eva's is 39, so the average across the three accepts is 31.3 days. Both joiners came from LinkedIn — but LinkedIn was also four of the six applicants, and that gap is the entire point of source-of-hire.</p>
+  </div>
+
+  <div class="note">
+    <p><strong>The six people, in one sentence each,</strong> because you will be asked about them for the rest of the course. <strong>Asha</strong> applied, moved fast, accepted and started — the clean hire. <strong>Ben</strong> got an offer and said no, which is a decline. <strong>Cara</strong> was screened and rejected after. <strong>Dev</strong> is the second clean hire, slower, from an older requisition. <strong>Eva</strong> accepted and then never turned up, which is a renege, and the agency fee of €4,000 is owed anyway. <strong>Farah</strong> applied six weeks ago and has not been screened, which is the one thing on this list that is Nidhi's fault.</p>
+  </div>
+</section>
+
+<section>
+  <h2>The chapters</h2>
+  <p>In order. Excel first, because Power BI is easier once the numbers are already understood, and because the Excel file is the thing you can open on a laptop in an interview. Chapter 1.5 is the Ferra dashboard — the Cursor-built workbook rebuilt by your, cell by cell. There is no week calendar. Finish a chapter when you can tick the boxes without looking.</p>
+  <div class="chs" id="chapterCards"></div>
+</section>
+
+<section class="lesson" data-lesson="home.rules" data-n="03" data-check="I know what I am not going to spend time on">
+  <p class="goal">Scope</p>
+  <h3>What this course deliberately leaves out</h3>
+  <p>Four months is short. These are real skills that will not move a European TA Partner interview, listed so you can stop feeling guilty about not doing them.</p>
+  <div class="grid2">
+    <div class="card">
+      <h4>In Excel</h4>
+      <p>VBA and macros, Solver, financial functions, statistical tests beyond a median, SUMPRODUCT, Power Pivot and Power View, and the old Ctrl+Shift+Enter array formulas.</p>
+    </div>
+    <div class="card">
+      <h4>In Power BI</h4>
+      <p>Building paginated reports, Python and R visuals, administering a Fabric tenant, enterprise deployment-pipeline ownership, XMLA/Tabular Editor engineering, and PL-300 exam prep until after your portfolio report exists. You will still learn what RLS, Fabric, Direct Lake, calculation groups and deployment pipelines are, because interviewers ask.</p>
+    </div>
+    <div class="card">
+      <h4>In HR</h4>
+      <p>Another general HR certificate. CIPD and SHRM are real qualifications and the wrong use of these four months. Payroll, Tally, and US employment law.</p>
+    </div>
+    <div class="card">
+      <h4>In AI</h4>
+      <p>Prompt-engineering certificates. One applied course — IBM's Generative AI for HR — after the Excel file and the Power BI report exist. Nothing before that.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>If you only has time for four things</h2>
+  <div class="note">
+    <p>The Excel workbook, the Power BI page, Boolean sourcing, and knowing the software roles well enough to run an intake meeting. Those four are what a European Talent Acquisition Partner interview tests that your current CV does not already prove. Everything else in this course makes your better. Those four get your the interview and through it.</p>
+  </div>
+  <p class="tiny">Progress and typed cells live in this browser's storage. <button class="btn" type="button" id="resetAll">Reset all progress</button></p>
+</section>
+
+<div class="pager">
+  <a class="btn" href="sandbox.html"><span class="lbl">Practice</span>Excel sandbox</a>
+  <a class="btn btn-go" href="excel-1.html"><span class="lbl">Chapter 1.1</span>Start: Excel foundations &rarr;</a>
+</div>
+
+</main>
+</div>
+
+<script src="assets/engine.js?v=3"></script>
+<script src="assets/sheet.js?v=3"></script>
+<script src="assets/data.js?v=3"></script>
+<script src="assets/course.js?v=3"></script>
+<script>
+var CHAPTERS = [
+  { group: "Excel" },
+  { id: "excel-1", file: "excel-1.html", num: "1.1", title: "Excel foundations",
+    blurb: "Cells, typing, data types, why a date will not subtract, operators, references, and Tables." },
+  { id: "excel-2", file: "excel-2.html", num: "1.2", title: "Logic and counting",
+    blurb: "IF, IFS, AND/OR, IFERROR, the COUNT family, SUMIFS, averages, and division that survives a zero." },
+  { id: "excel-3", file: "excel-3.html", num: "1.3", title: "Lookups and text",
+    blurb: "XLOOKUP, INDEX/MATCH, VLOOKUP well enough to read, text cleaning, joining, FILTER and UNIQUE." },
+  { id: "excel-4", file: "excel-4.html", num: "1.4", title: "Analysis and the dashboard",
+    blurb: "Sort, filter, duplicates, PivotTables, conditional formatting, charts, Power Query, and the dashboard sheet." },
+  { id: "labs-excel", file: "labs-excel.html", num: "1.4b", title: "Excel labs",
+    blurb: "A second pass with full teaching: why the habit exists, the six people's numbers, the trap, an interview line, a gold-cell exercise and a quiz for every Excel topic." },
+  { id: "project", file: "project.html", num: "1.5", title: "The Ferra dashboard",
+    blurb: "Rebuild the Cursor-built HR workbook yourself: Filter Engine, every presentation sheet, every formula, and the two-minute walkthrough." },
+  { id: "reference", file: "reference.html", num: "1.6", title: "Function reference",
+    blurb: "Every function in the course on one page, each one runnable against the practice data." },
+  { group: "Power BI" },
+  { id: "powerbi", file: "powerbi.html", num: "2", title: "Power BI",
+    blurb: "Power Query, star schema, measures, DAX, filter context, report design, Service, RLS, refresh, performance, Fabric vocabulary, and interview cases." },
+  { group: "The craft" },
+  { id: "labs-more", file: "labs-more.html", num: "2b", title: "Craft and job labs",
+    blurb: "Extra measures, metrics, ATS, Boolean, roles, visas, strategy, AI and interview drills — teaching plus a graded task for every non-Excel topic." },
+  { id: "metrics", file: "metrics.html", num: "3", title: "Recruiting metrics",
+    blurb: "Time to fill against time to hire, conversion, source of hire, acceptance, cost and quality — with calculators." },
+  { id: "ats", file: "ats.html", num: "4", title: "ATS and Workday",
+    blurb: "Requisition to hire, the objects, dispositions, the products, and why stage reporting breaks a funnel." },
+  { id: "sourcing", file: "sourcing.html", num: "5", title: "Sourcing and Boolean",
+    blurb: "Boolean logic against twelve fictional profiles, X-ray search, talent mapping, and outreach that gets replies." },
+  { group: "The job" },
+  { id: "roles", file: "roles.html", num: "6", title: "Roles to recognise",
+    blurb: "Software, data, AI and security roles, plus your own manufacturing ground — and the false matches." },
+  { id: "europe", file: "europe.html", num: "7", title: "Europe, GDPR, employment",
+    blurb: "Lawful basis and retention, notice and probation, works councils, visa floors, and the European CV." },
+  { id: "strategy", file: "strategy.html", num: "8", title: "Strategic TA",
+    blurb: "Workforce planning, the intake meeting, benchmarking, EVP, and the sentences for a hard conversation." },
+  { id: "ai", file: "ai.html", num: "9", title: "AI, used carefully",
+    blurb: "Where it helps, where it stops, and the answer to give when an interviewer asks what you do with it." },
+  { group: "Interview" },
+  { id: "interview", file: "interview.html", num: "10", title: "Interview rehearsal",
+    blurb: "Twenty questions with timers, model answers, the salary conversation, and your own story in one paragraph." },
+  { group: "Practice" },
+  { id: "sandbox", file: "sandbox.html", num: "∞", title: "Excel sandbox",
+    blurb: "The practice workbook with the locks off. Type any formula against the six candidates." }
+];
+
+function renderChapterCards() {
+  var host = document.getElementById("chapterCards");
+  if (!host) return;
+  host.innerHTML = "";
+  CHAPTERS.forEach(function (c) {
+    if (c.group) {
+      var g = document.createElement("div");
+      g.className = "ch-group";
+      g.textContent = c.group;
+      host.appendChild(g);
+      return;
+    }
+    var a = document.createElement("a");
+    a.className = "ch";
+    a.href = c.file;
+    var pct = Course.chapterPct(c.id);
+    if (pct === 100) a.classList.add("done");
+    a.innerHTML =
+      '<div class="num">' + c.num + "</div>" +
+      "<div><h3>" + c.title + "</h3><p>" + c.blurb + "</p></div>" +
+      '<div class="pr">' + (pct === null ? "not started" :
+        Course.doneCount(c.id) + " / " + Course.chapterTotal(c.id)) +
+      '<i><u style="width:' + (pct || 0) + '%"></u></i></div>';
+    host.appendChild(a);
+  });
+}
+
+Sheet.mount("sheetCand", CourseData.candidates(CourseData.ALL, {
+  id: "home-cand", readonly: true, rows: 7, cols: 12,
+  title: "Candidates", note: "One row per person. Blank means it never happened.", persist: false
+}));
+Sheet.mount("sheetRoles", CourseData.roles(null, {
+  id: "home-roles", readonly: true, rows: 3, cols: 7,
+  title: "Roles", note: "Two open requisitions. RoleID is the key that joins the two tables.", persist: false
+}));
+
+Course.init({ id: "home" });
+renderChapterCards();
+document.getElementById("resetAll").addEventListener("click", function () {
+  if (confirm("Clear every tick and every cell you have typed in this course?")) Course.reset();
+});
+</script>
+</body>
+</html>

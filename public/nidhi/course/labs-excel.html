@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Excel practice labs — Nidhi's course</title>
+<link rel="stylesheet" href="assets/course.css?v=3">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand"><a href="index.html">Nidhi Tiwari</a><span>Excel labs · every topic, extra reps</span></div>
+  <div class="top-actions">
+    <div class="pbar"><i></i></div>
+    <span class="pnum"></span>
+    <a class="btn" href="index.html">Course home</a>
+  </div>
+</div>
+
+<div class="layout">
+<nav class="side" id="sideNav"></nav>
+<main>
+
+<p class="kicker">After chapters 1.1–1.4 · extra depth</p>
+<h1>Excel labs: the rule, the six people, then you type it.</h1>
+<p class="lead">Each block is a full lesson: why the habit exists, the numbers on Asha–Farah, the trap that makes a report lie, the sentence you would say to a hiring manager, a gold-cell exercise, and a quiz. Same invented six people. Skip a quiz only when you can answer it out loud without looking.</p>
+
+<div class="warn">
+  <p><strong>Still invented data.</strong> Asha, Ben, Cara, Dev, Eva, Farah. If a formula would be written on a real Ferra file, you write it here first, then rebuilds it there — never the other way around.</p>
+</div>
+
+<section class="lesson" data-lesson="labs-excel.types" data-n="01">
+  <p class="goal">Convert before you SUM</p>
+  <h3>Numbers stored as text</h3>
+  <p>An ATS export often delivers headcount, days-to-fill and fees as text. They look like numbers. They sit on the left. <code>SUM</code> skips them with no warning. No red triangle. No #VALUE!. The total is simply too small, and a hiring director will treat that as your number.</p>
+  <p>Excel has three types. A number can be added. Text cannot. A date is a number wearing a costume. Alignment is the five-second test: numbers hug the right, text hugs the left. One left-aligned “4000 ” with a trailing space is enough to break a spend report.</p>
+  <table class="t wrap">
+    <thead><tr><th>Cell</th><th>Looks like</th><th>ISNUMBER</th><th>What SUM does</th></tr></thead>
+    <tbody>
+      <tr><td>Asha 0</td><td>Number</td><td>TRUE</td><td>Adds 0</td></tr>
+      <tr><td>Ben <code>3000 </code> (space)</td><td>Money</td><td>FALSE</td><td>Skips it</td></tr>
+      <tr><td>Dev 1000</td><td>Number</td><td>TRUE</td><td>Adds 1,000</td></tr>
+      <tr><td>Eva <code>4000 </code> (space)</td><td>Money</td><td>FALSE</td><td>Skips it</td></tr>
+    </tbody>
+  </table>
+  <p>SUM of the raw column is €1,000. The true spend is €8,000. The missing €7,000 is Ben and Eva. The test is <code>=ISNUMBER(B2)</code>. The fix is <code>=VALUE(B2)</code> or <code>=B2*1</code>. In a monthly file, Power Query Change Type is the real fix — this lab exists so you can see the bug with your own eyes first.</p>
+  <div class="gold"><p><strong>Interview line.</strong> “If a fee column is left-aligned I convert before I total. SUM of text is a silent under-count, not an error.”</p></div>
+  <div id="s01"></div>
+  <div id="q01"></div>
+</section>
+
+<section class="lesson" data-lesson="labs-excel.dates" data-n="02">
+  <p class="goal">Calendar days, working days, a blank that stays blank</p>
+  <h3>Date arithmetic that recruiting actually uses</h3>
+  <p>Time to hire is <code>Accepted − Applied</code>. Time to fill is <code>Joined − role opened</code> (or requisition raised). Time to start includes notice. They are three clocks. Quoting the wrong one in a standup is how a partner loses the room.</p>
+  <p>A blank date is zero. Zero minus 2 March 2026 is about −46,083. That is why every duration starts with <code>IF(end="","",end-start)</code>. Farah has no Accepted date. Your hire-days cell must stay blank, not a huge negative that then poisons AVERAGE.</p>
+  <table class="t wrap">
+    <thead><tr><th>Person</th><th>Applied</th><th>Accepted</th><th>Calendar days</th><th>NETWORKDAYS</th></tr></thead>
+    <tbody>
+      <tr><td>Asha</td><td>2 Mar</td><td>25 Mar</td><td>23</td><td>18</td></tr>
+      <tr><td>Dev</td><td>1 Feb</td><td>5 Mar</td><td>32</td><td>~24</td></tr>
+      <tr><td>Eva</td><td>1 Feb</td><td>12 Mar</td><td>39</td><td>~28</td></tr>
+      <tr><td>Farah</td><td>20 Mar</td><td>—</td><td>blank</td><td>blank</td></tr>
+    </tbody>
+  </table>
+  <p><code>NETWORKDAYS(start, end)</code> counts Monday–Friday, inclusive of both ends. A hiring manager who says “that included Easter” wants this. <code>EDATE(Joined, 6)</code> is probation end — Asha joined 20 Apr 2026, so 20 Oct 2026. <code>EOMONTH(date, 0)</code> is month-end for a snapshot. This course’s clock is pinned to <strong>1 May 2026</strong>.</p>
+  <div class="gold"><p><strong>Interview line.</strong> “Time to hire is the candidate’s wait. Time to fill is the seat’s wait. I never average a blank as zero.”</p></div>
+  <div id="s02"></div>
+  <div id="q02"></div>
+</section>
+
+<section class="lesson" data-lesson="labs-excel.abs" data-n="03">
+  <p class="goal">A share of total that survives fill-down</p>
+  <h3>Dollar signs, again, until they are boring</h3>
+  <p>A share is this row divided by one grand total. When you fill down, Excel walks every reference unless you pin it. LinkedIn 4 / total 6 = 67%. If the total becomes B7, B8, B9 — empty cells — row 3 is <code>#DIV/0!</code>. That is the whole lesson in one broken cell.</p>
+  <p><code>B2/$B$6</code> locks both column and row. <kbd>F4</kbd> (Mac: <kbd>fn</kbd>+<kbd>F4</kbd> or <kbd>Cmd</kbd>+<kbd>T</kbd>) cycles the four states while editing. Mixed refs (<code>B$6</code>, <code>$B6</code>) matter when you copy across months. For a share-of-total column, both dollars.</p>
+  <p>Fill-down is the test, not the first cell. If O2 looks right and O3 dies, the dollars walked. The three shares here must add to 100%.</p>
+  <div class="gold"><p><strong>Interview line.</strong> “A percentage of total uses an absolute reference so fill-down cannot chase an empty cell.”</p></div>
+  <div id="s03"></div>
+  <div id="q03"></div>
+</section>
+
+<section class="lesson" data-lesson="labs-excel.if" data-n="04">
+  <p class="goal">Buckets without a four-deep nest</p>
+  <h3>IF, then IFS</h3>
+  <p>Two outcomes: IF. Three or four: IFS, first true wins, last test <code>TRUE</code> as the catch-all. More than four: a lookup table. Never a Christmas tree of IF(IF(IF.</p>
+  <p>Order matters because the first true test wins. If you write Slow before Normal, nobody is ever Normal. On durations: blank if there is no date; otherwise Fast ≤20, Normal ≤35, else Slow. Thresholds are a judgement you can defend. A −46,000 for Farah is not a judgement, it is a bug.</p>
+  <table class="t wrap">
+    <thead><tr><th>Person</th><th>Hire days</th><th>Bucket</th></tr></thead>
+    <tbody>
+      <tr><td>Asha</td><td>23</td><td>Normal</td></tr>
+      <tr><td>Dev</td><td>32</td><td>Normal</td></tr>
+      <tr><td>Eva</td><td>39</td><td>Slow</td></tr>
+      <tr><td>Farah</td><td>—</td><td>blank</td></tr>
+    </tbody>
+  </table>
+  <div class="gold"><p><strong>Interview line.</strong> “I bucket after I blank the people who never reached the stage. A missing date is not Slow.”</p></div>
+  <div id="s04"></div>
+  <div id="q04"></div>
+</section>
+
+<section class="lesson" data-lesson="labs-excel.and" data-n="05">
+  <p class="goal">Monday’s list, written by the sheet</p>
+  <h3>AND: still open, and old enough to chase</h3>
+  <p><code>AND</code> is TRUE only when every test is true. <code>OR</code> is TRUE if any is. They live inside IF. The Monday formula is:</p>
+  <div class="fml">=IF(AND([@Outcome]="Open", TODAY()-[@Applied]&gt;14), "CHASE", "")</div>
+  <p>TODAY in this course is 1 May 2026. Farah applied 20 March — 42 days, never screened. You are the only chase. Asha joined; Ben declined; Cara was rejected; Dev joined; Eva reneged. None of them is Open, so none of them is a chase even if they were slow.</p>
+  <p>Do not write <code>=AND(Candidates[Outcome]="Open")</code> expecting a column of flags. AND of a whole column collapses to one TRUE/FALSE. Per-row tests belong in a helper column or in COUNTIFS.</p>
+  <div class="gold"><p><strong>Interview line.</strong> “My ageing column is still-open AND past a chase threshold. The sheet writes Monday’s list.”</p></div>
+  <div id="s05"></div>
+  <div id="q05"></div>
+</section>
+
+<section class="lesson" data-lesson="labs-excel.count" data-n="06">
+  <p class="goal">The funnel, counted properly</p>
+  <h3>COUNT vs COUNTA vs COUNTIF vs COUNTIFS</h3>
+  <p><code>COUNT</code> of a date column is “how many times this stage happened”. <code>COUNTA</code> of a name column is “how many rows”. If someone typed “pending” in Offer, COUNTA counts a stage that never happened. COUNT does not. That is why funnel stages use COUNT of dates.</p>
+  <p><code>COUNTIF</code> is one filter. <code>COUNTIFS</code> is several, all of them, AND not OR. There is no COUNTIFS-OR. For “Declined or Reneged” add two COUNTIFs, or flag a helper column.</p>
+  <table class="t wrap">
+    <thead><tr><th>Question</th><th>Formula idea</th><th>Answer here</th></tr></thead>
+    <tbody>
+      <tr><td>How many people?</td><td>COUNTA of Name</td><td>6</td></tr>
+      <tr><td>How many screened?</td><td>COUNT of Screened dates</td><td>5</td></tr>
+      <tr><td>LinkedIn?</td><td>COUNTIF Source = LinkedIn</td><td>4</td></tr>
+      <tr><td>LinkedIn who joined?</td><td>COUNTIFS Source + Outcome</td><td>2</td></tr>
+      <tr><td>Never joined?</td><td>COUNTBLANK Joined</td><td>4</td></tr>
+    </tbody>
+  </table>
+  <p>Criteria live in quotes: <code>"LinkedIn"</code>, <code>"&gt;30"</code>, <code>"&lt;&gt;"</code> for not blank, <code>"Link*"</code> for a wildcard. A rolling window is <code>"&gt;="&amp;TODAY()-30</code> — operator in quotes, joined to a live date.</p>
+  <div class="gold"><p><strong>Interview line.</strong> “I count dates for stages and names for rows. Two reports that disagree are usually COUNT versus COUNTA.”</p></div>
+  <div id="s06"></div>
+  <div id="q06"></div>
+</section>
+
+<section class="lesson" data-lesson="labs-excel.sumifs" data-n="07">
+  <p class="goal">Money with a condition</p>
+  <h3>SUMIFS argument order</h3>
+  <p>SUMIFS: <em>sum range first</em>, then pairs of test-range and criteria. SUMIF is the other way round. Write SUMIFS even for one condition so the habit never flips when a second filter appears (Source and Outcome).</p>
+  <p>Agency spend here is Eva only: €4,000. Eva accepted, then reneged. The fee is still owed. That is the politically useful number — not “we used an agency” but “€4,000 sat on a start that did not happen.” SUM of the whole fee column is the same €4,000 because nobody else carried a fee. The labelled SUMIFS is what you put on a slide.</p>
+  <div class="gold"><p><strong>Interview line.</strong> “Agency cost is SUMIFS on fees, not a typed total, and a renege still counts as spend.”</p></div>
+  <div id="s07"></div>
+  <div id="q07"></div>
+</section>
+
+<section class="lesson" data-lesson="labs-excel.avg" data-n="08">
+  <p class="goal">Mean, median, max — pick on purpose</p>
+  <h3>What an average hides</h3>
+  <p>Hire days for the three who accepted: Asha 23, Dev 32, Eva 39. Mean 31.3, median 32, max 39. AVERAGEIFS of those who Joined drops Eva and becomes 27.5. Two true numbers, two stories. An interviewer who knows TA will ask which you are quoting.</p>
+  <p>AVERAGE ignores blanks, which is why Farah does not drag the mean to zero — if the helper column is truly blank. If the helper holds −46000, AVERAGE is garbage. Blank first, then average.</p>
+  <p>Quote median and max together on time-to-fill: “typical 32, worst 39”. Never quote MIN alone — the fastest hire is often an internal move or a lucky referral, not a process you can scale.</p>
+  <div class="gold"><p><strong>Interview line.</strong> “I pair median with the max. A mean of 31 hides Eva’s 39 and Farah who never accepted.”</p></div>
+  <div id="s08"></div>
+  <div id="q08"></div>
+</section>
+
+<section class="lesson" data-lesson="labs-excel.rates" data-n="09">
+  <p class="goal">Undefined is not zero</p>
+  <h3>Rates that survive a zero denominator</h3>
+  <p>Acceptance = accepts / offers = 3/4 = 75%. Joining = joiners / accepts = 2/3 ≈ 67%. Yield = joiners / applicants = 2/6 ≈ 33%. Three different questions. Mixing them is how a dashboard lies.</p>
+  <p>A role with no offers yet is blank, not 0%. Wrap with <code>IFERROR</code> or test the denominator. 0% would mean “we offered and everyone said no”, which is a different story from “we have not offered yet”. Calculate the ratio (0.75) and format as percent. Do not multiply by 100 and then format as percent or you get 7500%.</p>
+  <div class="gold"><p><strong>Interview line.</strong> “Undefined is blank. Zero percent means we offered and lost them.”</p></div>
+  <div id="s09"></div>
+  <div id="q09"></div>
+</section>
+
+<section class="lesson" data-lesson="labs-excel.xlookup" data-n="10">
+  <p class="goal">Facts live once</p>
+  <h3>XLOOKUP with a not-found that is filterable</h3>
+  <p>Look for this row’s RoleID in Roles[RoleID], bring back HiringManager, and if the key is missing return the text <code>No role</code> — not #N/A, not a blank. Then you can filter the column to “No role” and get a worklist. Fourth argument is not optional in a professional file.</p>
+  <p>BE-1 is Maya Shah, Dublin. FE-1 is Leo Berger, Amsterdam. On the practice file Asha, Ben, Cara and Farah are BE-1 (Maya). Dev and Eva are FE-1 (Leo). The manager is a property of the role, typed once. If Maya’s name is misspelled, you fix it on Roles and every candidate row updates.</p>
+  <p>XLOOKUP looks any direction, names the return column, exact-matches by default. That is why it replaced VLOOKUP. If Excel is old, INDEX/MATCH is the fallback — next block.</p>
+  <div class="gold"><p><strong>Interview line.</strong> “Manager name lives on Roles once. Candidates only store RoleID. A missing key returns No role so I can filter the mess.”</p></div>
+  <div id="s10"></div>
+  <div id="q10"></div>
+</section>
+
+<section class="lesson" data-lesson="labs-excel.match" data-n="11">
+  <p class="goal">Read the files you will inherit</p>
+  <h3>INDEX / MATCH, from the inside out</h3>
+  <p><code>MATCH(key, column, 0)</code> returns the position (0 = exact). <code>INDEX(return_column, position)</code> fetches that item. Nest MATCH inside INDEX. Read inside-out, always. MATCH runs first.</p>
+  <p>Always pass 0 to MATCH. Approximate match (1 or omitted) on unsorted RoleIDs is how a plausible wrong manager gets into a report — BE-1 might match the nearest text, not the real row. VLOOKUP has the same trap: last argument FALSE or 0, never missing.</p>
+  <p>You write XLOOKUP. You read INDEX/MATCH because every inherited file is full of it. Interview answer: “XLOOKUP because it is exact by default and does not break when someone inserts a column. On older Excel I use INDEX/MATCH.”</p>
+  <div class="gold"><p><strong>Interview line.</strong> “MATCH finds the row, INDEX returns the field. The zero means exact.”</p></div>
+  <div id="s11"></div>
+  <div id="q11"></div>
+</section>
+
+<section class="lesson" data-lesson="labs-excel.clean" data-n="12">
+  <p class="goal">Spaces are not decoration</p>
+  <h3>TRIM, then map the typo</h3>
+  <p>TRIM removes leading, trailing and doubled spaces. It does not fix “Linkdin”. That needs SUBSTITUTE or a mapping table and XLOOKUP. LEN is the diagnostic: a word that looks like 8 characters and reports 9 has an invisible extra.</p>
+  <p>PROPER("LINKEDIN") gives “Linkedin”, not “LinkedIn” — so for a known list, map, don’t guess case. COUNTIF is case-insensitive, so “linkedin” still matches “LinkedIn”, but a trailing space does not. The space is the silent killer.</p>
+  <p>One TRIM column is fine once. A monthly export needs Power Query, where Trim and Replace Values replay every refresh. Do not spend a career retyping this.</p>
+  <div class="gold"><p><strong>Interview line.</strong> “I TRIM every text column on an export, then map known typos. I never trust a source mix until that is done.”</p></div>
+  <div id="s12"></div>
+  <div id="q12"></div>
+</section>
+
+<section class="lesson" data-lesson="labs-excel.split" data-n="13">
+  <p class="goal">One cell, two facts</p>
+  <h3>Split title from city</h3>
+  <p>Do not count characters. “Backend Engineer - Dublin” is not always 18 characters before the hyphen — a different title breaks LEFT(A2,18). Find the separator, then take everything before and after.</p>
+  <p><code>TEXTBEFORE(text," - ")</code> and <code>TEXTAFTER</code> if you have Microsoft 365. The SEARCH version still appears in inherited files: <code>=TRIM(LEFT(A2,SEARCH("-",A2)-1))</code>. TRIM after the split catches a space next to the hyphen.</p>
+  <p>Once title and city are columns, you can COUNTIFS city, XLOOKUP a city-to-country table, and chart mix. While they are glued, nothing groups.</p>
+  <div class="gold"><p><strong>Interview line.</strong> “I split on the delimiter, I do not count letters. Power Query Split Column is the monthly version.”</p></div>
+  <div id="s13"></div>
+  <div id="q13"></div>
+</section>
+
+<section class="lesson" data-lesson="labs-excel.join" data-n="14">
+  <p class="goal">A headline that rewrites itself</p>
+  <h3>TEXTJOIN and TEXT</h3>
+  <p>Joining a number into a sentence drops its format: <code>="Rate "&amp;0.75</code> is “Rate 0.75”. <code>TEXT(0.75,"0%")</code> is “75%”. Dates need <code>TEXT(date,"dd mmm yyyy")</code> or a slide says 46083.</p>
+  <p>TEXTJOIN with ignore-blanks TRUE skips empty names so the open-list does not end in a stray comma. FILTER inside TEXTJOIN is how a dashboard headline lists whoever is still Open without your typing Farah.</p>
+  <div class="gold"><p><strong>Interview line.</strong> “A dashboard title is a formula. TEXT keeps the percent sign; TEXTJOIN lists the open names.”</p></div>
+  <div id="s14"></div>
+  <div id="q14"></div>
+</section>
+
+<section class="lesson" data-lesson="labs-excel.filter" data-n="15">
+  <p class="goal">The Monday list, as a spill</p>
+  <h3>FILTER, UNIQUE, the # operator</h3>
+  <p>FILTER returns every matching name. UNIQUE of Source spills the distinct channels. SORT around UNIQUE so Agency, LinkedIn, Referral stay in a stable order for a chart.</p>
+  <p><code>N2#</code> means “the whole spill that starts at N2”, so COUNTIFS can sit beside UNIQUE and grow when a fourth source appears. #SPILL! means something is in the way below — delete or move it. Dynamic arrays cannot live inside a Table — they sit beside it.</p>
+  <p>This is Monday’s open list as one formula, and a source mix that does not need a pivot. When the data grows, the spill grows. That is the point.</p>
+  <div class="gold"><p><strong>Interview line.</strong> “UNIQUE plus COUNTIFS on the spill is a source table that updates itself. FILTER is the live worklist.”</p></div>
+  <div id="s15"></div>
+  <div id="q15"></div>
+</section>
+
+<section class="lesson" data-lesson="labs-excel.dupes" data-n="16">
+  <p class="goal">Flag, do not delete</p>
+  <h3>Duplicates on a name are not proof</h3>
+  <p>COUNTIF of the name range against this row, greater than 1, returns DUPLICATE. Two Ashas might be two people, or one person on two roles. The key in real life is email or candidate ID. Never Remove Duplicates on a live candidate file without a copy — it deletes permanently.</p>
+  <p>Lock the range: <code>$A$2:$A$8</code>. If the range walks, row 8 compares against a shifting window and flags the wrong people. A duplicate flag is a question for a human, not a delete key.</p>
+  <div class="gold"><p><strong>Interview line.</strong> “I flag duplicates on email, not name, and I never Remove Duplicates on a live ATS extract.”</p></div>
+  <div id="s16"></div>
+  <div id="q16"></div>
+</section>
+
+<section class="lesson" data-lesson="labs-excel.dash" data-n="17">
+  <p class="goal">No typed KPI</p>
+  <h3>A six-cell dashboard that only points</h3>
+  <p>Applicants, screened, offers, accepts, acceptance rate, agency spend. Every cell a formula. If you can rebuild this from a blank sheet in five minutes, chapter 1 is done.</p>
+  <p>The six cells must point at the table. If you type 6, 5, 4, 3, 75%, 4000 the dashboard is a photograph of one Tuesday. Add a seventh candidate and it lies. COUNTA, COUNT, IFERROR, SUMIFS — that is the whole dashboard grammar.</p>
+  <div class="gold"><p><strong>Interview line.</strong> “Nothing on the dashboard is typed. If the extract grows, the cards move.”</p></div>
+  <div id="s17"></div>
+  <div id="q17"></div>
+  <div id="d17"></div>
+</section>
+
+<section>
+  <h2>Before leaving the gym</h2>
+  <div class="note">
+    <p>From memory, on a blank sheet: date subtraction that blanks Farah, a share with <code>$</code>, COUNTIFS for LinkedIn joiners, XLOOKUP with “No role”, TRIM plus a map, FILTER of Outcome = Open, and three rates wrapped against zero. Then open the Ferra project chapter and do it at plant scale.</p>
+  </div>
+</section>
+
+<div class="pager">
+  <a class="btn" href="excel-4.html"><span class="lbl">Chapter 1.4</span>&larr; Analysis</a>
+  <a class="btn btn-go" href="project.html"><span class="lbl">Chapter 1.5</span>The Ferra dashboard &rarr;</a>
+</div>
+
+</main>
+</div>
+
+<script src="assets/engine.js?v=3"></script>
+<script src="assets/sheet.js?v=3"></script>
+<script src="assets/data.js?v=3"></script>
+<script src="assets/course.js?v=3"></script>
+<script>
+var D = CourseData;
+
+Sheet.mount("s01", {
+  id: "lab-types", rows: 10, cols: 6, headerRows: 1,
+  title: "Fees that look numeric",
+  note: "B looks like money. Two cells have a trailing space. Convert in D, then total.",
+  open: ["C2:C7", "D2:D7", "D8"],
+  widths: { A: 80, B: 90, C: 90, D: 90 },
+  formats: { B: "text", C: "text", D: "general" },
+  data: [
+    ["Name", "FeeRaw", "Is number?", "Fixed"],
+    ["Asha", "0"], ["Ben", "3000 "], ["Cara", "0"],
+    ["Dev", "1000"], ["Eva", "4000 "], ["Farah", "0"]
+  ],
+  cells: { A8: "SUM of B", B8: "=SUM(B2:B7)", A9: "SUM of D" },
+  fillTo: 7, lessonId: "labs-excel.types",
+  tasks: [
+    { cell: "C2", ask: "Is B2 a number? ISNUMBER. Fill down.",
+      want: true, answer: "=ISNUMBER(B2)", requires: ["ISNUMBER"],
+      good: "TRUE on Asha. Fill down — Ben and Eva should be FALSE." },
+    { cell: "C3", ask: "Ben’s cell. Should be FALSE.",
+      want: false, answer: "=ISNUMBER(B3)",
+      good: "FALSE. The trailing space made it text." },
+    { cell: "D2", ask: "Convert B2 with VALUE. Fill down.",
+      want: 0, answer: "=VALUE(B2)", requires: ["VALUE"],
+      alsoFill: { D4: "=VALUE(B4)", D5: "=VALUE(B5)", D6: "=VALUE(B6)", D7: "=VALUE(B7)" },
+      good: "0. Fill down so Ben becomes 3000 as a real number." },
+    { cell: "D3", ask: "Ben, converted.",
+      want: 3000, answer: "=VALUE(B3)",
+      good: "3000, now a number, right-aligned." },
+    { cell: "D8", ask: "SUM of the converted column D2:D7. Do not type 8000.",
+      want: 8000, answer: "=SUM(D2:D7)", requires: ["SUM"],
+      good: "8,000. B8 is 1,000 — SUM skipped the two text cells. That gap is the whole lesson." }
+  ]
+});
+
+Sheet.mount("s02", D.candidates(["Name", "Applied", "Accepted", "Joined"], {
+  id: "lab-dates", rows: 10, cols: 12, height: 280,
+  title: "Calendar days, working days, probation",
+  note: "Gold columns. Fill down after the first row works.",
+  open: ["F2:H7"], fillTo: 7, lessonId: "labs-excel.dates",
+  cells: { F1: "HireDays", G1: "Workdays", H1: "Probation end" },
+  extraFormats: { F: "general", G: "general", H: "date" },
+  widths: { F: 90, G: 90, H: 120 },
+  tasks: [
+    { cell: "F2", ask: "Asha’s time to hire: Accepted minus Applied. Blank if Accepted is empty.",
+      want: 23, answer: '=IF(C2="","",C2-B2)', requires: ["IF"],
+      good: "23 calendar days. Fill down — Farah stays blank." },
+    { cell: "F7", ask: "Farah must be blank, not a huge negative.",
+      want: "", answer: '=IF(C7="","",C7-B7)',
+      good: "Blank. That is the honest answer." },
+    { cell: "G2", ask: "Working days from Applied to Accepted, NETWORKDAYS. Blank if no Accepted.",
+      want: 18, answer: '=IF(C2="","",NETWORKDAYS(B2,C2))', requires: ["NETWORKDAYS"],
+      good: "18. The hiring manager who said “that included weekends” wanted this number." },
+    { cell: "H2", ask: "Six months after Asha’s join date: EDATE(Joined, 6). Blank if the candidate never joined.",
+      want: 46315, tol: 1, answer: '=IF(D2="","",EDATE(D2,6))', requires: ["EDATE"],
+      good: "20 October 2026 — a typical probation-end. Fill down; Eva and Farah stay blank." }
+  ]
+}));
+
+Sheet.mount("s03", {
+  id: "lab-abs", rows: 9, cols: 5, headerRows: 1,
+  title: "Share of applicants",
+  note: "Write C2 with $ on the total, then fill to C4.",
+  open: ["C2:C4"], fillTo: 4, lessonId: "labs-excel.abs",
+  widths: { A: 110, B: 90, C: 90 },
+  formats: { C: "pct" },
+  data: [["Source", "Applicants", "Share"], ["LinkedIn", 4], ["Referral", 1], ["Agency", 1]],
+  cells: { A6: "Total", B6: "=SUM(B2:B4)" },
+  tasks: [
+    { cell: "C2", ask: "LinkedIn as a share of B6. Lock B6.",
+      want: 0.6667, tol: 0.01, answer: "=B2/$B$6",
+      good: "67%. Fill down." },
+    { cell: "C3", ask: "Referral’s share, filled from C2.",
+      want: 0.1667, tol: 0.01, answer: "=B3/$B$6",
+      good: "17%, still dividing by B6." },
+    { cell: "C4", ask: "Agency.",
+      want: 0.1667, tol: 0.01, answer: "=B4/$B$6",
+      good: "The three shares add to 100%. If any row is #DIV/0!, the dollars walked." }
+  ]
+});
+
+Sheet.mount("s04", D.candidates(["Name", "Applied", "Accepted"], {
+  id: "lab-if", rows: 9, cols: 8, height: 260,
+  title: "Speed buckets",
+  note: "Blank if no Accepted. Else Fast ≤20, Normal ≤35, else Slow.",
+  open: ["E2:E7"], fillTo: 7, lessonId: "labs-excel.if",
+  cells: { E1: "Speed" }, extraFormats: { E: "text" },
+  tasks: [
+    { cell: "E2", ask: "Asha’s bucket. IFS or nested IF. Blank if C2 is empty.",
+      want: "Normal", answer: '=IF(C2="","",IFS(C2-B2<=20,"Fast",C2-B2<=35,"Normal",TRUE,"Slow"))', requires: ["IF"],
+      good: "Normal — 23 days. Fill down." },
+    { cell: "E5", ask: "Dev is 32 days.",
+      want: "Normal", answer: '=IF(C5="","",IFS(C5-B5<=20,"Fast",C5-B5<=35,"Normal",TRUE,"Slow"))',
+      good: "Normal." },
+    { cell: "E6", ask: "Eva is 39 days.",
+      want: "Slow", answer: '=IF(C6="","",IFS(C6-B6<=20,"Fast",C6-B6<=35,"Normal",TRUE,"Slow"))',
+      good: "Slow. The agency candidate who then reneged." },
+    { cell: "E7", ask: "Farah never accepted.",
+      want: "", answer: '=IF(C7="","",IFS(C7-B7<=20,"Fast",C7-B7<=35,"Normal",TRUE,"Slow"))',
+      good: "Blank. A missing date is not Slow." }
+  ]
+}));
+
+Sheet.mount("s05", D.candidates(["Name", "Applied", "Outcome"], {
+  id: "lab-and", rows: 9, cols: 7, height: 250,
+  title: "Chase flag",
+  note: "TODAY is 1 May 2026 in this course.",
+  open: ["E2:E7"], fillTo: 7, lessonId: "labs-excel.and",
+  cells: { E1: "Chase" }, extraFormats: { E: "text" },
+  tasks: [
+    { cell: "E2", ask: "CHASE if Outcome is Open AND days since Applied &gt; 14. Else blank.",
+      want: "", answer: '=IF(AND(C2="Open",TODAY()-B2>14),"CHASE","")', requires: ["AND"],
+      good: "Asha is Joined, so blank. Fill down." },
+    { cell: "E7", ask: "Farah.",
+      want: "CHASE", answer: '=IF(AND(C7="Open",TODAY()-B7>14),"CHASE","")',
+      good: "CHASE. Six weeks, never screened. That is Nidhi’s fault on this list, and the formula found it." }
+  ]
+}));
+
+Sheet.mount("s06", D.candidates(D.ALL, {
+  id: "lab-count", rows: 12, cols: 16, height: 260,
+  title: "Funnel counts",
+  note: "Use the table, not typed numbers.",
+  open: ["N2:N8"], lessonId: "labs-excel.count",
+  cells: {
+    N1: "Count", M2: "Rows", M3: "Screened (dates)", M4: "Offers",
+    M5: "LinkedIn", M6: "LinkedIn joiners", M7: "Never joined", M8: "Link* sources"
+  },
+  extraFormats: { N: "general", M: "text" },
+  widths: { M: 140, N: 90 },
+  tasks: [
+    { cell: "N2", ask: "How many rows? COUNTA of names.",
+      want: 6, answer: "=COUNTA(Candidates[Name])", requires: ["COUNTA"],
+      good: "6." },
+    { cell: "N3", ask: "How many were screened? COUNT of the Screened dates.",
+      want: 5, answer: "=COUNT(Candidates[Screened])", requires: ["COUNT"],
+      good: "5. Farah has no date, so COUNT skips it. COUNTA would have been wrong if someone had typed “pending”." },
+    { cell: "N4", ask: "Offers — COUNT of Offer dates.",
+      want: 4, answer: "=COUNT(Candidates[Offer])",
+      good: "4." },
+    { cell: "N5", ask: "LinkedIn applicants. COUNTIF.",
+      want: 4, answer: '=COUNTIF(Candidates[Source],"LinkedIn")', requires: ["COUNTIF"],
+      good: "4." },
+    { cell: "N6", ask: "LinkedIn and Joined. COUNTIFS, two tests.",
+      want: 2, answer: '=COUNTIFS(Candidates[Source],"LinkedIn",Candidates[Outcome],"Joined")', requires: ["COUNTIFS"],
+      good: "2 — Asha and Dev. Both joiners came from LinkedIn." },
+    { cell: "N7", ask: "Rows with a blank Joined date. COUNTBLANK or COUNTIF of \"\".",
+      want: 4, answer: "=COUNTBLANK(Candidates[Joined])",
+      good: "4 have not started." },
+    { cell: "N8", ask: "Sources starting with Link. Wildcard COUNTIF.",
+      want: 4, answer: '=COUNTIF(Candidates[Source],"Link*")',
+      good: "4. Same as LinkedIn here. On a dirty export this also catches Linkdin." }
+  ]
+}));
+
+Sheet.mount("s07", D.candidates(["Name", "Source", "FeeEUR", "Outcome"], {
+  id: "lab-sum", rows: 10, cols: 10,
+  title: "Agency spend",
+  note: "SUMIFS: add column first.",
+  open: ["F2", "F3", "F4"], lessonId: "labs-excel.sumifs",
+  cells: { E2: "All fees", E3: "Agency fees", E4: "Fees on reneged" },
+  extraFormats: { F: "eur", E: "text" },
+  widths: { E: 130, F: 100 },
+  tasks: [
+    { cell: "F2", ask: "Total fees. SUM of FeeEUR.",
+      want: 4000, answer: "=SUM(Candidates[FeeEUR])", requires: ["SUM"],
+      good: "€4,000. Only Eva carried a fee." },
+    { cell: "F3", ask: "Agency only. SUMIFS.",
+      want: 4000, answer: '=SUMIFS(Candidates[FeeEUR],Candidates[Source],"Agency")', requires: ["SUMIFS"],
+      good: "€4,000. Same number, now labelled as a channel." },
+    { cell: "F4", ask: "Fees where Outcome is Reneged.",
+      want: 4000, answer: '=SUMIFS(Candidates[FeeEUR],Candidates[Outcome],"Reneged")',
+      good: "Still €4,000. The fee is owed. That is the sentence for a hiring director." }
+  ]
+}));
+
+Sheet.mount("s08", D.candidates(["Name", "Applied", "Accepted", "Outcome"], {
+  id: "lab-avg", rows: 10, cols: 10,
+  title: "Hire-days summaries",
+  note: "Helper HireDays in F, already filled. Summaries in H.",
+  open: ["H2:H5"], lessonId: "labs-excel.avg",
+  cells: {
+    F1: "HireDays",
+    F2: '=IF(C2="","",C2-B2)', F3: '=IF(C3="","",C3-B3)', F4: '=IF(C4="","",C4-B4)',
+    F5: '=IF(C5="","",C5-B5)', F6: '=IF(C6="","",C6-B6)', F7: '=IF(C7="","",C7-B7)',
+    G2: "AVERAGE of F", G3: "MEDIAN of F", G4: "MAX of F", G5: "AVERAGEIFS Joined"
+  },
+  extraFormats: { F: "general", H: "n1", G: "text" },
+  widths: { G: 140, H: 90, F: 80 },
+  tasks: [
+    { cell: "H2", ask: "AVERAGE of HireDays F2:F7. Blanks ignored.",
+      want: 31.333, tol: 0.05, answer: "=AVERAGE(F2:F7)", requires: ["AVERAGE"],
+      good: "31.3 — the three who accepted." },
+    { cell: "H3", ask: "MEDIAN of the same.",
+      want: 32, answer: "=MEDIAN(F2:F7)", requires: ["MEDIAN"],
+      good: "32. Often the better headline." },
+    { cell: "H4", ask: "MAX — the worst case.",
+      want: 39, answer: "=MAX(F2:F7)", requires: ["MAX"],
+      good: "39, Eva. Report this next to the median." },
+    { cell: "H5", ask: "Average hire days only where Outcome is Joined. AVERAGEIFS on F, test D.",
+      want: 27.5, tol: 0.05, answer: '=AVERAGEIFS(F2:F7,D2:D7,"Joined")', requires: ["AVERAGEIFS"],
+      good: "27.5. Eva is out. Two stories, both true — you must say which you are quoting." }
+  ]
+}));
+
+Sheet.mount("s09", {
+  id: "lab-rates", rows: 10, cols: 4, headerRows: 1,
+  title: "Three rates",
+  note: "Do not type 0.75. Divide, and survive a zero.",
+  open: ["B6", "B7", "B8"],
+  widths: { A: 160, B: 90 },
+  formats: { B: "pct" },
+  data: [["Stage", "Count"], ["Applicants", 6], ["Offers", 4], ["Accepts", 3], ["Joiners", 2]],
+  cells: { A6: "Acceptance", A7: "Joining", A8: "Yield (join / apply)" },
+  cellFormats: { B2: "general", B3: "general", B4: "general", B5: "general" },
+  lessonId: "labs-excel.rates",
+  tasks: [
+    { cell: "B6", ask: "Accepts / Offers. IFERROR to blank.",
+      want: 0.75, tol: 0.001, answer: '=IFERROR(B4/B3,"")', requires: ["IFERROR"],
+      good: "75%." },
+    { cell: "B7", ask: "Joiners / Accepts.",
+      want: 0.6667, tol: 0.01, answer: '=IFERROR(B5/B4,"")',
+      good: "67%. Eva is the gap." },
+    { cell: "B8", ask: "Joiners / Applicants — overall yield.",
+      want: 0.3333, tol: 0.01, answer: '=IFERROR(B5/B2,"")',
+      good: "33%. Two people at a desk from six applicants." }
+  ]
+});
+
+Sheet.mount("s10", D.candidates(["Name", "RoleID"], {
+  id: "lab-xl", rows: 12, cols: 8, height: 280,
+  title: "Manager via XLOOKUP",
+  note: "Roles sit at A10. Scroll down.",
+  open: ["D2:D7"], fillTo: 7, lessonId: "labs-excel.xlookup",
+  cells: {
+    D1: "Manager",
+    A10: "RoleID", B10: "HiringManager", C10: "Location",
+    A11: "BE-1", B11: "Maya Shah", C11: "Dublin",
+    A12: "FE-1", B12: "Leo Berger", C12: "Amsterdam"
+  },
+  extraFormats: { D: "text" },
+  extraTables: { Roles: { range: "A10:C12", header: true } },
+  tasks: [
+    { cell: "D2", ask: "XLOOKUP Asha’s RoleID to Roles[HiringManager], not-found \"No role\". Fill down.",
+      want: "Maya Shah", answer: '=XLOOKUP(B2,Roles[RoleID],Roles[HiringManager],"No role")', requires: ["XLOOKUP"],
+      alsoFill: {
+        D3: '=XLOOKUP(B3,Roles[RoleID],Roles[HiringManager],"No role")',
+        D4: '=XLOOKUP(B4,Roles[RoleID],Roles[HiringManager],"No role")',
+        D6: '=XLOOKUP(B6,Roles[RoleID],Roles[HiringManager],"No role")',
+        D7: '=XLOOKUP(B7,Roles[RoleID],Roles[HiringManager],"No role")'
+      },
+      good: "Maya Shah. Fill down — Dev is FE-1 (Leo); Cara and Farah stay Maya." },
+    { cell: "D5", ask: "Dev is FE-1.",
+      want: "Leo Berger", answer: '=XLOOKUP(B5,Roles[RoleID],Roles[HiringManager],"No role")',
+      good: "Leo Berger. The manager is a property of the role, typed once." }
+  ]
+}));
+
+Sheet.mount("s11", D.candidates(["Name", "RoleID"], {
+  id: "lab-idx", rows: 12, cols: 8, height: 260,
+  title: "Same lookup, INDEX/MATCH",
+  note: "Roles at A10 again.",
+  open: ["D2:D7"], fillTo: 7, lessonId: "labs-excel.match",
+  cells: {
+    D1: "Title",
+    A10: "RoleID", B10: "Title",
+    A11: "BE-1", B11: "Backend Engineer",
+    A12: "FE-1", B12: "Frontend Engineer"
+  },
+  extraFormats: { D: "text" },
+  extraTables: { Roles: { range: "A10:B12", header: true } },
+  tasks: [
+    { cell: "D2", ask: "INDEX of Roles[Title] at MATCH of B2 in Roles[RoleID], exact (0).",
+      want: "Backend Engineer", answer: "=INDEX(Roles[Title],MATCH(B2,Roles[RoleID],0))", requires: ["INDEX"],
+      good: "Backend Engineer. Read inside-out: MATCH first." },
+    { cell: "D5", ask: "Dev is FE-1.",
+      want: "Frontend Engineer", answer: "=INDEX(Roles[Title],MATCH(B5,Roles[RoleID],0))",
+      good: "Frontend. Same idea as XLOOKUP; this is the version in every inherited file." }
+  ]
+}));
+
+Sheet.mount("s12", {
+  id: "lab-trim", rows: 10, cols: 6, headerRows: 1,
+  title: "Dirty Source column",
+  note: "TRIM first, then SUBSTITUTE the known typo Linkdin → LinkedIn.",
+  open: ["C2:C7", "D2:D7"], fillTo: 7, lessonId: "labs-excel.clean",
+  widths: { A: 80, B: 110, C: 110, D: 120 },
+  formats: { A: "text", B: "text", C: "text", D: "text" },
+  data: [
+    ["Name", "Raw", "Trimmed", "Mapped"],
+    ["Asha", "LinkedIn"],
+    ["Ben", "referral "],
+    ["Cara", "Linkdin"],
+    ["Dev", " LINKEDIN"],
+    ["Eva", "Agency"],
+    ["Farah", "linkedin"]
+  ],
+  tasks: [
+    { cell: "C2", ask: "TRIM of B2. Fill down.",
+      want: "LinkedIn", answer: "=TRIM(B2)", requires: ["TRIM"],
+      alsoFill: { C4: "=TRIM(B4)", C5: "=TRIM(B5)", C6: "=TRIM(B6)", C7: "=TRIM(B7)" },
+      good: "LinkedIn. Fill down — Ben loses the trailing space." },
+    { cell: "C3", ask: "Ben after TRIM.",
+      want: "referral", answer: "=TRIM(B3)",
+      good: "referral — space gone, still lower case. COUNTIF will still match Referral." },
+    { cell: "D2", ask: "SUBSTITUTE Linkdin with LinkedIn on the trimmed column.",
+      want: "LinkedIn", answer: '=SUBSTITUTE(C2,"Linkdin","LinkedIn")', requires: ["SUBSTITUTE"],
+      good: "LinkedIn. Fill down — Cara’s typo becomes LinkedIn. A mapping table is the grown-up version of this." },
+    { cell: "D4", ask: "Cara’s mapped source.",
+      want: "LinkedIn", answer: '=SUBSTITUTE(C4,"Linkdin","LinkedIn")',
+      good: "LinkedIn. Four real LinkedIn rows, not five sources in a pivot." }
+  ]
+});
+
+Sheet.mount("s13", {
+  id: "lab-split", rows: 9, cols: 5, headerRows: 1,
+  title: "Title - City",
+  note: "TEXTBEFORE and TEXTAFTER on \" - \".",
+  open: ["B2:C4"], fillTo: 4, lessonId: "labs-excel.split",
+  widths: { A: 220, B: 150, C: 110 },
+  data: [
+    ["Raw", "Title", "City"],
+    ["Backend Engineer - Dublin"],
+    ["Frontend Engineer - Amsterdam"],
+    ["Backend Engineer - Dublin"]
+  ],
+  tasks: [
+    { cell: "B2", ask: "Everything before \" - \". TEXTBEFORE.",
+      want: "Backend Engineer", answer: '=TEXTBEFORE(A2," - ")', requires: ["TEXTBEFORE"],
+      good: "Backend Engineer." },
+    { cell: "C2", ask: "Everything after \" - \". TEXTAFTER.",
+      want: "Dublin", answer: '=TEXTAFTER(A2," - ")', requires: ["TEXTAFTER"],
+      good: "Dublin. Now they can be grouped." },
+    { cell: "C3", ask: "Amsterdam for the frontend row.",
+      want: "Amsterdam", answer: '=TEXTAFTER(A3," - ")',
+      good: "Amsterdam." }
+  ]
+});
+
+Sheet.mount("s14", D.candidates(["Name", "Source", "Outcome"], {
+  id: "lab-join", rows: 10, cols: 8,
+  title: "A sentence that updates",
+  note: "One cell. No typed names.",
+  open: ["E2", "E3"], lessonId: "labs-excel.join",
+  cells: { D2: "Open names", D3: "Headline" },
+  extraFormats: { E: "text", D: "text" },
+  widths: { D: 110, E: 280 },
+  tasks: [
+    { cell: "E2", ask: "TEXTJOIN the names where Outcome is Open. FILTER inside TEXTJOIN, ignore blanks TRUE, comma-space.",
+      want: "Farah", answer: '=TEXTJOIN(", ",TRUE,FILTER(Candidates[Name],Candidates[Outcome]="Open"))', requires: ["TEXTJOIN"],
+      good: "Farah. When a second person goes Open, the cell grows by itself." },
+    { cell: "E3", ask: "A headline: \"Acceptance \" and TEXT of 3/4 as 0%, then \" across 4 offers\".",
+      want: "Acceptance 75% across 4 offers", answer: '="Acceptance "&TEXT(3/4,"0%")&" across 4 offers"', requires: ["TEXT"],
+      good: "Acceptance 75% across 4 offers. Without TEXT it would have said 0.75." }
+  ]
+}));
+
+Sheet.mount("s15", D.candidates(D.ALL, {
+  id: "lab-filter", rows: 12, cols: 16, height: 280,
+  title: "Spill range",
+  note: "N2 spills. O2 counts each spilled source.",
+  open: ["N2", "O2", "Q2"], lessonId: "labs-excel.filter",
+  cells: { N1: "Sources", O1: "Applicants", Q1: "Still open" },
+  extraFormats: { N: "text", O: "general", Q: "text" },
+  widths: { N: 100, O: 90, Q: 100 },
+  tasks: [
+    { cell: "N2", ask: "SORT of UNIQUE of Source.",
+      want: "Agency", answer: "=SORT(UNIQUE(Candidates[Source]))", requires: ["UNIQUE"],
+      good: "Agency, LinkedIn, Referral — spilled." },
+    { cell: "O2", ask: "COUNTIFS of Source against the spill N2#.",
+      want: 1, answer: "=COUNTIFS(Candidates[Source],N2#)", requires: ["COUNTIFS"],
+      good: "1, 4, 1. A fourth source in the data would add a fourth count." },
+    { cell: "Q2", ask: "FILTER names where Outcome is Open.",
+      want: "Farah", answer: '=FILTER(Candidates[Name],Candidates[Outcome]="Open")', requires: ["FILTER"],
+      good: "Farah. The Monday list, one formula." }
+  ]
+}));
+
+Sheet.mount("s16", D.candidates(["Name", "Source"], {
+  id: "lab-dupe", rows: 10, cols: 6, height: 260,
+  title: "A second Asha",
+  note: "Row 8 is a second Asha on purpose. Flag, do not delete.",
+  open: ["D2:D8"], fillTo: 8, lessonId: "labs-excel.dupes",
+  cells: { A8: "Asha", B8: "Agency", D1: "Flag" },
+  extraFormats: { D: "text" },
+  tasks: [
+    { cell: "D2", ask: "If this name appears more than once in $A$2:$A$8, DUPLICATE, else blank. Lock the range.",
+      want: "DUPLICATE", answer: '=IF(COUNTIF($A$2:$A$8,A2)>1,"DUPLICATE","")', requires: ["COUNTIF"],
+      good: "Asha flagged. Fill down — row 8 too. Ben stays blank." },
+    { cell: "D3", ask: "Ben should be blank.",
+      want: "", answer: '=IF(COUNTIF($A$2:$A$8,A3)>1,"DUPLICATE","")',
+      good: "Blank. Two Ashas are a question, not a delete." },
+    { cell: "D8", ask: "The extra Asha.",
+      want: "DUPLICATE", answer: '=IF(COUNTIF($A$2:$A$8,A8)>1,"DUPLICATE","")',
+      good: "Flagged. Next step in real life is email, not Remove Duplicates." }
+  ]
+}));
+
+Sheet.mount("s17", D.candidates(D.ALL, {
+  id: "lab-dash", rows: 10, cols: 16, height: 250,
+  title: "Dashboard block — formulas only",
+  note: "N is the label, O is the formula. Do not type 6, 4, 0.75 or 4000.",
+  open: ["O2:O7"], lessonId: "labs-excel.dash",
+  cells: {
+    N2: "Applicants", N3: "Screened", N4: "Offers", N5: "Accepts",
+    N6: "Acceptance", N7: "Agency €"
+  },
+  extraFormats: { N: "text", O: "general" },
+  cellFormats: { O6: "pct", O7: "eur" },
+  widths: { N: 110, O: 90 },
+  tasks: [
+    { cell: "O2", ask: "COUNTA of names.",
+      want: 6, answer: "=COUNTA(Candidates[Name])", requires: ["COUNTA"],
+      good: "6." },
+    { cell: "O3", ask: "COUNT of Screened dates.",
+      want: 5, answer: "=COUNT(Candidates[Screened])",
+      good: "5." },
+    { cell: "O4", ask: "COUNT of Offer dates.",
+      want: 4, answer: "=COUNT(Candidates[Offer])",
+      good: "4." },
+    { cell: "O5", ask: "COUNT of Accepted dates.",
+      want: 3, answer: "=COUNT(Candidates[Accepted])",
+      good: "3." },
+    { cell: "O6", ask: "O5/O4 wrapped in IFERROR.",
+      want: 0.75, tol: 0.001, answer: '=IFERROR(O5/O4,"")', requires: ["IFERROR"],
+      good: "75%." },
+    { cell: "O7", ask: "SUMIFS of FeeEUR where Source is Agency.",
+      want: 4000, answer: '=SUMIFS(Candidates[FeeEUR],Candidates[Source],"Agency")', requires: ["SUMIFS"],
+      good: "€4,000 on a renege. Six formulas, no typed numbers. That is a dashboard." }
+  ]
+}));
+
+function Q(id, lessonId, items) {
+  Quiz.mount(id, { title: "Check yourself", lessonId: lessonId, items: items });
+}
+Q("q01", "labs-excel.types", [
+  { q: "SUM of a fee column is too low and Excel shows no error. What happened first?",
+    opts: ["A filter is on", "Some fees are text (often a trailing space) and SUM skipped them", "The currency format hid values", "Need VBA"],
+    a: 1, why: "<b>Silent skip.</b> ISNUMBER, then VALUE or Change Type." },
+  { q: "Which test is blunt and reliable?",
+    opts: ["Look at the font", "=ISNUMBER(cell)", "Widen the column", "SUM twice"],
+    a: 1, why: "<b>TRUE or FALSE.</b> Alignment is a hint; ISNUMBER is proof." }
+]);
+Q("q02", "labs-excel.dates", [
+  { q: "Farah has no Accepted date. Accepted minus Applied should be:",
+    opts: ["0", "A large negative", "Blank", "TODAY minus Applied"],
+    a: 2, why: "<b>Blank is honest.</b> Zero would pull the average down; a serial-from-blank is worse." },
+  { q: "A manager says the 23 calendar days included weekends. Which function?",
+    opts: ["TODAY", "NETWORKDAYS", "EOMONTH", "TEXT"],
+    a: 1, why: "<b>Monday–Friday, inclusive.</b> Asha is 18 working days." },
+  { q: "Probation end six months after join is:",
+    opts: ["Join + 180 typed", "EDATE(Joined, 6)", "EOMONTH(Joined, 6)", "NETWORKDAYS(Joined, 6)"],
+    a: 1, why: "<b>EDATE keeps the day of month.</b> Asha 20 Apr → 20 Oct 2026." }
+]);
+Q("q03", "labs-excel.abs", [
+  { q: "Fill-down of =B2/B6 shows #DIV/0! on row 3. Why?",
+    opts: ["Division is illegal", "B6 walked to B7, which is empty", "Need VBA", "Format as percent first"],
+    a: 1, why: "<b>$B$6.</b> The first cell can look right and the fill still be wrong." }
+]);
+Q("q04", "labs-excel.if", [
+  { q: "IFS tests Fast ≤20 then Normal ≤35 then TRUE Slow. Eva is 39. Result?",
+    opts: ["Fast", "Normal", "Slow", "Blank"],
+    a: 2, why: "<b>First true wins.</b> 39 fails both thresholds, TRUE catch-all is Slow." },
+  { q: "Farah has no Accepted date. The outer IF should return:",
+    opts: ["Slow", "0", "Blank", "Fast"],
+    a: 2, why: "<b>Missing is not Slow.</b>" }
+]);
+Q("q05", "labs-excel.and", [
+  { q: "Who is CHASE on 1 May 2026?",
+    opts: ["Asha was slow", "Eva reneged", "Farah — Open and 42 days", "Everyone Open"],
+    a: 2, why: "<b>Open AND old.</b> Joined/Declined/Rejected/Reneged are not Open." },
+  { q: "AND of a whole Outcome column in one cell is:",
+    opts: ["A flag per row", "One TRUE/FALSE for the whole column — almost never what you meant", "The same as COUNTIFS", "A spill"],
+    a: 1, why: "<b>Per-row AND lives in a helper column.</b>" }
+]);
+Q("q06", "labs-excel.count", [
+  { q: "Offer column has four dates and one cell that says pending. COUNT vs COUNTA?",
+    opts: ["Both 5", "COUNT 4, COUNTA 5 — COUNT is the funnel", "Both 4", "COUNT 5, COUNTA 4"],
+    a: 1, why: "<b>Stages are dates.</b> pending is not an offer." },
+  { q: "COUNTIFS is:",
+    opts: ["OR of conditions", "AND of conditions", "XOR", "A pivot"],
+    a: 1, why: "<b>All tests must pass.</b> Two COUNTIFs to OR." }
+]);
+Q("q07", "labs-excel.sumifs", [
+  { q: "SUMIFS argument order starts with:",
+    opts: ["Criteria", "The range to add", "The range to test", "A pivot"],
+    a: 1, why: "<b>Add first, then pairs.</b> SUMIF is the other way — so you write SUMIFS always." },
+  { q: "Eva reneged after a €4,000 fee. Agency spend is:",
+    opts: ["€0 — you did not join", "€4,000 — the fee is owed", "Split 50/50", "Hidden"],
+    a: 1, why: "<b>Cost of a failed hire still sits on the books.</b>" }
+]);
+Q("q08", "labs-excel.avg", [
+  { q: "Which pair should you quote for time to accept?",
+    opts: ["MIN only", "Median and MAX", "SUM of days", "COUNTA"],
+    a: 1, why: "<b>Typical and worst.</b> MIN is often an internal move." },
+  { q: "AVERAGEIFS of hire days where Outcome is Joined drops Eva. The mean becomes:",
+    opts: ["31.3", "27.5", "39", "0"],
+    a: 1, why: "<b>Asha 23 and Dev 32.</b> Say which cohort you are quoting." }
+]);
+Q("q09", "labs-excel.rates", [
+  { q: "A role with zero offers. Acceptance rate on the dashboard should be:",
+    opts: ["0%", "100%", "Blank / N/A", "6%"],
+    a: 2, why: "<b>Undefined ≠ zero.</b> IFERROR or test the denominator." },
+  { q: "3/4 formatted as a percent is:",
+    opts: ["0.75 shown as 75%", "3/4*100 then percent format = 7500%", "Either is fine", "TEXT only"],
+    a: 0, why: "<b>Ratio, then format.</b> Do not also multiply by 100." }
+]);
+Q("q10", "labs-excel.xlookup", [
+  { q: "Why return \"No role\" instead of letting #N/A sit?",
+    opts: ["It is prettier", "You can filter the column to a worklist of broken keys", "XLOOKUP requires it", "GDPR"],
+    a: 1, why: "<b>An error becomes a task.</b>" },
+  { q: "Where does HiringManager live?",
+    opts: ["Typed on every candidate row", "Once on Roles, looked up by RoleID", "In the chart title", "In PowerPoint"],
+    a: 1, why: "<b>Facts live once.</b>" }
+]);
+Q("q11", "labs-excel.match", [
+  { q: "The 0 in MATCH(key, column, 0) means:",
+    opts: ["Return the first row", "Exact match", "Approximate match", "Wildcard"],
+    a: 1, why: "<b>Never omit it on IDs.</b>" },
+  { q: "Read INDEX/MATCH:",
+    opts: ["INDEX first in your head", "Inside-out: MATCH finds position, INDEX fetches", "Left to right only", "With VLOOKUP’s column index"],
+    a: 1, why: "<b>Inside-out.</b>" }
+]);
+Q("q12", "labs-excel.clean", [
+  { q: "TRIM does not fix:",
+    opts: ["Leading spaces", "The typo Linkdin", "Trailing spaces", "Doubled spaces"],
+    a: 1, why: "<b>SUBSTITUTE or a map.</b>" },
+  { q: "LEN of a cell that looks like LinkedIn returns 9. What is likely?",
+    opts: ["Excel is broken", "An invisible extra character", "Need PROPER", "It is a date"],
+    a: 1, why: "<b>Diagnostic before the fix.</b>" }
+]);
+Q("q13", "labs-excel.split", [
+  { q: "Why not LEFT(A2,18) on every title-city cell?",
+    opts: ["LEFT is deprecated", "A longer title breaks the split", "Dublin is always 6 letters", "Need VBA"],
+    a: 1, why: "<b>Find the delimiter.</b>" }
+]);
+Q("q14", "labs-excel.join", [
+  { q: "\"Rate \"&amp;0.75 shows Rate 0.75. Fix?",
+    opts: ["ROUND", "TEXT(0.75,\"0%\")", "VALUE", "TRIM"],
+    a: 1, why: "<b>TEXT is format in a sentence.</b>" }
+]);
+Q("q15", "labs-excel.filter", [
+  { q: "#SPILL! means:",
+    opts: ["The file is corrupt", "Something is blocking the cells the array needs", "Need a pivot", "FILTER is illegal in HR"],
+    a: 1, why: "<b>Clear the landing zone.</b>" },
+  { q: "N2# means:",
+    opts: ["A comment", "The whole spill that starts at N2", "Sheet N, cell 2", "Error"],
+    a: 1, why: "<b>Point COUNTIFS at a growing list.</b>" }
+]);
+Q("q16", "labs-excel.dupes", [
+  { q: "Two rows named Asha. Next step?",
+    opts: ["Remove Duplicates immediately", "Flag them; check email or candidate ID", "Delete the second", "Hide the row"],
+    a: 1, why: "<b>Name is not a key.</b>" }
+]);
+Q("q17", "labs-excel.dash", [
+  { q: "A dashboard card that shows 6 applicants should contain:",
+    opts: ["The typed number 6", "COUNTA of the name column", "A screenshot", "A pivot cache"],
+    a: 1, why: "<b>Formulas only.</b>" }
+]);
+
+Drill.mount("d17", {
+  id: "lab-say", lessonId: "labs-excel.dash", seconds: 45,
+  title: "Say the six cells.",
+  prompt: "Forty-five seconds. Applicants, screened, offers, accepts, acceptance, agency spend — and one action.",
+  model: "<p>\"Six applicants, five screened — Farah is the miss, six weeks, that is on me. Four offers, three accepts, 75 percent. Two actually started, so joining is 67, not 75: Eva reneged after a long notice and we still owe the agency four thousand. Monday I screen Farah and I do not brief another agency role until we have a notice-period plan.\"</p><p class=\"tiny\">Counts, the rate, the renege, the fee, the Monday action. That is Excel in an interview.</p>"
+});
+
+Course.init({ id: "labs-excel" });
+</script>
+</body>
+</html>
