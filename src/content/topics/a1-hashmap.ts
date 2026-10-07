@@ -9,6 +9,14 @@ export const content: TopicContent = {
     'hash(key) → bucket index → chain or tree of entries. equals() decides match in bucket. Think: labeled drawer system; collision = multiple keys in same drawer.',
   howItWorks: [
     {
+      type: 'paragraph',
+      text: 'Step 1 — The problem HashMap solves. Arrays are great when keys are 0..n-1. When the key is an arbitrary integer, a string, or a pair, you need “look up by label.” HashMap stores key→value and answers get/put in average O(1) time.',
+    },
+    {
+      type: 'paragraph',
+      text: 'Step 2 — Mental picture. hash(key) picks a bucket; equals decides which entry in that bucket matches. Collisions happen; Java handles them with chains (and trees when a bucket gets large). You rarely implement hashing in interviews—you use the map correctly.',
+    },
+    {
       type: 'list',
       ordered: true,
       items: [

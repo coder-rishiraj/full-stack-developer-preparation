@@ -9,6 +9,10 @@ export const content: TopicContent = {
     'Ring buffer with head/tail pointers. offerFirst/offerLast append; pollFirst/pollLast remove. No null elements allowed.',
   howItWorks: [
     {
+      type: 'paragraph',
+      text: 'Step 1 — Why “double-ended”? Sometimes you only need a queue (add at back, remove at front). Sometimes only a stack (add and remove at the same end). A Deque supports both ends, so one class covers BFS queues, DFS stacks, and sliding-window tricks.',
+    },
+    {
       type: 'list',
       ordered: true,
       items: [

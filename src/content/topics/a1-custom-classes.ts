@@ -9,14 +9,22 @@ export const content: TopicContent = {
     'Data holder + optional compareTo/Comparator. If it goes in HashMap/HashSet, hashCode/equals must match value semantics. If in TreeSet, implement Comparable or supply Comparator.',
   howItWorks: [
     {
+      type: 'paragraph',
+      text: 'Step 1 — When a bare int[] is not enough. Pairing {node, dist} as int[] works, but named fields (node, dist) are easier to read in a PriorityQueue and less error-prone than magic indices. Custom classes (or records) group related fields under one type.',
+    },
+    {
+      type: 'paragraph',
+      text: 'Step 2 — Keys need equals and hashCode. If the object goes into a HashMap or HashSet, two equal values must look equal to the map. Prefer record Pos(int r, int c) so equals/hashCode are generated correctly. Never mutate key fields while the object sits in a map.',
+    },
+    {
       type: 'list',
       ordered: true,
       items: [
         'static class Node { int val; List<Node> neighbors; } for graphs/trees.',
         'record Edge(int u, int v, int w) {} for immutable triples—auto equals/hashCode.',
         'class Interval { int start, end; } with sort via Comparator.comparingInt(i -> i.start).',
-        'Override equals/hashCode for mutable keys only if immutable after insert—or use record.',
-        'Comparable on class vs external Comparator for same type different orders.',
+        'Override equals/hashCode together—or use record.',
+        'Comparable on the class vs external Comparator for different orders.',
       ],
     },
     {

@@ -9,14 +9,22 @@ export const content: TopicContent = {
     'String = frozen char sequence; hash cached, equals compares content. StringBuilder = resizable char[] with append/delete; call toString() once at end. toCharArray() copies for in-place char algorithms.',
   howItWorks: [
     {
+      type: 'paragraph',
+      text: 'Step 1 — What is a String? A String holds text (characters) and cannot change after creation. s.charAt(i), s.length(), and s.equals(t) are the everyday tools. Comparing with == checks reference identity, not content—beginners hit this constantly.',
+    },
+    {
+      type: 'paragraph',
+      text: 'Step 2 — Why StringBuilder exists. Writing result = result + c inside a loop copies the whole string each time (roughly O(n²) total). StringBuilder keeps a mutable buffer: append characters cheaply, then call toString() once at the end.',
+    },
+    {
       type: 'list',
       ordered: true,
       items: [
         's.charAt(i) O(1); s.length(); s.substring(begin,end) O(n) copy.',
         'StringBuilder sb = new StringBuilder(); sb.append(c); sb.reverse(); sb.toString().',
         'String.join(",", list) for output formatting.',
-        's.toCharArray() for two-pointer in-place on array copy.',
-        'String.valueOf(int) for building from numbers without concat in loop.',
+        's.toCharArray() for two-pointer in-place on a char[] copy.',
+        'String.valueOf(int) for building from numbers without concat in a loop.',
       ],
     },
     {

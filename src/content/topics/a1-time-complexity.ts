@@ -9,6 +9,14 @@ export const content: TopicContent = {
     'Count the innermost work multiplied by how many times it runs. Drop constants and lower terms: 3n² + 100n → O(n²). Nested loops often multiply; sequential blocks add.',
   howItWorks: [
     {
+      type: 'paragraph',
+      text: 'Step 1 — What are we measuring? Time complexity estimates how the number of basic steps grows as the input grows. We care about the shape of growth (linear? quadratic?), not the exact millisecond count on your laptop.',
+    },
+    {
+      type: 'paragraph',
+      text: 'Step 2 — Find n. Usually n is array length, number of nodes, or string length. Sometimes there are two sizes (n×m grid). Write the cost in terms of those variables, then simplify with Big-O (next topic) by dropping constants and smaller terms.',
+    },
+    {
       type: 'list',
       ordered: true,
       items: [

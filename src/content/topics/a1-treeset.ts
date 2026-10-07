@@ -9,6 +9,10 @@ export const content: TopicContent = {
     'TreeMap with keys only (dummy PRESENT value). In-order iteration = ascending sort. Dual of HashSet with ordering tax O(log n).',
   howItWorks: [
     {
+      type: 'paragraph',
+      text: 'Step 1 — HashSet vs TreeSet. HashSet = unique + fast, no order. TreeSet = unique + sorted, with floor/ceiling. Use TreeSet when the algorithm needs the next larger/smaller element after inserts and deletes.',
+    },
+    {
       type: 'list',
       ordered: true,
       items: [

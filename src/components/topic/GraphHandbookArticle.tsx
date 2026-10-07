@@ -1,6 +1,19 @@
 import type { ReactNode } from 'react'
 import type { ContentBlock, TopicContent, TopicMeta } from '@/domain/types'
 import { getProblemsForTopic } from '@/content/problems'
+import { HighlightedCode } from '@/components/topic/HighlightedCode'
+import type { SolutionLanguage } from '@/components/topic/GraphAlgorithmReferenceCard'
+
+function normalizeLang(language: string | undefined): SolutionLanguage {
+  const l = (language ?? 'java').toLowerCase()
+  if (l === 'cpp' || l === 'c++' || l === 'cplusplus') return 'cpp'
+  return 'java'
+}
+
+const LANG_LABEL: Record<SolutionLanguage, string> = {
+  java: 'Java',
+  cpp: 'C++',
+}
 
 /**
  * Print-oriented article for the Graphs handbook.
@@ -23,10 +36,12 @@ export function GraphHandbookArticle({
     interview?: boolean
     flashcards?: boolean
     dsaProblems?: boolean
+    languages?: SolutionLanguage[]
   }
 }) {
   const nested = meta.curriculumLevel === 'nested-concept'
   const problems = include.dsaProblems ? getProblemsForTopic(meta.id) : []
+  const languages = include.languages ?? ['java']
 
   if (mode === 'quick') {
     return (
@@ -38,7 +53,7 @@ export function GraphHandbookArticle({
           </p>
           <h3 className="gh-title">{nested ? `↳ ${meta.title}` : meta.title}</h3>
         </header>
-        <GhBlock label="Quick revision">
+        <GhBlock label="Quick revision" tone="revision">
           <ol className="gh-steps">
             {content.quickRevision.map((item) => (
               <li key={item}>{item}</li>
@@ -46,7 +61,7 @@ export function GraphHandbookArticle({
           </ol>
         </GhBlock>
         {content.keyTakeaways.length > 0 && (
-          <GhBlock label="Key takeaways">
+          <GhBlock label="Key takeaways" tone="note">
             <ul className="gh-bullets">
               {content.keyTakeaways.map((item) => (
                 <li key={item}>{item}</li>
@@ -63,7 +78,7 @@ export function GraphHandbookArticle({
   )
   const analysisCallouts = (content.howItWorks ?? []).filter(
     (b): b is Extract<ContentBlock, { type: 'callout' }> =>
-      b.type === 'callout' && /complexity|analysis|note|tip/i.test(b.title ?? ''),
+      b.type === 'callout' && /complexity|analysis/i.test(b.title ?? ''),
   )
   const otherCallouts = (content.howItWorks ?? []).filter(
     (b): b is Extract<ContentBlock, { type: 'callout' }> =>
@@ -81,22 +96,22 @@ export function GraphHandbookArticle({
       </header>
 
       {content.whatIsIt && (
-        <GhBlock label="Problem">
+        <GhBlock label="Problem" tone="problem">
           <p className="gh-prose">{content.whatIsIt}</p>
         </GhBlock>
       )}
 
       {(content.whyExists || content.mentalModel) && (
-        <GhBlock label="Intuition">
+        <GhBlock label="Intuition" tone="intuition">
           {content.whyExists && <p className="gh-prose">{content.whyExists}</p>}
-          {content.mentalModel && (
+          {content.mentalModel && content.mentalModel !== content.whyExists && (
             <p className="gh-prose gh-prose-secondary">{content.mentalModel}</p>
           )}
         </GhBlock>
       )}
 
       {stepLists.length > 0 && (
-        <GhBlock label="Steps">
+        <GhBlock label="Steps" tone="steps">
           {stepLists.map((list, i) =>
             list.ordered ? (
               <ol key={i} className="gh-steps">
@@ -116,45 +131,59 @@ export function GraphHandbookArticle({
       )}
 
       {otherCallouts.map((c, i) => (
-        <GhBlock key={`callout-${i}`} label={c.title || 'Note'}>
+        <GhBlock key={`callout-${i}`} label={c.title || 'Note'} tone="note">
           {looksLikeCode(c.text) ? (
-            <pre className="gh-code">
-              <code>{formatInlineCode(c.text)}</code>
-            </pre>
+            <HighlightedCode
+              code={formatInlineCode(c.text)}
+              language="java"
+              className="gh-code"
+            />
           ) : (
             <p className="gh-prose">{c.text}</p>
           )}
         </GhBlock>
       ))}
 
-      {include.code && content.templates && content.templates.length > 0 && (
-        <GhBlock label="Code (Java)">
-          {content.templates.map((t) => (
-            <figure key={t.caption ?? t.code.slice(0, 24)} className="gh-code-figure">
-              {t.caption && <figcaption className="gh-code-caption">{t.caption}</figcaption>}
-              <pre className="gh-code">
-                <code>{t.code.trimEnd()}</code>
-              </pre>
-            </figure>
-          ))}
-        </GhBlock>
-      )}
+      {include.code &&
+        (content.templates ?? [])
+          .filter((t) => languages.includes(normalizeLang(t.language)))
+          .map((t) => {
+            const lang = normalizeLang(t.language)
+            return (
+              <GhBlock
+                key={`${lang}-${t.caption ?? t.code.slice(0, 24)}`}
+                label={`Solution (${LANG_LABEL[lang]})`}
+                tone="solution"
+              >
+                <figure className="gh-code-figure">
+                  {t.caption && <figcaption className="gh-code-caption">{t.caption}</figcaption>}
+                  <HighlightedCode code={t.code} language={lang} className="gh-code" />
+                </figure>
+              </GhBlock>
+            )
+          })}
 
-      {include.code && content.implementation && content.implementation.length > 0 && (
-        <GhBlock label="Implementation">
-          {content.implementation.map((t) => (
-            <figure key={t.caption ?? t.code.slice(0, 24)} className="gh-code-figure">
-              {t.caption && <figcaption className="gh-code-caption">{t.caption}</figcaption>}
-              <pre className="gh-code">
-                <code>{t.code.trimEnd()}</code>
-              </pre>
-            </figure>
-          ))}
-        </GhBlock>
-      )}
+      {include.code &&
+        (content.implementation ?? [])
+          .filter((t) => languages.includes(normalizeLang(t.language)))
+          .map((t) => {
+            const lang = normalizeLang(t.language)
+            return (
+              <GhBlock
+                key={`impl-${lang}-${t.caption ?? t.code.slice(0, 24)}`}
+                label={`Implementation (${LANG_LABEL[lang]})`}
+                tone="solution"
+              >
+                <figure className="gh-code-figure">
+                  {t.caption && <figcaption className="gh-code-caption">{t.caption}</figcaption>}
+                  <HighlightedCode code={t.code} language={lang} className="gh-code" />
+                </figure>
+              </GhBlock>
+            )
+          })}
 
       {content.complexity && (
-        <GhBlock label="Complexity">
+        <GhBlock label="Complexity" tone="complexity">
           <table className="gh-table gh-table-compact">
             <thead>
               <tr>
@@ -183,7 +212,7 @@ export function GraphHandbookArticle({
       )}
 
       {include.examples && content.example && content.example.length > 0 && (
-        <GhBlock label="Example">
+        <GhBlock label="Example" tone="example">
           {content.example.map((block, i) => (
             <ExampleBlock key={i} block={block} />
           ))}
@@ -191,7 +220,7 @@ export function GraphHandbookArticle({
       )}
 
       {content.patternRecognition && content.patternRecognition.length > 0 && (
-        <GhBlock label="Pattern recognition">
+        <GhBlock label="Pattern recognition" tone="patterns">
           <ul className="gh-bullets">
             {content.patternRecognition.map((p) => (
               <li key={p}>{p}</li>
@@ -201,7 +230,7 @@ export function GraphHandbookArticle({
       )}
 
       {content.commonMistakes && content.commonMistakes.length > 0 && (
-        <GhBlock label="Common mistakes">
+        <GhBlock label="Common mistakes" tone="mistakes">
           <ul className="gh-bullets">
             {content.commonMistakes.map((m) => (
               <li key={m}>{m}</li>
@@ -211,7 +240,7 @@ export function GraphHandbookArticle({
       )}
 
       {include.interview && content.interviewQuestions.length > 0 && (
-        <GhBlock label="Interview questions">
+        <GhBlock label="Interview questions" tone="interview">
           <ol className="gh-steps">
             {content.interviewQuestions.map((q) => (
               <li key={q.question}>
@@ -224,7 +253,7 @@ export function GraphHandbookArticle({
       )}
 
       {include.flashcards && content.flashcards.length > 0 && (
-        <GhBlock label="Flashcards">
+        <GhBlock label="Flashcards" tone="flashcards">
           <dl className="gh-flashcards">
             {content.flashcards.map((fc) => (
               <div key={fc.front} className="gh-flashcard">
@@ -237,7 +266,7 @@ export function GraphHandbookArticle({
       )}
 
       {content.quickRevision.length > 0 && (
-        <GhBlock label="Quick revision">
+        <GhBlock label="Quick revision" tone="revision">
           <ul className="gh-bullets">
             {content.quickRevision.map((item) => (
               <li key={item}>{item}</li>
@@ -247,7 +276,7 @@ export function GraphHandbookArticle({
       )}
 
       {problems.length > 0 && (
-        <GhBlock label="Related DSA problems">
+        <GhBlock label="Related DSA problems" tone="problems">
           <ul className="gh-bullets">
             {problems.map((p) => (
               <li key={p.id}>
@@ -264,9 +293,17 @@ export function GraphHandbookArticle({
   )
 }
 
-function GhBlock({ label, children }: { label: string; children: ReactNode }) {
+function GhBlock({
+  label,
+  tone,
+  children,
+}: {
+  label: string
+  tone?: string
+  children: ReactNode
+}) {
   return (
-    <section className="gh-block">
+    <section className={`gh-block${tone ? ` gh-tone-${tone}` : ''}`}>
       <h4 className="gh-label">{label}</h4>
       <div className="gh-block-body">{children}</div>
     </section>
@@ -316,9 +353,11 @@ function ExampleBlock({ block }: { block: ContentBlock }) {
   }
   if (block.type === 'code') {
     return (
-      <pre className="gh-code">
-        <code>{block.code.trimEnd()}</code>
-      </pre>
+      <HighlightedCode
+        code={block.code}
+        language={normalizeLang(block.language)}
+        className="gh-code"
+      />
     )
   }
   return null

@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom'
 import { SECTIONS, TOPICS } from '@/content/taxonomy'
 import { loadTopicContent } from '@/content/topics'
 import { GRAPH_ALGORITHMS_SUMMARY } from '@/content/topics/_graph-algorithms-summary'
+import { withGraphCppSolutions } from '@/content/topics/_graph-cpp'
 import { GraphHandbookArticle } from '@/components/topic/GraphHandbookArticle'
 import { Button } from '@/components/ui/Button'
 import type { TopicContent, TopicMeta } from '@/domain/types'
+import type { SolutionLanguage } from '@/components/topic/GraphAlgorithmReferenceCard'
 
 function isGraphSectionId(id: string) {
   return /^A8\.\d+$/.test(id)
@@ -13,17 +15,25 @@ function isGraphSectionId(id: string) {
 
 const HANDBOOK_CSS = `
 .graph-handbook {
-  --ink: #152033;
-  --muted: #5a6578;
-  --line: #d8dde6;
-  --soft: #f4f6f9;
-  --code-bg: #f7f5f0;
-  --label: #1f2a3d;
+  --ink: #12263a;
+  --muted: #5a6b7d;
+  --line: #d5e0ea;
+  --soft: #eef6f8;
+  --code-bg: #f7f8fb;
+  --code-fg: #1f2937;
+  --accent: #0d9488;
+  --accent-deep: #0f766e;
+  --accent-warm: #ea580c;
+  --accent-blue: #2563eb;
+  --label: #0f766e;
   max-width: 920px;
   margin: 0 auto;
   padding: 28px 36px 64px;
   color: var(--ink);
-  background: #fff;
+  background:
+    radial-gradient(ellipse 55% 40% at 100% 0%, rgba(234, 88, 12, .07), transparent 55%),
+    radial-gradient(ellipse 50% 45% at 0% 20%, rgba(13, 148, 136, .08), transparent 50%),
+    linear-gradient(180deg, #f7fbfa 0%, #ffffff 28%, #fffaf6 100%);
   font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
   font-size: 11.5pt;
   line-height: 1.55;
@@ -37,17 +47,21 @@ const HANDBOOK_CSS = `
   flex-direction: column;
   justify-content: center;
   padding: 48px 0 56px;
-  border-top: 7px solid var(--ink);
+  border-top: 7px solid var(--accent);
   border-bottom: 1px solid var(--line);
+  border-radius: 0 0 18px 18px;
+  background:
+    radial-gradient(ellipse 60% 80% at 100% 0%, rgba(234, 88, 12, .1), transparent 55%),
+    radial-gradient(ellipse 50% 70% at 0% 100%, rgba(13, 148, 136, .12), transparent 50%);
   break-after: page;
   page-break-after: always;
 }
 .gh-cover-kicker {
   margin: 0 0 18px;
-  color: var(--muted);
+  color: var(--accent-warm);
   font-family: Inter, ui-sans-serif, system-ui, sans-serif;
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: .16em;
   text-transform: uppercase;
 }
@@ -57,6 +71,8 @@ const HANDBOOK_CSS = `
   font-size: 42px;
   line-height: 1.05;
   letter-spacing: -.02em;
+  font-weight: 800;
+  color: #0f3d3a;
 }
 .gh-cover-sub {
   max-width: 42rem;
@@ -76,7 +92,8 @@ const HANDBOOK_CSS = `
 .gh-cover-meta strong {
   display: block;
   font-size: 22px;
-  font-weight: 700;
+  font-weight: 800;
+  color: var(--accent-deep);
 }
 .gh-cover-meta span {
   color: var(--muted);
@@ -96,12 +113,14 @@ const HANDBOOK_CSS = `
   margin: 0 0 18px;
   font-size: 26px;
   letter-spacing: -.01em;
+  font-weight: 800;
+  color: #0f3d3a;
 }
 .gh-toc ol {
   margin: 0;
   padding: 0;
   list-style: none;
-  border-top: 1px solid var(--ink);
+  border-top: 2px solid var(--accent);
 }
 .gh-toc li {
   display: grid;
@@ -113,9 +132,13 @@ const HANDBOOK_CSS = `
   font-family: Inter, ui-sans-serif, system-ui, sans-serif;
   font-size: 13px;
 }
+.gh-toc li:nth-child(even) {
+  background: rgba(13, 148, 136, .04);
+}
 .gh-toc .gh-toc-id {
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: .02em;
+  color: var(--accent-deep);
 }
 .gh-toc .gh-toc-count {
   color: var(--muted);
@@ -130,20 +153,24 @@ const HANDBOOK_CSS = `
 }
 .gh-section-banner {
   margin: 0 0 28px;
-  padding-bottom: 14px;
-  border-bottom: 2px solid var(--ink);
+  padding: 12px 14px;
+  border-radius: 10px;
+  border-left: 4px solid var(--accent);
+  background: linear-gradient(90deg, #dcf5f1, rgba(255,255,255,.55));
 }
 .gh-section-banner .gh-kicker {
   margin: 0 0 6px;
-  color: var(--muted);
+  color: var(--accent-deep);
   font-family: Inter, ui-sans-serif, system-ui, sans-serif;
   font-size: 10px;
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: .14em;
   text-transform: uppercase;
 }
 .gh-section-title {
   margin: 0;
+  font-weight: 800;
+  color: #0f3d3a;
 }
 .gh-article {
   padding: 8px 0 28px;
@@ -160,10 +187,10 @@ const HANDBOOK_CSS = `
 }
 .gh-kicker {
   margin: 0 0 6px;
-  color: var(--muted);
+  color: var(--accent-warm);
   font-family: Inter, ui-sans-serif, system-ui, sans-serif;
   font-size: 10px;
-  font-weight: 650;
+  font-weight: 800;
   letter-spacing: .08em;
   text-transform: uppercase;
 }
@@ -172,19 +199,46 @@ const HANDBOOK_CSS = `
   font-size: 22px;
   line-height: 1.2;
   letter-spacing: -.015em;
+  font-weight: 800;
+  color: #12263a;
 }
 .gh-block {
   margin: 0 0 18px;
 }
 .gh-label {
   margin: 0 0 8px;
-  color: var(--label);
   font-family: Inter, ui-sans-serif, system-ui, sans-serif;
   font-size: 11px;
   font-weight: 800;
   letter-spacing: .12em;
   text-transform: uppercase;
 }
+.gh-tone-problem .gh-label { color: #0f766e; }
+.gh-tone-intuition .gh-label { color: #c2410c; }
+.gh-tone-steps .gh-label { color: #1d4ed8; }
+.gh-tone-solution .gh-label { color: #6d28d9; }
+.gh-tone-complexity .gh-label { color: #b45309; }
+.gh-tone-note .gh-label,
+.gh-tone-example .gh-label,
+.gh-tone-patterns .gh-label,
+.gh-tone-mistakes .gh-label,
+.gh-tone-interview .gh-label,
+.gh-tone-flashcards .gh-label,
+.gh-tone-revision .gh-label,
+.gh-tone-problems .gh-label { color: #475569; }
+.gh-tone-problem { border-left: 3px solid #14b8a6; padding-left: 12px; }
+.gh-tone-intuition { border-left: 3px solid #fb923c; padding-left: 12px; }
+.gh-tone-steps { border-left: 3px solid #60a5fa; padding-left: 12px; }
+.gh-tone-solution { border-left: 3px solid #a78bfa; padding-left: 12px; }
+.gh-tone-complexity { border-left: 3px solid #fbbf24; padding-left: 12px; }
+.gh-tone-note,
+.gh-tone-example,
+.gh-tone-patterns,
+.gh-tone-mistakes,
+.gh-tone-interview,
+.gh-tone-flashcards,
+.gh-tone-revision,
+.gh-tone-problems { border-left: 3px solid #94a3b8; padding-left: 12px; }
 .gh-block-body {
   padding-left: 0;
 }
@@ -211,6 +265,10 @@ const HANDBOOK_CSS = `
 .gh-bullets li {
   margin: 0 0 7px;
 }
+.gh-steps li::marker {
+  color: var(--accent-blue);
+  font-weight: 700;
+}
 .gh-code-figure {
   margin: 0 0 14px;
 }
@@ -219,36 +277,69 @@ const HANDBOOK_CSS = `
   font-family: Inter, ui-sans-serif, system-ui, sans-serif;
   font-size: 11px;
   font-weight: 650;
-  color: var(--muted);
+  color: #6d28d9;
 }
 .gh-code {
   margin: 0;
   padding: 14px 16px;
   overflow: visible;
-  border: 1px solid #e2ddd3;
-  border-radius: 8px;
+  border: 1px solid #d7dee8;
+  border-radius: 10px;
   background: var(--code-bg);
-  color: #1c2433;
+  color: var(--code-fg);
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
   font-size: 9.4pt;
-  line-height: 1.45;
+  line-height: 1.5;
   white-space: pre-wrap;
   word-break: break-word;
+  box-shadow: none;
 }
-.gh-code code {
+.gh-code code,
+.gh-code span {
   font: inherit;
   background: transparent;
   border: none;
   padding: 0;
   color: inherit;
   white-space: inherit;
+  box-shadow: none;
 }
+/* Light syntax highlighting (print-friendly) */
+.gh-code.hljs .hljs-keyword,
+.gh-code.hljs .hljs-selector-tag,
+.gh-code.hljs .hljs-literal,
+.gh-code.hljs .hljs-section,
+.gh-code.hljs .hljs-link { color: #7c3aed; font-weight: 700; }
+.gh-code.hljs .hljs-built_in,
+.gh-code.hljs .hljs-type { color: #2563eb; }
+.gh-code.hljs .hljs-string,
+.gh-code.hljs .hljs-attr,
+.gh-code.hljs .hljs-attribute { color: #15803d; }
+.gh-code.hljs .hljs-number,
+.gh-code.hljs .hljs-symbol,
+.gh-code.hljs .hljs-bullet { color: #c2410c; }
+.gh-code.hljs .hljs-comment,
+.gh-code.hljs .hljs-quote,
+.gh-code.hljs .hljs-meta { color: #64748b; font-style: italic; }
+.gh-code.hljs .hljs-function .hljs-title,
+.gh-code.hljs .hljs-title.function_ { color: #1d4ed8; }
+.gh-code.hljs .hljs-title,
+.gh-code.hljs .hljs-name { color: #0f766e; }
+.gh-code.hljs .hljs-params { color: #334155; }
+.gh-code.hljs .hljs-variable,
+.gh-code.hljs .hljs-template-variable { color: #b91c1c; }
+.gh-code.hljs .hljs-class .hljs-title,
+.gh-code.hljs .hljs-title.class_ { color: #a16207; font-weight: 700; }
+.gh-code.hljs .hljs-doctag,
+.gh-code.hljs .hljs-strong { color: #7c3aed; font-weight: 700; }
 .gh-table {
   width: 100%;
   border-collapse: collapse;
   margin: 0 0 12px;
   font-family: Inter, ui-sans-serif, system-ui, sans-serif;
   font-size: 11.5px;
+  overflow: hidden;
+  border-radius: 8px;
 }
 .gh-table th,
 .gh-table td {
@@ -258,8 +349,12 @@ const HANDBOOK_CSS = `
   vertical-align: top;
 }
 .gh-table th {
-  background: var(--soft);
+  background: linear-gradient(180deg, #dcf5f1, #c8ebe6);
   font-weight: 700;
+  color: #0f766e;
+}
+.gh-table tbody tr:nth-child(even) {
+  background: rgba(13, 148, 136, .04);
 }
 .gh-table-compact {
   max-width: 320px;
@@ -270,9 +365,9 @@ const HANDBOOK_CSS = `
 .gh-flashcard {
   margin: 0 0 10px;
   padding: 12px 14px;
-  border: 1px solid var(--line);
+  border: 1px solid #c5e4df;
   border-radius: 8px;
-  background: #fff;
+  background: rgba(255,255,255,.9);
   break-inside: avoid;
   page-break-inside: avoid;
 }
@@ -281,6 +376,7 @@ const HANDBOOK_CSS = `
   font-family: Inter, ui-sans-serif, system-ui, sans-serif;
   font-size: 12.5px;
   font-weight: 700;
+  color: var(--accent-deep);
 }
 .gh-flashcard dd {
   margin: 0;
@@ -295,7 +391,10 @@ const HANDBOOK_CSS = `
 .gh-summary {
   break-before: page;
   page-break-before: always;
-  padding-top: 12px;
+  padding: 18px 16px 8px;
+  border-radius: 12px;
+  border-top: 3px solid var(--accent);
+  background: rgba(255,255,255,.7);
 }
 .gh-summary-intro {
   margin: 0 0 22px;
@@ -311,6 +410,7 @@ const HANDBOOK_CSS = `
   font-weight: 800;
   letter-spacing: .04em;
   text-transform: uppercase;
+  color: var(--accent-deep);
 }
 .gh-summary .gh-table {
   font-size: 10.5px;
@@ -324,6 +424,10 @@ const HANDBOOK_CSS = `
 .gh-decision li {
   margin: 0 0 8px;
 }
+.gh-decision li::marker {
+  color: var(--accent);
+  font-weight: 700;
+}
 .gh-end {
   margin-top: 28px;
   color: var(--muted);
@@ -335,25 +439,49 @@ const HANDBOOK_CSS = `
     max-width: none !important;
     margin: 0 !important;
     padding: 0 !important;
+    background: white !important;
   }
   .gh-code {
-    background: #f7f5f0 !important;
-    border-color: #ccc !important;
+    background: #f7f8fb !important;
+    color: #1f2937 !important;
+    border-color: #d7dee8 !important;
+    box-shadow: none !important;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
+  .gh-code code,
+  .gh-code span {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
   .gh-table th {
-    background: #eee !important;
+    background: #dcf5f1 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .gh-section-banner,
+  .gh-cover,
+  .gh-summary,
+  .gh-tone-problem,
+  .gh-tone-intuition,
+  .gh-tone-steps,
+  .gh-tone-solution,
+  .gh-tone-complexity {
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
   .gh-article,
   .gh-block,
-  .gh-code-figure,
   .gh-flashcard,
   .gh-table {
     break-inside: avoid;
     page-break-inside: avoid;
+  }
+  .gh-code-figure,
+  .gh-code {
+    break-inside: auto !important;
+    page-break-inside: auto !important;
   }
 }
 `
@@ -379,7 +507,8 @@ export function PrintGraphsHandbookPage() {
   }, [sections, topics])
 
   const [mode, setMode] = useState<'full' | 'quick'>('full')
-  const [code, setCode] = useState(true)
+  const [showJava, setShowJava] = useState(true)
+  const [showCpp, setShowCpp] = useState(false)
   const [examples, setExamples] = useState(true)
   const [interview, setInterview] = useState(false)
   const [flashcards, setFlashcards] = useState(false)
@@ -388,6 +517,13 @@ export function PrintGraphsHandbookPage() {
   const [byId, setById] = useState<Record<string, TopicContent>>({})
   const [loading, setLoading] = useState(true)
   const [loadedCount, setLoadedCount] = useState(0)
+
+  const languages = useMemo((): SolutionLanguage[] => {
+    const langs: SolutionLanguage[] = []
+    if (showJava) langs.push('java')
+    if (showCpp) langs.push('cpp')
+    return langs
+  }, [showJava, showCpp])
 
   useEffect(() => {
     let cancelled = false
@@ -408,7 +544,7 @@ export function PrintGraphsHandbookPage() {
         )
         if (cancelled) return
         for (const [id, c] of pairs) {
-          if (c) next[id] = c
+          if (c) next[id] = withGraphCppSolutions(id, c)
         }
         done += slice.length
         setById({ ...next })
@@ -423,7 +559,15 @@ export function PrintGraphsHandbookPage() {
   }, [topics])
 
   const generatedOn = new Intl.DateTimeFormat('en', { dateStyle: 'long' }).format(new Date())
-  const include = { diagrams: false, code, examples, interview, flashcards, dsaProblems }
+  const include = {
+    diagrams: false,
+    code: languages.length > 0,
+    examples,
+    interview,
+    flashcards,
+    dsaProblems,
+    languages,
+  }
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-6">
@@ -435,7 +579,7 @@ export function PrintGraphsHandbookPage() {
           <div>
             <h1 className="text-lg font-semibold">Graphs Handbook (A8)</h1>
             <p className="text-sm text-[var(--text-muted)]">
-              Reference-style print layout — Problem, Intuition, Steps, Code, Complexity.
+              Colorful A4 reference — Problem, Intuition, Steps, Java/C++ solutions, Complexity.
             </p>
           </div>
           <div className="flex gap-2">
@@ -460,9 +604,24 @@ export function PrintGraphsHandbookPage() {
               <option value="quick">Quick revision only</option>
             </select>
           </label>
+          <label className="inline-flex items-center gap-2">
+            <input
+              type="checkbox"
+              checked={showJava}
+              onChange={(e) => setShowJava(e.target.checked)}
+            />
+            Show solutions (Java)
+          </label>
+          <label className="inline-flex items-center gap-2">
+            <input
+              type="checkbox"
+              checked={showCpp}
+              onChange={(e) => setShowCpp(e.target.checked)}
+            />
+            Show solutions (C++)
+          </label>
           {(
             [
-              ['Code', code, setCode],
               ['Examples', examples, setExamples],
               ['Interview Qs', interview, setInterview],
               ['Flashcards', flashcards, setFlashcards],
@@ -490,8 +649,8 @@ export function PrintGraphsHandbookPage() {
           <p className="gh-cover-kicker">SE Prep · Track A · DSA</p>
           <h1>Graph Algorithms Handbook</h1>
           <p className="gh-cover-sub">
-            A structured reference for graph algorithms: problem, intuition, steps, commented Java
-            code, and complexity — designed for A4 study printouts.
+            A structured reference for graph algorithms: problem, intuition, steps, Java / C++
+            solutions, and complexity — designed for A4 study printouts.
           </p>
           <p className="gh-cover-sub" style={{ marginTop: 12 }}>
             Assumptions: 0-indexed vertices, V = number of vertices, adjacency-list representation

@@ -9,6 +9,10 @@ export const content: TopicContent = {
     'Complete binary tree in array: parent ≤ children (min-heap). Root = min. Insert bubble up; poll replace root with last leaf, bubble down.',
   howItWorks: [
     {
+      type: 'paragraph',
+      text: 'Step 1 — Queue vs PriorityQueue. A normal queue returns elements in insertion order (FIFO). A PriorityQueue always returns the “best” element next—smallest by default—regardless of insert order. Think “hospital triage,” not “ticket line.”',
+    },
+    {
       type: 'list',
       ordered: true,
       items: [

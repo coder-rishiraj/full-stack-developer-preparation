@@ -9,11 +9,15 @@ export const content: TopicContent = {
     'Balanced BST keyed by K. In-order traversal = sorted keys. Think sorted array with O(log n) insert/delete instead of O(n) shift.',
   howItWorks: [
     {
+      type: 'paragraph',
+      text: 'Step 1 — HashMap vs TreeMap. HashMap is fastest for plain get/put when you do not care about key order. TreeMap keeps keys sorted and supports “largest key ≤ x” style queries. Pay O(log n) per operation for that order.',
+    },
+    {
       type: 'list',
       ordered: true,
       items: [
         'Natural order: keys implement Comparable (Integer, String).',
-        'Custom: new TreeMap<>((a,b) -> a[0]-b[0]) — avoid overflow in subtract comparator.',
+        'Custom: new TreeMap<>((a,b) -> Integer.compare(a[0], b[0])) — prefer Integer.compare over subtract.',
         'floorKey(k) / ceilingKey(k): largest ≤ k / smallest ≥ k.',
         'pollFirstEntry / pollLastEntry: extract min/max key.',
         'subMap, headMap, tailMap for range views.',

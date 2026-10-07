@@ -56,14 +56,17 @@ export function TopicBody({
           </ul>
           <UserPointsList items={yours.quickRevision} />
         </Section>
-        {opts.diagrams && content.architecture?.mermaid && (
-          <Section title="Diagram">
-            <MermaidBlock
-              diagram={content.architecture.mermaid}
-              caption={content.architecture.caption}
-            />
-          </Section>
-        )}
+      {opts.diagrams && content.architecture?.mermaid && (
+        <Section title="Diagram">
+          {content.architecture.explanation && (
+            <p className="prose-content mb-3">{content.architecture.explanation}</p>
+          )}
+          <MermaidBlock
+            diagram={content.architecture.mermaid}
+            caption={content.architecture.caption}
+          />
+        </Section>
+      )}
         {content.complexity && (
           <Section title="Complexity">
             <ComplexityView c={content.complexity} />
@@ -138,6 +141,9 @@ export function TopicBody({
       )}
       {opts.diagrams && content.architecture?.mermaid && (
         <Section title="Architecture / Diagram">
+          {content.architecture.explanation && (
+            <p className="prose-content mb-3">{content.architecture.explanation}</p>
+          )}
           <MermaidBlock
             diagram={content.architecture.mermaid}
             caption={content.architecture.caption}

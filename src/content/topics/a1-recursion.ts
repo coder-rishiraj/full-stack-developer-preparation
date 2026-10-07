@@ -9,11 +9,19 @@ export const content: TopicContent = {
     'Call stack of frames: each frame has local state + parameters. Base case returns constant; recursive case combines results from child calls. Depth = max stack height—watch StackOverflowError on deep linear chains.',
   howItWorks: [
     {
+      type: 'paragraph',
+      text: 'Step 1 — The idea in plain words. Recursion means: solve a big problem by solving a smaller version of the same problem, then combine. You always need a base case—the smallest input you answer directly without calling yourself again—or the calls never stop.',
+    },
+    {
+      type: 'paragraph',
+      text: 'Step 2 — The call stack. Each recursive call pushes a frame (parameters + locals). When you return, that frame pops. Deep recursion uses O(depth) stack space; a chain of length ~10⁵ can overflow the JVM stack—then switch to an explicit stack or a loop.',
+    },
+    {
       type: 'list',
       ordered: true,
       items: [
         'Define base case(s) first—empty input, leaf node, index == n.',
-        'Recursive step must progress toward base (smaller n, deeper tree, index+1).',
+        'Recursive step must progress toward the base (smaller n, deeper tree, index+1).',
         'Return type: value (fib), void (backtrack), or boolean (exists path).',
         'Backtracking: choose → recurse → undo (restore state).',
         'Memo: Map state → result to avoid exponential recomputation.',

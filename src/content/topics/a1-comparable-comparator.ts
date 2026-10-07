@@ -9,6 +9,14 @@ export const content: TopicContent = {
     'compare(a,b) < 0 means a comes before b. Min-heap PQ uses smallest per compare. TreeSet uses compare == 0 to mean “duplicate.” Natural order = class’s compareTo; custom = lambda at call site.',
   howItWorks: [
     {
+      type: 'paragraph',
+      text: 'Step 1 — Why ordering APIs exist. Sorting, TreeMap, TreeSet, and PriorityQueue all need a rule: given two elements, which comes first? That rule returns negative (a before b), zero (tie), or positive (a after b).',
+    },
+    {
+      type: 'paragraph',
+      text: 'Step 2 — Two ways to supply the rule. Comparable lives on the class itself (“I know my natural order”). Comparator lives outside (“sort these intervals by end time”) so one type can have many orders without editing the class.',
+    },
+    {
       type: 'list',
       ordered: true,
       items: [

@@ -150,7 +150,7 @@ export type TopicContent = {
   whyExists?: string
   mentalModel?: string
   howItWorks?: ContentBlock[]
-  architecture?: { mermaid?: string; caption?: string }
+  architecture?: { mermaid?: string; caption?: string; explanation?: string }
   example?: ContentBlock[]
   implementation?: CodeBlock[]
   internals?: ContentBlock[]

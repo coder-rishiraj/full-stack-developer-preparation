@@ -14,9 +14,12 @@ type Lang = 'java' | 'cpp'
 export function HighlightedCode({
   code,
   language,
+  className = 'ga-code',
 }: {
   code: string
   language: Lang
+  /** Base class for the <pre> (default ga-code; handbook uses gh-code). */
+  className?: string
 }) {
   const html = useMemo(() => {
     try {
@@ -27,7 +30,7 @@ export function HighlightedCode({
   }, [code, language])
 
   return (
-    <pre className="ga-code hljs">
+    <pre className={`${className} hljs`}>
       <code
         className={`language-${language}`}
         dangerouslySetInnerHTML={{ __html: html }}

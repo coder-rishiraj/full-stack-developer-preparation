@@ -9,12 +9,20 @@ export const content: TopicContent = {
     'Count bytes/ objects you allocate beyond input: HashMap of size n → O(n); recursion depth d → O(d) stack; in-place pointer swap on array → O(1) auxiliary if output not counted.',
   howItWorks: [
     {
+      type: 'paragraph',
+      text: 'Step 1 — Time asks “how long?” Space asks “how much extra memory?” Both use Big-O in n. Input already occupies memory; interviewers usually care about auxiliary space—maps, queues, recursion stack, DP tables—unless they say otherwise.',
+    },
+    {
+      type: 'paragraph',
+      text: 'Step 2 — Say it clearly. “O(n) time, O(1) auxiliary space” means you may reuse the input array with a few pointers. “O(n) space” often means a HashSet or copy of size n. Always clarify whether output is counted.',
+    },
+    {
       type: 'list',
       ordered: true,
       items: [
-        'Auxiliary space: working memory excluding input (unless problem says otherwise).',
+        'Auxiliary space: working memory excluding input (unless the problem says otherwise).',
         'Output space often excluded in analysis but clarify in interview.',
-        'In-place: O(1) extra if only pointers/indices on input array.',
+        'In-place: O(1) extra if only pointers/indices on the input array.',
         'Recursion: O(depth) stack frames; each frame O(1) or O(local array).',
         'Copying input (toCharArray, clone) counts O(n) extra.',
       ],

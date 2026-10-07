@@ -120,10 +120,27 @@ const NC_CAT = {
   },
 }
 
+/**
+ * Curated starter problems kept on the Java competitive-syntax topic.
+ * Everything else in INTRODUCTORY PROBLEMS maps to Arrays & Strings practice.
+ */
+const CSES_TOPIC_OVERRIDES = {
+  'Weird Algorithm': 'a1-java-syntax-competitive',
+  'Missing Number': 'a1-java-syntax-competitive',
+  'Repetitions': 'a1-java-syntax-competitive',
+  'Increasing Array': 'a1-java-syntax-competitive',
+  'Tower of Hanoi': 'a1-recursion',
+  'Creating Strings': 'a1-recursion',
+  'Gray Code': 'a1-recursion',
+  'Palindrome Reorder': 'a1-strings-stringbuilder',
+  'String Reorder': 'a1-strings-stringbuilder',
+  'Chessboard and Queens': 'a9-subsets',
+}
+
 const CSES_CAT = {
   'INTRODUCTORY PROBLEMS': {
     category: 'introductory',
-    primaryTopic: 'a1-java-syntax-competitive',
+    primaryTopic: 'a2-array-string-traversal',
     primaryPattern: 'introductory',
     secondary: [],
   },
@@ -201,7 +218,7 @@ const CSES_CAT = {
   },
   'CONSTRUCTION PROBLEMS': {
     category: 'construction',
-    primaryTopic: 'a1-java-syntax-competitive',
+    primaryTopic: 'a2-matrix',
     primaryPattern: 'construction',
     secondary: [],
   },
@@ -219,13 +236,13 @@ const CSES_CAT = {
   },
   'ADDITIONAL PROBLEMS I': {
     category: 'additional-1',
-    primaryTopic: 'a1-java-syntax-competitive',
+    primaryTopic: 'a14-timed-coding',
     primaryPattern: 'additional',
     secondary: [],
   },
   'ADDITIONAL PROBLEMS II': {
     category: 'additional-2',
-    primaryTopic: 'a1-java-syntax-competitive',
+    primaryTopic: 'a14-timed-coding',
     primaryPattern: 'additional',
     secondary: [],
   },
@@ -641,7 +658,7 @@ function parseCses() {
       sourceId,
       urlVerified,
       category: meta.category,
-      primaryTopic: meta.primaryTopic,
+      primaryTopic: CSES_TOPIC_OVERRIDES[name] ?? meta.primaryTopic,
       primaryPattern: meta.primaryPattern,
       secondaryPatterns: meta.secondary,
       difficulty: 'unknown',

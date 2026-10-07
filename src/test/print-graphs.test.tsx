@@ -19,6 +19,8 @@ describe('PrintGraphsHandbookPage', () => {
     expect(
       screen.getByRole('heading', { name: 'Graph Algorithms Handbook' }),
     ).toBeInTheDocument()
+    expect(screen.getByLabelText('Show solutions (Java)')).toBeInTheDocument()
+    expect(screen.getByLabelText('Show solutions (C++)')).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'Table of contents' })).toBeInTheDocument()
     expect(
       screen.getByRole('heading', {
@@ -32,6 +34,7 @@ describe('PrintGraphsHandbookPage', () => {
         expect(screen.getAllByText('Problem').length).toBeGreaterThan(0)
         expect(screen.getAllByText('Intuition').length).toBeGreaterThan(0)
         expect(screen.getAllByText('Steps').length).toBeGreaterThan(0)
+        expect(screen.getAllByText('Solution (Java)').length).toBeGreaterThan(0)
       },
       { timeout: 15_000 },
     )

@@ -9,6 +9,10 @@ export const content: TopicContent = {
     'HashMap with dummy values. Only keys matter; set semantics: no duplicates, one null element allowed, iteration order undefined.',
   howItWorks: [
     {
+      type: 'paragraph',
+      text: 'Step 1 — Set vs List. A List allows duplicates and cares about order/index. A Set answers only “is this element in the collection?”—each value appears at most once. HashSet is the fast, unordered Set you reach for in DSA.',
+    },
+    {
       type: 'list',
       ordered: true,
       items: [

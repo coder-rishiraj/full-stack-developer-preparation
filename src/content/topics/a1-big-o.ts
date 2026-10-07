@@ -9,13 +9,21 @@ export const content: TopicContent = {
     'Tie-breaking hierarchy for common functions: O(1) < O(log n) < O(n) < O(n log n) < O(n²) < O(2^n) < O(n!). Upper bound = worst-case ceiling; Ω lower bound; Θ tight when both match.',
   howItWorks: [
     {
+      type: 'paragraph',
+      text: 'Step 1 — What Big-O means in one sentence. O(g(n)) says: for large enough n, the cost stays within a constant factor of g(n). It is an upper-bound style of speaking—“this is no worse than quadratic,” even if the tight story is more precise.',
+    },
+    {
+      type: 'paragraph',
+      text: 'Step 2 — How to simplify. Keep the fastest-growing term; drop coefficients. 3n² + 100n is O(n²). A loop from 0..n-1 with O(1) body is O(n). Two nested such loops are O(n²). Sorting then scanning is O(n log n) because sort dominates.',
+    },
+    {
       type: 'list',
       ordered: true,
       items: [
         'Drop constants: O(2n) → O(n). Drop lower terms: O(n² + n) → O(n²).',
         'Nested independent loops on n multiply to O(n²).',
-        'Sequential blocks: take maximum term.',
-        'Halving parameter each iteration → O(log n) iterations.',
+        'Sequential blocks: take the maximum term.',
+        'Halving the parameter each iteration → O(log n) iterations.',
         'Master theorem / recursion tree for divide-and-conquer (sketch in interview).',
       ],
     },
