@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { ContentBlocks, MermaidBlock, Section } from '@/components/topic/ContentBlocks'
+import { ContentBlocks, MermaidBlock, RichText, Section } from '@/components/topic/ContentBlocks'
 import { UserPointsList } from '@/components/topic/ExtraPointsEditor'
 import type { TopicContent, TopicMeta, TopicOverlay } from '@/domain/types'
 import { getProblemsForTopic } from '@/content/problems'
@@ -59,7 +59,9 @@ export function TopicBody({
       {opts.diagrams && content.architecture?.mermaid && (
         <Section title="Diagram">
           {content.architecture.explanation && (
-            <p className="prose-content mb-3">{content.architecture.explanation}</p>
+            <p className="prose-content mb-3">
+              <RichText text={content.architecture.explanation} />
+            </p>
           )}
           <MermaidBlock
             diagram={content.architecture.mermaid}
@@ -121,17 +123,23 @@ export function TopicBody({
     <div className="space-y-2">
       {content.whatIsIt && (
         <Section title="What Is It?">
-          <p className="prose-content">{content.whatIsIt}</p>
+          <p className="prose-content">
+            <RichText text={content.whatIsIt} />
+          </p>
         </Section>
       )}
       {content.whyExists && (
         <Section title="Why Does It Exist?">
-          <p className="prose-content">{content.whyExists}</p>
+          <p className="prose-content">
+            <RichText text={content.whyExists} />
+          </p>
         </Section>
       )}
       {content.mentalModel && (
         <Section title="Mental Model">
-          <p className="prose-content">{content.mentalModel}</p>
+          <p className="prose-content">
+            <RichText text={content.mentalModel} />
+          </p>
         </Section>
       )}
       {content.howItWorks && (
@@ -142,7 +150,9 @@ export function TopicBody({
       {opts.diagrams && content.architecture?.mermaid && (
         <Section title="Architecture / Diagram">
           {content.architecture.explanation && (
-            <p className="prose-content mb-3">{content.architecture.explanation}</p>
+            <p className="prose-content mb-3">
+              <RichText text={content.architecture.explanation} />
+            </p>
           )}
           <MermaidBlock
             diagram={content.architecture.mermaid}

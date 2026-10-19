@@ -34,13 +34,23 @@ export type Confidence = 1 | 2 | 3 | 4 | 5
 
 export type EstimatedDepth = 'shallow' | 'medium' | 'deep'
 
+export type QuizQuestion = {
+  prompt: string
+  options: string[]
+  /** Index into options. */
+  answer: number
+  explanation: string
+}
+
 export type ContentBlock =
   | { type: 'paragraph'; text: string }
+  | { type: 'heading'; text: string }
   | { type: 'list'; ordered?: boolean; items: string[] }
   | { type: 'callout'; variant?: 'note' | 'warning' | 'tip'; title?: string; text: string }
   | { type: 'table'; headers: string[]; rows: string[][] }
   | { type: 'code'; language: string; code: string; caption?: string }
   | { type: 'mermaid'; diagram: string; caption?: string }
+  | { type: 'quiz'; title?: string; questions: QuizQuestion[] }
 
 export type CodeBlock = {
   language: string
