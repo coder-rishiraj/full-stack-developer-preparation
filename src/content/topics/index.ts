@@ -85,13 +85,16 @@ function registerGeneratedLoaders(
     for (const topic of section.topics) {
       if (LOADER_BY_ID[topic.id]) continue
       LOADER_BY_ID[topic.id] = async () => ({
-        content: createContent({
+        content: {
+          generated: true,
+          ...createContent({
           title: topic.title,
           sectionTitle: section.title,
           parentTitle: topic.parentTopicId
             ? titleById.get(topic.parentTopicId)
             : undefined,
-        }),
+          }),
+        },
       })
     }
   }

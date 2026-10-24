@@ -21,7 +21,7 @@ export const content: TopicContent = {
         '**Scanner** and what a **token** is.',
         '**int**, **long**, and overflow.',
         'Why **Scanner** gets slow, then **BufferedReader** and **StringTokenizer**.',
-        '**Output**, **modulo**, **INF**, and **BigInteger**.',
+        '**Output**, **static final** modulo, **INF**, and **BigInteger**.',
       ],
     },
     {
@@ -683,7 +683,100 @@ System.out.print(sb);`,
     },
     {
       type: 'heading',
-      text: 'Step 11 — The % operator and the usual contest modulus',
+      text: 'Step 11 — static final MOD, and the % operator',
+    },
+    {
+      type: 'paragraph',
+      text: 'Contest code writes the modulus as **static final int MOD**. The two words do different jobs. **static** says who owns the variable. **final** says whether it can be assigned again.',
+    },
+    {
+      type: 'heading',
+      text: 'static — belongs to the class',
+    },
+    {
+      type: 'paragraph',
+      text: 'An ordinary field belongs to one object. A **static** field belongs to the class, and every object shares that one copy.',
+    },
+    {
+      type: 'code',
+      language: 'java',
+      caption: 'age is per student. school is one value for the class.',
+      code: `class Student {
+    int age;
+    static String school = "ABC School";
+}`,
+    },
+    {
+      type: 'list',
+      items: [
+        '**age** belongs to each individual **Student** object. Two students can have different ages.',
+        '**school** belongs to the **Student** class. Change it in one place and every student sees the new value, because there is only one copy.',
+        'You can read a static variable with the class name: **Student.school**. You do not need to create a **Student** first.',
+        '**System.out.println(Student.school);** prints **ABC School**.',
+      ],
+    },
+    {
+      type: 'heading',
+      text: 'final — cannot be reassigned',
+    },
+    {
+      type: 'paragraph',
+      text: 'A **final** variable can be assigned only once. After that, another assignment is a compilation error.',
+    },
+    {
+      type: 'code',
+      language: 'java',
+      caption: 'The second assignment does not compile',
+      code: `final int MAX = 100;
+
+MAX = 200; // compilation error`,
+    },
+    {
+      type: 'list',
+      items: [
+        '**MAX** is 100 for the rest of the program.',
+        '**final** does not by itself make the variable shared. Without **static**, each object would still have its own **MAX**, and each of those copies could be set only once.',
+      ],
+    },
+    {
+      type: 'heading',
+      text: 'static final — a class-level constant',
+    },
+    {
+      type: 'paragraph',
+      text: 'Together, the variable is one shared constant. **static** means you use it through the class, with no object. **final** means you cannot change it after initialization.',
+    },
+    {
+      type: 'code',
+      language: 'java',
+      caption: 'MOD is visible from main, and it cannot be overwritten',
+      code: `public class Main {
+    static final int MOD = 1_000_000_007;
+
+    public static void main(String[] args) {
+        System.out.println(MOD); // works
+
+        // MOD = 100; // compilation error
+    }
+}`,
+    },
+    {
+      type: 'list',
+      items: [
+        'Problems ask you to print the answer modulo **1_000_000_007**. Writing that number at every **%** is noisy, and a typo in one of the copies is a wrong answer.',
+        '**static final int MOD = 1_000_000_007;** names it once. The calculation becomes **(x * y) % MOD**.',
+        'The name is easier to read, easier to change if a problem uses a different modulus, and safer because the value cannot be assigned again by accident.',
+        'Java constants are written in uppercase: **MOD**, **MAX_SIZE**, **INF**.',
+      ],
+    },
+    {
+      type: 'table',
+      headers: ['Keyword', 'Meaning'],
+      rows: [
+        ['**static**', 'Belongs to the class, not to each object'],
+        ['**final**', 'Cannot be reassigned'],
+        ['**static final**', 'A class-level constant'],
+      ],
     },
     {
       type: 'list',
@@ -823,6 +916,7 @@ System.out.println(fact);`,
         ['Thousands or millions of output lines', '**StringBuilder**, then one print'],
         ['Index, length, small value', '**int**'],
         ['Sum, product, distance', '**long**'],
+        ['Contest modulus', '**static final int MOD**, uppercase'],
         ['Unreachable distance', '**long INF** around 4×10^18'],
         ['Debug notes', '**System.err**, then delete them'],
       ],
@@ -868,6 +962,18 @@ System.out.println(fact);`,
           ],
           answer: 1,
           explanation: 'Both operands are **ints**, so the overflow happens before the value is stored. Cast first: **(long) a * b**.',
+        },
+        {
+          prompt: 'What does **static final int MOD** mean?',
+          options: [
+            'Each object has its own MOD, and main may change it later',
+            'MOD belongs to the class, and it cannot be assigned again',
+            'static means the value is read from the input',
+            'final means MOD is a method',
+          ],
+          answer: 1,
+          explanation:
+            '**static** puts one copy on the class, so **main** can use **MOD** with no object. **final** rejects a later **MOD = ...**. Constants are named in uppercase.',
         },
         {
           prompt: 'What does **(-7) % 5** produce in Java, and what do contests usually want?',
@@ -1094,6 +1200,7 @@ for (int i = 0; i < n; i++) {
     'int is about ±2×10^9. long is for sums and products. Cast before you multiply two ints into a long.',
     'BufferedReader reads lines. StringTokenizer splits a line. A next() helper handles numbers spread over many lines.',
     'println is fine for a short answer. StringBuilder batches a huge print.',
+    'static final int MOD is one class-level constant. static shares it. final stops a later assignment. Write the name in uppercase.',
     'Java % can be negative. Use (x % MOD + MOD) % MOD.',
   ],
   interviewQuestions: [

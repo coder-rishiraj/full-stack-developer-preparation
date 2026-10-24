@@ -13,7 +13,7 @@ export function PrintDsaSheetPage() {
           Print checklist
         </Button>
       </div>
-      <div className="print-header">SE Prep · DSA Checklist · NeetCode 250 + CSES</div>
+      <div className="print-header">Career Duo · DSA Checklist · NeetCode 250 + CSES</div>
       <h1 className="print-topic-title">DSA Problem Checklist ({PROBLEMS.length})</h1>
       <table className="w-full border-collapse text-xs">
         <thead>

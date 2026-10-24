@@ -8,6 +8,9 @@ import { useUserStore } from '@/stores/user-store'
 import { isJavaLanguageRound } from '@/domain/progress-selectors'
 import { useTopicContent } from '@/hooks/useTopicContent'
 import type { TopicContent } from '@/domain/types'
+import { useLesson } from '@/hooks/useLesson'
+import { LessonBlocks } from '@/components/lesson/LessonBlocks'
+import { filterBlocks, revisionBlocks } from '@/content/lessons/revision'
 
 export function PrintPreviewPage() {
   const [params] = useSearchParams()
@@ -27,7 +30,10 @@ export function PrintPreviewPage() {
 
   const note = useUserStore((s) => s.notes[topicId] ?? '')
   const meta = getTopicMeta(topicId)
-  const { content, loading } = useTopicContent(sheet === 'interview' ? undefined : topicId)
+  const { content, loading: notesLoading } = useTopicContent(sheet === 'interview' ? undefined : topicId)
+  const { lesson, loading: lessonLoading } = useLesson(sheet === 'interview' ? undefined : topicId)
+  const loading = notesLoading || lessonLoading
+  const [quizzes, setQuizzes] = useState(false)
 
   const interviewTopics = useMemo(() => {
     if (sheet !== 'interview') return []
@@ -96,20 +102,27 @@ export function PrintPreviewPage() {
               value={mode}
               onChange={(e) => setMode(e.target.value as 'full' | 'quick')}
             >
-              <option value="full">Full Notes</option>
-              <option value="quick">Quick Revision</option>
+              <option value="full">{lesson ? 'Full lesson' : 'Full notes'}</option>
+              <option value="quick">{lesson ? 'Revision sheet' : 'Quick revision'}</option>
             </select>
           </label>
           {(
-            [
-              ['Diagrams', diagrams, setDiagrams],
-              ['Code', code, setCode],
-              ['Examples', examples, setExamples],
-              ['Interview Qs', interview, setInterview],
-              ['Flashcards', flashcards, setFlashcards],
-              ['My Notes', myNotes, setMyNotes],
-              ['DSA Problems', dsaProblems, setDsaProblems],
-            ] as const
+            (lesson
+              ? [
+                  ['Diagrams', diagrams, setDiagrams],
+                  ['Code', code, setCode],
+                  ['Quizzes', quizzes, setQuizzes],
+                  ['My Notes', myNotes, setMyNotes],
+                ]
+              : [
+                  ['Diagrams', diagrams, setDiagrams],
+                  ['Code', code, setCode],
+                  ['Examples', examples, setExamples],
+                  ['Interview Qs', interview, setInterview],
+                  ['Flashcards', flashcards, setFlashcards],
+                  ['My Notes', myNotes, setMyNotes],
+                  ['DSA Problems', dsaProblems, setDsaProblems],
+                ]) as [string, boolean, (v: boolean) => void][]
           ).map(([label, value, set]) => (
             <label key={label} className="flex items-center gap-1">
               <input type="checkbox" checked={value} onChange={(e) => set(e.target.checked)} />
@@ -123,7 +136,7 @@ export function PrintPreviewPage() {
       <div className="print-surface">
         {sheet === 'interview' ? (
           <div>
-            <div className="print-header">Interview Sheet · {round ?? 'general'} · SE Prep</div>
+            <div className="print-header">Interview Sheet · {round ?? 'general'} · Career Duo</div>
             <h1 className="print-topic-title">Quick Revision Checklist</h1>
             {sheetLoading && <p className="text-sm">Loading revision bullets…</p>}
             {interviewTopics.map((t) => {
@@ -141,6 +154,34 @@ export function PrintPreviewPage() {
                 </section>
               )
             })}
+          </div>
+        ) : meta && lesson ? (
+          <div>
+            <div className="print-header">
+              Career Duo · {meta.sectionId} {meta.sectionTitle}
+            </div>
+            <h1 className="print-topic-title mb-2 mt-1 font-[family-name:var(--font-ui)] text-3xl font-semibold tracking-tight">{meta.title}</h1>
+            {mode === 'full' && !lesson.focus && lesson.lesson.frontmatter.summary && (
+              <p className="mb-6 text-[15px] italic text-[var(--text-muted)]">{lesson.lesson.frontmatter.summary}</p>
+            )}
+            <article className="cd-article">
+              <LessonBlocks
+                blocks={filterBlocks(
+                  mode === 'quick'
+                    ? revisionBlocks(lesson.lesson.blocks)
+                    : lesson.focus
+                      ? lesson.focus.blocks
+                      : lesson.lesson.blocks,
+                  { code, diagrams, quizzes: quizzes || mode === 'quick' },
+                )}
+              />
+            </article>
+            {myNotes && note && (
+              <section className="mt-6 border-t border-neutral-300 pt-4">
+                <h2 className="mb-2 font-semibold">My Notes</h2>
+                <pre className="whitespace-pre-wrap text-sm">{note}</pre>
+              </section>
+            )}
           </div>
         ) : meta && content ? (
           <div>

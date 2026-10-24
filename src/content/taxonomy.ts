@@ -75,8 +75,15 @@ export function getTrack(id: string): TrackInfo | undefined {
   return TRACKS.find((t) => t.id === id)
 }
 
+const TOPIC_BY_ID = new Map(TOPICS.map((t) => [t.id, t]))
+
 export function getTopicMeta(id: string): TopicMeta | undefined {
-  return TOPICS.find((t) => t.id === id)
+  return TOPIC_BY_ID.get(id)
+}
+
+/** Nested concepts whose parent is `id`, in curriculum order. */
+export function getChildTopics(id: string): TopicMeta[] {
+  return TOPICS.filter((t) => t.parentTopicId === id)
 }
 
 export function getTopicsByTrack(trackId: string): TopicMeta[] {

@@ -6,13 +6,15 @@
   "scripts": {
     "dev": "vite --port 5173 --strictPort",
     "dev:fresh": "rm -rf node_modules/.vite && vite --port 5173 --strictPort --force",
-    "build": "tsc -b && vite build",
+    "build": "node scripts/lessons-sync.mjs && tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview --port 5173 --strictPort",
     "test": "vitest run",
     "test:watch": "vitest",
     "generate:dsa": "node scripts/generate-dsa-problems.mjs",
-    "qc": "node scripts/qc-report.mjs"
+    "qc": "node scripts/qc-report.mjs",
+    "lessons:sync": "node scripts/lessons-sync.mjs",
+    "lessons:check": "vitest run src/test/lessons.test.ts"
   },
   "dependencies": {
     "highlight.js": "^11.12.0",

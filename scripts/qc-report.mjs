@@ -19,6 +19,7 @@ try {
   const { PROBLEMS } = await server.ssrLoadModule('/src/content/problems/index.ts')
   const topicsMod = await server.ssrLoadModule('/src/content/topics/index.ts')
   const { buildQcReport, summarizeByCode } = await server.ssrLoadModule('/src/domain/qc.ts')
+  const { hasLesson } = await server.ssrLoadModule('/src/content/lessons/index.ts')
 
   await topicsMod.preloadAllTopicContent()
   const contentIds = topicsMod.getReadyTopicIds()
@@ -33,6 +34,7 @@ try {
     contentById,
     contentIds,
     problems: PROBLEMS,
+    hasLesson,
   })
 
   console.log(`Concepts: ${report.topicCount}`)

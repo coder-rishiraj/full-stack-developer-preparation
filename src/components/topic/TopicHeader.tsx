@@ -1,30 +1,10 @@
 import { Link } from 'react-router-dom'
-import {
-  ExecutionPriorityBadge,
-  PriorityBadge,
-  StatusBadge,
-  TrackBadge,
-} from '@/components/ui/Badge'
-import { Button } from '@/components/ui/Button'
+import { getTopicMeta, getTrack } from '@/content/taxonomy'
 import type { Confidence, StudyStatus, TopicMeta, TopicProgress } from '@/domain/types'
-
-function isStudied(status: StudyStatus): boolean {
-  return status !== 'not_started'
-}
 
 function PrintIcon() {
   return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden
-    >
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
       <polyline points="6 9 6 2 18 2 18 9" />
       <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
       <rect x="6" y="14" width="12" height="8" />
@@ -32,14 +12,23 @@ function PrintIcon() {
   )
 }
 
-function Divider() {
+function BookmarkIcon({ filled }: { filled: boolean }) {
   return (
-    <span
-      className="mx-0.5 hidden h-4 w-px bg-[var(--border-strong)] sm:inline-block"
-      aria-hidden
-    />
+    <svg width="15" height="15" viewBox="0 0 24 24" fill={filled ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
+    </svg>
   )
 }
+
+const DIFFICULTY_LABEL = { beginner: 'Beginner', intermediate: 'Intermediate', advanced: 'Advanced' } as const
+
+export const STATUS_OPTIONS: { value: StudyStatus; label: string }[] = [
+  { value: 'not_started', label: 'Not started' },
+  { value: 'learning', label: 'Learning' },
+  { value: 'first_pass', label: 'Completed' },
+  { value: 'interview_ready', label: 'Interview ready' },
+  { value: 'needs_revision', label: 'Needs revision' },
+]
 
 export function TopicHeader({
   meta,
@@ -50,6 +39,9 @@ export function TopicHeader({
   bookmarked,
   onToggleBookmark,
   mode = 'full',
+  summary,
+  difficulty,
+  minutes,
 }: {
   meta: TopicMeta
   progress: TopicProgress
@@ -59,107 +51,71 @@ export function TopicHeader({
   bookmarked: boolean
   onToggleBookmark: () => void
   mode?: 'full' | 'study' | 'revision'
+  summary?: string
+  difficulty?: keyof typeof DIFFICULTY_LABEL
+  minutes?: number
 }) {
+  const track = getTrack(meta.track)
+  const parent = meta.parentTopicId ? getTopicMeta(meta.parentTopicId) : undefined
   const trackListTo = `/tracks/${meta.track}?section=${encodeURIComponent(meta.sectionId)}`
-  const studied = isStudied(progress.status)
   const topicBase = `/topics/${meta.id}`
-  const chip = (active: boolean) =>
-    `rounded-full px-2 py-0.5 text-xs ${
-      active
-        ? 'bg-[var(--accent-soft)] font-medium text-[var(--accent)]'
-        : 'text-[var(--text-muted)] hover:bg-[var(--bg-muted)] hover:text-[var(--text)]'
-    } disabled:opacity-40`
+  const studied = progress.status !== 'not_started'
+  const tab = (active: boolean) =>
+    `rounded px-2.5 py-1 text-xs font-medium transition-colors ${
+      active ? 'bg-[var(--bg-elevated)] text-[var(--heading)] shadow-sm' : 'text-[var(--text-muted)] hover:text-[var(--text)]'
+    }`
+  const iconBtn =
+    'inline-flex h-7 w-7 items-center justify-center rounded-md border border-[var(--border)] text-[var(--text-muted)] hover:border-[var(--border-strong)] hover:text-[var(--text)]'
 
   return (
-    <header className="print-avoid-break space-y-2">
-      <div className="flex flex-wrap items-start justify-between gap-2">
-        <div className="min-w-0 flex-1 space-y-1.5">
-          <div
-            className="print-hidden flex flex-wrap items-center gap-2"
-            data-screen-only
-          >
-            <Link
-              to={trackListTo}
-              className="text-sm text-[var(--accent)] hover:underline"
-            >
-              ← Track {meta.track}
+    <header className="print-avoid-break space-y-3">
+      <nav aria-label="Breadcrumb" className="print-hidden flex flex-wrap items-center gap-x-1.5 gap-y-1 text-[12.5px] text-[var(--text-faint)]" data-screen-only>
+        <Link to={`/tracks/${meta.track}`} className="hover:text-[var(--accent)]" style={{ color: track?.accent }}>
+          {track?.name ?? `Track ${meta.track}`}
+        </Link>
+        <span aria-hidden>/</span>
+        <Link to={trackListTo} className="hover:text-[var(--accent)]">
+          {meta.sectionId} · {meta.sectionTitle}
+        </Link>
+        {parent && (
+          <>
+            <span aria-hidden>/</span>
+            <Link to={`/topics/${parent.id}`} className="hover:text-[var(--accent)]">
+              {parent.title}
             </Link>
-            <Link to={trackListTo} className="hover:opacity-90">
-              <TrackBadge track={meta.track} />
-            </Link>
-            <Link
-              to={trackListTo}
-              className="rounded border border-[var(--border)] bg-[var(--bg-muted)] px-1.5 py-0.5 text-xs text-[var(--text-muted)] hover:border-[var(--border-strong)] hover:text-[var(--text)]"
-            >
-              {meta.sectionId}
-            </Link>
-            <PriorityBadge priority={meta.priority} />
-            <ExecutionPriorityBadge priority={meta.executionPriority} />
-            <StatusBadge status={progress.status} />
-          </div>
+          </>
+        )}
+      </nav>
 
-          <h1 className="font-[family-name:var(--font-ui)] text-xl font-semibold tracking-tight md:text-2xl">
-            {meta.title}
-          </h1>
-
-          <p className="text-xs text-[var(--text-muted)]">
-            {meta.sectionTitle}
-            {' · '}
-            {meta.estimatedDepth}
-            {' · M'}
-            {meta.targetMonths.join(', M')}
-            {progress.lastStudied
-              ? ` · Studied ${new Date(progress.lastStudied).toLocaleDateString()}`
-              : ''}
-            {progress.lastRevised
-              ? ` · Revised ${new Date(progress.lastRevised).toLocaleDateString()}`
-              : ''}
-          </p>
-        </div>
-
-        <div
-          className="print-hidden flex shrink-0 items-center gap-1.5"
-          data-screen-only
-        >
-          <div
-            className="inline-flex rounded-md border border-[var(--border)] p-0.5"
-            role="group"
-            aria-label="View mode"
-          >
-            <Link
-              to={topicBase}
-              className={`rounded px-2 py-1 text-xs font-medium ${
-                mode === 'full'
-                  ? 'bg-[var(--accent)] text-white'
-                  : 'text-[var(--text-muted)] hover:text-[var(--text)]'
-              }`}
-            >
-              Overview
+      <div className="flex flex-col-reverse gap-3 sm:flex-row sm:items-start sm:justify-between">
+        <h1 className="min-w-0 flex-1 font-[family-name:var(--font-ui)] text-[1.75rem] font-semibold leading-tight tracking-[-0.015em] text-[var(--heading)] md:text-[2rem]">
+          {meta.title}
+        </h1>
+        <div className="print-hidden flex shrink-0 items-center gap-1.5 self-start" data-screen-only>
+          <div className="inline-flex rounded-md bg-[var(--bg-muted)] p-0.5" role="group" aria-label="View mode">
+            <Link to={topicBase} state={{ explicit: true }} className={tab(mode === 'full')} aria-current={mode === 'full' ? 'page' : undefined}>
+              Lesson
             </Link>
-            <Link
-              to={`${topicBase}/study`}
-              className={`rounded px-2 py-1 text-xs font-medium ${
-                mode === 'study'
-                  ? 'bg-[var(--accent)] text-white'
-                  : 'text-[var(--text-muted)] hover:text-[var(--text)]'
-              }`}
-            >
+            <Link to={`${topicBase}/study`} className={tab(mode === 'study')} aria-current={mode === 'study' ? 'page' : undefined}>
               Study
             </Link>
-            <Link
-              to={`${topicBase}/revision`}
-              className={`rounded px-2 py-1 text-xs font-medium ${
-                mode === 'revision'
-                  ? 'bg-[var(--accent)] text-white'
-                  : 'text-[var(--text-muted)] hover:text-[var(--text)]'
-              }`}
-            >
+            <Link to={`${topicBase}/revision`} className={tab(mode === 'revision')} aria-current={mode === 'revision' ? 'page' : undefined}>
               Revision
             </Link>
           </div>
+          <button
+            type="button"
+            className={`${iconBtn} ${bookmarked ? 'text-[var(--accent)]' : ''}`}
+            onClick={onToggleBookmark}
+            aria-pressed={bookmarked}
+            aria-label={bookmarked ? 'Remove bookmark' : 'Bookmark'}
+            title={bookmarked ? 'Bookmarked' : 'Bookmark'}
+          >
+            <BookmarkIcon filled={bookmarked} />
+          </button>
           <Link
             to={`/print/preview?topic=${meta.id}${mode === 'revision' ? '&mode=quick' : ''}`}
-            className="inline-flex h-7 w-7 items-center justify-center rounded-md border border-[var(--border)] text-[var(--text-muted)] hover:border-[var(--border-strong)] hover:text-[var(--text)]"
+            className={iconBtn}
             aria-label="Print topic"
             title="Print topic"
           >
@@ -168,85 +124,71 @@ export function TopicHeader({
         </div>
       </div>
 
+      {summary && (
+        <p className="max-w-[var(--measure)] font-[family-name:var(--font-content)] text-[1rem] leading-relaxed text-[var(--text-muted)] sm:text-[1.08rem]">
+          {summary}
+        </p>
+      )}
+
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[12.5px] text-[var(--text-faint)]">
+        {difficulty && <span>{DIFFICULTY_LABEL[difficulty]}</span>}
+        {minutes ? <span>~{minutes} min</span> : null}
+        <span>{meta.priority === 'tier1' ? 'Core' : meta.priority === 'tier2' ? 'Important' : 'Extended'}</span>
+        {progress.lastStudied && <span>Studied {new Date(progress.lastStudied).toLocaleDateString()}</span>}
+        {progress.lastRevised && <span>Revised {new Date(progress.lastRevised).toLocaleDateString()}</span>}
+      </div>
+
       {meta.usedInCapstone && (
         <p className="rounded-md border border-[var(--border)] bg-[var(--accent-soft)] px-3 py-1.5 text-sm">
           <strong>Capstone:</strong> {meta.usedInCapstone}
         </p>
       )}
 
-      <div
-        className="print-hidden flex flex-wrap items-center gap-1.5 rounded-md border border-[var(--border)] bg-[var(--bg-elevated)] px-2 py-1.5"
-        data-screen-only
-      >
-        <Button
-          size="sm"
-          variant={studied ? 'primary' : 'secondary'}
-          onClick={() => onStatus(studied ? 'not_started' : 'first_pass')}
+      {mode !== 'study' && (
+        <div
+          className="print-hidden flex flex-wrap items-center gap-2 border-y border-[var(--border)] py-2 text-xs text-[var(--text-muted)]"
+          data-screen-only
         >
-          {studied ? 'Studied' : 'Mark studied'}
-        </Button>
-        <label className="flex items-center gap-1 text-xs text-[var(--text-muted)]">
-          Conf
-          <select
-            className="rounded border border-[var(--border)] bg-[var(--bg)] px-1 py-0.5"
-            value={progress.confidence}
-            onChange={(e) => onConfidence(Number(e.target.value) as Confidence)}
-            aria-label="Confidence"
+          <label className="flex items-center gap-1.5">
+            <span>Status</span>
+            <select
+              className="rounded border border-[var(--border)] bg-[var(--bg)] px-1.5 py-0.5 text-[var(--text)]"
+              value={progress.status}
+              onChange={(e) => onStatus(e.target.value as StudyStatus)}
+              aria-label="Study status"
+            >
+              {STATUS_OPTIONS.map((o) => (
+                <option key={o.value} value={o.value}>
+                  {o.label}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label className="flex items-center gap-1.5">
+            <span>Confidence</span>
+            <select
+              className="rounded border border-[var(--border)] bg-[var(--bg)] px-1.5 py-0.5 text-[var(--text)]"
+              value={progress.confidence}
+              onChange={(e) => onConfidence(Number(e.target.value) as Confidence)}
+              aria-label="Confidence"
+            >
+              {[1, 2, 3, 4, 5].map((n) => (
+                <option key={n} value={n}>
+                  {n}
+                </option>
+              ))}
+            </select>
+          </label>
+          <button
+            type="button"
+            className="rounded px-2 py-0.5 hover:bg-[var(--bg-muted)] hover:text-[var(--text)] disabled:opacity-40"
+            disabled={!studied}
+            onClick={onRevise}
           >
-            {[1, 2, 3, 4, 5].map((n) => (
-              <option key={n} value={n}>
-                {n}
-              </option>
-            ))}
-          </select>
-        </label>
-
-        <Divider />
-
-        <button
-          type="button"
-          className={chip(progress.status === 'interview_ready')}
-          disabled={!studied}
-          onClick={() =>
-            onStatus(
-              progress.status === 'interview_ready'
-                ? 'first_pass'
-                : 'interview_ready',
-            )
-          }
-        >
-          Interview ready
-        </button>
-        <button
-          type="button"
-          className={chip(progress.status === 'needs_revision')}
-          disabled={!studied}
-          onClick={() =>
-            onStatus(
-              progress.status === 'needs_revision'
-                ? 'first_pass'
-                : 'needs_revision',
-            )
-          }
-        >
-          Needs revision
-        </button>
-        <button
-          type="button"
-          className={chip(false)}
-          disabled={!studied}
-          onClick={onRevise}
-        >
-          Mark revised
-        </button>
-        <button
-          type="button"
-          className={chip(bookmarked)}
-          onClick={onToggleBookmark}
-        >
-          {bookmarked ? 'Bookmarked' : 'Bookmark'}
-        </button>
-      </div>
+            Mark revised
+          </button>
+        </div>
+      )}
     </header>
   )
 }

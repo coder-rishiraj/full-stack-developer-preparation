@@ -1,6 +1,14 @@
-# SE Prep — Software Engineering Preparation Platform
+# Career Duo — Software Engineering, Taught Properly
 
-Personal learning OS for interview-ready software engineering depth (DSA, Frontend, Java/Backend, System Design, Applied AI).
+A structured software engineering curriculum — DSA, Frontend, Java/Backend, System Design and
+Applied AI — taught as complete lessons with examples, diagrams, practice and revision.
+
+## Lessons
+
+- Lessons: `src/content/lessons/<topic-id>.md` — standard in [docs/LESSON_GUIDE.md](docs/LESSON_GUIDE.md)
+- Progress checklist: [docs/CURRICULUM_CHECKLIST.md](docs/CURRICULUM_CHECKLIST.md) (`npm run lessons:sync`)
+- Hand-over notes: [docs/TRANSFORMATION_PROGRESS.md](docs/TRANSFORMATION_PROGRESS.md)
+- Validate lessons: `npm run lessons:check`
 
 ## Phase status
 

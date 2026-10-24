@@ -646,7 +646,7 @@ export function PrintGraphsHandbookPage() {
         <style>{HANDBOOK_CSS}</style>
 
         <header className="gh-cover">
-          <p className="gh-cover-kicker">SE Prep · Track A · DSA</p>
+          <p className="gh-cover-kicker">Career Duo · Track A · DSA</p>
           <h1>Graph Algorithms Handbook</h1>
           <p className="gh-cover-sub">
             A structured reference for graph algorithms: problem, intuition, steps, Java / C++
@@ -828,7 +828,7 @@ export function PrintGraphsHandbookPage() {
             </ol>
           </div>
 
-          <p className="gh-end">End of Graph Algorithms Handbook · Track A · SE Prep · {generatedOn}</p>
+          <p className="gh-end">End of Graph Algorithms Handbook · Track A · Career Duo · {generatedOn}</p>
         </section>
       </main>
     </div>

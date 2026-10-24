@@ -4,6 +4,7 @@ import { PROBLEMS } from '@/content/problems'
 import { interviewReadiness, isJavaLanguageRound } from '@/domain/progress-selectors'
 import { ProgressBar } from '@/components/ui/Progress'
 import { useUserStore } from '@/stores/user-store'
+import { hasLesson } from '@/content/lessons'
 
 const ROUNDS = [
   {
@@ -69,9 +70,10 @@ export function InterviewPage() {
   return (
     <div className="mx-auto max-w-4xl space-y-6 px-4 py-6 md:px-6">
       <div>
-        <h1 className="text-2xl font-semibold">Interview Prep</h1>
-        <p className="text-sm text-[var(--text-muted)]">
-          Focused checklists generated from existing progress — not fake readiness scores.
+        <h1 className="text-[1.9rem] font-semibold tracking-tight text-[var(--heading)]">Interview preparation</h1>
+        <p className="mt-1 text-[15px] text-[var(--text-muted)]">
+          Question banks, round-by-round checklists built from your own progress, and the interview
+          section of every lesson — conceptual questions, follow-ups and the reasoning behind strong answers.
         </p>
       </div>
 
@@ -116,8 +118,10 @@ export function InterviewPage() {
 
       <section className="grid gap-3 sm:grid-cols-2">
         {ROUNDS.map((r) => {
-          const topics = TOPICS.filter((t) => r.topicFilter(t)).slice(0, 8)
-          const total = TOPICS.filter((t) => r.topicFilter(t)).length
+          const matching = TOPICS.filter((t) => r.topicFilter(t) && t.curriculumLevel === 'classified-item')
+          // Topics with a full lesson first: their "Interview perspective" section is the question bank.
+          const topics = [...matching.filter((t) => hasLesson(t.id)), ...matching.filter((t) => !hasLesson(t.id))].slice(0, 8)
+          const total = matching.length
           return (
             <div key={r.id} className="rounded-lg border border-[var(--border)] bg-[var(--bg-elevated)] p-3">
               <h3 className="font-semibold">{r.title}</h3>
@@ -130,10 +134,11 @@ export function InterviewPage() {
                   <li className="text-[var(--text-faint)]">No matching topics.</li>
                 ) : (
                   topics.map((t) => (
-                    <li key={t.id}>
-                      <Link className="text-[var(--accent)] hover:underline" to={`/topics/${t.id}/revision`}>
+                    <li key={t.id} className="flex items-baseline gap-2">
+                      <Link className="text-[var(--accent)] hover:underline" to={hasLesson(t.id) ? `/topics/${t.id}#interview-perspective` : `/topics/${t.id}/revision`}>
                         {t.title}
                       </Link>
+                      {hasLesson(t.id) && <span className="text-[10.5px] text-[var(--text-faint)]">interview questions</span>}
                     </li>
                   ))
                 )}

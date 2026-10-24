@@ -44,11 +44,16 @@ export type QuizQuestion = {
 
 export type ContentBlock =
   | { type: 'paragraph'; text: string }
-  | { type: 'heading'; text: string }
+  | { type: 'heading'; text: string; level?: 3 | 4 }
   | { type: 'list'; ordered?: boolean; items: string[] }
-  | { type: 'callout'; variant?: 'note' | 'warning' | 'tip'; title?: string; text: string }
+  | {
+      type: 'callout'
+      variant?: 'note' | 'warning' | 'tip' | 'important' | 'mistake' | 'interview'
+      title?: string
+      text: string
+    }
   | { type: 'table'; headers: string[]; rows: string[][] }
-  | { type: 'code'; language: string; code: string; caption?: string }
+  | { type: 'code'; language: string; code: string; caption?: string; output?: string }
   | { type: 'mermaid'; diagram: string; caption?: string }
   | { type: 'quiz'; title?: string; questions: QuizQuestion[] }
 
@@ -156,6 +161,8 @@ export type TopicMeta = {
 }
 
 export type TopicContent = {
+  /** True when produced by a section template rather than written for this topic. */
+  generated?: boolean
   whatIsIt?: string
   whyExists?: string
   mentalModel?: string
@@ -277,9 +284,37 @@ export type CustomTopic = {
   updatedAt: string
 }
 
+export type ThemeName =
+  | 'system'
+  | 'light'
+  | 'dark'
+  | 'midnight'
+  | 'nord'
+  | 'solarized-light'
+  | 'solarized-dark'
+
+export type ReadingPrefs = {
+  font: 'serif' | 'sans'
+  size: 'small' | 'medium' | 'large'
+  measure: 'narrow' | 'normal' | 'wide'
+}
+
+export type LearningPrefs = {
+  /** Opening a lesson moves a not-started topic to "learning". */
+  autoMarkLearning: boolean
+  /** Which view a topic link opens by default. */
+  defaultView: 'full' | 'study'
+}
+
 export type UserState = {
   version: 1
-  theme: 'light' | 'dark' | 'system'
+  theme: ThemeName
+  reading: ReadingPrefs
+  learning: LearningPrefs
+  /** Most recent first; capped. */
+  recentTopics: string[]
+  /** Completed capstone checklist items, keyed `<project>:<task text>`. */
+  capstoneTasks: Record<string, true>
   /** Optional interview target date `YYYY-MM-DD` — fills Rev 8 on study schedules. */
   interviewDate?: string
   topics: Record<string, TopicProgress>

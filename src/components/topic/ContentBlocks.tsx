@@ -1,5 +1,8 @@
-import { useEffect, useId, useState, type ReactNode } from 'react'
+import { useState, type ReactNode } from 'react'
 import type { ContentBlock } from '@/domain/types'
+import { parseInline, slugify } from '@/lib/lesson-markdown'
+import { CodeBlock } from '@/components/lesson/CodeBlock'
+import { InlineView, ThemedMermaid } from '@/components/lesson/LessonBlocks'
 
 export function ContentBlocks({ blocks }: { blocks: ContentBlock[] }) {
   return (
@@ -11,49 +14,21 @@ export function ContentBlocks({ blocks }: { blocks: ContentBlock[] }) {
   )
 }
 
-/** Renders **bold** markers. A single * inside a phrase, such as a * b, stays literal. */
+/** Renders inline lesson Markdown: **bold**, *italic*, `code`, links and [[topic]] links. */
 export function RichText({ text }: { text: string }) {
-  const parts: { bold: boolean; text: string }[] = []
-  let i = 0
-  let buf = ''
-  while (i < text.length) {
-    if (text.startsWith('**', i)) {
-      const end = text.indexOf('**', i + 2)
-      if (end !== -1) {
-        if (buf) parts.push({ bold: false, text: buf })
-        buf = ''
-        parts.push({ bold: true, text: text.slice(i + 2, end) })
-        i = end + 2
-        continue
-      }
-    }
-    buf += text[i]
-    i++
-  }
-  if (buf) parts.push({ bold: false, text: buf })
-  return (
-    <>
-      {parts.map((part, index) =>
-        part.bold ? (
-          <strong key={index} className="font-bold text-[var(--text)]">
-            {part.text}
-          </strong>
-        ) : (
-          <span key={index}>{part.text}</span>
-        ),
-      )}
-    </>
-  )
+  return <InlineView nodes={parseInline(text)} />
 }
 
 function ContentBlockView({ block }: { block: ContentBlock }) {
   switch (block.type) {
-    case 'heading':
+    case 'heading': {
+      const Tag = block.level === 4 ? 'h4' : 'h3'
       return (
-        <h3 className="prose-content mt-8 scroll-mt-4 border-b border-[var(--border)] pb-1 text-[1.2rem] font-bold leading-snug text-[var(--text)]">
+        <Tag className="mt-8 scroll-mt-4 font-[family-name:var(--font-ui)] text-[1.15rem] font-semibold leading-snug text-[var(--heading)]">
           <RichText text={block.text} />
-        </h3>
+        </Tag>
       )
+    }
     case 'paragraph':
       return (
         <p className="prose-content text-[var(--text)]">
@@ -80,19 +55,18 @@ function ContentBlockView({ block }: { block: ContentBlock }) {
       )
     case 'callout':
       return (
-        <div
-          role="note"
-          className="print-avoid-break rounded-md border border-[var(--border)] bg-[var(--bg-muted)] px-3 py-2 text-sm"
-        >
+        <aside role="note" className="cd-callout print-avoid-break" data-variant={block.variant ?? 'note'}>
           {block.title && (
-            <div className="mb-1 font-semibold text-[var(--text)]">
-              <RichText text={block.title} />
+            <div className="cd-callout-label">
+              <span className="cd-callout-title">
+                <RichText text={block.title} />
+              </span>
             </div>
           )}
-          <p className="whitespace-pre-wrap text-[var(--text-muted)]">
+          <p className="whitespace-pre-wrap">
             <RichText text={block.text} />
           </p>
-        </div>
+        </aside>
       )
     case 'table':
       return (
@@ -126,75 +100,22 @@ function ContentBlockView({ block }: { block: ContentBlock }) {
       )
     case 'code':
       return (
-        <figure className="print-avoid-break">
-          {block.caption && (
-            <figcaption className="mb-1 text-xs font-medium text-[var(--text-muted)]">
-              <RichText text={block.caption} />
-            </figcaption>
-          )}
-          <pre className="overflow-x-auto rounded-md border border-[var(--border)] bg-[var(--bg-muted)] p-3 text-[12px] leading-relaxed">
-            <code>{block.code}</code>
-          </pre>
-        </figure>
+        <CodeBlock code={block.code} language={block.language} title={block.caption} output={block.output} />
       )
     case 'quiz':
       return <QuizBlock title={block.title} questions={block.questions} />
     case 'mermaid':
-      return <MermaidBlock diagram={block.diagram} caption={block.caption} />
+      return <ThemedMermaid diagram={block.diagram} caption={block.caption} />
     default:
       return null
   }
 }
 
-export function MermaidBlock({
-  diagram,
-  caption,
-}: {
-  diagram: string
-  caption?: string
-}) {
-  const id = useId().replace(/:/g, '')
-  const [svg, setSvg] = useState<string>('')
-  const [error, setError] = useState<string | null>(null)
-
-  useEffect(() => {
-    let cancelled = false
-    ;(async () => {
-      try {
-        const mermaid = (await import('mermaid')).default
-        mermaid.initialize({
-          startOnLoad: false,
-          theme: 'neutral',
-          securityLevel: 'strict',
-        })
-        const { svg: rendered } = await mermaid.render(`mmd-${id}`, diagram)
-        if (!cancelled) setSvg(rendered)
-      } catch (e) {
-        if (!cancelled) setError(e instanceof Error ? e.message : 'Diagram failed')
-      }
-    })()
-    return () => {
-      cancelled = true
-    }
-  }, [diagram, id])
-
-  return (
-    <figure className="print-avoid-break mermaid rounded-md border border-[var(--border)] bg-[var(--bg-elevated)] p-3">
-      {caption && (
-        <figcaption className="mb-2 text-xs font-medium text-[var(--text-muted)]">
-          {caption}
-        </figcaption>
-      )}
-      {error && <p className="text-sm text-[var(--danger)]">{error}</p>}
-      {!error && !svg && (
-        <p className="text-sm text-[var(--text-faint)]">Rendering diagram…</p>
-      )}
-      {svg && <div dangerouslySetInnerHTML={{ __html: svg }} />}
-    </figure>
-  )
+export function MermaidBlock({ diagram, caption }: { diagram: string; caption?: string }) {
+  return <ThemedMermaid diagram={diagram} caption={caption} />
 }
 
-function QuizBlock({
+export function QuizBlock({
   title,
   questions,
 }: {
@@ -276,8 +197,11 @@ export function Section({
   id?: string
 }) {
   return (
-    <section id={id} className="scroll-mt-4 border-t border-[var(--border)] pt-6">
-      <h2 className="mb-3 font-[family-name:var(--font-ui)] text-lg font-semibold tracking-tight">
+    <section className="scroll-mt-4 border-t border-[var(--border)] pt-6">
+      <h2
+        id={id ?? slugify(title)}
+        className="mb-3 scroll-mt-5 font-[family-name:var(--font-ui)] text-lg font-semibold tracking-tight text-[var(--heading)]"
+      >
         {title}
       </h2>
       {children}

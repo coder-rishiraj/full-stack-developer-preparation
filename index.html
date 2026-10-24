@@ -4,7 +4,22 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SE Prep — Software Engineering Preparation</title>
+    <title>Career Duo — Software Engineering, Taught Properly</title>
+    <meta name="description" content="Career Duo: a structured software engineering curriculum — DSA, frontend, Java backend, system design and applied AI — taught as complete lessons." />
+    <script>
+      ;(function () {
+        try {
+          var a = JSON.parse(localStorage.getItem('cd-appearance') || '{}')
+          var t = a.theme || 'system'
+          if (t === 'system') t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+          var r = document.documentElement
+          r.dataset.theme = t
+          if (a.font) r.dataset.font = a.font
+          if (a.size) r.dataset.textSize = a.size
+          if (a.measure) r.dataset.measure = a.measure
+        } catch (e) {}
+      })()
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

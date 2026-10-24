@@ -7,6 +7,7 @@ import {
   preloadAllTopicContent,
 } from '@/content/topics'
 import { searchAll } from '@/lib/search'
+import { hasLesson } from '@/content/lessons'
 import {
   buildQcReport,
   summarizeByCode,
@@ -26,6 +27,7 @@ describe('Phase 5 quality control', () => {
       contentById,
       contentIds,
       problems: PROBLEMS,
+      hasLesson,
     })
 
     const errorSummary = summarizeByCode(report.errors)

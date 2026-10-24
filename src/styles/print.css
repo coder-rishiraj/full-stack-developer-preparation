@@ -191,3 +191,34 @@
     grid-template-columns: 1fr !important;
   }
 }
+
+/* Print always uses the light handbook palette, whatever theme is on screen. */
+@media print {
+  html[data-theme] {
+    color-scheme: light;
+    --bg: #ffffff;
+    --bg-elevated: #ffffff;
+    --bg-muted: #f3f3f1;
+    --bg-sunken: #f7f7f5;
+    --border: #dddddd;
+    --border-strong: #bbbbbb;
+    --text: #111111;
+    --heading: #000000;
+    --text-muted: #444444;
+    --text-faint: #666666;
+    --accent: #1f4a3e;
+    --accent-soft: #eef3f0;
+    --link: #1f4a6e;
+    --code-bg: #f7f7f5;
+    --code-border: #dddddd;
+    --code-text: #111111;
+    --code-keyword: #6a2c8a;
+    --code-string: #22602f;
+    --code-number: #8a4a10;
+    --code-comment: #666666;
+    --code-function: #1f4a7e;
+    --code-type: #6a4a00;
+    --code-attr: #8a2c2c;
+    --code-output-bg: #f0f0ee;
+  }
+}

@@ -18,6 +18,9 @@ import { Button } from '@/components/ui/Button'
 import { AddCustomTopicControl } from '@/components/topic/AddCustomTopicControl'
 import { TopicListRow } from '@/components/topic/TopicListRow'
 import { useUserStore } from '@/stores/user-store'
+import { LESSON_MANIFEST, hasLesson } from '@/content/lessons'
+import { completionPercent } from '@/domain/progress-selectors'
+import { ProgressBar } from '@/components/ui/Progress'
 import type { TopicMeta, TrackId } from '@/domain/types'
 
 function setOpenItem(
@@ -214,7 +217,14 @@ export function TrackPage() {
     )
   }
 
-  const ready = topics.filter((t) => t.contentReady).length
+  const classifiedTopics = curriculumTopics.filter((t) => t.curriculumLevel === 'classified-item')
+  const lessons = classifiedTopics.filter((t) => hasLesson(t.id)).length
+  const DEPTH_MINUTES = { shallow: 15, medium: 30, deep: 50 } as const
+  const totalMinutes = classifiedTopics.reduce(
+    (sum, t) => sum + (LESSON_MANIFEST[t.id]?.minutes ?? DEPTH_MINUTES[t.estimatedDepth]),
+    0,
+  )
+  const trackPct = completionPercent(curriculumTopics, state)
   const allExpanded =
     groupIds.every((id) => openGroups.has(id)) &&
     subsectionIds.every((id) => openSubsections.has(id))
@@ -236,6 +246,10 @@ export function TrackPage() {
             status={progress.status}
             notesReady={topic.contentReady}
             nested={topic.curriculumLevel === 'nested-concept'}
+            lessonReady={hasLesson(topic.id)}
+            summary={LESSON_MANIFEST[topic.id]?.summary}
+            difficulty={LESSON_MANIFEST[topic.id]?.difficulty}
+            minutes={LESSON_MANIFEST[topic.id]?.minutes}
             extra={isCustom ? <Badge tone="info">Custom</Badge> : undefined}
           />
         </li>
@@ -262,14 +276,18 @@ export function TrackPage() {
           style={{ background: track.accent }}
           aria-hidden
         />
-        <h1 className="text-2xl font-semibold">
-          Track {track.id} — {track.name}
-        </h1>
-        <p className="text-sm text-[var(--text-muted)]">{track.description}</p>
-        <p className="mt-2 text-xs text-[var(--text-faint)]">
-          {curriculumTopics.length} curriculum topics · {customForTrack.length}{' '}
-          custom · {displayGroups.length} sections · {ready} with deep notes
-        </p>
+        <p className="text-[12px] font-semibold uppercase tracking-[0.12em] text-[var(--text-faint)]">Track {track.id}</p>
+        <h1 className="mt-1 text-[1.9rem] font-semibold leading-tight tracking-tight text-[var(--heading)]">{track.name}</h1>
+        <p className="mt-1 max-w-3xl text-[15px] text-[var(--text-muted)]">{track.description}</p>
+        <div className="mt-4 grid max-w-3xl gap-4 sm:grid-cols-[1fr_auto]">
+          <ProgressBar label="Your progress" value={trackPct} accent={track.accent} />
+          <p className="text-xs leading-relaxed text-[var(--text-faint)] sm:text-right">
+            {displayGroups.length} modules · {classifiedTopics.length} topics · {curriculumTopics.length - classifiedTopics.length} nested concepts
+            <br />
+            {lessons} full lessons · about {Math.round(totalMinutes / 60)} hours of study
+            {customForTrack.length ? ` · ${customForTrack.length} custom` : ''}
+          </p>
+        </div>
         <div className="mt-3 flex flex-wrap items-center gap-2" aria-label="Curriculum section controls">
           <Button
             size="sm"
@@ -310,6 +328,10 @@ export function TrackPage() {
           : []
         if (sectionTopics.length === 0 && !isCustomSectionId(group.id)) return null
         const { classified, nested } = countDisplaySection(sectionTopics)
+        const groupDone = sectionTopics.filter(
+          (t) => t.curriculumLevel === 'classified-item' && ['first_pass', 'interview_ready'].includes(getTopicProgress(state, t.id).status),
+        ).length
+        const groupLessons = sectionTopics.filter((t) => t.curriculumLevel === 'classified-item' && hasLesson(t.id)).length
         const groupOpen = openGroups.has(group.id)
         const groupLabel = isCustomSectionId(group.id)
           ? group.title
@@ -326,7 +348,7 @@ export function TrackPage() {
             className="group/track scroll-mt-4"
           >
             <summary
-              className="mb-2 flex cursor-pointer list-none items-center gap-2 rounded-md bg-[var(--bg-muted)] px-3 py-2 text-sm font-semibold uppercase tracking-wide text-[var(--text-faint)] hover:text-[var(--text)] [&::-webkit-details-marker]:hidden"
+              className="mb-2 flex cursor-pointer list-none items-center gap-2 rounded-md bg-[var(--bg-muted)] px-3 py-2.5 text-[13px] font-semibold text-[var(--heading)] hover:bg-[color-mix(in_srgb,var(--bg-muted)_70%,var(--border))] [&::-webkit-details-marker]:hidden"
               onClick={(event) => {
                 event.preventDefault()
                 setOpenGroups((current) =>
@@ -347,6 +369,10 @@ export function TrackPage() {
               <span className="font-normal normal-case tracking-normal">
                 {classified} items
                 {nested > 0 ? ` · ${nested} nested` : ''}
+              </span>
+              <span className="ml-auto font-normal normal-case tracking-normal tabular-nums">
+                {groupLessons > 0 && <span className="mr-3 text-[var(--accent)]">{groupLessons} lessons</span>}
+                {groupDone}/{classified} done
               </span>
             </summary>
 

@@ -412,6 +412,8 @@ export function buildQcReport(input: {
   contentById: Record<string, TopicContent | undefined>
   contentIds: string[]
   problems: { id: string; primaryTopic: string; sourceUrl: string; urlVerified: boolean }[]
+  /** Topics taught by a Markdown lesson are checked by the lesson validator instead. */
+  hasLesson?: (topicId: string) => boolean
 }): QcReport {
   const topicIds = new Set(input.topics.map((t) => t.id))
   const issues: QcIssue[] = [
@@ -421,6 +423,7 @@ export function buildQcReport(input: {
   ]
 
   for (const t of input.topics) {
+    if (input.hasLesson?.(t.id)) continue
     issues.push(...auditTopicContent(t, input.contentById[t.id]))
   }
 

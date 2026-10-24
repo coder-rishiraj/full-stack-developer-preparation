@@ -1,6 +1,13 @@
 import { create } from 'zustand'
 import { clearUserState, loadUserState, saveUserState } from '@/lib/idb'
-import { EMPTY_USER_STATE, exportUserState, importUserState } from '@/lib/import-export'
+import {
+  EMPTY_USER_STATE,
+  exportUserState,
+  importUserState,
+  sanitizeLearning,
+  sanitizeReading,
+  sanitizeTheme,
+} from '@/lib/import-export'
 import { computeNextRevision, defaultTopicProgress } from '@/domain/revision'
 import {
   applyStudyRevisionSchedule,
@@ -25,6 +32,13 @@ type UserStore = UserState & {
   hydrated: boolean
   hydrate: () => Promise<void>
   setTheme: (theme: UserState['theme']) => void
+  setReading: (patch: Partial<UserState['reading']>) => void
+  setLearning: (patch: Partial<UserState['learning']>) => void
+  /** Records a lesson visit for "Continue learning" and recently visited lists. */
+  recordVisit: (topicId: string) => void
+  toggleCapstoneTask: (key: string) => void
+  /** Marks an untouched topic as "learning" without creating a revision schedule. */
+  startLearning: (topicId: string) => void
   setInterviewDate: (interviewDate: string | undefined) => void
   setTopicStatus: (topicId: string, status: StudyStatus) => void
   setTopicConfidence: (topicId: string, confidence: Confidence) => void
@@ -56,6 +70,11 @@ const ACTION_KEYS = new Set([
   'hydrated',
   'hydrate',
   'setTheme',
+  'setReading',
+  'setLearning',
+  'recordVisit',
+  'startLearning',
+  'toggleCapstoneTask',
   'setInterviewDate',
   'setTopicStatus',
   'setTopicConfidence',
@@ -123,6 +142,11 @@ export const useUserStore = create<UserStore>((set, get) => ({
       set({
         ...EMPTY_USER_STATE,
         ...loaded,
+        theme: sanitizeTheme(loaded.theme),
+        reading: sanitizeReading(loaded.reading),
+        learning: sanitizeLearning(loaded.learning),
+        recentTopics: Array.isArray(loaded.recentTopics) ? loaded.recentTopics : [],
+        capstoneTasks: loaded.capstoneTasks ?? {},
         topicOverlays: loaded.topicOverlays ?? {},
         customTopics,
         hydrated: true,
@@ -134,6 +158,45 @@ export const useUserStore = create<UserStore>((set, get) => ({
 
   setTheme: (theme) => {
     set({ theme })
+    schedulePersist(get)
+  },
+
+  setReading: (patch) => {
+    set({ reading: { ...get().reading, ...patch } })
+    schedulePersist(get)
+  },
+
+  setLearning: (patch) => {
+    set({ learning: { ...get().learning, ...patch } })
+    schedulePersist(get)
+  },
+
+  toggleCapstoneTask: (key) => {
+    const next = { ...get().capstoneTasks }
+    if (next[key]) delete next[key]
+    else next[key] = true
+    set({ capstoneTasks: next })
+    schedulePersist(get)
+  },
+
+  startLearning: (topicId) => {
+    const existing = get().topics[topicId] ?? defaultTopicProgress()
+    if (existing.status !== 'not_started') return
+    const now = new Date().toISOString()
+    set({
+      topics: {
+        ...get().topics,
+        [topicId]: { ...existing, status: 'learning', lastStudied: now, firstStudied: existing.firstStudied ?? now },
+      },
+      currentFocus: { ...get().currentFocus, learning: topicId },
+    })
+    schedulePersist(get)
+  },
+
+  recordVisit: (topicId) => {
+    const prev = get().recentTopics
+    if (prev[0] === topicId) return
+    set({ recentTopics: [topicId, ...prev.filter((id) => id !== topicId)].slice(0, 20) })
     schedulePersist(get)
   },
 

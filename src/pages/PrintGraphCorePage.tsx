@@ -130,7 +130,7 @@ export function PrintGraphCorePage() {
 
         <div className="ga-main">
           <header className="ga-cover">
-            <p className="kicker">SE Prep · Track A · Core only</p>
+            <p className="kicker">Career Duo · Track A · Core only</p>
             <h1>Core Graph Algorithms</h1>
             <p>
               The distinct algorithms you should be able to write from memory. Each entry is

@@ -2,6 +2,7 @@ import MiniSearch from 'minisearch'
 import { TOPICS } from '@/content/taxonomy'
 import { PROBLEMS } from '@/content/problems'
 import type { CustomTopic } from '@/domain/types'
+import { LESSON_MANIFEST } from '@/content/lessons'
 
 export type SearchHit = {
   id: string
@@ -32,7 +33,8 @@ function buildDocs(customTopics: CustomTopic[]): Doc[] {
   const docs: Doc[] = []
 
   for (const t of TOPICS) {
-    const body = [t.title, t.sectionTitle, ...t.tags, t.contentReady ? 'notes-ready' : ''].join(
+    const lesson = LESSON_MANIFEST[t.id]
+    const body = [t.title, t.sectionTitle, ...t.tags, t.contentReady ? 'notes-ready' : '', lesson?.summary ?? ''].join(
       ' ',
     )
     docs.push({

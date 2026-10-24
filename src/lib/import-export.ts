@@ -1,8 +1,60 @@
-import type { CustomTopic, RevisionSlot, TopicOverlay, TopicProgress, UserState } from '@/domain/types'
+import type {
+  CustomTopic,
+  LearningPrefs,
+  ReadingPrefs,
+  RevisionSlot,
+  ThemeName,
+  TopicOverlay,
+  TopicProgress,
+  UserState,
+} from '@/domain/types'
+
+export const THEMES: { id: ThemeName; label: string }[] = [
+  { id: 'system', label: 'System (light or dark)' },
+  { id: 'light', label: 'Light' },
+  { id: 'dark', label: 'Dark' },
+  { id: 'midnight', label: 'Midnight' },
+  { id: 'nord', label: 'Nord' },
+  { id: 'solarized-light', label: 'Solarized Light' },
+  { id: 'solarized-dark', label: 'Solarized Dark' },
+]
+
+export const DEFAULT_READING: ReadingPrefs = { font: 'serif', size: 'medium', measure: 'normal' }
+export const DEFAULT_LEARNING: LearningPrefs = { autoMarkLearning: true, defaultView: 'full' }
+
+function pick<T extends string>(value: unknown, allowed: readonly T[], fallback: T): T {
+  return allowed.includes(value as T) ? (value as T) : fallback
+}
+
+export function sanitizeReading(raw: unknown): ReadingPrefs {
+  const r = (raw ?? {}) as Partial<ReadingPrefs>
+  return {
+    font: pick(r.font, ['serif', 'sans'] as const, DEFAULT_READING.font),
+    size: pick(r.size, ['small', 'medium', 'large'] as const, DEFAULT_READING.size),
+    measure: pick(r.measure, ['narrow', 'normal', 'wide'] as const, DEFAULT_READING.measure),
+  }
+}
+
+export function sanitizeLearning(raw: unknown): LearningPrefs {
+  const r = (raw ?? {}) as Partial<LearningPrefs>
+  return {
+    autoMarkLearning:
+      typeof r.autoMarkLearning === 'boolean' ? r.autoMarkLearning : DEFAULT_LEARNING.autoMarkLearning,
+    defaultView: pick(r.defaultView, ['full', 'study'] as const, DEFAULT_LEARNING.defaultView),
+  }
+}
+
+export function sanitizeTheme(raw: unknown): ThemeName {
+  return pick(raw, THEMES.map((t) => t.id), 'system')
+}
 
 export const EMPTY_USER_STATE: UserState = {
   version: 1,
   theme: 'system',
+  reading: { ...DEFAULT_READING },
+  learning: { ...DEFAULT_LEARNING },
+  recentTopics: [],
+  capstoneTasks: {},
   topics: {},
   problems: {},
   notes: {},
@@ -151,7 +203,15 @@ export function importUserState(json: string): UserState {
 
   return {
     version: 1,
-    theme: state.theme ?? 'system',
+    theme: sanitizeTheme(state.theme),
+    reading: sanitizeReading(state.reading),
+    learning: sanitizeLearning(state.learning),
+    recentTopics: Array.isArray(state.recentTopics)
+      ? state.recentTopics.filter((x): x is string => typeof x === 'string').slice(0, 20)
+      : [],
+    capstoneTasks: Object.fromEntries(
+      Object.entries(state.capstoneTasks ?? {}).filter(([k, v]) => typeof k === 'string' && v === true),
+    ) as Record<string, true>,
     interviewDate:
       typeof state.interviewDate === 'string' &&
       /^\d{4}-\d{2}-\d{2}$/.test(state.interviewDate)

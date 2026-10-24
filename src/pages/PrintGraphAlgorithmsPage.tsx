@@ -198,7 +198,7 @@ export function PrintGraphAlgorithmsPage() {
 
         <div className="ga-main">
           <header className="ga-cover">
-            <p className="kicker">SE Prep · Track A · All topics</p>
+            <p className="kicker">Career Duo · Track A · All topics</p>
             <h1>Graph Algorithms — Full Topic Reference</h1>
             <p>
               Every algorithmic Graphs topic in curriculum order: Problem → Intuition → Steps →

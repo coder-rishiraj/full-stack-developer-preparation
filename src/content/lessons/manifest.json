@@ -1,0 +1,9 @@
+{
+ "a3-binary-search": {
+  "summary": "Binary search finds a value in sorted data by discarding half of the remaining candidates with every comparison. You will learn why sorted order makes that possible, how to write the loop so it is provably correct, and how to recognise binary-search problems that do not look like searching at all.",
+  "difficulty": "beginner",
+  "minutes": 45,
+  "words": 3832,
+  "concepts": []
+ }
+}

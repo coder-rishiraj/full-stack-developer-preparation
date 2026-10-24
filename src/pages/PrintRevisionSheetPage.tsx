@@ -55,7 +55,7 @@ export function PrintRevisionSheetPage() {
           Print
         </Button>
       </div>
-      <div className="print-header">SE Prep · Tier 1 Revision Sheet</div>
+      <div className="print-header">Career Duo · Tier 1 Revision Sheet</div>
       <h1 className="print-topic-title">Revision Sheet</h1>
       {loading && <p className="text-sm">Loading revision bullets…</p>}
       {topics.map((t) => {
