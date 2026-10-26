@@ -164,12 +164,12 @@ function ShoppingList({ items, keyed }) {
 // Render 2: items = ['Bread', 'Milk', 'Eggs']
 ```
 
-Logging the DOM operations React performs for render 2 (recorded by wrapping `insertBefore`, `appendChild` and text-node setters):
+Recording the DOM operations React performs for render 2 (by wrapping `insertBefore`, `appendChild` and the text setters in a test harness) gives:
 
-```output
-index keys: li text "" -> "Eggs", text "Milk" -> "Bread", text "Eggs" -> "Milk", appendChild(Eggs)
-item keys:  li text "" -> "Bread", insertBefore(Bread)
-```
+| Keys | DOM operations for render 2 |
+|---|---|
+| Index | text of `li` 0: `Milk` → `Bread`; text of `li` 1: `Eggs` → `Milk`; create `li` "Eggs"; append it |
+| Item | create `li` "Bread"; insert it before `Milk` |
 
 With index keys, React matched old position 0 (`Milk`) with new position 0 (`Bread`) and changed its text, did the same for position 1, and then created a new `<li>` at the end for `Eggs`. Every existing item was modified. With item keys, React recognised that `Milk` and `Eggs` were still there, left them untouched, and inserted one new node before them.
 
@@ -194,14 +194,9 @@ This is linear, but it does not always find the minimum number of moves. Take `[
 | B | 1 | 3 | 1 < 3 → move |
 | C | 2 | 3 | 2 < 3 → move |
 
-React moves three nodes, although moving `D` alone would do. The reverse change, moving `A` from the front to the back, costs one move: `B`, `C` and `D` stay in place and only `A` is moved. Running both changes and logging the DOM operations confirms it:
+React moves three nodes, although moving `D` alone would do. The reverse change, from `[D, A, B, C]` back to `[A, B, C, D]`, costs one move. Recording the DOM operations in a harness confirms both: the first change performs `appendChild` for `A`, `B` and `C`; the second performs a single `appendChild` for `D`.
 
-```output
-last to front: appendChild(A), appendChild(B), appendChild(C)
-first to back: appendChild(D)
-```
-
-(In the second case `D` is appended because, when going from `[D, A, B, C]` back to `[A, B, C, D]`, `D` is the overtaken item.) Moves of existing nodes are cheap, so this rarely matters. It is a good illustration of what "heuristic" means: correct always, minimal usually.
+(In the second change `A`, `B` and `C` keep their relative order, so only `D`, the overtaken item, moves.) Moves of existing nodes are cheap, so this rarely matters. It is a good illustration of what "heuristic" means: correct always, minimal usually.
 
 ### What the heuristics cannot see
 
@@ -291,17 +286,16 @@ function App() {
 createRoot(document.getElementById('root')).render(<App />);
 ```
 
-Click the first counter twice, then click "toggle". The console and the page show:
+Click the first counter twice, then click "toggle". The console shows:
 
 ```output
 mount Y
 mount Q
-page: Y:2 Q:0
---- toggle
 unmount Q
 mount P
-page: X:2 P:0
 ```
+
+Before the toggle the page reads `Y:2 Q:0`; after it, `X:2 P:0`.
 
 The first slot switched from `<Counter name="Y" />` to `<Counter name="X" />`. Same type, same position: React updated the instance's `name` prop and kept its state, so `X` shows `2` — the clicks made on `Y`. There was no unmount or mount for it; the effect with an empty dependency array did not re-run.
 

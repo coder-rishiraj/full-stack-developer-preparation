@@ -52,7 +52,7 @@ blue
 { color: 'red' }
 ```
 
-In `car.color`, only `car` goes through identifier resolution. Once `car` is found, `color` is looked up as a property of that object, which uses a different algorithm — the **prototype chain** (see [[b1-property-lookup]]). In `car[key]`, the identifier `key` is resolved to the string `'color'`, and that string is then used as a property key. In the object literal `{ color: 'blue' }`, `color` is just a key and nothing is resolved. But the shorthand `{ color }` means `{ color: color }`, so the second `color` *is* an identifier and is resolved to `'red'`.
+In `car.color`, only `car` goes through identifier resolution. Once `car` is found, `color` is looked up as a property of that object, which uses a different algorithm — the **prototype chain** (see [[b1-property-lookup]]). In `car[key]`, the identifier `key` is resolved to the string `'color'`, and that string is then used as a property key. In the object literal `{ color: 'blue' }`, `color` is only a key and nothing is resolved. But the shorthand `{ color }` means `{ color: color }`, so the second `color` *is* an identifier and is resolved to `'red'`.
 
 Other names that are not variable references: labels (`outer:` before a loop), names after `.` or `?.`, method names in a class body, and keys in destructuring patterns such as `const { color: c } = car` (where `color` is a property key and `c` is a new binding being declared).
 
@@ -152,7 +152,7 @@ false true
 Run in Node.js, `window` is not declared anywhere, so `typeof window` is `'undefined'` and no error is thrown. This pattern is common in code that must run both in the browser and on a server, for example in server-side rendering. The special case only covers unresolvable names. If the name resolves to a `let`, `const` or `class` that is still in its TDZ, `typeof` throws like any other read.
 
 > [!WARNING] typeof can hide a missing import
-> Because `typeof` never complains about an undeclared name, a check such as `if (typeof analytics !== 'undefined') analytics.track(…)` keeps working silently after someone removes the `import` of `analytics` — the feature simply stops running. Use `typeof` checks only for genuinely optional globals, and let a missing import fail loudly.
+> Because `typeof` never complains about an undeclared name, a check such as `if (typeof analytics !== 'undefined') analytics.track(…)` keeps working silently after someone removes the `import` of `analytics` — the feature silently stops running. Use `typeof` checks only for genuinely optional globals, and let a missing import fail loudly.
 
 **Writing to it depends on strict mode.** In strict code (including every ES module and class body), assignment to an unresolvable name throws `ReferenceError`, as the earlier program showed. In sloppy code, the assignment instead **creates a property on the global object**:
 
@@ -253,7 +253,7 @@ In `sloppyEval`, the name `injected` cannot be resolved by reading the function'
 
 ## How engines make resolution fast
 
-A literal implementation would walk a chain of tables for every variable access. Real engines do almost none of that. Because scope is lexical, V8 performs **scope analysis** while parsing: for each identifier, it determines which scope declares it and where that variable will be stored. A local variable that no inner function uses becomes a register or stack slot. A captured variable becomes a numbered slot in a heap-allocated context, and the engine records "go up two contexts, take slot 3". At run time there is no searching at all — just fixed offsets.
+A literal implementation would walk a chain of tables for every variable access. Real engines do almost none of that. Because scope is lexical, V8 performs **scope analysis** while parsing: for each identifier, it determines which scope declares it and where that variable will be stored. A local variable that no inner function uses becomes a register or stack slot. A captured variable becomes a numbered slot in a heap-allocated context, and the engine records "go up two contexts, take slot 3". At run time there is no searching at all, only fixed offsets.
 
 Global lookups are handled with caches: the first lookup of `Math` in a function records where it was found so later executions can go straight there. The constructs above are exactly the ones that break the analysis. A direct `eval` or a `with` anywhere in a function means some names cannot be resolved ahead of time, so the engine falls back to dynamic lookups for that scope. Avoiding them keeps code fast as well as readable.
 

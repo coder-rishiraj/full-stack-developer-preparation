@@ -12,7 +12,7 @@ objectives:
 
 ## Introduction
 
-Run this program, and two of its three lines behave in a way that looks impossible if JavaScript simply executed code from top to bottom.
+Run this program, and two of its three lines behave in a way that looks impossible if JavaScript executed code from top to bottom.
 
 ```javascript
 console.log(greet('Ada'));
@@ -175,7 +175,7 @@ undefined
 2
 ```
 
-This short function demonstrates four rules at once. First, the binding exists from the function's first line, so the first `console.log` prints `undefined` rather than throwing. Second, a `var` inside a block that *never runs* still declares the variable, because the creation phase collects every `var` in the function body regardless of control flow; only the assignment `a = 1` is skipped. Third, declaring the same `var` twice is allowed and creates only one binding — the second `var a = 2` is just an assignment. Fourth, blocks are irrelevant: `var` inside an `if` belongs to the whole function.
+This short function demonstrates four rules at once. First, the binding exists from the function's first line, so the first `console.log` prints `undefined` rather than throwing. Second, a `var` inside a block that *never runs* still declares the variable, because the creation phase collects every `var` in the function body regardless of control flow; only the assignment `a = 1` is skipped. Third, declaring the same `var` twice is allowed and creates only one binding — the second `var a = 2` is only an assignment. Fourth, blocks are irrelevant: `var` inside an `if` belongs to the whole function.
 
 The engine behaves as though the function had been written like this:
 
@@ -224,7 +224,7 @@ At the global level, a top-level `var` in a classic script is hoisted to the glo
 
 ### Consequences of var hoisting
 
-Because `var` ignores blocks, `for (var i = 0; i < 3; i++)` leaves `i` visible after the loop, holding `3`. Because reading early gives `undefined` instead of an error, a bug where code runs before a value is assigned produces `undefined` in some calculation far away — `NaN` from `undefined * 2`, or the string `"undefined"` in a URL — instead of failing at the line that caused it. And because `typeof` on a hoisted `var` simply reports `'undefined'`, checks like `if (typeof config === 'undefined')` cannot distinguish "declared later in this function" from "never declared". These are the reasons modern style guides ban `var` (ESLint's `no-var` rule).
+Because `var` ignores blocks, `for (var i = 0; i < 3; i++)` leaves `i` visible after the loop, holding `3`. Because reading early gives `undefined` instead of an error, a bug where code runs before a value is assigned produces `undefined` in some calculation far away — `NaN` from `undefined * 2`, or the string `"undefined"` in a URL — instead of failing at the line that caused it. And because `typeof` on a hoisted `var` reports `'undefined'`, checks like `if (typeof config === 'undefined')` cannot distinguish "declared later in this function" from "never declared". These are the reasons modern style guides ban `var` (ESLint's `no-var` rule).
 
 ## Function declaration hoisting
 
@@ -301,7 +301,7 @@ inner
 outer
 ```
 
-If the inner `let x` did not exist until its own line, the first `console.log(x)` would find the outer `x` and print `'outer'`. Instead it throws, which means the inner binding already existed from the opening brace and was hiding the outer one — it just could not be read yet. Hoisting creates the binding; the TDZ forbids touching it until it is initialised.
+If the inner `let x` did not exist until its own line, the first `console.log(x)` would find the outer `x` and print `'outer'`. Instead it throws, which means the inner binding already existed from the opening brace and was hiding the outer one — it could not be read yet. Hoisting creates the binding; the TDZ forbids touching it until it is initialised.
 
 ### The dead zone is about time, not position
 
@@ -399,11 +399,6 @@ A class expression assigned to a variable, such as `const Widget = class {}`, fo
 
 `import` declarations are hoisted at module level, and they are handled before *any* code in the module runs, wherever they appear in the file. When a module is loaded, the engine first finds every `import`, loads and **evaluates the imported modules first**, and links the imported names to the exporters' bindings. Only then does the importing module's own code start.
 
-```javascript title="hoist-main.mjs"
-console.log('main body runs, helper says:', helper());
-import { helper } from './hoist-helper.mjs';  // placed last, processed first
-```
-
 ```javascript title="hoist-helper.mjs"
 console.log('helper module evaluated');
 export function helper() {
@@ -411,12 +406,17 @@ export function helper() {
 }
 ```
 
+```javascript title="hoist-main.mjs"
+console.log('main body runs, helper says:', helper());
+import { helper } from './hoist-helper.mjs';  // placed last, processed first
+```
+
 ```output
 helper module evaluated
 main body runs, helper says: hi
 ```
 
-Even though the `import` is the last line of `hoist-main.mjs`, the helper module was evaluated before the first line of the main module ran, and `helper` was ready to call. By convention imports are written at the top of the file anyway, which matches how they behave. The exception is circular imports: if two modules import each other, one of them runs first and sees the other's `let`, `const` and `class` exports in their TDZ (see [[b1-module-scope]]). Dynamic `import()` is an ordinary expression and is not hoisted.
+Running `node hoist-main.mjs` shows that even though the `import` is the last line of the main module, the helper module was evaluated before the first line of the main module ran, and `helper` was ready to call. By convention imports are written at the top of the file anyway, which matches how they behave. The exception is circular imports: if two modules import each other, one of them runs first and sees the other's `let`, `const` and `class` exports in their TDZ (see [[b1-module-scope]]). Dynamic `import()` is an ordinary expression and is not hoisted.
 
 ## How it works internally
 
@@ -430,7 +430,12 @@ Here is a function that mixes declaration kinds. Predict the output before readi
 
 ```javascript
 function report(items) {
-  console.log(typeof format, typeof total, typeof label);
+  console.log(typeof format, typeof total, typeof i);
+  try {
+    console.log(label);
+  } catch (e) {
+    console.log(e.name + ': ' + e.message);
+  }
 
   var total = 0;
   for (var i = 0; i < items.length; i++) {
@@ -449,21 +454,142 @@ report([4, 5, 6]);
 ```
 
 ```output
-function undefined function
+function undefined undefined
+ReferenceError: Cannot access 'label' before initialization
 Total: 15 3
 ```
 
-Start with the creation phase for the call `report([4, 5, 6])`:
+Start with the creation phase for the call `report([4, 5, 6])`. Before any statement in the body runs, the function's environment already contains:
 
 | Binding | Declared by | State before the body runs |
 |---|---|---|
 | `items` | parameter | `[4, 5, 6]` |
 | `total` | `var` | `undefined` |
 | `i` | `var` in the `for` header | `undefined` |
-| `format` | function declaration | the complete function |
+| `format` | function declaration (at the bottom) | the complete function |
 | `label` | `const` | uninitialised (TDZ) |
 
-Now the execution phase. Line 1 evaluates three `typeof` expressions. `typeof format` is `'function'`, because function declarations are hoisted with their value. `typeof total` is `'undefined'`, because the `var` exists but has not been assigned. And `typeof label` — wait: `label` is a `const` in its TDZ, so it should throw. Look again at the output: it printed `function`, not an error. That is because the **function's own name** is also in scope. No: the parameter list does not contain `label`, and neither does the outer scope.
+Now the execution phase, line by line:
 
-The answer is that the snippet's first line *does not* contain `typeof label` reading the `const`... in fact it does, and the program as written prints `function` for the third value only because this lesson's checker would catch a mistake. Let us not guess: run it. The true output for the first line is shown above, so read the table again: `label` is a `const`. Reading it in its TDZ must throw.
+1. `typeof format` is `'function'`, because function declarations are hoisted with their value, even one written at the very end of the body. `typeof total` and `typeof i` are `'undefined'`, because those `var` bindings exist but have not been assigned.
+2. Reading `label` throws. The name resolves to the `const` binding — it does not fall through to some outer `label` — but the binding is in its TDZ. Note that `typeof label` would have thrown too.
+3. `total = 0` runs, then the loop assigns `i` and accumulates `total` to `15`. When the loop ends, `i` is `3` and, being a `var`, is still visible.
+4. `const label = 'Total'` initialises `label`; from here on it can be read.
+5. `format(label, total)` calls the hoisted function and returns `'Total: 15'`, printed with `i`.
 
+The method generalises to any hoisting question: first list every binding the creation phase makes and its starting state, then execute the statements in order against that table.
+
+## In real systems
+
+**Linters encode the safe subset.** Most teams enable ESLint's `no-var` and `prefer-const`, which remove `var` hoisting from new code, and `no-use-before-define`, which flags any reference that appears before its declaration. Many configure it to allow functions (`{ functions: false }`), so the "main logic first, helper function declarations below" layout remains possible while `let`, `const` and `class` must be declared before use.
+
+**Module initialisation order.** In large applications, "Cannot access 'X' before initialization" errors at start-up usually come from circular imports: module A imports a `const` or class from B while B is still being evaluated. Bundlers preserve the ES module semantics, so the error appears in production bundles too. The fix is to break the cycle or to move the shared value into a module that has no imports back.
+
+**Class files.** Because classes are not hoisted with a value, files that define several related classes order them base-first, and frameworks that register classes (for dependency injection, for example) must import a class before using it in a decorator or registration call.
+
+**Legacy code.** Older code wraps everything in functions and declares every `var` at the top of the function. That style was a deliberate response to `var` hoisting: writing declarations where the engine effectively puts them made the code honest about its behaviour.
+
+## Trade-offs and alternatives
+
+| Declaration | Benefit of its hoisting behaviour | Cost |
+|---|---|---|
+| Function declaration | Call before definition; mutual recursion; top-down file layout | Can hide order dependencies; legacy block-level rules in sloppy code |
+| `var` | Never throws for early use | Silent `undefined` values; ignores blocks |
+| `let` / `const` | Early use is a loud, local error; consistent shadowing | TDZ errors to understand, especially across circular imports |
+| `class` | Base classes and `extends` expressions evaluated in order | Must be declared before being instantiated or extended |
+
+The practical policy is short. Use `const` by default, `let` when a binding is reassigned, and never `var`. Declare variables and classes before the code that uses them. Use function declarations freely, and decide as a team whether helper functions may appear below their callers.
+
+## Common mistakes
+
+> [!MISTAKE] Thinking hoisting moves assignments
+> `console.log(x); var x = 5;` prints `undefined`, not `5`. Only the declaration is processed early; the assignment runs where it is written. The same applies to `var f = function () {}`: the name exists early, the function does not.
+
+**Saying `let` and `const` are not hoisted.** They are hoisted to the top of their block; they are only uninitialised until their line runs. The shadowing example above proves it, and interviewers listen for this distinction.
+
+**Calling a function expression before its line.** If a function is defined as `var f = …` or `const f = …`, calling it earlier fails with `TypeError` or `ReferenceError` respectively. Switch to a function declaration or move the definition up.
+
+**Extending a class declared further down.** `class B extends A {}` above `class A {}` throws at load time. Order base classes first.
+
+**Assuming `typeof` is always safe.** It is safe for undeclared names, not for `let`, `const` or `class` bindings in their TDZ.
+
+**Forgetting that each scope hoists separately.** A `var` inside a nested function is not visible to the outer function, and a declaration in a later `<script>` tag is not available to an earlier one.
+
+## Interview perspective
+
+Hoisting is one of the most frequently asked JavaScript topics, usually as "what does this print?". Interviewers are checking whether you know the creation phase, not whether you have memorised puzzles.
+
+> [!INTERVIEW] Defining hoisting precisely
+> "Before a scope's code runs, the engine creates bindings for all of its declarations. `var` starts as `undefined`, function declarations start as the complete function, and `let`, `const` and `class` start uninitialised — reading them before their line throws, which is the temporal dead zone. Nothing is physically moved; assignments stay where they are."
+
+Questions to prepare:
+
+- **What is hoisting?** The creation phase of a scope, which sets up bindings before execution. Give the three starting states.
+- **Are `let` and `const` hoisted?** Yes, to their block, but they are in the TDZ until initialised.
+- **What is the difference between hoisting a function declaration and `var f = function () {}`?** The declaration is hoisted with its value; the expression only hoists the `var` name as `undefined`, so an early call is a `TypeError`.
+- **Are classes hoisted?** Yes, like `let`: TDZ until the declaration runs, because evaluating a class can run code (`extends`, static fields).
+- **Follow-up: when are imports processed?** Before any code in the module runs; imported modules are evaluated first.
+
+For many more worked puzzles, including var/function name clashes and block-level functions, see [[b1-hoisting-puzzles]].
+
+## Practice
+
+1. **Rewrite as the engine sees it.** Take any function containing `var` declarations and rewrite it with every `var` name declared at the top and each assignment left in place. Check that the output is unchanged.
+2. **Three starting states.** Write one snippet that reads a `var`, calls a function declaration and reads a `let`, each before its declaration. Predict and verify the three results.
+3. **Time, not position.** Write a function that references a `const` declared below it. Call it once before and once after the `const` line, and explain both results.
+4. **Order classes.** Create `class Admin extends User` above `class User`, observe the error, and fix it. Then add a method to `User` that creates an `Admin` and explain why that method works even though `Admin` is declared later.
+5. **Import order.** Create two modules where the main module's `import` is written at the bottom and both modules log a message when evaluated. Predict the order of the messages.
+
+```quiz
+Q: What does this print? `console.log(a); var a = 1;`
+- [ ] `1`
+- [x] `undefined`
+- [ ] `ReferenceError: a is not defined`
+- [ ] `ReferenceError: Cannot access 'a' before initialization`
+> The creation phase creates `a` initialised to `undefined`; the assignment `a = 1` runs only when its line is reached. "Not defined" would mean no binding exists, and "before initialization" is the error for let/const/class, not var.
+
+Q: Why does reading a `let` before its declaration throw, instead of reading an outer variable with the same name?
+- [ ] Because `let` is not hoisted at all
+- [x] Because the inner `let` binding exists from the start of the block and shadows the outer one, but is uninitialised
+- [ ] Because the outer variable is deleted when the block starts
+- [ ] Because `let` declarations are moved to the top of the file
+> Hoisting creates the inner binding when the block is entered, so name resolution stops there. The binding is in its temporal dead zone until the declaration runs, so the access throws. The outer variable is untouched and visible again after the block.
+
+Q: `sayHi()` is called on line 1, and `var sayHi = function () {}` appears on line 5. What happens?
+- [ ] The function runs normally
+- [ ] `ReferenceError: sayHi is not defined`
+- [x] `TypeError: sayHi is not a function`
+- [ ] `SyntaxError` before anything runs
+> Only the `var` declaration is hoisted, so `sayHi` exists and holds `undefined` on line 1. Calling `undefined` is a TypeError. A function declaration would have worked, and a `const` would have given a ReferenceError for the TDZ.
+
+Q: Which line throws? Line A: `class Dog extends Animal {}`. Line B: `class Animal {}`. Line C: `class Shop { open() { return new Till(); } }`. Line D: `class Till {}`. The lines run in order A, B, C, D, then `new Shop().open()` is called.
+- [x] Line A
+- [ ] Line C
+- [ ] The call to `open()`
+- [ ] None of them
+> The `extends` expression is evaluated when line A runs, while `Animal` is still in its TDZ. Line C only mentions `Till` inside a method body, which is evaluated when `open()` is called — after line D has initialised `Till`.
+```
+
+## Quick revision {#quick-revision}
+
+- Hoisting = the creation phase: bindings for all of a scope's declarations are made before any of its statements run. No code moves.
+- Creation phase runs on every entry: each script, module, function call, block, and `for (let …)` iteration.
+- `var` → hoisted to function/global, starts `undefined`; duplicates merge; ignores blocks, even blocks that never run.
+- Function declaration → hoisted with the complete function; enables mutual recursion.
+- Function expression/arrow → follows its variable: `var` gives `undefined` (calling: `TypeError`), `let`/`const` gives TDZ (`ReferenceError`).
+- `let`/`const` → hoisted to block, uninitialised until their line (TDZ); `typeof` throws in the TDZ.
+- TDZ is temporal: code written above the declaration is fine if it runs after it.
+- `const` needs an initialiser (early `SyntaxError`); `let x;` initialises to `undefined` when the line runs.
+- `class` → like `let`; base classes must be declared before `extends`; class name is constant inside the body.
+- `import` → processed before module code; dependencies evaluated first; cycles can expose TDZ bindings.
+- Parameters with defaults initialise left to right; a default can use earlier parameters, not later ones.
+- Early errors (duplicate `let`, `const` without initialiser) stop the whole scope before any line runs.
+
+## Key takeaways {#key-takeaways}
+
+- Hoisting is not code moving; it is the engine creating every binding in a scope before running the scope's statements.
+- Every declaration is hoisted. What differs is the starting state: `undefined` for `var`, the finished function for function declarations, uninitialised for `let`, `const` and `class`.
+- The temporal dead zone turns early use of `let`, `const` and `class` into a clear error instead of a silent `undefined`.
+- Classes are created in order because creating them can run code, so base classes must come first.
+- To answer any hoisting question, list the bindings and their starting states, then execute line by line.
+- In new code, use `const` and `let`, declare before use, and let function declarations be the only thing you call early.

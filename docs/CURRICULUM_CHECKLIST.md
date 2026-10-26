@@ -9,92 +9,92 @@ them under an anchored heading.
 
 | Track | Name | Lessons | Done |
 |---|---|---|---|
-| A | DSA & Problem Solving | 1 / 125 | 1% |
-| B | Frontend Engineering | 0 / 647 | 0% |
-| C | Java & Backend Engineering | 0 / 329 | 0% |
-| D | LLD, System Design & Distributed Systems | 0 / 111 | 0% |
-| E | Applied AI Engineering | 0 / 77 | 0% |
-| | **All tracks** | **1 / 1289** | **0%** |
+| A | DSA & Problem Solving | 50 / 125 | 40% |
+| B | Frontend Engineering | 39 / 647 | 6% |
+| C | Java & Backend Engineering | 12 / 329 | 4% |
+| D | LLD, System Design & Distributed Systems | 19 / 111 | 17% |
+| E | Applied AI Engineering | 8 / 77 | 10% |
+| | **All tracks** | **128 / 1289** | **10%** |
 
 Legend: ✅ lesson written · ◐ condensed notes only · ○ generic template only · ✗ no content
 
 ### Track A — DSA & Problem Solving
 
-#### A1 · Programming for Interviews — 0/9
+#### A1 · Programming for Interviews — 9/9
 
-- [ ] `a1-java-syntax-competitive` Java Syntax for Competitive Coding — ◐ condensed notes
-- [ ] `a1-arraylist` Collections Framework — ◐ condensed notes · nested 0/6
-- [ ] `a1-comparable-comparator` Comparable / Comparator — ◐ condensed notes
-- [ ] `a1-strings-stringbuilder` Strings / StringBuilder — ◐ condensed notes
-- [ ] `a1-custom-classes` Custom Classes — ◐ condensed notes
-- [ ] `a1-recursion` Recursion — ◐ condensed notes
-- [ ] `a1-time-complexity` Time/Space Complexity — ◐ condensed notes · nested 0/1
-- [ ] `a1-big-o` Big-O Analysis — ◐ condensed notes
-- [ ] `a1-java-streams-interviews` Java Streams for Interviews — ◐ condensed notes
+- [x] `a1-java-syntax-competitive` Java Syntax for Competitive Coding — ✅ lesson (6109 words)
+- [x] `a1-arraylist` Collections Framework — ✅ lesson (8938 words) · nested 6/6
+- [x] `a1-comparable-comparator` Comparable / Comparator — ✅ lesson (3378 words)
+- [x] `a1-strings-stringbuilder` Strings / StringBuilder — ✅ lesson (3166 words)
+- [x] `a1-custom-classes` Custom Classes — ✅ lesson (3046 words)
+- [x] `a1-recursion` Recursion — ✅ lesson (3842 words)
+- [x] `a1-time-complexity` Time/Space Complexity — ✅ lesson (5576 words) · nested 1/1
+- [x] `a1-big-o` Big-O Analysis — ✅ lesson (4118 words)
+- [x] `a1-java-streams-interviews` Java Streams for Interviews — ✅ lesson (3746 words)
 
-#### A2 · Arrays & Strings — 0/11
+#### A2 · Arrays & Strings — 11/11
 
-- [ ] `a2-array-string-traversal` Array/String Traversal and Manipulation — ◐ condensed notes
-- [ ] `a2-prefix-suffix` Prefix/Suffix Techniques — ◐ condensed notes
-- [ ] `a2-two-pointers` Two Pointers — ◐ condensed notes
-- [ ] `a2-sliding-window` Sliding Window — ◐ condensed notes
-- [ ] `a2-frequency-counting` Frequency Counting — ◐ condensed notes
-- [ ] `a2-hashing` Hashing — ◐ condensed notes
-- [ ] `a2-sorting-based` Sorting-Based Problems — ◐ condensed notes
-- [ ] `a2-matrix` Matrix Problems — ◐ condensed notes
-- [ ] `a2-intervals` Interval Problems — ◐ condensed notes
-- [ ] `a2-kadane` Kadane's Algorithm — ◐ condensed notes
-- [ ] `a2-difference-arrays` Difference Arrays — ◐ condensed notes
+- [x] `a2-array-string-traversal` Array/String Traversal and Manipulation — ✅ lesson (4070 words)
+- [x] `a2-prefix-suffix` Prefix/Suffix Techniques — ✅ lesson (3672 words)
+- [x] `a2-two-pointers` Two Pointers — ✅ lesson (3938 words)
+- [x] `a2-sliding-window` Sliding Window — ✅ lesson (3988 words)
+- [x] `a2-frequency-counting` Frequency Counting — ✅ lesson (3197 words)
+- [x] `a2-hashing` Hashing — ✅ lesson (3784 words)
+- [x] `a2-sorting-based` Sorting-Based Problems — ✅ lesson (4579 words)
+- [x] `a2-matrix` Matrix Problems — ✅ lesson (4426 words)
+- [x] `a2-intervals` Interval Problems — ✅ lesson (4290 words)
+- [x] `a2-kadane` Kadane's Algorithm — ✅ lesson (4037 words)
+- [x] `a2-difference-arrays` Difference Arrays — ✅ lesson (3524 words)
 
-#### A3 · Searching & Sorting — 1/8
+#### A3 · Searching & Sorting — 8/8
 
 - [x] `a3-binary-search` Binary Search — ✅ lesson (3832 words)
-- [ ] `a3-binary-search-on-answer` Binary Search on Answer — ◐ condensed notes
-- [ ] `a3-lower-upper-bounds` Lower/Upper Bounds — ◐ condensed notes
-- [ ] `a3-merge-sort` Merge Sort — ◐ condensed notes
-- [ ] `a3-quick-sort` Quick Sort Concepts — ◐ condensed notes
-- [ ] `a3-comparator-sorting` Comparator-Based Sorting — ◐ condensed notes
-- [ ] `a3-quickselect` Quickselect — ◐ condensed notes
-- [ ] `a3-counting-sort` Counting/Bucket Sorting Concepts — ◐ condensed notes · nested 0/1
+- [x] `a3-binary-search-on-answer` Binary Search on Answer — ✅ lesson (4507 words)
+- [x] `a3-lower-upper-bounds` Lower/Upper Bounds — ✅ lesson (4281 words)
+- [x] `a3-merge-sort` Merge Sort — ✅ lesson (3965 words)
+- [x] `a3-quick-sort` Quick Sort Concepts — ✅ lesson (3872 words)
+- [x] `a3-comparator-sorting` Comparator-Based Sorting — ✅ lesson (3651 words)
+- [x] `a3-quickselect` Quickselect — ✅ lesson (2975 words)
+- [x] `a3-counting-sort` Counting/Bucket Sorting Concepts — ✅ lesson (3975 words) · nested 1/1
 
-#### A4 · Linked Lists — 0/7
+#### A4 · Linked Lists — 7/7
 
-- [ ] `a4-singly-linked-lists` Singly/Doubly Linked Lists — ◐ condensed notes · nested 0/1
-- [ ] `a4-fast-slow-pointers` Fast/Slow Pointers — ◐ condensed notes
-- [ ] `a4-reversal` Linked List Reversal — ◐ condensed notes
-- [ ] `a4-cycle-detection` Cycle Detection — ◐ condensed notes
-- [ ] `a4-merge-lists` Merge Lists — ◐ condensed notes
-- [ ] `a4-intersection` List Intersection — ◐ condensed notes
-- [ ] `a4-lru-style` LRU-Style Linked-List Manipulation — ◐ condensed notes
+- [x] `a4-singly-linked-lists` Singly/Doubly Linked Lists — ✅ lesson (4865 words) · nested 1/1
+- [x] `a4-fast-slow-pointers` Fast/Slow Pointers — ✅ lesson (3394 words)
+- [x] `a4-reversal` Linked List Reversal — ✅ lesson (3492 words)
+- [x] `a4-cycle-detection` Cycle Detection — ✅ lesson (3909 words)
+- [x] `a4-merge-lists` Merge Lists — ✅ lesson (3445 words)
+- [x] `a4-intersection` List Intersection — ✅ lesson (3212 words)
+- [x] `a4-lru-style` LRU-Style Linked-List Manipulation — ✅ lesson (3324 words)
 
-#### A5 · Stack & Queue — 0/7
+#### A5 · Stack & Queue — 7/7
 
-- [ ] `a5-stack` Stack — ◐ condensed notes
-- [ ] `a5-queue` Queue — ◐ condensed notes
-- [ ] `a5-deque` Deque — ◐ condensed notes
-- [ ] `a5-monotonic-stack` Monotonic Stack — ◐ condensed notes
-- [ ] `a5-monotonic-queue` Monotonic Queue — ◐ condensed notes
-- [ ] `a5-next-greater-smaller` Next Greater/Smaller Element — ◐ condensed notes
-- [ ] `a5-parentheses` Parentheses/Expression Problems — ◐ condensed notes · nested 0/1
+- [x] `a5-stack` Stack — ✅ lesson (3614 words)
+- [x] `a5-queue` Queue — ✅ lesson (3245 words)
+- [x] `a5-deque` Deque — ✅ lesson (3006 words)
+- [x] `a5-monotonic-stack` Monotonic Stack — ✅ lesson (3711 words)
+- [x] `a5-monotonic-queue` Monotonic Queue — ✅ lesson (3330 words)
+- [x] `a5-next-greater-smaller` Next Greater/Smaller Element — ✅ lesson (3121 words)
+- [x] `a5-parentheses` Parentheses/Expression Problems — ✅ lesson (5447 words) · nested 1/1
 
-#### A6 · Trees — 0/12
+#### A6 · Trees — 7/12
 
-- [ ] `a6-binary-trees` Binary Trees — ◐ condensed notes
-- [ ] `a6-dfs` Tree DFS — ◐ condensed notes
-- [ ] `a6-bfs` Tree BFS/Level-Order Traversal — ◐ condensed notes · nested 0/1
-- [ ] `a6-bst` Binary Search Trees — ◐ condensed notes
-- [ ] `a6-height-depth` Tree Height/Depth — ◐ condensed notes
-- [ ] `a6-diameter` Tree Diameter — ◐ condensed notes
-- [ ] `a6-lca` Lowest Common Ancestor — ◐ condensed notes
+- [x] `a6-binary-trees` Binary Trees — ✅ lesson (5033 words)
+- [x] `a6-dfs` Tree DFS — ✅ lesson (4345 words)
+- [x] `a6-bfs` Tree BFS/Level-Order Traversal — ✅ lesson (4102 words) · nested 1/1
+- [x] `a6-bst` Binary Search Trees — ✅ lesson (4642 words)
+- [x] `a6-height-depth` Tree Height/Depth — ✅ lesson (3378 words)
+- [x] `a6-diameter` Tree Diameter — ✅ lesson (3568 words)
+- [x] `a6-lca` Lowest Common Ancestor — ✅ lesson (5671 words)
 - [ ] `a6-path-problems` Tree Path Problems — ◐ condensed notes
 - [ ] `a6-construction` Tree Construction — ◐ condensed notes
 - [ ] `a6-serialization` Serialization/Deserialization — ◐ condensed notes
 - [ ] `a6-tree-views` Tree Views — ◐ condensed notes
 - [ ] `a6-nary-trees` N-ary Trees — ◐ condensed notes
 
-#### A7 · Heaps — 0/6
+#### A7 · Heaps — 1/6
 
-- [ ] `a7-min-heap` Min/Max Heap — ◐ condensed notes · nested 0/1
+- [x] `a7-min-heap` Min/Max Heap — ✅ lesson (4922 words) · nested 1/1
 - [ ] `a7-priority-queues` Priority Queues — ◐ condensed notes
 - [ ] `a7-top-k` Top-K Problems — ◐ condensed notes
 - [ ] `a7-k-way-merge` K-way Merge — ◐ condensed notes
@@ -237,32 +237,32 @@ Legend: ✅ lesson written · ◐ condensed notes only · ○ generic template o
 
 ### Track B — Frontend Engineering
 
-#### B1.1 · JavaScript Foundations — 0/7
+#### B1.1 · JavaScript Foundations — 7/7
 
-- [ ] `b1-what-is-javascript` What JavaScript Is — ◐ condensed notes
-- [ ] `b1-ecmascript` JavaScript vs ECMAScript — ◐ condensed notes
-- [ ] `b1-runtimes` JavaScript Runtimes — ◐ condensed notes · nested 0/4
-- [ ] `b1-script-loading` How JavaScript Loads in a Webpage — ◐ condensed notes · nested 0/5
-- [ ] `b1-statements-expressions` Statements vs Expressions — ◐ condensed notes
-- [ ] `b1-syntax-basics` Syntax Basics — ◐ condensed notes · nested 0/7
-- [ ] `b1-basic-debugging` Basic Debugging — ◐ condensed notes
+- [x] `b1-what-is-javascript` What JavaScript Is — ✅ lesson (3265 words)
+- [x] `b1-ecmascript` JavaScript vs ECMAScript — ✅ lesson (2863 words)
+- [x] `b1-runtimes` JavaScript Runtimes — ✅ lesson (4299 words) · nested 4/4
+- [x] `b1-script-loading` How JavaScript Loads in a Webpage — ✅ lesson (4341 words) · nested 5/5
+- [x] `b1-statements-expressions` Statements vs Expressions — ✅ lesson (2730 words)
+- [x] `b1-syntax-basics` Syntax Basics — ✅ lesson (5455 words) · nested 7/7
+- [x] `b1-basic-debugging` Basic Debugging — ✅ lesson (3662 words)
 
-#### B1.2 · Variables & Declarations — 0/8
+#### B1.2 · Variables & Declarations — 8/8
 
-- [ ] `b1-variables` Variables — ◐ condensed notes · nested 0/4
-- [ ] `b1-var` var — ◐ condensed notes
-- [ ] `b1-let` let — ◐ condensed notes
-- [ ] `b1-const` const — ◐ condensed notes
-- [ ] `b1-var-let-const` var vs let vs const — ◐ condensed notes · nested 0/3
-- [ ] `b1-tdz` Temporal Dead Zone — ◐ condensed notes
-- [ ] `b1-global-variables` Global Variables and globalThis — ◐ condensed notes
-- [ ] `b1-variable-naming` Variable Naming / Best Practices — ◐ condensed notes
+- [x] `b1-variables` Variables — ✅ lesson (4580 words) · nested 4/4
+- [x] `b1-var` var — ✅ lesson (2944 words)
+- [x] `b1-let` let — ✅ lesson (2642 words)
+- [x] `b1-const` const — ✅ lesson (2364 words)
+- [x] `b1-var-let-const` var vs let vs const — ✅ lesson (3446 words) · nested 3/3
+- [x] `b1-tdz` Temporal Dead Zone — ✅ lesson (2928 words)
+- [x] `b1-global-variables` Global Variables and globalThis — ✅ lesson (5398 words)
+- [x] `b1-variable-naming` Variable Naming / Best Practices — ✅ lesson (4031 words)
 
-#### B1.3 · Types & Values — 0/10
+#### B1.3 · Types & Values — 3/10
 
-- [ ] `b1-primitive-types` Primitive Types — ◐ condensed notes · nested 0/7
-- [ ] `b1-objects-as-values` Objects as Values — ◐ condensed notes
-- [ ] `b1-primitive-vs-reference` Primitive vs Reference Types — ◐ condensed notes · nested 0/3
+- [x] `b1-primitive-types` Primitive Types — ✅ lesson (5475 words) · nested 7/7
+- [x] `b1-objects-as-values` Objects as Values — ✅ lesson (3150 words)
+- [x] `b1-primitive-vs-reference` Primitive vs Reference Types — ✅ lesson (4522 words) · nested 2/3
 - [ ] `b1-typeof` typeof — ◐ condensed notes · nested 0/1
 - [ ] `b1-undefined-vs-null` undefined vs null vs Undeclared — ◐ condensed notes
 - [ ] `b1-nan-infinity` NaN, Infinity, and Safe Numbers — ◐ condensed notes · nested 0/2
@@ -330,24 +330,24 @@ Legend: ✅ lesson written · ◐ condensed notes only · ○ generic template o
 - [ ] `b1-currying` Currying & Partial Application — ◐ condensed notes · nested 0/1
 - [ ] `b1-memoization` Memoization — ◐ condensed notes
 
-#### B1.10 · Scope & Lexical Environments — 0/3
+#### B1.10 · Scope & Lexical Environments — 3/3
 
-- [ ] `b1-scope` Scope — ◐ condensed notes · nested 0/1
-- [ ] `b1-lexical-scope` Lexical Scope — ◐ condensed notes · nested 0/3
-- [ ] `b1-name-resolution` Variable Resolution — ◐ condensed notes
+- [x] `b1-scope` Scope — ✅ lesson (4089 words) · nested 1/1
+- [x] `b1-lexical-scope` Lexical Scope — ✅ lesson (4836 words) · nested 3/3
+- [x] `b1-name-resolution` Variable Resolution — ✅ lesson (3375 words)
 
-#### B1.11 · Hoisting & Temporal Dead Zone — 0/2
+#### B1.11 · Hoisting & Temporal Dead Zone — 2/2
 
-- [ ] `b1-hoisting` Hoisting — ◐ condensed notes · nested 0/4
-- [ ] `b1-hoisting-puzzles` Hoisting Interview Puzzles — ◐ condensed notes
+- [x] `b1-hoisting` Hoisting — ✅ lesson (4753 words) · nested 4/4
+- [x] `b1-hoisting-puzzles` Hoisting Interview Puzzles — ✅ lesson (3312 words)
 
-#### B1.12 · Closures — 0/5
+#### B1.12 · Closures — 5/5
 
-- [ ] `b1-closures` Closures — ◐ condensed notes · nested 0/2
-- [ ] `b1-closures-in-loops` Loops + Closures — ◐ condensed notes · nested 0/1
-- [ ] `b1-stale-closures` Stale Closures — ◐ condensed notes · nested 0/1
-- [ ] `b1-closure-memory` Closure Memory Implications — ◐ condensed notes
-- [ ] `b1-closure-puzzles` Closure Interview Puzzles — ◐ condensed notes
+- [x] `b1-closures` Closures — ✅ lesson (4728 words) · nested 2/2
+- [x] `b1-closures-in-loops` Loops + Closures — ✅ lesson (3291 words) · nested 1/1
+- [x] `b1-stale-closures` Stale Closures — ✅ lesson (3231 words) · nested 1/1
+- [x] `b1-closure-memory` Closure Memory Implications — ✅ lesson (3466 words)
+- [x] `b1-closure-puzzles` Closure Interview Puzzles — ✅ lesson (2615 words)
 
 #### B1.13 · Objects — 0/3
 
@@ -419,16 +419,16 @@ Legend: ✅ lesson written · ◐ condensed notes only · ○ generic template o
 
 - [ ] `b1-call-stack` Call Stack — ◐ condensed notes · nested 0/3
 
-#### B1.25 · JavaScript Runtime & Engine — 0/2
+#### B1.25 · JavaScript Runtime & Engine — 2/2
 
-- [ ] `b1-js-engine` JavaScript Engine — ◐ condensed notes · nested 0/2
-- [ ] `b1-parsing-jit` Parsing, AST, Interpreter, JIT — ◐ condensed notes · nested 0/2
+- [x] `b1-js-engine` JavaScript Engine — ✅ lesson (3788 words) · nested 2/2
+- [x] `b1-parsing-jit` Parsing, AST, Interpreter, JIT — ✅ lesson (4895 words) · nested 2/2
 
-#### B1.26 · Event Loop — 0/3
+#### B1.26 · Event Loop — 3/3
 
-- [ ] `b1-event-loop` JavaScript Event Loop — ◐ condensed notes · nested 0/1
-- [ ] `b1-microtasks` Microtasks vs Macrotasks — ◐ condensed notes · nested 0/3
-- [ ] `b1-event-loop-puzzles` Event-Loop Interview Puzzles — ◐ condensed notes
+- [x] `b1-event-loop` JavaScript Event Loop — ✅ lesson (4756 words) · nested 1/1
+- [x] `b1-microtasks` Microtasks vs Macrotasks — ✅ lesson (3962 words) · nested 3/3
+- [x] `b1-event-loop-puzzles` Event-Loop Interview Puzzles — ✅ lesson (2433 words)
 
 #### B1.27 · Timers & Scheduling — 0/3
 
@@ -1085,14 +1085,14 @@ Legend: ✅ lesson written · ◐ condensed notes only · ○ generic template o
 - [ ] `b4-controlled` Controlled Components — ◐ condensed notes · nested 0/1
 - [ ] `b4-state-identity` Preserving & Resetting State — ○ template only · nested 0/3
 
-#### B4.3 · Rendering & Reconciliation — 0/9
+#### B4.3 · Rendering & Reconciliation — 6/9
 
-- [ ] `b4-rendering-lifecycle` Rendering Lifecycle — ◐ condensed notes · nested 0/5
-- [ ] `b4-reconciliation` Reconciliation — ◐ condensed notes · nested 0/1
-- [ ] `b4-virtual-dom` Virtual DOM — ◐ condensed notes · nested 0/1
-- [ ] `b4-fiber` React Fiber — ○ template only · nested 0/2
-- [ ] `b4-keys` Keys & Component Identity — ◐ condensed notes · nested 0/3
-- [ ] `b4-rendering-patterns` Rendering Patterns — ○ template only · nested 0/4
+- [x] `b4-rendering-lifecycle` Rendering Lifecycle — ✅ lesson (5948 words) · nested 5/5
+- [x] `b4-reconciliation` Reconciliation — ✅ lesson (4386 words) · nested 1/1
+- [x] `b4-virtual-dom` Virtual DOM — ✅ lesson (4082 words) · nested 1/1
+- [x] `b4-fiber` React Fiber — ✅ lesson (5117 words) · nested 2/2
+- [x] `b4-keys` Keys & Component Identity — ✅ lesson (4209 words) · nested 3/3
+- [x] `b4-rendering-patterns` Rendering Patterns — ✅ lesson (4444 words) · nested 4/4
 - [ ] `b4-pure-rendering` Pure Rendering — ○ template only · nested 0/1
 - [ ] `b4-strict-mode` Strict Mode — ○ template only · nested 0/1
 - [ ] `b4-modern-rendering` Modern React Rendering Model — ◐ condensed notes
@@ -1381,26 +1381,26 @@ Legend: ✅ lesson written · ◐ condensed notes only · ○ generic template o
 
 ### Track C — Java & Backend Engineering
 
-#### C1.1 · Syntax & Types — 0/3
+#### C1.1 · Syntax & Types — 3/3
 
-- [ ] `c1-syntax` Language Syntax & Compilation — ○ template only · nested 0/3
-- [ ] `c1-types` Data Types & Variables — ○ template only · nested 0/4
-- [ ] `c1-user-input` Scanner & User Input — ○ template only
+- [x] `c1-syntax` Language Syntax & Compilation — ✅ lesson (5898 words) · nested 3/3
+- [x] `c1-types` Data Types & Variables — ✅ lesson (7012 words) · nested 4/4
+- [x] `c1-user-input` Scanner & User Input — ✅ lesson (4368 words)
 
-#### C1.2 · Operators & Control Flow — 0/2
+#### C1.2 · Operators & Control Flow — 2/2
 
-- [ ] `c1-operators` Operators — ○ template only · nested 0/4
-- [ ] `c1-control-flow` Control Flow — ○ template only · nested 0/4
+- [x] `c1-operators` Operators — ✅ lesson (7370 words) · nested 4/4
+- [x] `c1-control-flow` Control Flow — ✅ lesson (7353 words) · nested 4/4
 
-#### C1.3 · Arrays & Methods — 0/2
+#### C1.3 · Arrays & Methods — 2/2
 
-- [ ] `c1-arrays` Arrays — ○ template only · nested 0/2
-- [ ] `c1-methods` Methods — ○ template only · nested 0/5
+- [x] `c1-arrays` Arrays — ✅ lesson (5791 words) · nested 2/2
+- [x] `c1-methods` Methods — ✅ lesson (7351 words) · nested 5/5
 
-#### C1.4 · Strings & Wrappers — 0/2
+#### C1.4 · Strings & Wrappers — 2/2
 
-- [ ] `c1-strings` Strings — ○ template only · nested 0/3
-- [ ] `c1-wrappers` Wrapper Classes — ○ template only · nested 0/2
+- [x] `c1-strings` Strings — ✅ lesson (6133 words) · nested 3/3
+- [x] `c1-wrappers` Wrapper Classes — ✅ lesson (5040 words) · nested 2/2
 
 #### C1.5 · OOP Foundations — 0/3
 
@@ -1523,14 +1523,14 @@ Legend: ✅ lesson written · ◐ condensed notes only · ○ generic template o
 
 - [ ] `c2-jvm-tuning` JVM Tuning Strategy — ○ template only · nested 0/4
 
-#### C3.1 · Concurrency Foundations — 0/2
+#### C3.1 · Concurrency Foundations — 2/2
 
-- [ ] `c3-processes-vs-threads` Processes vs Threads — ◐ condensed notes · nested 0/2
-- [ ] `c3-thread-safety` Thread Safety — ○ template only · nested 0/2
+- [x] `c3-processes-vs-threads` Processes vs Threads — ✅ lesson (4926 words) · nested 2/2
+- [x] `c3-thread-safety` Thread Safety — ✅ lesson (4117 words) · nested 2/2
 
-#### C3.2 · Thread API & Lifecycle — 0/1
+#### C3.2 · Thread API & Lifecycle — 1/1
 
-- [ ] `c3-thread-lifecycle` Thread Lifecycle — ◐ condensed notes · nested 0/8
+- [x] `c3-thread-lifecycle` Thread Lifecycle — ✅ lesson (7693 words) · nested 8/8
 
 #### C3.3 · Race Conditions & Safe State — 0/1
 
@@ -2477,30 +2477,30 @@ Legend: ✅ lesson written · ◐ condensed notes only · ○ generic template o
 
 ### Track D — LLD, System Design & Distributed Systems
 
-#### D1 · Object-Oriented Design — 0/7
+#### D1 · Object-Oriented Design — 7/7
 
-- [ ] `d1-encapsulation` Encapsulation — ◐ condensed notes
-- [ ] `d1-abstraction` Abstraction — ◐ condensed notes
-- [ ] `d1-composition-vs-inheritance` Composition vs Inheritance — ◐ condensed notes
-- [ ] `d1-solid` SOLID — ◐ condensed notes
-- [ ] `d1-coupling-cohesion` Coupling/Cohesion — ◐ condensed notes
-- [ ] `d1-interfaces` Interfaces (Design) — ◐ condensed notes
-- [ ] `d1-immutability` Immutability (Design) — ◐ condensed notes
+- [x] `d1-encapsulation` Encapsulation — ✅ lesson (4117 words)
+- [x] `d1-abstraction` Abstraction — ✅ lesson (3516 words)
+- [x] `d1-composition-vs-inheritance` Composition vs Inheritance — ✅ lesson (3606 words)
+- [x] `d1-solid` SOLID — ✅ lesson (3907 words)
+- [x] `d1-coupling-cohesion` Coupling/Cohesion — ✅ lesson (3482 words)
+- [x] `d1-interfaces` Interfaces (Design) — ✅ lesson (3580 words)
+- [x] `d1-immutability` Immutability (Design) — ✅ lesson (3370 words)
 
-#### D2 · Design Patterns — 0/13
+#### D2 · Design Patterns — 12/13
 
-- [ ] `d2-strategy` Strategy — ◐ condensed notes
-- [ ] `d2-factory` Factory — ◐ condensed notes
-- [ ] `d2-builder` Builder — ◐ condensed notes
-- [ ] `d2-observer` Observer — ◐ condensed notes
-- [ ] `d2-adapter` Adapter — ◐ condensed notes
-- [ ] `d2-decorator` Decorator — ◐ condensed notes
-- [ ] `d2-facade` Facade — ◐ condensed notes
-- [ ] `d2-command` Command — ◐ condensed notes
-- [ ] `d2-template-method` Template Method — ◐ condensed notes
-- [ ] `d2-chain-of-responsibility` Chain of Responsibility — ◐ condensed notes
-- [ ] `d2-state` State — ◐ condensed notes
-- [ ] `d2-proxy` Proxy — ◐ condensed notes
+- [x] `d2-strategy` Strategy — ✅ lesson (3981 words)
+- [x] `d2-factory` Factory — ✅ lesson (4128 words)
+- [x] `d2-builder` Builder — ✅ lesson (3744 words)
+- [x] `d2-observer` Observer — ✅ lesson (3987 words)
+- [x] `d2-adapter` Adapter — ✅ lesson (3548 words)
+- [x] `d2-decorator` Decorator — ✅ lesson (3784 words)
+- [x] `d2-facade` Facade — ✅ lesson (4176 words)
+- [x] `d2-command` Command — ✅ lesson (4022 words)
+- [x] `d2-template-method` Template Method — ✅ lesson (3452 words)
+- [x] `d2-chain-of-responsibility` Chain of Responsibility — ✅ lesson (3755 words)
+- [x] `d2-state` State — ✅ lesson (3670 words)
+- [x] `d2-proxy` Proxy — ✅ lesson (3829 words)
 - [ ] `d2-visitor` Visitor — ◐ condensed notes
 
 #### D3 · LLD Interview Problems — 0/14
@@ -2830,37 +2830,37 @@ Legend: ✅ lesson written · ◐ condensed notes only · ○ generic template o
 
 ### Track E — Applied AI Engineering
 
-#### E1.1 · Applied AI Landscape & Engineering Roles — 0/1
+#### E1.1 · Applied AI Landscape & Engineering Roles — 1/1
 
-- [ ] `e1-ai-landscape` Applied AI Engineering Landscape — ○ template only · nested 0/5
+- [x] `e1-ai-landscape` Applied AI Engineering Landscape — ✅ lesson (7384 words) · nested 5/5
 
-#### E1.2 · AI Power-User & Coding-Agent Workflows — 0/1
+#### E1.2 · AI Power-User & Coding-Agent Workflows — 1/1
 
-- [ ] `e1-ai-tool-mastery` AI Tool Mastery — ○ template only · nested 0/6
+- [x] `e1-ai-tool-mastery` AI Tool Mastery — ✅ lesson (6920 words) · nested 6/6
 
-#### E1.3 · Python Essentials for AI Engineers — 0/1
+#### E1.3 · Python Essentials for AI Engineers — 1/1
 
-- [ ] `e1-syntax` Python Essentials — ◐ condensed notes · nested 0/6
+- [x] `e1-syntax` Python Essentials — ✅ lesson (8664 words) · nested 6/6
 
-#### E1.4 · Python AI Backend & Data Stack — 0/1
+#### E1.4 · Python AI Backend & Data Stack — 1/1
 
-- [ ] `e1-async` Python AI Backend Engineering — ◐ condensed notes · nested 0/6
+- [x] `e1-async` Python AI Backend Engineering — ✅ lesson (10363 words) · nested 6/6
 
-#### E2.1 · Machine Learning Foundations — 0/1
+#### E2.1 · Machine Learning Foundations — 1/1
 
-- [ ] `e2-ml-vs-dl-vs-genai` ML, Deep Learning & Generative AI — ◐ condensed notes · nested 0/4
+- [x] `e2-ml-vs-dl-vs-genai` ML, Deep Learning & Generative AI — ✅ lesson (7096 words) · nested 4/4
 
-#### E2.2 · Learning Paradigms & Core ML Problems — 0/1
+#### E2.2 · Learning Paradigms & Core ML Problems — 1/1
 
-- [ ] `e2-supervised-unsupervised` Learning Paradigms — ◐ condensed notes · nested 0/6
+- [x] `e2-supervised-unsupervised` Learning Paradigms — ✅ lesson (6674 words) · nested 6/6
 
-#### E2.3 · Training, Generalization & Classical Evaluation — 0/1
+#### E2.3 · Training, Generalization & Classical Evaluation — 1/1
 
-- [ ] `e2-training-evaluation` Training & Evaluation — ○ template only · nested 0/6
+- [x] `e2-training-evaluation` Training & Evaluation — ✅ lesson (11092 words) · nested 6/6
 
-#### E2.4 · Math for Applied AI — Just in Time — 0/1
+#### E2.4 · Math for Applied AI — Just in Time — 1/1
 
-- [ ] `e2-math-foundations` Math for Applied AI — ○ template only · nested 0/5
+- [x] `e2-math-foundations` Math for Applied AI — ✅ lesson (8421 words) · nested 5/5
 
 #### E2.5 · Classical ML with scikit-learn — 0/1
 

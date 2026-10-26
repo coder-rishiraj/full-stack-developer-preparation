@@ -33,7 +33,7 @@ Plain JavaScript examples run in Node.js 22; React examples assume React 19.
 
 You put up a billboard and a photographer takes a picture of it. Next week you repaint the billboard. If someone asks the photographer what the billboard says, they look at the photo in their bag and tell you last week's message.
 
-Here the billboard is not one surface that gets repainted — that would be a single mutated variable, and a closure watching it would always be up to date. Instead, every update puts up a **new billboard** next to the old one. The photographer still has a photo of the first billboard, which never changed. Nothing is wrong with the photo; it is simply of the wrong billboard.
+Here the billboard is not one surface that gets repainted — that would be a single mutated variable, and a closure watching it would always be up to date. Instead, every update puts up a **new billboard** next to the old one. The photographer still has a photo of the first billboard, which never changed. Nothing is wrong with the photo; it is of the wrong billboard.
 
 That distinction is the whole lesson:
 

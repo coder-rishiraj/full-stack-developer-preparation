@@ -249,17 +249,10 @@ start:        50(30(20 40) 70(60(- 65) 80))
 delete 20:    50(30(- 40) 70(60(- 65) 80))
 delete 30:    50(40 70(60(- 65) 80))
 delete 50:    60(40 70(65 80))
-```
-
-The printed form `node(left right)` uses `-` for an empty subtree. Wait — the output above stops at four lines, but the program prints five. Let us look at the last step properly. Deleting `99`, which is not in the tree, walks down to a `null` and returns it unchanged, so the tree is the same as after deleting `50`. The full output is:
-
-```output
-start:        50(30(20 40) 70(60(- 65) 80))
-delete 20:    50(30(- 40) 70(60(- 65) 80))
-delete 30:    50(40 70(60(- 65) 80))
-delete 50:    60(40 70(65 80))
 delete 99:    60(40 70(65 80))
 ```
+
+The printed form `node(left right)` uses `-` for an empty subtree. Deleting `20` is the leaf case. Deleting `30`, which by then has only the right child `40`, splices `40` up into its place. Deleting `99`, which is not in the tree, walks down to a `null` and returns it unchanged, so the last two lines are identical.
 
 Trace the two-child case, deleting `50` from `50(40 70(60(- 65) 80))`:
 

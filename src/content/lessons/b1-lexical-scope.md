@@ -208,7 +208,7 @@ A **lexical environment** is the runtime object that represents one scope while 
 1. An **environment record** — a table mapping each name declared in that scope to its binding (its storage slot and current value, plus whether it has been initialised and whether it can be reassigned).
 2. An **outer reference** — a pointer to the environment of the enclosing scope.
 
-Following the outer references from any environment gives you exactly the scope chain from the previous section. In recent editions of the ECMAScript specification the two parts are merged — every environment record simply carries an `[[OuterEnv]]` field — but the model is the same, and "lexical environment" remains the common name in books and interviews.
+Following the outer references from any environment gives you exactly the scope chain from the previous section. In recent editions of the ECMAScript specification the two parts are merged — every environment record carries an `[[OuterEnv]]` field — but the model is the same, and "lexical environment" remains the common name in books and interviews.
 
 ### When environments are created
 
@@ -456,7 +456,7 @@ The alternatives are not really alternatives within JavaScript; they are techniq
 
 ## Interview perspective
 
-Interviewers use lexical scope to check that you understand *why* closures work, not just that they do. The strongest answers mention both the rule and the mechanism.
+Interviewers use lexical scope to check that you understand *why* closures work, not only that they do. The strongest answers mention both the rule and the mechanism.
 
 > [!INTERVIEW] Explaining lexical scope in one breath
 > "JavaScript resolves names by where code is written, not where it's called. Each function stores a reference to the environment it was created in; when called, its new environment links to that stored one, so lookup walks outward through the definition-time scopes. That's why closures keep access to outer variables after the outer function returns."

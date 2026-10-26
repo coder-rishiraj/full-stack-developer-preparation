@@ -103,6 +103,22 @@ Two further details complete the picture. A closure also keeps the chain of **ou
 > [!WARNING] The classic shared-context leak
 > A widely studied leak, first described by the Meteor team in 2013, had this shape: inside a function called every second, a helper closure referenced the previous version of a large object, and a separate method closure was stored on the new object. The method never used the previous object, but because both closures shared a Context, each new object kept the previous one alive, forming an ever-growing chain. The fix was to stop capturing the previous object (or to set the variable to `null` once it was no longer needed).
 
+```quiz
+Q: A function creates `bigData`, a closure `a` that uses `bigData`, and a closure `b` that uses only a small `id`. It returns `b` and discards `a`. In V8, is `bigData` kept alive while `b` is reachable?
+- [ ] No, because b never mentions bigData
+- [x] Yes, because a and b were created in the same scope and share one Context that holds bigData
+- [ ] No, because a was discarded, so bigData has no references
+- [ ] Yes, because every closure keeps all variables of every enclosing function
+> V8 puts a variable in the heap Context if any inner function captures it, and all closures from that scope share the Context. Because a captured bigData, the Context b keeps holds it. The last option overstates it: had no closure captured bigData, it would not be retained at all.
+
+Q: Why do reference cycles such as "element -> listener -> captured environment -> element" not leak in modern engines by themselves?
+- [ ] Engines detect cycles and break them with reference counting
+- [x] Tracing collectors free everything not reachable from a root, so an unreachable cycle is collected as a whole
+- [ ] Event listeners are always held weakly
+- [ ] Closures never capture DOM elements
+> Mark-and-sweep starts at the roots and marks what it can reach; a cycle with no path from a root is never marked and is freed. A leak needs something reachable, such as a listener list on window or a global registry, pointing into the cycle.
+```
+
 ## Leak patterns
 
 Almost every closure leak in real applications is one of the following patterns. In each, the closure is innocent; the bug is a reference that outlives its purpose.
@@ -165,9 +181,9 @@ done
 A closure that owns a `Map` — a memoize cache, a registry of handlers, a list of subscribers — keeps every entry for as long as the closure lives. When that closure is module-level, it lives for the whole session:
 
 ```javascript title="bounded-cache.mjs"
-function memoizeLast(fn, maxEntries) {
+function memoizeBounded(fn, maxEntries) {
   const cache = new Map();                    // Map keeps insertion order
-  return (key) => {
+  const memoized = (key) => {
     if (cache.has(key)) return cache.get(key);
     const value = fn(key);
     cache.set(key, value);
@@ -177,18 +193,23 @@ function memoizeLast(fn, maxEntries) {
     }
     return value;
   };
+  memoized.size = () => cache.size;           // exposed only for this demo
+  return memoized;
 }
 
-const describe = memoizeLast((page) => `page ${page} data`, 3);
-for (let page = 1; page <= 5; page++) describe(page);
-console.log(describe(5), '| page 1 cached?', describe(1) === 'page 1 data');
+let computed = 0;
+const loadPage = memoizeBounded((page) => { computed++; return `page ${page}`; }, 3);
+for (let page = 1; page <= 5; page++) loadPage(page);
+loadPage(5);                                  // cache hit
+loadPage(1);                                  // evicted earlier, so computed again
+console.log('entries kept:', loadPage.size(), '| computations:', computed);
 ```
 
 ```output
-page 5 data | page 1 cached? true
+entries kept: 3 | computations: 6
 ```
 
-The function caps the cache at three entries, so asking for five pages never holds more than three results. (The last call recomputes page 1, which had been evicted, and returns the same string — the check confirms correctness, not caching.) An unbounded version would keep every page ever requested. For a proper least-recently-used policy, see [[b1-impl-lru]].
+The cache never holds more than three results however many pages are requested. Requesting page 5 again is a hit; page 1 was evicted when page 4 arrived, so it is computed again — the price of the bound. An unbounded version would keep every page ever requested for as long as the closure lives. For a proper least-recently-used policy, see [[b1-impl-lru]].
 
 ### Subscriptions without cleanup in frameworks
 

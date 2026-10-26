@@ -1,9 +1,1110 @@
 {
+ "a1-arraylist": {
+  "summary": "Java's Collections Framework gives you ready-made lists, sets, maps, queues and heaps. You will learn how each one works inside, what every common operation costs, and how to choose the right one from the question your algorithm keeps asking — the skill behind almost every efficient interview solution.",
+  "difficulty": "beginner",
+  "minutes": 120,
+  "words": 8938,
+  "concepts": [
+   "a1-hashmap",
+   "a1-hashset",
+   "a1-treemap",
+   "a1-treeset",
+   "a1-deque",
+   "a1-priorityqueue"
+  ]
+ },
+ "a1-big-o": {
+  "summary": "Big-O notation is the precise language for describing how fast a cost grows, with constant factors and small terms deliberately removed. You will learn what O, Ω and Θ actually claim, how to simplify any cost expression correctly, how to read common recurrences, and when an asymptotic ranking can mislead you on real inputs.",
+  "difficulty": "beginner",
+  "minutes": 45,
+  "words": 4118,
+  "concepts": []
+ },
+ "a1-comparable-comparator": {
+  "summary": "Sorting, TreeMap, TreeSet and PriorityQueue all depend on one question — which of two objects comes first? You will learn how Java's Comparable and Comparator answer it, how to write comparisons that are correct for every input, and why a wrong comparator silently breaks sorts, trees and heaps.",
+  "difficulty": "beginner",
+  "minutes": 40,
+  "words": 3378,
+  "concepts": []
+ },
+ "a1-custom-classes": {
+  "summary": "Small custom types — a grid cell, an edge, an interval, a tree or trie node — make solutions readable and are required whenever an object becomes a map key or a heap element. You will learn when to write one, how records and static nested classes work, and the equals/hashCode and ordering rules that decide whether collections treat your objects correctly.",
+  "difficulty": "beginner",
+  "minutes": 45,
+  "words": 3046,
+  "concepts": []
+ },
+ "a1-java-streams-interviews": {
+  "summary": "Java streams describe a computation over a collection as a pipeline of steps — filter, transform, group, collect — instead of a hand-written loop. You will learn how a pipeline actually executes, the handful of operations and collectors that cover most interview tasks, what streams cost, and when a plain loop is the better choice.",
+  "difficulty": "intermediate",
+  "minutes": 45,
+  "words": 3746,
+  "concepts": []
+ },
+ "a1-java-syntax-competitive": {
+  "summary": "The small slice of Java you need to solve problems on an online judge or in a coding interview — the program skeleton, reading input, choosing int or long, printing efficiently and doing arithmetic modulo a prime. Getting these right means your time goes into the algorithm instead of fighting the language.",
+  "difficulty": "beginner",
+  "minutes": 50,
+  "words": 6109,
+  "concepts": []
+ },
+ "a1-recursion": {
+  "summary": "Recursion solves a problem by solving smaller copies of the same problem until one is small enough to answer directly. You will learn how to design a recursive method, what the call stack does while it runs, how to analyse its time and space, and how the same idea grows into tree traversal, backtracking and memoized dynamic programming.",
+  "difficulty": "beginner",
+  "minutes": 55,
+  "words": 3842,
+  "concepts": []
+ },
+ "a1-strings-stringbuilder": {
+  "summary": "Java strings cannot be changed after they are created, which makes them safe to share and hash but turns careless concatenation in a loop into an O(n²) bug. You will learn how String and StringBuilder work, how to read, compare and build text correctly, and the counting and two-pointer techniques behind most string interview problems.",
+  "difficulty": "beginner",
+  "minutes": 45,
+  "words": 3166,
+  "concepts": []
+ },
+ "a1-time-complexity": {
+  "summary": "Time complexity describes how the number of steps an algorithm performs grows as its input grows, and space complexity does the same for the extra memory it uses. You will learn to count both from code, account for hidden library costs, and use a problem's constraints to decide which solutions can possibly pass before you write them.",
+  "difficulty": "beginner",
+  "minutes": 55,
+  "words": 5576,
+  "concepts": [
+   "a1-space-complexity"
+  ]
+ },
+ "a2-array-string-traversal": {
+  "summary": "Almost every array and string problem is solved by walking the data in a deliberate order while keeping a little state. You will learn the core traversal patterns — single pass, backward pass, read/write compaction, reversal and parse-while-scanning — and how to choose between them so your solutions stay O(n).",
+  "difficulty": "beginner",
+  "minutes": 45,
+  "words": 4070,
+  "concepts": []
+ },
+ "a2-difference-arrays": {
+  "summary": "A difference array stores how much each element differs from the one before it, so adding a value to a whole range touches only two entries. You will learn why that works, how to apply thousands of range updates in O(1) each and rebuild the array with one prefix-sum pass, how to handle 1-based and half-open ranges, and when to switch to a sweep, a 2D grid version or a Fenwick tree.",
+  "difficulty": "intermediate",
+  "minutes": 35,
+  "words": 3524,
+  "concepts": []
+ },
+ "a2-frequency-counting": {
+  "summary": "Frequency counting answers \"how many of each?\" by tallying elements into an array or hash map in one pass, which turns comparisons that would otherwise need sorting or nested loops into O(n) work. You will learn how to choose the counting container, the standard counting idioms in Java, and the classic problems built on them — anagrams, first unique character, grouping, top-k and majority voting.",
+  "difficulty": "beginner",
+  "minutes": 45,
+  "words": 3197,
+  "concepts": []
+ },
+ "a2-hashing": {
+  "summary": "Hashing lets a program answer \"have I seen this before?\" and \"where did I see it?\" in constant average time, which turns many O(n²) search problems into a single O(n) pass. You will learn how a hash table works inside Java's HashMap, what makes a good key, and the core hashing patterns — membership, complement lookup, last-seen index, prefix sums with counts and sequence building.",
+  "difficulty": "intermediate",
+  "minutes": 60,
+  "words": 3784,
+  "concepts": []
+ },
+ "a2-intervals": {
+  "summary": "Interval problems work with ranges such as meetings, bookings and IP blocks, asking whether they overlap, how to merge them, how many can fit, and how many run at once. You will learn the overlap test, why sorting by start or by end turns quadratic pair checks into one linear pass, and the handful of techniques — merge, insert, intersect, greedy selection and sweep — that cover almost every interval question.",
+  "difficulty": "intermediate",
+  "minutes": 55,
+  "words": 4290,
+  "concepts": []
+ },
+ "a2-kadane": {
+  "summary": "Kadane's algorithm finds the contiguous subarray with the largest sum in a single pass, by asking at every index whether to extend the best run that ends there or start a new one. You will derive it from brute force, prove why the one-line recurrence is correct, handle the all-negative and empty-subarray cases, and adapt it to circular arrays, products, stock prices and 2D grids.",
+  "difficulty": "intermediate",
+  "minutes": 45,
+  "words": 4037,
+  "concepts": []
+ },
+ "a2-matrix": {
+  "summary": "A matrix is a grid of rows and columns, and grid problems — images, game boards, maps, spreadsheets — reward a small set of skills used precisely. You will learn how Java stores 2D arrays, how to traverse them in every common order, how to transform them in place, how to search sorted grids faster than cell by cell, and how to treat a grid as a graph for flood fill.",
+  "difficulty": "intermediate",
+  "minutes": 55,
+  "words": 4426,
+  "concepts": []
+ },
+ "a2-prefix-suffix": {
+  "summary": "Prefix and suffix techniques precompute what lies to the left and to the right of every index in one or two linear passes, so questions that would need a fresh scan for each index — range sums, \"everything except me\", water trapped between walls — are answered in O(1) each. You will learn to build these tables, combine them correctly at the boundaries, and recognise when a problem is asking for them.",
+  "difficulty": "beginner",
+  "minutes": 45,
+  "words": 3672,
+  "concepts": []
+ },
+ "a2-sliding-window": {
+  "summary": "A sliding window keeps a contiguous range of an array or string and updates a small summary of it as the range moves, so you can find the best subarray or substring under a constraint in O(n) instead of checking all O(n²) ranges. You will learn fixed and variable windows, the monotonicity condition that makes shrinking safe, and the standard variations interviewers build on.",
+  "difficulty": "intermediate",
+  "minutes": 60,
+  "words": 3988,
+  "concepts": []
+ },
+ "a2-sorting-based": {
+  "summary": "Many array problems become easy once the data is in order — duplicates sit next to each other, the closest values become neighbours, and a greedy choice or a two-pointer scan becomes provably correct. You will learn what sorting buys you, what it costs, how to choose the sort key, and how to recognise \"sort first, then scan\" problems.",
+  "difficulty": "beginner",
+  "minutes": 50,
+  "words": 4579,
+  "concepts": []
+ },
+ "a2-two-pointers": {
+  "summary": "The two-pointer technique keeps two indices into a sequence and moves them by a rule that provably discards impossible candidates, turning many O(n²) pair-checking problems into a single O(n) pass. You will learn the three families — converging, same-direction and two-sequence pointers — how to prove each move is safe, and how to recognise the pattern in new problems.",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 3938,
+  "concepts": []
+ },
+ "a3-binary-search-on-answer": {
+  "summary": "Binary search on the answer solves \"find the smallest (or largest) value that works\" problems by guessing a value, checking whether it works, and halving the range of guesses. You will learn to spot these problems, prove the monotonic property they rely on, write the feasibility check, and get the search boundaries right for both minimising and maximising.",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 4507,
+  "concepts": []
+ },
  "a3-binary-search": {
   "summary": "Binary search finds a value in sorted data by discarding half of the remaining candidates with every comparison. You will learn why sorted order makes that possible, how to write the loop so it is provably correct, and how to recognise binary-search problems that do not look like searching at all.",
   "difficulty": "beginner",
   "minutes": 45,
   "words": 3832,
   "concepts": []
+ },
+ "a3-comparator-sorting": {
+  "summary": "Comparator-based sorting lets you sort anything — records, intervals, strings, indices — by rules you define, using the library's O(n log n) sort. You will learn the comparator contract and why breaking it produces wrong results, how to build multi-key orderings safely in Java, and how a well-chosen ordering turns problems such as Largest Number and meeting-room scheduling into a sort plus a scan.",
+  "difficulty": "intermediate",
+  "minutes": 40,
+  "words": 3651,
+  "concepts": []
+ },
+ "a3-counting-sort": {
+  "summary": "Comparison sorts cannot beat O(n log n), but when keys are small integers or spread evenly over a known range, you can sort without comparing at all. You will learn counting sort, its stable prefix-sum form and its use inside radix sort, and bucket sort for evenly distributed values — including when each one is fast and when it breaks down.",
+  "difficulty": "intermediate",
+  "minutes": 45,
+  "words": 3975,
+  "concepts": [
+   "a3-bucket-sort"
+  ]
+ },
+ "a3-lower-upper-bounds": {
+  "summary": "Lower and upper bounds are the binary-search variants that find boundaries instead of matches — the first element at least x, the first element greater than x. You will learn to derive both from one invariant and use them for first and last occurrences, counts, insertion points, floor and ceiling queries.",
+  "difficulty": "intermediate",
+  "minutes": 40,
+  "words": 4281,
+  "concepts": []
+ },
+ "a3-merge-sort": {
+  "summary": "Merge sort sorts by splitting the data in half, sorting each half, and merging the two sorted halves in one linear pass. You will learn why that gives a guaranteed O(n log n) running time and a stable result, how to implement it on arrays and linked lists, and how its merge step solves problems such as counting inversions.",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 3965,
+  "concepts": []
+ },
+ "a3-quick-sort": {
+  "summary": "Quicksort sorts by choosing a pivot, rearranging the array so smaller elements sit left of it and larger ones right, and then sorting each side. You will learn how partitioning works and why it is correct, why the average running time is O(n log n) but the worst case is O(n²), and how random pivots, three-way partitioning and hybrid designs make quicksort fast and safe in practice.",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 3872,
+  "concepts": []
+ },
+ "a3-quickselect": {
+  "summary": "Quickselect finds the k-th smallest element of an unsorted array in O(n) average time by partitioning like quicksort but continuing into only one side. You will learn why discarding a side is safe, why the average cost is linear, how to avoid its O(n²) worst case, and when a heap is the better tool.",
+  "difficulty": "intermediate",
+  "minutes": 35,
+  "words": 2975,
+  "concepts": []
+ },
+ "a4-cycle-detection": {
+  "summary": "A linked list has a cycle when following next pointers never reaches null because some node points back to an earlier one. You will learn to detect a cycle with a hash set and then with Floyd's tortoise-and-hare in O(1) space, to prove why the second phase finds the exact node where the cycle begins, and to spot the same structure hiding in number sequences and arrays.",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 3909,
+  "concepts": []
+ },
+ "a4-fast-slow-pointers": {
+  "summary": "Fast/slow pointers walk a linked list with two references moving at different speeds, or with a fixed gap between them, so that one pass reveals positions you could otherwise find only by measuring the list first. You will learn why the technique works, how to get its loop guards exactly right, and how to recognise it in middle-of-list, nth-from-end, palindrome and cycle problems.",
+  "difficulty": "beginner",
+  "minutes": 40,
+  "words": 3394,
+  "concepts": []
+ },
+ "a4-intersection": {
+  "summary": "Two singly linked lists intersect when, from some node onwards, they share the very same nodes — a Y shape. You will learn why the shared part must run all the way to the end, how to find the first shared node with a hash set, by aligning lengths, or with the elegant pointer-switching trick, and why the comparison must be on node identity rather than value.",
+  "difficulty": "beginner",
+  "minutes": 35,
+  "words": 3212,
+  "concepts": []
+ },
+ "a4-lru-style": {
+  "summary": "An LRU cache keeps a bounded number of entries and, when full, evicts the one used least recently — with every lookup, insert and eviction in O(1). You will learn why neither a hash map nor a list can do this alone, how a hash map pointing into a doubly linked list with sentinels does it, and how the same move-to-front manipulation extends to LinkedHashMap, LFU caches and production cache design.",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 3324,
+  "concepts": []
+ },
+ "a4-merge-lists": {
+  "summary": "Merging combines sorted linked lists into one sorted list by repeatedly taking the smaller front node, rewiring existing nodes instead of copying them. You will learn the two-list merge with a dummy and a tail pointer, why it is linear, how to keep it stable, and how to scale it to k lists with a heap or with divide and conquer — plus the array and merge-sort variants built on the same idea.",
+  "difficulty": "beginner",
+  "minutes": 45,
+  "words": 3445,
+  "concepts": []
+ },
+ "a4-reversal": {
+  "summary": "Reversing a linked list means turning every next pointer around so the last node becomes the head, using only a few local references. You will learn the iterative three-pointer method and the invariant that makes it correct, the recursive version and its stack cost, and how to reverse only part of a list — the building block behind sublist, k-group, palindrome and reorder problems.",
+  "difficulty": "beginner",
+  "minutes": 45,
+  "words": 3492,
+  "concepts": []
+ },
+ "a4-singly-linked-lists": {
+  "summary": "A linked list stores a sequence as a chain of separate nodes joined by references instead of one contiguous block of memory. You will learn how singly and doubly linked lists are built, what each operation really costs, and the pointer habits — save before you rewire, use a dummy node — that make every later linked-list problem manageable.",
+  "difficulty": "beginner",
+  "minutes": 50,
+  "words": 4865,
+  "concepts": [
+   "a4-doubly-linked-lists"
+  ]
+ },
+ "a5-deque": {
+  "summary": "A deque (double-ended queue) lets you add and remove items at both ends in O(1). You will learn how it is stored as a circular array, how one Java class serves as stack, queue and deque, and the problems — palindromes, 0-1 BFS and sliding windows — where needing both ends is the whole point.",
+  "difficulty": "beginner",
+  "minutes": 35,
+  "words": 3006,
+  "concepts": []
+ },
+ "a5-monotonic-queue": {
+  "summary": "A monotonic queue is a deque kept sorted so that the maximum or minimum of a moving window is always at its front. You will learn how it extends the monotonic stack with expiry, why it gives sliding-window extremes in O(n), and how the same idea speeds up dynamic programming and prefix-sum problems.",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 3330,
+  "concepts": []
+ },
+ "a5-monotonic-stack": {
+  "summary": "A monotonic stack is an ordinary stack that you keep sorted by popping anything the new element makes useless. You will learn why that single rule answers \"nearest larger or smaller element\" questions for every index in O(n), how to choose the stack's direction, and how to apply it to histograms, digit removal and subarray-minimum sums.",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 3711,
+  "concepts": []
+ },
+ "a5-next-greater-smaller": {
+  "summary": "Next and previous greater or smaller element problems ask, for every position, where the nearest larger or smaller value is. You will learn the four variants, how a monotonic stack answers each in O(n), how to handle ties, circular arrays and online input, and how to recognise these problems behind stories about temperatures and stock prices.",
+  "difficulty": "intermediate",
+  "minutes": 45,
+  "words": 3121,
+  "concepts": []
+ },
+ "a5-parentheses": {
+  "summary": "Bracket and expression problems are where stacks earn their reputation. You will learn to validate, repair, measure and generate parenthesised strings, and then to evaluate arithmetic expressions — postfix, infix with precedence, parentheses and unary minus — using stacks, the shunting-yard algorithm and recursive descent.",
+  "difficulty": "intermediate",
+  "minutes": 70,
+  "words": 5447,
+  "concepts": [
+   "a5-expression"
+  ]
+ },
+ "a5-queue": {
+  "summary": "A queue hands items out in the order they arrived — first in, first out. You will learn how queues are stored efficiently, how to use Java's queue API without its traps, how to build a queue from two stacks, and why breadth-first search depends on a queue to find shortest paths.",
+  "difficulty": "beginner",
+  "minutes": 40,
+  "words": 3245,
+  "concepts": []
+ },
+ "a5-stack": {
+  "summary": "A stack is a collection where the last item added is the first one removed. You will learn why that single rule makes stacks the natural tool for nesting, undoing and deferring work, how to use one correctly in Java, and how to spot stack problems in interviews.",
+  "difficulty": "beginner",
+  "minutes": 40,
+  "words": 3614,
+  "concepts": []
+ },
+ "a6-bfs": {
+  "summary": "Breadth-first search visits a tree one level at a time, using a queue to remember which nodes are waiting. You will learn why a queue produces level order, how to process each level separately, and how to shape the output for level-order, zigzag, bottom-up and per-level summary problems.",
+  "difficulty": "intermediate",
+  "minutes": 55,
+  "words": 4102,
+  "concepts": [
+   "a6-level-order"
+  ]
+ },
+ "a6-binary-trees": {
+  "summary": "A binary tree stores data as a hierarchy in which every node has at most two children. You will learn the vocabulary and shapes of binary trees, how to represent and build them in Java, and the recursive way of thinking that solves almost every tree problem in a few lines.",
+  "difficulty": "beginner",
+  "minutes": 55,
+  "words": 5033,
+  "concepts": []
+ },
+ "a6-bst": {
+  "summary": "A binary search tree keeps its keys ordered so that every comparison discards a whole subtree, giving fast search, insertion and deletion on data that keeps changing. You will learn the ordering rule and why it makes inorder traversal sorted, implement every core operation, validate a tree correctly, and see why balance decides whether operations cost O(log n) or O(n).",
+  "difficulty": "intermediate",
+  "minutes": 65,
+  "words": 4642,
+  "concepts": []
+ },
+ "a6-dfs": {
+  "summary": "Depth-first search walks a tree by going as deep as possible along one branch before backing up. You will learn the three depth-first orders, how to pass information down and up a tree, how to collect root-to-leaf paths with backtracking, and how to write every traversal iteratively when recursion is not an option.",
+  "difficulty": "intermediate",
+  "minutes": 60,
+  "words": 4345,
+  "concepts": []
+ },
+ "a6-diameter": {
+  "summary": "The diameter of a tree is the longest path between any two nodes, and that path need not pass through the root. You will learn to find it in one O(n) pass by returning heights while recording the best path at each node, and to reuse the same pattern for maximum path sum, longest univalue path and diameters of general trees.",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 3568,
+  "concepts": []
+ },
+ "a6-height-depth": {
+  "summary": "Height and depth measure how tall a tree is and how far down a node sits, and they decide the cost of nearly every tree operation. You will learn both definitions and their edge-versus-node conventions, compute maximum and minimum depth correctly, and check whether a tree is balanced in a single O(n) pass.",
+  "difficulty": "beginner",
+  "minutes": 45,
+  "words": 3378,
+  "concepts": []
+ },
+ "a6-lca": {
+  "summary": "The lowest common ancestor of two nodes is the deepest node that has both of them in its subtree. You will learn the five-line postorder solution and exactly why it works, the variants that interviews build on it (parent pointers, missing nodes, BSTs, distances), and how binary lifting answers many queries in O(log n) each.",
+  "difficulty": "intermediate",
+  "minutes": 55,
+  "words": 5671,
+  "concepts": []
+ },
+ "a7-min-heap": {
+  "summary": "A heap keeps the smallest (or largest) element permanently at the front while still allowing fast inserts and removals. You will learn how a min heap and a max heap are laid out in a plain array, how sift-up and sift-down restore order in O(log n), why building a heap from n values takes only O(n), and how to get either kind from Java's PriorityQueue without comparator bugs.",
+  "difficulty": "intermediate",
+  "minutes": 60,
+  "words": 4922,
+  "concepts": [
+   "a7-max-heap"
+  ]
+ },
+ "b1-basic-debugging": {
+  "summary": "Debugging is a repeatable method for finding out why a program does something other than what you intended — reproduce the problem, observe real values, form a hypothesis, test it, and fix the cause. You will learn to read JavaScript error messages and stack traces, use logging deliberately, pause code with breakpoints and the `debugger` statement, and narrow down a bug instead of guessing.",
+  "difficulty": "beginner",
+  "minutes": 45,
+  "words": 3662,
+  "concepts": []
+ },
+ "b1-closure-memory": {
+  "summary": "A closure keeps its captured variables alive for as long as the function itself can be reached, which is usually what you want and occasionally a memory leak. You will learn exactly what a closure retains, why closures from the same scope can keep each other's data alive, the leak patterns that appear in long-running apps, and how to find and fix them.",
+  "difficulty": "advanced",
+  "minutes": 45,
+  "words": 3466,
+  "concepts": []
+ },
+ "b1-closure-puzzles": {
+  "summary": "Closure interview puzzles test whether you can simulate JavaScript's scopes and timing in your head rather than recall memorised answers. You will learn a four-question method for solving any closure puzzle and apply it to the patterns interviewers use most — shared and per-iteration bindings, factories, shadowing, getters, parameter scopes, this, and async timing.",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 2615,
+  "concepts": []
+ },
+ "b1-closures-in-loops": {
+  "summary": "When you create functions inside a loop, each function closes over the loop's variables — and whether those variables are shared or fresh on every iteration decides what the functions see later. You will learn exactly how var, let and const behave in each kind of loop, why the famous setTimeout loop prints 3, 3, 3, and every correct way to fix it.",
+  "difficulty": "intermediate",
+  "minutes": 40,
+  "words": 3291,
+  "concepts": [
+   "b1-var-loop-problem"
+  ]
+ },
+ "b1-closures": {
+  "summary": "A closure is a function together with the variables from the place where it was created, which it can keep reading and changing long after that place has finished running. You will learn how closures arise from lexical scope, what the engine keeps alive for them, and how to use them for private state, factories and callbacks.",
+  "difficulty": "intermediate",
+  "minutes": 55,
+  "words": 4728,
+  "concepts": [
+   "b1-closure-lifecycle",
+   "b1-private-state"
+  ]
+ },
+ "b1-const": {
+  "summary": "const declares a block-scoped binding that must be given a value immediately and can never be pointed at a different value. You will learn exactly what const does and does not protect, how to make objects genuinely read-only when you need to, and why \"const by default\" is the modern rule.",
+  "difficulty": "beginner",
+  "minutes": 35,
+  "words": 2364,
+  "concepts": []
+ },
+ "b1-ecmascript": {
+  "summary": "ECMAScript is the standard that defines the JavaScript language, and \"JavaScript\" is the everyday name for engines that implement it plus whatever their host adds. You will learn who writes the standard, how new features move from idea to specification, what the edition names like ES6 and ES2020 mean, and how to ship modern syntax to environments that do not support it yet.",
+  "difficulty": "beginner",
+  "minutes": 35,
+  "words": 2863,
+  "concepts": []
+ },
+ "b1-event-loop-puzzles": {
+  "summary": "Event-loop puzzles ask you to predict the order in which logs from synchronous code, promises, async functions and timers appear. You will learn a reliable step-by-step method for solving them on paper, practise it on ten puzzles of increasing difficulty, and learn to explain each answer the way interviewers want to hear it.",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 2433,
+  "concepts": []
+ },
+ "b1-event-loop": {
+  "summary": "The event loop is the scheduler that decides when each piece of JavaScript runs on a single thread — your script, promise callbacks, timers, clicks and network responses. You will learn its exact steps, why a promise callback beats a zero-millisecond timer, why long synchronous work freezes a page, and how browsers and Node.js differ.",
+  "difficulty": "intermediate",
+  "minutes": 55,
+  "words": 4756,
+  "concepts": [
+   "b1-run-to-completion"
+  ]
+ },
+ "b1-global-variables": {
+  "summary": "A global variable is a name that every script in a realm can see, and `globalThis` is the one portable way to reach the object that holds many of them. You will learn every way a global gets created, why the global scope is split into two stores, how browsers, workers and Node.js differ, and why modern code keeps its own names out of the global scope.",
+  "difficulty": "beginner",
+  "minutes": 50,
+  "words": 5398,
+  "concepts": []
+ },
+ "b1-hoisting-puzzles": {
+  "summary": "Hoisting puzzles are short programs whose output looks wrong until you apply the creation phase. You will learn a two-pass method for solving any of them and work through the patterns interviewers use — var shadowing, var and function name clashes, function expressions, the temporal dead zone, default parameters, block-level functions and classes.",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 3312,
+  "concepts": []
+ },
+ "b1-hoisting": {
+  "summary": "Hoisting is the name for a simple fact with surprising consequences — JavaScript sets up every declaration in a scope before running any of the scope's code. You will learn the two phases behind it, exactly what each kind of declaration (var, function, let, const, class, import) looks like before its line runs, and how to read code the way the engine does.",
+  "difficulty": "intermediate",
+  "minutes": 55,
+  "words": 4753,
+  "concepts": [
+   "b1-creation-vs-execution",
+   "b1-var-hoisting",
+   "b1-let-const-hoisting",
+   "b1-class-hoisting"
+  ]
+ },
+ "b1-js-engine": {
+  "summary": "A JavaScript engine is the program that turns your source code into running behaviour — it parses, compiles and executes code, keeps the call stack, and manages memory on a garbage-collected heap. You will learn what an engine does and does not do, how it differs from the browser or Node.js that hosts it, and how the heap holds your objects and closures.",
+  "difficulty": "intermediate",
+  "minutes": 45,
+  "words": 3788,
+  "concepts": [
+   "b1-engine-vs-host",
+   "b1-heap"
+  ]
+ },
+ "b1-let": {
+  "summary": "let declares a variable that can be reassigned but lives only inside the block where it is written. You will learn how block scope, the temporal dead zone and per-iteration loop bindings make let safer than var, and when let is the right choice over const.",
+  "difficulty": "beginner",
+  "minutes": 35,
+  "words": 2642,
+  "concepts": []
+ },
+ "b1-lexical-scope": {
+  "summary": "Lexical scope means a function can see the variables that surround it where it is written, not where it is called. You will learn how JavaScript builds that rule from nested environments linked into a scope chain, how inner names shadow outer ones, and why this one rule is what makes closures, module privacy and safe minification possible.",
+  "difficulty": "intermediate",
+  "minutes": 55,
+  "words": 4836,
+  "concepts": [
+   "b1-scope-chain",
+   "b1-lexical-environment",
+   "b1-shadowing"
+  ]
+ },
+ "b1-microtasks": {
+  "summary": "JavaScript hosts keep two kinds of waiting work — tasks (macrotasks) such as timers and events, and microtasks such as promise callbacks — and they run them with very different priority. You will learn exactly what goes into each queue, when each queue is processed, how promises and await create microtasks, and how to use that knowledge to batch work without freezing the page.",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 3962,
+  "concepts": [
+   "b1-macrotasks",
+   "b1-queue-microtask",
+   "b1-microtask-starvation"
+  ]
+ },
+ "b1-name-resolution": {
+  "summary": "Every time your code mentions a variable, the engine must work out which binding that name refers to — or decide that it refers to nothing. You will learn the exact resolution procedure, what happens on reads versus writes, why strict mode and typeof change the outcome, and how the global object, with and eval complicate the picture.",
+  "difficulty": "intermediate",
+  "minutes": 40,
+  "words": 3375,
+  "concepts": []
+ },
+ "b1-objects-as-values": {
+  "summary": "In JavaScript, every value that is not one of the seven primitives is an object — a mutable collection of properties with its own identity. You will learn what that means for creating, comparing, storing and passing objects, and why \"same contents\" and \"same object\" are different questions.",
+  "difficulty": "beginner",
+  "minutes": 45,
+  "words": 3150,
+  "concepts": []
+ },
+ "b1-parsing-jit": {
+  "summary": "Before your JavaScript runs, the engine parses it into a syntax tree, compiles it to bytecode, interprets it, and recompiles hot functions into optimised machine code based on what it has observed. You will learn each stage, why engines use several compilers instead of one, what makes optimised code fall back (deoptimise), and how V8's hidden classes and inline caches make property access fast.",
+  "difficulty": "advanced",
+  "minutes": 55,
+  "words": 4895,
+  "concepts": [
+   "b1-v8-architecture",
+   "b1-hidden-classes"
+  ]
+ },
+ "b1-primitive-types": {
+  "summary": "Every JavaScript value is either one of seven primitive types — string, number, bigint, boolean, undefined, null, symbol — or an object. You will learn what each primitive represents, how it behaves at its edges, and why knowing the exact type of a value prevents a large class of everyday bugs.",
+  "difficulty": "beginner",
+  "minutes": 60,
+  "words": 5475,
+  "concepts": [
+   "b1-type-string",
+   "b1-type-number",
+   "b1-type-bigint",
+   "b1-type-boolean",
+   "b1-type-undefined",
+   "b1-type-null",
+   "b1-type-symbol-overview"
+  ]
+ },
+ "b1-primitive-vs-reference": {
+  "summary": "JavaScript copies every value on assignment and when calling a function — but for an object, the value being copied is a reference, so both copies reach the same object. You will learn to predict exactly when data is shared, why primitives can never change, how to copy and update objects safely, and what \"call-by-sharing\" means for function arguments.",
+  "difficulty": "beginner",
+  "minutes": 55,
+  "words": 4522,
+  "concepts": [
+   "b1-object-mutability",
+   "b1-call-by-sharing"
+  ]
+ },
+ "b1-runtimes": {
+  "summary": "A JavaScript runtime is everything needed to run JavaScript in a particular place — an engine that executes the language, host APIs that connect it to the outside world, an event loop that schedules callbacks, and a way to load code. You will learn how browsers and Node.js assemble these pieces differently, why the same code can work in one and fail in the other, and how to tell language features from host APIs.",
+  "difficulty": "beginner",
+  "minutes": 50,
+  "words": 4299,
+  "concepts": [
+   "b1-runtime-engine",
+   "b1-runtime-browser",
+   "b1-runtime-web-apis",
+   "b1-runtime-nodejs"
+  ]
+ },
+ "b1-scope": {
+  "summary": "Scope is the part of a program where a name can be used. You will learn the four kinds of scope JavaScript has — global, module, function and block — which declarations belong to which, and how choosing the right one prevents name collisions, leaked variables and loop bugs.",
+  "difficulty": "beginner",
+  "minutes": 45,
+  "words": 4089,
+  "concepts": [
+   "b1-module-scope"
+  ]
+ },
+ "b1-script-loading": {
+  "summary": "A browser finds JavaScript by parsing HTML, and the way a `<script>` tag is written decides when its code downloads, when it runs, and what part of the page exists at that moment. You will learn how inline, external, `async`, `defer` and module scripts interact with the HTML parser, and how to choose the right one for application code, third-party tags and small bootstrap snippets.",
+  "difficulty": "beginner",
+  "minutes": 50,
+  "words": 4341,
+  "concepts": [
+   "b1-script-inline",
+   "b1-script-external",
+   "b1-script-async",
+   "b1-script-defer",
+   "b1-script-module"
+  ]
+ },
+ "b1-stale-closures": {
+  "summary": "A stale closure is a long-lived function that keeps reading variables from an earlier call or render after the program has moved on to newer ones. You will learn why this happens even though closures read live variables, how it shows up in plain JavaScript and in React components, and the four reliable ways to fix it.",
+  "difficulty": "intermediate",
+  "minutes": 45,
+  "words": 3231,
+  "concepts": [
+   "b1-closures-react"
+  ]
+ },
+ "b1-statements-expressions": {
+  "summary": "Every piece of JavaScript is either an expression, which produces a value, or a statement, which performs an action. You will learn to tell them apart, why the grammar needs the split, and how it explains everyday puzzles such as why `if` cannot go inside JSX braces, why an arrow function returning `{ name }` gives `undefined`, and why some function definitions are hoisted while others are not.",
+  "difficulty": "beginner",
+  "minutes": 30,
+  "words": 2730,
+  "concepts": []
+ },
+ "b1-syntax-basics": {
+  "summary": "JavaScript source code is text that the engine breaks into tokens — names, keywords, literals and punctuation — and assembles into statements before anything runs. You will learn the building blocks of that text, the rules for naming things, how comments, case, semicolons and strict mode work, and how to print output with the console so you can see what your code is doing.",
+  "difficulty": "beginner",
+  "minutes": 60,
+  "words": 5455,
+  "concepts": [
+   "b1-comments",
+   "b1-identifiers",
+   "b1-keywords",
+   "b1-case-sensitivity",
+   "b1-asi",
+   "b1-strict-mode",
+   "b1-console-output"
+  ]
+ },
+ "b1-tdz": {
+  "summary": "The temporal dead zone is the period between entering a scope and running a let, const or class declaration, during which the name exists but any use of it throws. You will learn why it exists, how to recognise every situation that triggers it — including typeof, default parameters, classes, switch statements and circular imports — and how to fix the bugs it reveals.",
+  "difficulty": "intermediate",
+  "minutes": 35,
+  "words": 2928,
+  "concepts": []
+ },
+ "b1-var-let-const": {
+  "summary": "JavaScript has three variable keywords because the language grew in two stages, and they differ in scope, behaviour before declaration, redeclaration, reassignment and how they interact with the global object. You will compare them side by side, learn the three kinds of scope they live in — function, block and global — and leave with a simple rule for choosing between them.",
+  "difficulty": "beginner",
+  "minutes": 45,
+  "words": 3446,
+  "concepts": [
+   "b1-function-scope-vars",
+   "b1-block-scope-vars",
+   "b1-global-scope-vars"
+  ]
+ },
+ "b1-var": {
+  "summary": "var is JavaScript's original way to declare a variable, and it behaves differently from let and const in four ways — function scope, hoisting to undefined, silent redeclaration and attachment to the global object. You will learn exactly how each works, why the design made sense in 1995, and how to read and safely modernise code that still uses it.",
+  "difficulty": "beginner",
+  "minutes": 35,
+  "words": 2944,
+  "concepts": []
+ },
+ "b1-variable-naming": {
+  "summary": "A variable's name is the first and often the only documentation a reader gets. You will learn the JavaScript naming conventions, how to choose names that state meaning, units and intent, which names collide with built-ins and browser globals, and how teams enforce and change names safely.",
+  "difficulty": "beginner",
+  "minutes": 35,
+  "words": 4031,
+  "concepts": []
+ },
+ "b1-variables": {
+  "summary": "A variable is a name bound to a value, and every variable in JavaScript goes through the same life — it is declared, initialised, and possibly reassigned. You will learn to separate the name from the value, to tell those three steps apart, and to predict which declarations JavaScript accepts and which it rejects before your code even runs.",
+  "difficulty": "beginner",
+  "minutes": 45,
+  "words": 4580,
+  "concepts": [
+   "b1-declaration",
+   "b1-initialization",
+   "b1-assignment",
+   "b1-redeclaration"
+  ]
+ },
+ "b1-what-is-javascript": {
+  "summary": "JavaScript is a high-level, dynamically typed, garbage-collected language that always runs inside a host such as a browser or Node.js. You will learn what kind of language it is, where it came from, which parts belong to the language and which to the host, and why those facts explain most of its surprising behaviour.",
+  "difficulty": "beginner",
+  "minutes": 35,
+  "words": 3265,
+  "concepts": []
+ },
+ "b4-fiber": {
+  "summary": "React Fiber is the engine inside React that does rendering work. It turns your component tree into a linked tree of \"fiber\" objects that React can walk one unit at a time, pause, resume or throw away. You will learn what a fiber holds, how the current and work-in-progress trees cooperate, and how the work loop turns a render into DOM changes while keeping the page responsive.",
+  "difficulty": "advanced",
+  "minutes": 60,
+  "words": 5117,
+  "concepts": [
+   "b4-fiber-tree",
+   "b4-fiber-work-loop"
+  ]
+ },
+ "b4-keys": {
+  "summary": "Keys are how you tell React which item is which when a list changes, and, more generally, how React decides whether a component is \"the same one\" as last render. You will learn how React uses keys, how to choose stable ones, exactly why array-index keys corrupt state, and how to use identity on purpose to keep or reset a component's state.",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 4209,
+  "concepts": [
+   "b4-stable-keys",
+   "b4-index-key-danger",
+   "b4-component-identity"
+  ]
+ },
+ "b4-reconciliation": {
+  "summary": "Reconciliation is the process React uses to compare the UI your components return now with what they returned last time, and decide which DOM nodes and component instances to keep, update, move, create or destroy. You will learn the rules React follows, the heuristics that make it fast, and how those rules decide whether a component keeps or loses its state.",
+  "difficulty": "intermediate",
+  "minutes": 55,
+  "words": 4386,
+  "concepts": [
+   "b4-diffing"
+  ]
+ },
+ "b4-rendering-lifecycle": {
+  "summary": "Every screen update in React goes through the same three steps — something triggers an update, React renders (calls your components to work out what the UI should be), and React commits (changes the real DOM), after which effects run. You will learn exactly what happens in each step, what does and does not cause a render, and why render must be pure while commit is where side effects belong.",
+  "difficulty": "intermediate",
+  "minutes": 60,
+  "words": 5948,
+  "concepts": [
+   "b4-render-vs-rerender",
+   "b4-render-triggers",
+   "b4-parent-child-rendering",
+   "b4-render-phase",
+   "b4-commit-phase"
+  ]
+ },
+ "b4-rendering-patterns": {
+  "summary": "Almost every React screen is built from a few rendering patterns — showing different UI depending on conditions, turning arrays into lists, nesting lists inside lists, and rendering nothing at all. You will learn each pattern, what JSX actually does with values like `0`, `false` and `null`, and how each choice affects state, keys and readability.",
+  "difficulty": "beginner",
+  "minutes": 50,
+  "words": 4444,
+  "concepts": [
+   "b4-conditional-rendering",
+   "b4-rendering-lists",
+   "b4-nested-lists",
+   "b4-rendering-null"
+  ]
+ },
+ "b4-virtual-dom": {
+  "summary": "The \"virtual DOM\" is React's in-memory description of the UI — a tree of plain JavaScript objects that your components return — which React compares between renders to decide what to change in the real DOM. You will learn what these objects look like, why React works this way, what it does and does not make faster, and where the approach runs out.",
+  "difficulty": "intermediate",
+  "minutes": 45,
+  "words": 4082,
+  "concepts": [
+   "b4-virtual-dom-limitations"
+  ]
+ },
+ "c1-arrays": {
+  "summary": "An array is Java's most basic container, a fixed-length row of values of one type stored side by side in memory. You will learn how to create, index, copy and compare arrays, how they behave as objects, how grids are built from arrays of arrays, and when to reach for ArrayList instead.",
+  "difficulty": "beginner",
+  "minutes": 60,
+  "words": 5791,
+  "concepts": [
+   "c1-multidimensional-arrays",
+   "c1-arrays-vs-arraylist"
+  ]
+ },
+ "c1-control-flow": {
+  "summary": "Control flow decides which statements run, how many times, and when to stop. You will learn how Java's if/else, switch, loops, break and continue work, what the compiler checks about them, how they compile to jumps, and how to choose the clearest form for each decision or repetition.",
+  "difficulty": "beginner",
+  "minutes": 75,
+  "words": 7353,
+  "concepts": [
+   "c1-if-else",
+   "c1-switch",
+   "c1-loops",
+   "c1-break-continue"
+  ]
+ },
+ "c1-methods": {
+  "summary": "A method is a named, reusable block of code that takes inputs and can return a result. You will learn how to declare and call methods, exactly what Java copies when it passes arguments, how the compiler chooses between overloaded methods, where variables are visible, how recursion uses the call stack, and how varargs methods accept any number of arguments.",
+  "difficulty": "beginner",
+  "minutes": 70,
+  "words": 7351,
+  "concepts": [
+   "c1-method-parameters",
+   "c1-method-overloading",
+   "c1-variable-scope",
+   "c1-recursion-java",
+   "c1-varargs"
+  ]
+ },
+ "c1-operators": {
+  "summary": "Operators are the verbs of Java expressions. You will learn how arithmetic, assignment, comparison, logical and bitwise operators really behave, including at their edges, and how precedence, associativity and evaluation order decide what a long expression means.",
+  "difficulty": "beginner",
+  "minutes": 70,
+  "words": 7370,
+  "concepts": [
+   "c1-arithmetic-operators",
+   "c1-relational-logical",
+   "c1-bitwise-operators",
+   "c1-operator-precedence"
+  ]
+ },
+ "c1-strings": {
+  "summary": "Text is the most common kind of data a Java program handles, and String is the class that represents it. You will learn why strings are immutable, how the core String methods behave at their edges, how the JVM shares string literals in the string pool, when to build text with StringBuilder, and why text must be compared with equals rather than ==.",
+  "difficulty": "beginner",
+  "minutes": 65,
+  "words": 6133,
+  "concepts": [
+   "c1-string-pool",
+   "c1-stringbuilder",
+   "c1-string-equals"
+  ]
+ },
+ "c1-syntax": {
+  "summary": "A Java program is plain text that the javac compiler turns into bytecode, which the Java Virtual Machine then loads and runs. You will learn the rules that text must follow, how a program starts at main(), how comments and packages organise code, and what happens between typing javac and seeing output.",
+  "difficulty": "beginner",
+  "minutes": 50,
+  "words": 5898,
+  "concepts": [
+   "c1-comments",
+   "c1-main-method",
+   "c1-packages"
+  ]
+ },
+ "c1-types": {
+  "summary": "Every value in a Java program has a type that the compiler knows before the program runs. You will learn the eight primitive types and how they behave at their limits, how reference types point to objects, how values convert between types, and when var lets the compiler write the type for you.",
+  "difficulty": "beginner",
+  "minutes": 60,
+  "words": 7012,
+  "concepts": [
+   "c1-primitives",
+   "c1-reference-types",
+   "c1-type-casting",
+   "c1-local-var"
+  ]
+ },
+ "c1-user-input": {
+  "summary": "Scanner turns the raw characters a user types into numbers, words and lines your program can use. You will learn how it reads input token by token, why mixing nextInt and nextLine loses data, how to validate input without crashing, and when to switch to BufferedReader or other input sources.",
+  "difficulty": "beginner",
+  "minutes": 40,
+  "words": 4368,
+  "concepts": []
+ },
+ "c1-wrappers": {
+  "summary": "Every Java primitive has a wrapper class that represents the same value as an object, so it can live in collections, be null, and carry utility methods. You will learn what the eight wrappers offer, how the compiler converts automatically between primitives and wrappers, why that conversion can throw NullPointerException or slow a loop down, and why == on two Integers is true for 127 and false for 128.",
+  "difficulty": "beginner",
+  "minutes": 55,
+  "words": 5040,
+  "concepts": [
+   "c1-autoboxing",
+   "c1-integer-cache"
+  ]
+ },
+ "c3-processes-vs-threads": {
+  "summary": "A process is an isolated running program; a thread is a path of execution inside a process that shares its memory. You will learn what each owns, what they cost, how Java maps its threads onto the operating system, how concurrency differs from parallelism, and when to reach for platform threads, virtual threads or separate processes.",
+  "difficulty": "beginner",
+  "minutes": 50,
+  "words": 4926,
+  "concepts": [
+   "c3-concurrency-vs-parallelism",
+   "c3-platform-vs-virtual-overview"
+  ]
+ },
+ "c3-thread-lifecycle": {
+  "summary": "Every Java thread moves through a fixed set of states, from creation to termination, and the Thread API is the set of controls for moving it between them. You will learn the six thread states and what causes each transition, how to define and start work correctly, how to wait for and cancel threads, and how daemon status, uncaught-exception handlers and ThreadLocal affect a thread's life and clean-up.",
+  "difficulty": "intermediate",
+  "minutes": 75,
+  "words": 7693,
+  "concepts": [
+   "c3-thread-states",
+   "c3-thread-vs-runnable",
+   "c3-start-vs-run",
+   "c3-sleep-yield-join",
+   "c3-interruption",
+   "c3-daemon-threads",
+   "c3-uncaught-handler",
+   "c3-threadlocal"
+  ]
+ },
+ "c3-thread-safety": {
+  "summary": "Code is thread-safe when it keeps behaving correctly no matter how the scheduler interleaves the threads that use it. You will learn why shared mutable state is the root of every thread-safety bug, how to recognise it, and the three ways to remove the danger — do not share, do not mutate, or coordinate access.",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 4117,
+  "concepts": [
+   "c3-shared-mutable-state",
+   "c3-thread-confinement"
+  ]
+ },
+ "d1-abstraction": {
+  "summary": "Abstraction lets code work with a simple model of a capability — \"save this document\", \"send this notification\" — without knowing how it is done underneath. You will learn how to choose what an abstraction exposes and hides, how abstractions leak, and when adding one makes a design worse instead of better.",
+  "difficulty": "beginner",
+  "minutes": 40,
+  "words": 3516,
+  "concepts": []
+ },
+ "d1-composition-vs-inheritance": {
+  "summary": "Inheritance and composition are the two ways one class can reuse another — by extending it or by holding it and delegating to it. You will learn what each one really couples you to, why \"favour composition over inheritance\" became standard advice, and how to recognise the cases where inheritance is still the right tool.",
+  "difficulty": "intermediate",
+  "minutes": 45,
+  "words": 3606,
+  "concepts": []
+ },
+ "d1-coupling-cohesion": {
+  "summary": "Coupling measures how much one module depends on others; cohesion measures how well the parts inside one module belong together. You will learn the kinds of each, how to recognise them in real code and in system architectures, and how to refactor towards modules that are focused inside and loosely connected outside.",
+  "difficulty": "intermediate",
+  "minutes": 45,
+  "words": 3482,
+  "concepts": []
+ },
+ "d1-encapsulation": {
+  "summary": "Encapsulation keeps an object's data and the rules about that data in one place, behind a small public surface, so no outside code can put the object into an invalid state. You will learn how to design that surface, how internals leak out by accident, and why encapsulation is about protecting invariants rather than writing getters and setters.",
+  "difficulty": "beginner",
+  "minutes": 40,
+  "words": 4117,
+  "concepts": []
+ },
+ "d1-immutability": {
+  "summary": "An immutable object cannot change after it is created; to \"change\" it, you create a new one. You will learn why that single rule removes whole categories of bugs — shared-state surprises, broken hash keys, thread races, replay errors — how to build immutable types correctly in Java, and where immutability costs more than it gives.",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 3370,
+  "concepts": []
+ },
+ "d1-interfaces": {
+  "summary": "In design, an interface is a contract between the code that needs a capability and the code that provides it. You will learn what a good contract states beyond method signatures, who should own it, how to keep it narrow and stable as it evolves, and when adding an interface is unnecessary ceremony.",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 3580,
+  "concepts": []
+ },
+ "d1-solid": {
+  "summary": "SOLID is five design principles — Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation and Dependency Inversion — for arranging classes so that a change in one place does not break things elsewhere. You will learn what problem each principle solves, how to spot its violation in real code, how to refactor towards it, and when applying it would be over-engineering.",
+  "difficulty": "intermediate",
+  "minutes": 60,
+  "words": 3907,
+  "concepts": []
+ },
+ "d2-adapter": {
+  "summary": "Adapter wraps a class whose interface does not fit, so your code can use it through the interface it already expects. You will learn how to write an adapter that translates units, data and errors rather than merely renaming methods, where adapters belong in an architecture, and how Adapter differs from Facade, Decorator and Proxy.",
+  "difficulty": "intermediate",
+  "minutes": 40,
+  "words": 3548,
+  "concepts": []
+ },
+ "d2-builder": {
+  "summary": "Builder lets you assemble a complex object one named step at a time and only hands it over, validated and usually immutable, when you call build(). You will learn the problems it fixes — telescoping constructors and half-built mutable objects — how to write a correct builder in Java, and when records, withers or named parameters are the better choice.",
+  "difficulty": "intermediate",
+  "minutes": 40,
+  "words": 3744,
+  "concepts": []
+ },
+ "d2-chain-of-responsibility": {
+  "summary": "Chain of Responsibility passes a request along a line of handler objects, each of which either deals with it or hands it to the next, so the sender never needs to know who will process it. You will learn the classic \"first capable handler wins\" form and the pipeline form used by servlet filters, Spring Security and web middleware, how to build and order chains, and the bugs that break them.",
+  "difficulty": "intermediate",
+  "minutes": 40,
+  "words": 3755,
+  "concepts": []
+ },
+ "d2-command": {
+  "summary": "Command turns a request into an object, so it can be stored, passed around, queued, logged, retried and undone instead of being executed on the spot. You will learn the roles in the pattern, build undo and redo for a text editor, combine commands into macros, and see how the same idea shows up as lambdas, job queues and the \"command\" side of CQRS.",
+  "difficulty": "intermediate",
+  "minutes": 40,
+  "words": 4022,
+  "concepts": []
+ },
+ "d2-decorator": {
+  "summary": "Decorator adds behaviour to an object by wrapping it in another object with the same interface, so features such as caching, retries, logging or compression can be stacked in any combination at runtime. You will learn how to build decorators, why their order matters, where they appear in Java I/O, web middleware and Spring, and how they differ from Adapter and Proxy.",
+  "difficulty": "intermediate",
+  "minutes": 45,
+  "words": 3784,
+  "concepts": []
+ },
+ "d2-facade": {
+  "summary": "Facade gives clients one simple entry point to a subsystem made of many cooperating classes, so a multi-step workflow such as checkout is written once instead of being re-assembled by every caller. You will learn how to design a facade's methods, keep it a thin coordinator rather than a god class, handle partial failure inside it, and tell it apart from Adapter, Mediator, Proxy and an API gateway.",
+  "difficulty": "intermediate",
+  "minutes": 45,
+  "words": 4176,
+  "concepts": []
+ },
+ "d2-factory": {
+  "summary": "Factories move the decision \"which concrete class do I create, and how?\" out of the code that uses the object and into one place. You will learn the three factory variants — Simple Factory, Factory Method and Abstract Factory — what problem each solves, and how they relate to static factory methods and dependency injection.",
+  "difficulty": "intermediate",
+  "minutes": 45,
+  "words": 4128,
+  "concepts": []
+ },
+ "d2-observer": {
+  "summary": "Observer lets one object announce \"something happened\" to any number of interested objects without knowing who they are. You will learn how to implement it correctly — including unsubscription, failure isolation and safe iteration — and how it relates to event emitters, Spring application events and publish/subscribe messaging.",
+  "difficulty": "intermediate",
+  "minutes": 45,
+  "words": 3987,
+  "concepts": []
+ },
+ "d2-proxy": {
+  "summary": "A proxy stands in for another object, implements the same interface, and decides whether, when and how calls reach the real thing — loading it lazily, checking permissions, caching results or forwarding over a network. You will learn the kinds of proxy, how to write them by hand and generate them at runtime with java.lang.reflect.Proxy, and how the same idea powers Hibernate lazy loading, RPC stubs and Spring's @Transactional.",
+  "difficulty": "intermediate",
+  "minutes": 45,
+  "words": 3829,
+  "concepts": []
+ },
+ "d2-state": {
+  "summary": "State lets an object change its behaviour when its internal state changes, by delegating each action to a state object and swapping that object on every transition. You will learn how it replaces status switches scattered across methods, how to model an order lifecycle with it, when an enum or a transition table is the better tool, and how to persist and protect state transitions in a real database.",
+  "difficulty": "intermediate",
+  "minutes": 45,
+  "words": 3670,
+  "concepts": []
+ },
+ "d2-strategy": {
+  "summary": "Strategy puts each variant of an algorithm behind one small interface so the code that uses it can swap variants without changing. You will learn how to refactor a growing switch into strategies, where the choice of strategy should be made, and how to tell Strategy apart from State and Template Method.",
+  "difficulty": "intermediate",
+  "minutes": 40,
+  "words": 3981,
+  "concepts": []
+ },
+ "d2-template-method": {
+  "summary": "Template Method puts the fixed outline of an algorithm in one base-class method and lets subclasses fill in only the steps that vary. You will learn how to write the template, the difference between abstract steps and hooks, why the template is usually final, where the pattern lives in the JDK, servlets and Spring, and when composition with Strategy is the better choice.",
+  "difficulty": "intermediate",
+  "minutes": 40,
+  "words": 3452,
+  "concepts": []
+ },
+ "e1-ai-landscape": {
+  "summary": "\"AI\" covers everything from hand-written rules to large language models, and an engineer who builds with it needs precise vocabulary and sound judgement. This lesson maps the field — how AI, machine learning, deep learning and generative AI relate, what foundation and multimodal models are, who does what on an AI team, how the model ecosystem is organised — and teaches the most important decision of all, whether a problem needs AI in the first place.",
+  "difficulty": "beginner",
+  "minutes": 60,
+  "words": 7384,
+  "concepts": [
+   "e1-ai-ml-dl-genai",
+   "e1-foundation-llm-multimodal",
+   "e1-ai-vs-ml-engineer",
+   "e1-model-ecosystem",
+   "e1-applied-ai-decision"
+  ]
+ },
+ "e1-ai-tool-mastery": {
+  "summary": "AI assistants and coding agents can multiply an engineer's output — or quietly fill a codebase and a report with confident mistakes. This lesson teaches the durable skills behind using them well: knowing what each kind of tool is for, comparing models on your own tasks, running coding agents safely in a repository, delegating with clear briefs, verifying everything, and checking AI research against its sources.",
+  "difficulty": "beginner",
+  "minutes": 65,
+  "words": 6920,
+  "concepts": [
+   "e1-assistant-ecosystems",
+   "e1-model-strengths",
+   "e1-coding-agents",
+   "e1-repository-assistance",
+   "e1-delegation-verification",
+   "e1-deep-research"
+  ]
+ },
+ "e1-async": {
+  "summary": "An AI backend spends most of its time waiting on model APIs, databases and networks, and must turn untrusted JSON into reliable typed data. This lesson teaches the Python stack for that job — asyncio, Pydantic, FastAPI, streaming with SSE and WebSockets, background job queues — plus the NumPy and pandas skills used to inspect the data those services produce.",
+  "difficulty": "intermediate",
+  "minutes": 120,
+  "words": 10363,
+  "concepts": [
+   "e1-pydantic",
+   "e1-fastapi",
+   "e1-python-streaming",
+   "e1-background-jobs",
+   "e1-numpy",
+   "e1-pandas"
+  ]
+ },
+ "e1-syntax": {
+  "summary": "Python is the working language of applied AI — model SDKs, data tools, evaluation scripts and AI backends are all written in it. This lesson teaches the parts of Python an AI engineer uses every day, from how names and objects behave to collections, functions, classes, type hints, packages and virtual environments, with the gotchas that cause real bugs.",
+  "difficulty": "beginner",
+  "minutes": 90,
+  "words": 8664,
+  "concepts": [
+   "e1-collections",
+   "e1-functions",
+   "e1-classes",
+   "e1-type-hints",
+   "e1-packages",
+   "e1-venvs"
+  ]
+ },
+ "e2-math-foundations": {
+  "summary": "The mathematics behind machine learning is smaller than it looks — vectors and dot products, a little probability, enough statistics to trust a measurement, derivatives and the chain rule, and the optimisers that use them. This lesson teaches each piece just in time, through the AI engineering task that needs it, with runnable Python so every formula becomes a calculation you can check.",
+  "difficulty": "intermediate",
+  "minutes": 95,
+  "words": 8421,
+  "concepts": [
+   "e2-linear-algebra",
+   "e2-probability",
+   "e2-statistics",
+   "e2-calculus-gradients",
+   "e2-optimization"
+  ]
+ },
+ "e2-ml-vs-dl-vs-genai": {
+  "summary": "Machine learning, deep learning and generative AI are three layers of the same idea — behaviour learned from data — that differ in what data they need, what they output, what they cost and how they fail. This lesson teaches how each works, the core vocabulary every later AI topic depends on (datasets, features, labels, parameters, hyperparameters, training, inference, generalization), and how to choose the right layer for a real task.",
+  "difficulty": "beginner",
+  "minutes": 85,
+  "words": 7096,
+  "concepts": [
+   "e2-datasets-features-labels",
+   "e2-parameters-hyperparameters",
+   "e2-training-vs-inference",
+   "e2-model-generalization"
+  ]
+ },
+ "e2-supervised-unsupervised": {
+  "summary": "Learning paradigms describe where a model's learning signal comes from — human labels, the structure of unlabelled data, the data itself, or rewards from acting in an environment. This lesson teaches supervised, unsupervised, self-supervised, semi-supervised and reinforcement learning, the core problem types they solve (regression, classification, clustering, ranking and recommendation), and how all of them combine in the life of a modern LLM.",
+  "difficulty": "beginner",
+  "minutes": 90,
+  "words": 6674,
+  "concepts": [
+   "e2-supervised",
+   "e2-unsupervised",
+   "e2-self-semi-supervised",
+   "e2-reinforcement-learning",
+   "e2-regression-classification",
+   "e2-clustering-ranking-recommendation"
+  ]
+ },
+ "e2-training-evaluation": {
+  "summary": "Training is the search for model parameters that make a loss small; evaluation is the honest measurement of whether those parameters work on data the model has never seen. This lesson teaches both halves — data splits, loss functions, gradient descent, overfitting and regularization, the bias–variance trade-off and classification metrics — with small runnable Python programs, so you can judge any model, from a fraud classifier to a fine-tuned LLM.",
+  "difficulty": "intermediate",
+  "minutes": 110,
+  "words": 11092,
+  "concepts": [
+   "e2-train-validation-test",
+   "e2-loss-functions",
+   "e2-gradient-descent",
+   "e2-overfit-underfit",
+   "e2-bias-variance",
+   "e2-classification-metrics"
+  ]
  }
 }

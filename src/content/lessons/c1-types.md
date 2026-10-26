@@ -368,16 +368,22 @@ This matters most with strings: `==` on two `String` variables may be `true` or 
 
 A reference variable can hold the special value **`null`**, meaning it points to no object. Comparing with `null` is fine; using it to call a method or read a field throws a `NullPointerException`:
 
-```java
-List<String> missing = null;
-System.out.println(missing == null);   // true
-System.out.println(missing.size());    // throws NullPointerException
+```java title="NullDemo.java"
+import java.util.List;
+
+public class NullDemo {
+    public static void main(String[] args) {
+        List<String> missing = null;
+        System.out.println(missing == null);   // comparing with null is fine
+        System.out.println(missing.size());    // following a null reference is not
+    }
+}
 ```
 
 ```output
 true
 Exception in thread "main" java.lang.NullPointerException: Cannot invoke "java.util.List.size()" because "missing" is null
-	at Refs.main(Refs.java:36)
+	at NullDemo.main(NullDemo.java:7)
 ```
 
 Since Java 14 (and on by default from Java 15), these **helpful NullPointerException messages** name exactly what was `null`. Local variable names appear only when the class was compiled with debug information (`javac -g`, which build tools and IDEs normally use); with plain `javac`, the message says `"<local6>"` instead, meaning local-variable slot 6.
@@ -676,6 +682,43 @@ var result = service.process(request);   // what is result? a reader cannot tell
 ```
 
 Here the explicit type documents something the reader needs. The guidance from the OpenJDK team is to choose variable names that carry the meaning, keep the scope of `var` variables small, and use explicit types where they help a reader. Many teams adopt a simple rule: `var` when the type appears on the same line, explicit types otherwise.
+
+```quiz
+Q: What does `long ms = 30 * 24 * 60 * 60 * 1000;` store in `ms`?
+- [ ] 2,592,000,000, because the variable is a `long`
+- [x] A wrong, negative value, because the multiplication overflows in `int` before widening
+- [ ] Nothing — the line does not compile
+- [ ] `Long.MAX_VALUE`, because overflow saturates
+> All operands are int literals, so the multiplication is done in int and 2,592,000,000 exceeds Integer.MAX_VALUE; the wrapped result (-1,702,967,296) is then widened to long. The receiving variable's type does not affect the arithmetic, and integer overflow wraps rather than saturating. Writing 30L fixes it.
+
+Q: A method receives a `List<String> list` parameter and runs `list = new ArrayList<>(); list.add("x");`. What does the caller see?
+- [ ] Its variable now refers to the new list containing "x"
+- [x] No change — its variable still refers to the original, unmodified list
+- [ ] Its original list now contains "x"
+- [ ] A compile error, because parameters cannot be reassigned
+> Java passes a copy of the reference. Reassigning the parameter changes only the method's copy, and the add goes to the new list. Had the method called list.add("x") before reassigning, the caller's list would have changed, because both references pointed at it.
+
+Q: What does `System.out.println((byte) 200);` print?
+- [ ] 127, because the value saturates at the byte maximum
+- [ ] 200
+- [x] -56
+- [ ] It throws an exception at run time
+> Narrowing between integer types keeps only the low 8 bits: 200 is 11001000 in binary, which as a signed two's-complement byte is -56. Saturation applies only when converting floating-point values to integers.
+
+Q: Which declaration compiles?
+- [ ] `var total;`
+- [ ] `var names = null;`
+- [x] `var scores = new int[] {90, 85};`
+- [ ] `var a = 1, b = 2;`
+> var needs an initialiser with a usable type. A bare array initialiser {90, 85} has no type on its own, but new int[] {...} does. Missing initialisers, null and compound declarations are all rejected.
+
+Q: `Object o = 42;` followed by `String s = (String) o;` — what happens?
+- [ ] A compile error: Integer cannot be converted to String
+- [x] It compiles, then throws ClassCastException at run time
+- [ ] `s` becomes the string "42"
+- [ ] `s` becomes null
+> The variable's static type is Object, which might hold a String, so the compiler allows the downcast. The JVM checks the real class at run time, finds Integer, and throws. Casting never converts values; use String.valueOf for that.
+```
 
 ## How it works internally
 

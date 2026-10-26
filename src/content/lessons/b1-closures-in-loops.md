@@ -139,7 +139,7 @@ The per-iteration copy is a feature of `for` loops with `let` declarations in th
 
 ### `for...of` and `for...in`
 
-These loops create a fresh binding for each iteration when the variable is declared with `let` or `const`, because each iteration simply evaluates the declaration anew with the next value. With `var`, there is again one shared binding.
+These loops create a fresh binding for each iteration when the variable is declared with `let` or `const`, because each iteration evaluates the declaration anew with the next value. With `var`, there is again one shared binding.
 
 ```javascript title="for-of.mjs"
 const shared = [];
@@ -369,7 +369,7 @@ for (var i = 0; i < buttons.length; i++) {
 
 Clicking any button logs `You clicked button 3`, and code that used `buttons[i]` inside the handler would get `undefined`, because index `3` is past the end. Changing `var` to `let` fixes both. A cleaner design often avoids the index entirely: `buttons.forEach((button, index) => ...)` or reading `event.currentTarget` inside the handler.
 
-> [!WARNING] Fix every loop, not just the one that failed
+> [!WARNING] Fix every loop, not only the one that failed
 > Files with older code often mix `var` and `let` loops. Fixing the loop that a bug report mentions and leaving a sibling `var` loop with a callback behind is a common way to ship the same bug twice. Search the file for `for (var` when you fix one; a linter rule such as ESLint's `no-var` prevents the problem entirely.
 
 ## In real systems

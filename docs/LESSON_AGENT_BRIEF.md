@@ -28,11 +28,17 @@ to turn one batch of curriculum topics into complete, textbook-quality lessons.
 
 - Create files only in `src/content/lessons/`, only for the topic ids in your batch. Do not edit
   any other file. Do not run `npm run lessons:sync`, `git`, `npm install`, or start servers.
+  Do not use any browser tools (neither the user's Chrome nor the app's browser pane) or visit
+  websites; describe browser-only behaviour from the specs and say it was not run.
 - `[[topic-id]]` links must be real ids. Use ids from the brief, or find them with
   `grep -rho "id: '[a-z0-9-]*'" src/content/curriculum/ | sort -u` (or grep for a keyword).
 - Technical accuracy comes first. If behaviour depends on a version, name the version. Prefer
   saying less over saying something wrong. Code must compile/run as shown, and shown output must
   be what the code really prints.
+- Verify outputs where you can: run JavaScript/TypeScript snippets with `node` (write them to a
+  temp file outside the repo, e.g. under `/tmp`), Python with `python3`, and Java with the
+  Homebrew JDK at `/opt/homebrew/opt/openjdk/bin/` (`javac --release 21`, then `java`). Do not
+  install or download anything. When output depends on scheduling or timing, say so in the text.
 - Depth follows importance: tier1 topics and topics with many nested concepts deserve the most
   thorough treatment. Nested-concept sections are usually 300–900 words each; they must make
   sense when shown on their own page.

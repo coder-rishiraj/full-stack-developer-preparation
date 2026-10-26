@@ -529,7 +529,7 @@ public void run() {
 
 What you must not do is catch the exception, log it, and carry on looping as if nothing happened. That thread can now never be stopped by interruption, so `executor.shutdownNow()` will not end it and the application will hang on shutdown. Wrapping it in an unchecked exception without restoring the flag loses the information in the same way.
 
-The example from this topic's original notes, which waits for a worker with a timeout and then interrupts it, is correct in spirit but needs two fixes to compile: `Thread` has no `join(long, TimeUnit)` method, and the `catch (InterruptedException e)` only compiles if something inside the `try` can throw it. A version that compiles, for Java 19+:
+A frequently copied version of the "wait with a timeout, then interrupt" pattern is correct in spirit but contains two errors that stop it compiling: `Thread` has no `join(long, TimeUnit)` method, and the `catch (InterruptedException e)` only compiles if something inside the `try` can throw it. A version that compiles, for Java 19+:
 
 ```java
 Thread worker = new Thread(() -> {
