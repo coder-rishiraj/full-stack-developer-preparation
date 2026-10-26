@@ -50,3 +50,8 @@ still unchecked (`node scripts/module-brief.mjs --batch N` shows what a batch co
 - `src/test/qc.test.ts` warns about graph-pack topics missing pattern-recognition and
   common-mistakes notes; it clears once the A8 graph lessons (batches 11–18) are written,
   because QC skips topics taught by a lesson.
+- `src/content/topics/_graph-reference-pack.ts`: the `ALL_CYCLES` template returns every cycle
+  twice (once per direction) — confirmed by running it. The a8-cycle-undirected lesson teaches a
+  corrected version; the pack (used by the printable graph handbook) still needs fixing.
+- `src/content/topics/_graph-core-pack.ts` says the parent check misses parallel edges; in testing
+  it reports them from the parent's side. Edge ids matter mainly for bridge-style algorithms.

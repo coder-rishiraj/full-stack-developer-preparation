@@ -9,12 +9,12 @@ them under an anchored heading.
 
 | Track | Name | Lessons | Done |
 |---|---|---|---|
-| A | DSA & Problem Solving | 50 / 125 | 40% |
-| B | Frontend Engineering | 39 / 647 | 6% |
-| C | Java & Backend Engineering | 12 / 329 | 4% |
-| D | LLD, System Design & Distributed Systems | 19 / 111 | 17% |
-| E | Applied AI Engineering | 8 / 77 | 10% |
-| | **All tracks** | **128 / 1289** | **10%** |
+| A | DSA & Problem Solving | 63 / 125 | 50% |
+| B | Frontend Engineering | 52 / 647 | 8% |
+| C | Java & Backend Engineering | 16 / 329 | 5% |
+| D | LLD, System Design & Distributed Systems | 20 / 111 | 18% |
+| E | Applied AI Engineering | 11 / 77 | 14% |
+| | **All tracks** | **162 / 1289** | **13%** |
 
 Legend: ✅ lesson written · ◐ condensed notes only · ○ generic template only · ✗ no content
 
@@ -77,7 +77,7 @@ Legend: ✅ lesson written · ◐ condensed notes only · ○ generic template o
 - [x] `a5-next-greater-smaller` Next Greater/Smaller Element — ✅ lesson (3121 words)
 - [x] `a5-parentheses` Parentheses/Expression Problems — ✅ lesson (5447 words) · nested 1/1
 
-#### A6 · Trees — 7/12
+#### A6 · Trees — 12/12
 
 - [x] `a6-binary-trees` Binary Trees — ✅ lesson (5033 words)
 - [x] `a6-dfs` Tree DFS — ✅ lesson (4345 words)
@@ -86,32 +86,32 @@ Legend: ✅ lesson written · ◐ condensed notes only · ○ generic template o
 - [x] `a6-height-depth` Tree Height/Depth — ✅ lesson (3378 words)
 - [x] `a6-diameter` Tree Diameter — ✅ lesson (3568 words)
 - [x] `a6-lca` Lowest Common Ancestor — ✅ lesson (5671 words)
-- [ ] `a6-path-problems` Tree Path Problems — ◐ condensed notes
-- [ ] `a6-construction` Tree Construction — ◐ condensed notes
-- [ ] `a6-serialization` Serialization/Deserialization — ◐ condensed notes
-- [ ] `a6-tree-views` Tree Views — ◐ condensed notes
-- [ ] `a6-nary-trees` N-ary Trees — ◐ condensed notes
+- [x] `a6-path-problems` Tree Path Problems — ✅ lesson (5136 words)
+- [x] `a6-construction` Tree Construction — ✅ lesson (4582 words)
+- [x] `a6-serialization` Serialization/Deserialization — ✅ lesson (4107 words)
+- [x] `a6-tree-views` Tree Views — ✅ lesson (4205 words)
+- [x] `a6-nary-trees` N-ary Trees — ✅ lesson (4203 words)
 
-#### A7 · Heaps — 1/6
+#### A7 · Heaps — 6/6
 
-- [x] `a7-min-heap` Min/Max Heap — ✅ lesson (4922 words) · nested 1/1
-- [ ] `a7-priority-queues` Priority Queues — ◐ condensed notes
-- [ ] `a7-top-k` Top-K Problems — ◐ condensed notes
-- [ ] `a7-k-way-merge` K-way Merge — ◐ condensed notes
-- [ ] `a7-running-median` Running Median — ◐ condensed notes
-- [ ] `a7-two-heap-pattern` Two-Heap Pattern — ◐ condensed notes
+- [x] `a7-min-heap` Min/Max Heap — ✅ lesson (4913 words) · nested 1/1
+- [x] `a7-priority-queues` Priority Queues — ✅ lesson (3499 words)
+- [x] `a7-top-k` Top-K Problems — ✅ lesson (3519 words)
+- [x] `a7-k-way-merge` K-way Merge — ✅ lesson (3397 words)
+- [x] `a7-running-median` Running Median — ✅ lesson (2988 words)
+- [x] `a7-two-heap-pattern` Two-Heap Pattern — ✅ lesson (3370 words)
 
-#### A8.1 · Graph Foundations & Representations — 0/1
+#### A8.1 · Graph Foundations & Representations — 1/1
 
-- [ ] `a8-graph-representation` Graph Representation — ◐ condensed notes · nested 0/8
+- [x] `a8-graph-representation` Graph Representation — ✅ lesson (8837 words) · nested 8/8
 
-#### A8.2 · BFS & DFS Traversal — 0/1
+#### A8.2 · BFS & DFS Traversal — 1/1
 
-- [ ] `a8-bfs` BFS (Breadth-First Search) — ◐ condensed notes · nested 0/6
+- [x] `a8-bfs` BFS (Breadth-First Search) — ✅ lesson (9383 words) · nested 6/6
 
-#### A8.3 · Grid Graphs & Pattern BFS — 0/1
+#### A8.3 · Grid Graphs & Pattern BFS — 1/1
 
-- [ ] `a8-multi-source-bfs` Multi-source BFS — ◐ condensed notes · nested 0/12
+- [x] `a8-multi-source-bfs` Multi-source BFS — ✅ lesson (12679 words) · nested 12/12
 
 #### A8.4 · Cycle Detection — Undirected Graphs — 0/1
 
@@ -258,30 +258,30 @@ Legend: ✅ lesson written · ◐ condensed notes only · ○ generic template o
 - [x] `b1-global-variables` Global Variables and globalThis — ✅ lesson (5398 words)
 - [x] `b1-variable-naming` Variable Naming / Best Practices — ✅ lesson (4031 words)
 
-#### B1.3 · Types & Values — 3/10
+#### B1.3 · Types & Values — 10/10
 
-- [x] `b1-primitive-types` Primitive Types — ✅ lesson (5475 words) · nested 7/7
+- [x] `b1-primitive-types` Primitive Types — ✅ lesson (5474 words) · nested 7/7
 - [x] `b1-objects-as-values` Objects as Values — ✅ lesson (3150 words)
-- [x] `b1-primitive-vs-reference` Primitive vs Reference Types — ✅ lesson (4522 words) · nested 2/3
-- [ ] `b1-typeof` typeof — ◐ condensed notes · nested 0/1
-- [ ] `b1-undefined-vs-null` undefined vs null vs Undeclared — ◐ condensed notes
-- [ ] `b1-nan-infinity` NaN, Infinity, and Safe Numbers — ◐ condensed notes · nested 0/2
-- [ ] `b1-autoboxing` Wrapper Objects / Autoboxing — ◐ condensed notes
-- [ ] `b1-truthy-falsy` Truthy and Falsy Values — ◐ condensed notes
-- [ ] `b1-instanceof` instanceof — ◐ condensed notes
-- [ ] `b1-tostringtag` Symbol.toStringTag — ◐ condensed notes
+- [x] `b1-primitive-vs-reference` Primitive vs Reference Types — ✅ lesson (4565 words) · nested 3/3
+- [x] `b1-typeof` typeof — ✅ lesson (3156 words) · nested 1/1
+- [x] `b1-undefined-vs-null` undefined vs null vs Undeclared — ✅ lesson (3173 words)
+- [x] `b1-nan-infinity` NaN, Infinity, and Safe Numbers — ✅ lesson (4072 words) · nested 2/2
+- [x] `b1-autoboxing` Wrapper Objects / Autoboxing — ✅ lesson (3347 words)
+- [x] `b1-truthy-falsy` Truthy and Falsy Values — ✅ lesson (3287 words)
+- [x] `b1-instanceof` instanceof — ✅ lesson (3012 words)
+- [x] `b1-tostringtag` Symbol.toStringTag — ✅ lesson (2442 words)
 
-#### B1.4 · Type Conversion & Coercion — 0/4
+#### B1.4 · Type Conversion & Coercion — 4/4
 
-- [ ] `b1-explicit-conversion` Explicit Conversion — ◐ condensed notes · nested 0/5
-- [ ] `b1-type-coercion` Type Coercion — ◐ condensed notes · nested 0/2
-- [ ] `b1-equality` Equality Operators — ◐ condensed notes · nested 0/3
-- [ ] `b1-to-primitive` Object-to-Primitive Conversion — ◐ condensed notes · nested 0/3
+- [x] `b1-explicit-conversion` Explicit Conversion — ✅ lesson (5658 words) · nested 5/5
+- [x] `b1-type-coercion` Type Coercion — ✅ lesson (4633 words) · nested 2/2
+- [x] `b1-equality` Equality Operators — ✅ lesson (4931 words) · nested 3/3
+- [x] `b1-to-primitive` Object-to-Primitive Conversion — ✅ lesson (4596 words) · nested 3/3
 
-#### B1.5 · Operators & Expressions — 0/11
+#### B1.5 · Operators & Expressions — 2/11
 
-- [ ] `b1-arithmetic-operators` Arithmetic Operators — ◐ condensed notes
-- [ ] `b1-assignment-operators` Assignment Operators — ◐ condensed notes
+- [x] `b1-arithmetic-operators` Arithmetic Operators — ✅ lesson (3957 words)
+- [x] `b1-assignment-operators` Assignment Operators — ✅ lesson (3586 words)
 - [ ] `b1-comparison-operators` Comparison Operators — ◐ condensed notes
 - [ ] `b1-logical-operators` Logical Operators — ◐ condensed notes · nested 0/1
 - [ ] `b1-unary-operators` Unary Operators — ◐ condensed notes · nested 0/1
@@ -1402,15 +1402,15 @@ Legend: ✅ lesson written · ◐ condensed notes only · ○ generic template o
 - [x] `c1-strings` Strings — ✅ lesson (6133 words) · nested 3/3
 - [x] `c1-wrappers` Wrapper Classes — ✅ lesson (5040 words) · nested 2/2
 
-#### C1.5 · OOP Foundations — 0/3
+#### C1.5 · OOP Foundations — 3/3
 
-- [ ] `c1-oop` OOP — ◐ condensed notes · nested 0/1
-- [ ] `c1-encapsulation` Encapsulation — ◐ condensed notes
-- [ ] `c1-classes` Classes/Interfaces — ◐ condensed notes · nested 0/4
+- [x] `c1-oop` OOP — ✅ lesson (5367 words) · nested 1/1
+- [x] `c1-encapsulation` Encapsulation — ✅ lesson (4680 words)
+- [x] `c1-classes` Classes/Interfaces — ✅ lesson (7553 words) · nested 4/4
 
-#### C1.6 · Inheritance & Polymorphism — 0/3
+#### C1.6 · Inheritance & Polymorphism — 1/3
 
-- [ ] `c1-inheritance` Inheritance — ◐ condensed notes · nested 0/2
+- [x] `c1-inheritance` Inheritance — ✅ lesson (6689 words) · nested 2/2
 - [ ] `c1-polymorphism` Polymorphism — ◐ condensed notes · nested 0/3
 - [ ] `c1-abstract-classes` Abstract Classes — ◐ condensed notes · nested 0/1
 
@@ -2487,7 +2487,7 @@ Legend: ✅ lesson written · ◐ condensed notes only · ○ generic template o
 - [x] `d1-interfaces` Interfaces (Design) — ✅ lesson (3580 words)
 - [x] `d1-immutability` Immutability (Design) — ✅ lesson (3370 words)
 
-#### D2 · Design Patterns — 12/13
+#### D2 · Design Patterns — 13/13
 
 - [x] `d2-strategy` Strategy — ✅ lesson (3981 words)
 - [x] `d2-factory` Factory — ✅ lesson (4128 words)
@@ -2501,7 +2501,7 @@ Legend: ✅ lesson written · ◐ condensed notes only · ○ generic template o
 - [x] `d2-chain-of-responsibility` Chain of Responsibility — ✅ lesson (3755 words)
 - [x] `d2-state` State — ✅ lesson (3670 words)
 - [x] `d2-proxy` Proxy — ✅ lesson (3829 words)
-- [ ] `d2-visitor` Visitor — ◐ condensed notes
+- [x] `d2-visitor` Visitor — ✅ lesson (5390 words)
 
 #### D3 · LLD Interview Problems — 0/14
 
@@ -2862,17 +2862,17 @@ Legend: ✅ lesson written · ◐ condensed notes only · ○ generic template o
 
 - [x] `e2-math-foundations` Math for Applied AI — ✅ lesson (8421 words) · nested 5/5
 
-#### E2.5 · Classical ML with scikit-learn — 0/1
+#### E2.5 · Classical ML with scikit-learn — 1/1
 
-- [ ] `e2-classical-ml` Classical ML Practice — ○ template only · nested 0/5
+- [x] `e2-classical-ml` Classical ML Practice — ✅ lesson (8666 words) · nested 5/5
 
-#### E2.6 · Neural Networks & PyTorch Fundamentals — 0/1
+#### E2.6 · Neural Networks & PyTorch Fundamentals — 1/1
 
-- [ ] `e2-neural-networks` Neural-Network Concepts — ◐ condensed notes · nested 0/5
+- [x] `e2-neural-networks` Neural-Network Concepts — ✅ lesson (9099 words) · nested 5/5
 
-#### E2.7 · Transformers & Attention Internals — 0/1
+#### E2.7 · Transformers & Attention Internals — 1/1
 
-- [ ] `e2-transformers` Transformer Architecture — ◐ condensed notes · nested 0/7
+- [x] `e2-transformers` Transformer Architecture — ✅ lesson (9416 words) · nested 7/7
 
 #### E2.8 · LLM Inference, Training Lifecycle & Limitations — 0/1
 

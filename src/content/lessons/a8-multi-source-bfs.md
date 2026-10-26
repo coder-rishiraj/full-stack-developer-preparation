@@ -936,7 +936,7 @@ public class SnakesAndLadders {
 
 ### Tracing the 6 × 6 board
 
-Flattening gives three jumps: square 2 has a ladder to 15 (bottom row, second cell), square 14 has a ladder to 35 (third row from the bottom, reading right to left, so the `35` at column 1 is label 14), and square 17 has a snake to 13. The BFS finds this four-roll route:
+Flattening gives three jumps: square 2 has a ladder to 15 (bottom row, second cell), square 14 has a ladder to 35 (the third row from the bottom reads left to right again, starting at label 13, so the `35` at column 1 is label 14), and square 17 has a snake to 13 (the `13` at column 4 of the same row). The BFS finds this four-roll route:
 
 | Roll | From | Lands on | Jump | Now at |
 |---|---|---|---|---|

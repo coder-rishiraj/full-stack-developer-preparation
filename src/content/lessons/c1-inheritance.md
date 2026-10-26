@@ -184,6 +184,12 @@ An override is a promise: code that holds a `Reader` reference must be able to c
 Here is what the compiler says when the access or exception rule is broken. Both subclasses below try to override `public String read() throws IOException`:
 
 ```java title="Rules.java"
+import java.io.IOException;
+
+class Reader {
+    public String read() throws IOException { return ""; }
+}
+
 class QuietReader extends Reader {
     @Override
     String read() { return "quiet"; }          // narrower access
@@ -197,6 +203,8 @@ Rules.java:9: error: read() in QuietReader cannot override read() in Reader
   attempting to assign weaker access privileges; was public
 1 error
 ```
+
+With the same `Reader` class above it in the file:
 
 ```java title="Rules.java"
 class AnyReader extends Reader {
@@ -267,7 +275,7 @@ class Breaker extends Locked {}
 ```
 
 ```output
-Rules.java:9: error: cannot inherit from final Locked
+Rules.java:10: error: cannot inherit from final Locked
 class Breaker extends Locked {}
                       ^
 Rules.java:6: error: read() in Sub cannot override read() in Reader

@@ -179,7 +179,7 @@ implementation examples (Python or TypeScript), with realistic data and failure 
   is clearer, say what surrounds it.
 - Show output in an ` ```output ` block right after the code.
 - Comments explain *why*, not what. Keep lines under ~90 characters.
-- Java 21, modern JavaScript (ES2023), TypeScript 5, React 19, Spring Boot 3, PostgreSQL 16,
+- Java 21, modern JavaScript (ES2023), TypeScript 5.x–6.x (the repo compiler), React 19, Spring Boot 3, PostgreSQL 16,
   Python 3.12 unless the topic is specifically about an older version.
 - After each significant block, walk through it in prose: what happens first, what each part is
   for, what would break if you changed it.

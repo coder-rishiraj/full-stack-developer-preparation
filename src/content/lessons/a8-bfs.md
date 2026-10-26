@@ -340,15 +340,6 @@ public class ShortestPath {
 dist:   [0, 1, 1, 2, 3, 4, 2, -1, -1]
 parent: [-1, 0, 0, 1, 3, 4, 2, -1, -1]
 0 -> 5: [0, 1, 3, 4, 5]
-0 -> 8: [0, 1, 3, 4, 5]
-```
-
-Wait — check the last line against the code before trusting it. `path(8, ...)` sees `dist[8] == -1` and returns an empty list, so the program actually prints `0 -> 8: []`. The real output is:
-
-```output
-dist:   [0, 1, 1, 2, 3, 4, 2, -1, -1]
-parent: [-1, 0, 0, 1, 3, 4, 2, -1, -1]
-0 -> 5: [0, 1, 3, 4, 5]
 0 -> 8: []
 ```
 
@@ -495,7 +486,7 @@ The method has two natural hook points. Code placed before the loop runs in **pr
 
 ### Dry run
 
-Trace the calls from 0. Indentation shows recursion depth, and the clock ticks on every entry and exit.
+Trace the calls from 0. The call-stack column shows the recursion depth, and the clock ticks on every entry and exit.
 
 | Event | Call stack after the event | Note |
 |---|---|---|

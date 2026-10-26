@@ -32,7 +32,7 @@ true
 true
 ```
 
-The user who has not typed anything yet, and the one who typed only spaces, both get the badge. The comparison `typed == 0` uses **loose equality**, which converts the string to a number before comparing, and `Number('')` and `Number('   ')` are both `0`. The code did exactly what the language specifies; the specification just does not match what the author meant.
+The user who has not typed anything yet, and the one who typed only spaces, both get the badge. The comparison `typed == 0` uses **loose equality**, which converts the string to a number before comparing, and `Number('')` and `Number('   ')` are both `0`. The code did exactly what the language specifies; the specification does not match what the author meant.
 
 JavaScript gives you several ways to compare values, and they answer subtly different questions:
 
@@ -550,5 +550,5 @@ The underlying choice is between comparing **identity** and comparing **contents
 - `==` follows a fixed conversion algorithm — booleans become numbers first, strings become numbers next to numbers, objects become primitives — and `null` equals only `undefined`; the one widely accepted use is `x == null`.
 - `NaN` is never equal to itself under `===` or `==`, and `-0` equals `0`; `Object.is` and SameValueZero-based APIs handle these cases.
 - Every equality operator compares objects by identity, so comparing contents needs a deliberate shallow or deep comparison.
-- Inequality operators are just negated equality; most inequality bugs are logic errors such as joining two `!==` checks with `||`.
+- Inequality operators are negated equality; most inequality bugs are logic errors such as joining two `!==` checks with `||`.
 - When two values of "the same data" have different types, fix the types at the boundary rather than switching to loose comparison.

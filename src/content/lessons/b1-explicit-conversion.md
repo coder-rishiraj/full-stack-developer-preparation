@@ -292,7 +292,7 @@ console.log(BigInt('9007199254740993'));
 
 This is why database IDs and other 64-bit integers often travel as strings in JSON. If you convert such an ID with `Number()`, two different IDs can become the same number. Keep large IDs as strings, or convert with `BigInt()`, which is exact for integers of any size but rejects decimals (`BigInt('1.5')` throws a `SyntaxError`, `BigInt(1.5)` a `RangeError`). See [[b1-safe-integers]] and [[b1-bigint]].
 
-### Validating, not just converting
+### Validating, not only converting
 
 Because `Number()` turns blanks into `0` and garbage into `NaN`, a converter for user input needs two extra checks: reject empty text, and reject results that are not finite.
 
@@ -568,7 +568,7 @@ console.log(a - -b);
 7
 ```
 
-`a + b` joins text. `+a + +b` converts both sides first and then adds. `a + +b` converts only `b`, but because `a` is still a string, the binary `+` joins `'3'` and `4` into `'34'`. The last line works only because binary `-` always converts to numbers. Each of these is correct JavaScript, and each is easy to misread in a code review. Many teams therefore prefer `Number(a) + Number(b)` in application code and reserve unary `+` for short, obviously numeric expressions. Whichever you choose, unary `+` has the same validation needs as `Number()`: an empty string still becomes `0`.
+`a + b` joins text. `+a + +b` converts both sides first and then adds. `a + +b` converts only `b`, but because `a` is still a string, the binary `+` joins `'3'` and `4` into `'34'`. The last line works only because binary `-` always converts to numbers. Each of these is correct JavaScript, and each is easy to misread in a code review. Many teams therefore prefer `Number(a) + Number(b)` in application code and reserve unary `+` for short, clearly numeric expressions. Whichever you choose, unary `+` has the same validation needs as `Number()`: an empty string still becomes `0`.
 
 ```quiz
 Q: What is the value of `'5' + + '5'`?
@@ -728,7 +728,7 @@ The general trade-off is between **leniency** and **safety**. Lenient converters
 
 **"What is `parseInt(0.0000005)`?"** `5`, because the number stringifies as `'5e-7'`. The follow-up is "how should you truncate a number?" — `Math.trunc`.
 
-**"Name the values `Number()` turns into 0, and into NaN."** Zero: `0`, `false`, `null`, `''`, whitespace-only strings, `[]`, `['0']`. NaN: `undefined`, non-numeric strings, `{}`, arrays with more than one element. Explaining that `null` and `undefined` differ for historical reasons shows you know it is not logical, just specified.
+**"Name the values `Number()` turns into 0, and into NaN."** Zero: `0`, `false`, `null`, `''`, whitespace-only strings, `[]`, `['0']`. NaN: `undefined`, non-numeric strings, `{}`, arrays with more than one element. Explaining that `null` and `undefined` differ for historical reasons shows you know it is specified rather than logical.
 
 **"How would you convert untrusted input to a number?"** Check type and emptiness, convert with `Number()`, verify with `Number.isFinite` (and `Number.isInteger` or a range check if the domain needs it), and return an error or default otherwise. Mention doing it once at the boundary.
 

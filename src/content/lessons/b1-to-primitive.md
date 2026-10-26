@@ -49,7 +49,7 @@ Subtracting two dates gives the number of milliseconds between them, comparing t
 
 The reason is a step the language performs every time an operator receives an object. Operators are defined on **primitive values** — strings, numbers, bigints, booleans, symbols, `null` and `undefined`. Before an operator can do its work, any object operand must be converted to a primitive. The specification calls this step **ToPrimitive**, and objects control its result through three methods: `valueOf`, `toString` and `Symbol.toPrimitive`. Dates override these methods; plain objects inherit generic defaults.
 
-Understanding ToPrimitive explains a whole family of puzzling results — `[] + {}`, `[] == 0`, `String(obj)` differing from `obj + ''` — and it lets you design objects, such as money or durations, that work sensibly with operators. Just as importantly, it tells you when *not* to: an explicit method is often clearer than an object that quietly turns into a number.
+Understanding ToPrimitive explains a whole family of puzzling results — `[] + {}`, `[] == 0`, `String(obj)` differing from `obj + ''` — and it lets you design objects, such as money or durations, that work sensibly with operators. Equally important, it tells you when *not* to: an explicit method is often clearer than an object that quietly turns into a number.
 
 ## Before you start
 
@@ -171,7 +171,7 @@ This order explains why plain objects and arrays end up as strings even in numer
 
 ### The default does nothing useful
 
-Every ordinary object inherits `Object.prototype.valueOf`, which simply returns the object itself. Because the result is an object, ToPrimitive treats it as "no answer" and moves on to `toString`. So for plain objects, arrays and functions, `valueOf` is effectively invisible.
+Every ordinary object inherits `Object.prototype.valueOf`, which returns the object itself. Because the result is an object, ToPrimitive treats it as "no answer" and moves on to `toString`. So for plain objects, arrays and functions, `valueOf` is effectively invisible.
 
 A few built-ins override it with something meaningful:
 

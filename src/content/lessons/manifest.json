@@ -331,6 +331,13 @@
   "words": 4642,
   "concepts": []
  },
+ "a6-construction": {
+  "summary": "Tree construction rebuilds a binary tree from a description of it — usually two traversal orders, sometimes one traversal plus an ordering rule. You will learn which descriptions determine a tree uniquely, how preorder and inorder combine to rebuild it in O(n), and the related constructions interviews ask for, from BSTs out of preorder to maximum binary trees with a monotonic stack.",
+  "difficulty": "intermediate",
+  "minutes": 55,
+  "words": 4582,
+  "concepts": []
+ },
  "a6-dfs": {
   "summary": "Depth-first search walks a tree by going as deep as possible along one branch before backing up. You will learn the three depth-first orders, how to pass information down and up a tree, how to collect root-to-leaf paths with backtracking, and how to write every traversal iteratively when recursion is not an option.",
   "difficulty": "intermediate",
@@ -359,14 +366,148 @@
   "words": 5671,
   "concepts": []
  },
+ "a6-nary-trees": {
+  "summary": "An N-ary tree lets each node have any number of children, which is how file systems, the DOM, organisation charts and JSON documents are shaped. You will learn how to represent one in Java, how every binary-tree traversal generalises by looping over children, and how to serialise N-ary trees or convert them to binary trees with the left-child right-sibling trick.",
+  "difficulty": "intermediate",
+  "minutes": 45,
+  "words": 4203,
+  "concepts": []
+ },
+ "a6-path-problems": {
+  "summary": "Tree path problems ask about sums, counts or sequences along paths, and almost all of them fall into four families depending on where a path may start and end. You will learn to classify a path problem in one question, carry state down for root-to-leaf paths, count downward paths in O(n) with prefix sums, and handle paths that bend or run in any direction.",
+  "difficulty": "intermediate",
+  "minutes": 55,
+  "words": 5136,
+  "concepts": []
+ },
+ "a6-serialization": {
+  "summary": "Serialisation turns a tree of objects into a flat string or byte sequence that can be stored or sent, and deserialisation rebuilds the identical tree from it. You will learn why null markers make a single preorder sequence enough, how to write and test a codec in both preorder and level-order styles, and how the same encoding solves problems such as finding duplicate subtrees.",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 4107,
+  "concepts": []
+ },
+ "a6-tree-views": {
+  "summary": "Tree view problems ask which nodes you would see when looking at a drawn tree from one side — from the right, from above, from below, or column by column. You will learn to give every node a row and a column, and to solve right and left views, top and bottom views, vertical order, boundary traversal and maximum width as small variations of BFS or DFS over those coordinates.",
+  "difficulty": "intermediate",
+  "minutes": 45,
+  "words": 4205,
+  "concepts": []
+ },
+ "a7-k-way-merge": {
+  "summary": "K-way merge combines k sorted sequences into one sorted sequence by repeatedly taking the smallest of their current front elements. You will learn why a min heap of k fronts does this in O(N log k), what each heap entry must carry, how to merge lazily over streams, and how the same idea solves k-th smallest in a sorted matrix, k smallest pairs and the smallest range covering k lists.",
+  "difficulty": "intermediate",
+  "minutes": 55,
+  "words": 3397,
+  "concepts": []
+ },
  "a7-min-heap": {
   "summary": "A heap keeps the smallest (or largest) element permanently at the front while still allowing fast inserts and removals. You will learn how a min heap and a max heap are laid out in a plain array, how sift-up and sift-down restore order in O(log n), why building a heap from n values takes only O(n), and how to get either kind from Java's PriorityQueue without comparator bugs.",
   "difficulty": "intermediate",
   "minutes": 60,
-  "words": 4922,
+  "words": 4913,
   "concepts": [
    "a7-max-heap"
   ]
+ },
+ "a7-priority-queues": {
+  "summary": "A priority queue hands out the most important waiting item next, not the oldest. You will learn the abstract operations, why a binary heap is the standard implementation, how to design comparators with tie-breakers in Java, how to \"change\" a priority with lazy deletion, and how to recognise scheduling and best-next problems that a priority queue solves.",
+  "difficulty": "intermediate",
+  "minutes": 55,
+  "words": 3499,
+  "concepts": []
+ },
+ "a7-running-median": {
+  "summary": "The running median is the middle value of a stream that keeps growing, available after every new number. You will learn why re-sorting is too slow, how splitting the numbers into a max heap of the lower half and a min heap of the upper half gives O(log n) inserts and O(1) median queries, and how to keep the two halves correctly ordered and balanced.",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 2988,
+  "concepts": []
+ },
+ "a7-top-k": {
+  "summary": "Top-K problems ask for the k largest, smallest, most frequent or closest items without sorting everything. You will learn why a bounded heap of size k solves them in O(n log k) time and O(k) memory, how to pick the heap's polarity and tie-breaking correctly, and when quickselect or bucket sort is the better tool.",
+  "difficulty": "intermediate",
+  "minutes": 55,
+  "words": 3519,
+  "concepts": []
+ },
+ "a7-two-heap-pattern": {
+  "summary": "The two-heap pattern uses a pair of heaps when a problem needs fast access to two different extremes at once — the boundary between a lower and an upper group, or the best item among those that a second ordering has made available. You will learn both forms, how to keep them consistent with invariants, how lazy deletion lets them handle sliding windows, and how to recognise the pattern in scheduling problems such as IPO.",
+  "difficulty": "advanced",
+  "minutes": 55,
+  "words": 3370,
+  "concepts": []
+ },
+ "a8-bfs": {
+  "summary": "Breadth-first search (BFS) and depth-first search (DFS) are the two ways to visit every vertex of a graph, and almost every graph algorithm is built on one of them. You will learn how each works and why, how BFS finds shortest paths in unweighted graphs, how to write DFS with and without recursion, how to choose between them, and how to deep-copy a graph — including one with shared nodes.",
+  "difficulty": "intermediate",
+  "minutes": 90,
+  "words": 9383,
+  "concepts": [
+   "a8-bfs-shortest-unweighted",
+   "a8-dfs",
+   "a8-iterative-dfs",
+   "a8-bfs-vs-dfs",
+   "a8-clone-graph",
+   "a8-clone-dag"
+  ]
+ },
+ "a8-graph-representation": {
+  "summary": "A graph is a set of things plus the connections between them, and before any graph algorithm can run you must choose how to store those connections in memory. You will learn the vocabulary of graphs, the three standard representations and their costs, how to pick one from a problem's constraints, and two classic representation problems — reachability for every pair (transitive closure) and building a graph from a list of degrees.",
+  "difficulty": "beginner",
+  "minutes": 75,
+  "words": 8837,
+  "concepts": [
+   "a8-graph-types",
+   "a8-graph-terminology",
+   "a8-adjacency-list",
+   "a8-adjacency-matrix",
+   "a8-edge-list",
+   "a8-when-to-use-representation",
+   "a8-transitive-closure",
+   "a8-graph-from-degrees"
+  ]
+ },
+ "a8-multi-source-bfs": {
+  "summary": "Multi-source BFS finds, for every cell or vertex, the distance to the nearest of many starting points in a single breadth-first pass. Around it sits the whole family of grid and state-space BFS problems — flood fill, islands, rotting oranges, word ladders, water jugs, 0-1 BFS — which all come down to modelling the problem as a graph and choosing the right traversal.",
+  "difficulty": "intermediate",
+  "minutes": 120,
+  "words": 12679,
+  "concepts": [
+   "a8-grid-as-graph",
+   "a8-rotten-oranges",
+   "a8-pacific-atlantic",
+   "a8-flood-fill",
+   "a8-number-of-islands",
+   "a8-shortest-path-binary-matrix",
+   "a8-steps-by-knight",
+   "a8-snakes-and-ladders",
+   "a8-word-ladder",
+   "a8-water-jug",
+   "a8-0-1-bfs",
+   "a8-boggle"
+  ]
+ },
+ "b1-arithmetic-operators": {
+  "summary": "JavaScript's arithmetic operators look like a calculator's, but they first convert their operands, follow IEEE 754 floating-point rules, and treat `+` as both addition and string concatenation. You will learn exactly what each operator does, why `'20' + 5` is `'205'` while `'20' - 5` is `15`, and how to write arithmetic that stays correct with user input, negatives, money and BigInt.",
+  "difficulty": "beginner",
+  "minutes": 40,
+  "words": 3957,
+  "concepts": []
+ },
+ "b1-assignment-operators": {
+  "summary": "Assignment operators write a value into a variable or property. You will learn what can appear on the left of `=`, why assignment is itself an expression, how compound operators like `+=` read and write the target exactly once, and how logical assignment (`||=`, `&&=`, `??=`) can skip the write entirely.",
+  "difficulty": "beginner",
+  "minutes": 35,
+  "words": 3586,
+  "concepts": []
+ },
+ "b1-autoboxing": {
+  "summary": "Primitives such as strings and numbers have no properties of their own, yet `'hi'.toUpperCase()` works. You will learn how JavaScript briefly wraps a primitive in a wrapper object to look up a property, why anything you store on that wrapper disappears, and why you should never create wrapper objects yourself with `new`.",
+  "difficulty": "beginner",
+  "minutes": 35,
+  "words": 3347,
+  "concepts": []
  },
  "b1-basic-debugging": {
   "summary": "Debugging is a repeatable method for finding out why a program does something other than what you intended — reproduce the problem, observe real values, form a hypothesis, test it, and fix the cause. You will learn to read JavaScript error messages and stack traces, use logging deliberately, pause code with breakpoints and the `debugger` statement, and narrow down a bug instead of guessing.",
@@ -422,6 +563,17 @@
   "words": 2863,
   "concepts": []
  },
+ "b1-equality": {
+  "summary": "JavaScript has several ways to ask \"are these the same?\" — strict `===`, loose `==`, their negations `!==` and `!=`, `Object.is`, and the rule that `Map`, `Set` and `includes` use internally. You will learn the exact algorithm behind each, why `[] == ![]` is true and `NaN === NaN` is false, why two identical-looking objects are never equal, and which comparison to reach for in real code.",
+  "difficulty": "beginner",
+  "minutes": 50,
+  "words": 4931,
+  "concepts": [
+   "b1-strict-equality",
+   "b1-abstract-equality",
+   "b1-inequality"
+  ]
+ },
  "b1-event-loop-puzzles": {
   "summary": "Event-loop puzzles ask you to predict the order in which logs from synchronous code, promises, async functions and timers appear. You will learn a reliable step-by-step method for solving them on paper, practise it on ten puzzles of increasing difficulty, and learn to explain each answer the way interviewers want to hear it.",
   "difficulty": "intermediate",
@@ -436,6 +588,19 @@
   "words": 4756,
   "concepts": [
    "b1-run-to-completion"
+  ]
+ },
+ "b1-explicit-conversion": {
+  "summary": "Explicit conversion is turning a value into a string, number or boolean on purpose, at a point you choose, instead of letting an operator guess. You will learn exactly what `String()`, `Number()`, `Boolean()`, `parseInt`, `parseFloat` and unary `+` do with every kind of input, where each one surprises people, and how to convert untrusted input safely at the edges of a program.",
+  "difficulty": "beginner",
+  "minutes": 55,
+  "words": 5658,
+  "concepts": [
+   "b1-string-conversion",
+   "b1-number-conversion",
+   "b1-boolean-conversion",
+   "b1-parseint-parsefloat",
+   "b1-unary-plus"
   ]
  },
  "b1-global-variables": {
@@ -463,6 +628,13 @@
    "b1-let-const-hoisting",
    "b1-class-hoisting"
   ]
+ },
+ "b1-instanceof": {
+  "summary": "The `instanceof` operator answers \"is this object a kind of X?\" by searching the object's prototype chain for `X.prototype`. You will learn the exact algorithm, why it returns surprising answers for primitives, values from other realms and objects whose prototype was changed, how `Symbol.hasInstance` customises it, and which check to use instead when `instanceof` is the wrong tool.",
+  "difficulty": "intermediate",
+  "minutes": 30,
+  "words": 3012,
+  "concepts": []
  },
  "b1-js-engine": {
   "summary": "A JavaScript engine is the program that turns your source code into running behaviour — it parses, compiles and executes code, keeps the call stack, and manages memory on a garbage-collected heap. You will learn what an engine does and does not do, how it differs from the browser or Node.js that hosts it, and how the heap holds your objects and closures.",
@@ -510,6 +682,16 @@
   "words": 3375,
   "concepts": []
  },
+ "b1-nan-infinity": {
+  "summary": "JavaScript numbers include special values — NaN, Infinity, -Infinity and -0 — and a limited range of exactly representable integers. You will learn where these values come from, why NaN is not equal to itself, how to detect each one reliably with Number.isNaN, Number.isFinite and Object.is, and how to keep them from silently corrupting calculations.",
+  "difficulty": "beginner",
+  "minutes": 50,
+  "words": 4072,
+  "concepts": [
+   "b1-number-isnan",
+   "b1-object-is"
+  ]
+ },
  "b1-objects-as-values": {
   "summary": "In JavaScript, every value that is not one of the seven primitives is an object — a mutable collection of properties with its own identity. You will learn what that means for creating, comparing, storing and passing objects, and why \"same contents\" and \"same object\" are different questions.",
   "difficulty": "beginner",
@@ -531,7 +713,7 @@
   "summary": "Every JavaScript value is either one of seven primitive types — string, number, bigint, boolean, undefined, null, symbol — or an object. You will learn what each primitive represents, how it behaves at its edges, and why knowing the exact type of a value prevents a large class of everyday bugs.",
   "difficulty": "beginner",
   "minutes": 60,
-  "words": 5475,
+  "words": 5474,
   "concepts": [
    "b1-type-string",
    "b1-type-number",
@@ -546,8 +728,9 @@
   "summary": "JavaScript copies every value on assignment and when calling a function — but for an object, the value being copied is a reference, so both copies reach the same object. You will learn to predict exactly when data is shared, why primitives can never change, how to copy and update objects safely, and what \"call-by-sharing\" means for function arguments.",
   "difficulty": "beginner",
   "minutes": 55,
-  "words": 4522,
+  "words": 4565,
   "concepts": [
+   "b1-immutability-primitives",
    "b1-object-mutability",
    "b1-call-by-sharing"
   ]
@@ -622,6 +805,57 @@
   "difficulty": "intermediate",
   "minutes": 35,
   "words": 2928,
+  "concepts": []
+ },
+ "b1-to-primitive": {
+  "summary": "Operators such as `+`, `-`, `<` and `==` only work on primitive values, so when you hand them an object, JavaScript first asks the object to turn itself into a primitive. You will learn the exact algorithm the engine follows, the \"hint\" that decides between a number and a string, and how `valueOf`, `toString` and `Symbol.toPrimitive` let your own objects take part — or deliberately refuse to.",
+  "difficulty": "intermediate",
+  "minutes": 45,
+  "words": 4596,
+  "concepts": [
+   "b1-valueof",
+   "b1-object-tostring",
+   "b1-symbol-toprimitive"
+  ]
+ },
+ "b1-tostringtag": {
+  "summary": "`Symbol.toStringTag` is the well-known symbol that controls the name `Object.prototype.toString` prints, as in `[object Map]`. You will learn how that string is built, which built-ins set a tag and which get one from internal slots, how to give your own classes a readable tag for debugging, and why a tag must never be trusted as proof of type.",
+  "difficulty": "intermediate",
+  "minutes": 25,
+  "words": 2442,
+  "concepts": []
+ },
+ "b1-truthy-falsy": {
+  "summary": "JavaScript conditions accept any value, not only `true` and `false`, and decide with a fixed rule that sorts every value into \"truthy\" or \"falsy\". You will learn the exact falsy list, every place the rule is applied, why `&&`, `||` and `??` return values rather than booleans, and how to avoid the bugs that come from treating `0` and `''` as \"missing\".",
+  "difficulty": "beginner",
+  "minutes": 35,
+  "words": 3287,
+  "concepts": []
+ },
+ "b1-type-coercion": {
+  "summary": "Type coercion is JavaScript converting a value from one type to another so that an operation can proceed — sometimes because you asked, far more often because an operator decided to. You will learn which operators convert their operands and into what, why `'5' - 1` is `4` but `'5' + 1` is `'51'`, how relational comparisons treat strings and `null`, and how to keep coercion from silently corrupting data.",
+  "difficulty": "beginner",
+  "minutes": 45,
+  "words": 4633,
+  "concepts": [
+   "b1-implicit-coercion",
+   "b1-plus-coercion"
+  ]
+ },
+ "b1-typeof": {
+  "summary": "typeof is the operator that tells you, at run time, which broad category a value belongs to. You will learn its eight possible answers, the special cases (null, functions, undeclared variables), what it cannot tell you, and which tools to combine it with for reliable type checks.",
+  "difficulty": "beginner",
+  "minutes": 40,
+  "words": 3156,
+  "concepts": [
+   "b1-typeof-null"
+  ]
+ },
+ "b1-undefined-vs-null": {
+  "summary": "JavaScript has three different kinds of \"nothing\" — undefined (no value was given), null (deliberately empty) and undeclared (no such variable exists). You will learn where each comes from, how they behave differently in comparisons, conversions, defaults and JSON, and how to choose and check for them in real code.",
+  "difficulty": "beginner",
+  "minutes": 40,
+  "words": 3173,
   "concepts": []
  },
  "b1-var-let-const": {
@@ -742,6 +976,18 @@
    "c1-arrays-vs-arraylist"
   ]
  },
+ "c1-classes": {
+  "summary": "A class describes a kind of object — its fields, constructors and methods — and an interface describes a contract that many classes can fulfil. You will learn how objects are created and initialised, how constructors and the this keyword work, how access modifiers control who can see what, and how interfaces with default, static and private methods let you write code that depends on what objects do rather than what they are.",
+  "difficulty": "beginner",
+  "minutes": 90,
+  "words": 7553,
+  "concepts": [
+   "c1-constructors",
+   "c1-this-keyword",
+   "c1-access-modifiers",
+   "c1-interfaces"
+  ]
+ },
  "c1-control-flow": {
   "summary": "Control flow decides which statements run, how many times, and when to stop. You will learn how Java's if/else, switch, loops, break and continue work, what the compiler checks about them, how they compile to jumps, and how to choose the clearest form for each decision or repetition.",
   "difficulty": "beginner",
@@ -752,6 +998,23 @@
    "c1-switch",
    "c1-loops",
    "c1-break-continue"
+  ]
+ },
+ "c1-encapsulation": {
+  "summary": "Encapsulation means an object keeps its data private and lets other code change it only through methods that enforce the rules. You will learn how to design a class so its invariants can never be broken, when getters and setters help and when they are ceremony, how mutable collections leak through getters, and how immutability, packages and modules extend the same idea.",
+  "difficulty": "beginner",
+  "minutes": 50,
+  "words": 4680,
+  "concepts": []
+ },
+ "c1-inheritance": {
+  "summary": "Inheritance lets one Java class extend another, reusing its fields and methods and replacing the behaviour that differs. You will learn exactly what a subclass inherits, the rules a valid override must follow, the order in which a subclass object is built, how super reaches the parent's code, and what every class inherits from java.lang.Object.",
+  "difficulty": "beginner",
+  "minutes": 70,
+  "words": 6689,
+  "concepts": [
+   "c1-super-keyword",
+   "c1-object-class"
   ]
  },
  "c1-methods": {
@@ -765,6 +1028,15 @@
    "c1-variable-scope",
    "c1-recursion-java",
    "c1-varargs"
+  ]
+ },
+ "c1-oop": {
+  "summary": "Object-oriented programming organises a program around objects that bundle data with the operations allowed on it. You will learn what problem that solves, what the four pillars really mean in Java, how the JVM decides which method runs, and why experienced engineers usually prefer composition to inheritance.",
+  "difficulty": "beginner",
+  "minutes": 60,
+  "words": 5367,
+  "concepts": [
+   "c1-aggregation"
   ]
  },
  "c1-operators": {
@@ -999,6 +1271,13 @@
   "words": 3452,
   "concepts": []
  },
+ "d2-visitor": {
+  "summary": "Visitor lets you add new operations to a fixed family of object types without editing those types, by routing each call through an accept method and a visit method (double dispatch). You will learn why Java needs that trick, when the pattern pays off, what it costs when a new type appears, and how Java 21's sealed types and pattern matching compete with it.",
+  "difficulty": "intermediate",
+  "minutes": 40,
+  "words": 5390,
+  "concepts": []
+ },
  "e1-ai-landscape": {
   "summary": "\"AI\" covers everything from hand-written rules to large language models, and an engineer who builds with it needs precise vocabulary and sound judgement. This lesson maps the field — how AI, machine learning, deep learning and generative AI relate, what foundation and multimodal models are, who does what on an AI team, how the model ecosystem is organised — and teaches the most important decision of all, whether a problem needs AI in the first place.",
   "difficulty": "beginner",
@@ -1054,6 +1333,19 @@
    "e1-venvs"
   ]
  },
+ "e2-classical-ml": {
+  "summary": "Classical machine learning — linear and logistic regression, decision trees and their ensembles, k-means and PCA — still solves most problems on tabular business data, and it is the honest baseline every LLM-based solution should beat. This lesson explains how each algorithm works with small from-scratch Python programs, then shows how to build leak-free scikit-learn pipelines and tune them with cross-validation.",
+  "difficulty": "intermediate",
+  "minutes": 105,
+  "words": 8666,
+  "concepts": [
+   "e2-linear-logistic-regression",
+   "e2-trees-ensembles",
+   "e2-kmeans-pca",
+   "e2-sklearn-pipelines",
+   "e2-hyperparameter-tuning"
+  ]
+ },
  "e2-math-foundations": {
   "summary": "The mathematics behind machine learning is smaller than it looks — vectors and dot products, a little probability, enough statistics to trust a measurement, derivatives and the chain rule, and the optimisers that use them. This lesson teaches each piece just in time, through the AI engineering task that needs it, with runnable Python so every formula becomes a calculation you can check.",
   "difficulty": "intermediate",
@@ -1077,6 +1369,19 @@
    "e2-parameters-hyperparameters",
    "e2-training-vs-inference",
    "e2-model-generalization"
+  ]
+ },
+ "e2-neural-networks": {
+  "summary": "A neural network is a stack of simple, adjustable units — weighted sums followed by nonlinear activations — trained by measuring a loss and pushing every weight a little in the direction that reduces it. This lesson builds the idea from a single neuron to a trained network, implements forward propagation and backpropagation from scratch, then shows how PyTorch automates the same work with tensors, autograd, nn.Module and DataLoaders, and closes with the CNN, RNN and LSTM history that explains why transformers took over.",
+  "difficulty": "intermediate",
+  "minutes": 120,
+  "words": 9099,
+  "concepts": [
+   "e2-neurons-weights-activations",
+   "e2-forward-backprop",
+   "e2-pytorch-tensors-autograd",
+   "e2-pytorch-training-loop",
+   "e2-cnn-rnn-history"
   ]
  },
  "e2-supervised-unsupervised": {
@@ -1105,6 +1410,21 @@
    "e2-overfit-underfit",
    "e2-bias-variance",
    "e2-classification-metrics"
+  ]
+ },
+ "e2-transformers": {
+  "summary": "The transformer is the neural-network architecture behind every modern large language model and most embedding models. This lesson follows text through it step by step — tokenization into ids, embeddings and positional information, query–key–value attention, multi-head and causal masking, the residual block with LayerNorm and MLP — and ends with the encoder, decoder and encoder–decoder families, so that terms like \"decoder-only\", \"context length\" and \"attention head\" become concrete mechanisms you can reason about.",
+  "difficulty": "intermediate",
+  "minutes": 130,
+  "words": 9416,
+  "concepts": [
+   "e2-tokenization",
+   "e2-tokens",
+   "e2-embeddings",
+   "e2-attention",
+   "e2-multi-head-causal",
+   "e2-transformer-block",
+   "e2-encoder-decoder-families"
   ]
  }
 }
