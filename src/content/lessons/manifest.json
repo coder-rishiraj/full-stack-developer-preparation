@@ -442,7 +442,7 @@
   "summary": "Breadth-first search (BFS) and depth-first search (DFS) are the two ways to visit every vertex of a graph, and almost every graph algorithm is built on one of them. You will learn how each works and why, how BFS finds shortest paths in unweighted graphs, how to write DFS with and without recursion, how to choose between them, and how to deep-copy a graph — including one with shared nodes.",
   "difficulty": "intermediate",
   "minutes": 90,
-  "words": 9383,
+  "words": 9339,
   "concepts": [
    "a8-bfs-shortest-unweighted",
    "a8-dfs",
@@ -450,6 +450,72 @@
    "a8-bfs-vs-dfs",
    "a8-clone-graph",
    "a8-clone-dag"
+  ]
+ },
+ "a8-bipartite": {
+  "summary": "A graph is bipartite when its vertices can be split into two groups so that every edge joins the two groups. You will learn why a simple BFS or DFS 2-colouring decides this in linear time, why a graph is bipartite exactly when it has no odd-length cycle, how to produce that odd cycle as proof, and how the same idea decides whether a graph splits into two cliques.",
+  "difficulty": "intermediate",
+  "minutes": 65,
+  "words": 5806,
+  "concepts": [
+   "a8-bipartite-bfs",
+   "a8-bipartite-dfs",
+   "a8-odd-cycle-bipartite",
+   "a8-two-clique-problem"
+  ]
+ },
+ "a8-connected-components": {
+  "summary": "A connected component is a maximal group of vertices that can all reach one another. You will learn the one pattern that finds every component — an outer loop that starts a BFS or DFS from each unvisited vertex — and apply it to graphs, grids, largest regions, forests, and the sink questions that come up for directed graphs.",
+  "difficulty": "intermediate",
+  "minutes": 65,
+  "words": 7100,
+  "concepts": [
+   "a8-components-bfs",
+   "a8-components-dfs",
+   "a8-largest-region",
+   "a8-count-trees-in-forest",
+   "a8-universal-sink",
+   "a8-number-of-sinks"
+  ]
+ },
+ "a8-cycle-detection": {
+  "summary": "A directed graph has a cycle exactly when depth-first search finds an edge back to a vertex that is still on the current path, or equivalently when repeatedly removing vertices with no incoming edges gets stuck. You will learn both tests, the white/gray/black colour scheme that makes the DFS version precise, how to print the cycle you found, and how Bellman-Ford detects the special case of a cycle whose total weight is negative.",
+  "difficulty": "intermediate",
+  "minutes": 75,
+  "words": 8428,
+  "concepts": [
+   "a8-cycle-directed-dfs",
+   "a8-cycle-using-colors",
+   "a8-cycle-directed-bfs-kahn",
+   "a8-negative-cycle-detection"
+  ]
+ },
+ "a8-cycle-undirected": {
+  "summary": "An undirected graph has a cycle exactly when some traversal meets an already-visited vertex by an edge other than the one it arrived on. You will learn why the parent check is needed, how to detect cycles with DFS, BFS and Union-Find, and how the same ideas extend to finding the shortest or minimum-weight cycle, counting cycles of a given length and listing every cycle.",
+  "difficulty": "intermediate",
+  "minutes": 70,
+  "words": 7730,
+  "concepts": [
+   "a8-cycle-undirected-dfs",
+   "a8-cycle-undirected-bfs",
+   "a8-print-shortest-cycle",
+   "a8-cycles-of-length-n",
+   "a8-print-all-cycles"
+  ]
+ },
+ "a8-dijkstra": {
+  "summary": "Dijkstra's algorithm finds the cheapest route from one source to every vertex when no edge has a negative weight, by always finalising the closest vertex not yet finalised. You will learn why that greedy choice is correct, how to implement it with a priority queue, an ordered set or a plain array, how to print the path, why negative edges break it, and how to pick the right shortest-path algorithm — including Dial's bucket queue and the D'Esopo-Pape deque method.",
+  "difficulty": "intermediate",
+  "minutes": 80,
+  "words": 7071,
+  "concepts": [
+   "a8-dijkstra-priority-queue",
+   "a8-dijkstra-set",
+   "a8-dijkstra-print-path",
+   "a8-dijkstra-limitations",
+   "a8-shortest-path-decision",
+   "a8-dials-algorithm",
+   "a8-desopo-pape"
   ]
  },
  "a8-graph-representation": {
@@ -472,7 +538,7 @@
   "summary": "Multi-source BFS finds, for every cell or vertex, the distance to the nearest of many starting points in a single breadth-first pass. Around it sits the whole family of grid and state-space BFS problems — flood fill, islands, rotting oranges, word ladders, water jugs, 0-1 BFS — which all come down to modelling the problem as a graph and choosing the right traversal.",
   "difficulty": "intermediate",
   "minutes": 120,
-  "words": 12679,
+  "words": 12694,
   "concepts": [
    "a8-grid-as-graph",
    "a8-rotten-oranges",
@@ -486,6 +552,37 @@
    "a8-water-jug",
    "a8-0-1-bfs",
    "a8-boggle"
+  ]
+ },
+ "a8-topological-sorting": {
+  "summary": "A topological sort lists the vertices of a directed acyclic graph so that every edge points forward, which is exactly the order in which dependent tasks can be done. You will learn Kahn's algorithm and the DFS finishing-time method, how to use them for course schedules and dependency ordering, how to enumerate every valid order, and how a topological order turns shortest paths, longest paths and many dynamic programs on DAGs into a single linear pass.",
+  "difficulty": "intermediate",
+  "minutes": 110,
+  "words": 11012,
+  "concepts": [
+   "a8-topo-kahn",
+   "a8-topo-dfs",
+   "a8-topo-departure-time",
+   "a8-course-schedule",
+   "a8-all-topological-sorts",
+   "a8-max-edges-keep-dag",
+   "a8-shortest-path-dag",
+   "a8-longest-path-dag",
+   "a8-dag-dp",
+   "a8-find-itinerary"
+  ]
+ },
+ "a8-union-find": {
+  "summary": "Union-Find (Disjoint Set Union) keeps elements in groups that can be merged, and answers \"are these two in the same group?\" in effectively constant time. You will learn how a forest of parent pointers represents the groups, why path compression and union by rank or size make it fast, and how to apply it to grids, streams of edges and offline connectivity queries.",
+  "difficulty": "intermediate",
+  "minutes": 70,
+  "words": 6849,
+  "concepts": [
+   "a8-dsu-path-compression",
+   "a8-dsu-union-by-rank",
+   "a8-dsu-union-by-size",
+   "a8-dsu-on-grids",
+   "a8-dynamic-connectivity"
   ]
  },
  "b1-arithmetic-operators": {
@@ -515,6 +612,22 @@
   "minutes": 45,
   "words": 3662,
   "concepts": []
+ },
+ "b1-bitwise-operators": {
+  "summary": "JavaScript's bitwise operators work on the individual binary digits of a number, but only after converting it to a 32-bit integer. You will learn what each operator does, exactly how that conversion truncates and wraps values, how to use bit flags safely, and when `BigInt`, `Math.imul` or typed arrays are the better tool.",
+  "difficulty": "intermediate",
+  "minutes": 40,
+  "words": 3665,
+  "concepts": []
+ },
+ "b1-break-continue": {
+  "summary": "`break` ends a loop or `switch` early and `continue` skips to the next iteration. You will learn exactly where each one sends execution in every kind of loop, how they interact with `switch` and `finally`, why they cannot cross a function boundary (so they do not work inside `forEach`), and how labels let them target an outer loop.",
+  "difficulty": "beginner",
+  "minutes": 40,
+  "words": 3748,
+  "concepts": [
+   "b1-labels"
+  ]
  },
  "b1-closure-memory": {
   "summary": "A closure keeps its captured variables alive for as long as the function itself can be reached, which is usually what you want and occasionally a memory leak. You will learn exactly what a closure retains, why closures from the same scope can keep each other's data alive, the leak patterns that appear in long-running apps, and how to find and fix them.",
@@ -549,6 +662,13 @@
    "b1-private-state"
   ]
  },
+ "b1-comparison-operators": {
+  "summary": "The relational operators `<`, `>`, `<=` and `>=` answer \"which comes first?\", but in JavaScript the answer depends on the operand types — two strings are compared character by character, everything else is converted to numbers, and `NaN` makes every comparison false. You will learn the exact algorithm, why `'10' < '9'` is `true`, why `null >= 0` is `true` while `null == 0` is `false`, and how to compare numbers, strings, dates and versions correctly.",
+  "difficulty": "beginner",
+  "minutes": 35,
+  "words": 3411,
+  "concepts": []
+ },
  "b1-const": {
   "summary": "const declares a block-scoped binding that must be given a value immediately and can never be pointed at a different value. You will learn exactly what const does and does not protect, how to make objects genuinely read-only when you need to, and why \"const by default\" is the modern rule.",
   "difficulty": "beginner",
@@ -567,7 +687,7 @@
   "summary": "JavaScript has several ways to ask \"are these the same?\" — strict `===`, loose `==`, their negations `!==` and `!=`, `Object.is`, and the rule that `Map`, `Set` and `includes` use internally. You will learn the exact algorithm behind each, why `[] == ![]` is true and `NaN === NaN` is false, why two identical-looking objects are never equal, and which comparison to reach for in real code.",
   "difficulty": "beginner",
   "minutes": 50,
-  "words": 4931,
+  "words": 4929,
   "concepts": [
    "b1-strict-equality",
    "b1-abstract-equality",
@@ -603,6 +723,20 @@
    "b1-unary-plus"
   ]
  },
+ "b1-for-loops": {
+  "summary": "Loops repeat code until a condition says stop. You will learn exactly how JavaScript's three classic loops — `for`, `while` and `do...while` — execute, how `let` gives each iteration of a `for` loop its own variable, and how to avoid the off-by-one errors, infinite loops and mutation bugs that cause most loop failures.",
+  "difficulty": "beginner",
+  "minutes": 45,
+  "words": 4101,
+  "concepts": []
+ },
+ "b1-for-of-in": {
+  "summary": "JavaScript has two loops that look almost identical but walk completely different things. `for...of` walks the values an iterable produces; `for...in` walks the enumerable string keys of an object, including inherited ones. You will learn the protocol behind each, why `for...in` is the wrong tool for arrays, and which loop or `Object` method to reach for in every common situation.",
+  "difficulty": "beginner",
+  "minutes": 40,
+  "words": 3696,
+  "concepts": []
+ },
  "b1-global-variables": {
   "summary": "A global variable is a name that every script in a realm can see, and `globalThis` is the one portable way to reach the object that holds many of them. You will learn every way a global gets created, why the global scope is split into two stores, how browsers, workers and Node.js differ, and why modern code keeps its own names out of the global scope.",
   "difficulty": "beginner",
@@ -628,6 +762,20 @@
    "b1-let-const-hoisting",
    "b1-class-hoisting"
   ]
+ },
+ "b1-if-else": {
+  "summary": "The `if` statement is how a JavaScript program chooses between paths. You will learn exactly how its condition is tested (truthiness, not `=== true`), why `else if` is not a separate keyword, how braces and block scope change behaviour, and how to structure decisions so they stay readable as they grow.",
+  "difficulty": "beginner",
+  "minutes": 40,
+  "words": 4079,
+  "concepts": []
+ },
+ "b1-in-delete-void": {
+  "summary": "`in`, `delete`, `void` and `instanceof` are JavaScript's keyword operators: they test whether a property exists, remove a property, discard a value, and check an object's prototype chain. You will learn exactly what each one checks or changes, the surprises around inherited properties, arrays, strict mode and primitives, and the modern alternatives you should often reach for instead.",
+  "difficulty": "beginner",
+  "minutes": 35,
+  "words": 3924,
+  "concepts": []
  },
  "b1-instanceof": {
   "summary": "The `instanceof` operator answers \"is this object a kind of X?\" by searching the object's prototype chain for `X.prototype`. You will learn the exact algorithm, why it returns surprising answers for primitives, values from other realms and objects whose prototype was changed, how `Symbol.hasInstance` customises it, and which check to use instead when `instanceof` is the wrong tool.",
@@ -664,6 +812,15 @@
    "b1-shadowing"
   ]
  },
+ "b1-logical-operators": {
+  "summary": "JavaScript's logical operators `&&`, `||` and `!` combine conditions, but `&&` and `||` do not return booleans — they return one of their operands, and they stop evaluating as soon as the answer is known. You will learn the exact rules, why `count || 10` loses a real zero, how short-circuit evaluation skips code on the right, and how to write guards and defaults that are both correct and readable.",
+  "difficulty": "beginner",
+  "minutes": 40,
+  "words": 3565,
+  "concepts": [
+   "b1-short-circuit"
+  ]
+ },
  "b1-microtasks": {
   "summary": "JavaScript hosts keep two kinds of waiting work — tasks (macrotasks) such as timers and events, and microtasks such as promise callbacks — and they run them with very different priority. You will learn exactly what goes into each queue, when each queue is processed, how promises and await create microtasks, and how to use that knowledge to batch work without freezing the page.",
   "difficulty": "intermediate",
@@ -692,11 +849,27 @@
    "b1-object-is"
   ]
  },
+ "b1-nullish-coalescing": {
+  "summary": "The nullish coalescing operator `??` supplies a fallback only when a value is `null` or `undefined`, so real values such as `0`, `''` and `false` are kept. You will learn how it differs from `||` and from default parameters, why it cannot be mixed with `&&` and `||` without parentheses, and how the logical assignment operators `??=`, `||=` and `&&=` turn the same rules into in-place updates.",
+  "difficulty": "beginner",
+  "minutes": 40,
+  "words": 3374,
+  "concepts": [
+   "b1-logical-assignment"
+  ]
+ },
  "b1-objects-as-values": {
   "summary": "In JavaScript, every value that is not one of the seven primitives is an object — a mutable collection of properties with its own identity. You will learn what that means for creating, comparing, storing and passing objects, and why \"same contents\" and \"same object\" are different questions.",
   "difficulty": "beginner",
   "minutes": 45,
   "words": 3150,
+  "concepts": []
+ },
+ "b1-optional-chaining": {
+  "summary": "Optional chaining (`?.`) reads a property, indexes into a value or calls a function only when the value in front of it is not `null` or `undefined`, and produces `undefined` instead of throwing otherwise. You will learn its three forms, exactly how far a short-circuit reaches, where it is not allowed, and how to use it without hiding real bugs.",
+  "difficulty": "beginner",
+  "minutes": 35,
+  "words": 3067,
   "concepts": []
  },
  "b1-parsing-jit": {
@@ -708,6 +881,13 @@
    "b1-v8-architecture",
    "b1-hidden-classes"
   ]
+ },
+ "b1-precedence": {
+  "summary": "Precedence and associativity are the rules JavaScript uses to decide how an expression with several operators is grouped before anything is computed. You will learn how to read any expression the way the parser does, which rows of the precedence table cause real bugs, and why grouping is a different thing from the order in which operands are evaluated.",
+  "difficulty": "beginner",
+  "minutes": 40,
+  "words": 4408,
+  "concepts": []
  },
  "b1-primitive-types": {
   "summary": "Every JavaScript value is either one of seven primitive types — string, number, bigint, boolean, undefined, null, symbol — or an object. You will learn what each primitive represents, how it behaves at its edges, and why knowing the exact type of a value prevents a large class of everyday bugs.",
@@ -785,6 +965,13 @@
   "words": 2730,
   "concepts": []
  },
+ "b1-switch": {
+  "summary": "The `switch` statement selects code to run by comparing one value against a list of cases with strict equality. You will learn its exact evaluation order, why execution falls through from one case into the next, how its single shared scope causes surprising errors, and when an object lookup or an `if` chain is the better tool.",
+  "difficulty": "beginner",
+  "minutes": 40,
+  "words": 3477,
+  "concepts": []
+ },
  "b1-syntax-basics": {
   "summary": "JavaScript source code is text that the engine breaks into tokens — names, keywords, literals and punctuation — and assembles into statements before anything runs. You will learn the building blocks of that text, the rules for naming things, how comments, case, semicolons and strict mode work, and how to print output with the console so you can see what your code is doing.",
   "difficulty": "beginner",
@@ -807,11 +994,18 @@
   "words": 2928,
   "concepts": []
  },
+ "b1-ternary": {
+  "summary": "The conditional (ternary) operator `condition ? a : b` chooses between two values inside an expression and evaluates only the branch it picks. You will learn its exact evaluation rules, its low precedence and right-associativity, where it beats `if`/`else` (assignments, returns, template literals, JSX), and where nested ternaries should be replaced with something clearer.",
+  "difficulty": "beginner",
+  "minutes": 30,
+  "words": 3065,
+  "concepts": []
+ },
  "b1-to-primitive": {
   "summary": "Operators such as `+`, `-`, `<` and `==` only work on primitive values, so when you hand them an object, JavaScript first asks the object to turn itself into a primitive. You will learn the exact algorithm the engine follows, the \"hint\" that decides between a number and a string, and how `valueOf`, `toString` and `Symbol.toPrimitive` let your own objects take part — or deliberately refuse to.",
   "difficulty": "intermediate",
   "minutes": 45,
-  "words": 4596,
+  "words": 4594,
   "concepts": [
    "b1-valueof",
    "b1-object-tostring",
@@ -849,6 +1043,15 @@
   "words": 3156,
   "concepts": [
    "b1-typeof-null"
+  ]
+ },
+ "b1-unary-operators": {
+  "summary": "Unary operators take a single operand — `+`, `-`, `!`, `~`, `typeof`, `void`, `delete`, and the increment and decrement operators `++` and `--`. You will learn which conversion each one applies, what it returns, the precedence rules that make `-2 ** 2` illegal and `!a instanceof B` wrong, and the prefix/postfix difference that drives so many puzzle questions.",
+  "difficulty": "beginner",
+  "minutes": 40,
+  "words": 4118,
+  "concepts": [
+   "b1-increment-decrement"
   ]
  },
  "b1-undefined-vs-null": {
@@ -966,6 +1169,15 @@
    "b4-virtual-dom-limitations"
   ]
  },
+ "c1-abstract-classes": {
+  "summary": "An abstract class is a partly finished class that cannot be instantiated; it holds the state and code its subclasses share and declares the steps each subclass must supply. You will learn the rules for abstract classes and methods, the template method and skeletal-implementation patterns built on them, and how to choose between an abstract class and an interface.",
+  "difficulty": "intermediate",
+  "minutes": 55,
+  "words": 4846,
+  "concepts": [
+   "c1-abstract-vs-interface"
+  ]
+ },
  "c1-arrays": {
   "summary": "An array is Java's most basic container, a fixed-length row of values of one type stored side by side in memory. You will learn how to create, index, copy and compare arrays, how they behave as objects, how grids are built from arrays of arrays, and when to reach for ArrayList instead.",
   "difficulty": "beginner",
@@ -1011,7 +1223,7 @@
   "summary": "Inheritance lets one Java class extend another, reusing its fields and methods and replacing the behaviour that differs. You will learn exactly what a subclass inherits, the rules a valid override must follow, the order in which a subclass object is built, how super reaches the parent's code, and what every class inherits from java.lang.Object.",
   "difficulty": "beginner",
   "minutes": 70,
-  "words": 6689,
+  "words": 6704,
   "concepts": [
    "c1-super-keyword",
    "c1-object-class"
@@ -1049,6 +1261,17 @@
    "c1-relational-logical",
    "c1-bitwise-operators",
    "c1-operator-precedence"
+  ]
+ },
+ "c1-polymorphism": {
+  "summary": "Polymorphism lets one piece of code work with many types of object, each responding in its own way. You will learn how Java separates the declared type of a reference from the runtime type of an object, why overriding is resolved at run time but overloading at compile time, why static methods cannot be overridden, and how the JVM makes virtual calls fast.",
+  "difficulty": "intermediate",
+  "minutes": 70,
+  "words": 5250,
+  "concepts": [
+   "c1-overload-vs-override",
+   "c1-dynamic-binding",
+   "c1-static-no-override"
   ]
  },
  "c1-strings": {
@@ -1278,6 +1501,41 @@
   "words": 5390,
   "concepts": []
  },
+ "d3-elevator": {
+  "summary": "The elevator problem is a state machine that has to make scheduling decisions — which floor next, which car answers a call — while requests keep arriving. You will model an elevator as states plus ordered stop sets, implement the LOOK scheduling rule and a nearest-car dispatcher in runnable Java, and learn how to reason about starvation, door safety, capacity and concurrent button presses.",
+  "difficulty": "intermediate",
+  "minutes": 55,
+  "words": 5215,
+  "concepts": []
+ },
+ "d3-library": {
+  "summary": "A library management system is the classic low-level design problem about business rules — who may borrow what, for how long, and who gets a book when it comes back. You will learn the key modelling insight (a book title is not a physical copy), implement borrowing, renewals, fines and a reservation queue in runnable Java, and see how the same design maps to database tables and survives two members reaching for the last copy.",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 4612,
+  "concepts": []
+ },
+ "d3-parking-lot": {
+  "summary": "The parking lot is the most common low-level design interview problem, and it is the best place to learn the method that every other design problem reuses. You will turn a vague prompt into requirements, classes and working Java code, then handle the parts interviewers probe hardest — spot-assignment policy, pricing, testable time and two gates parking cars at the same moment.",
+  "difficulty": "intermediate",
+  "minutes": 55,
+  "words": 5696,
+  "concepts": []
+ },
+ "d3-tic-tac-toe": {
+  "summary": "Tic-tac-toe is the gateway game-design problem — small enough to finish in an interview, rich enough to show whether you can separate a board's rules from a game's turn order and plug in different kinds of player. You will build a complete N-by-N version in Java with constant-time win detection, undo and an unbeatable minimax player, and learn how the design stretches to bigger boards and online play.",
+  "difficulty": "beginner",
+  "minutes": 45,
+  "words": 4573,
+  "concepts": []
+ },
+ "d3-vending-machine": {
+  "summary": "A vending machine is small enough to design in half an hour and still tests the ideas interviewers care most about — a state machine that rejects illegal actions, money handled exactly, and a purchase that either completes fully or leaves everything as it was. You will build one in runnable Java with the State pattern, an escrow for inserted coins, a change algorithm that works when coins run out, and compensation when the motor jams.",
+  "difficulty": "intermediate",
+  "minutes": 45,
+  "words": 4668,
+  "concepts": []
+ },
  "e1-ai-landscape": {
   "summary": "\"AI\" covers everything from hand-written rules to large language models, and an engineer who builds with it needs precise vocabulary and sound judgement. This lesson maps the field — how AI, machine learning, deep learning and generative AI relate, what foundation and multimodal models are, who does what on an AI team, how the model ecosystem is organised — and teaches the most important decision of all, whether a problem needs AI in the first place.",
   "difficulty": "beginner",
@@ -1344,6 +1602,20 @@
    "e2-kmeans-pca",
    "e2-sklearn-pipelines",
    "e2-hyperparameter-tuning"
+  ]
+ },
+ "e2-llm-fundamentals": {
+  "summary": "A large language model is a transformer trained to predict the next token, then shaped by instruction tuning and preference training into an assistant. This lesson explains what happens when you call one — the context window that bounds each request, how logits become text through temperature and top-p sampling, why prefill and decode behave so differently and what the KV cache stores — and then how models are trained, what reasoning models add, and why hallucinations, bias and reasoning failures are built-in risks you must design around.",
+  "difficulty": "intermediate",
+  "minutes": 125,
+  "words": 8802,
+  "concepts": [
+   "e2-context-windows",
+   "e2-temperature",
+   "e2-kv-cache",
+   "e2-pretraining-instruction-alignment",
+   "e2-reasoning-models",
+   "e2-hallucinations"
   ]
  },
  "e2-math-foundations": {
@@ -1425,6 +1697,45 @@
    "e2-multi-head-causal",
    "e2-transformer-block",
    "e2-encoder-decoder-families"
+  ]
+ },
+ "e3-chat-apis": {
+  "summary": "LLM provider APIs are the HTTP interfaces through which applications send instructions and a conversation to a hosted or self-hosted model and receive the next turn, a stop reason and token usage back. This lesson explains the shared request and response anatomy, then the specific patterns of the OpenAI, Anthropic and Gemini APIs and of open-model servers, and finishes with a thin provider layer that keeps your code portable without a heavyweight framework.",
+  "difficulty": "intermediate",
+  "minutes": 120,
+  "words": 8598,
+  "concepts": [
+   "e3-openai-api",
+   "e3-anthropic-api",
+   "e3-gemini-api",
+   "e3-open-model-api",
+   "e3-provider-abstraction"
+  ]
+ },
+ "e3-messages": {
+  "summary": "Every chat API call is built from role-tagged messages, and the way you choose roles, store history, stream output, handle cancellation and count tokens decides whether a conversational feature is correct, safe and affordable. This lesson explains message roles and their priority, why calls are stateless and how to manage conversation state, how streaming works at the byte level, what to do when a stream is cut off, and how to read and account for token usage across providers.",
+  "difficulty": "intermediate",
+  "minutes": 120,
+  "words": 8482,
+  "concepts": [
+   "e3-instruction-hierarchy",
+   "e3-conversation-state",
+   "e3-streaming",
+   "e3-cancellation-disconnect",
+   "e3-token-usage"
+  ]
+ },
+ "e3-structured-outputs": {
+  "summary": "Structured outputs make a language model return data your code can use — JSON that matches a schema — instead of prose you have to scrape. This lesson explains how schema-constrained decoding works and what it does and does not guarantee, how to write JSON Schemas that models fill well, how to design extraction and classification tasks, and how to validate, repair, handle refusals and truncation, and post-process results deterministically.",
+  "difficulty": "intermediate",
+  "minutes": 115,
+  "words": 7812,
+  "concepts": [
+   "e3-json-schemas",
+   "e3-extraction-classification",
+   "e3-schema-validation",
+   "e3-refusal-partial-output",
+   "e3-deterministic-postprocessing"
   ]
  }
 }

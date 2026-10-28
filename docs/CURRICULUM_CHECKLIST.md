@@ -9,12 +9,12 @@ them under an anchored heading.
 
 | Track | Name | Lessons | Done |
 |---|---|---|---|
-| A | DSA & Problem Solving | 63 / 125 | 50% |
-| B | Frontend Engineering | 52 / 647 | 8% |
-| C | Java & Backend Engineering | 16 / 329 | 5% |
-| D | LLD, System Design & Distributed Systems | 20 / 111 | 18% |
-| E | Applied AI Engineering | 11 / 77 | 14% |
-| | **All tracks** | **162 / 1289** | **13%** |
+| A | DSA & Problem Solving | 70 / 125 | 56% |
+| B | Frontend Engineering | 66 / 647 | 10% |
+| C | Java & Backend Engineering | 18 / 329 | 5% |
+| D | LLD, System Design & Distributed Systems | 25 / 111 | 23% |
+| E | Applied AI Engineering | 15 / 77 | 19% |
+| | **All tracks** | **194 / 1289** | **15%** |
 
 Legend: ✅ lesson written · ◐ condensed notes only · ○ generic template only · ✗ no content
 
@@ -107,39 +107,39 @@ Legend: ✅ lesson written · ◐ condensed notes only · ○ generic template o
 
 #### A8.2 · BFS & DFS Traversal — 1/1
 
-- [x] `a8-bfs` BFS (Breadth-First Search) — ✅ lesson (9383 words) · nested 6/6
+- [x] `a8-bfs` BFS (Breadth-First Search) — ✅ lesson (9339 words) · nested 6/6
 
 #### A8.3 · Grid Graphs & Pattern BFS — 1/1
 
-- [x] `a8-multi-source-bfs` Multi-source BFS — ✅ lesson (12679 words) · nested 12/12
+- [x] `a8-multi-source-bfs` Multi-source BFS — ✅ lesson (12694 words) · nested 12/12
 
-#### A8.4 · Cycle Detection — Undirected Graphs — 0/1
+#### A8.4 · Cycle Detection — Undirected Graphs — 1/1
 
-- [ ] `a8-cycle-undirected` Cycle Detection in Undirected Graphs — ◐ condensed notes · nested 0/5
+- [x] `a8-cycle-undirected` Cycle Detection in Undirected Graphs — ✅ lesson (7730 words) · nested 5/5
 
-#### A8.5 · Cycle Detection — Directed Graphs — 0/1
+#### A8.5 · Cycle Detection — Directed Graphs — 1/1
 
-- [ ] `a8-cycle-detection` Graph Cycle Detection (Directed) — ◐ condensed notes · nested 0/4
+- [x] `a8-cycle-detection` Graph Cycle Detection (Directed) — ✅ lesson (8428 words) · nested 4/4
 
-#### A8.6 · Topological Sort & DAG Algorithms — 0/1
+#### A8.6 · Topological Sort & DAG Algorithms — 1/1
 
-- [ ] `a8-topological-sorting` Topological Sorting — ◐ condensed notes · nested 0/10
+- [x] `a8-topological-sorting` Topological Sorting — ✅ lesson (11012 words) · nested 10/10
 
-#### A8.7 · Bipartite Graphs — 0/1
+#### A8.7 · Bipartite Graphs — 1/1
 
-- [ ] `a8-bipartite` Bipartite Graphs — ◐ condensed notes · nested 0/4
+- [x] `a8-bipartite` Bipartite Graphs — ✅ lesson (5806 words) · nested 4/4
 
-#### A8.8 · Connected Components — 0/1
+#### A8.8 · Connected Components — 1/1
 
-- [ ] `a8-connected-components` Connected Components — ◐ condensed notes · nested 0/6
+- [x] `a8-connected-components` Connected Components — ✅ lesson (7100 words) · nested 6/6
 
-#### A8.9 · Disjoint Set Union (Union-Find) — 0/1
+#### A8.9 · Disjoint Set Union (Union-Find) — 1/1
 
-- [ ] `a8-union-find` Union-Find / DSU — ◐ condensed notes · nested 0/5
+- [x] `a8-union-find` Union-Find / DSU — ✅ lesson (6849 words) · nested 5/5
 
-#### A8.10 · Shortest Paths — Non-negative Weights — 0/1
+#### A8.10 · Shortest Paths — Non-negative Weights — 1/1
 
-- [ ] `a8-dijkstra` Dijkstra — ◐ condensed notes · nested 0/7
+- [x] `a8-dijkstra` Dijkstra — ✅ lesson (7071 words) · nested 7/7
 
 #### A8.11 · Shortest Paths — Negative Weights & All-Pairs — 0/2
 
@@ -275,30 +275,30 @@ Legend: ✅ lesson written · ◐ condensed notes only · ○ generic template o
 
 - [x] `b1-explicit-conversion` Explicit Conversion — ✅ lesson (5658 words) · nested 5/5
 - [x] `b1-type-coercion` Type Coercion — ✅ lesson (4633 words) · nested 2/2
-- [x] `b1-equality` Equality Operators — ✅ lesson (4931 words) · nested 3/3
-- [x] `b1-to-primitive` Object-to-Primitive Conversion — ✅ lesson (4596 words) · nested 3/3
+- [x] `b1-equality` Equality Operators — ✅ lesson (4929 words) · nested 3/3
+- [x] `b1-to-primitive` Object-to-Primitive Conversion — ✅ lesson (4594 words) · nested 3/3
 
-#### B1.5 · Operators & Expressions — 2/11
+#### B1.5 · Operators & Expressions — 11/11
 
 - [x] `b1-arithmetic-operators` Arithmetic Operators — ✅ lesson (3957 words)
 - [x] `b1-assignment-operators` Assignment Operators — ✅ lesson (3586 words)
-- [ ] `b1-comparison-operators` Comparison Operators — ◐ condensed notes
-- [ ] `b1-logical-operators` Logical Operators — ◐ condensed notes · nested 0/1
-- [ ] `b1-unary-operators` Unary Operators — ◐ condensed notes · nested 0/1
-- [ ] `b1-ternary` Ternary Operator — ◐ condensed notes
-- [ ] `b1-precedence` Operator Precedence & Associativity — ◐ condensed notes
-- [ ] `b1-optional-chaining` Optional Chaining — ◐ condensed notes
-- [ ] `b1-nullish-coalescing` Nullish Coalescing — ◐ condensed notes · nested 0/1
-- [ ] `b1-bitwise-operators` Bitwise Operators — ◐ condensed notes
-- [ ] `b1-in-delete-void` in, delete, void, instanceof — ◐ condensed notes
+- [x] `b1-comparison-operators` Comparison Operators — ✅ lesson (3411 words)
+- [x] `b1-logical-operators` Logical Operators — ✅ lesson (3565 words) · nested 1/1
+- [x] `b1-unary-operators` Unary Operators — ✅ lesson (4118 words) · nested 1/1
+- [x] `b1-ternary` Ternary Operator — ✅ lesson (3065 words)
+- [x] `b1-precedence` Operator Precedence & Associativity — ✅ lesson (4408 words)
+- [x] `b1-optional-chaining` Optional Chaining — ✅ lesson (3067 words)
+- [x] `b1-nullish-coalescing` Nullish Coalescing — ✅ lesson (3374 words) · nested 1/1
+- [x] `b1-bitwise-operators` Bitwise Operators — ✅ lesson (3665 words)
+- [x] `b1-in-delete-void` in, delete, void, instanceof — ✅ lesson (3924 words)
 
-#### B1.6 · Control Flow — 0/6
+#### B1.6 · Control Flow — 5/6
 
-- [ ] `b1-if-else` if / else / else if — ◐ condensed notes
-- [ ] `b1-switch` switch — ◐ condensed notes
-- [ ] `b1-for-loops` for / while / do...while — ◐ condensed notes
-- [ ] `b1-for-of-in` for...of vs for...in — ◐ condensed notes
-- [ ] `b1-break-continue` break / continue — ◐ condensed notes · nested 0/1
+- [x] `b1-if-else` if / else / else if — ✅ lesson (4079 words)
+- [x] `b1-switch` switch — ✅ lesson (3477 words)
+- [x] `b1-for-loops` for / while / do...while — ✅ lesson (4101 words)
+- [x] `b1-for-of-in` for...of vs for...in — ✅ lesson (3696 words)
+- [x] `b1-break-continue` break / continue — ✅ lesson (3748 words) · nested 1/1
 - [ ] `b1-nested-control-flow` Nested Control Flow — ◐ condensed notes
 
 #### B1.7 · Strings — 0/5
@@ -1408,11 +1408,11 @@ Legend: ✅ lesson written · ◐ condensed notes only · ○ generic template o
 - [x] `c1-encapsulation` Encapsulation — ✅ lesson (4680 words)
 - [x] `c1-classes` Classes/Interfaces — ✅ lesson (7553 words) · nested 4/4
 
-#### C1.6 · Inheritance & Polymorphism — 1/3
+#### C1.6 · Inheritance & Polymorphism — 3/3
 
-- [x] `c1-inheritance` Inheritance — ✅ lesson (6689 words) · nested 2/2
-- [ ] `c1-polymorphism` Polymorphism — ◐ condensed notes · nested 0/3
-- [ ] `c1-abstract-classes` Abstract Classes — ◐ condensed notes · nested 0/1
+- [x] `c1-inheritance` Inheritance — ✅ lesson (6704 words) · nested 2/2
+- [x] `c1-polymorphism` Polymorphism — ✅ lesson (5250 words) · nested 3/3
+- [x] `c1-abstract-classes` Abstract Classes — ✅ lesson (4846 words) · nested 1/1
 
 #### C1.7 · Records, Enums & Nested Types — 0/3
 
@@ -2503,13 +2503,13 @@ Legend: ✅ lesson written · ◐ condensed notes only · ○ generic template o
 - [x] `d2-proxy` Proxy — ✅ lesson (3829 words)
 - [x] `d2-visitor` Visitor — ✅ lesson (5390 words)
 
-#### D3 · LLD Interview Problems — 0/14
+#### D3 · LLD Interview Problems — 5/14
 
-- [ ] `d3-parking-lot` Parking Lot — ◐ condensed notes
-- [ ] `d3-elevator` Elevator — ◐ condensed notes
-- [ ] `d3-library` Library — ◐ condensed notes
-- [ ] `d3-vending-machine` Vending Machine — ◐ condensed notes
-- [ ] `d3-tic-tac-toe` Tic-Tac-Toe — ◐ condensed notes
+- [x] `d3-parking-lot` Parking Lot — ✅ lesson (5696 words)
+- [x] `d3-elevator` Elevator — ✅ lesson (5215 words)
+- [x] `d3-library` Library — ✅ lesson (4612 words)
+- [x] `d3-vending-machine` Vending Machine — ✅ lesson (4668 words)
+- [x] `d3-tic-tac-toe` Tic-Tac-Toe — ✅ lesson (4573 words)
 - [ ] `d3-chess` Chess — ◐ condensed notes
 - [ ] `d3-splitwise` Splitwise — ◐ condensed notes
 - [ ] `d3-atm` ATM — ◐ condensed notes
@@ -2874,21 +2874,21 @@ Legend: ✅ lesson written · ◐ condensed notes only · ○ generic template o
 
 - [x] `e2-transformers` Transformer Architecture — ✅ lesson (9416 words) · nested 7/7
 
-#### E2.8 · LLM Inference, Training Lifecycle & Limitations — 0/1
+#### E2.8 · LLM Inference, Training Lifecycle & Limitations — 1/1
 
-- [ ] `e2-llm-fundamentals` Large Language Model Fundamentals — ○ template only · nested 0/6
+- [x] `e2-llm-fundamentals` Large Language Model Fundamentals — ✅ lesson (8802 words) · nested 6/6
 
-#### E3.1 · Provider APIs & Direct SDK Integration — 0/1
+#### E3.1 · Provider APIs & Direct SDK Integration — 1/1
 
-- [ ] `e3-chat-apis` LLM Provider APIs — ◐ condensed notes · nested 0/5
+- [x] `e3-chat-apis` LLM Provider APIs — ✅ lesson (8598 words) · nested 5/5
 
-#### E3.2 · Messages, Conversations & Streaming — 0/1
+#### E3.2 · Messages, Conversations & Streaming — 1/1
 
-- [ ] `e3-messages` Messages & Conversations — ◐ condensed notes · nested 0/5
+- [x] `e3-messages` Messages & Conversations — ✅ lesson (8482 words) · nested 5/5
 
-#### E3.3 · Structured Outputs & Typed Extraction — 0/1
+#### E3.3 · Structured Outputs & Typed Extraction — 1/1
 
-- [ ] `e3-structured-outputs` Structured Outputs — ◐ condensed notes · nested 0/5
+- [x] `e3-structured-outputs` Structured Outputs — ✅ lesson (7812 words) · nested 5/5
 
 #### E3.4 · Tool & Function Calling — 0/1
 

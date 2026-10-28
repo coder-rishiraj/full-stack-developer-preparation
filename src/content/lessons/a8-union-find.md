@@ -173,7 +173,7 @@ Full compression (recursive or two-pass) flattens the whole path in one call: ev
 | Recursive full compression | `parent[x] = find(parent[x])` | 1 down, 1 back (stack) | Shortest code; recursion depth = path length |
 | Two-pass full compression | find root, then re-point the path | 2 loops | No recursion; same result as recursive |
 | Path halving | `parent[x] = parent[parent[x]]` while climbing | 1 loop | Each node jumps to its grandparent; paths halve per call |
-| Path splitting | every node points to its grandparent (not just alternate ones) | 1 loop | Same guarantees as halving |
+| Path splitting | every node points to its grandparent (not only alternate ones) | 1 loop | Same guarantees as halving |
 
 Halving and splitting compress less per call — the output shows halving cutting the path from five pointers to three — but they need no second pass and no recursion. Combined with union by rank or size, Tarjan and van Leeuwen showed in 1984 that all of these variants achieve the same O(α(n)) amortised bound, so the choice is about code style. Path halving is popular in competitive programming because it is a three-line loop.
 
@@ -300,9 +300,6 @@ union(4, 6) merged root=4 rank=2 height=2
 union(0, 4) merged root=0 rank=3 height=3
 union(7, 3) skip   root=0 rank=3 height=3
 parent = [0, 0, 0, 2, 0, 4, 4, 6]
-```
-
-```output
 n = 65536, log2(n) = 16, largest rank after random unions = 6
 ```
 
@@ -584,7 +581,7 @@ The naive structure follows almost ten billion pointers on the chain — exactly
 
 ### The α(n) bound
 
-With both path compression and union by rank (or size), Robert Tarjan proved in 1975 that any sequence of `m` operations on `n` elements takes O(m · α(n)) time, and later work showed this is optimal for this kind of structure. α is the **inverse Ackermann function**. The Ackermann function grows faster than any tower of exponentials — its fourth level is already a number with far more digits than there are atoms in the observable universe — so its inverse grows correspondingly slowly: **α(n) ≤ 4 for every n you could ever store**. This is why Union-Find operations are described as "effectively constant time", while being careful not to call them O(1): mathematically, α(n) is unbounded, just absurdly slowly.
+With both path compression and union by rank (or size), Robert Tarjan proved in 1975 that any sequence of `m` operations on `n` elements takes O(m · α(n)) time, and later work showed this is optimal for this kind of structure. α is the **inverse Ackermann function**. The Ackermann function grows faster than any tower of exponentials — its fourth level is already a number with far more digits than there are atoms in the observable universe — so its inverse grows correspondingly slowly: **α(n) ≤ 4 for every n you could ever store**. This is why Union-Find operations are described as "effectively constant time", while being careful not to call them O(1): mathematically, α(n) is unbounded, but grows absurdly slowly.
 
 The intuition for why the two optimisations combine so well: union by rank guarantees that trees are at most logarithmically tall *before* any compression, and path compression ensures that each long path is paid for once and then flattened. The proof tracks how far each node's rank is below its parent's rank and charges each pointer hop either to the operation or to a node whose "rank gap" grows — and a gap can only grow a very small number of times before it is huge.
 
@@ -967,13 +964,13 @@ Q: Why does the threshold-query technique sort the queries by limit?
 | A path between two vertices | BFS/DFS | Union-Find knows *that*, not *how* |
 | Directed reachability | BFS/DFS, SCC algorithms | Union-Find models symmetric relations only |
 
-Union-Find's advantages are speed, tiny memory (two `int` arrays) and very short code. Its limits are just as clear: no deletion, no paths, no direction. A directed edge `a → b` does not make `b` reach `a`, but `union` treats the relation as symmetric — so Union-Find detects cycles only in undirected graphs; for directed cycles use DFS colouring or Kahn's algorithm ([[a8-cycle-detection]]).
+Union-Find's advantages are speed, tiny memory (two `int` arrays) and very short code. Its limits are equally clear: no deletion, no paths, no direction. A directed edge `a → b` does not make `b` reach `a`, but `union` treats the relation as symmetric — so Union-Find detects cycles only in undirected graphs; for directed cycles use DFS colouring or Kahn's algorithm ([[a8-cycle-detection]]).
 
 ## Common mistakes
 
 **Linking elements instead of roots.** `parent[a] = b` detaches `a` from its own tree and leaves the rest of its set behind. Always link `find(a)` and `find(b)`.
 
-**Comparing `parent[x]` instead of `find(x)`.** `parent[x]` is just the next pointer up, not the representative. Two elements in the same set can have different parents. Connectivity is `find(a) == find(b)`.
+**Comparing `parent[x]` instead of `find(x)`.** `parent[x]` is only the next pointer up, not the representative. Two elements in the same set can have different parents. Connectivity is `find(a) == find(b)`.
 
 **Recursive `find` without union by rank or size.** The first `find` on a long chain recurses once per node and can throw `StackOverflowError` at around 100,000 elements, as shown above. Use a linking rule, or an iterative `find`.
 

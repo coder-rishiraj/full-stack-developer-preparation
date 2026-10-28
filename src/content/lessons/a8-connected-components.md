@@ -267,7 +267,7 @@ The four islands are the 2 × 2 block at the top left, the three cells around `(
 
 ### Recursive DFS on an adjacency list
 
-This version returns the members of each component, which shows that a component is just "everything one DFS call tree touched".
+This version returns the members of each component, which shows that a component is exactly "everything one DFS call tree touched".
 
 ```java title="ComponentsDfs.java"
 import java.util.*;
@@ -404,7 +404,7 @@ static void dfs(int u, int[][] m, boolean[] seen) {
 }
 ```
 
-This method sits inside the same class as the outer counting loop. Each vertex scans a full row of length `n`, so the total is O(n²) — optimal here, because reading the input matrix already costs O(n²). Scan the full row, not just the upper triangle: the vertex you need may have a smaller index.
+This method sits inside the same class as the outer counting loop. Each vertex scans a full row of length `n`, so the total is O(n²) — optimal here, because reading the input matrix already costs O(n²). Scan the full row, not only the upper triangle: the vertex you need may have a smaller index.
 
 ### BFS or DFS for components?
 
@@ -726,7 +726,7 @@ cycle sinks = []
 
 Vertices 1 and 3 receive edges but send none. Vertex 6 has no edges at all; with the out-degree definition it is a sink too. Some problem statements say "a sink must have at least one incoming edge" — if so, also count in-degrees and require `inDegree[v] > 0`. The directed cycle `1 → 2 → 3 → 1` has no sink: every vertex has a way out.
 
-The array is sized `n + 1` because the vertices are numbered from 1, a common format in GeeksforGeeks-style problems; index 0 is simply unused. **Complexity**: O(V + E) time — one pass over the edges, one over the vertices — and O(V) space. With an adjacency list already built, a sink is just a vertex whose list is empty, so the count is O(V).
+The array is sized `n + 1` because the vertices are numbered from 1, a common format in GeeksforGeeks-style problems; index 0 is unused. **Complexity**: O(V + E) time — one pass over the edges, one over the vertices — and O(V) space. With an adjacency list already built, a sink is a vertex whose list is empty, so the count is O(V).
 
 ### Why sinks matter beyond counting
 

@@ -55,3 +55,7 @@ still unchecked (`node scripts/module-brief.mjs --batch N` shows what a batch co
   corrected version; the pack (used by the printable graph handbook) still needs fixing.
 - `src/content/topics/_graph-core-pack.ts` says the parent check misses parallel edges; in testing
   it reports them from the parent's side. Edge ids matter mainly for bridge-style algorithms.
+- `src/content/topics/_graph-reference-pack.ts`: `MAX_EDGES_DAG` overflows `int` once V > 46,341
+  (V(V−1)/2). The a8-topological-sorting lesson uses `long`; the pack still needs the fix.
+- Dijkstra notes claim an O(V² log V) worst case from stale heap entries; it is O(E log V)
+  (stale entries are bounded by E). The a8-dijkstra lesson is correct; the notes are not.

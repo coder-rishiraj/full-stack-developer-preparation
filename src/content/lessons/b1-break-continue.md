@@ -294,7 +294,7 @@ after stop: count = 2
 after add: count = 3
 ```
 
-The author probably wanted `'stop'` to end the loop, but the `break` was "eaten" by the `switch`. Fixes: use a labelled `break` (see [[b1-break-continue#b1-labels|Labels]] below), put the loop in a function and `return`, or check for `'stop'` with an `if` before the `switch`. This exact bug is examined again in [[b1-nested-control-flow]].
+The author probably wanted `'stop'` to end the loop, but the `break` was "eaten" by the `switch`. Fixes: use a labelled `break` (see the Labels section below), put the loop in a function and `return`, or check for `'stop'` with an `if` before the `switch`. This exact bug is examined again in [[b1-nested-control-flow]].
 
 ## break, continue and finally
 

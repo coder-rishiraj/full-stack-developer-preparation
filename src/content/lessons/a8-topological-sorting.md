@@ -49,9 +49,9 @@ This lesson teaches:
 
 Imagine the dressing rules written on cards, one card per item, each listing what must already be on. Spread the cards on a table. Any card whose list is empty can be done right now — underwear, shirt and socks. Pick one, put it on, and cross that item off every other card. Now trousers and the tie have empty lists too. Keep going: at each step, choose any card whose list is empty. You never get stuck, because the rules are consistent, and when the table is clear you have dressed in a valid order. That is Kahn's algorithm.
 
-Now imagine the opposite approach: start from the *last* thing that could be done and work backwards. Ask "what must happen before the jacket?" — the belt and tie. "Before the belt?" — trousers and shirt. "Before the trousers?" — underwear. Follow these chains to the bottom, and write an item down only once everything it depends on is written. That is the DFS method, run on the reversed rules; in the standard version, we follow edges forward and write each item down once everything that depends on it is done, then read the list backwards.
+Now imagine the opposite approach: start from the *last* thing that could be done and work backwards. Ask "what must happen before the jacket?" — the belt and tie. "Before the belt?" — trousers and shirt. "Before the trousers?" — underwear. Follow these chains to the bottom, and write an item down only once everything it depends on is written. That is the idea behind the DFS method. The standard version runs it in the mirror direction: it follows edges forward ("what comes after this?"), writes an item down only once everything that comes after it has been written, and finally reads the list backwards.
 
-Both pictures share one invariant: **an item is placed only when its relationship to everything it is constrained by is settled.** They just settle it from opposite ends.
+Both pictures share one invariant: **an item is placed only when its relationship to everything it is constrained by is settled.** They settle it from opposite ends.
 
 ## What a topological order is, and when one exists
 
@@ -59,7 +59,7 @@ A **topological order** of a directed graph `G` is a sequence containing every v
 
 **A topological order exists if and only if the graph is a DAG.** One direction is short: if the graph has a cycle `v₁ → v₂ → … → vₖ → v₁`, then any order would need `v₁` before `v₂` before … before `vₖ` before `v₁`, which puts `v₁` before itself. The other direction is constructive: every non-empty DAG has a vertex with no incoming edges (proved in [[a8-cycle-directed-bfs-kahn]]), so put it first, remove it, and repeat on the smaller DAG. That construction *is* Kahn's algorithm.
 
-**The order is usually not unique.** Whenever two vertices have no path between them in either direction, either can come first. The dressing graph has hundreds of valid orders. An order is unique exactly when every pair of consecutive vertices in it is joined by an edge — that is, when the DAG contains a path through all its vertices (a **Hamiltonian path**). This matters in practice: if a problem expects "the" order, it must either guarantee uniqueness or specify a tie-break, such as "smallest label first".
+**The order is usually not unique.** Whenever two vertices have no path between them in either direction, either can come first. The dressing graph has 192 valid orders, as the counting method in [[a8-all-topological-sorts]] confirms. An order is unique exactly when every pair of consecutive vertices in it is joined by an edge — that is, when the DAG contains a path through all its vertices (a **Hamiltonian path**). This matters in practice: if a problem expects "the" order, it must either guarantee uniqueness or specify a tie-break, such as "smallest label first".
 
 Some quick consequences worth remembering:
 
@@ -360,7 +360,7 @@ The DFS method is the natural choice when you are already running DFS for anothe
 
 ## Topological Sort Using Departure Time of Vertex {#a8-topo-departure-time}
 
-This is the DFS method from [[a8-topo-dfs]] written with explicit timestamps. A global clock ticks once whenever DFS **arrives** at a vertex and once whenever it **departs** (finishes) a vertex. Each vertex therefore gets an arrival time and a departure time. In a DAG, every edge `u → v` satisfies `departure[u] > departure[v]`, so listing vertices in decreasing departure time gives a topological order. Departure times are just finishing times under another name; the value of this formulation is that the times are numbers you can store, compare and reuse.
+This is the DFS method from [[a8-topo-dfs]] written with explicit timestamps. A global clock ticks once whenever DFS **arrives** at a vertex and once whenever it **departs** (finishes) a vertex. Each vertex therefore gets an arrival time and a departure time. In a DAG, every edge `u → v` satisfies `departure[u] > departure[v]`, so listing vertices in decreasing departure time gives a topological order. Departure times are finishing times under another name; the value of this formulation is that the times are numbers you can store, compare and reuse.
 
 ### Arrival, departure and nesting
 
@@ -584,7 +584,7 @@ Building the graph is O(V + E) for courses and prerequisites, and Kahn is O(V + 
 
 ## All Topological Sorts of a DAG {#a8-all-topological-sorts}
 
-This problem asks for **every** valid topological order of a DAG, not just one. It is solved by **backtracking**: at each step, try every vertex that is currently ready (indegree 0 and not yet used), place it, update indegrees, recurse to complete the order, and then undo the choice and try the next ready vertex. Each complete sequence is a different valid order. The number of orders can be enormous, so the running time depends on the size of the output.
+This problem asks for **every** valid topological order of a DAG, not only one. It is solved by **backtracking**: at each step, try every vertex that is currently ready (indegree 0 and not yet used), place it, update indegrees, recurse to complete the order, and then undo the choice and try the next ready vertex. Each complete sequence is a different valid order. The number of orders can be enormous, so the running time depends on the size of the output.
 
 ### Why backtracking over Kahn's choices
 
@@ -696,7 +696,7 @@ Since the original edges already point forward in the chosen order, none of them
 
 ### Why adding a backward edge would break it
 
-Suppose you added an edge `tⱼ → tᵢ` with `i < j` that goes against the order. After adding all forward edges, `tᵢ → tⱼ` is present, so `tᵢ → tⱼ → tᵢ` is a cycle. So once all forward edges are in place, no further edge is possible — the count is maximum, not just large.
+Suppose you added an edge `tⱼ → tᵢ` with `i < j` that goes against the order. After adding all forward edges, `tᵢ → tⱼ` is present, so `tᵢ → tⱼ → tᵢ` is a cycle. So once all forward edges are in place, no further edge is possible — the count is maximum, not merely large.
 
 ### Implementation
 
@@ -761,7 +761,7 @@ This algorithm finds the shortest distance from a source vertex to every other v
 
 ### From general shortest paths to one pass
 
-In a general graph, shortest-path algorithms have to work to discover the right order in which to finalise vertices. **Dijkstra's algorithm** ([[a8-dijkstra]]) uses a priority queue to always finalise the closest unfinished vertex, which costs O((V + E) log V) and breaks when weights are negative. **Bellman-Ford** ([[a8-bellman-ford]]) gives up on finding an order and simply relaxes every edge `V − 1` times, costing O(V · E).
+In a general graph, shortest-path algorithms have to work to discover the right order in which to finalise vertices. **Dijkstra's algorithm** ([[a8-dijkstra]]) uses a priority queue to always finalise the closest unfinished vertex, which costs O((V + E) log V) and breaks when weights are negative. **Bellman-Ford** ([[a8-bellman-ford]]) gives up on finding an order and relaxes every edge `V − 1` times, costing O(V · E).
 
 A DAG hands us the right order for free. Every path into a vertex `v` passes only through vertices that come before `v` in topological order. So if we process vertices in that order and **relax** each outgoing edge — for edge `u → v` with weight `w`, if `dist[u] + w < dist[v]` then set `dist[v] = dist[u] + w` — then by the time we reach `v`, every edge into `v` has already been relaxed from a vertex whose distance was final. One pass suffices.
 
@@ -890,7 +890,7 @@ This problem asks for the path with the **largest** total weight — from a give
 
 ### Why it is hard in general and easy in a DAG
 
-In a general graph, "longest simple path" is **NP-hard**: if you could solve it quickly, you could decide whether a graph has a Hamiltonian path (a simple path of length `V − 1` through every vertex), which is NP-complete. The difficulty comes from cycles — the path must avoid revisiting vertices, and keeping track of which vertices were used is what explodes. Simply negating the weights and running Bellman-Ford does not help, because positive cycles become negative cycles, which Bellman-Ford can detect but not route around.
+In a general graph, "longest simple path" is **NP-hard**: if you could solve it quickly, you could decide whether a graph has a Hamiltonian path (a simple path of length `V − 1` through every vertex), which is NP-complete. The difficulty comes from cycles — the path must avoid revisiting vertices, and keeping track of which vertices were used is what explodes. Negating the weights and running Bellman-Ford does not help, because positive cycles become negative cycles, which Bellman-Ford can detect but not route around.
 
 A DAG has no cycles, so every path is automatically simple, and the "which vertices have I used?" problem disappears. The shortest-path invariant carries over unchanged: process vertices in topological order, and every path into `v` is fully accounted for before `v` is processed. Two equivalent implementations:
 
@@ -1122,7 +1122,7 @@ The lexicographic requirement creates a trap. The obvious greedy approach — al
 
 ### Hierholzer's algorithm with smallest-first choices
 
-**Hierholzer's algorithm** ([[a8-hierholzer-algorithm]]) fixes the trap without backtracking. Walk greedily, always taking the smallest unused ticket. When you reach an airport with no unused tickets left, that airport must be the *end* of the remaining trip, so add it to the *front* of the answer and step back to the previous airport, which may still have unused tickets that form a detour loop. Detours get spliced in automatically because airports are added to the answer only when they are finished — a postorder, just like the DFS topological sort, and for the same reason: an airport is placed only after everything that must come after it is placed.
+**Hierholzer's algorithm** ([[a8-hierholzer-algorithm]]) fixes the trap without backtracking. Walk greedily, always taking the smallest unused ticket. When you reach an airport with no unused tickets left, that airport must be the *end* of the remaining trip, so add it to the *front* of the answer and step back to the previous airport, which may still have unused tickets that form a detour loop. Detours get spliced in automatically because airports are added to the answer only when they are finished — a postorder, like the DFS topological sort, and for the same reason: an airport is placed only after everything that must come after it is placed.
 
 ```java title="ReconstructItinerary.java"
 import java.util.*;

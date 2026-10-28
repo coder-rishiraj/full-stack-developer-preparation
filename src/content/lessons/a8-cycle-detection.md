@@ -43,7 +43,7 @@ Picture a city where every street is one-way. You leave your hotel and wander, u
 Two kinds of familiar junction can appear in front of you.
 
 - A junction you visited **earlier but have already wound your string back from**. You explored everything reachable from there and came back; it did not lead back to where you are now, or you would have found that out at the time. Reaching it again tells you nothing about loops.
-- A junction your string **is still lying on** — one you passed on the way to where you are standing now. There is a one-way route from that junction to you (along the string), and you have just found a one-way street from you back to it. Together they form a loop you could drive around forever.
+- A junction your string **is still lying on** — one you passed on the way to where you are standing now. There is a one-way route from that junction to you (along the string), and you have now found a one-way street from you back to it. Together they form a loop you could drive around forever.
 
 That distinction is the entire DFS method. "Visited" is not the question. The question is "is that vertex **on my current path**?" Only the second kind of junction proves a cycle.
 
@@ -67,7 +67,7 @@ Two shortcuts that work on undirected graphs give wrong answers here, and unders
 
 **"A visited neighbour means a cycle" reports false cycles.** Run DFS on the diamond, visiting neighbours in index order. DFS goes `A → B → D`, finishes `D` and `B`, returns to `A`, then goes `A → C` and finds that `C`'s neighbour `D` is already visited. There is no cycle, yet a visited-means-cycle rule would report one. The problem is that `D` was reached by two different *forward* routes. In a directed graph, meeting a visited vertex only means two paths converge, not that a path returns.
 
-**The undirected parent rule misses real cycles and still reports false ones.** The undirected rule says "a visited neighbour other than my parent is a cycle". On the two-vertex cycle `0 → 1, 1 → 0`, DFS goes from 0 to 1, sees neighbour 0 — which is 1's parent — and skips it. The real cycle is missed. On the diamond, `D` is visited and is not `C`'s parent, so the false cycle is still reported. The parent rule is the right fix for undirected graphs, where every edge is stored in both directions; it is simply the wrong model for one-way edges.
+**The undirected parent rule misses real cycles and still reports false ones.** The undirected rule says "a visited neighbour other than my parent is a cycle". On the two-vertex cycle `0 → 1, 1 → 0`, DFS goes from 0 to 1, sees neighbour 0 — which is 1's parent — and skips it. The real cycle is missed. On the diamond, `D` is visited and is not `C`'s parent, so the false cycle is still reported. The parent rule is the right fix for undirected graphs, where every edge is stored in both directions; it is the wrong model for one-way edges.
 
 What both shortcuts lack is information about *where* the visited vertex is relative to the current search. A vertex can be visited and finished (harmless), or visited and still on the current path (a cycle). Every correct method tracks that difference, either with a second boolean array, with three colours, or — in Kahn's method — by never looking at visited flags at all.
 
@@ -477,7 +477,7 @@ You do not need to delete edges physically. Keep an `indeg[]` array, and "removi
 3. While the queue is not empty: remove a vertex `u`, count it, and for every edge `u → v` decrement `indeg[v]`; if it becomes `0`, add `v` to the queue.
 4. If the count equals `V`, there is no cycle. Otherwise there is one, and the uncounted vertices are exactly those that lie on a cycle or can be reached from one.
 
-The last claim deserves a sentence. A vertex is removed only after all its predecessors are removed, so a vertex stays stuck exactly when some path leads to it from a cycle. That means the leftovers are not just "the cycle" — vertices downstream of a cycle are stuck too.
+The last claim deserves a sentence. A vertex is removed only after all its predecessors are removed, so a vertex stays stuck exactly when some path leads to it from a cycle. That means the leftovers are not only "the cycle" — vertices downstream of a cycle are stuck too.
 
 ### Implementation, with the trapped vertices and a cycle
 
@@ -590,7 +590,7 @@ Computing indegrees scans every edge once: O(V + E). Each vertex enters the queu
 In interviews, both are acceptable for Course Schedule. Kahn is often the safer default in Java because it cannot overflow the stack, and its cycle test is a single comparison of a count with `V`.
 
 > [!MISTAKE] Checking the wrong thing at the end
-> Kahn's verdict is `count == V`, computed after the loop. An empty initial queue does prove a cycle (a non-empty DAG always has a source), but a non-empty initial queue proves nothing — a cycle can sit downstream of the sources, as vertex 1, 2, 3 do above. Always count removed vertices.
+> Kahn's verdict is `count == V`, computed after the loop. An empty initial queue does prove a cycle (a non-empty DAG always has a source), but a non-empty initial queue proves nothing — a cycle can sit downstream of the sources, as vertices 1, 2 and 3 do above. Always count removed vertices.
 
 ## Negative Weight Cycle Detection {#a8-negative-cycle-detection}
 
@@ -712,7 +712,7 @@ Two alternatives are worth knowing:
 If you need the cycle with the smallest *average* weight per edge rather than any negative cycle, that is a separate problem: [[a8-minimum-mean-weight-cycle]].
 
 > [!WARNING] A negative edge is not a negative cycle
-> Negative edges alone are harmless to Bellman-Ford and to shortest paths in a DAG ([[a8-shortest-path-dag]]). Only a cycle whose *total* is negative breaks shortest paths. Do not reject an input just because some weight is below zero — and do not use Dijkstra on it either, since Dijkstra can be wrong with any negative edge.
+> Negative edges alone are harmless to Bellman-Ford and to shortest paths in a DAG ([[a8-shortest-path-dag]]). Only a cycle whose *total* is negative breaks shortest paths. Do not reject an input merely because some weight is below zero — and do not use Dijkstra on it either, since Dijkstra can be wrong with any negative edge.
 
 ## How the methods compare
 
@@ -736,7 +736,7 @@ flowchart TD
 
 ## In real systems
 
-**Build tools and task runners.** Gradle, Bazel and Make all model work as a directed graph of tasks or targets. Before running anything they check the graph for cycles; Gradle, for example, stops with a "circular dependency" error that names the tasks in the loop. Printing the cycle — not just saying one exists — is what makes the error actionable.
+**Build tools and task runners.** Gradle, Bazel and Make all model work as a directed graph of tasks or targets. Before running anything they check the graph for cycles; Gradle, for example, stops with a "circular dependency" error that names the tasks in the loop. Printing the cycle — not only saying one exists — is what makes the error actionable.
 
 **Infrastructure as code.** Terraform builds a dependency graph of resources so it can create independent resources in parallel and dependent ones in order. A configuration where resource A references B and B references A produces a "Cycle:" error listing the resources involved.
 
