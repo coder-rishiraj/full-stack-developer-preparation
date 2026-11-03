@@ -595,32 +595,157 @@ So 10⁹ + 7 sits at a balance point. It is close to the largest modulus for whi
 
 #### 3. It is prime, which makes division possible
 
-This is the most important reason, and the one interviewers usually want to hear.
+This is the most important reason, and the one interviewers usually ask about. It takes several steps to explain, so the explanation below builds it one idea at a time with small numbers. Once the idea works for the prime 7, it works in exactly the same way for the prime 1,000,000,007.
 
-Addition, subtraction and multiplication work under **any** modulus. Division does not. In modular arithmetic you cannot simply write `a / b`, because `(a / b) % MOD` is not equal to `(a % MOD) / (b % MOD)`. Instead, dividing by `b` means multiplying by the **modular inverse** of `b`. That is a number `x` with `b * x % MOD == 1`, so `x` acts as 1/b.
+**Step 1: Division is multiplication by a reciprocal.**
 
-**An inverse exists for every non-zero `b` only when `MOD` is prime.** A non-prime modulus shows why. Take modulus 10 and try to find the inverse of 2:
+Forget modulo for a moment. 12 ÷ 3 = 4. The same calculation can be written as 12 × ⅓ = 4. Here ⅓ is the **reciprocal** of 3, the number that gives 1 when you multiply it by 3 (3 × ⅓ = 1).
 
-```text
-2 × 0 = 0   2 × 1 = 2   2 × 2 = 4   2 × 3 = 6   2 × 4 = 8
-2 × 5 = 0   2 × 6 = 2   2 × 7 = 4   2 × 8 = 6   2 × 9 = 8   (all mod 10)
-```
+So dividing by a number is the same as multiplying by its reciprocal. Keep this in mind. Everything below is about finding a "reciprocal" that works under modulo.
 
-The results are always even, so `1` never appears. The number 2 has no inverse modulo 10, and you cannot divide by 2. The cause is that 2 shares a factor with 10. With a prime modulus, no number from `1` to `MOD − 1` shares a factor with it, so every one of them has an inverse.
+**Step 2: Under modulo, ordinary division gives wrong answers.**
 
-There is a second problem with non-prime moduli. Two non-zero numbers can multiply to zero: `2 × 5 % 10 == 0`. Once an intermediate value becomes `0`, the information is lost permanently. With a prime modulus, a product is `0` only if one of the factors is `0`.
+Suppose you need (10 ÷ 2) mod 7. In ordinary arithmetic, 10 ÷ 2 = 5, and 5 mod 7 = 5, so 5 is the correct answer.
 
-Division matters because many counting formulas require it. The most common one is the binomial coefficient:
+In a contest you never have the real number 10. You have only its remainder, because the real number was too large to store. Since 10 mod 7 = 3, the problem becomes "3 ÷ 2, modulo 7". Ordinary division gives 1.5, which is not a whole number, and Java's integer division `3 / 2` gives `1`. Neither is 5.
 
-> C(n, r) = n! / (r! · (n − r)!)
+The other three operations do not have this problem. You can reduce first and then operate:
 
-Here is a small example of how a non-prime modulus breaks it. The value of C(4, 2) is 24 / (2 · 2) = 6. Modulo 10, 4! = 24 becomes `4`, and the denominator is also `4`. You would need to compute "4 divided by 4" modulo 10, but 4 has no inverse modulo 10, so the computation cannot continue. Modulo the prime 7, 24 becomes `3`, and the inverse of 4 is `2` (because 4 × 2 = 8 ≡ 1). Then 3 × 2 = 6, which is correct.
+| Operation | Reduce first, then operate | Correct? |
+|---|---|---|
+| Addition | `(a % MOD + b % MOD) % MOD` | ✓ |
+| Subtraction | `(a % MOD - b % MOD + MOD) % MOD` | ✓ |
+| Multiplication | `(a % MOD) * (b % MOD) % MOD` | ✓ |
+| Division | `(a % MOD) / (b % MOD)` | ✗ wrong answer |
 
-**How to compute the inverse: Fermat's little theorem.** When `p` is prime and `a` is not a multiple of `p`:
+Division needs a different approach.
 
-> a^(p − 1) ≡ 1 (mod p)
+**Step 3: Find a whole number that acts like ½ modulo 7.**
 
-Split off one factor of `a`: a · a^(p − 2) ≡ 1. By definition, that makes **a^(p − 2) the inverse of a**. With fast exponentiation, which squares the base and halves the exponent at each step, this takes about 30 multiplications for p = 10⁹ + 7. This method works only because the modulus is prime.
+By Step 1, dividing by 2 means multiplying by ½. Under modulo 7, look for a **whole number** `x` that does the job of ½. It must satisfy the same rule as ½: two times it gives 1. Under modulo, that means `2 × x mod 7 = 1`. Try every possible `x`:
+
+| x | 2 × x | 2 × x mod 7 |
+|---|---|---|
+| 0 | 0 | 0 |
+| 1 | 2 | 2 |
+| 2 | 4 | 4 |
+| 3 | 6 | 6 |
+| **4** | **8** | **1** ← found it |
+| 5 | 10 | 3 |
+| 6 | 12 | 5 |
+
+At `x = 4`, 2 × 4 = 8, and 8 mod 7 = 1. So under modulo 7, the number **4 plays the role of ½**. It is called the **modular inverse** of 2 modulo 7, written 2⁻¹ ≡ 4 (mod 7).
+
+Now finish the problem from Step 2. Instead of dividing 3 by 2, multiply 3 by 4: 3 × 4 = 12, and 12 mod 7 = **5**. That is the correct answer.
+
+This gives the rule for all modular division:
+
+> To divide by `b` under modulo, multiply by the modular inverse of `b`, the number `x` with `b × x mod MOD = 1`.
+
+In code, write `a * inverse(b) % MOD` instead of `a / b % MOD`.
+
+Look at the last column of the table again: 0, 2, 4, 6, 1, 3, 5. **Every remainder from 0 to 6 appears exactly once.** Because 1 is one of them, an inverse was guaranteed to exist. The next step shows a case where this fails.
+
+**Step 4: Try the same thing modulo 10. It fails.**
+
+Repeat Step 3 with the modulus 10, which is not prime. Look for `x` with `2 × x mod 10 = 1`:
+
+| x | 2 × x | 2 × x mod 10 |
+|---|---|---|
+| 0 | 0 | 0 |
+| 1 | 2 | 2 |
+| 2 | 4 | 4 |
+| 3 | 6 | 6 |
+| 4 | 8 | 8 |
+| 5 | 10 | 0 |
+| 6 | 12 | 2 |
+| 7 | 14 | 4 |
+| 8 | 16 | 6 |
+| 9 | 18 | 8 |
+
+The last column is 0, 2, 4, 6, 8, 0, 2, 4, 6, 8, and **the value 1 never appears**. The reason is that 2 × x is always even, and taking the remainder modulo 10 subtracts a multiple of 10, which is also even. An even number minus an even number is still even, so the remainder is always even, and it can never be 1. **2 has no inverse modulo 10, so you cannot divide by 2.**
+
+The table also shows why "undoing" the multiplication is impossible. Only half the remainders appear, and each appears twice. For example, 2 × 1 and 2 × 6 both give 2. If you know only that the result is 2, you cannot tell whether you started with 1 or 6. Division is exactly this undoing, so it has no single correct answer.
+
+**Step 5: The cause is a shared factor.**
+
+Why did 7 work and 10 fail? Compare the number 2 with each modulus:
+
+- 2 and 10 share the factor 2. Their greatest common divisor is gcd(2, 10) = 2.
+- 2 and 7 share no factor except 1, so gcd(2, 7) = 1.
+
+The shared factor is what caused the failure in Step 4. Both 2 × x and 10 were multiples of 2, so the remainder was also a multiple of 2, and it could never be 1. This leads to the general rule:
+
+> A number `a` has an inverse modulo `M` **exactly when gcd(a, M) = 1**, which means `a` and `M` share no factor except 1.
+
+Here are the inverses of every non-zero number for both moduli:
+
+| a | Inverse mod 7 | Inverse mod 10 |
+|---|---|---|
+| 1 | 1 | 1 |
+| 2 | 4 | none (2 and 10 share 2) |
+| 3 | 5 | 7 |
+| 4 | 2 | none (share 2) |
+| 5 | 3 | none (share 5) |
+| 6 | 6 | none (share 2) |
+| 7 | — | 3 |
+| 8 | — | none (share 2) |
+| 9 | — | 9 |
+
+Modulo 10, some numbers do have inverses (1, 3, 7 and 9), but more than half do not. Modulo 7, **every** non-zero number has one. Check any row: for example, 3 × 5 = 15, and 15 mod 7 = 1.
+
+**Step 6: A prime modulus gives every number an inverse.**
+
+A prime is a number whose only divisors are 1 and itself. The prime 7 is divisible only by 1 and 7. Take any number from 1 to 6. It is smaller than 7, so it cannot have 7 as a factor. The only factor left that it could share with 7 is 1. So gcd(a, 7) = 1 for every `a` from 1 to 6, and by the rule in Step 5, every one of them has an inverse.
+
+The same argument works for 1,000,000,007. It is prime, so no remainder from 1 to 1,000,000,006 shares a factor with it, and **every non-zero remainder has an inverse**. With a prime modulus, you can divide by any non-zero remainder. With a non-prime modulus, division works for some numbers and fails for others, and you would have to check each time.
+
+**Step 7: A second benefit: non-zero numbers never multiply to zero.**
+
+Modulo 10, 2 × 5 = 10, which leaves remainder 0. Neither 2 nor 5 is zero, but their product is zero. The pairs 4 × 5, 5 × 6 and 5 × 8 do the same. Numbers like these are called **zero divisors**. In a long calculation they cause permanent damage. Once a running product becomes 0, every later multiplication keeps it at 0, and the real answer is lost.
+
+Modulo 7, this never happens. For a × b to leave remainder 0, 7 must divide a × b. When a prime divides a product, it must divide one of the factors. But 7 cannot divide any number from 1 to 6. You can check all 36 products of the numbers 1 to 6: none of them leaves remainder 0. With a prime modulus, a product is zero only when one of its factors is zero, just as in ordinary arithmetic.
+
+**Step 8: Where contest problems need division: nCr.**
+
+Division is not a rare edge case. The most common counting formula in contests contains it. The number of ways to choose `r` items from `n` items is:
+
+> C(n, r) = n! / (r! × (n − r)!)
+
+For small numbers this is easy. The number of ways to choose 2 people from 4 is C(4, 2) = 24 / (2 × 2) = 6.
+
+Now consider C(1000, 500). The factorials have thousands of digits, and 20! is the largest factorial that fits in a `long`. So you must reduce each factorial modulo MOD as you build it. After that you have only remainders, and Step 2 showed that remainders cannot be divided directly. So replace each division with a multiplication by an inverse:
+
+> C(n, r) mod MOD = n! × inverse(r!) × inverse((n − r)!) mod MOD
+
+Compare a prime modulus and a non-prime modulus on C(4, 2), whose correct answer is 6:
+
+- **Modulo 7 (prime):** 4! = 24 → 24 mod 7 = 3. The denominator is 2! × 2! = 4, and the inverse of 4 modulo 7 is 2 (from the table in Step 5). So the answer is 3 × 2 = 6. ✓
+- **Modulo 10 (not prime):** 4! = 24 → 24 mod 10 = 4. The denominator is 4, and 4 has **no inverse** modulo 10. The calculation cannot continue, even though the correct answer, 6, is an ordinary small number.
+
+**Step 9: Computing the inverse quickly with Fermat's little theorem.**
+
+For modulus 7, you found the inverse of 2 by trying every candidate. For 1,000,000,007, that could take a billion tries for a single inverse, which is far too slow. A theorem gives the answer directly.
+
+> **Fermat's little theorem:** if `p` is prime and `a` is not a multiple of `p`, then a^(p − 1) mod p = 1.
+
+Check it with small numbers. For a = 2 and p = 7: 2⁶ = 64 = 9 × 7 + 1, so the remainder is 1 ✓. For a = 3: 3⁶ = 729 = 104 × 7 + 1, so the remainder is again 1 ✓.
+
+Now take one factor of `a` out of the power: a^(p − 1) = a × a^(p − 2). So the theorem says:
+
+> a × a^(p − 2) mod p = 1
+
+Compare this with the definition of an inverse, a × inverse(a) mod p = 1. The two equations have the same form, so:
+
+> **inverse(a) = a^(p − 2) mod p**
+
+Check it against the table in Step 5. The inverse of 2 modulo 7 is 2⁵ = 32, and 32 mod 7 = 4 ✓. The inverse of 3 is 3⁵ = 243, and 243 mod 7 = 5 ✓.
+
+Fermat's theorem works only when `p` is prime. So a prime modulus does two jobs: it guarantees that every inverse **exists**, and it gives a simple formula to **compute** it.
+
+For MOD = 1,000,000,007, the formula is inverse(a) = a^1,000,000,005 mod MOD. Multiplying `a` by itself a billion times would be far too slow. **Fast exponentiation**, also called binary exponentiation, avoids this. It repeatedly squares the base (a, a², a⁴, a⁸, …) and multiplies together only the powers that match the 1-bits of the exponent. The exponent 1,000,000,005 has 30 bits, so the calculation needs only about 30 squarings and at most 30 multiplications. That is O(log MOD) time. The calculation reduces modulo MOD after every step, so every value stays below MOD and every product fits in a `long`.
+
+The program below combines all of these ideas.
 
 ```java title="ModInverse.java"
 public class ModInverse {
@@ -671,6 +796,45 @@ public class ModInverse {
 ```
 
 The number `333333336` is "one third" modulo 10⁹ + 7, because 3 × 333,333,336 = 1,000,000,008, which leaves remainder 1. The binomial coefficient is computed entirely by multiplication, using inverses in place of division, and gives the correct `10`. The last three lines show requirement 2 in action. Remainders of 10⁹ + 7 add safely in `int` and multiply safely in `long`, while remainders of 2³¹ − 1 overflow on a single addition.
+
+To summarize requirement 3: division under modulo means multiplying by an inverse. An inverse of `a` exists only when `a` shares no factor with the modulus. A prime shares no factor with any smaller positive number, so every non-zero remainder has an inverse. Fermat's little theorem then gives the inverse as a^(MOD − 2), which fast exponentiation computes in about 30 steps.
+
+```quiz
+Q: What is the modular inverse of 2 modulo 7?
+- [ ] 2
+- [ ] 3
+- [x] 4
+- [ ] 5
+> 2 × 4 = 8, and 8 mod 7 = 1. So under modulo 7, multiplying by 4 does the job of multiplying by ½.
+
+Q: Why does 2 have no inverse modulo 10?
+- [ ] 10 is too small for inverses to exist
+- [x] 2 and 10 share the factor 2, so 2 × x mod 10 is always even and can never be 1
+- [ ] Only odd numbers can have inverses under any modulus
+- [ ] 2 is prime, and primes have no inverses
+> An inverse of `a` modulo `M` exists exactly when gcd(a, M) = 1. Here gcd(2, 10) = 2. Under the prime modulus 7, the same number 2 has the inverse 4.
+
+Q: Can a number have an inverse modulo a non-prime number?
+- [ ] Never
+- [x] Yes, when it shares no factor with the modulus. For example, 3 × 7 = 21 leaves remainder 1 modulo 10
+- [ ] Yes, every non-zero number always does
+- [ ] Only if the number itself is prime
+> Some numbers have an inverse modulo 10 (1, 3, 7 and 9), but 2, 4, 5, 6 and 8 do not. A prime modulus is used because it guarantees an inverse for every non-zero number, not only for some.
+
+Q: When MOD is prime, which expression gives the modular inverse of `a`?
+- [ ] a^MOD mod MOD
+- [ ] a^(MOD − 1) mod MOD
+- [x] a^(MOD − 2) mod MOD
+- [ ] a / MOD
+> Fermat's little theorem says a^(MOD − 1) mod MOD = 1. Taking one factor of `a` out gives a × a^(MOD − 2) mod MOD = 1, so a^(MOD − 2) is the number that multiplies `a` to give 1.
+
+Q: Under the prime modulus 7, can two non-zero remainders multiply to give remainder 0?
+- [ ] Yes, for example 2 × 5
+- [x] No. If 7 divides a × b, it must divide a or b, and 7 cannot divide any number from 1 to 6
+- [ ] Yes, but only for even numbers
+- [ ] Only when the product is larger than 7
+> 2 × 5 = 10 leaves 0 modulo 10, but leaves 3 modulo 7. Under a prime modulus, products of non-zero remainders are never zero, so information is never lost to an accidental 0.
+```
 
 #### 4. It is easy to remember and type
 
