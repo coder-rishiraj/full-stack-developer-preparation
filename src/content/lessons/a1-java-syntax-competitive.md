@@ -549,6 +549,145 @@ public class ModMath {
 
 The first three lines show the sign rule and its repair: `-2` becomes `3` modulo 5, and `-7` becomes `MOD - 7` modulo `MOD`. Now look at the last two. Without the cast, `a * b` overflowed in `int`, and taking `% MOD` of that wrapped value produced a number that looks plausible and is simply wrong. `%` cannot undo an overflow that has already happened. The cast in `mul` fixes it. You can check the answer by hand: 999,999,999 is `MOD - 8`, so its square leaves the same remainder as (−8)² = 64. In `mul`, the expression `(long) a * b % MOD` is evaluated left to right: cast, multiply in `long`, then reduce.
 
+### Why 1,000,000,007?
+
+This is a common interview question, and "because everyone uses it" is not an answer. The number was chosen because it satisfies four requirements at once: it is **large**, it **fits Java's types safely**, it is **prime**, and it is **easy to remember**. Each requirement is explained below. Removing any one of them gives a worse modulus.
+
+#### 1. It is large enough to keep answers distinguishable
+
+The judge does not see your real answer. It sees only `answer % MOD`. Two different real answers that leave the same remainder look identical. A wrong solution can therefore pass by accident if its wrong answer happens to share the remainder of the right one.
+
+The remainder can be any of the values `0` to `MOD − 1`, so the size of `MOD` controls how likely that accident is:
+
+| Modulus | Possible remainders | Chance a random wrong answer matches |
+|---|---|---|
+| 10 | 10 | 1 in 10 |
+| 1,000 | 1,000 | 1 in 1,000 |
+| 1,000,000,007 | about 10⁹ | about 1 in a billion |
+
+With a modulus of 10, one wrong solution in ten would be accepted. With 10⁹ + 7, the remainder is almost as strict a check as the full answer. The same argument applies to **hashing**, such as polynomial string hashing: a larger modulus means fewer collisions between different strings.
+
+So the modulus should be as large as possible. The next requirement sets the upper limit.
+
+#### 2. It fits safely in `int` and `long`
+
+Modular code performs three operations on remainders: it stores them, adds them, and multiplies them. Each operation must stay inside a Java type without overflowing. Remember the limits:
+
+- `int` holds values up to `Integer.MAX_VALUE` = 2,147,483,647, about 2.1 × 10⁹.
+- `long` holds values up to `Long.MAX_VALUE` = 9,223,372,036,854,775,807, about 9.2 × 10¹⁸.
+
+The largest remainder is `MOD − 1` = 1,000,000,006. Check each operation against those limits:
+
+| Operation | Largest result | Fits in |
+|---|---|---|
+| Store a remainder | 1,000,000,006 ≈ 1.0 × 10⁹ | `int` ✓ |
+| Add two remainders | 2,000,000,012 ≈ 2.0 × 10⁹ | `int` ✓ (just under 2.147 × 10⁹) |
+| Multiply two remainders | 1,000,000,012,000,000,036 ≈ 1.0 × 10¹⁸ | `long` ✓ (9× headroom) |
+
+All three operations are safe. That is why the rules in the previous section are simple: store in `int`, add in `int` and reduce, multiply in `long` and reduce. The 9× headroom in `long` also lets you add up to nine products before reducing, which some optimized loops rely on.
+
+Now compare moduli that break this rule:
+
+- **2³¹ − 1 = 2,147,483,647** is prime and fits in `int`. But adding two remainders gives about 4.3 × 10⁹, which overflows `int` and becomes `-4`. You would need `long` even for addition.
+- **2⁶¹ − 1** is a prime used in some hashing code. But multiplying two remainders gives about 5.3 × 10³⁶, which overflows even `long`. Every multiplication then needs special 128-bit tricks.
+
+So 10⁹ + 7 sits at a balance point. It is close to the largest modulus for which the sum of two remainders still fits in `int` and the product still fits in `long`.
+
+#### 3. It is prime, which makes division possible
+
+This is the most important reason, and the one interviewers usually want to hear.
+
+Addition, subtraction and multiplication work under **any** modulus. Division does not. In modular arithmetic you cannot simply write `a / b`, because `(a / b) % MOD` is not equal to `(a % MOD) / (b % MOD)`. Instead, dividing by `b` means multiplying by the **modular inverse** of `b`. That is a number `x` with `b * x % MOD == 1`, so `x` acts as 1/b.
+
+**An inverse exists for every non-zero `b` only when `MOD` is prime.** A non-prime modulus shows why. Take modulus 10 and try to find the inverse of 2:
+
+```text
+2 × 0 = 0   2 × 1 = 2   2 × 2 = 4   2 × 3 = 6   2 × 4 = 8
+2 × 5 = 0   2 × 6 = 2   2 × 7 = 4   2 × 8 = 6   2 × 9 = 8   (all mod 10)
+```
+
+The results are always even, so `1` never appears. The number 2 has no inverse modulo 10, and you cannot divide by 2. The cause is that 2 shares a factor with 10. With a prime modulus, no number from `1` to `MOD − 1` shares a factor with it, so every one of them has an inverse.
+
+There is a second problem with non-prime moduli. Two non-zero numbers can multiply to zero: `2 × 5 % 10 == 0`. Once an intermediate value becomes `0`, the information is lost permanently. With a prime modulus, a product is `0` only if one of the factors is `0`.
+
+Division matters because many counting formulas require it. The most common one is the binomial coefficient:
+
+> C(n, r) = n! / (r! · (n − r)!)
+
+Here is a small example of how a non-prime modulus breaks it. The value of C(4, 2) is 24 / (2 · 2) = 6. Modulo 10, 4! = 24 becomes `4`, and the denominator is also `4`. You would need to compute "4 divided by 4" modulo 10, but 4 has no inverse modulo 10, so the computation cannot continue. Modulo the prime 7, 24 becomes `3`, and the inverse of 4 is `2` (because 4 × 2 = 8 ≡ 1). Then 3 × 2 = 6, which is correct.
+
+**How to compute the inverse: Fermat's little theorem.** When `p` is prime and `a` is not a multiple of `p`:
+
+> a^(p − 1) ≡ 1 (mod p)
+
+Split off one factor of `a`: a · a^(p − 2) ≡ 1. By definition, that makes **a^(p − 2) the inverse of a**. With fast exponentiation, which squares the base and halves the exponent at each step, this takes about 30 multiplications for p = 10⁹ + 7. This method works only because the modulus is prime.
+
+```java title="ModInverse.java"
+public class ModInverse {
+    static final int MOD = 1_000_000_007;
+
+    static long power(long base, long exp) {  // base^exp % MOD, fast exponentiation
+        long result = 1;
+        base %= MOD;
+        while (exp > 0) {
+            if ((exp & 1) == 1) result = result * base % MOD;
+            base = base * base % MOD;
+            exp >>= 1;
+        }
+        return result;
+    }
+
+    static long inverse(long a) {             // valid because MOD is prime
+        return power(a, MOD - 2);
+    }
+
+    public static void main(String[] args) {
+        long inv3 = inverse(3);
+        System.out.println(inv3);                 // the "1/3" of this world
+        System.out.println(3 * inv3 % MOD);       // 3 * (1/3) = 1
+
+        long[] fact = new long[6];
+        fact[0] = 1;
+        for (int i = 1; i <= 5; i++) fact[i] = fact[i - 1] * i % MOD;
+        long c52 = fact[5] * inverse(fact[2]) % MOD * inverse(fact[3]) % MOD;
+        System.out.println(c52);                  // C(5, 2) = 120 / (2 * 6)
+
+        int maxRem = MOD - 1;
+        System.out.println(maxRem + maxRem);      // sum of two remainders: fits in int
+        System.out.println((long) maxRem * maxRem); // product: fits in long
+        int m = Integer.MAX_VALUE;                // 2^31 - 1 is prime too...
+        System.out.println((m - 1) + (m - 1));    // ...but its sum overflows int
+    }
+}
+```
+
+```output
+333333336
+1
+10
+2000000012
+1000000012000000036
+-4
+```
+
+The number `333333336` is "one third" modulo 10⁹ + 7, because 3 × 333,333,336 = 1,000,000,008, which leaves remainder 1. The binomial coefficient is computed entirely by multiplication, using inverses in place of division, and gives the correct `10`. The last three lines show requirement 2 in action. Remainders of 10⁹ + 7 add safely in `int` and multiply safely in `long`, while remainders of 2³¹ − 1 overflow on a single addition.
+
+#### 4. It is easy to remember and type
+
+The number 1,000,000,007 is the **smallest prime greater than 10⁹**. The numbers 1,000,000,001, …003 and …005 are composite, and the even numbers are excluded automatically. You can remember it as "a billion plus seven." Java's digit separators make typos visible: `1_000_000_007`. Its twin, **1,000,000,009**, is also prime. It is sometimes used as a second modulus in double hashing, so that two independent remainders must collide at the same time.
+
+#### The other common modulus: 998,244,353
+
+Some problems use 998_244_353 instead. It satisfies requirements 1 to 3 for the same reasons: it is a prime just under 10⁹. It also has one additional property:
+
+> 998,244,353 = 119 × 2²³ + 1
+
+Because p − 1 is divisible by a large power of two, the **Number Theoretic Transform** works under this modulus. The NTT is the modular version of the FFT, and it multiplies large polynomials in O(n log n). Problems that need the NTT use 998,244,353. Otherwise, the choice between the two moduli makes no difference to your code: change the constant, and everything else stays the same.
+
+#### The interview answer in four sentences
+
+> "We take answers modulo 10⁹ + 7 because the real answers are too big to store, so we compare remainders instead. It is **large**, about a billion possible remainders, so different answers almost never collide. It is **small enough** that the sum of two remainders fits in an `int` and the product fits in a `long`, so no operation overflows. And it is **prime**, so every non-zero number has a modular inverse, computed with Fermat's little theorem as a^(p−2), which lets us divide, for example in nCr."
+
 ## Infinity sentinels
 
 Shortest-path algorithms start with a distance of `0` at the source and "unreachable" everywhere else. You represent "unreachable" with a **sentinel** — a value larger than any real distance.
