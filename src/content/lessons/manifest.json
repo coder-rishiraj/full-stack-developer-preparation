@@ -45,7 +45,7 @@
   "summary": "The small slice of Java you need to solve problems on an online judge or in a coding interview — the program skeleton, reading input, choosing int or long, printing efficiently and doing arithmetic modulo a prime. Getting these right means your time goes into the algorithm instead of fighting the language.",
   "difficulty": "beginner",
   "minutes": 50,
-  "words": 6109,
+  "words": 8969,
   "concepts": []
  },
  "a1-recursion": {
@@ -70,6 +70,27 @@
   "concepts": [
    "a1-space-complexity"
   ]
+ },
+ "a10-interval-scheduling": {
+  "summary": "Interval scheduling is the family of greedy problems where requests occupy a stretch of time on a shared resource and you must choose, assign or cover them optimally. You will learn why \"earliest finish first\" keeps the most requests, how to prove it two different ways, how the same reasoning gives the fewest rooms and the fewest covering intervals, and why adding weights breaks greedy and calls for dynamic programming.",
+  "difficulty": "intermediate",
+  "minutes": 55,
+  "words": 5230,
+  "concepts": []
+ },
+ "a11-lcs": {
+  "summary": "The longest common subsequence of two strings is the longest sequence of characters that appears in both, in the same order, with gaps allowed. You will derive its dynamic-programming solution from first principles by asking what can happen to the last character of each string, then reconstruct the sequence, cut memory to one row, and reuse the same reasoning for edit distance, supersequences and palindromes.",
+  "difficulty": "intermediate",
+  "minutes": 55,
+  "words": 1957,
+  "concepts": []
+ },
+ "a11-lis": {
+  "summary": "The longest increasing subsequence (LIS) is the longest run of values you can pick from an array, in their original order, so that each one is larger than the last. You will derive the O(n²) dynamic programming solution from a brute-force recursion, then derive the O(n log n) \"tails\" algorithm, prove why it works, and adapt both to the variants interviews ask for.",
+  "difficulty": "intermediate",
+  "minutes": 60,
+  "words": 5339,
+  "concepts": []
  },
  "a2-array-string-traversal": {
   "summary": "Almost every array and string problem is solved by walking the data in a deliberate order while keeping a little state. You will learn the core traversal patterns — single pass, backward pass, read/write compaction, reversal and parse-while-scanning — and how to choose between them so your solutions stay O(n).",
@@ -438,6 +459,27 @@
   "words": 3370,
   "concepts": []
  },
+ "a8-articulation-points": {
+  "summary": "An articulation point is a vertex whose removal splits an undirected graph — a single point of failure among the nodes. You will learn how one depth-first search with discovery times and low-link values finds every such vertex in linear time, why the root of the search needs its own rule, how cut vertices relate to bridges, and how the same search splits a graph into biconnected components.",
+  "difficulty": "advanced",
+  "minutes": 80,
+  "words": 5683,
+  "concepts": [
+   "a8-articulation-tarjan",
+   "a8-bridges-vs-articulation",
+   "a8-biconnected-components"
+  ]
+ },
+ "a8-bellman-ford": {
+  "summary": "Bellman-Ford finds shortest paths from one source even when some edges have negative weights, by relaxing every edge V − 1 times, and one more pass tells you whether a negative cycle makes shortest paths meaningless. You will learn why V − 1 passes are enough, how the extra pass detects negative cycles, and how the same relaxation idea solves \"at most K edges\" and constraint problems.",
+  "difficulty": "intermediate",
+  "minutes": 70,
+  "words": 5675,
+  "concepts": [
+   "a8-bellman-ford-relaxation",
+   "a8-bellman-ford-negative-cycle"
+  ]
+ },
  "a8-bfs": {
   "summary": "Breadth-first search (BFS) and depth-first search (DFS) are the two ways to visit every vertex of a graph, and almost every graph algorithm is built on one of them. You will learn how each works and why, how BFS finds shortest paths in unweighted graphs, how to write DFS with and without recursion, how to choose between them, and how to deep-copy a graph — including one with shared nodes.",
   "difficulty": "intermediate",
@@ -462,6 +504,16 @@
    "a8-bipartite-dfs",
    "a8-odd-cycle-bipartite",
    "a8-two-clique-problem"
+  ]
+ },
+ "a8-bridges": {
+  "summary": "A bridge is an edge of an undirected graph whose removal disconnects part of the graph — a single point of failure among the links. You will learn why bridges are exactly the edges on no cycle, how one depth-first search with discovery times and low-link values finds all of them in linear time, and how to apply it to the Critical Connections problem and to network-hardening questions.",
+  "difficulty": "advanced",
+  "minutes": 75,
+  "words": 4917,
+  "concepts": [
+   "a8-bridges-tarjan",
+   "a8-critical-connections"
   ]
  },
  "a8-connected-components": {
@@ -518,6 +570,66 @@
    "a8-desopo-pape"
   ]
  },
+ "a8-euler-path": {
+  "summary": "An Euler path uses every edge of a graph exactly once, and an Euler circuit does so and returns to its start. You will learn the simple degree test that decides whether one exists, how Hierholzer's algorithm builds one in linear time, why Fleury's bridge-avoiding method is slower, how directed graphs differ, and how the Chinese Postman problem extends the idea to routes that must repeat some edges.",
+  "difficulty": "intermediate",
+  "minutes": 95,
+  "words": 7028,
+  "concepts": [
+   "a8-seven-bridges-konigsberg",
+   "a8-euler-vs-hamiltonian",
+   "a8-fleury-algorithm",
+   "a8-hierholzer-algorithm",
+   "a8-euler-circuit-directed",
+   "a8-chinese-postman"
+  ]
+ },
+ "a8-floyd-warshall": {
+  "summary": "Floyd-Warshall computes the shortest distance between every pair of vertices with three nested loops, by letting paths use one more allowed \"via\" vertex at a time. You will learn why its loop order is fixed, how it handles negative edges and cycles, and the related techniques for all-pairs and special-structure shortest paths — Johnson's algorithm, multistage graphs, 0-1 weighted graphs and the minimum mean cycle.",
+  "difficulty": "intermediate",
+  "minutes": 85,
+  "words": 6820,
+  "concepts": [
+   "a8-floyd-warshall-all-pairs",
+   "a8-johnsons-algorithm",
+   "a8-multistage-graph",
+   "a8-shortest-path-binary-graph",
+   "a8-minimum-mean-weight-cycle"
+  ]
+ },
+ "a8-gfg-must-do-extras": {
+  "summary": "GeeksforGeeks-style \"must-do\" graph lists mix famous problems with a few that do not fit the usual chapters. This lesson maps every common one to the pattern and lesson that solves it, then teaches the ones that need their own explanation — minimum swaps to sort as cycles of a permutation, minimum cost path as Dijkstra on a grid, and the shortest chain of one-letter word changes with one- and two-sided BFS.",
+  "difficulty": "intermediate",
+  "minutes": 55,
+  "words": 4323,
+  "concepts": [
+   "a8-shortest-chain-target-word"
+  ]
+ },
+ "a8-graph-coloring": {
+  "summary": "Graph colouring assigns colours to vertices so that no edge joins two vertices of the same colour — the model behind timetables, register allocation and frequency assignment. You will learn why two colours are easy but three are NP-complete, how to decide m-colourability by backtracking, how greedy and DSatur heuristics behave, and three classic companions — the Traveling Salesman Problem, the Erdős–Rényi random graph and the Petersen graph.",
+  "difficulty": "advanced",
+  "minutes": 85,
+  "words": 7320,
+  "concepts": [
+   "a8-traveling-salesman",
+   "a8-erdos-renyi",
+   "a8-peterson-graph"
+  ]
+ },
+ "a8-graph-interview-framework": {
+  "summary": "Most graph interview problems never say \"graph\". This lesson gives you a repeatable way to solve them — decide what the vertices and edges are, read the question and the constraints to pick an algorithm, then avoid the handful of mistakes that sink most attempts — and it ties every earlier graph lesson into one map you can revise from.",
+  "difficulty": "intermediate",
+  "minutes": 95,
+  "words": 9180,
+  "concepts": [
+   "a8-identify-vertices-edges",
+   "a8-constraint-driven-choice",
+   "a8-common-graph-mistakes",
+   "a8-must-do-graph-patterns",
+   "a8-complexity-cheat-sheet"
+  ]
+ },
  "a8-graph-representation": {
   "summary": "A graph is a set of things plus the connections between them, and before any graph algorithm can run you must choose how to store those connections in memory. You will learn the vocabulary of graphs, the three standard representations and their costs, how to pick one from a problem's constraints, and two classic representation problems — reachability for every pair (transitive closure) and building a graph from a list of degrees.",
   "difficulty": "beginner",
@@ -532,6 +644,40 @@
    "a8-when-to-use-representation",
    "a8-transitive-closure",
    "a8-graph-from-degrees"
+  ]
+ },
+ "a8-max-flow": {
+  "summary": "Maximum flow asks how much can be pushed from a source to a sink through a network whose edges have capacities. You will learn the residual graph and augmenting paths, why the maximum flow always equals the minimum cut, the main algorithms (Ford-Fulkerson, Edmonds-Karp, Dinic, push-relabel), and how matching, disjoint paths, channel assignment and global min cut reduce to flows and cuts.",
+  "difficulty": "advanced",
+  "minutes": 150,
+  "words": 11124,
+  "concepts": [
+   "a8-ford-fulkerson",
+   "a8-dinic",
+   "a8-push-relabel",
+   "a8-min-st-cut",
+   "a8-max-edge-disjoint-paths",
+   "a8-bipartite-matching-flow",
+   "a8-hopcroft-karp",
+   "a8-channel-assignment",
+   "a8-kargers-algorithm"
+  ]
+ },
+ "a8-mst-kruskal": {
+  "summary": "A minimum spanning tree connects every vertex of a weighted graph using the cheapest possible set of edges. You will learn why greedy choices are safe here (the cut and cycle properties), how Kruskal's algorithm uses sorting and Union-Find, how Prim's algorithm grows one tree with a priority queue, and the wider family — Borůvka, reverse-delete, counting spanning trees, minimum-product trees and the real systems that rely on MSTs.",
+  "difficulty": "intermediate",
+  "minutes": 95,
+  "words": 8761,
+  "concepts": [
+   "a8-spanning-tree-basics",
+   "a8-mst-prim",
+   "a8-prim-vs-kruskal",
+   "a8-connect-all-cities",
+   "a8-boruvka-mst",
+   "a8-reverse-delete-mst",
+   "a8-total-spanning-trees",
+   "a8-minimum-product-spanning-tree",
+   "a8-mst-applications"
   ]
  },
  "a8-multi-source-bfs": {
@@ -552,6 +698,20 @@
    "a8-water-jug",
    "a8-0-1-bfs",
    "a8-boggle"
+  ]
+ },
+ "a8-scc": {
+  "summary": "A strongly connected component is a largest group of vertices in a directed graph where every vertex can reach every other. You will learn why these groups exist, how Kosaraju's and Tarjan's algorithms find all of them in linear time, how collapsing them turns any directed graph into a DAG, and how the same ideas solve 2-SAT, walk counting and the word-circle puzzle.",
+  "difficulty": "advanced",
+  "minutes": 120,
+  "words": 10027,
+  "concepts": [
+   "a8-kosaraju",
+   "a8-tarjan-scc",
+   "a8-kosaraju-vs-tarjan",
+   "a8-condensation-dag",
+   "a8-count-walks-k-edges",
+   "a8-string-chain-circle"
   ]
  },
  "a8-topological-sorting": {
@@ -584,6 +744,62 @@
    "a8-dsu-on-grids",
    "a8-dynamic-connectivity"
   ]
+ },
+ "a9-combination-sum": {
+  "summary": "Combination Sum asks for every group of numbers that adds up to a target. You will learn how one index decides between reuse and single use, why sorting turns an overshoot into an early stop, how to skip duplicate values safely, and how to recognise when the question really wants a count — which is a dynamic programming problem, not a backtracking one.",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 3279,
+  "concepts": []
+ },
+ "a9-combinations": {
+  "summary": "A combination is a choice of k items from n where order does not matter, and there are C(n, k) of them. You will learn to generate them with the start-index backtracking template, prune branches that cannot reach size k, handle repeated values, and tell combinations apart from subsets, permutations and cartesian products.",
+  "difficulty": "intermediate",
+  "minutes": 45,
+  "words": 3202,
+  "concepts": []
+ },
+ "a9-constraint-backtracking": {
+  "summary": "Constraint-based backtracking fills in a solution one decision at a time and refuses any choice that already breaks a rule, so whole families of hopeless assignments are never generated. You will learn to model a problem as variables, domains and constraints, check those constraints incrementally in O(1), and speed the search up with variable ordering (MRV) and forward checking — the ideas behind Sudoku, N-Queens and graph-colouring solvers.",
+  "difficulty": "intermediate",
+  "minutes": 60,
+  "words": 5779,
+  "concepts": []
+ },
+ "a9-grid-search": {
+  "summary": "Grid search backtracking explores paths through a 2D board one cell at a time, marking each cell while it is on the current path and releasing it when the search backs out. You will learn the mark–explore–unmark template through Word Search, see exactly why the unmark matters, count and list paths, scale to many words with a trie, and know when BFS, flood fill or DP is the better tool.",
+  "difficulty": "intermediate",
+  "minutes": 55,
+  "words": 3728,
+  "concepts": []
+ },
+ "a9-n-queens": {
+  "summary": "N-Queens asks for every way to place n queens on an n × n chessboard so that none attacks another. It is the classic constraint-satisfaction problem; you will learn how placing one queen per row shrinks the search, how two simple formulas make every conflict check O(1), how a bitmask version speeds it up, and why pruning turns billions of candidate boards into about two thousand steps.",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 3311,
+  "concepts": []
+ },
+ "a9-permutations": {
+  "summary": "A permutation is one ordering of a collection, and n distinct items have n! of them. You will learn to generate every ordering with backtracking in two styles, avoid repeated orderings when values repeat, step to the next ordering without recursion, and jump straight to the k-th ordering — and why factorial growth limits all of this to small n.",
+  "difficulty": "intermediate",
+  "minutes": 55,
+  "words": 4053,
+  "concepts": []
+ },
+ "a9-pruning": {
+  "summary": "Pruning stops a backtracking search from exploring branches that provably cannot contain a valid or better answer. You will learn the one rule every prune must obey, the five prunes that cover most problems — remaining count, sorted break and sum bounds, duplicate skipping, symmetry breaking and branch and bound — and how to measure what each one saves.",
+  "difficulty": "intermediate",
+  "minutes": 60,
+  "words": 5518,
+  "concepts": []
+ },
+ "a9-subsets": {
+  "summary": "Generating every subset of a collection is the simplest backtracking problem and the template for most of the others. You will learn to see it as a tree of decisions, write it three different ways, handle duplicate values without producing repeated subsets, and explain exactly why it costs O(n · 2ⁿ).",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 4504,
+  "concepts": []
  },
  "b1-arithmetic-operators": {
   "summary": "JavaScript's arithmetic operators look like a calculator's, but they first convert their operands, follow IEEE 754 floating-point rules, and treat `+` as both addition and string concatenation. You will learn exactly what each operator does, why `'20' + 5` is `'205'` while `'20' - 5` is `15`, and how to write arithmetic that stays correct with user input, negatives, money and BigInt.",

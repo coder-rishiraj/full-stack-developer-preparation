@@ -800,7 +800,7 @@ Let `A` be the adjacency matrix, `A[i][j] = 1` if there is an edge `i → j` ([[
 
 Computing `Aᵏ` by multiplying `k` times costs O(k · V³), worse than the DP for one source. But matrix multiplication is associative, so we can use **binary exponentiation**: `A⁸ = ((A²)²)²` needs three multiplications, not seven. Write `k` in binary; square the base once per bit and multiply it into the result when the bit is 1. That is about `2 log₂ k` multiplications, each O(V³): **O(V³ log k)** time and O(V²) space. For `k = 10¹⁸` that is about 120 multiplications.
 
-Counts grow exponentially with `k` in a graph with cycles, so they overflow `long` quickly — on this four-vertex graph the unreduced count of 0 → 3 walks first turns negative at `k = 86`. Problems therefore ask for the answer modulo a prime such as 1,000,000,007. Reduce after every multiply-add: both factors are below the modulus, so their product is below 10¹⁸·⁰⁰⁰⁰⁰¹⁴ ≈ 1.0 × 10¹⁸, which fits in a `long` (maximum about 9.2 × 10¹⁸).
+Counts grow exponentially with `k` in a graph with cycles, so they overflow `long` quickly — on this four-vertex graph the unreduced count of 0 → 3 walks first turns negative at `k = 86`. Problems therefore ask for the answer modulo a prime such as 1,000,000,007. Reduce after every multiply-add: both factors are below the modulus, so their product is below (10⁹ + 7)² ≈ 1.0 × 10¹⁸, and adding a value below the modulus still fits in a `long` (maximum about 9.2 × 10¹⁸).
 
 ```java title="CountWalks.java"
 import java.util.*;
@@ -1039,7 +1039,7 @@ Q: Why is `(A + I)^k` wrong for counting walks with at most k edges?
 
 **Dependency analysis.** Build tools and module systems report circular dependencies by finding SCCs of size greater than one. Java's module system rejects cyclic `requires` relationships at compile time; analysis tools for codebases (for example, those that enforce layered architecture) compute SCCs of the class or package dependency graph and list each tangle as one unit to refactor. Reporting the whole SCC is more useful than reporting one cycle, because breaking one cycle may leave others in the same tangle.
 
-**Compilers.** Mutually recursive functions form SCCs of the call graph. Compilers and type checkers process the call graph's condensation bottom-up so that callees are analysed before callers, and each SCC is analysed as a unit. Type inference in languages such as Haskell groups mutually recursive bindings this way; in Haskell's GHC the dependency-analysis step uses SCCs.
+**Compilers.** Mutually recursive functions form SCCs of the call graph. Compilers and type checkers process the call graph's condensation bottom-up so that callees are analysed before callers, and each SCC is analysed as a unit. Type inference in Haskell, for example, splits bindings into strongly connected groups of mutually recursive definitions and infers types one group at a time.
 
 **Program analysis and model checking.** Given a state machine, a state that can loop forever without reaching an accepting state lies in a cyclic SCC. Model checkers that verify "something good eventually happens" look for reachable cyclic SCCs that violate the property. Garbage collectors that use reference counting have the mirror problem: a cycle of objects referencing each other never drops to zero, and cycle collectors find such groups.
 

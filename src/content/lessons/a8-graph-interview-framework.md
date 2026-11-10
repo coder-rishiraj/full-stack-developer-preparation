@@ -164,7 +164,8 @@ public class BusRoutes {
     }
 
     public static void main(String[] args) {
-        System.out.println(numBusesToDestination(new int[][] {{1, 2, 7}, {3, 6, 7}}, 1, 6));
+        int[][] simple = {{1, 2, 7}, {3, 6, 7}};
+        System.out.println(numBusesToDestination(simple, 1, 6));
         int[][] routes = {{7, 12}, {4, 5, 15}, {6}, {15, 19}, {9, 12, 13}};
         System.out.println(numBusesToDestination(routes, 15, 12));
         System.out.println(numBusesToDestination(routes, 4, 4));
@@ -526,7 +527,8 @@ public class SilentBugs {
     public static void main(String[] args) {
         // Bug 1: a subtraction comparator overflows when values have opposite signs.
         PriorityQueue<int[]> bad = new PriorityQueue<>((x, y) -> x[0] - y[0]);
-        PriorityQueue<int[]> good = new PriorityQueue<>(Comparator.comparingInt(x -> x[0]));
+        PriorityQueue<int[]> good =
+                new PriorityQueue<>(Comparator.comparingInt(x -> x[0]));
         for (int d : new int[] {Integer.MAX_VALUE, -5}) {
             bad.add(new int[] {d});
             good.add(new int[] {d});
@@ -758,12 +760,13 @@ public class GraphTemplates {
     }
 
     public static void main(String[] args) {
-        List<List<Integer>> g = graph(6, new int[][] {{0, 1}, {0, 2}, {1, 3}, {2, 3}, {3, 4}},
-                false);
+        int[][] edges = {{0, 1}, {0, 2}, {1, 3}, {2, 3}, {3, 4}};
+        List<List<Integer>> g = graph(6, edges, false);
         System.out.println("bfs  " + Arrays.toString(bfs(g, 0)));
         System.out.println("dfs  " + dfs(g, 0));
 
-        List<List<Integer>> dag = graph(4, new int[][] {{0, 1}, {0, 2}, {1, 3}, {2, 3}}, true);
+        int[][] dagEdges = {{0, 1}, {0, 2}, {1, 3}, {2, 3}};
+        List<List<Integer>> dag = graph(4, dagEdges, true);
         List<List<Integer>> cyc = graph(3, new int[][] {{0, 1}, {1, 2}, {2, 0}}, true);
         System.out.println("topo " + topoSort(dag) + " cycle " + topoSort(cyc));
 
@@ -871,7 +874,7 @@ Here is the framework run on four problems you may not have seen, each in the or
 
 **Critical Connections in a Network.** *Model*: servers are vertices, connections are undirected unweighted edges. *Question*: which edges, if removed, disconnect the network — bridges. *Constraints*: n up to 10⁵, E up to 10⁵. *Algorithm*: Tarjan's low-link DFS, O(V + E). *Traps*: recursion depth on a path-shaped network (use an iterative DFS or a larger thread stack); skip the parent *edge*, not the parent vertex, if parallel edges are possible ([[a8-critical-connections]]).
 
-**Accounts Merge.** *Model*: emails are vertices; every email in an account is joined to that account's first email, so each account becomes a star rather than a clique. *Question*: which emails belong to the same person — connected components. *Constraints*: up to 1,000 accounts of 10 emails. *Algorithm*: Union-Find over email ids, then group by root and sort, O(N · α(N) + N log N) for N emails. *Traps*: two different people can share a *name*; only shared *emails* connect accounts.
+**Accounts Merge.** *Model*: emails are vertices; every email in an account is joined to that account's first email, so each account becomes a star rather than a clique. *Question*: which emails belong to the same person — connected components. *Constraints*: up to 1,000 accounts of at most 10 entries each (a name plus emails). *Algorithm*: Union-Find over email ids, then group by root and sort, O(N · α(N) + N log N) for N emails. *Traps*: two different people can share a *name*; only shared *emails* connect accounts.
 
 **Shortest Path Visiting All Nodes.** *Model*: the graph is given, but you may revisit vertices and the goal depends on which have been seen, so the vertex must be `(current node, visited mask)`. *Question*: fewest edges, unit cost — BFS. *Constraints*: n ≤ 12, so there are 12 · 2¹² = 49,152 states. *Algorithm*: multi-source BFS starting from every `(i, {i})` at distance 0, stopping at the first state whose mask is full; O(2ⁿ · n²) in the worst case. *Traps*: the visited array is over states, not nodes; a node-level visited array would forbid the revisits the answer needs.
 

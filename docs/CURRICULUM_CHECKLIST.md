@@ -9,12 +9,12 @@ them under an anchored heading.
 
 | Track | Name | Lessons | Done |
 |---|---|---|---|
-| A | DSA & Problem Solving | 70 / 125 | 56% |
+| A | DSA & Problem Solving | 92 / 125 | 74% |
 | B | Frontend Engineering | 66 / 647 | 10% |
 | C | Java & Backend Engineering | 18 / 329 | 5% |
 | D | LLD, System Design & Distributed Systems | 25 / 111 | 23% |
 | E | Applied AI Engineering | 15 / 77 | 19% |
-| | **All tracks** | **194 / 1289** | **15%** |
+| | **All tracks** | **216 / 1289** | **17%** |
 
 Legend: ✅ lesson written · ◐ condensed notes only · ○ generic template only · ✗ no content
 
@@ -22,7 +22,7 @@ Legend: ✅ lesson written · ◐ condensed notes only · ○ generic template o
 
 #### A1 · Programming for Interviews — 9/9
 
-- [x] `a1-java-syntax-competitive` Java Syntax for Competitive Coding — ✅ lesson (6109 words)
+- [x] `a1-java-syntax-competitive` Java Syntax for Competitive Coding — ✅ lesson (8969 words)
 - [x] `a1-arraylist` Collections Framework — ✅ lesson (8938 words) · nested 6/6
 - [x] `a1-comparable-comparator` Comparable / Comparator — ✅ lesson (3378 words)
 - [x] `a1-strings-stringbuilder` Strings / StringBuilder — ✅ lesson (3166 words)
@@ -141,65 +141,65 @@ Legend: ✅ lesson written · ◐ condensed notes only · ○ generic template o
 
 - [x] `a8-dijkstra` Dijkstra — ✅ lesson (7071 words) · nested 7/7
 
-#### A8.11 · Shortest Paths — Negative Weights & All-Pairs — 0/2
+#### A8.11 · Shortest Paths — Negative Weights & All-Pairs — 2/2
 
-- [ ] `a8-bellman-ford` Bellman-Ford — ◐ condensed notes · nested 0/2
-- [ ] `a8-floyd-warshall` Floyd-Warshall — ◐ condensed notes · nested 0/5
+- [x] `a8-bellman-ford` Bellman-Ford — ✅ lesson (5675 words) · nested 2/2
+- [x] `a8-floyd-warshall` Floyd-Warshall — ✅ lesson (6820 words) · nested 5/5
 
-#### A8.12 · Minimum Spanning Trees — 0/1
+#### A8.12 · Minimum Spanning Trees — 1/1
 
-- [ ] `a8-mst-kruskal` Minimum Spanning Tree (Kruskal) — ◐ condensed notes · nested 0/9
+- [x] `a8-mst-kruskal` Minimum Spanning Tree (Kruskal) — ✅ lesson (8761 words) · nested 9/9
 
-#### A8.13 · Strongly Connected Components — 0/1
+#### A8.13 · Strongly Connected Components — 1/1
 
-- [ ] `a8-scc` Strongly Connected Components — ◐ condensed notes · nested 0/6
+- [x] `a8-scc` Strongly Connected Components — ✅ lesson (10027 words) · nested 6/6
 
-#### A8.14 · Bridges & Articulation Points — 0/2
+#### A8.14 · Bridges & Articulation Points — 2/2
 
-- [ ] `a8-bridges` Bridges in a Graph — ◐ condensed notes · nested 0/2
-- [ ] `a8-articulation-points` Articulation Points (Cut Vertices) — ◐ condensed notes · nested 0/3
+- [x] `a8-bridges` Bridges in a Graph — ✅ lesson (4917 words) · nested 2/2
+- [x] `a8-articulation-points` Articulation Points (Cut Vertices) — ✅ lesson (5683 words) · nested 3/3
 
-#### A8.15 · Flow, Matching & Eulerian Paths — 0/2
+#### A8.15 · Flow, Matching & Eulerian Paths — 2/2
 
-- [ ] `a8-max-flow` Maximum Flow — ◐ condensed notes · nested 0/9
-- [ ] `a8-euler-path` Euler Path & Circuit — ◐ condensed notes · nested 0/6
+- [x] `a8-max-flow` Maximum Flow — ✅ lesson (11124 words) · nested 9/9
+- [x] `a8-euler-path` Euler Path & Circuit — ✅ lesson (7028 words) · nested 6/6
 
-#### A8.16 · Interview Decision Framework & Must-Do Patterns — 0/1
+#### A8.16 · Interview Decision Framework & Must-Do Patterns — 1/1
 
-- [ ] `a8-graph-interview-framework` Graph Interview Decision Framework — ○ template only · nested 0/5
+- [x] `a8-graph-interview-framework` Graph Interview Decision Framework — ✅ lesson (9180 words) · nested 5/5
 
-#### A8.17 · Classic & Advanced Graph Problems (GFG) — 0/2
+#### A8.17 · Classic & Advanced Graph Problems (GFG) — 2/2
 
-- [ ] `a8-graph-coloring` Graph Coloring — ◐ condensed notes · nested 0/3
-- [ ] `a8-gfg-must-do-extras` GFG Must-Do Graph Extras — ○ template only · nested 0/1
+- [x] `a8-graph-coloring` Graph Coloring — ✅ lesson (7320 words) · nested 3/3
+- [x] `a8-gfg-must-do-extras` GFG Must-Do Graph Extras — ✅ lesson (4323 words) · nested 1/1
 
-#### A9 · Recursion & Backtracking — 0/8
+#### A9 · Recursion & Backtracking — 8/8
 
-- [ ] `a9-subsets` Subsets — ◐ condensed notes
-- [ ] `a9-permutations` Permutations — ◐ condensed notes
-- [ ] `a9-combinations` Combinations — ◐ condensed notes
-- [ ] `a9-combination-sum` Combination Sum — ◐ condensed notes
-- [ ] `a9-grid-search` Grid Search Backtracking — ◐ condensed notes
-- [ ] `a9-n-queens` N-Queens — ◐ condensed notes
-- [ ] `a9-constraint-backtracking` Constraint-Based Backtracking — ◐ condensed notes
-- [ ] `a9-pruning` Pruning — ◐ condensed notes
+- [x] `a9-subsets` Subsets — ✅ lesson (4504 words)
+- [x] `a9-permutations` Permutations — ✅ lesson (4053 words)
+- [x] `a9-combinations` Combinations — ✅ lesson (3202 words)
+- [x] `a9-combination-sum` Combination Sum — ✅ lesson (3279 words)
+- [x] `a9-grid-search` Grid Search Backtracking — ✅ lesson (3728 words)
+- [x] `a9-n-queens` N-Queens — ✅ lesson (3311 words)
+- [x] `a9-constraint-backtracking` Constraint-Based Backtracking — ✅ lesson (5779 words)
+- [x] `a9-pruning` Pruning — ✅ lesson (5518 words)
 
-#### A10 · Greedy — 0/4
+#### A10 · Greedy — 1/4
 
-- [ ] `a10-interval-scheduling` Interval Scheduling — ◐ condensed notes
+- [x] `a10-interval-scheduling` Interval Scheduling — ✅ lesson (5230 words)
 - [ ] `a10-sorting-greedy` Sorting + Greedy — ◐ condensed notes
 - [ ] `a10-heap-greedy` Heap + Greedy — ◐ condensed notes
 - [ ] `a10-local-vs-global` Local vs Global Optimum Reasoning — ◐ condensed notes
 
-#### A11 · Dynamic Programming — 0/12
+#### A11 · Dynamic Programming — 2/12
 
 - [ ] `a11-memoization` Memoization vs Tabulation — ◐ condensed notes · nested 0/1
 - [ ] `a11-1d-dp` 1D DP — ◐ condensed notes
 - [ ] `a11-2d-dp` 2D DP — ◐ condensed notes
 - [ ] `a11-knapsack` Knapsack Patterns — ◐ condensed notes
 - [ ] `a11-subsequences` Subsequence Problems — ◐ condensed notes
-- [ ] `a11-lis` Longest Increasing Subsequence — ◐ condensed notes
-- [ ] `a11-lcs` Longest Common Subsequence — ◐ condensed notes
+- [x] `a11-lis` Longest Increasing Subsequence — ✅ lesson (5339 words)
+- [x] `a11-lcs` Longest Common Subsequence — ✅ lesson (1957 words)
 - [ ] `a11-grid-dp` Grid DP — ◐ condensed notes
 - [ ] `a11-partition-dp` Partition DP Basics — ◐ condensed notes
 - [ ] `a11-tree-dp` DP on Trees — ◐ condensed notes

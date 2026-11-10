@@ -59,3 +59,21 @@ still unchecked (`node scripts/module-brief.mjs --batch N` shows what a batch co
   (V(V−1)/2). The a8-topological-sorting lesson uses `long`; the pack still needs the fix.
 - Dijkstra notes claim an O(V² log V) worst case from stale heap entries; it is O(E log V)
   (stale entries are bounded by E). The a8-dijkstra lesson is correct; the notes are not.
+- Graph packs (found while writing a8-scc / a8-bridges / a8-articulation-points; lessons are correct):
+  - C++ pack Kosaraju comment says reverse finish order picks a "source component of the
+    transpose" — it is a source of G (a sink of the transpose).
+  - C++ pack Tarjan comment claims `low[v]` vs `disc[v]` merges SCCs — false for SCCs, but a real
+    bug for articulation points (240 of 200,000 random graphs wrong).
+  - C++ pack "walks of at most k edges" via `(A+I)^k` overcounts; use the block matrix [[A,I],[0,I]].
+  - Java pack walk counting has no modulus and overflows (negative from k=86 in the example).
+  - Reference pack `CHAIN_WORD` only tries letters a–z, so the uppercase GfG example returns 0
+    (the a8-gfg-must-do-extras lesson derives the alphabet from the dictionary). The pack also
+    recommends heap-based Prim for dense graphs, where the O(V²) array version is better.
+  - Found while writing a8-max-flow / a8-euler-path (lessons are correct): Karger loops forever
+    on disconnected input; EulerPath and Fleury start at an isolated vertex 0 with no
+    connectivity check; the generic Hierholzer picks the wrong start for directed paths;
+    EulerCircuitDirected has no connectivity check; the "Fleury" code has no bridge test; the
+    greedy colouring is O(V²), not O(V+E). Flow, matching and Chinese Postman code is correct.
+  - Found while writing a8-bellman-ford / a8-floyd-warshall / a8-mst-kruskal: Karp's minimum
+    mean cycle code only starts walks at vertex 0 and misses cycles 0 cannot reach; the notes'
+    Johnson complexity and loop-order explanation were wrong (lessons are correct).
