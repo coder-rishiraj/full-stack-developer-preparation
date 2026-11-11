@@ -51,7 +51,7 @@ The finger-based reasoning suggests a recursive method instead. Written without 
 
 ### Step 1: choose the state
 
-Every recursive call in the finger picture is described by just two numbers: where the left finger is and where the right finger is. Everything to the right of the fingers has been dealt with; everything to the left is still open. So each subproblem is "the LCS of a **prefix** of `a` and a **prefix** of `b`".
+Every recursive call in the finger picture is described by only two numbers: where the left finger is and where the right finger is. Everything to the right of the fingers has been dealt with; everything to the left is still open. So each subproblem is "the LCS of a **prefix** of `a` and a **prefix** of `b`".
 
 Define the **state**:
 
@@ -276,7 +276,7 @@ Reconstruction is the catch: walking back needs the decisions made in every row,
 
 ## Checking the solution against brute force
 
-A recurrence can look right and still be wrong — a missing `+1`, a swapped index. The quickest way to gain confidence is a **stress test**: compare the DP with an obviously correct brute force on thousands of small random inputs. Here the brute force tries every subsequence of `a`. The test also checks that the reconstructed string has the right length and really is a subsequence of both inputs.
+A recurrence can look right and still be wrong — a missing `+1`, a swapped index. The quickest way to gain confidence is a **stress test**: compare the DP with a brute force that is too simple to get wrong on thousands of small random inputs. Here the brute force tries every subsequence of `a`. The test also checks that the reconstructed string has the right length and really is a subsequence of both inputs.
 
 ```java title="LcsStressTest.java"
 import java.util.Random;
@@ -545,7 +545,7 @@ Interviewers use LCS to see whether you can *derive* a two-sequence DP, not whet
 
 Questions to be ready for:
 
-- **Print the LCS, not just its length.** Walk back from `(m, n)`: diagonal on a match, otherwise towards the larger neighbour. Mention that ties give different valid answers.
+- **Print the LCS, not only its length.** Walk back from `(m, n)`: diagonal on a match, otherwise towards the larger neighbour. Mention that ties give different valid answers.
 - **Reduce the memory.** Two rows, columns over the shorter string. Explain why this loses reconstruction, and name Hirschberg for getting both.
 - **Delete Operation for Two Strings / Minimum ASCII Delete Sum.** `m + n - 2 · LCS`, and the weighted variant changes `+1` to the character's value.
 - **Shortest Common Supersequence.** Length `m + n - LCS`; build it by walking back and writing unmatched characters as you pass them.
@@ -562,7 +562,7 @@ Work through these in order; each one changes one part of the derivation.
 2. **Delete Operation for Two Strings.** Express the answer using LCS, then solve it directly with a DP whose cells count deletions.
 3. **Minimum ASCII Delete Sum for Two Strings.** Change what each kept character is worth.
 4. **Uncrossed Lines.** Recognise LCS on integer arrays.
-5. **Shortest Common Supersequence.** Return the string, not just the length.
+5. **Shortest Common Supersequence.** Return the string, not only the length.
 6. **Edit Distance.** Derive the three moves and the base cases before coding.
 7. **Longest Palindromic Subsequence.** Solve it once via LCS with the reverse and once as an interval DP on `s[l..r]`.
 8. **Stress test.** Take your solution to problem 6 and check it against a breadth-first search over single edits on random two-letter strings of length up to 5.

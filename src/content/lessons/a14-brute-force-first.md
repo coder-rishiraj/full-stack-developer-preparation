@@ -19,7 +19,7 @@ That obvious solution is the **brute force**: an algorithm that tries every poss
 - **It proves you understand the problem.** You cannot enumerate every candidate unless you know exactly what a candidate is and what makes it correct.
 - **It gives you a correct fallback.** If the optimal idea does not come, a working brute force with a clear complexity analysis earns far more credit than half-written clever code.
 - **It is where optimisations come from.** An optimisation removes work. You can only see which work is wasted once you have written down the algorithm that does all of it.
-- **It is a test oracle.** A slow but obviously correct solution can check a fast but subtle one on thousands of inputs.
+- **It is a test oracle.** A slow but clearly correct solution can check a fast but subtle one on thousands of inputs.
 
 This lesson covers how to find a brute force for any problem, how to state its cost correctly, how to present it without wasting time, and how to use it. The next lesson, [[a14-deriving-optimization]], picks up exactly where this one ends: with a brute force on the table and its wasted work identified.
 
@@ -83,7 +83,7 @@ Fill in the three parts. A candidate is a subarray `nums[start..end]`. Enumerate
 
 ### Version 2: remove the obvious repetition
 
-Look at what version 1 recomputes. With `start = 0`, it sums `nums[0..0]`, then `nums[0..1]` from scratch, then `nums[0..2]` from scratch. But `sum(0..2)` is just `sum(0..1) + nums[2]`. If you keep a running sum as `end` moves right, each check becomes O(1).
+Look at what version 1 recomputes. With `start = 0`, it sums `nums[0..0]`, then `nums[0..1]` from scratch, then `nums[0..2]` from scratch. But `sum(0..2)` equals `sum(0..1) + nums[2]`. If you keep a running sum as `end` moves right, each check becomes O(1).
 
 > "Each time end moves right, the new subarray is the old one plus one element, so I can keep a running sum. That makes it O(n²)."
 
@@ -159,13 +159,6 @@ public class SubarraySumK {
     }
 }
 ```
-
-```output
-4
-500 random tests agree
-```
-
-Wait — the first line prints three numbers separated by spaces. Here is the exact output:
 
 ```output
 4 4 4

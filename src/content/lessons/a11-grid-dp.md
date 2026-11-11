@@ -34,7 +34,7 @@ You should be comfortable with:
 
 To count routes into a cell, do not think about the whole route. Think only about the *last step*. If moves are right and down, the robot entered cell `(r, c)` either from the cell above, `(r - 1, c)`, or from the cell to the left, `(r, c - 1)`. Every route into `(r, c)` falls into exactly one of those two groups, and each group is "all routes into the neighbour, plus one step". So the number of routes into `(r, c)` is the number into the cell above plus the number into the cell to the left.
 
-That one observation is the whole technique. The allowed moves tell you which cells can come *just before* the current one, and the question (count, minimum, maximum) tells you how to combine them. Because the moves only go right and down, every cell's predecessors are above or to the left, so sweeping the grid top-to-bottom and left-to-right always finds them already computed.
+That one observation is the whole technique. The allowed moves tell you which cells can come *immediately before* the current one, and the question (count, minimum, maximum) tells you how to combine them. Because the moves only go right and down, every cell's predecessors are above or to the left, so sweeping the grid top-to-bottom and left-to-right always finds them already computed.
 
 ## The naive approach
 
@@ -167,7 +167,7 @@ public class GridDp {
 
 The open 3 × 7 grid has 28 routes, matching `C(8, 2)`. Blocking the centre of a 3 × 3 grid leaves only the two routes around the edge. A blocked start gives 0 because the obstacle check comes *before* the base case. The 1 × 1 grid returns its only cell's cost, `5`.
 
-`uniquePaths` returns `long` because counts grow fast: an open 17 × 18 grid already has `C(33, 16) ≈ 1.17 × 10⁹` routes, more than an `int` can hold. Problems that expect larger counts usually ask for the answer modulo 10⁹ + 7; apply the modulus after each addition.
+`uniquePaths` returns `long` because counts grow fast: an open 18 × 18 grid already has `C(34, 17) ≈ 2.33 × 10⁹` routes, more than an `int` can hold. Problems that expect larger counts usually ask for the answer modulo 10⁹ + 7; apply the modulus after each addition.
 
 ### Dry run: Minimum Path Sum
 
@@ -232,7 +232,7 @@ Now the past is irrelevant — whatever route brought him here, what he needs fr
 need(r, c) = max(1, min(need(r + 1, c), need(r, c + 1)) - d[r][c])
 ```
 
-**Base case.** After the bottom-right cell he only needs to be alive, so pretend the cells just past the end — below it and to its right — need 1. Every other cell outside the grid needs infinity, so it is never chosen.
+**Base case.** After the bottom-right cell he only needs to be alive, so pretend the cells immediately past the end — below it and to its right — need 1. Every other cell outside the grid needs infinity, so it is never chosen.
 
 **Order.** Each cell depends on the cell below and the cell to the right, so fill **from the bottom-right corner, row by row upwards, right to left**. The answer is `need(0, 0)`.
 
@@ -303,7 +303,7 @@ There are two ways out, and choosing between them is a frequent interview test.
 
 **The cycles are only apparent.** In *Longest Increasing Path in a Matrix* you may move in four directions, but only to a strictly larger value. Values strictly increase along every path, so no path can return to where it started. The dependencies form a **directed acyclic graph (DAG)** even though the grid has no obvious sweep order. Memoized recursion handles this without you finding the order explicitly: `longestFrom(r, c)` = 1 + the best `longestFrom` among larger neighbours. The recursion visits states in an order consistent with the DAG automatically (a topological order), and each state is solved once — O(m · n) in total.
 
-**The cycles are real.** For "cheapest route in four directions with non-negative cell costs", a route may wander back and forth, and a recursive definition would call itself in a loop. This is a **shortest-path problem**: use breadth-first search for unit costs, 0-1 BFS for costs of 0 and 1, and Dijkstra's algorithm for general non-negative costs. Calling them "DP" is not wrong in spirit, but table-filling will not work.
+**The cycles are real.** For "cheapest route in four directions with non-negative cell costs", a route may wander back and forth, and a recursive definition would call itself in a loop. This is a **shortest-path problem**: use breadth-first search for unit costs, 0-1 BFS for costs of 0 and 1, and Dijkstra's algorithm ([[a8-dijkstra]]) for general non-negative costs. Calling them "DP" is not wrong in spirit, but table-filling will not work.
 
 ```mermaid
 flowchart TD
@@ -325,7 +325,7 @@ public class GridVariants {
         int m = d.length, n = d[0].length;
         int[][] need = new int[m + 1][n + 1];
         for (int[] row : need) Arrays.fill(row, Integer.MAX_VALUE);
-        need[m][n - 1] = 1;                               // "after" the princess: just stay alive
+        need[m][n - 1] = 1;                               // past the last cell: only stay alive
         need[m - 1][n] = 1;
         for (int r = m - 1; r >= 0; r--) {
             for (int c = n - 1; c >= 0; c--) {
@@ -428,7 +428,7 @@ public class GridVariants {
 4
 ```
 
-A few points in this code deserve attention. In `minInitialHealth` the padded row and column hold `Integer.MAX_VALUE`, and that value is only ever passed to `min` alongside a real neighbour, never subtracted from on its own — except at the bottom-right cell, where both padded neighbours are set to 1 first. In `cherryPickup`, "unreachable" is `Integer.MIN_VALUE / 4` rather than `MIN_VALUE`, so adding a few cherries to it cannot overflow into a large positive number; the `prev == NEG` check skips such states anyway. The loops over `r1` and `r2` only visit rows for which the column `t - r` is inside the grid. In the second cherry grid the thorns cut every route, so the answer is 0. The longest increasing path in the last example is `1 → 2 → 6 → 9`, length 4.
+A few points in this code deserve attention. In `minInitialHealth` the padded row and column hold `Integer.MAX_VALUE`. Every cell except the bottom-right has at least one real neighbour, so `min` never returns the sentinel there, and the bottom-right cell's two padded neighbours are set to 1, so nothing is ever subtracted from `MAX_VALUE`. In `cherryPickup`, "unreachable" is `Integer.MIN_VALUE / 4` rather than `MIN_VALUE`, so adding a few cherries to it cannot overflow into a large positive number; the `prev == NEG` check skips such states anyway. The loops over `r1` and `r2` only visit rows for which the column `t - r` is inside the grid. In the second cherry grid the thorns cut every route, so the answer is 0. The longest increasing path in the last example is `1 → 2 → 6 → 9`, length 4.
 
 Every method in `GridDp` and `GridVariants` was stress-tested against brute force — enumerating every right/down route (and every *pair* of routes for Cherry Pickup), checking every square, and plain exhaustive recursion for the increasing path — on 3,000 random grids of up to 5 × 5, with no mismatches. That is how the counterexample to the forward Dungeon DP above was confirmed too.
 

@@ -9,12 +9,12 @@ them under an anchored heading.
 
 | Track | Name | Lessons | Done |
 |---|---|---|---|
-| A | DSA & Problem Solving | 92 / 125 | 74% |
+| A | DSA & Problem Solving | 125 / 125 | 100% |
 | B | Frontend Engineering | 66 / 647 | 10% |
 | C | Java & Backend Engineering | 18 / 329 | 5% |
 | D | LLD, System Design & Distributed Systems | 25 / 111 | 23% |
 | E | Applied AI Engineering | 15 / 77 | 19% |
-| | **All tracks** | **216 / 1289** | **17%** |
+| | **All tracks** | **249 / 1289** | **19%** |
 
 Legend: ✅ lesson written · ◐ condensed notes only · ○ generic template only · ✗ no content
 
@@ -184,56 +184,56 @@ Legend: ✅ lesson written · ◐ condensed notes only · ○ generic template o
 - [x] `a9-constraint-backtracking` Constraint-Based Backtracking — ✅ lesson (5779 words)
 - [x] `a9-pruning` Pruning — ✅ lesson (5518 words)
 
-#### A10 · Greedy — 1/4
+#### A10 · Greedy — 4/4
 
 - [x] `a10-interval-scheduling` Interval Scheduling — ✅ lesson (5230 words)
-- [ ] `a10-sorting-greedy` Sorting + Greedy — ◐ condensed notes
-- [ ] `a10-heap-greedy` Heap + Greedy — ◐ condensed notes
-- [ ] `a10-local-vs-global` Local vs Global Optimum Reasoning — ◐ condensed notes
+- [x] `a10-sorting-greedy` Sorting + Greedy — ✅ lesson (4763 words)
+- [x] `a10-heap-greedy` Heap + Greedy — ✅ lesson (4705 words)
+- [x] `a10-local-vs-global` Local vs Global Optimum Reasoning — ✅ lesson (4425 words)
 
-#### A11 · Dynamic Programming — 2/12
+#### A11 · Dynamic Programming — 12/12
 
-- [ ] `a11-memoization` Memoization vs Tabulation — ◐ condensed notes · nested 0/1
-- [ ] `a11-1d-dp` 1D DP — ◐ condensed notes
-- [ ] `a11-2d-dp` 2D DP — ◐ condensed notes
-- [ ] `a11-knapsack` Knapsack Patterns — ◐ condensed notes
-- [ ] `a11-subsequences` Subsequence Problems — ◐ condensed notes
+- [x] `a11-memoization` Memoization vs Tabulation — ✅ lesson (6118 words) · nested 1/1
+- [x] `a11-1d-dp` 1D DP — ✅ lesson (5564 words)
+- [x] `a11-2d-dp` 2D DP — ✅ lesson (6656 words)
+- [x] `a11-knapsack` Knapsack Patterns — ✅ lesson (6792 words)
+- [x] `a11-subsequences` Subsequence Problems — ✅ lesson (5752 words)
 - [x] `a11-lis` Longest Increasing Subsequence — ✅ lesson (5339 words)
-- [x] `a11-lcs` Longest Common Subsequence — ✅ lesson (1957 words)
-- [ ] `a11-grid-dp` Grid DP — ◐ condensed notes
-- [ ] `a11-partition-dp` Partition DP Basics — ◐ condensed notes
-- [ ] `a11-tree-dp` DP on Trees — ◐ condensed notes
-- [ ] `a11-state-machine-dp` State-Machine DP — ◐ condensed notes
-- [ ] `a11-bitmask-dp` Bitmask DP — ◐ condensed notes
+- [x] `a11-lcs` Longest Common Subsequence — ✅ lesson (4996 words)
+- [x] `a11-grid-dp` Grid DP — ✅ lesson (5146 words)
+- [x] `a11-partition-dp` Partition DP Basics — ✅ lesson (4523 words)
+- [x] `a11-tree-dp` DP on Trees — ✅ lesson (4226 words)
+- [x] `a11-state-machine-dp` State-Machine DP — ✅ lesson (4161 words)
+- [x] `a11-bitmask-dp` Bitmask DP — ✅ lesson (3891 words)
 
-#### A12 · Tries & Advanced Structures — 0/5
+#### A12 · Tries & Advanced Structures — 5/5
 
-- [ ] `a12-trie` Trie — ◐ condensed notes
-- [ ] `a12-prefix-matching` Prefix Matching — ◐ condensed notes
-- [ ] `a12-segment-trees` Segment Trees — ◐ condensed notes
-- [ ] `a12-fenwick` Fenwick Tree — ◐ condensed notes
-- [ ] `a12-sparse-tables` Sparse Tables — ◐ condensed notes
+- [x] `a12-trie` Trie — ✅ lesson (4323 words)
+- [x] `a12-prefix-matching` Prefix Matching — ✅ lesson (4553 words)
+- [x] `a12-segment-trees` Segment Trees — ✅ lesson (3943 words)
+- [x] `a12-fenwick` Fenwick Tree — ✅ lesson (3290 words)
+- [x] `a12-sparse-tables` Sparse Tables — ✅ lesson (2681 words)
 
-#### A13 · Bit Manipulation — 0/5
+#### A13 · Bit Manipulation — 5/5
 
-- [ ] `a13-and-or-xor` AND / OR / XOR — ◐ condensed notes
-- [ ] `a13-set-bit` Set/Unset/Check Bit — ◐ condensed notes · nested 0/2
-- [ ] `a13-powers-of-two` Powers of Two — ◐ condensed notes
-- [ ] `a13-xor-tricks` XOR Tricks — ◐ condensed notes
-- [ ] `a13-bitmasking` Bitmasking — ◐ condensed notes
+- [x] `a13-and-or-xor` AND / OR / XOR — ✅ lesson (3865 words)
+- [x] `a13-set-bit` Set/Unset/Check Bit — ✅ lesson (3612 words) · nested 2/2
+- [x] `a13-powers-of-two` Powers of Two — ✅ lesson (2737 words)
+- [x] `a13-xor-tricks` XOR Tricks — ✅ lesson (3630 words)
+- [x] `a13-bitmasking` Bitmasking — ✅ lesson (3798 words)
 
-#### A14 · Coding Interview Execution — 0/10
+#### A14 · Coding Interview Execution — 10/10
 
-- [ ] `a14-clarifying-requirements` Clarifying Requirements — ◐ condensed notes
-- [ ] `a14-brute-force-first` Explaining Brute-Force First — ◐ condensed notes
-- [ ] `a14-deriving-optimization` Deriving Optimized Solution — ◐ condensed notes
-- [ ] `a14-thinking-aloud` Thinking Aloud — ◐ condensed notes
-- [ ] `a14-clean-coding` Clean Coding Without IDE Assistance — ◐ condensed notes
-- [ ] `a14-manual-testing` Manual Testing — ◐ condensed notes
-- [ ] `a14-edge-cases` Edge-Case Identification — ◐ condensed notes
-- [ ] `a14-complexity-in-interview` Complexity Analysis in Interviews — ◐ condensed notes
-- [ ] `a14-responding-to-hints` Responding to Interviewer Hints — ◐ condensed notes
-- [ ] `a14-timed-coding` Timed Mock Interviews — ◐ condensed notes · nested 0/1
+- [x] `a14-clarifying-requirements` Clarifying Requirements — ✅ lesson (3266 words)
+- [x] `a14-brute-force-first` Explaining Brute-Force First — ✅ lesson (3306 words)
+- [x] `a14-deriving-optimization` Deriving Optimized Solution — ✅ lesson (3206 words)
+- [x] `a14-thinking-aloud` Thinking Aloud — ✅ lesson (3266 words)
+- [x] `a14-clean-coding` Clean Coding Without IDE Assistance — ✅ lesson (3131 words)
+- [x] `a14-manual-testing` Manual Testing — ✅ lesson (3152 words)
+- [x] `a14-edge-cases` Edge-Case Identification — ✅ lesson (3935 words)
+- [x] `a14-complexity-in-interview` Complexity Analysis in Interviews — ✅ lesson (4487 words)
+- [x] `a14-responding-to-hints` Responding to Interviewer Hints — ✅ lesson (3692 words)
+- [x] `a14-timed-coding` Timed Mock Interviews — ✅ lesson (4458 words) · nested 1/1
 
 ### Track B — Frontend Engineering
 

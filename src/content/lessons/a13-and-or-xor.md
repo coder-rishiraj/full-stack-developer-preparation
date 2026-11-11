@@ -118,7 +118,7 @@ Read the columns from the right. Column 0: `a` has 0, `b` has 0, so every result
 
 AND with a **mask** — a number you build to select certain positions — keeps the bits of `x` where the mask has 1 and forces the rest to 0. `x & 1` keeps only bit 0, so it is `1` for odd numbers and `0` for even ones. `x & 0xFF` keeps the lowest 8 bits, which is how you extract one byte from a larger number. `x & (1 << k)` keeps only bit `k`, which tests whether it is set — the subject of [[a13-check-bit]].
 
-AND can only turn bits off, never on, so `x & m` is never "more" than either input in the sense of having extra bits. That makes it the natural tool for **testing** and **clearing**.
+AND can only turn bits off, never on: every 1 in `x & m` is a 1 in both `x` and `m`. That makes it the natural tool for **testing** and **clearing**.
 
 ### OR: turn bits on
 
@@ -299,7 +299,7 @@ Q: Why does `Math.abs(Integer.MIN_VALUE)` return a negative number?
 - [ ] Because Java stores negative numbers as sign and magnitude
 > `int` ranges from -2^31 to 2^31 - 1. The value 2^31 does not exist, so `-MIN_VALUE` wraps around to MIN_VALUE itself. Java uses two's complement, not sign and magnitude.
 
-Q: Which expression is `true` exactly when bits `x` and `y` differ in every one of their 32 positions?
+Q: Which expression is `true` exactly when `x` and `y` differ in every one of their 32 bit positions?
 - [ ] `(x & y) == 0`
 - [ ] `(x | y) == -1`
 - [x] `(x ^ y) == -1`

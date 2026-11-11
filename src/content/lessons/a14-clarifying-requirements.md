@@ -56,7 +56,7 @@ A useful filter before asking anything: **would a different answer make me write
 
 ### Scale is the question that picks the algorithm
 
-Of all clarifying questions, "how large can the input be?" carries the most information, because it tells you how fast your solution has to be. A typical judge or interviewer expects something like 10⁷–10⁸ simple operations to be fine. So `n ≤ 20` hints at exponential search over subsets, `n ≤ 5,000` permits O(n²), and `n` up to 10⁵ or 10⁶ needs O(n log n) or O(n). The full table, and how to use it to steer the optimisation, is in [[a14-deriving-optimization]]. Here the point is simply to ask: knowing the bound before you design saves you from polishing a quadratic idea for a million-element input.
+Of all clarifying questions, "how large can the input be?" carries the most information, because it tells you how fast your solution has to be. A typical judge or interviewer expects something like 10⁷–10⁸ simple operations to be fine. So `n ≤ 20` hints at exponential search over subsets, `n ≤ 5,000` permits O(n²), and `n` up to 10⁵ or 10⁶ needs O(n log n) or O(n). The full table, and how to use it to steer the optimisation, is in [[a14-deriving-optimization]]. Here the point is to ask: knowing the bound before you design saves you from polishing a quadratic idea for a million-element input.
 
 The value range matters too. If values can reach 10⁹ and you add two of them, the sum overflows Java's `int` (maximum 2,147,483,647). One question — "what range are the values in?" — tells you to use `long`. See [[a1-java-syntax-competitive]] for how overflow behaves in Java.
 

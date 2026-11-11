@@ -336,7 +336,7 @@ Proofs establish correctness; counterexamples establish incorrectness, and they 
 **By program.** `CoinGreedyCheck` above is the general recipe in miniature:
 
 1. Write the greedy algorithm.
-2. Write an exact algorithm that is obviously correct, however slow: brute force over all subsets or orders, or a simple DP.
+2. Write an exact algorithm whose correctness is not in doubt, however slow: brute force over all subsets or orders, or a simple DP.
 3. Generate many small inputs — all of them, if the space is small, or thousands of random ones with a fixed seed.
 4. Compare the two answers and print the first input where they disagree.
 

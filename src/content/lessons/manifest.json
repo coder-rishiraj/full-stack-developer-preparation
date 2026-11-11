@@ -71,6 +71,13 @@
    "a1-space-complexity"
   ]
  },
+ "a10-heap-greedy": {
+  "summary": "Some greedy algorithms need \"the best item right now\" while the set of items keeps changing — merged results re-enter the pool, new options unlock over time, or an earlier choice turns out to be a mistake. You will learn the three shapes of heap-based greedy (combine the smallest, unlock then choose, commit then regret), why a priority queue makes each step O(log n), and how to prove these greedy choices correct.",
+  "difficulty": "intermediate",
+  "minutes": 60,
+  "words": 4705,
+  "concepts": []
+ },
  "a10-interval-scheduling": {
   "summary": "Interval scheduling is the family of greedy problems where requests occupy a stretch of time on a shared resource and you must choose, assign or cover them optimally. You will learn why \"earliest finish first\" keeps the most requests, how to prove it two different ways, how the same reasoning gives the fewest rooms and the fewest covering intervals, and why adding weights breaks greedy and calls for dynamic programming.",
   "difficulty": "intermediate",
@@ -78,11 +85,60 @@
   "words": 5230,
   "concepts": []
  },
+ "a10-local-vs-global": {
+  "summary": "A greedy algorithm takes the locally best step and never looks back; this lesson is about deciding whether those local steps add up to the globally best answer. You will learn the two properties that make greedy correct, three proof techniques, how to hunt for counterexamples systematically, and what to do when greedy fails — with coin change, knapsack, Jump Game and Gas Station as worked cases.",
+  "difficulty": "intermediate",
+  "minutes": 55,
+  "words": 4425,
+  "concepts": []
+ },
+ "a10-sorting-greedy": {
+  "summary": "Many optimisation problems become a single pass once the items are in the right order — the hard part is finding that order and proving it is right. You will learn to derive a sort key with the adjacent-swap argument, apply it to scheduling, matching, ratio and cost-difference problems, and recognise when a sort-then-scan greedy is safe and when it is not.",
+  "difficulty": "intermediate",
+  "minutes": 55,
+  "words": 4763,
+  "concepts": []
+ },
+ "a11-1d-dp": {
+  "summary": "One-dimensional DP solves problems whose subproblems are named by a single number — a prefix length, a position, or an amount. You will derive House Robber, Decode Ways, Coin Change and Word Break from their brute-force recursions, learn the four common shapes of a one-index state, and reduce the memory to a couple of variables where the recurrence allows it.",
+  "difficulty": "intermediate",
+  "minutes": 55,
+  "words": 5564,
+  "concepts": []
+ },
+ "a11-2d-dp": {
+  "summary": "Some problems cannot be described by one index, because the answer depends on two things at once — positions in two strings, a row and a column, or an item and a remaining capacity. You will learn how to spot the second dimension, derive a two-index recurrence from the choices in the problem, pick a fill order from the dependency arrows, and shrink the table to one or two rows.",
+  "difficulty": "intermediate",
+  "minutes": 60,
+  "words": 6656,
+  "concepts": []
+ },
+ "a11-bitmask-dp": {
+  "summary": "Bitmask DP is dynamic programming whose state includes a subset of a small set of items, stored as the bits of an integer. You will learn when the subset really must be part of the state, how to encode and iterate subsets in Java, and how to derive the travelling-salesman (Held–Karp), assignment and submask-partition recurrences, with their O(2ⁿ) costs and the n ≤ 20 rule of thumb.",
+  "difficulty": "advanced",
+  "minutes": 55,
+  "words": 3891,
+  "concepts": []
+ },
+ "a11-grid-dp": {
+  "summary": "Grid DP solves counting and optimisation problems on a matrix by asking how you could have arrived at each cell. You will derive the state, recurrence, base cases and fill direction for path counting, minimum cost, obstacles, backward-computed constraints, squares and two simultaneous walkers, and learn to tell when a grid is not a DP at all.",
+  "difficulty": "intermediate",
+  "minutes": 60,
+  "words": 5146,
+  "concepts": []
+ },
+ "a11-knapsack": {
+  "summary": "Knapsack problems ask you to choose items under a capacity limit, and a surprising number of interview problems are knapsacks in disguise. You will derive the 0/1 knapsack DP from a take-or-skip recursion, compress it to one array and prove why the loop direction matters, and then adapt the same state to unbounded items, subset sum, counting problems and limited copies.",
+  "difficulty": "intermediate",
+  "minutes": 60,
+  "words": 6792,
+  "concepts": []
+ },
  "a11-lcs": {
   "summary": "The longest common subsequence of two strings is the longest sequence of characters that appears in both, in the same order, with gaps allowed. You will derive its dynamic-programming solution from first principles by asking what can happen to the last character of each string, then reconstruct the sequence, cut memory to one row, and reuse the same reasoning for edit distance, supersequences and palindromes.",
   "difficulty": "intermediate",
-  "minutes": 55,
-  "words": 1957,
+  "minutes": 60,
+  "words": 4996,
   "concepts": []
  },
  "a11-lis": {
@@ -91,6 +147,188 @@
   "minutes": 60,
   "words": 5339,
   "concepts": []
+ },
+ "a11-memoization": {
+  "summary": "Dynamic programming makes slow recursive searches fast by solving each distinct subproblem once. You will learn to spot repeated work, derive a DP from a problem through five decisions — state, recurrence, base cases, order of computation and answer — and implement it either top-down with memoization or bottom-up with tabulation, knowing when each is the better choice.",
+  "difficulty": "intermediate",
+  "minutes": 60,
+  "words": 6118,
+  "concepts": [
+   "a11-tabulation"
+  ]
+ },
+ "a11-partition-dp": {
+  "summary": "Partition DP solves problems that ask you to cut a sequence into pieces as well as possible. You will learn its two shapes — choosing the last piece of a prefix, and choosing the split point of an interval — and derive the state, recurrence, base cases and fill order for palindrome cuts, bounded pieces, k-way splits, matrix chains and Burst Balloons.",
+  "difficulty": "advanced",
+  "minutes": 65,
+  "words": 4523,
+  "concepts": []
+ },
+ "a11-state-machine-dp": {
+  "summary": "State-machine DP handles sequences where your options at each step depend on a small \"mode\" you are in — holding a stock or not, in cooldown, how many transactions are left. You will learn to draw the modes and legal transitions first, turn the drawing into one DP value per mode per step, and solve the whole Best Time to Buy and Sell Stock family plus non-stock problems with the same method.",
+  "difficulty": "advanced",
+  "minutes": 60,
+  "words": 4161,
+  "concepts": []
+ },
+ "a11-subsequences": {
+  "summary": "Subsequence problems ask you to pick elements in their original order while skipping any you like. You will learn why brute force over subsequences is exponential, how to choose among the four standard dynamic programming states for these problems, and how to derive solutions for matching, counting and palindrome questions from first principles.",
+  "difficulty": "intermediate",
+  "minutes": 60,
+  "words": 5752,
+  "concepts": []
+ },
+ "a11-tree-dp": {
+  "summary": "DP on trees computes an answer for every subtree from the answers of its children, in one post-order pass. You will learn to design the small summary each node reports to its parent, derive multi-state recurrences such as rob/skip and the three camera states, run tree DP on adjacency lists without recursion, and answer a question for every possible root with rerooting.",
+  "difficulty": "advanced",
+  "minutes": 60,
+  "words": 4226,
+  "concepts": []
+ },
+ "a12-fenwick": {
+  "summary": "A Fenwick tree (binary indexed tree) keeps prefix sums of a changing array in a single array of n + 1 numbers, answering prefix sums and point updates in O(log n) with a few lines of code. You will learn what each cell stores, why `i & -i` drives both loops, and how to extend it to range updates, inversion counting and order statistics.",
+  "difficulty": "advanced",
+  "minutes": 45,
+  "words": 3290,
+  "concepts": []
+ },
+ "a12-prefix-matching": {
+  "summary": "Prefix matching covers two related jobs — finding which stored words are prefixes of (or start with) a query, and finding where a pattern occurs in a long text without re-reading characters. You will learn trie-based longest/shortest prefix matching and top-k suggestions, then KMP's prefix function, the Z-function and Rabin-Karp rolling hashes.",
+  "difficulty": "intermediate",
+  "minutes": 60,
+  "words": 4553,
+  "concepts": []
+ },
+ "a12-segment-trees": {
+  "summary": "A segment tree stores aggregates (sums, minimums, maximums and more) of every half, quarter and smaller piece of an array, so that range queries and updates both take O(log n). You will learn how it is built, why a query touches only O(log n) nodes, how to support any associative operation, and how lazy propagation makes range updates fast.",
+  "difficulty": "advanced",
+  "minutes": 60,
+  "words": 3943,
+  "concepts": []
+ },
+ "a12-sparse-tables": {
+  "summary": "A sparse table precomputes the answer for every power-of-two-length window of a fixed array, so that range minimum, maximum, GCD, AND and OR queries take O(1) after O(n log n) preprocessing. You will learn how it is built, why two overlapping blocks are enough, which operations allow that overlap, and when to choose it over a segment tree.",
+  "difficulty": "advanced",
+  "minutes": 35,
+  "words": 2681,
+  "concepts": []
+ },
+ "a12-trie": {
+  "summary": "A trie stores a set of strings as a tree of characters, so that every prefix of every word is a single node you can walk to in O(L) time. You will learn how insert, search and prefix queries work, how to count, delete and list words, and how the same structure solves wildcard search, autocomplete and maximum-XOR problems.",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 4323,
+  "concepts": []
+ },
+ "a13-and-or-xor": {
+  "summary": "AND, OR and XOR combine two integers one binary digit at a time. You will learn how Java stores integers in two's complement, what each bitwise operator (and NOT and the shifts) does to those bits, and the handful of algebraic facts that turn up in almost every bit-manipulation problem.",
+  "difficulty": "beginner",
+  "minutes": 45,
+  "words": 3865,
+  "concepts": []
+ },
+ "a13-bitmasking": {
+  "summary": "A bitmask stores a subset of a small set of items as the bits of one integer, so set operations become single instructions and every subset can be listed by counting. You will learn to encode sets, enumerate all subsets, submasks and fixed-size subsets, recognise the n ≤ 20 signal, and see how masks become the state of a dynamic program.",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 3798,
+  "concepts": []
+ },
+ "a13-powers-of-two": {
+  "summary": "A power of two is a number with exactly one bit set, and that one fact gives O(1) tests, fast rounding, cheap modulo and integer logarithms. You will learn why n > 0 && (n & (n - 1)) == 0 works, how to round to the neighbouring powers of two, and why hash tables and many data structures size themselves in powers of two.",
+  "difficulty": "beginner",
+  "minutes": 35,
+  "words": 2737,
+  "concepts": []
+ },
+ "a13-set-bit": {
+  "summary": "Setting, clearing, toggling and testing a single bit are the four basic moves of bit manipulation. You will learn to build the one-bit mask `1 << k`, why each move uses the operator it does, the lowest-set-bit tricks `n & (n - 1)` and `n & -n`, and the overflow and precedence traps that break these one-liners in Java.",
+  "difficulty": "beginner",
+  "minutes": 45,
+  "words": 3612,
+  "concepts": [
+   "a13-unset-bit",
+   "a13-check-bit"
+  ]
+ },
+ "a13-xor-tricks": {
+  "summary": "XOR cancels equal values, so a whole array can be folded into one number in which every paired element has disappeared. You will learn the algebra behind that, and use it to solve Single Number I, II and III, Missing Number, range XOR and subarray-XOR counting in linear time with constant or small extra space.",
+  "difficulty": "intermediate",
+  "minutes": 45,
+  "words": 3630,
+  "concepts": []
+ },
+ "a14-brute-force-first": {
+  "summary": "Before optimising, a strong candidate states the simplest correct solution and its exact cost. You will learn how to find the brute force for any problem by naming its candidate space, how to state its complexity honestly, how to present it in under two minutes, and how it becomes both the starting point for optimisation and a trusted test oracle.",
+  "difficulty": "beginner",
+  "minutes": 40,
+  "words": 3306,
+  "concepts": []
+ },
+ "a14-clarifying-requirements": {
+  "summary": "Interview problems are deliberately underspecified, and the first few minutes decide whether you solve the problem that was asked. You will learn which questions change the algorithm or the output, how to confirm the answers with examples, and what to do when the interviewer will not answer.",
+  "difficulty": "beginner",
+  "minutes": 35,
+  "words": 3266,
+  "concepts": []
+ },
+ "a14-clean-coding": {
+  "summary": "Interview code is usually written without autocomplete, error highlighting or a run button, and it is read by someone deciding whether they want to work with you. You will learn to structure code before filling it in, name and decompose it so it can be traced by hand, write the Java APIs you need from memory, and avoid the bugs a compiler will not catch for you.",
+  "difficulty": "beginner",
+  "minutes": 40,
+  "words": 3131,
+  "concepts": []
+ },
+ "a14-complexity-in-interview": {
+  "summary": "Every interview solution ends with \"what is the time and space complexity?\", and a wrong answer there undoes a lot of good work. You will learn a repeatable method for analysing your own code under pressure — naming variables, counting iterations rather than loops, catching hidden library costs and recursion stack space — and how to state the result in a few clear sentences.",
+  "difficulty": "intermediate",
+  "minutes": 45,
+  "words": 4487,
+  "concepts": []
+ },
+ "a14-deriving-optimization": {
+  "summary": "Interviewers care less about whether you know the optimal solution than whether you can get there from a slow one. You will learn a repeatable way to do it — use the constraints to set a target, find the work the brute force repeats, pick the technique that removes exactly that work, and check the idea against a counterexample before coding.",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 3206,
+  "concepts": []
+ },
+ "a14-edge-cases": {
+  "summary": "Most interview solutions that fail do so on an input the candidate never thought about — an empty array, a single node, a zero, a value at the edge of the integer range. You will learn a systematic way to generate those inputs, how to find the ones that threaten your specific code by reading its branches, and when in the interview to raise them.",
+  "difficulty": "beginner",
+  "minutes": 40,
+  "words": 3935,
+  "concepts": []
+ },
+ "a14-manual-testing": {
+  "summary": "In most coding interviews there is no test runner and no debugger, so you verify code by executing it in your head. You will learn how to choose a handful of inputs that expose bugs, compute their expected answers independently, trace loops and recursion with a variable table, and fix what you find without breaking what already worked.",
+  "difficulty": "beginner",
+  "minutes": 40,
+  "words": 3152,
+  "concepts": []
+ },
+ "a14-responding-to-hints": {
+  "summary": "Interviewers give hints all the time — as questions, suggestions or gentle warnings — and how you respond is part of what they assess. You will learn to recognise the different kinds of hint and what each usually means, a five-step way to take one on board visibly, how to push back politely when you think a hint does not apply, and when and how to ask for a hint yourself.",
+  "difficulty": "beginner",
+  "minutes": 35,
+  "words": 3692,
+  "concepts": []
+ },
+ "a14-thinking-aloud": {
+  "summary": "In a live coding interview, the interviewer can only grade the reasoning they can hear. You will learn what to say in each phase of a problem, how to narrate code without slowing down, how to think aloud productively when stuck, and you will follow a complete annotated interview on a heap-based interval problem.",
+  "difficulty": "beginner",
+  "minutes": 40,
+  "words": 3266,
+  "concepts": []
+ },
+ "a14-timed-coding": {
+  "summary": "Real coding interviews give you roughly 35–45 minutes per problem, and running out of time with no working code is one of the most common ways to fail. You will learn how to budget an interview session, which checkpoints tell you to change course, what to cut when time is short, and how to build timed stamina through solo timed practice and mock interviews.",
+  "difficulty": "intermediate",
+  "minutes": 45,
+  "words": 4458,
+  "concepts": [
+   "a14-mock-interviews"
+  ]
  },
  "a2-array-string-traversal": {
   "summary": "Almost every array and string problem is solved by walking the data in a deliberate order while keeping a little state. You will learn the core traversal patterns — single pass, backward pass, read/write compaction, reversal and parse-while-scanning — and how to choose between them so your solutions stay O(n).",
