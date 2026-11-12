@@ -372,10 +372,10 @@ SyntaxError try {} catch (e) { let e = 1; } | Identifier 'e' has already been de
 ok         try {} catch (e) { var e = 1; }
 SyntaxError function f(a) { let a = 1; } | Identifier 'a' has already been declared
 ok         function f(a) { var a = 1; }
-SyntaxError { let x = 1; var x = 2; }
+SyntaxError { let x = 1; var x = 2; } | Identifier 'x' has already been declared
 ```
 
-A `catch (e)` clause creates a small environment holding `e`, and a `let e` directly in the catch block is treated as a redeclaration. A parameter and a top-level `let` of the same name clash for the same reason. The `var` versions are allowed for historical compatibility: `var a` next to a parameter `a` re-uses the parameter's binding. In the last case the `var x` would be hoisted through the block that already has a `let x`, which is forbidden. (The final output line is shortened here; Node prints the same "has already been declared" message as for the others.)
+A `catch (e)` clause creates a small environment holding `e`, and a `let e` directly in the catch block is treated as a redeclaration. A parameter and a top-level `let` of the same name clash for the same reason. The `var` versions are allowed for historical compatibility: `var a` next to a parameter `a` re-uses the parameter's binding. In the last case the `var x` would be hoisted through the block that already has a `let x`, which is forbidden.
 
 ### Parameters with default values
 

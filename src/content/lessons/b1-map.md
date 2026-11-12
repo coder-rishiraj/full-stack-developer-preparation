@@ -317,7 +317,11 @@ console.log(top);
 ```output
 25
 Map(3) { 'ada' => 65, 'lin' => 15, 'sam' => 60 }
-Map(3) { 'ada' => [ 'o1', 'o3' ], 'lin' => [ 'o2' ], 'sam' => [ 'o4' ] }
+Map(3) {
+  'ada' => [ 'o1', 'o3' ],
+  'lin' => [ 'o2' ],
+  'sam' => [ 'o4' ]
+}
 [ 'ada', 65 ]
 ```
 

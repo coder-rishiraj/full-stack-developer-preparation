@@ -761,7 +761,7 @@ A small publish/subscribe object exercises every part of the pattern: per-instan
 
 ```javascript title="emitter.js"
 function Emitter() {
-  if (!new.target) {
+  if (!(this instanceof Emitter)) {
     throw new TypeError('Emitter must be called with new');
   }
   this.listeners = new Map();          // per instance: never put this on the prototype
@@ -812,20 +812,31 @@ Logger true
 
 `Emitter` keeps its listeners in a `Map` created inside the constructor, so each emitter has its own. Had the code written `Emitter.prototype.listeners = new Map()`, `a` and `b` would have shared one map and `b.log` would have triggered `a`'s handlers — the shared-mutable-prototype bug from [[b1-prototype-chain]]. The output proves the separation: `b` has zero handlers, and `a.listeners === b.listeners` is `false`, while the `on` method is shared.
 
-`Logger` follows the three-step recipe, with one detail that looks like a problem. `Emitter.call(this)` is a plain call, so inside `Emitter`, `new.target` should be `undefined` and the guard should throw — yet the program runs. The reason is subtle and worth understanding: `new.target` is `undefined` only when the function is invoked through `[[Call]]`, and `Emitter.call(this)` is exactly that. So this code does throw as written if `Logger` is constructed.
+`Logger` follows the three-step recipe, and the choice of guard in `Emitter` matters for it. `Emitter.call(this)` is a plain call, not a construction, so inside `Emitter` the value of `new.target` is `undefined`. A guard written as `if (!new.target) throw ...` would therefore reject the call that `Logger` depends on:
 
-That last paragraph describes what you should expect, and it is why the program above was run before being printed here. Guards based on `new.target` are incompatible with the `Parent.call(this)` inheritance idiom. The version that produced the output shown uses the older, compatible guard — replace the first lines of `Emitter` with:
-
-```javascript title="emitter-guard.js"
-function Emitter() {
-  if (!(this instanceof Emitter)) {
-    throw new TypeError('Emitter must be called with new');
+```javascript title="guard-vs-call.js"
+function StrictEmitter() {
+  if (!new.target) {
+    throw new TypeError('StrictEmitter must be called with new');
   }
   this.listeners = new Map();
 }
+function StrictLogger() {
+  StrictEmitter.call(this);
+}
+
+try {
+  new StrictLogger();
+} catch (error) {
+  console.log(error.message);
+}
 ```
 
-With `this instanceof Emitter`, a call through `Emitter.call(loggerInstance)` passes, because a `Logger` instance has `Emitter.prototype` in its chain, while a bare `Emitter()` call still fails. This is a real compatibility constraint: classes (which enforce `new` the strict way) cannot be extended with the `Parent.call(this)` idiom at all, which is why ES2015-era code that mixed the two styles broke, and why `Reflect.construct(Parent, args, new.target)` exists for the rare cases that need it.
+```output
+StrictEmitter must be called with new
+```
+
+The `this instanceof Emitter` guard passes for `Emitter.call(loggerInstance)`, because a `Logger` instance has `Emitter.prototype` in its chain, while a bare `Emitter()` call still fails. Guards based on `new.target` are incompatible with the `Parent.call(this)` idiom. The same constraint applies to classes, which enforce `new` strictly: a class cannot be invoked through `.call`, so a constructor function cannot inherit from a class this way. `Reflect.construct(Parent, args, new.target)` exists for the cases that need to construct a parent on behalf of a different constructor ([[b1-reflect]]).
 
 ## In real systems
 
