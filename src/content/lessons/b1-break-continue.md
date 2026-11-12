@@ -572,6 +572,8 @@ The function has a name that explains the loop's purpose, can be tested on its o
 
 **Unlabelled `break` in a nested loop meant to stop everything.** It only ends the inner loop. Use `break label` or extract a function and `return`.
 
+**Putting the label on the wrong loop.** `break name` leaves the statement that carries the label `name` — nothing more. If the label sits on the inner loop, `break name` behaves like a plain `break`, and the outer loop keeps going. Put the label on the outermost statement you want to leave.
+
 **Control flow in `finally`.** A `break`, `continue` or `return` in `finally` silently discards the pending return value or exception. Keep `finally` for cleanup only.
 
 **Arrow function returning an object without parentheses.** `() => { a: 1 }` is a block with a label and returns `undefined`; write `() => ({ a: 1 })`.
