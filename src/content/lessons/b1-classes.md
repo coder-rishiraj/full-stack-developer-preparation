@@ -646,7 +646,7 @@ undefined
 50
 ```
 
-From outside, `#balance` simply does not exist. It does not appear in `console.log` output, `Object.keys`, `JSON.stringify` or spread, and the string key `'#balance'` is an unrelated, missing property. The only way to change the balance is `deposit`, which enforces the invariant that deposits are positive. The getter `balance` exposes a read-only view; assigning to `acct.balance` does nothing because there is no setter. (In strict-mode code, including modules, that assignment throws a `TypeError` instead of failing silently.) Writing `acct.#balance` anywhere outside the class is a `SyntaxError` — the code is rejected before it runs.
+Run as a classic (non-module) script, this prints the output above. From outside, `#balance` does not exist. It does not appear in `console.log` output, `Object.keys`, `JSON.stringify` or spread, and the string key `'#balance'` is an unrelated, missing property. The only way to change the balance is `deposit`, which enforces the invariant that deposits are positive. The getter `balance` exposes a read-only view; assigning to `acct.balance` does nothing because there is no setter. (In strict-mode code, including ES modules such as an `.mjs` file, that assignment throws a `TypeError` instead of failing silently.) Writing `acct.#balance` anywhere outside the class is a `SyntaxError` — the code is rejected before it runs.
 
 This is real **encapsulation**, enforced by the language: other code cannot depend on, or corrupt, the internal state. Before ES2022, JavaScript code used a leading underscore (`this._balance`) as a convention meaning "please do not touch", which nothing enforced, or used closures ([[b1-private-state]]), which made every method a separate function per instance.
 

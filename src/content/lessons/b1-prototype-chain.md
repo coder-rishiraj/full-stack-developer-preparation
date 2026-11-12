@@ -230,7 +230,7 @@ console.log(hidden.x, 'x' in hidden, Object.hasOwn(hidden, 'x'));
 undefined true true
 ```
 
-That is why `obj.x === undefined` cannot tell "missing" from "present but undefined". Second, an own data property shadows an inherited *getter* too. The getter on the prototype is simply never reached.
+That is why `obj.x === undefined` cannot tell "missing" from "present but undefined". Second, an own data property shadows an inherited *getter* too. The getter on the prototype is never reached.
 
 ### Writing: assignment does not travel up
 

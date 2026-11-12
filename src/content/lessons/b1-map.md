@@ -222,7 +222,7 @@ cake 5
 
 Iterating the Map directly is the same as iterating `prices.entries()`. Notice the argument order of `forEach`: the callback receives `(value, key, map)`, value first, to match `Array.prototype.forEach`'s `(element, index, array)`. Getting these backwards is easy.
 
-`keys()`, `values()` and `entries()` return **iterators**, not arrays, so they have no `length` and no `filter` or `reduce` in ES2023 ([[b1-iterators]]). Spread them into an array first, as the last two lines do. Like a Set, a Map may be modified while it is being iterated: entries deleted before they are reached are skipped, and entries added are visited.
+`keys()`, `values()` and `entries()` return **iterators**, not arrays, so they have no `length` and no array methods ([[b1-iterators]]). Spread them into an array first, as the last two lines do. ES2025 iterator helpers (Node.js 22 and current browsers) add `map`, `filter` and `reduce` directly to iterators, but spreading works everywhere and gives you the full array API. Like a Set, a Map may be modified while it is being iterated: entries deleted before they are reached are skipped, and entries added are visited.
 
 ## Converting to and from objects, arrays and JSON
 

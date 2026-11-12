@@ -466,7 +466,9 @@ function splitRow(line: string): string[] {
   if (s.endsWith('|') && !s.endsWith('\\|')) s = s.slice(0, -1)
   const cells: string[] = []
   let buf = ''
-  let inCode = false
+  // Length of the backtick run that opened the current code span (0 = not in code),
+  // so ``a ` b`` keeps its pipes and single backticks inside one cell.
+  let fence = 0
   for (let i = 0; i < s.length; i++) {
     const c = s[i]
     if (c === '\\' && s[i + 1] === '|') {
@@ -474,8 +476,16 @@ function splitRow(line: string): string[] {
       i++
       continue
     }
-    if (c === '`') inCode = !inCode
-    if (c === '|' && !inCode) {
+    if (c === '`') {
+      let run = 1
+      while (s[i + run] === '`') run++
+      if (fence === 0) fence = run
+      else if (run === fence) fence = 0
+      buf += s.slice(i, i + run)
+      i += run - 1
+      continue
+    }
+    if (c === '|' && fence === 0) {
       cells.push(buf.trim())
       buf = ''
       continue

@@ -148,9 +148,9 @@ console.log(alpha(3));
 
 ```output
 Trace: in beta, n = 4
-    at beta (/private/tmp/app/frames.js:6:11)
-    at alpha (/private/tmp/app/frames.js:3:10)
-    at Object.<anonymous> (/private/tmp/app/frames.js:9:13)
+    at beta (/app/frames.js:6:11)
+    at alpha (/app/frames.js:3:10)
+    at Object.<anonymous> (/app/frames.js:9:13)
     at Module._compile (node:internal/modules/cjs/loader:1781:14)
     at Object..js (node:internal/modules/cjs/loader:1913:10)
     at Module.load (node:internal/modules/cjs/loader:1505:32)
@@ -161,7 +161,7 @@ Trace: in beta, n = 4
 8
 ```
 
-This was run with Node.js 22 from a file saved in `/tmp/app`; your paths will differ. The first three lines are the program's own frames. `beta` is on top, at line 6, column 11 — the `console.trace` call. `alpha` is waiting at line 3, column 10, which is the call `beta(x)`. `Object.<anonymous>` is the file's top-level code, waiting at line 9. It has that odd name because Node wraps each CommonJS file in an unnamed function. The remaining lines are frames from inside Node itself: the module loader that was running your file. A browser shows no such lines, because a page's script is started by the browser's native code, not by JavaScript.
+This was run with Node.js 22 from a file saved in `/app`; your paths will differ. The first three lines are the program's own frames. `beta` is on top, at line 6, column 11 — the `console.trace` call. `alpha` is waiting at line 3, column 10, which is the call `beta(x)`. `Object.<anonymous>` is the file's top-level code, waiting at line 9. It has that odd name because Node wraps each CommonJS file in an unnamed function. The remaining lines are frames from inside Node itself: the module loader that was running your file. A browser shows no such lines, because a page's script is started by the browser's native code, not by JavaScript.
 
 Two values of `n` exist at the same moment here — `3` in `alpha`'s frame and `4` in `beta`'s — without any conflict, because each frame has its own variables.
 
@@ -192,9 +192,9 @@ console.log(firstFrame(() => run(checkStock)));
 ```
 
 ```output
-at /private/tmp/app/names.js:12:48
-at validateCart (/private/tmp/app/names.js:13:66)
-at checkStock (/private/tmp/app/names.js:14:34)
+at /app/names.js:12:48
+at validateCart (/app/names.js:13:66)
+at checkStock (/app/names.js:14:34)
 ```
 
 The arrow function written directly as an argument has no name, so its frame is only a file position. The named function expression shows `validateCart`. The arrow assigned to a `const` shows `checkStock`, because a function created in an assignment to a variable takes the variable's name. In a trace with thirty frames, names are the difference between seeing the path at a glance and opening thirty locations. Give callbacks that do real work a name.
@@ -222,7 +222,7 @@ first runs
 first returns
 script ends
 Trace: inside later
-    at Timeout.later [as _onTimeout] (/private/tmp/app/timer.js:4:13)
+    at Timeout.later [as _onTimeout] (/app/timer.js:4:13)
     at listOnTimeout (node:internal/timers:585:17)
     at process.processTimers (node:internal/timers:521:7)
 ```
@@ -465,15 +465,15 @@ printReceipt({ items: [{ price: '120' }, { price: 'abc' }] });
 ```
 
 ```output
-/private/tmp/app/receipt.js:4
+/app/receipt.js:4
     throw new TypeError('Not a number: ' + text);
     ^
 
 TypeError: Not a number: abc
-    at parsePrice (/private/tmp/app/receipt.js:4:11)
-    at totalOf (/private/tmp/app/receipt.js:12:14)
-    at printReceipt (/private/tmp/app/receipt.js:18:25)
-    at Object.<anonymous> (/private/tmp/app/receipt.js:21:1)
+    at parsePrice (/app/receipt.js:4:11)
+    at totalOf (/app/receipt.js:12:14)
+    at printReceipt (/app/receipt.js:18:25)
+    at Object.<anonymous> (/app/receipt.js:21:1)
     at Module._compile (node:internal/modules/cjs/loader:1781:14)
     at Object..js (node:internal/modules/cjs/loader:1913:10)
     at Module.load (node:internal/modules/cjs/loader:1505:32)
@@ -514,8 +514,8 @@ try {
 
 ```output
 Error: made here
-    at makeError (/private/tmp/app/captured.js:2:10)
-    at thrower (/private/tmp/app/captured.js:5:15)
+    at makeError (/app/captured.js:2:10)
+    at thrower (/app/captured.js:5:15)
 ```
 
 The top frame is `makeError`, at the `new Error` on line 2, although the `throw` is on line 6. Helper functions that build errors therefore add a frame of their own to the top of every trace. V8 provides `Error.captureStackTrace(err, fn)` to re-capture a trace while leaving out `fn` and everything above it; it is a V8 feature, available in Node.js and Chromium browsers, and not part of the language standard.
@@ -561,8 +561,8 @@ loadPage().catch((e) => console.log(e.stack));
 
 ```output
 Error: user service down
-    at fetchUser (/private/tmp/app/async.js:3:9)
-    at async loadPage (/private/tmp/app/async.js:6:3)
+    at fetchUser (/app/async.js:3:9)
+    at async loadPage (/app/async.js:6:3)
 ```
 
 When the error was created, `loadPage` was not on the stack — it was suspended at its `await`. V8 adds the line `at async loadPage` by following the chain of promises that are waiting for `fetchUser`, so the word `async` marks a frame that has been reconstructed. This works for `async`/`await`. It does not work for plain `setTimeout` or event callbacks, as the `timer.js` example showed, although DevTools can display the scheduling code as a separate "async" section when its async stack traces feature is on. See [[b1-async-debugging]].
@@ -592,7 +592,7 @@ try {
 ```output
 Could not load user 7
 cause: SyntaxError
-at loadUser (/private/tmp/app/cause.js:5:11)
+at loadUser (/app/cause.js:5:11)
 at JSON.parse (<anonymous>)
 ```
 

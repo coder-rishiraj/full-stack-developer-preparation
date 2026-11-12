@@ -142,7 +142,7 @@ The last two rows are worth restating. Fields are own properties of each instanc
 
 A subclass instance must be set up by every class in its hierarchy: the parent initialises the parent's state, then the child initialises its own. The subclass constructor triggers the parent's work by calling **`super(...)`**, which runs the parent constructor.
 
-JavaScript enforces a strict rule here: **in a derived class constructor, `this` does not exist until `super()` has returned.** Touching `this` earlier — even just reading it — throws a `ReferenceError`, and so does finishing the constructor without ever calling `super()`.
+JavaScript enforces a strict rule here: **in a derived class constructor, `this` does not exist until `super()` has returned.** Touching `this` earlier — even only reading it — throws a `ReferenceError`, and so does finishing the constructor without ever calling `super()`.
 
 ```javascript
 class Base {
@@ -521,6 +521,8 @@ console.log(JSON.stringify(broken.value), JSON.stringify(fixed.value));
 ```output
 "" "ABC"
 ```
+
+That output comes from a classic (non-module) script, where the assignment to `broken.value` is silently ignored. In an ES module or other strict code, the same line throws `TypeError: Cannot set property value of #<UpperField> which has only a getter` (Node 22's wording).
 
 **Renaming a parent method breaks overrides silently.** If the parent's `formatRow` is renamed to `renderRow`, a subclass still defining `formatRow` now has an unrelated method that is never called, with no error. TypeScript's `override` keyword together with the `noImplicitOverride` option catches this.
 

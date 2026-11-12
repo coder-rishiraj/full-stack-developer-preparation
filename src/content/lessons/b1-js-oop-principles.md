@@ -684,7 +684,7 @@ It is also worth saying that OOP is one style among several in JavaScript. A gre
 These questions are less about syntax and more about whether you can connect a principle to a mechanism and to a design consequence. Define the term in one sentence, name the JavaScript mechanism, then give the reason it matters.
 
 > [!INTERVIEW] "How does JavaScript implement the OOP principles?"
-> "Encapsulation comes from `#private` class members, closures and module scope — underscore prefixes are only a convention. Polymorphism is dynamic property lookup: `obj.method()` finds the method on the actual object's prototype chain at call time, so it works through overriding in a class hierarchy and also through duck typing with no hierarchy at all. Inheritance is prototype delegation, with `class extends` as syntax for it. And composition is just objects holding references to other objects and delegating, which is usually preferred over deep hierarchies."
+> "Encapsulation comes from `#private` class members, closures and module scope — underscore prefixes are only a convention. Polymorphism is dynamic property lookup: `obj.method()` finds the method on the actual object's prototype chain at call time, so it works through overriding in a class hierarchy and also through duck typing with no hierarchy at all. Inheritance is prototype delegation, with `class extends` as syntax for it. And composition is objects holding references to other objects and delegating, which is usually preferred over deep hierarchies."
 
 Questions to prepare:
 
