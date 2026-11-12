@@ -1046,6 +1046,24 @@
   "words": 3957,
   "concepts": []
  },
+ "b1-array-basics": {
+  "summary": "A JavaScript array is an ordered, zero-indexed list — but underneath it is an ordinary object with numeric-string keys and a self-maintaining `length`. You will learn how to create arrays without traps, how indexing and `length` really behave, and how \"holes\" in sparse arrays make some methods skip elements that others visit.",
+  "difficulty": "beginner",
+  "minutes": 50,
+  "words": 4981,
+  "concepts": [
+   "b1-sparse-arrays"
+  ]
+ },
+ "b1-arrow-functions": {
+  "summary": "Arrow functions — `(a, b) => a + b` — are a compact function syntax with one big behavioural difference, they take `this` from the surrounding code instead of from how they are called. You will learn every syntax form, what arrows deliberately lack (`this`, `arguments`, `new`, `prototype`), how lexical `this` fixes lost-`this` bugs in callbacks, and when an arrow is the wrong choice.",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 3531,
+  "concepts": [
+   "b1-lexical-this"
+  ]
+ },
  "b1-assignment-operators": {
   "summary": "Assignment operators write a value into a variable or property. You will learn what can appear on the left of `=`, why assignment is itself an expression, how compound operators like `+=` read and write the target exactly once, and how logical assignment (`||=`, `&&=`, `??=`) can skip the write entirely.",
   "difficulty": "beginner",
@@ -1067,6 +1085,13 @@
   "words": 3662,
   "concepts": []
  },
+ "b1-bigint": {
+  "summary": "BigInt is JavaScript's primitive for whole numbers of any size. You will learn how to create bigints safely, how their arithmetic differs from number arithmetic, why they refuse to mix with numbers, and how to move them through JSON, typed arrays and APIs — ending with decoding real 64-bit snowflake IDs.",
+  "difficulty": "intermediate",
+  "minutes": 45,
+  "words": 3960,
+  "concepts": []
+ },
  "b1-bitwise-operators": {
   "summary": "JavaScript's bitwise operators work on the individual binary digits of a number, but only after converting it to a 32-bit integer. You will learn what each operator does, exactly how that conversion truncates and wraps values, how to use bit flags safely, and when `BigInt`, `Math.imul` or typed arrays are the better tool.",
   "difficulty": "intermediate",
@@ -1078,9 +1103,31 @@
   "summary": "`break` ends a loop or `switch` early and `continue` skips to the next iteration. You will learn exactly where each one sends execution in every kind of loop, how they interact with `switch` and `finally`, why they cannot cross a function boundary (so they do not work inside `forEach`), and how labels let them target an outer loop.",
   "difficulty": "beginner",
   "minutes": 40,
-  "words": 3748,
+  "words": 3800,
   "concepts": [
    "b1-labels"
+  ]
+ },
+ "b1-call": {
+  "summary": "`call`, `apply` and `bind` let you choose the value of `this` for a function instead of leaving it to the call site. You will learn what each one does, how they differ (run now with a list, run now with an array, or return a new function for later), how to use them to borrow methods and keep callbacks attached to their objects, and how they work well enough to implement them yourself.",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 5021,
+  "concepts": [
+   "b1-apply",
+   "b1-bind",
+   "b1-function-borrowing"
+  ]
+ },
+ "b1-classes": {
+  "summary": "A JavaScript class is a compact way to write a constructor function and the shared prototype its objects delegate to. You will learn what the class syntax creates in memory, how construction runs, where instance and static members live, and how public and private fields change what an object exposes.",
+  "difficulty": "intermediate",
+  "minutes": 70,
+  "words": 6577,
+  "concepts": [
+   "b1-class-constructor",
+   "b1-instance-static",
+   "b1-public-private-fields"
   ]
  },
  "b1-closure-memory": {
@@ -1130,6 +1177,25 @@
   "words": 2364,
   "concepts": []
  },
+ "b1-copying-objects": {
+  "summary": "Copying an object in JavaScript can mean three very different things — copying the reference, copying one level, or copying the whole tree. You will learn what spread, Object.assign, structuredClone and the JSON round trip each really copy, why shallow copies share nested objects, and how to choose the right technique for state updates, snapshots and data sent between threads.",
+  "difficulty": "intermediate",
+  "minutes": 55,
+  "words": 4648,
+  "concepts": [
+   "b1-structured-clone",
+   "b1-json-clone-limits"
+  ]
+ },
+ "b1-currying": {
+  "summary": "Currying turns a function of several arguments into a chain of functions that each take one, and partial application fixes some arguments now and leaves the rest for later. You will learn how both work through closures, how to write a generic curry and where it breaks, and how compose and pipe chain small functions into readable data pipelines.",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 4251,
+  "concepts": [
+   "b1-compose-pipe"
+  ]
+ },
  "b1-ecmascript": {
   "summary": "ECMAScript is the standard that defines the JavaScript language, and \"JavaScript\" is the everyday name for engines that implement it plus whatever their host adds. You will learn who writes the standard, how new features move from idea to specification, what the edition names like ES6 and ES2020 mean, and how to ship modern syntax to environments that do not support it yet.",
   "difficulty": "beginner",
@@ -1177,6 +1243,15 @@
    "b1-unary-plus"
   ]
  },
+ "b1-first-class-functions": {
+  "summary": "In JavaScript, functions are values — you can store them, pass them to other functions and return them from functions. You will learn what \"first-class\" means, how higher-order functions such as map, filter and addEventListener use this, how to write your own function factories and wrappers, and how callbacks work, including the difference between synchronous and asynchronous ones.",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 3700,
+  "concepts": [
+   "b1-callbacks-sync"
+  ]
+ },
  "b1-for-loops": {
   "summary": "Loops repeat code until a condition says stop. You will learn exactly how JavaScript's three classic loops — `for`, `while` and `do...while` — execute, how `let` gives each iteration of a `for` loop its own variable, and how to avoid the off-by-one errors, infinite loops and mutation bugs that cause most loop failures.",
   "difficulty": "beginner",
@@ -1189,6 +1264,37 @@
   "difficulty": "beginner",
   "minutes": 40,
   "words": 3696,
+  "concepts": []
+ },
+ "b1-function-declaration": {
+  "summary": "A function declaration — `function name(params) { body }` — creates a named, reusable function that exists from the moment its scope is entered. You will learn its syntax and parts, how calling and returning work, why declarations can be called before their line, and the block-scoping rules that differ between strict and sloppy code.",
+  "difficulty": "beginner",
+  "minutes": 40,
+  "words": 3877,
+  "concepts": []
+ },
+ "b1-function-expression": {
+  "summary": "A function expression creates a function as a value, at the moment the expression runs, so you can store it in a variable, pass it to another function or choose it at runtime. You will learn how it differs from a declaration, why it cannot be called before its line, and how named and anonymous function expressions affect recursion, stack traces and the function's name property.",
+  "difficulty": "beginner",
+  "minutes": 45,
+  "words": 3735,
+  "concepts": [
+   "b1-named-function-expression",
+   "b1-anonymous-function"
+  ]
+ },
+ "b1-function-hoisting": {
+  "summary": "The same function can be written as a declaration or as an expression, and the two behave differently if you call them before the line that defines them. You will learn exactly what each form looks like before its line runs, how to read the three different errors you can get, and how to choose a style deliberately.",
+  "difficulty": "intermediate",
+  "minutes": 40,
+  "words": 3819,
+  "concepts": []
+ },
+ "b1-getters-setters": {
+  "summary": "Getters and setters are accessor properties — properties that run a function when they are read or assigned, while still looking like ordinary fields to the code that uses them. You will learn the syntax in object literals, classes and Object.defineProperty, where the real value is stored, how accessors interact with inheritance, copying and JSON, and when an explicit method is the better choice.",
+  "difficulty": "intermediate",
+  "minutes": 45,
+  "words": 4314,
   "concepts": []
  },
  "b1-global-variables": {
@@ -1222,6 +1328,13 @@
   "difficulty": "beginner",
   "minutes": 40,
   "words": 4079,
+  "concepts": []
+ },
+ "b1-iife": {
+  "summary": "An Immediately Invoked Function Expression (IIFE) is a function that is created and called in the same breath, so its body runs once inside a private scope. You will learn why the strange parentheses are required, how IIFEs gave JavaScript private state and modules before the language had them, and where they are still the right tool today.",
+  "difficulty": "intermediate",
+  "minutes": 40,
+  "words": 4353,
   "concepts": []
  },
  "b1-in-delete-void": {
@@ -1275,6 +1388,23 @@
    "b1-short-circuit"
   ]
  },
+ "b1-math": {
+  "summary": "Math is JavaScript's built-in library of numeric functions and constants — min and max, powers and roots, logarithms, trigonometry, rounding and random numbers. You will learn how each group behaves at its edges, why Math.round(-2.5) is -2, how to pick random integers and shuffle without bias, and when Math.random must be replaced by the Web Crypto API.",
+  "difficulty": "beginner",
+  "minutes": 55,
+  "words": 5819,
+  "concepts": [
+   "b1-rounding",
+   "b1-random"
+  ]
+ },
+ "b1-memoization": {
+  "summary": "Memoization makes a function remember the results it has already computed, so calling it again with the same arguments returns the stored answer instead of redoing the work. You will learn how to build a memoize helper with a closure and a Map, how to choose cache keys correctly, when memoization silently returns wrong answers, and how to keep caches from growing forever.",
+  "difficulty": "intermediate",
+  "minutes": 45,
+  "words": 4610,
+  "concepts": []
+ },
  "b1-microtasks": {
   "summary": "JavaScript hosts keep two kinds of waiting work — tasks (macrotasks) such as timers and events, and microtasks such as promise callbacks — and they run them with very different priority. You will learn exactly what goes into each queue, when each queue is processed, how promises and await create microtasks, and how to use that knowledge to batch work without freezing the page.",
   "difficulty": "intermediate",
@@ -1303,6 +1433,13 @@
    "b1-object-is"
   ]
  },
+ "b1-nested-control-flow": {
+  "summary": "Real programs put loops inside loops, `switch` inside `for` and `try` inside both. You will learn how nested statements execute, which loop a `break` really leaves, what nesting costs in readability and running time, and the techniques — early returns, guard clauses, extracted functions, array methods and lookup tables — that keep nested logic flat and correct.",
+  "difficulty": "beginner",
+  "minutes": 40,
+  "words": 5589,
+  "concepts": []
+ },
  "b1-nullish-coalescing": {
   "summary": "The nullish coalescing operator `??` supplies a fallback only when a value is `null` or `undefined`, so real values such as `0`, `''` and `false` are kept. You will learn how it differs from `||` and from default parameters, why it cannot be mixed with `&&` and `||` without parentheses, and how the logical assignment operators `??=`, `||=` and `&&=` turn the same rules into in-place updates.",
   "difficulty": "beginner",
@@ -1310,6 +1447,46 @@
   "words": 3374,
   "concepts": [
    "b1-logical-assignment"
+  ]
+ },
+ "b1-number-methods": {
+  "summary": "JavaScript gives you three families of number tools — Number.* predicates and constants that test values without coercion, parsers that turn text into numbers, and to* methods that turn numbers into display strings. You will learn what each one really does, where their rounding and coercion rules surprise people, and how to combine them into input handling and formatting that is correct for real users.",
+  "difficulty": "beginner",
+  "minutes": 45,
+  "words": 3902,
+  "concepts": []
+ },
+ "b1-number-representation": {
+  "summary": "Every JavaScript number is a 64-bit IEEE 754 double. You will learn how those 64 bits encode a value, why the representable numbers have gaps that grow with size, why 0.1 + 0.2 is not 0.3, and where the safe-integer limit of 2^53 - 1 comes from — so you can predict numeric bugs instead of discovering them in production.",
+  "difficulty": "intermediate",
+  "minutes": 60,
+  "words": 6028,
+  "concepts": [
+   "b1-floating-point",
+   "b1-safe-integers"
+  ]
+ },
+ "b1-object-apis": {
+  "summary": "The static methods on `Object` are JavaScript's toolkit for working with any object's properties from the outside — listing them, transforming them, copying them, creating objects with a chosen prototype, locking them against change and asking who owns a property. You will learn exactly which properties each method sees, what it does to them, and the traps that come from assuming more than it does.",
+  "difficulty": "intermediate",
+  "minutes": 60,
+  "words": 6036,
+  "concepts": [
+   "b1-object-keys-values",
+   "b1-object-assign-create",
+   "b1-object-freeze-seal",
+   "b1-object-hasown"
+  ]
+ },
+ "b1-object-literals": {
+  "summary": "An object literal is the `{ … }` syntax that creates a new object with the properties you list. You will learn exactly what each form of key and value means — plain keys, dot and bracket access, computed names, shorthand properties and methods, spread and the special `__proto__` key — and the bugs each one prevents or causes.",
+  "difficulty": "beginner",
+  "minutes": 50,
+  "words": 5890,
+  "concepts": [
+   "b1-dot-vs-bracket",
+   "b1-computed-properties",
+   "b1-property-shorthand"
   ]
  },
  "b1-objects-as-values": {
@@ -1324,6 +1501,22 @@
   "difficulty": "beginner",
   "minutes": 35,
   "words": 3067,
+  "concepts": []
+ },
+ "b1-own-vs-inherited": {
+  "summary": "Every property you can read on a JavaScript object either lives on the object itself (own) or is found on one of its prototypes (inherited). You will learn how reads, writes, deletes, existence checks and every listing API treat the two kinds differently, and how the enumerable flag decides which properties show up when you iterate, copy or serialise.",
+  "difficulty": "beginner",
+  "minutes": 55,
+  "words": 5579,
+  "concepts": [
+   "b1-enumerable-properties"
+  ]
+ },
+ "b1-parameters": {
+  "summary": "Parameters are how a JavaScript function receives its inputs, and JavaScript is unusually relaxed about them — any number of arguments can be passed to any function. You will learn what happens with missing and extra arguments, how default parameters, rest parameters and destructured options objects work, and why the legacy `arguments` object behaves strangely.",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 3575,
   "concepts": []
  },
  "b1-parsing-jit": {
@@ -1368,6 +1561,41 @@
    "b1-object-mutability",
    "b1-call-by-sharing"
   ]
+ },
+ "b1-property-descriptors": {
+  "summary": "Every JavaScript property is more than a key and a value — it is a small record, the property descriptor, that also says whether the value can change, whether the property is listed, and whether its settings can be changed or the property deleted. You will learn to read and write descriptors with Object.defineProperty, what each of the three flags controls, and how they explain read-only built-ins, Object.freeze and silent assignment failures.",
+  "difficulty": "intermediate",
+  "minutes": 55,
+  "words": 5493,
+  "concepts": [
+   "b1-define-property",
+   "b1-writable-enumerable-configurable"
+  ]
+ },
+ "b1-prototypes": {
+  "summary": "Every JavaScript object has a hidden link to another object, its prototype, and borrows any property it does not have from there. You will learn why the language shares behaviour this way instead of copying it, how built-ins, constructors and classes all rest on the same link, and how to read and change that link safely with `Object.getPrototypeOf` and friends.",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 5099,
+  "concepts": [
+   "b1-internal-prototype"
+  ]
+ },
+ "b1-pure-functions": {
+  "summary": "A pure function returns a result that depends only on its arguments and changes nothing outside itself; an impure function reads hidden inputs or causes side effects. You will learn to tell them apart, to spot hidden inputs and hidden side effects in JavaScript, to write non-mutating updates, and to structure programs so the logic is pure and the effects sit at the edges.",
+  "difficulty": "intermediate",
+  "minutes": 45,
+  "words": 3813,
+  "concepts": [
+   "b1-side-effects"
+  ]
+ },
+ "b1-recursion-js": {
+  "summary": "Recursion is a function solving a problem by calling itself on a smaller piece of the same problem. You will learn how to design a recursive function that is guaranteed to stop, what the call stack does on every call, why deep recursion crashes JavaScript with a RangeError, and how to convert recursion to a loop when it must handle large inputs.",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 4446,
+  "concepts": []
  },
  "b1-runtimes": {
   "summary": "A JavaScript runtime is everything needed to run JavaScript in a particular place — an engine that executes the language, host APIs that connect it to the outside world, an event loop that schedules callbacks, and a way to load code. You will learn how browsers and Node.js assemble these pieces differently, why the same code can work in one and fail in the other, and how to tell language features from host APIs.",
@@ -1419,11 +1647,31 @@
   "words": 2730,
   "concepts": []
  },
+ "b1-string-creation": {
+  "summary": "Strings are JavaScript's immutable, primitive type for text. You will learn every way to create one, why no operation can ever change a string in place, how indexing and `length` really work, and how to build text efficiently without the wrapper-object and lost-result bugs that catch beginners.",
+  "difficulty": "beginner",
+  "minutes": 40,
+  "words": 5209,
+  "concepts": [
+   "b1-string-indexing"
+  ]
+ },
+ "b1-string-methods": {
+  "summary": "JavaScript strings come with a toolbox of methods for changing case, searching, extracting, replacing, splitting and trimming text. You will learn the handful of rules every method follows, how each family behaves at its edges, and how to combine them into reliable text-processing pipelines without the classic `indexOf`, `substring` and `replace` bugs.",
+  "difficulty": "beginner",
+  "minutes": 50,
+  "words": 5357,
+  "concepts": [
+   "b1-string-search",
+   "b1-string-extract",
+   "b1-string-replace"
+  ]
+ },
  "b1-switch": {
   "summary": "The `switch` statement selects code to run by comparing one value against a list of cases with strict equality. You will learn its exact evaluation order, why execution falls through from one case into the next, how its single shared scope causes surprising errors, and when an object lookup or an `if` chain is the better tool.",
   "difficulty": "beginner",
   "minutes": 40,
-  "words": 3477,
+  "words": 3479,
   "concepts": []
  },
  "b1-syntax-basics": {
@@ -1441,6 +1689,13 @@
    "b1-console-output"
   ]
  },
+ "b1-tagged-templates": {
+  "summary": "A tagged template calls a function with the pieces of a template literal and its values kept separate, instead of gluing them into a string. You will learn exactly what a tag function receives, how cooked and raw strings and per-site caching work, and how libraries use tags to escape HTML, parameterise SQL and build domain-specific languages.",
+  "difficulty": "intermediate",
+  "minutes": 35,
+  "words": 3210,
+  "concepts": []
+ },
  "b1-tdz": {
   "summary": "The temporal dead zone is the period between entering a scope and running a let, const or class declaration, during which the name exists but any use of it throws. You will learn why it exists, how to recognise every situation that triggers it — including typeof, default parameters, classes, switch statements and circular imports — and how to fix the bugs it reveals.",
   "difficulty": "intermediate",
@@ -1448,12 +1703,37 @@
   "words": 2928,
   "concepts": []
  },
+ "b1-template-literals": {
+  "summary": "Template literals are backtick strings that can embed expressions with `${...}` and span several lines. You will learn exactly how interpolated values become text, how line breaks and indentation behave, how every escape sequence works in classic and template strings, and why interpolation alone never makes HTML, URLs or SQL safe.",
+  "difficulty": "beginner",
+  "minutes": 45,
+  "words": 4910,
+  "concepts": [
+   "b1-string-interpolation",
+   "b1-multiline-strings",
+   "b1-escape-sequences"
+  ]
+ },
  "b1-ternary": {
   "summary": "The conditional (ternary) operator `condition ? a : b` chooses between two values inside an expression and evaluates only the branch it picks. You will learn its exact evaluation rules, its low precedence and right-associativity, where it beats `if`/`else` (assignments, returns, template literals, JSX), and where nested ternaries should be replaced with something clearer.",
   "difficulty": "beginner",
   "minutes": 30,
   "words": 3065,
   "concepts": []
+ },
+ "b1-this": {
+  "summary": "In JavaScript, `this` is not fixed when a function is written. Each call sets it, based on how the call is made. You will learn the five rules that decide `this` (default, implicit, explicit, `new` and arrow), the order they are applied in, and why `this` goes missing when a method is passed around as a callback.",
+  "difficulty": "intermediate",
+  "minutes": 60,
+  "words": 6522,
+  "concepts": [
+   "b1-this-default",
+   "b1-this-implicit",
+   "b1-this-explicit",
+   "b1-this-new",
+   "b1-this-arrow",
+   "b1-this-lost"
+  ]
  },
  "b1-to-primitive": {
   "summary": "Operators such as `+`, `-`, `<` and `==` only work on primitive values, so when you hand them an object, JavaScript first asks the object to turn itself into a primitive. You will learn the exact algorithm the engine follows, the \"hint\" that decides between a number and a string, and how `valueOf`, `toString` and `Symbol.toPrimitive` let your own objects take part — or deliberately refuse to.",
@@ -1513,6 +1793,13 @@
   "difficulty": "beginner",
   "minutes": 40,
   "words": 3173,
+  "concepts": []
+ },
+ "b1-unicode-strings": {
+  "summary": "JavaScript stores text as UTF-16 code units, which is why `'🙂'.length` is 2 and why reversing or truncating a string can corrupt it. You will learn the three levels of \"character\" — code units, code points and grapheme clusters — which APIs work at each level, and how to count, slice, compare and encode international text correctly.",
+  "difficulty": "intermediate",
+  "minutes": 45,
+  "words": 3875,
   "concepts": []
  },
  "b1-var-let-const": {

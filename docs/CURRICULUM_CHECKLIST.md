@@ -10,11 +10,11 @@ them under an anchored heading.
 | Track | Name | Lessons | Done |
 |---|---|---|---|
 | A | DSA & Problem Solving | 125 / 125 | 100% |
-| B | Frontend Engineering | 66 / 647 | 10% |
+| B | Frontend Engineering | 98 / 647 | 15% |
 | C | Java & Backend Engineering | 18 / 329 | 5% |
 | D | LLD, System Design & Distributed Systems | 25 / 111 | 23% |
 | E | Applied AI Engineering | 15 / 77 | 19% |
-| | **All tracks** | **249 / 1289** | **19%** |
+| | **All tracks** | **281 / 1289** | **22%** |
 
 Legend: ✅ lesson written · ◐ condensed notes only · ○ generic template only · ✗ no content
 
@@ -292,43 +292,43 @@ Legend: ✅ lesson written · ◐ condensed notes only · ○ generic template o
 - [x] `b1-bitwise-operators` Bitwise Operators — ✅ lesson (3665 words)
 - [x] `b1-in-delete-void` in, delete, void, instanceof — ✅ lesson (3924 words)
 
-#### B1.6 · Control Flow — 5/6
+#### B1.6 · Control Flow — 6/6
 
 - [x] `b1-if-else` if / else / else if — ✅ lesson (4079 words)
-- [x] `b1-switch` switch — ✅ lesson (3477 words)
+- [x] `b1-switch` switch — ✅ lesson (3479 words)
 - [x] `b1-for-loops` for / while / do...while — ✅ lesson (4101 words)
 - [x] `b1-for-of-in` for...of vs for...in — ✅ lesson (3696 words)
-- [x] `b1-break-continue` break / continue — ✅ lesson (3748 words) · nested 1/1
-- [ ] `b1-nested-control-flow` Nested Control Flow — ◐ condensed notes
+- [x] `b1-break-continue` break / continue — ✅ lesson (3800 words) · nested 1/1
+- [x] `b1-nested-control-flow` Nested Control Flow — ✅ lesson (5589 words)
 
-#### B1.7 · Strings — 0/5
+#### B1.7 · Strings — 5/5
 
-- [ ] `b1-string-creation` String Creation & Immutability — ◐ condensed notes · nested 0/1
-- [ ] `b1-string-methods` Core String Methods — ◐ condensed notes · nested 0/3
-- [ ] `b1-template-literals` Template Literals — ◐ condensed notes · nested 0/3
-- [ ] `b1-tagged-templates` Tagged Template Literals — ◐ condensed notes
-- [ ] `b1-unicode-strings` Unicode / UTF-16 Basics — ◐ condensed notes
+- [x] `b1-string-creation` String Creation & Immutability — ✅ lesson (5209 words) · nested 1/1
+- [x] `b1-string-methods` Core String Methods — ✅ lesson (5357 words) · nested 3/3
+- [x] `b1-template-literals` Template Literals — ✅ lesson (4910 words) · nested 3/3
+- [x] `b1-tagged-templates` Tagged Template Literals — ✅ lesson (3210 words)
+- [x] `b1-unicode-strings` Unicode / UTF-16 Basics — ✅ lesson (3875 words)
 
-#### B1.8 · Numbers & Math — 0/4
+#### B1.8 · Numbers & Math — 4/4
 
-- [ ] `b1-number-representation` Number Representation — ◐ condensed notes · nested 0/2
-- [ ] `b1-number-methods` Number Methods & Parsing — ◐ condensed notes
-- [ ] `b1-math` Math — ◐ condensed notes · nested 0/2
-- [ ] `b1-bigint` BigInt — ◐ condensed notes
+- [x] `b1-number-representation` Number Representation — ✅ lesson (6028 words) · nested 2/2
+- [x] `b1-number-methods` Number Methods & Parsing — ✅ lesson (3902 words)
+- [x] `b1-math` Math — ✅ lesson (5819 words) · nested 2/2
+- [x] `b1-bigint` BigInt — ✅ lesson (3960 words)
 
-#### B1.9 · Functions — 0/11
+#### B1.9 · Functions — 11/11
 
-- [ ] `b1-function-declaration` Function Declaration — ◐ condensed notes
-- [ ] `b1-function-expression` Function Expression — ◐ condensed notes · nested 0/2
-- [ ] `b1-arrow-functions` Arrow Functions — ◐ condensed notes · nested 0/1
-- [ ] `b1-parameters` Parameters, Defaults, Rest, arguments — ◐ condensed notes
-- [ ] `b1-first-class-functions` First-Class / Higher-Order Functions — ◐ condensed notes · nested 0/1
-- [ ] `b1-pure-functions` Pure vs Impure Functions — ◐ condensed notes · nested 0/1
-- [ ] `b1-iife` IIFE — ◐ condensed notes
-- [ ] `b1-function-hoisting` Function Hoisting vs Expression — ◐ condensed notes
-- [ ] `b1-recursion-js` Recursion — ◐ condensed notes
-- [ ] `b1-currying` Currying & Partial Application — ◐ condensed notes · nested 0/1
-- [ ] `b1-memoization` Memoization — ◐ condensed notes
+- [x] `b1-function-declaration` Function Declaration — ✅ lesson (3877 words)
+- [x] `b1-function-expression` Function Expression — ✅ lesson (3735 words) · nested 2/2
+- [x] `b1-arrow-functions` Arrow Functions — ✅ lesson (3531 words) · nested 1/1
+- [x] `b1-parameters` Parameters, Defaults, Rest, arguments — ✅ lesson (3575 words)
+- [x] `b1-first-class-functions` First-Class / Higher-Order Functions — ✅ lesson (3700 words) · nested 1/1
+- [x] `b1-pure-functions` Pure vs Impure Functions — ✅ lesson (3813 words) · nested 1/1
+- [x] `b1-iife` IIFE — ✅ lesson (4353 words)
+- [x] `b1-function-hoisting` Function Hoisting vs Expression — ✅ lesson (3819 words)
+- [x] `b1-recursion-js` Recursion — ✅ lesson (4446 words)
+- [x] `b1-currying` Currying & Partial Application — ✅ lesson (4251 words) · nested 1/1
+- [x] `b1-memoization` Memoization — ✅ lesson (4610 words)
 
 #### B1.10 · Scope & Lexical Environments — 3/3
 
@@ -349,41 +349,41 @@ Legend: ✅ lesson written · ◐ condensed notes only · ○ generic template o
 - [x] `b1-closure-memory` Closure Memory Implications — ✅ lesson (3466 words)
 - [x] `b1-closure-puzzles` Closure Interview Puzzles — ✅ lesson (2615 words)
 
-#### B1.13 · Objects — 0/3
+#### B1.13 · Objects — 3/3
 
-- [ ] `b1-object-literals` Object Literals — ◐ condensed notes · nested 0/3
-- [ ] `b1-object-apis` Object APIs — ◐ condensed notes · nested 0/4
-- [ ] `b1-copying-objects` Shallow vs Deep Copy — ◐ condensed notes · nested 0/2
+- [x] `b1-object-literals` Object Literals — ✅ lesson (5890 words) · nested 3/3
+- [x] `b1-object-apis` Object APIs — ✅ lesson (6036 words) · nested 4/4
+- [x] `b1-copying-objects` Shallow vs Deep Copy — ✅ lesson (4648 words) · nested 2/2
 
-#### B1.14 · Object Property Model — 0/3
+#### B1.14 · Object Property Model — 3/3
 
-- [ ] `b1-own-vs-inherited` Own vs Inherited Properties — ◐ condensed notes · nested 0/1
-- [ ] `b1-property-descriptors` Property Descriptors — ◐ condensed notes · nested 0/2
-- [ ] `b1-getters-setters` Getters & Setters — ◐ condensed notes
+- [x] `b1-own-vs-inherited` Own vs Inherited Properties — ✅ lesson (5579 words) · nested 1/1
+- [x] `b1-property-descriptors` Property Descriptors — ✅ lesson (5493 words) · nested 2/2
+- [x] `b1-getters-setters` Getters & Setters — ✅ lesson (4314 words)
 
-#### B1.15 · this, call, apply, bind — 0/2
+#### B1.15 · this, call, apply, bind — 2/2
 
-- [ ] `b1-this` this — ◐ condensed notes · nested 0/6
-- [ ] `b1-call` call, apply, bind — ◐ condensed notes · nested 0/3
+- [x] `b1-this` this — ✅ lesson (6522 words) · nested 6/6
+- [x] `b1-call` call, apply, bind — ✅ lesson (5021 words) · nested 3/3
 
-#### B1.16 · Prototypes & Prototype Chain — 0/5
+#### B1.16 · Prototypes & Prototype Chain — 1/5
 
-- [ ] `b1-prototypes` Prototypes — ◐ condensed notes · nested 0/1
+- [x] `b1-prototypes` Prototypes — ✅ lesson (5099 words) · nested 1/1
 - [ ] `b1-prototype-chain` Prototype Chain — ◐ condensed notes · nested 0/1
 - [ ] `b1-constructor-functions` Constructor Functions — ◐ condensed notes · nested 0/2
 - [ ] `b1-object-create` Object.create — ◐ condensed notes
 - [ ] `b1-prototype-pollution` Prototype Pollution (Concept) — ◐ condensed notes
 
-#### B1.17 · Classes & OOP — 0/4
+#### B1.17 · Classes & OOP — 1/4
 
-- [ ] `b1-classes` Classes — ◐ condensed notes · nested 0/3
+- [x] `b1-classes` Classes — ✅ lesson (6577 words) · nested 3/3
 - [ ] `b1-class-inheritance` extends / super / Inheritance — ◐ condensed notes · nested 0/1
 - [ ] `b1-js-oop-principles` Encapsulation, Polymorphism, Composition — ◐ condensed notes
 - [ ] `b1-classes-vs-factories` Classes vs Factories vs Constructors — ◐ condensed notes
 
-#### B1.18 · Arrays — 0/7
+#### B1.18 · Arrays — 1/7
 
-- [ ] `b1-array-basics` Array Creation, Indexing, Length — ◐ condensed notes · nested 0/1
+- [x] `b1-array-basics` Array Creation, Indexing, Length — ✅ lesson (4981 words) · nested 1/1
 - [ ] `b1-array-mutation` Mutating vs Non-Mutating Methods — ◐ condensed notes · nested 0/2
 - [ ] `b1-array-search` Searching Arrays — ◐ condensed notes · nested 0/2
 - [ ] `b1-array-map-filter-reduce` map / filter / reduce — ◐ condensed notes · nested 0/2

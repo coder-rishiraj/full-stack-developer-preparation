@@ -1,5 +1,5 @@
 ---
-summary: '`call`, `apply` and `bind` let you choose the value of `this` for a function instead of leaving it to the call site. You will learn what each one does, how they differ (run now with a list, run now with an array, or return a new function for later), how to use them to borrow methods and keep callbacks attached to their objects, and how they work well enough to implement them yourself.'
+summary: The methods `call`, `apply` and `bind` let you choose the value of `this` for a function instead of leaving it to the call site. You will learn what each one does, how they differ (run now with a list, run now with an array, or return a new function for later), how to use them to borrow methods and keep callbacks attached to their objects, and how they work well enough to implement them yourself.
 difficulty: intermediate
 minutes: 50
 objectives:
@@ -59,7 +59,7 @@ function greet(greeting, punctuation) {
 const ada = { name: 'Ada' };
 const grace = { name: 'Grace' };
 
-console.log(greet.call(ada, 'Hello', '!'));
+console.log(greet.call(ada, 'Hello', '.'));
 console.log(greet.call(grace, 'Welcome', '.'));
 
 const result = greet.call(ada, 'Hi', '?');
@@ -67,12 +67,12 @@ console.log(typeof result);
 ```
 
 ```output
-Hello, Ada!
+Hello, Ada.
 Welcome, Grace.
 string
 ```
 
-`greet` is not a property of `ada` or `grace`, yet each call runs it with the chosen object as `this`. The return value of `call` is simply the return value of the function — `call` does not wrap or change it. And nothing is modified: neither object gains a `greet` property, and `greet` itself is unchanged.
+`greet` is not a property of `ada` or `grace`, yet each call runs it with the chosen object as `this`. The return value of `call` is the return value of the function: `call` does not wrap or change it. And nothing is modified: neither object gains a `greet` property, and `greet` itself is unchanged.
 
 ### What `thisArg` becomes
 
@@ -127,15 +127,15 @@ function introduce(greeting, punctuation) {
 }
 
 const ada = { name: 'Ada' };
-const args = ['Hello', '!'];
+const args = ['Hello', '.'];
 
 console.log(introduce.apply(ada, args));
 console.log(introduce.call(ada, ...args));   // the modern equivalent
 ```
 
 ```output
-Hello, I am Ada!
-Hello, I am Ada!
+Hello, I am Ada.
+Hello, I am Ada.
 ```
 
 ### Why `apply` existed
@@ -156,7 +156,7 @@ console.log(Math.max.apply(null, []));      // no arguments at all
 -Infinity
 ```
 
-`Math.max` ignores `this`, so `null` is just a placeholder. With an empty array it receives no arguments and returns `-Infinity`, the same as `Math.max()` — worth knowing, because code that expects a number from an empty list gets a surprising value.
+`Math.max` ignores `this`, so `null` is only a placeholder. With an empty array it receives no arguments and returns `-Infinity`, the same as `Math.max()` — worth knowing, because code that expects a number from an empty list gets a surprising value.
 
 Today, spread does the unpacking: `fn(...args)` when `this` does not matter, `fn.call(thisArg, ...args)` when it does. `apply` remains common in older code, in polyfills and in interview questions, and it is still the shortest way to forward the `arguments` object.
 
@@ -529,7 +529,7 @@ function intro(greeting, punctuation) {
 }
 const ada = { name: 'Ada' };
 
-console.log(intro.myCall(ada, 'Hello', '!'));
+console.log(intro.myCall(ada, 'Hello', '.'));
 console.log(intro.myApply(ada, ['Hi', '.']));
 const hey = intro.myBind(ada, 'Hey');
 console.log(hey('?'), hey.call({ name: 'Grace' }, '?'));
@@ -540,7 +540,7 @@ console.log(new OnYAxis(5), Object.keys(ada));
 ```
 
 ```output
-Hello, Ada!
+Hello, Ada.
 Hi, Ada.
 Hey, Ada? Hey, Ada?
 Point { x: 0, y: 5 } [ 'name' ]

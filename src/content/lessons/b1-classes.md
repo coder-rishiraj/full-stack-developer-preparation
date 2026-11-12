@@ -474,8 +474,7 @@ console.log(p, p instanceof Product);
 ```
 
 ```output
-Product { sku: 'A1' }
-true
+Product { sku: 'A1' } true
 ```
 
 ### Static fields and static blocks
@@ -905,8 +904,7 @@ try {
 ```output
 4 1950
 {"lines":[{"sku":"PEN-1","name":"Pen","unitPrice":250,"quantity":3},{"sku":"NB-9","name":"Notebook","unitPrice":1200,"quantity":1}]}
-2 750
-true
+3 750 true
 RangeError: invalid quantity: 0
 ```
 

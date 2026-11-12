@@ -138,7 +138,7 @@ The last call shows that the rule follows the function being called. `strictCall
 
 ### Why sloppy mode uses the global object
 
-Early JavaScript wanted plain calls to "just work" inside browser pages, where nearly everything lived on `window`. Falling back to the global object meant a function that used `this` would at least find *something*. The cost was that mistakes became silent. The classic case is a **constructor function** — a function meant to be called with `new` (see [[b1-this-new]]) — called without it:
+Early JavaScript wanted plain calls to work without ceremony inside browser pages, where nearly everything lived on `window`. Falling back to the global object meant a function that used `this` would at least find *something*. The cost was that mistakes became silent. The classic case is a **constructor function** — a function meant to be called with `new` (see [[b1-this-new]]) — called without it:
 
 ```javascript title="forgotten-new.cjs"
 function Counter() {
@@ -316,7 +316,7 @@ function intro(greeting, punctuation) {
 
 const ada = { name: 'Ada' };
 
-console.log(intro.call(ada, 'Hello', '!'));
+console.log(intro.call(ada, 'Hello', '.'));
 console.log(intro.apply(ada, ['Hi', '.']));
 
 const introAda = intro.bind(ada, 'Hey');
@@ -325,7 +325,7 @@ console.log(introAda.call({ name: 'Grace' }, '?'));   // bound this wins
 ```
 
 ```output
-Hello, I am Ada!
+Hello, I am Ada.
 Hi, I am Ada.
 Hey, I am Ada?
 Hey, I am Ada?
@@ -603,7 +603,7 @@ Each API decides how to call your function, so a lost method sees different thin
 | `setTimeout(fn)` in browsers | `window`, per the HTML specification |
 | `setTimeout(fn)` in Node.js | Node's internal `Timeout` object |
 
-The event-listener row produces a subtler bug than a crash. `this` is a real object — just the wrong one. Node.js implements the same `EventTarget` interface as the browser, so this example runs in Node and behaves like a DOM button (it was not run in a browser):
+The event-listener row produces a subtler bug than a crash. `this` is a real object, but the wrong one. Node.js implements the same `EventTarget` interface as the browser, so this example runs in Node and behaves like a DOM button (it was not run in a browser):
 
 ```javascript title="listener-this.mjs"
 const button = new EventTarget();          // stands in for a DOM element
