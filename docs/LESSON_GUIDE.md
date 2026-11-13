@@ -66,7 +66,7 @@ Prose…
 | `[[a3-binary-search]]` | Link to a topic (shows its title) |
 | `[[a3-binary-search\|binary search]]` | Link with custom text |
 | `[MDN](https://developer.mozilla.org/…)` | External link |
-| `> [!NOTE] Optional title` + `> body` | Callout. Variants: `NOTE`, `TIP`, `IMPORTANT`, `WARNING`, `MISTAKE`, `INTERVIEW` |
+| `> [!NOTE] Optional title` + `> body` | Callout. Variants: `NOTE`, `TIP`, `IMPORTANT`, `WARNING`, `MISTAKE`, `INTERVIEW`. `HINT` renders collapsed until opened (used for practice hints on problem pages) |
 | ` ```java title="Main.java" ` | Code block — language is required |
 | ` ```output ` directly after a code block | The program's output, shown under the code |
 | ` ```mermaid ` | Diagram (flowchart, sequenceDiagram, stateDiagram-v2, classDiagram, erDiagram, gantt) |

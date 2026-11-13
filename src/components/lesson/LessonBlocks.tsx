@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useId, useState, type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { getTopicMeta } from '@/content/taxonomy'
+import { getProblem } from '@/content/problems'
 import type { CalloutVariant, Inline, MdBlock } from '@/lib/lesson-markdown'
 import { useUserStore } from '@/stores/user-store'
 import { isDarkTheme } from '@/lib/appearance'
@@ -76,6 +77,15 @@ function InlineNode({ node }: { node: Inline }): ReactNode {
     }
     case 'topic': {
       const meta = getTopicMeta(node.id)
+      // `[[id]]` also links DSA problems, e.g. `[[nc-3sum|3Sum]]` → /dsa/nc-3sum.
+      const problem = meta ? undefined : getProblem(node.id)
+      if (problem) {
+        return (
+          <Link to={`/dsa/${problem.id}${node.anchor ? `#${node.anchor}` : ''}`} title={`Problem: ${problem.name}`}>
+            {node.label ?? problem.name}
+          </Link>
+        )
+      }
       const label = node.label ?? meta?.title ?? node.id
       if (!meta) {
         return (
@@ -100,6 +110,7 @@ const CALLOUT_LABEL: Record<CalloutVariant, string> = {
   warning: 'Warning',
   mistake: 'Common mistake',
   interview: 'Interview insight',
+  hint: 'Hint',
 }
 
 const CALLOUT_ICON: Record<CalloutVariant, string> = {
@@ -109,6 +120,7 @@ const CALLOUT_ICON: Record<CalloutVariant, string> = {
   warning: '⚠',
   mistake: '✕',
   interview: '◆',
+  hint: '?',
 }
 
 export function LessonBlocks({ blocks }: { blocks: MdBlock[] }) {
@@ -174,6 +186,19 @@ function BlockView({ block }: { block: MdBlock }): ReactNode {
     case 'mermaid':
       return <ThemedMermaid diagram={block.diagram} caption={block.caption} />
     case 'callout':
+      // A hint stays closed until the reader chooses to open it.
+      if (block.variant === 'hint') {
+        return (
+          <details className="cd-callout cd-hint" data-variant="hint">
+            <summary className="cd-callout-label">
+              <span aria-hidden>{CALLOUT_ICON.hint}</span>
+              <span className="cd-callout-title">{block.title ? <InlineView nodes={block.title} /> : CALLOUT_LABEL.hint}</span>
+              <span className="cd-hint-cue" />
+            </summary>
+            <LessonBlocks blocks={block.blocks} />
+          </details>
+        )
+      }
       return (
         <aside className="cd-callout" data-variant={block.variant} role="note">
           <div className="cd-callout-label">

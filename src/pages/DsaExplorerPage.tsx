@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { TOPICS, getTopicMeta } from '@/content/taxonomy'
 import { hasLesson } from '@/content/lessons'
+import { hasProblemPage } from '@/content/problem-pages'
 import { PROBLEMS, filterProblems, getProblemCategories } from '@/content/problems'
 import { DsaStatusBadge, PriorityBadge } from '@/components/ui/Badge'
 import { ProgressBar } from '@/components/ui/Progress'
@@ -20,6 +21,13 @@ const STATUS_LABEL: Record<DsaStatus, string> = {
 const SOLVED = new Set<DsaStatus>(['solved_independently', 'solved_with_hint', 'mastered'])
 const TOPIC_ORDER = new Map(TOPICS.map((t, i) => [t.id, i]))
 import { useUserStore } from '@/stores/user-store'
+
+/** Marks problems that have a written interview walkthrough on their page. */
+function WalkthroughMark() {
+  return (
+    <span className="ml-1.5 text-[10.5px] font-semibold uppercase text-[var(--accent)]">walkthrough</span>
+  )
+}
 
 function formatCategory(slug: string) {
   return slug.replace(/-/g, ' ')
@@ -218,6 +226,7 @@ export function DsaExplorerPage() {
                     <Link className="font-medium text-[var(--accent)] hover:underline" to={`/dsa/${p.id}`}>
                       {p.name}
                     </Link>
+                    {hasProblemPage(p.id) && <WalkthroughMark />}
                   </td>
                   <td className="px-3 py-2 text-[var(--text-muted)]">{p.source === 'cses' ? 'CSES' : 'NeetCode'}</td>
                   <td className="px-3 py-2 text-[var(--text-muted)]">
@@ -308,6 +317,7 @@ function GroupedProblems({
                   <li key={p.id} className="flex flex-wrap items-center gap-x-3 gap-y-1 px-4 py-2 text-sm">
                     <Link className="min-w-0 flex-1 font-medium text-[var(--text)] hover:text-[var(--accent)]" to={`/dsa/${p.id}`}>
                       {p.name}
+                      {hasProblemPage(p.id) && <WalkthroughMark />}
                     </Link>
                     <span className="text-xs text-[var(--text-faint)]">{p.source === 'cses' ? 'CSES' : 'NeetCode'}</span>
                     <span className={`w-16 text-xs capitalize ${p.difficulty === 'hard' ? 'text-[var(--danger)]' : p.difficulty === 'medium' ? 'text-[var(--warning)]' : p.difficulty === 'easy' ? 'text-[var(--success)]' : 'text-[var(--text-faint)]'}`}>

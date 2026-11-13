@@ -13,12 +13,13 @@
  *   Diagrams          ```mermaid
  *   Quiz              ```quiz  (Q: / - [ ] / - [x] / > explanation)
  *   Callouts          > [!NOTE] Title   (NOTE TIP IMPORTANT WARNING MISTAKE INTERVIEW)
+ *                     > [!HINT] Title   — collapsed until the reader opens it
  *   Tables            GFM pipe tables
  *   Lists             -, *, 1. with nesting by indentation
  *   Inline            **bold** *italic* `code` [text](url) [[topic-id]] [[topic-id|label]]
  */
 
-export type CalloutVariant = 'note' | 'tip' | 'important' | 'warning' | 'mistake' | 'interview'
+export type CalloutVariant = 'note' | 'tip' | 'important' | 'warning' | 'mistake' | 'interview' | 'hint'
 
 export const CALLOUT_VARIANTS: CalloutVariant[] = [
   'note',
@@ -27,6 +28,7 @@ export const CALLOUT_VARIANTS: CalloutVariant[] = [
   'warning',
   'mistake',
   'interview',
+  'hint',
 ]
 
 export type Inline =

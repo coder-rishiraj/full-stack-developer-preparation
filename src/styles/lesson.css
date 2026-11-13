@@ -369,6 +369,32 @@
 .cd-callout[data-variant='interview'] {
   --c: var(--callout-interview);
 }
+.cd-callout[data-variant='hint'] {
+  --c: var(--callout-tip);
+}
+
+/* Hints are collapsed callouts: the summary is the label row. */
+.cd-hint > summary {
+  cursor: pointer;
+  list-style: none;
+}
+.cd-hint > summary::-webkit-details-marker {
+  display: none;
+}
+.cd-hint-cue {
+  margin-left: auto;
+  font-weight: 500;
+  color: var(--text-faint);
+}
+.cd-hint-cue::after {
+  content: 'Show hint';
+}
+.cd-hint[open] .cd-hint-cue::after {
+  content: 'Hide';
+}
+.cd-hint:not([open]) {
+  padding-bottom: 0.75rem;
+}
 
 /* Diagrams */
 .cd-figure {
@@ -434,6 +460,9 @@
     color: #111;
   }
   .cd-code,
+  .cd-hint-cue {
+    display: none;
+  }
   .cd-callout,
   .cd-table-wrap,
   .cd-figure {
