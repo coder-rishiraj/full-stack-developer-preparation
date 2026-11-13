@@ -2495,12 +2495,77 @@
   "words": 3265,
   "concepts": []
  },
+ "b2-abstract-classes": {
+  "summary": "An abstract class is a base class that cannot be instantiated on its own; it shares real code with its subclasses while forcing each one to supply the pieces it leaves abstract. You will learn how TypeScript checks abstract members, how subclasses override methods safely with `override` and `super`, what survives into the emitted JavaScript, and when an interface or plain functions are the better tool.",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 3167,
+  "concepts": [
+   "b2-method-overriding"
+  ]
+ },
  "b2-as-const-objects": {
   "summary": "Adding `as const` to an object literal tells TypeScript to keep every value's exact literal type and to make every property readonly, at every level. You will learn why TypeScript normally widens `\"/about\"` to `string`, how `as const` stops that, how to derive key and value unions from the object, how `satisfies` checks its shape without losing the literals, and why this pattern has become the standard replacement for enums.",
   "difficulty": "intermediate",
   "minutes": 45,
   "words": 3104,
   "concepts": []
+ },
+ "b2-as-const": {
+  "summary": "`as const` tells TypeScript to infer the narrowest possible type for a literal: exact literal values, readonly properties and readonly tuples instead of arrays. You will learn why TypeScript widens types by default, what `as const` changes, how to derive union types from constant data, and how it works with `satisfies` and `const` type parameters.",
+  "difficulty": "intermediate",
+  "minutes": 35,
+  "words": 2433,
+  "concepts": []
+ },
+ "b2-async-return-infer": {
+  "summary": "Calling `ReturnType` on an async function gives you a `Promise<...>`, not the data inside it. You will learn how to get the resolved value type with `Awaited<ReturnType<typeof fn>>`, how `Awaited` is built from `infer`, how to write the older hand-rolled version, and how to use the pattern to type wrappers, API clients and data hooks without duplicating types.",
+  "difficulty": "intermediate",
+  "minutes": 40,
+  "words": 2368,
+  "concepts": []
+ },
+ "b2-change-handlers-pattern": {
+  "summary": "The ChangeHandlers pattern derives one correctly typed `onXxxChange` callback per field from a form's state type — `onEmailChange(value: string)`, `onAgeChange(value: number)` — using a mapped type, key remapping and a template literal type. You will learn to build it, adapt it for optional, read-only and skipped fields, implement it at runtime, use it in React props, and compare it with a single `onChange(field, value)`.",
+  "difficulty": "advanced",
+  "minutes": 40,
+  "words": 2419,
+  "concepts": []
+ },
+ "b2-classes-ts": {
+  "summary": "TypeScript classes are JavaScript classes with typed fields, constructors and methods, plus compile-time checks for initialisation, access and inheritance. You will learn how a class declares both a value and a type, how field initialisation is checked, how extends, override and super work, and the exact order in which a derived object is built.",
+  "difficulty": "intermediate",
+  "minutes": 60,
+  "words": 4612,
+  "concepts": [
+   "b2-class-inheritance",
+   "b2-super-constructor"
+  ]
+ },
+ "b2-conditional-types": {
+  "summary": "A conditional type picks one of two types by asking whether one type is assignable to another — `T extends U ? X : Y`. You will learn how the compiler evaluates that check, why it splits unions apart (distribution) and how to stop it, and how the built-in utilities `Exclude`, `Extract` and `NonNullable` are built from it.",
+  "difficulty": "advanced",
+  "minutes": 45,
+  "words": 3316,
+  "concepts": []
+ },
+ "b2-declaration-merging": {
+  "summary": "Declaration merging is TypeScript's rule for combining several declarations that share a name into one entity — interfaces merging their members, namespaces adding properties to functions, classes and enums, and module and global augmentations extending types you do not own. You will learn which declarations can merge, how conflicts and overloads are resolved, and how to safely extend library and global types such as Express's `Request` or `Window`.",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 3291,
+  "concepts": [
+   "b2-module-augmentation"
+  ]
+ },
+ "b2-discriminated-unions": {
+  "summary": "A discriminated union is a union of object types that share one literal-typed \"tag\" property, such as kind or type. You will learn how the tag lets TypeScript work out exactly which variant you hold, how to make impossible states unrepresentable, and how to make the compiler tell you whenever a case is left unhandled.",
+  "difficulty": "intermediate",
+  "minutes": 55,
+  "words": 4346,
+  "concepts": [
+   "b2-exhaustiveness-assertnever"
+  ]
  },
  "b2-enums": {
   "summary": "An enum gives a name to each value in a fixed set of constants — order statuses, directions, log levels — and creates both a type and a real JavaScript object. You will learn how numeric and string enums are written, exactly what JavaScript they compile to, how the type checker treats them, and the pitfalls (reverse mappings, const enums, modern build tools) that shape when teams use them.",
@@ -2516,6 +2581,65 @@
   "difficulty": "beginner",
   "minutes": 35,
   "words": 2664,
+  "concepts": []
+ },
+ "b2-function-overloading": {
+  "summary": "Function overloads let one JavaScript function present several distinct, precisely typed call shapes to its callers — for example returning a single item for an id and a list for no argument. You will learn how overload signatures and the implementation signature fit together, how TypeScript picks an overload, where overloads are unsafe, and when a union or generic is the better tool.",
+  "difficulty": "intermediate",
+  "minutes": 40,
+  "words": 3134,
+  "concepts": []
+ },
+ "b2-function-variance": {
+  "summary": "Variance answers a precise question — when can a function of one type be used where a function of another type is expected? You will learn why return types are covariant, why parameter types are contravariant under strictFunctionTypes, where TypeScript deliberately stays unsound (methods and mutable arrays), and how variance extends to generic types.",
+  "difficulty": "advanced",
+  "minutes": 40,
+  "words": 3176,
+  "concepts": []
+ },
+ "b2-generic-constraints": {
+  "summary": "A generic constraint, written `T extends Something`, limits which types a type parameter accepts so that generic code can safely use the members that every allowed type has. You will learn how constraints unlock property access while keeping the caller's specific type, how `K extends keyof T` gives typed property keys, and the errors and traps constraints create.",
+  "difficulty": "intermediate",
+  "minutes": 45,
+  "words": 3512,
+  "concepts": []
+ },
+ "b2-generics": {
+  "summary": "Generics let one function, interface, type alias or class work with many types while keeping the link between what goes in and what comes out. You will learn how type parameters are declared and inferred, why they beat `any` and `unknown` for reusable code, how generic classes and default type parameters work, and why none of it exists at runtime.",
+  "difficulty": "intermediate",
+  "minutes": 55,
+  "words": 5261,
+  "concepts": [
+   "b2-generic-classes",
+   "b2-default-type-parameters"
+  ]
+ },
+ "b2-implements-vs-extends": {
+  "summary": "`extends` makes a class inherit another class's code and builds a real prototype chain; `implements` only asks the compiler to check that a class matches a contract. You will learn exactly what each keyword does at compile time and at runtime, how to combine them, the surprising things `implements` does not do, and how to choose between them when designing types.",
+  "difficulty": "intermediate",
+  "minutes": 40,
+  "words": 2399,
+  "concepts": []
+ },
+ "b2-index-signatures": {
+  "summary": "An index signature describes an object whose keys are not known when you write the code, such as a word counter or a cache keyed by id. You will learn the syntax, the rules TypeScript enforces on keys and values, why reads can be undefined at runtime, and which compiler options make dictionary code safer.",
+  "difficulty": "intermediate",
+  "minutes": 40,
+  "words": 2944,
+  "concepts": []
+ },
+ "b2-indexed-access": {
+  "summary": "An indexed access type `T[K]` looks up the type of property `K` on type `T`, the same way `obj[key]` looks up a value. You will learn how lookups work with literal keys, unions of keys, nested paths, arrays and tuples, optional properties and unions of objects, and how `T[K]` lets generic code return the exact type of the property it reads.",
+  "difficulty": "intermediate",
+  "minutes": 40,
+  "words": 2121,
+  "concepts": []
+ },
+ "b2-infer": {
+  "summary": "The `infer` keyword lets a conditional type capture part of the type it matched — a function's return type, an array's element type, the value inside a promise. You will learn where `infer` is allowed, how the compiler fills it in, how to rebuild `ReturnType` and `Parameters` from scratch, and the edge cases around overloads, generics and multiple matches.",
+  "difficulty": "advanced",
+  "minutes": 45,
+  "words": 2676,
   "concepts": []
  },
  "b2-interface-vs-type-when": {
@@ -2534,12 +2658,54 @@
    "b2-extending-interfaces"
   ]
  },
+ "b2-keyof-typeof-patterns": {
+  "summary": "Combining `as const`, `typeof`, `keyof` and indexed access lets one runtime object or array define both the values your program uses and the union types that check them. You will learn the standard idioms — key unions, value unions, element unions, enum-like constants, exhaustive lookup tables and typed handler maps — and the runtime checks that must accompany them.",
+  "difficulty": "intermediate",
+  "minutes": 40,
+  "words": 2307,
+  "concepts": []
+ },
+ "b2-keyof": {
+  "summary": "The `keyof` operator turns an object type into the union of its property names. You will learn exactly what `keyof` produces for ordinary objects, index signatures, arrays, unions and classes, and how `K extends keyof T` lets generic helpers accept only real property names while keeping each property's value type.",
+  "difficulty": "intermediate",
+  "minutes": 45,
+  "words": 3414,
+  "concepts": []
+ },
+ "b2-literal-types": {
+  "summary": "A literal type is a type with exactly one value, such as \"GET\", 404 or true. You will learn how unions of literals describe finite sets of allowed values, why TypeScript sometimes widens a literal to string or number, and how to keep the precise type when you need it.",
+  "difficulty": "beginner",
+  "minutes": 40,
+  "words": 3880,
+  "concepts": []
+ },
  "b2-literal-unions-vs-enums": {
   "summary": "TypeScript offers two main ways to model a fixed set of values — a union of literal types such as `\"idle\" | \"loading\" | \"done\"`, or an enum. You will compare them on what they compile to, how they accept data, how you list their values, how they refactor and how they work with modern tooling, and leave with a clear rule for choosing.",
   "difficulty": "intermediate",
   "minutes": 40,
   "words": 2762,
   "concepts": []
+ },
+ "b2-mapped-types": {
+  "summary": "A mapped type builds a new object type by looping over a set of keys — usually `keyof T` — and computing each property. You will learn the syntax, the `readonly` and `?` modifiers, how `Partial`, `Required`, `Readonly`, `Pick` and `Record` are built, what \"homomorphic\" mapping preserves, and how the `as` clause renames and filters keys.",
+  "difficulty": "advanced",
+  "minutes": 55,
+  "words": 3462,
+  "concepts": [
+   "b2-key-remapping"
+  ]
+ },
+ "b2-narrowing": {
+  "summary": "Narrowing is how TypeScript turns a broad type such as string | number | null, or unknown, into a precise one inside a branch of your code, by following the runtime checks you write. You will learn how control-flow analysis works, the built-in checks (equality, truthiness, typeof, instanceof, in), and how to write your own type guards and assertion functions safely.",
+  "difficulty": "intermediate",
+  "minutes": 60,
+  "words": 4851,
+  "concepts": [
+   "b2-typeof-narrowing",
+   "b2-instanceof-narrowing",
+   "b2-in-operator",
+   "b2-custom-type-guards"
+  ]
  },
  "b2-null-undefined-ts": {
   "summary": "JavaScript has two values for \"nothing here\" — null and undefined — and TypeScript gives each its own type. You will learn how they differ at runtime, how to model absence precisely with optional properties and unions, and how to handle possibly-missing values safely with narrowing, ?? and ?.",
@@ -2572,6 +2738,13 @@
   "words": 3197,
   "concepts": []
  },
+ "b2-parameter-properties": {
+  "summary": "A parameter property lets a constructor parameter declare and initialise a class field in one step, by putting a modifier such as `private` or `readonly` in front of it. You will learn exactly what code TypeScript generates for it, the initialisation-order trap it can cause, the places it is not allowed, and why some modern toolchains discourage it.",
+  "difficulty": "intermediate",
+  "minutes": 35,
+  "words": 2410,
+  "concepts": []
+ },
  "b2-primitive-object-types": {
   "summary": "TypeScript describes every JavaScript value as either a primitive (string, number, boolean, bigint, symbol, null, undefined) or an object. You will learn how each primitive type maps to real runtime values, why lowercase `string` and uppercase `String` are different things, and how the primitive/object split explains copying, comparison and mutation.",
   "difficulty": "beginner",
@@ -2583,11 +2756,48 @@
    "b2-type-boolean"
   ]
  },
+ "b2-public-private-protected": {
+  "summary": "TypeScript's `public`, `private` and `protected` modifiers decide which code may touch a class member, and `readonly` decides whether it may be reassigned. You will learn exactly what each modifier allows, why they vanish from the emitted JavaScript, when to reach for native `#private` fields instead, and how to use these tools to keep a class's invariants safe.",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 4007,
+  "concepts": [
+   "b2-readonly-class-members"
+  ]
+ },
  "b2-readonly-tuples": {
   "summary": "A readonly tuple is a fixed-shape array that the compiler will not let anyone change. You will learn how to write one, how as const produces deeply readonly literal tuples, how to derive union types from constant lists, and how to pass readonly tuples to functions without fighting the compiler.",
   "difficulty": "intermediate",
   "minutes": 35,
   "words": 3141,
+  "concepts": []
+ },
+ "b2-record-vs-index-signature": {
+  "summary": "`Record<K, V>` and index signatures both describe objects used as maps, but they answer different questions: is the set of keys fixed and known, or open and discovered at runtime? You will learn how `Record` is built, when it gives you exhaustiveness checking, when it is identical to an index signature, and how to choose between them.",
+  "difficulty": "intermediate",
+  "minutes": 35,
+  "words": 2556,
+  "concepts": []
+ },
+ "b2-remote-data-pattern": {
+  "summary": "RemoteData models the life of an asynchronous request — not asked yet, loading, succeeded or failed — as one discriminated union instead of a handful of booleans. You will learn how to define and consume it, how to move between states safely, and how to handle refetches and out-of-order responses.",
+  "difficulty": "intermediate",
+  "minutes": 45,
+  "words": 3693,
+  "concepts": []
+ },
+ "b2-satisfies": {
+  "summary": "The `satisfies` operator (TypeScript 4.9+) checks that a value matches a type without changing the type TypeScript infers for it. You will learn the problem it solves, how it differs from a type annotation and from `as`, how it combines with `as const`, and where it fits in real configuration and lookup-table code.",
+  "difficulty": "intermediate",
+  "minutes": 40,
+  "words": 2446,
+  "concepts": []
+ },
+ "b2-singleton-pattern": {
+  "summary": "The singleton pattern guarantees that a class has exactly one instance and gives the whole program one way to reach it. You will learn the classic TypeScript implementation with a private constructor, why ES modules are usually a simpler singleton, where \"only one\" quietly breaks — async initialisation, duplicated modules, server-side rendering — and why many teams prefer dependency injection.",
+  "difficulty": "intermediate",
+  "minutes": 35,
+  "words": 2595,
   "concepts": []
  },
  "b2-special-types": {
@@ -2607,6 +2817,20 @@
   "difficulty": "intermediate",
   "minutes": 40,
   "words": 3135,
+  "concepts": []
+ },
+ "b2-structural-typing": {
+  "summary": "TypeScript decides whether one type can be used as another by comparing their shapes, not their names. You will learn the assignability rules for objects, classes and functions, why extra properties are sometimes allowed and sometimes rejected, where TypeScript deliberately deviates from pure structural typing, and how branded types recover name-based safety when you need it.",
+  "difficulty": "intermediate",
+  "minutes": 45,
+  "words": 2644,
+  "concepts": []
+ },
+ "b2-template-literal-types": {
+  "summary": "Template literal types build string types the way template strings build string values — `` `on${Capitalize<E>}` `` turns `\"click\" | \"focus\"` into `\"onClick\" | \"onFocus\"`. You will learn how they combine unions, which types can be interpolated, the four built-in string helpers, how patterns such as `` `${number}px` `` check strings, and how `infer` parses strings at the type level.",
+  "difficulty": "advanced",
+  "minutes": 45,
+  "words": 2459,
   "concepts": []
  },
  "b2-ts-disadvantages": {
@@ -2665,6 +2889,16 @@
   "words": 2344,
   "concepts": []
  },
+ "b2-type-assertions": {
+  "summary": "Type assertions tell the compiler to treat a value as a type it cannot prove — and they do nothing at runtime. You will learn when `as` is legitimate and when it hides bugs, how `as const` freezes literal types for configuration and unions, and how the non-null assertion `!` differs from real null checks.",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 4127,
+  "concepts": [
+   "b2-as-const-assertion",
+   "b2-non-null-assertion"
+  ]
+ },
  "b2-type-inference": {
   "summary": "Type inference is the TypeScript compiler working out types you did not write, from initial values, return statements, surrounding context and control flow. You will learn the rules it follows — literal widening, best common type, contextual typing, return inference, generic inference — so you can predict what the compiler infers and spot where inference needs help.",
   "difficulty": "intermediate",
@@ -2682,6 +2916,23 @@
    "b2-array-inference"
   ]
  },
+ "b2-typed-functions": {
+  "summary": "A typed function states what it accepts and what it returns, and TypeScript checks every call and every implementation against that contract. You will learn to annotate parameters and return values, write function types, use optional, default and rest parameters, and type arrow functions — including the places where the compiler is more lenient than you might expect.",
+  "difficulty": "beginner",
+  "minutes": 55,
+  "words": 5788,
+  "concepts": [
+   "b2-optional-rest-parameters",
+   "b2-arrow-functions-ts"
+  ]
+ },
+ "b2-typeof": {
+  "summary": "In a type position, `typeof` asks the compiler for the type of an existing value — a variable, object, function or class — so you can derive types from code instead of writing them twice. You will learn how it differs from JavaScript's runtime `typeof`, what it captures for literals, objects, functions, classes and enums, and how it combines with `as const`, `ReturnType` and `InstanceType`.",
+  "difficulty": "intermediate",
+  "minutes": 40,
+  "words": 2455,
+  "concepts": []
+ },
  "b2-union-patterns": {
   "summary": "Unions and intersections become powerful when combined into a few standard patterns — state modelled as a discriminated union, exhaustive handling with `assertNever`, action unions for reducers, narrowing array filters, complete lookup tables, and props composed with intersections. You will learn each pattern, the bug it prevents, and how they fit together in a real UI state machine.",
   "difficulty": "intermediate",
@@ -2697,6 +2948,30 @@
   "concepts": [
    "b2-intersections"
   ]
+ },
+ "b2-utility-types": {
+  "summary": "Utility types are generic types built into TypeScript that derive new types from existing ones — making properties optional or required, selecting or removing keys, building dictionaries, and extracting the parameters, return value or resolved value of a function. You will learn what each common utility does, how it is defined, where it is used in real code and the traps in each.",
+  "difficulty": "intermediate",
+  "minutes": 60,
+  "words": 5067,
+  "concepts": [
+   "b2-partial",
+   "b2-required",
+   "b2-pick",
+   "b2-omit",
+   "b2-record-utility",
+   "b2-readonly-utility",
+   "b2-returntype",
+   "b2-parameters-type",
+   "b2-awaited"
+  ]
+ },
+ "b2-variant-map-satisfies": {
+  "summary": "A variant map is an object with one entry for every case of a union, such as a style for every button variant or a handler for every action type. You will learn how `satisfies` makes the compiler enforce that every case is present, how mapped types give each handler its own precisely typed argument, and how to dispatch through the map without casts.",
+  "difficulty": "advanced",
+  "minutes": 45,
+  "words": 2841,
+  "concepts": []
  },
  "b2-what-is-typescript": {
   "summary": "TypeScript is JavaScript with a static type system that is checked before the code runs and then erased. You will learn what that sentence really means, what the compiler does and does not do for you, and why the types vanish from the program that actually runs.",

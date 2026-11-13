@@ -10,11 +10,11 @@ them under an anchored heading.
 | Track | Name | Lessons | Done |
 |---|---|---|---|
 | A | DSA & Problem Solving | 125 / 125 | 100% |
-| B | Frontend Engineering | 206 / 647 | 32% |
+| B | Frontend Engineering | 240 / 647 | 37% |
 | C | Java & Backend Engineering | 18 / 329 | 5% |
 | D | LLD, System Design & Distributed Systems | 25 / 111 | 23% |
 | E | Applied AI Engineering | 15 / 77 | 19% |
-| | **All tracks** | **389 / 1289** | **30%** |
+| | **All tracks** | **423 / 1289** | **33%** |
 
 Legend: ✅ lesson written · ◐ condensed notes only · ○ generic template only · ✗ no content
 
@@ -599,84 +599,84 @@ Legend: ✅ lesson written · ◐ condensed notes only · ○ generic template o
 - [x] `b2-unions` Union Types — ✅ lesson (3579 words) · nested 1/1
 - [x] `b2-union-patterns` Union & Intersection Patterns — ✅ lesson (3196 words)
 
-#### B2.12 · Literal Types & Discriminated Unions — 0/3
+#### B2.12 · Literal Types & Discriminated Unions — 3/3
 
-- [ ] `b2-literal-types` Literal Types — ◐ condensed notes
-- [ ] `b2-discriminated-unions` Discriminated Unions — ◐ condensed notes · nested 0/1
-- [ ] `b2-remote-data-pattern` RemoteData Async State Pattern — ◐ condensed notes
+- [x] `b2-literal-types` Literal Types — ✅ lesson (3880 words)
+- [x] `b2-discriminated-unions` Discriminated Unions — ✅ lesson (4346 words) · nested 1/1
+- [x] `b2-remote-data-pattern` RemoteData Async State Pattern — ✅ lesson (3693 words)
 
-#### B2.13 · Type Narrowing & Type Guards — 0/1
+#### B2.13 · Type Narrowing & Type Guards — 1/1
 
-- [ ] `b2-narrowing` Type Narrowing — ◐ condensed notes · nested 0/4
+- [x] `b2-narrowing` Type Narrowing — ✅ lesson (4851 words) · nested 4/4
 
-#### B2.14 · Functions — 0/3
+#### B2.14 · Functions — 3/3
 
-- [ ] `b2-typed-functions` Typed Functions — ◐ condensed notes · nested 0/2
-- [ ] `b2-function-overloading` Function Overloading — ◐ condensed notes
-- [ ] `b2-function-variance` Function Type Variance — ◐ condensed notes
+- [x] `b2-typed-functions` Typed Functions — ✅ lesson (5788 words) · nested 2/2
+- [x] `b2-function-overloading` Function Overloading — ✅ lesson (3134 words)
+- [x] `b2-function-variance` Function Type Variance — ✅ lesson (3176 words)
 
-#### B2.15 · Casting & Assertions — 0/1
+#### B2.15 · Casting & Assertions — 1/1
 
-- [ ] `b2-type-assertions` Type Assertions (as) — ◐ condensed notes · nested 0/2
+- [x] `b2-type-assertions` Type Assertions (as) — ✅ lesson (4127 words) · nested 2/2
 
-#### B2.16 · Classes — 0/1
+#### B2.16 · Classes — 1/1
 
-- [ ] `b2-classes-ts` Classes — ◐ condensed notes · nested 0/2
+- [x] `b2-classes-ts` Classes — ✅ lesson (4612 words) · nested 2/2
 
-#### B2.17 · Access Modifiers & Encapsulation — 0/2
+#### B2.17 · Access Modifiers & Encapsulation — 2/2
 
-- [ ] `b2-public-private-protected` public / private / protected — ◐ condensed notes · nested 0/1
-- [ ] `b2-parameter-properties` Parameter Properties — ◐ condensed notes
+- [x] `b2-public-private-protected` public / private / protected — ✅ lesson (4007 words) · nested 1/1
+- [x] `b2-parameter-properties` Parameter Properties — ✅ lesson (2410 words)
 
-#### B2.18 · Abstract Classes & implements — 0/3
+#### B2.18 · Abstract Classes & implements — 3/3
 
-- [ ] `b2-abstract-classes` Abstract Classes — ◐ condensed notes · nested 0/1
-- [ ] `b2-implements-vs-extends` implements vs extends — ◐ condensed notes
-- [ ] `b2-singleton-pattern` Singleton Pattern — ◐ condensed notes
+- [x] `b2-abstract-classes` Abstract Classes — ✅ lesson (3167 words) · nested 1/1
+- [x] `b2-implements-vs-extends` implements vs extends — ✅ lesson (2399 words)
+- [x] `b2-singleton-pattern` Singleton Pattern — ✅ lesson (2595 words)
 
-#### B2.19 · Generics — 0/2
+#### B2.19 · Generics — 2/2
 
-- [ ] `b2-generics` Generics — ◐ condensed notes · nested 0/2
-- [ ] `b2-generic-constraints` Generic Constraints — ◐ condensed notes
+- [x] `b2-generics` Generics — ✅ lesson (5261 words) · nested 2/2
+- [x] `b2-generic-constraints` Generic Constraints — ✅ lesson (3512 words)
 
-#### B2.20 · Utility Types — 0/1
+#### B2.20 · Utility Types — 1/1
 
-- [ ] `b2-utility-types` Utility Types Overview — ◐ condensed notes · nested 0/9
+- [x] `b2-utility-types` Utility Types Overview — ✅ lesson (5067 words) · nested 9/9
 
-#### B2.21 · keyof, typeof & Indexed Access — 0/4
+#### B2.21 · keyof, typeof & Indexed Access — 4/4
 
-- [ ] `b2-keyof` keyof — ◐ condensed notes
-- [ ] `b2-typeof` typeof (type level) — ◐ condensed notes
-- [ ] `b2-indexed-access` Indexed Access Types — ◐ condensed notes
-- [ ] `b2-keyof-typeof-patterns` keyof + typeof Patterns — ◐ condensed notes
+- [x] `b2-keyof` keyof — ✅ lesson (3414 words)
+- [x] `b2-typeof` typeof (type level) — ✅ lesson (2455 words)
+- [x] `b2-indexed-access` Indexed Access Types — ✅ lesson (2121 words)
+- [x] `b2-keyof-typeof-patterns` keyof + typeof Patterns — ✅ lesson (2307 words)
 
-#### B2.22 · Structural Typing & Declaration Merging — 0/2
+#### B2.22 · Structural Typing & Declaration Merging — 2/2
 
-- [ ] `b2-structural-typing` Structural Typing — ◐ condensed notes
-- [ ] `b2-declaration-merging` Declaration Merging — ◐ condensed notes · nested 0/1
+- [x] `b2-structural-typing` Structural Typing — ✅ lesson (2644 words)
+- [x] `b2-declaration-merging` Declaration Merging — ✅ lesson (3291 words) · nested 1/1
 
-#### B2.23 · Index Signatures — 0/2
+#### B2.23 · Index Signatures — 2/2
 
-- [ ] `b2-index-signatures` Index Signatures — ◐ condensed notes
-- [ ] `b2-record-vs-index-signature` Record vs Index Signature — ◐ condensed notes
+- [x] `b2-index-signatures` Index Signatures — ✅ lesson (2944 words)
+- [x] `b2-record-vs-index-signature` Record vs Index Signature — ✅ lesson (2556 words)
 
-#### B2.24 · satisfies & as const — 0/3
+#### B2.24 · satisfies & as const — 3/3
 
-- [ ] `b2-satisfies` satisfies — ◐ condensed notes
-- [ ] `b2-as-const` as const — ◐ condensed notes
-- [ ] `b2-variant-map-satisfies` Variant Maps with satisfies — ◐ condensed notes
+- [x] `b2-satisfies` satisfies — ✅ lesson (2446 words)
+- [x] `b2-as-const` as const — ✅ lesson (2433 words)
+- [x] `b2-variant-map-satisfies` Variant Maps with satisfies — ✅ lesson (2841 words)
 
-#### B2.25 · Conditional Types & infer — 0/3
+#### B2.25 · Conditional Types & infer — 3/3
 
-- [ ] `b2-conditional-types` Conditional Types — ◐ condensed notes
-- [ ] `b2-infer` infer — ◐ condensed notes
-- [ ] `b2-async-return-infer` Async Return with infer / Awaited — ◐ condensed notes
+- [x] `b2-conditional-types` Conditional Types — ✅ lesson (3316 words)
+- [x] `b2-infer` infer — ✅ lesson (2676 words)
+- [x] `b2-async-return-infer` Async Return with infer / Awaited — ✅ lesson (2368 words)
 
-#### B2.26 · Mapped & Template Literal Types — 0/3
+#### B2.26 · Mapped & Template Literal Types — 3/3
 
-- [ ] `b2-mapped-types` Mapped Types — ◐ condensed notes · nested 0/1
-- [ ] `b2-template-literal-types` Template Literal Types — ◐ condensed notes
-- [ ] `b2-change-handlers-pattern` ChangeHandlers Pattern — ◐ condensed notes
+- [x] `b2-mapped-types` Mapped Types — ✅ lesson (3462 words) · nested 1/1
+- [x] `b2-template-literal-types` Template Literal Types — ✅ lesson (2459 words)
+- [x] `b2-change-handlers-pattern` ChangeHandlers Pattern — ✅ lesson (2419 words)
 
 #### B2.27 · Type-Safe API Design — 0/2
 
