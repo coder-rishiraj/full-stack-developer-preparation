@@ -10,18 +10,15 @@ One interview walkthrough per problem: `src/content/problem-pages/<problem-id>.m
 
 ## Status
 
-**Done: 1 / 650.** The sample page is approved as the template; no batch has started.
-
-## Sample
-
-- [x] `nc-two-sum` (NeetCode #4, arrays-hashing): reference page; all 4 approaches and the skeleton compile and pass `tests/nc-two-sum.java`
+**Done: 10 / 650.** NeetCode `arrays-hashing` `listOrder` 1–10 are written and verified.
 
 ## Next batch (not started)
 
-NeetCode `arrays-hashing`, `listOrder` 1–10, skipping `nc-two-sum`.
+NeetCode `arrays-hashing`, `listOrder` 11–20: `nc-sort-an-array`, `nc-sort-colors`, `nc-top-k-frequent-elements`, `nc-encode-and-decode-strings`, then the next six by `listOrder`.
 
 ## Done
 
-| Batch | Category | Problem ids | Commit |
+| Batch | Category | Problem ids | Notes |
 |---|---|---|---|
-| sample | arrays-hashing | `nc-two-sum` | not committed |
+| sample | arrays-hashing | `nc-two-sum` | Reference page |
+| 1 | arrays-hashing | `nc-concatenation-of-array`, `nc-contains-duplicate`, `nc-valid-anagram`, `nc-longest-common-prefix`, `nc-group-anagrams`, `nc-remove-element`, `nc-majority-element`, `nc-design-hashset`, `nc-design-hashmap` | Constraints checked against LeetCode; every approach compiled and tested |

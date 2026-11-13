@@ -89,6 +89,7 @@ The validator sets floors (two approaches, three hints, three challenges, three 
 - **Correctness:** for each approach, say why it returns only valid answers, why it cannot miss
   one, and the invariant if there is one. Plain arguments, not formal proofs. The recommended
   approach also gets a 20–30 second spoken version.
+- **No "obviously" or "clearly".** Give the reason instead ("correct by inspection, since it checks every pair").
 - **The recommended solution is the best interview answer,** which is not always the most
   advanced one. Weigh time, space, simplicity and implementation risk.
 
@@ -119,7 +120,8 @@ These came out of review. They apply to every page.
 Run for every page, and for **every approach on it**, not only the recommended one.
 
 1. **Every solution compiles.** Each `### Approach N` has a ```` ```java ```` block declaring
-   `class Solution`, complete with imports. `problems:verify` compiles each one separately with
+   `class Solution` (or the class the problem asks for, such as `class MyHashSet`), complete with
+   imports. Each block is compiled on its own, so never rely on a class from another block. `problems:verify` compiles each one separately with
    `-Xlint:all -Werror`. Mark a code skeleton with `fragment="<method signature>"` on its fence so
    that it is compiled and tested too.
 2. **Every solution passes the tests.** `tests/<id>.java` declares `class Tests` with a `main`

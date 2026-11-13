@@ -499,7 +499,7 @@ n = length of `nums`. "Expected" means averaged over the behaviour of the hash f
 
 | Approach | Pros | Cons | When to pick it |
 |---|---|---|---|
-| 1. Brute force | Obviously correct; no extra memory; two minutes to write | Quadratic | As the stated baseline, or when n is tiny and memory is the hard limit |
+| 1. Brute force | Correct by inspection, since it checks every pair; no extra memory; two minutes to write | Quadratic | As the stated baseline, or when n is tiny and memory is the hard limit |
 | 2. Sort indices + two pointers | Guaranteed bound, no hashing; extends naturally to 3Sum | Slower than hashing; index bookkeeping is easy to get wrong | Input already sorted, values rather than indices wanted, or a worst-case guarantee is required |
 | Alt. Sort + binary search | Works on sorted data with random access | Same cost as two pointers, more code | Rarely: a few lookups in data that is already sorted |
 | 3. Hash map, two passes | Linear; easy to explain as "index everything, then query" | Two passes; needs the `j != i` guard | If this is the version you derived, it is a fine answer; mention the one-pass refinement |

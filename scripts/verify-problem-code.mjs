@@ -5,8 +5,9 @@
  *   npm run problems:verify -- nc-two-sum   only the named pages
  *
  * For each `src/content/problem-pages/<id>.md`:
- *   - every ```java block that declares `class Solution` is compiled on its own
- *     (warnings are errors) together with `tests/<id>.java`, then `Tests.main` runs;
+ *   - every ```java block that declares a top-level class (`class Solution`, or the
+ *     problem's own class such as `class MyHashSet`) is compiled on its own (warnings
+ *     are errors) together with `tests/<id>.java`, then `Tests.main` runs;
  *   - every "### Approach N" must contain such a block;
  *   - other ```java blocks (skeletons, fragments) are compiled inside a wrapper
  *     method when the page marks them `fragment="<signature>"`, otherwise listed.
@@ -83,6 +84,10 @@ function run(cmd, args, cwd) {
   return { ok: res.status === 0, out: `${res.stdout ?? ''}${res.stderr ?? ''}`.trim() || (res.error ? String(res.error) : '') }
 }
 
+/** A block is a complete program unit when it declares a class at the top level. */
+const COMPLETE = /^(public\s+)?(final\s+)?class\s+\w+/m
+const COMPLETE_NAME = /^(public\s+)?(final\s+)?class\s+(\w+)/m
+
 const wanted = process.argv.slice(2)
 const ids = readdirSync(pageDir)
   .filter((f) => f.endsWith('.md') && f !== 'PROGRESS.md')
@@ -117,25 +122,30 @@ try {
 
     const approaches = [...markdown.matchAll(/^###\s+(Approach \d.*?)\s*$/gm)].map((m) => m[1])
     for (const name of approaches) {
-      if (!blocks.some((b) => b.heading === name && /\bclass Solution\b/.test(b.code))) {
-        fail(`"${name}" has no java block declaring class Solution`)
+      if (!blocks.some((b) => b.heading === name && COMPLETE.test(b.code))) {
+        fail(`"${name}" has no java block declaring a top-level class`)
       }
     }
 
     blocks.forEach((block, index) => {
       const dir = path.join(work, `${id}-${index}`)
       mkdirSync(dir, { recursive: true })
-      const complete = /\bclass Solution\b/.test(block.code)
+      const complete = COMPLETE.test(block.code)
       if (!complete && !block.fragment) {
         console.log(`  – not compiled (fragment without fragment="…"): ${block.title}`)
         return
       }
+      // A fragment that ends in `return` must not get a trailing throw ("unreachable statement").
+      const endsInReturn = /^\s*return\b[^;]*;\s*$/.test(block.code.trim().split('\n').pop() ?? '')
+      const tail = endsInReturn ? '' : '\n        throw new IllegalArgumentException("no answer");'
       const source = complete
         ? block.code
-        : `import java.util.*;\n\nclass Solution {\n    ${block.fragment} {\n${block.code}\n        throw new IllegalArgumentException("no answer");\n    }\n}\n`
-      writeFileSync(path.join(dir, 'Solution.java'), source)
+        : `import java.util.*;\n\nclass Solution {\n    ${block.fragment} {\n${block.code}${tail}\n    }\n}\n`
+      // Name the file after its first top-level class (MyHashSet.java, …) so javac does not warn.
+      const className = source.match(COMPLETE_NAME)?.[3] ?? 'Solution'
+      writeFileSync(path.join(dir, `${className}.java`), source)
       writeFileSync(path.join(dir, 'Tests.java'), tests)
-      const compiled = run(javac, ['-Xlint:all', '-Werror', '-d', 'out', 'Solution.java', 'Tests.java'], dir)
+      const compiled = run(javac, ['-Xlint:all', '-Werror', '-d', 'out', `${className}.java`, 'Tests.java'], dir)
       if (!compiled.ok) {
         fail(`does not compile: ${block.title}\n${compiled.out.replace(/^/gm, '      ')}`)
         return
