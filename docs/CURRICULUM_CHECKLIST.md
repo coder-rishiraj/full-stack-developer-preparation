@@ -10,11 +10,11 @@ them under an anchored heading.
 | Track | Name | Lessons | Done |
 |---|---|---|---|
 | A | DSA & Problem Solving | 125 / 125 | 100% |
-| B | Frontend Engineering | 98 / 647 | 15% |
+| B | Frontend Engineering | 206 / 647 | 32% |
 | C | Java & Backend Engineering | 18 / 329 | 5% |
 | D | LLD, System Design & Distributed Systems | 25 / 111 | 23% |
 | E | Applied AI Engineering | 15 / 77 | 19% |
-| | **All tracks** | **281 / 1289** | **22%** |
+| | **All tracks** | **389 / 1289** | **30%** |
 
 Legend: ✅ lesson written · ◐ condensed notes only · ○ generic template only · ✗ no content
 
@@ -364,60 +364,60 @@ Legend: ✅ lesson written · ◐ condensed notes only · ○ generic template o
 #### B1.15 · this, call, apply, bind — 2/2
 
 - [x] `b1-this` this — ✅ lesson (6522 words) · nested 6/6
-- [x] `b1-call` call, apply, bind — ✅ lesson (5021 words) · nested 3/3
+- [x] `b1-call` call, apply, bind — ✅ lesson (5019 words) · nested 3/3
 
-#### B1.16 · Prototypes & Prototype Chain — 1/5
+#### B1.16 · Prototypes & Prototype Chain — 5/5
 
 - [x] `b1-prototypes` Prototypes — ✅ lesson (5099 words) · nested 1/1
-- [ ] `b1-prototype-chain` Prototype Chain — ◐ condensed notes · nested 0/1
-- [ ] `b1-constructor-functions` Constructor Functions — ◐ condensed notes · nested 0/2
-- [ ] `b1-object-create` Object.create — ◐ condensed notes
-- [ ] `b1-prototype-pollution` Prototype Pollution (Concept) — ◐ condensed notes
+- [x] `b1-prototype-chain` Prototype Chain — ✅ lesson (4366 words) · nested 1/1
+- [x] `b1-constructor-functions` Constructor Functions — ✅ lesson (5179 words) · nested 2/2
+- [x] `b1-object-create` Object.create — ✅ lesson (3991 words)
+- [x] `b1-prototype-pollution` Prototype Pollution (Concept) — ✅ lesson (4187 words)
 
-#### B1.17 · Classes & OOP — 1/4
+#### B1.17 · Classes & OOP — 4/4
 
-- [x] `b1-classes` Classes — ✅ lesson (6577 words) · nested 3/3
-- [ ] `b1-class-inheritance` extends / super / Inheritance — ◐ condensed notes · nested 0/1
-- [ ] `b1-js-oop-principles` Encapsulation, Polymorphism, Composition — ◐ condensed notes
-- [ ] `b1-classes-vs-factories` Classes vs Factories vs Constructors — ◐ condensed notes
+- [x] `b1-classes` Classes — ✅ lesson (6593 words) · nested 3/3
+- [x] `b1-class-inheritance` extends / super / Inheritance — ✅ lesson (5523 words) · nested 1/1
+- [x] `b1-js-oop-principles` Encapsulation, Polymorphism, Composition — ✅ lesson (5687 words)
+- [x] `b1-classes-vs-factories` Classes vs Factories vs Constructors — ✅ lesson (4370 words)
 
-#### B1.18 · Arrays — 1/7
+#### B1.18 · Arrays — 7/7
 
 - [x] `b1-array-basics` Array Creation, Indexing, Length — ✅ lesson (4981 words) · nested 1/1
-- [ ] `b1-array-mutation` Mutating vs Non-Mutating Methods — ◐ condensed notes · nested 0/2
-- [ ] `b1-array-search` Searching Arrays — ◐ condensed notes · nested 0/2
-- [ ] `b1-array-map-filter-reduce` map / filter / reduce — ◐ condensed notes · nested 0/2
-- [ ] `b1-array-sort` sort and JavaScript Sorting Gotchas — ◐ condensed notes
-- [ ] `b1-array-from-isarray` Array.from / Array.isArray — ◐ condensed notes
-- [ ] `b1-copying-arrays` Copying Arrays — ◐ condensed notes
+- [x] `b1-array-mutation` Mutating vs Non-Mutating Methods — ✅ lesson (4642 words) · nested 2/2
+- [x] `b1-array-search` Searching Arrays — ✅ lesson (3991 words) · nested 2/2
+- [x] `b1-array-map-filter-reduce` map / filter / reduce — ✅ lesson (5149 words) · nested 2/2
+- [x] `b1-array-sort` sort and JavaScript Sorting Gotchas — ✅ lesson (4337 words)
+- [x] `b1-array-from-isarray` Array.from / Array.isArray — ✅ lesson (4424 words)
+- [x] `b1-copying-arrays` Copying Arrays — ✅ lesson (3404 words)
 
-#### B1.19 · Maps, Sets & Weak Collections — 0/4
+#### B1.19 · Maps, Sets & Weak Collections — 4/4
 
-- [ ] `b1-set` Set — ◐ condensed notes · nested 0/1
-- [ ] `b1-map` Map — ◐ condensed notes · nested 0/1
-- [ ] `b1-weakmap` WeakMap — ◐ condensed notes · nested 0/1
-- [ ] `b1-weakset` WeakSet — ◐ condensed notes
+- [x] `b1-set` Set — ✅ lesson (3422 words) · nested 1/1
+- [x] `b1-map` Map — ✅ lesson (3484 words) · nested 1/1
+- [x] `b1-weakmap` WeakMap — ✅ lesson (3764 words) · nested 1/1
+- [x] `b1-weakset` WeakSet — ✅ lesson (2334 words)
 
-#### B1.20 · Destructuring, Spread & Modern Syntax — 0/2
+#### B1.20 · Destructuring, Spread & Modern Syntax — 2/2
 
-- [ ] `b1-destructuring` Destructuring — ◐ condensed notes · nested 0/1
-- [ ] `b1-spread-rest` Spread/Rest — ◐ condensed notes
+- [x] `b1-destructuring` Destructuring — ✅ lesson (3704 words) · nested 1/1
+- [x] `b1-spread-rest` Spread/Rest — ✅ lesson (5088 words)
 
-#### B1.21 · Iterables, Iterators & Generators — 0/1
+#### B1.21 · Iterables, Iterators & Generators — 1/1
 
-- [ ] `b1-iterators` Iterators/Generators — ◐ condensed notes · nested 0/5
+- [x] `b1-iterators` Iterators/Generators — ✅ lesson (6934 words) · nested 5/5
 
-#### B1.22 · Symbols — 0/1
+#### B1.22 · Symbols — 1/1
 
-- [ ] `b1-symbols` Symbols — ◐ condensed notes · nested 0/2
+- [x] `b1-symbols` Symbols — ✅ lesson (4255 words) · nested 2/2
 
-#### B1.23 · Execution Context — 0/1
+#### B1.23 · Execution Context — 1/1
 
-- [ ] `b1-execution-contexts` Execution Contexts — ◐ condensed notes · nested 0/3
+- [x] `b1-execution-contexts` Execution Contexts — ✅ lesson (5834 words) · nested 3/3
 
-#### B1.24 · Call Stack — 0/1
+#### B1.24 · Call Stack — 1/1
 
-- [ ] `b1-call-stack` Call Stack — ◐ condensed notes · nested 0/3
+- [x] `b1-call-stack` Call Stack — ✅ lesson (5398 words) · nested 3/3
 
 #### B1.25 · JavaScript Runtime & Engine — 2/2
 
@@ -430,174 +430,174 @@ Legend: ✅ lesson written · ◐ condensed notes only · ○ generic template o
 - [x] `b1-microtasks` Microtasks vs Macrotasks — ✅ lesson (3962 words) · nested 3/3
 - [x] `b1-event-loop-puzzles` Event-Loop Interview Puzzles — ✅ lesson (2433 words)
 
-#### B1.27 · Timers & Scheduling — 0/3
+#### B1.27 · Timers & Scheduling — 3/3
 
-- [ ] `b1-settimeout` setTimeout / clearTimeout — ◐ condensed notes · nested 0/1
-- [ ] `b1-setinterval` setInterval / clearInterval — ◐ condensed notes
-- [ ] `b1-requestanimationframe-js` requestAnimationFrame (Language View) — ◐ condensed notes
+- [x] `b1-settimeout` setTimeout / clearTimeout — ✅ lesson (4358 words) · nested 1/1
+- [x] `b1-setinterval` setInterval / clearInterval — ✅ lesson (3506 words)
+- [x] `b1-requestanimationframe-js` requestAnimationFrame (Language View) — ✅ lesson (3387 words)
 
-#### B1.28 · Callbacks — 0/2
+#### B1.28 · Callbacks — 2/2
 
-- [ ] `b1-callback-concept` Callback Concept — ◐ condensed notes · nested 0/2
-- [ ] `b1-callback-hell` Callback Hell & Inversion of Control — ◐ condensed notes
+- [x] `b1-callback-concept` Callback Concept — ✅ lesson (4008 words) · nested 2/2
+- [x] `b1-callback-hell` Callback Hell & Inversion of Control — ✅ lesson (3070 words)
 
-#### B1.29 · Promises — 0/4
+#### B1.29 · Promises — 4/4
 
-- [ ] `b1-promises` Promises — ◐ condensed notes · nested 0/3
-- [ ] `b1-error-propagation` Error Propagation — ◐ condensed notes
-- [ ] `b1-promise-combinators` Promise Combinators — ◐ condensed notes · nested 0/4
-- [ ] `b1-sequential-vs-parallel` Sequential vs Parallel Async Work — ◐ condensed notes
+- [x] `b1-promises` Promises — ✅ lesson (4702 words) · nested 3/3
+- [x] `b1-error-propagation` Error Propagation — ✅ lesson (3214 words)
+- [x] `b1-promise-combinators` Promise Combinators — ✅ lesson (3608 words) · nested 4/4
+- [x] `b1-sequential-vs-parallel` Sequential vs Parallel Async Work — ✅ lesson (3222 words)
 
-#### B1.30 · Async/Await — 0/2
+#### B1.30 · Async/Await — 2/2
 
-- [ ] `b1-async-await` async/await — ◐ condensed notes · nested 0/2
-- [ ] `b1-async-control-flow` Async Control Flow — ◐ condensed notes
+- [x] `b1-async-await` async/await — ✅ lesson (5101 words) · nested 2/2
+- [x] `b1-async-control-flow` Async Control Flow — ✅ lesson (3313 words)
 
-#### B1.31 · Async Cancellation & Coordination — 0/3
+#### B1.31 · Async Cancellation & Coordination — 3/3
 
-- [ ] `b1-abort-controller-js` AbortController / AbortSignal (Language) — ◐ condensed notes
-- [ ] `b1-stale-requests` Race Conditions & Stale Requests — ◐ condensed notes · nested 0/1
-- [ ] `b1-concurrency-limiting` Concurrency Limiting — ◐ condensed notes
+- [x] `b1-abort-controller-js` AbortController / AbortSignal (Language) — ✅ lesson (2954 words)
+- [x] `b1-stale-requests` Race Conditions & Stale Requests — ✅ lesson (3895 words) · nested 1/1
+- [x] `b1-concurrency-limiting` Concurrency Limiting — ✅ lesson (3285 words)
 
-#### B1.32 · Error Handling — 0/4
+#### B1.32 · Error Handling — 4/4
 
-- [ ] `b1-error-types` Error Types — ◐ condensed notes · nested 0/1
-- [ ] `b1-throw-try-catch` throw / try / catch / finally — ◐ condensed notes
-- [ ] `b1-custom-errors` Custom Errors — ◐ condensed notes
-- [ ] `b1-unhandled-rejection` Unhandled Promise Rejection — ◐ condensed notes
+- [x] `b1-error-types` Error Types — ✅ lesson (4470 words) · nested 1/1
+- [x] `b1-throw-try-catch` throw / try / catch / finally — ✅ lesson (3487 words)
+- [x] `b1-custom-errors` Custom Errors — ✅ lesson (3053 words)
+- [x] `b1-unhandled-rejection` Unhandled Promise Rejection — ✅ lesson (3081 words)
 
-#### B1.33 · Debugging — 0/4
+#### B1.33 · Debugging — 4/4
 
-- [ ] `b1-devtools` Browser DevTools — ◐ condensed notes · nested 0/2
-- [ ] `b1-async-debugging` Async Debugging — ◐ condensed notes
-- [ ] `b1-source-maps` Source Maps Conceptually — ◐ condensed notes
-- [ ] `b1-profiling-basics` Performance & Memory Profiling Basics — ◐ condensed notes
+- [x] `b1-devtools` Browser DevTools — ✅ lesson (6435 words) · nested 2/2
+- [x] `b1-async-debugging` Async Debugging — ✅ lesson (3398 words)
+- [x] `b1-source-maps` Source Maps Conceptually — ✅ lesson (3215 words)
+- [x] `b1-profiling-basics` Performance & Memory Profiling Basics — ✅ lesson (3879 words)
 
-#### B1.34 · Modules — 0/3
+#### B1.34 · Modules — 3/3
 
-- [ ] `b1-modules` Modules — ◐ condensed notes · nested 0/3
-- [ ] `b1-esm-vs-cjs` ESM vs CommonJS — ◐ condensed notes · nested 0/4
-- [ ] `b1-module-pattern` IIFE / Module Pattern (Historical) — ◐ condensed notes
+- [x] `b1-modules` Modules — ✅ lesson (5231 words) · nested 3/3
+- [x] `b1-esm-vs-cjs` ESM vs CommonJS — ✅ lesson (4850 words) · nested 4/4
+- [x] `b1-module-pattern` IIFE / Module Pattern (Historical) — ✅ lesson (2650 words)
 
-#### B1.35 · JSON & Serialization — 0/2
+#### B1.35 · JSON & Serialization — 2/2
 
-- [ ] `b1-json` JSON vs JavaScript Objects — ◐ condensed notes · nested 0/2
-- [ ] `b1-json-replacer-reviver` replacer / reviver / toJSON — ◐ condensed notes
+- [x] `b1-json` JSON vs JavaScript Objects — ✅ lesson (4261 words) · nested 2/2
+- [x] `b1-json-replacer-reviver` replacer / reviver / toJSON — ✅ lesson (3197 words)
 
-#### B1.36 · Dates & Time — 0/4
+#### B1.36 · Dates & Time — 4/4
 
-- [ ] `b1-date-basics` Date Basics — ◐ condensed notes · nested 0/2
-- [ ] `b1-date-pitfalls` Date Arithmetic Pitfalls — ◐ condensed notes
-- [ ] `b1-intl-datetime` Intl.DateTimeFormat — ◐ condensed notes
-- [ ] `b1-temporal-api` Temporal API Direction — ◐ condensed notes
+- [x] `b1-date-basics` Date Basics — ✅ lesson (4306 words) · nested 2/2
+- [x] `b1-date-pitfalls` Date Arithmetic Pitfalls — ✅ lesson (3242 words)
+- [x] `b1-intl-datetime` Intl.DateTimeFormat — ✅ lesson (2904 words)
+- [x] `b1-temporal-api` Temporal API Direction — ✅ lesson (2573 words)
 
-#### B1.37 · Regular Expressions — 0/3
+#### B1.37 · Regular Expressions — 3/3
 
-- [ ] `b1-regex-basics` Regex Literals & Constructor — ◐ condensed notes · nested 0/1
-- [ ] `b1-regex-methods` test / exec / match / replace — ◐ condensed notes
-- [ ] `b1-regex-groups` Groups & Lookaround Basics — ◐ condensed notes
+- [x] `b1-regex-basics` Regex Literals & Constructor — ✅ lesson (4697 words) · nested 1/1
+- [x] `b1-regex-methods` test / exec / match / replace — ✅ lesson (3079 words)
+- [x] `b1-regex-groups` Groups & Lookaround Basics — ✅ lesson (2705 words)
 
-#### B1.38 · Functional JavaScript — 0/2
+#### B1.38 · Functional JavaScript — 2/2
 
-- [ ] `b1-functional-style` Declarative vs Imperative Style — ◐ condensed notes · nested 0/1
-- [ ] `b1-referential-transparency` Referential Transparency Concept — ◐ condensed notes
+- [x] `b1-functional-style` Declarative vs Imperative Style — ✅ lesson (3772 words) · nested 1/1
+- [x] `b1-referential-transparency` Referential Transparency Concept — ✅ lesson (2762 words)
 
-#### B1.39 · Memory Management & Garbage Collection — 0/3
+#### B1.39 · Memory Management & Garbage Collection — 3/3
 
-- [ ] `b1-memory-management` Memory Management — ◐ condensed notes · nested 0/1
-- [ ] `b1-garbage-collection` Garbage Collection — ◐ condensed notes · nested 0/1
-- [ ] `b1-memory-leaks` Common Memory Leaks — ◐ condensed notes · nested 0/1
+- [x] `b1-memory-management` Memory Management — ✅ lesson (3366 words) · nested 1/1
+- [x] `b1-garbage-collection` Garbage Collection — ✅ lesson (3414 words) · nested 1/1
+- [x] `b1-memory-leaks` Common Memory Leaks — ✅ lesson (3928 words) · nested 1/1
 
-#### B1.40 · Performance Patterns — 0/3
+#### B1.40 · Performance Patterns — 3/3
 
-- [ ] `b1-debounce` Debouncing — ◐ condensed notes · nested 0/1
-- [ ] `b1-throttle` Throttling — ◐ condensed notes
-- [ ] `b1-long-tasks` Long Tasks / Main-Thread Blocking — ◐ condensed notes
+- [x] `b1-debounce` Debouncing — ✅ lesson (3206 words) · nested 1/1
+- [x] `b1-throttle` Throttling — ✅ lesson (2434 words)
+- [x] `b1-long-tasks` Long Tasks / Main-Thread Blocking — ✅ lesson (2730 words)
 
-#### B1.41 · Proxy & Reflect — 0/1
+#### B1.41 · Proxy & Reflect — 1/1
 
-- [ ] `b1-proxy` Proxy/Reflect — ◐ condensed notes · nested 0/3
+- [x] `b1-proxy` Proxy/Reflect — ✅ lesson (5877 words) · nested 3/3
 
-#### B1.42 · Binary Data — 0/2
+#### B1.42 · Binary Data — 2/2
 
-- [ ] `b1-arraybuffer` ArrayBuffer / TypedArray / DataView — ◐ condensed notes
-- [ ] `b1-blob-file-js` Blob / File / FileReader (Language) — ◐ condensed notes
+- [x] `b1-arraybuffer` ArrayBuffer / TypedArray / DataView — ✅ lesson (3971 words)
+- [x] `b1-blob-file-js` Blob / File / FileReader (Language) — ✅ lesson (3056 words)
 
-#### B1.43 · JavaScript Implementation Exercises — 0/11
+#### B1.43 · JavaScript Implementation Exercises — 11/11
 
-- [ ] `b1-impl-map-filter-reduce` Implement map / filter / reduce / forEach — ◐ condensed notes
-- [ ] `b1-impl-call-apply-bind` Implement call / apply / bind — ◐ condensed notes
-- [ ] `b1-impl-promise-combinators` Implement Promise.all / allSettled / race — ◐ condensed notes
-- [ ] `b1-impl-debounce-throttle` Implement debounce / throttle / memoize — ◐ condensed notes
-- [ ] `b1-impl-curry-compose` Implement curry / compose / pipe — ◐ condensed notes
-- [ ] `b1-impl-deep-clone` Implement deep clone / flatten / deep equality — ◐ condensed notes
-- [ ] `b1-impl-get-path` Implement get(object, path) — ◐ condensed notes
-- [ ] `b1-impl-event-emitter` Implement EventEmitter — ◐ condensed notes
-- [ ] `b1-impl-retry-sleep` Implement retry / sleep / concurrency limiter — ◐ condensed notes
-- [ ] `b1-impl-promise` Implement a Promise — ◐ condensed notes
-- [ ] `b1-impl-lru` Implement LRU Cache in JavaScript — ◐ condensed notes
+- [x] `b1-impl-map-filter-reduce` Implement map / filter / reduce / forEach — ✅ lesson (3373 words)
+- [x] `b1-impl-call-apply-bind` Implement call / apply / bind — ✅ lesson (2917 words)
+- [x] `b1-impl-promise-combinators` Implement Promise.all / allSettled / race — ✅ lesson (2848 words)
+- [x] `b1-impl-debounce-throttle` Implement debounce / throttle / memoize — ✅ lesson (3443 words)
+- [x] `b1-impl-curry-compose` Implement curry / compose / pipe — ✅ lesson (2499 words)
+- [x] `b1-impl-deep-clone` Implement deep clone / flatten / deep equality — ✅ lesson (3185 words)
+- [x] `b1-impl-get-path` Implement get(object, path) — ✅ lesson (3294 words)
+- [x] `b1-impl-event-emitter` Implement EventEmitter — ✅ lesson (3317 words)
+- [x] `b1-impl-retry-sleep` Implement retry / sleep / concurrency limiter — ✅ lesson (3454 words)
+- [x] `b1-impl-promise` Implement a Promise — ✅ lesson (3663 words)
+- [x] `b1-impl-lru` Implement LRU Cache in JavaScript — ✅ lesson (3132 words)
 
-#### B2.1 · Introduction & Setup — 0/7
+#### B2.1 · Introduction & Setup — 7/7
 
-- [ ] `b2-what-is-typescript` What TypeScript Is — ◐ condensed notes
-- [ ] `b2-ts-vs-javascript` TypeScript vs JavaScript — ◐ condensed notes
-- [ ] `b2-why-typescript` Why Use TypeScript — ◐ condensed notes
-- [ ] `b2-ts-disadvantages` TypeScript Trade-offs — ◐ condensed notes
-- [ ] `b2-optional-static-typing` Optional Static Typing — ◐ condensed notes
-- [ ] `b2-tsc-compilation` Compiling with tsc — ◐ condensed notes
-- [ ] `b2-ts-vs-tsx` .ts vs .tsx — ◐ condensed notes
+- [x] `b2-what-is-typescript` What TypeScript Is — ✅ lesson (2807 words)
+- [x] `b2-ts-vs-javascript` TypeScript vs JavaScript — ✅ lesson (2182 words)
+- [x] `b2-why-typescript` Why Use TypeScript — ✅ lesson (2193 words)
+- [x] `b2-ts-disadvantages` TypeScript Trade-offs — ✅ lesson (2214 words)
+- [x] `b2-optional-static-typing` Optional Static Typing — ✅ lesson (2364 words)
+- [x] `b2-tsc-compilation` Compiling with tsc — ✅ lesson (2603 words)
+- [x] `b2-ts-vs-tsx` .ts vs .tsx — ✅ lesson (2094 words)
 
-#### B2.2 · Simple Types & Annotations — 0/3
+#### B2.2 · Simple Types & Annotations — 3/3
 
-- [ ] `b2-primitive-object-types` Primitive & Object Types — ◐ condensed notes · nested 0/3
-- [ ] `b2-explicit-types` Explicit Types — ◐ condensed notes
-- [ ] `b2-type-annotations` Type Annotations — ◐ condensed notes
+- [x] `b2-primitive-object-types` Primitive & Object Types — ✅ lesson (4151 words) · nested 3/3
+- [x] `b2-explicit-types` Explicit Types — ✅ lesson (2664 words)
+- [x] `b2-type-annotations` Type Annotations — ✅ lesson (2344 words)
 
-#### B2.3 · Type Inference — 0/2
+#### B2.3 · Type Inference — 2/2
 
-- [ ] `b2-type-inference` Type Inference — ◐ condensed notes
-- [ ] `b2-when-explicit-vs-inferred` When to Annotate vs Infer — ◐ condensed notes
+- [x] `b2-type-inference` Type Inference — ✅ lesson (2912 words)
+- [x] `b2-when-explicit-vs-inferred` When to Annotate vs Infer — ✅ lesson (2400 words)
 
-#### B2.4 · Special Types — 0/3
+#### B2.4 · Special Types — 3/3
 
-- [ ] `b2-special-types` any, unknown, never, void — ◐ condensed notes · nested 0/4
-- [ ] `b2-null-undefined-ts` null & undefined — ◐ condensed notes
-- [ ] `b2-strict-null-checks` strictNullChecks — ◐ condensed notes
+- [x] `b2-special-types` any, unknown, never, void — ✅ lesson (5548 words) · nested 4/4
+- [x] `b2-null-undefined-ts` null & undefined — ✅ lesson (3294 words)
+- [x] `b2-strict-null-checks` strictNullChecks — ✅ lesson (3135 words)
 
-#### B2.5 · Arrays — 0/1
+#### B2.5 · Arrays — 1/1
 
-- [ ] `b2-typed-arrays` Typed Arrays — ◐ condensed notes · nested 0/2
+- [x] `b2-typed-arrays` Typed Arrays — ✅ lesson (4208 words) · nested 2/2
 
-#### B2.6 · Tuples — 0/2
+#### B2.6 · Tuples — 2/2
 
-- [ ] `b2-tuples` Tuples — ◐ condensed notes
-- [ ] `b2-readonly-tuples` Readonly Tuples — ◐ condensed notes
+- [x] `b2-tuples` Tuples — ✅ lesson (2819 words)
+- [x] `b2-readonly-tuples` Readonly Tuples — ✅ lesson (3141 words)
 
-#### B2.7 · Object Types — 0/2
+#### B2.7 · Object Types — 2/2
 
-- [ ] `b2-object-types` Object Types — ◐ condensed notes · nested 0/2
-- [ ] `b2-parameter-destructuring` Parameter Destructuring — ◐ condensed notes
+- [x] `b2-object-types` Object Types — ✅ lesson (5020 words) · nested 2/2
+- [x] `b2-parameter-destructuring` Parameter Destructuring — ✅ lesson (3197 words)
 
-#### B2.8 · Enums & Literal Constants — 0/3
+#### B2.8 · Enums & Literal Constants — 3/3
 
-- [ ] `b2-enums` Enums — ◐ condensed notes · nested 0/1
-- [ ] `b2-literal-unions-vs-enums` Literal Unions vs Enums — ◐ condensed notes
-- [ ] `b2-as-const-objects` as const Objects — ◐ condensed notes
+- [x] `b2-enums` Enums — ✅ lesson (3571 words) · nested 1/1
+- [x] `b2-literal-unions-vs-enums` Literal Unions vs Enums — ✅ lesson (2762 words)
+- [x] `b2-as-const-objects` as const Objects — ✅ lesson (3104 words)
 
-#### B2.9 · Interfaces — 0/2
+#### B2.9 · Interfaces — 2/2
 
-- [ ] `b2-interfaces` Interfaces — ◐ condensed notes · nested 0/1
-- [ ] `b2-interface-vs-type-when` Interface vs Type — When to Use — ◐ condensed notes
+- [x] `b2-interfaces` Interfaces — ✅ lesson (4364 words) · nested 1/1
+- [x] `b2-interface-vs-type-when` Interface vs Type — When to Use — ✅ lesson (2556 words)
 
-#### B2.10 · Type Aliases — 0/2
+#### B2.10 · Type Aliases — 2/2
 
-- [ ] `b2-type-aliases` Type Aliases — ◐ condensed notes
-- [ ] `b2-type-alias-patterns` Type Alias Patterns — ◐ condensed notes
+- [x] `b2-type-aliases` Type Aliases — ✅ lesson (3096 words)
+- [x] `b2-type-alias-patterns` Type Alias Patterns — ✅ lesson (3017 words)
 
-#### B2.11 · Unions & Intersections — 0/2
+#### B2.11 · Unions & Intersections — 2/2
 
-- [ ] `b2-unions` Union Types — ◐ condensed notes · nested 0/1
-- [ ] `b2-union-patterns` Union & Intersection Patterns — ◐ condensed notes
+- [x] `b2-unions` Union Types — ✅ lesson (3579 words) · nested 1/1
+- [x] `b2-union-patterns` Union & Intersection Patterns — ✅ lesson (3196 words)
 
 #### B2.12 · Literal Types & Discriminated Unions — 0/3
 

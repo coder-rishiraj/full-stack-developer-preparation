@@ -136,6 +136,9 @@ Trace the run. The worklist starts as `[window]`. Popping `window` marks it and 
 
 Two properties follow directly from this algorithm. Marking cost is proportional to the number of **live** objects and references, because the collector never visits garbage while marking. And the collector never frees anything that is reachable, so a "leak" in a JavaScript program is never the sweep forgetting something; it is always a path from a root that the programmer did not intend.
 
+> [!IMPORTANT] Leaks are never the collector's fault
+> Mark-and-sweep frees exactly the objects that are unreachable. If memory is not reclaimed, something reachable still points at it — find that reference instead of suspecting the GC.
+
 ### Compaction
 
 After many sweeps, free memory is scattered in small gaps between surviving objects. This **fragmentation** can make it impossible to place a large object even when plenty of memory is free in total. A **compacting** collector moves surviving objects together and updates every reference to them, leaving one contiguous free region. Moving objects is expensive, so V8's old-generation collector, called **Mark-Compact**, compacts only the most fragmented pages and sweeps the rest.
@@ -200,6 +203,9 @@ These techniques reduce pauses; they do not eliminate them. Under heavy allocati
 |---|---|---|---|---|
 | Minor GC (Scavenge) | Young generation | Parallel copying | Very often | Proportional to survivors; usually sub-millisecond to a few ms |
 | Major GC (Mark-Compact) | Whole heap | Concurrent/incremental mark, concurrent sweep, selective compaction | Rarely | Proportional to live objects; main-thread portion kept short |
+
+> [!INTERVIEW] The three-sentence answer
+> Engines trace from roots and reclaim what they cannot reach, so cycles are fine. The heap is split into a young generation, collected often by a cheap copying scavenger, and an old generation, collected rarely by mark-compact. Most of the work runs incrementally or on background threads to keep main-thread pauses short.
 
 ## How collection timing affects your code
 

@@ -457,7 +457,10 @@ console.log(await settledViaAll([1, Promise.reject(new Error('x'))]));
 ```
 
 ```output
-[ { status: 'fulfilled', value: 1 }, { status: 'rejected', reason: 'x' } ]
+[
+  { status: 'fulfilled', value: 1 },
+  { status: 'rejected', reason: 'x' }
+]
 ```
 
 (The real `allSettled` keeps the whole reason object; the snippet stores `reason.message` only to keep the printed output short.)

@@ -478,9 +478,13 @@ function splitRow(line: string): string[] {
     }
     if (c === '`') {
       let run = 1
-      while (s[i + run] === '`') run++
-      if (fence === 0) fence = run
-      else if (run === fence) fence = 0
+      // An escaped backtick (\`) counts on its own, so it never starts a long run.
+      if (s[i - 1] !== '\\') while (s[i + run] === '`') run++
+      // Single backticks toggle; a longer run opens a span only that same run closes.
+      if (fence > 1) {
+        if (run === fence) fence = 0
+      } else if (run > 1 && fence === 0) fence = run
+      else if (run % 2 === 1) fence = fence === 0 ? 1 : 0
       buf += s.slice(i, i + run)
       i += run - 1
       continue

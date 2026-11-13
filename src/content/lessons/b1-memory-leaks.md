@@ -66,6 +66,7 @@ listeners: 11
 Every listener keeps its own `buffer` of 100,000 elements alive through its closure. The warning appears when an emitter gains more than ten listeners for one event; it is a heuristic, not a limit, and raising it with `setMaxListeners` silences the symptom without fixing anything. The fix is to remove the listener when the widget goes away:
 
 ```javascript title="emitter-fixed.mjs"
+// Replaces mountWidget in emitter-leak.mjs; `bus` is the same emitter.
 function mountWidget(id) {
   const buffer = new Array(100_000).fill(id);
   const onRefresh = () => buffer.length;

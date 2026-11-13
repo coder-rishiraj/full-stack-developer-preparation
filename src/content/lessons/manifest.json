@@ -1039,6 +1039,13 @@
   "words": 4504,
   "concepts": []
  },
+ "b1-abort-controller-js": {
+  "summary": "Promises cannot be cancelled, so JavaScript platforms provide a separate cancellation token, AbortController and its AbortSignal. You will learn how the pair works, how to pass a signal through async code, how to make your own functions cancellable, and how timeouts and combined signals are built on the same mechanism.",
+  "difficulty": "intermediate",
+  "minutes": 40,
+  "words": 2954,
+  "concepts": []
+ },
  "b1-arithmetic-operators": {
   "summary": "JavaScript's arithmetic operators look like a calculator's, but they first convert their operands, follow IEEE 754 floating-point rules, and treat `+` as both addition and string concatenation. You will learn exactly what each operator does, why `'20' + 5` is `'205'` while `'20' - 5` is `15`, and how to write arithmetic that stays correct with user input, negatives, money and BigInt.",
   "difficulty": "beginner",
@@ -1055,6 +1062,57 @@
    "b1-sparse-arrays"
   ]
  },
+ "b1-array-from-isarray": {
+  "summary": "`Array.isArray` is the one reliable way to ask \\\"is this value an array?\\\", and `Array.from` turns anything list-shaped — strings, Sets, Maps, `arguments`, DOM `NodeList`s, generators, objects with a `length` — into a real array. You will learn what each one checks or copies, how `Array.of` fixes the `Array(3)` trap, and which tool to reach for when converting data.",
+  "difficulty": "beginner",
+  "minutes": 40,
+  "words": 4424,
+  "concepts": []
+ },
+ "b1-array-map-filter-reduce": {
+  "summary": "`map`, `filter` and `reduce` turn the three most common loops — transform every element, keep some elements, combine all elements into one value — into named, chainable operations. You will learn exactly how each one works, how `forEach`, `flat` and `flatMap` fit beside them, and the traps around return values, initial values, `async` callbacks and holes.",
+  "difficulty": "beginner",
+  "minutes": 60,
+  "words": 5149,
+  "concepts": [
+   "b1-foreach",
+   "b1-flat-flatmap"
+  ]
+ },
+ "b1-array-mutation": {
+  "summary": "Some array methods change the array you call them on; others leave it alone and return a new one. You will learn which is which, what each one returns, how `push`/`pop`/`shift`/`unshift` and `slice`/`splice` behave at their edges, and how to update arrays without mutation — the skill that React state and other shared data depend on.",
+  "difficulty": "beginner",
+  "minutes": 50,
+  "words": 4642,
+  "concepts": [
+   "b1-push-pop-shift",
+   "b1-slice-splice"
+  ]
+ },
+ "b1-array-search": {
+  "summary": "Searching an array means answering one of four questions — is it there, where is it, which element matches, or do any or all match. You will learn which method answers each question, the equality rule each one uses, what they return when nothing is found, and when a linear search should be replaced by a `Set` or `Map`.",
+  "difficulty": "beginner",
+  "minutes": 45,
+  "words": 3991,
+  "concepts": [
+   "b1-includes-indexof",
+   "b1-some-every"
+  ]
+ },
+ "b1-array-sort": {
+  "summary": "`sort` reorders an array in place, and by default it compares elements as strings — which is why `[10, 2, 1].sort()` gives `[1, 10, 2]`. You will learn how to write comparator functions for numbers, strings, dates and objects, how to sort by several keys, what stability guarantees, and when to use the copying `toSorted` instead.",
+  "difficulty": "beginner",
+  "minutes": 45,
+  "words": 4337,
+  "concepts": []
+ },
+ "b1-arraybuffer": {
+  "summary": "An ArrayBuffer is a fixed block of raw bytes, and typed arrays and DataView are the \"views\" that read and write those bytes as integers or floating-point numbers. You will learn how buffers and views share memory, how byte order works, and how to parse and build binary formats such as file headers and network messages.",
+  "difficulty": "intermediate",
+  "minutes": 45,
+  "words": 3971,
+  "concepts": []
+ },
  "b1-arrow-functions": {
   "summary": "Arrow functions — `(a, b) => a + b` — are a compact function syntax with one big behavioural difference, they take `this` from the surrounding code instead of from how they are called. You will learn every syntax form, what arrows deliberately lack (`this`, `arguments`, `new`, `prototype`), how lexical `this` fixes lost-`this` bugs in callbacks, and when an arrow is the wrong choice.",
   "difficulty": "intermediate",
@@ -1069,6 +1127,30 @@
   "difficulty": "beginner",
   "minutes": 35,
   "words": 3586,
+  "concepts": []
+ },
+ "b1-async-await": {
+  "summary": "async/await lets you write Promise-based code that reads top to bottom like ordinary synchronous code. You will learn exactly what the two keywords do, how an async function is suspended and resumed through the microtask queue, how errors flow through try/catch, and why waiting with await never freezes the page or the server.",
+  "difficulty": "intermediate",
+  "minutes": 55,
+  "words": 5101,
+  "concepts": [
+   "b1-await-try-catch",
+   "b1-await-does-not-block"
+  ]
+ },
+ "b1-async-control-flow": {
+  "summary": "Real features are workflows of many asynchronous steps — some dependent, some independent, some optional, some repeated. This lesson teaches the patterns for sequencing, fanning out, joining, branching, looping, polling and retrying with async/await, and how to choose between them for speed and correct error handling.",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 3313,
+  "concepts": []
+ },
+ "b1-async-debugging": {
+  "summary": "Asynchronous bugs are rarely about one wrong line; they are about callbacks running in an order you did not expect. You will learn why an ordinary stack trace loses the history of async code, how async stack traces and promise-rejection breakpoints recover it, and how to diagnose stale responses, unhandled rejections and misleading timings.",
+  "difficulty": "intermediate",
+  "minutes": 45,
+  "words": 3398,
   "concepts": []
  },
  "b1-autoboxing": {
@@ -1099,6 +1181,13 @@
   "words": 3665,
   "concepts": []
  },
+ "b1-blob-file-js": {
+  "summary": "A Blob is an immutable chunk of bytes with a MIME type, and a File is a Blob with a name and a modification time. You will learn how to create, slice and read them with the promise-based methods and streams, how they differ from ArrayBuffers and strings, and why the older FileReader API still appears in code you maintain.",
+  "difficulty": "intermediate",
+  "minutes": 35,
+  "words": 3056,
+  "concepts": []
+ },
  "b1-break-continue": {
   "summary": "`break` ends a loop or `switch` early and `continue` skips to the next iteration. You will learn exactly where each one sends execution in every kind of loop, how they interact with `switch` and `finally`, why they cannot cross a function boundary (so they do not work inside `forEach`), and how labels let them target an outer loop.",
   "difficulty": "beginner",
@@ -1108,22 +1197,66 @@
    "b1-labels"
   ]
  },
- "b1-call": {
-  "summary": "`call`, `apply` and `bind` let you choose the value of `this` for a function instead of leaving it to the call site. You will learn what each one does, how they differ (run now with a list, run now with an array, or return a new function for later), how to use them to borrow methods and keep callbacks attached to their objects, and how they work well enough to implement them yourself.",
+ "b1-call-stack": {
+  "summary": "The call stack is how a JavaScript engine keeps track of which function is running and where to go back to when it finishes. You will learn to trace pushes and pops by hand, see what a stack frame holds, understand why deep recursion throws a RangeError, and read a stack trace to find where a bug really is.",
   "difficulty": "intermediate",
   "minutes": 50,
-  "words": 5021,
+  "words": 5398,
+  "concepts": [
+   "b1-stack-frames",
+   "b1-stack-overflow",
+   "b1-stack-traces"
+  ]
+ },
+ "b1-call": {
+  "summary": "The methods `call`, `apply` and `bind` let you choose the value of `this` for a function instead of leaving it to the call site. You will learn what each one does, how they differ (run now with a list, run now with an array, or return a new function for later), how to use them to borrow methods and keep callbacks attached to their objects, and how they work well enough to implement them yourself.",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 5019,
   "concepts": [
    "b1-apply",
    "b1-bind",
    "b1-function-borrowing"
   ]
  },
+ "b1-callback-concept": {
+  "summary": "A callback is a function you hand to other code so that it can call you back — now, later, once or many times. You will learn what makes a function a callback, the contract every callback API carries, the difference between synchronous and asynchronous callbacks, and the error-first convention that Node.js built its I/O on.",
+  "difficulty": "beginner",
+  "minutes": 50,
+  "words": 4008,
+  "concepts": [
+   "b1-sync-vs-async-callbacks",
+   "b1-error-first-callbacks"
+  ]
+ },
+ "b1-callback-hell": {
+  "summary": "Callback hell is what asynchronous code turns into when every step must nest inside the previous step's callback, and inversion of control is the deeper problem of handing your continuation to code you do not control. You will learn to recognise both, flatten callback code without any library, and see exactly which problems promises and async/await solve.",
+  "difficulty": "intermediate",
+  "minutes": 40,
+  "words": 3070,
+  "concepts": []
+ },
+ "b1-class-inheritance": {
+  "summary": "Inheritance lets one class reuse and specialise another through `extends`, with `super` giving access to the parent's constructor and methods. You will learn the two prototype links `extends` creates, why `super()` must run before `this`, how method overriding and dynamic dispatch work, and when inheritance is the wrong tool.",
+  "difficulty": "intermediate",
+  "minutes": 60,
+  "words": 5523,
+  "concepts": [
+   "b1-method-overriding"
+  ]
+ },
+ "b1-classes-vs-factories": {
+  "summary": "JavaScript gives you three ways to produce many similar objects — constructor functions, classes and factory functions. You will learn exactly how they differ in method sharing, memory, privacy, instanceof, this-safety and the role of new, so that you can choose one deliberately and defend the choice in an interview.",
+  "difficulty": "intermediate",
+  "minutes": 40,
+  "words": 4370,
+  "concepts": []
+ },
  "b1-classes": {
   "summary": "A JavaScript class is a compact way to write a constructor function and the shared prototype its objects delegate to. You will learn what the class syntax creates in memory, how construction runs, where instance and static members live, and how public and private fields change what an object exposes.",
   "difficulty": "intermediate",
   "minutes": 70,
-  "words": 6577,
+  "words": 6593,
   "concepts": [
    "b1-class-constructor",
    "b1-instance-static",
@@ -1170,11 +1303,35 @@
   "words": 3411,
   "concepts": []
  },
+ "b1-concurrency-limiting": {
+  "summary": "Running every async task at once with Promise.all is fast for ten items and dangerous for ten thousand. This lesson shows how to cap the number of tasks in flight — with batches, a worker pool, or a reusable limiter — how to keep results in order and slots from leaking on errors, and how to choose the limit.",
+  "difficulty": "intermediate",
+  "minutes": 45,
+  "words": 3285,
+  "concepts": []
+ },
  "b1-const": {
   "summary": "const declares a block-scoped binding that must be given a value immediately and can never be pointed at a different value. You will learn exactly what const does and does not protect, how to make objects genuinely read-only when you need to, and why \"const by default\" is the modern rule.",
   "difficulty": "beginner",
   "minutes": 35,
   "words": 2364,
+  "concepts": []
+ },
+ "b1-constructor-functions": {
+  "summary": "A constructor function is an ordinary function that, when called with `new`, produces objects sharing one prototype. You will learn how to write one, exactly what `new` does in four steps, what the `constructor` property is and is not, and how this pre-class pattern maps onto the `class` syntax you write today.",
+  "difficulty": "intermediate",
+  "minutes": 55,
+  "words": 5179,
+  "concepts": [
+   "b1-new-operator",
+   "b1-constructor-property"
+  ]
+ },
+ "b1-copying-arrays": {
+  "summary": "`const b = a` does not copy an array, and `[...a]` copies only the outer list — the objects inside are still shared. You will learn the difference between a reference, a shallow copy and a deep copy, which copying technique to use, how each one treats holes, extra properties and subclasses, and how to copy nested arrays without surprises.",
+  "difficulty": "beginner",
+  "minutes": 30,
+  "words": 3404,
   "concepts": []
  },
  "b1-copying-objects": {
@@ -1196,6 +1353,58 @@
    "b1-compose-pipe"
   ]
  },
+ "b1-custom-errors": {
+  "summary": "Custom errors are your own subclasses of Error that name the failures of your application, so callers can recognise and handle them without parsing messages. You will learn how to write them correctly, carry extra data and causes, design a small hierarchy, and keep them working across transpilers, realms and the network.",
+  "difficulty": "intermediate",
+  "minutes": 40,
+  "words": 3053,
+  "concepts": []
+ },
+ "b1-date-basics": {
+  "summary": "A JavaScript `Date` is a mutable object holding one number — milliseconds since 1 January 1970 UTC — with methods that read that moment either in UTC or in the computer's local time zone. You will learn how to create, read, copy, compare and validate dates, how Unix timestamps relate to that number, and why local time versus UTC is behind most date bugs.",
+  "difficulty": "beginner",
+  "minutes": 50,
+  "words": 4306,
+  "concepts": [
+   "b1-unix-timestamps",
+   "b1-local-vs-utc"
+  ]
+ },
+ "b1-date-pitfalls": {
+  "summary": "Date arithmetic looks like adding numbers, but calendars have months of different lengths, leap years and daylight-saving jumps, and JavaScript's `Date` handles them by silently rolling over. You will learn the specific ways date math goes wrong — month overflow, DST gaps, off-by-one day counts, mutation, string sorting and invalid dates — and the correct pattern for each.",
+  "difficulty": "intermediate",
+  "minutes": 45,
+  "words": 3242,
+  "concepts": []
+ },
+ "b1-debounce": {
+  "summary": "Debouncing delays a function until a burst of calls has gone quiet, so that a search box sends one request after the user stops typing instead of one per keystroke. You will learn how debounce works with timers and closures, implement it with leading, trailing, cancel and flush behaviour, and learn when to choose it over throttling.",
+  "difficulty": "intermediate",
+  "minutes": 40,
+  "words": 3206,
+  "concepts": [
+   "b1-debounce-vs-throttle"
+  ]
+ },
+ "b1-destructuring": {
+  "summary": "Destructuring unpacks values from arrays and properties from objects into variables with a pattern that mirrors the shape of the data. You will learn array and object patterns, defaults, renaming and nesting, how destructuring works in function parameters, and the exact rules that decide when it throws.",
+  "difficulty": "beginner",
+  "minutes": 45,
+  "words": 3704,
+  "concepts": [
+   "b1-destructure-defaults"
+  ]
+ },
+ "b1-devtools": {
+  "summary": "Browser DevTools let you look inside a running page — its live DOM, its console, its network traffic and its paused JavaScript. You will learn what each panel is for, how to pause code with breakpoints and step through it, and how to read the Scope, Watch and Call Stack panes so that debugging becomes observation instead of guessing.",
+  "difficulty": "beginner",
+  "minutes": 50,
+  "words": 6435,
+  "concepts": [
+   "b1-breakpoints",
+   "b1-watch-scope"
+  ]
+ },
  "b1-ecmascript": {
   "summary": "ECMAScript is the standard that defines the JavaScript language, and \"JavaScript\" is the everyday name for engines that implement it plus whatever their host adds. You will learn who writes the standard, how new features move from idea to specification, what the edition names like ES6 and ES2020 mean, and how to ship modern syntax to environments that do not support it yet.",
   "difficulty": "beginner",
@@ -1214,6 +1423,34 @@
    "b1-inequality"
   ]
  },
+ "b1-error-propagation": {
+  "summary": "An error in JavaScript travels along one of two channels — up the call stack as a thrown exception, or down a promise chain as a rejection — and `async`/`await` joins the two. You will learn exactly how each channel carries a failure, where errors escape both, and how to decide which layer of an application should catch, wrap, or rethrow.",
+  "difficulty": "intermediate",
+  "minutes": 45,
+  "words": 3214,
+  "concepts": []
+ },
+ "b1-error-types": {
+  "summary": "JavaScript reports failures as error objects that belong to a small family of built-in types. You will learn what an error object contains, which language rule each built-in type stands for, and how to tell them apart reliably when you catch one.",
+  "difficulty": "beginner",
+  "minutes": 40,
+  "words": 4470,
+  "concepts": [
+   "b1-typeerror"
+  ]
+ },
+ "b1-esm-vs-cjs": {
+  "summary": "JavaScript has two module systems in daily use — CommonJS, which Node.js built first, and the standard ES modules. You will learn how each one loads code, why ESM imports are live bindings while `require` hands you an object, how both handle circular dependencies, what top-level `await` does to a module graph, and why only ESM can be reliably tree-shaken.",
+  "difficulty": "advanced",
+  "minutes": 65,
+  "words": 4850,
+  "concepts": [
+   "b1-live-bindings",
+   "b1-circular-deps",
+   "b1-top-level-await",
+   "b1-tree-shaking"
+  ]
+ },
  "b1-event-loop-puzzles": {
   "summary": "Event-loop puzzles ask you to predict the order in which logs from synchronous code, promises, async functions and timers appear. You will learn a reliable step-by-step method for solving them on paper, practise it on ten puzzles of increasing difficulty, and learn to explain each answer the way interviewers want to hear it.",
   "difficulty": "intermediate",
@@ -1228,6 +1465,17 @@
   "words": 4756,
   "concepts": [
    "b1-run-to-completion"
+  ]
+ },
+ "b1-execution-contexts": {
+  "summary": "An execution context is the record the JavaScript engine keeps for one running piece of code — which variables exist, what `this` is, and where to look for names it does not own. You will learn how a context is created and then executed, how the global and function contexts differ, and how their environments explain hoisting, scope and closures as one mechanism.",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 5834,
+  "concepts": [
+   "b1-global-execution-context",
+   "b1-function-execution-context",
+   "b1-variable-environment"
   ]
  },
  "b1-explicit-conversion": {
@@ -1290,6 +1538,24 @@
   "words": 3819,
   "concepts": []
  },
+ "b1-functional-style": {
+  "summary": "The same program can be written as step-by-step instructions that change variables (imperative) or as a description of the result built from transformations (declarative). You will learn how the two styles differ in JavaScript, when each reads better, and how immutability — producing new values instead of editing old ones — makes the declarative style safe in UI code.",
+  "difficulty": "intermediate",
+  "minutes": 55,
+  "words": 3772,
+  "concepts": [
+   "b1-immutability-fp"
+  ]
+ },
+ "b1-garbage-collection": {
+  "summary": "Garbage collection is how a JavaScript engine finds unreachable objects and reuses their memory without stopping your page for long. You will learn why engines trace from roots instead of counting references, how mark-and-sweep and generational collection work, and what that means for the code you write.",
+  "difficulty": "intermediate",
+  "minutes": 45,
+  "words": 3414,
+  "concepts": [
+   "b1-mark-and-sweep"
+  ]
+ },
  "b1-getters-setters": {
   "summary": "Getters and setters are accessor properties — properties that run a function when they are read or assigned, while still looking like ordinary fields to the code that uses them. You will learn the syntax in object literals, classes and Object.defineProperty, where the real value is stored, how accessors interact with inheritance, copying and JSON, and when an explicit method is the better choice.",
   "difficulty": "intermediate",
@@ -1337,6 +1603,83 @@
   "words": 4353,
   "concepts": []
  },
+ "b1-impl-call-apply-bind": {
+  "summary": "Re-implementing `call`, `apply` and `bind` without using them forces you to understand how JavaScript decides `this` for a method call. You will build all three, see exactly where the classic \"temporary property\" trick differs from the real methods, and make your `bind` support partial arguments and `new`.",
+  "difficulty": "intermediate",
+  "minutes": 45,
+  "words": 2917,
+  "concepts": []
+ },
+ "b1-impl-curry-compose": {
+  "summary": "`curry`, `compose` and `pipe` are the small functional-programming tools behind point-free code, Redux middleware and RxJS operators. You will implement each from closures and `reduce`, understand why `curry` depends on `fn.length` and when that breaks, and learn when these tools make code clearer and when they make it harder to read.",
+  "difficulty": "intermediate",
+  "minutes": 40,
+  "words": 2499,
+  "concepts": []
+ },
+ "b1-impl-debounce-throttle": {
+  "summary": "Debounce, throttle and memoize are the three function wrappers every frontend engineer is asked to write. Each is a closure that remembers a little state — a timer, a timestamp or a cache — and decides whether to call the real function. You will build all three from scratch, add the options interviewers ask about (leading and trailing calls, cancel, custom cache keys), and learn where each one breaks.",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 3443,
+  "concepts": []
+ },
+ "b1-impl-deep-clone": {
+  "summary": "Deep clone, flatten and deep equality are three recursive walks over nested data — the same traversal with a different job at each node. You will implement all three by hand, handle cycles, shared references, dates, maps and sets, and learn exactly where `JSON.parse(JSON.stringify(x))` and `structuredClone` fall short.",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 3185,
+  "concepts": []
+ },
+ "b1-impl-event-emitter": {
+  "summary": "An event emitter lets one part of a program announce \"this happened\" while any number of other parts react, without either side knowing about the other. You will build one from scratch — `on`, `off`, `once`, `emit` — and learn the details that separate a toy from a correct implementation, such as snapshotting listeners during `emit`, function identity, error handling and leaks.",
+  "difficulty": "intermediate",
+  "minutes": 40,
+  "words": 3317,
+  "concepts": []
+ },
+ "b1-impl-get-path": {
+  "summary": "A `get(object, path, defaultValue)` helper reads a deeply nested value such as `'orders[0].items[0].qty'` without crashing when something along the way is missing. You will build one from scratch — a path parser, a safe walk and a precise default rule — and learn why the same parsing code becomes a security hole when it is reused to write values.",
+  "difficulty": "intermediate",
+  "minutes": 40,
+  "words": 3294,
+  "concepts": []
+ },
+ "b1-impl-lru": {
+  "summary": "A Least Recently Used (LRU) cache keeps a fixed number of entries and, when full, throws away the one that has gone unused the longest. You will implement it in JavaScript twice — with the insertion order of `Map`, and with the classic hash map plus doubly linked list — and learn why both give O(1) `get` and `set`.",
+  "difficulty": "intermediate",
+  "minutes": 40,
+  "words": 3132,
+  "concepts": []
+ },
+ "b1-impl-map-filter-reduce": {
+  "summary": "Writing `map`, `filter`, `reduce` and `forEach` yourself is a classic interview exercise because each is a small loop with precise rules about callbacks, `thisArg`, holes and the starting accumulator. You will build all four from a plain `for` loop, match the behaviour the ECMAScript specification describes, and learn which details interviewers probe.",
+  "difficulty": "intermediate",
+  "minutes": 45,
+  "words": 3373,
+  "concepts": []
+ },
+ "b1-impl-promise-combinators": {
+  "summary": "Implementing `Promise.all`, `Promise.allSettled` and `Promise.race` from scratch shows whether you understand how promises settle, why results must be stored by index, and what happens to the promises that lose. You will build all three (plus `Promise.any`), match the built-ins on edge cases such as empty input and non-promise values, and learn the bugs interviewers look for.",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 2848,
+  "concepts": []
+ },
+ "b1-impl-promise": {
+  "summary": "Building your own Promise class is the most thorough way to understand what `then`, chaining and `await` really do. You will implement one step by step — states, the executor, asynchronous handlers, chaining, thenable adoption, `catch` and `finally` — and check its behaviour against the native Promise.",
+  "difficulty": "advanced",
+  "minutes": 50,
+  "words": 3663,
+  "concepts": []
+ },
+ "b1-impl-retry-sleep": {
+  "summary": "Three small promise utilities show up in almost every production codebase and in many interviews — `sleep`, `retry` with exponential backoff, and a concurrency limiter. You will build each one from scratch, make them cancellable with `AbortSignal`, and learn the details that decide whether they help a struggling system or make it worse.",
+  "difficulty": "intermediate",
+  "minutes": 45,
+  "words": 3454,
+  "concepts": []
+ },
  "b1-in-delete-void": {
   "summary": "`in`, `delete`, `void` and `instanceof` are JavaScript's keyword operators: they test whether a property exists, remove a property, discard a value, and check an object's prototype chain. You will learn exactly what each one checks or changes, the surprises around inherited properties, arrays, strict mode and primitives, and the modern alternatives you should often reach for instead.",
   "difficulty": "beginner",
@@ -1351,6 +1694,26 @@
   "words": 3012,
   "concepts": []
  },
+ "b1-intl-datetime": {
+  "summary": "`Intl.DateTimeFormat` turns an instant into text a person in a particular language and time zone expects to read. You will learn how locales and options control the output, how to show any IANA time zone, how `formatToParts` and `formatRange` give you structured and range output, and why formatted strings are for display only.",
+  "difficulty": "intermediate",
+  "minutes": 40,
+  "words": 2904,
+  "concepts": []
+ },
+ "b1-iterators": {
+  "summary": "Iterators are the one protocol behind `for...of`, spread, destructuring, `Map`, `Set` and streaming data in JavaScript. You will learn how the protocol works, how to make your own objects iterable, how generators write iterators for you, and how async iterators walk data that arrives over time.",
+  "difficulty": "intermediate",
+  "minutes": 55,
+  "words": 6934,
+  "concepts": [
+   "b1-iterable-protocol",
+   "b1-symbol-iterator",
+   "b1-generators",
+   "b1-yield",
+   "b1-async-iterators"
+  ]
+ },
  "b1-js-engine": {
   "summary": "A JavaScript engine is the program that turns your source code into running behaviour — it parses, compiles and executes code, keeps the call stack, and manages memory on a garbage-collected heap. You will learn what an engine does and does not do, how it differs from the browser or Node.js that hosts it, and how the heap holds your objects and closures.",
   "difficulty": "intermediate",
@@ -1359,6 +1722,30 @@
   "concepts": [
    "b1-engine-vs-host",
    "b1-heap"
+  ]
+ },
+ "b1-js-oop-principles": {
+  "summary": "Encapsulation, polymorphism and composition are the design ideas that keep object-based code changeable as it grows. You will learn what each one means in JavaScript specifically — where they come from closures, private fields, prototype lookup and plain object references — and how to choose composition or inheritance for a real design.",
+  "difficulty": "intermediate",
+  "minutes": 55,
+  "words": 5687,
+  "concepts": []
+ },
+ "b1-json-replacer-reviver": {
+  "summary": "`JSON.stringify` and `JSON.parse` accept hooks that let you decide how each value is written and rebuilt: a replacer and `toJSON` on the way out, a reviver on the way in. You will learn the exact order in which they run, what `this` and the key are at each call, and how to use them for redaction, dates, `BigInt`, `Map`/`Set` and class instances without corrupting data.",
+  "difficulty": "intermediate",
+  "minutes": 40,
+  "words": 3197,
+  "concepts": []
+ },
+ "b1-json": {
+  "summary": "JSON is a text format for data that looks like JavaScript object syntax but follows much stricter rules and supports far fewer types. You will learn exactly what JSON can express, how `JSON.stringify` and `JSON.parse` convert between text and values, and what silently disappears, changes or throws along the way.",
+  "difficulty": "beginner",
+  "minutes": 50,
+  "words": 4261,
+  "concepts": [
+   "b1-json-stringify-parse",
+   "b1-json-unsupported"
   ]
  },
  "b1-let": {
@@ -1388,6 +1775,22 @@
    "b1-short-circuit"
   ]
  },
+ "b1-long-tasks": {
+  "summary": "A long task is a stretch of main-thread work of 50 ms or more, during which the page cannot respond to input or paint. You will learn why run-to-completion makes long tasks freeze the page, how to detect them, and how to fix them by splitting work, yielding to the event loop and moving computation to workers.",
+  "difficulty": "intermediate",
+  "minutes": 35,
+  "words": 2730,
+  "concepts": []
+ },
+ "b1-map": {
+  "summary": "A Map is JavaScript's purpose-built dictionary - it associates keys of any type with values, remembers insertion order and knows its own size. You will learn its API and equality rule, the patterns it is used for, and how to decide between a Map and a plain object.",
+  "difficulty": "beginner",
+  "minutes": 45,
+  "words": 3484,
+  "concepts": [
+   "b1-map-vs-object"
+  ]
+ },
  "b1-math": {
   "summary": "Math is JavaScript's built-in library of numeric functions and constants — min and max, powers and roots, logarithms, trigonometry, rounding and random numbers. You will learn how each group behaves at its edges, why Math.round(-2.5) is -2, how to pick random integers and shuffle without bias, and when Math.random must be replaced by the Web Crypto API.",
   "difficulty": "beginner",
@@ -1405,6 +1808,24 @@
   "words": 4610,
   "concepts": []
  },
+ "b1-memory-leaks": {
+  "summary": "A memory leak in JavaScript is memory the program keeps reachable after it stops needing it. You will learn the handful of patterns that cause almost every leak in browsers and Node — forgotten listeners, timers, unbounded caches, detached DOM and closures — and how to prove and locate a leak with heap snapshots.",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 3928,
+  "concepts": [
+   "b1-heap-snapshots"
+  ]
+ },
+ "b1-memory-management": {
+  "summary": "JavaScript allocates memory for you and reclaims it automatically once nothing can reach it any more. You will learn the memory lifecycle, the reachability rule the garbage collector applies, and how your references decide how long data stays alive in long-running pages and Node servers.",
+  "difficulty": "intermediate",
+  "minutes": 40,
+  "words": 3366,
+  "concepts": [
+   "b1-reachability"
+  ]
+ },
  "b1-microtasks": {
   "summary": "JavaScript hosts keep two kinds of waiting work — tasks (macrotasks) such as timers and events, and microtasks such as promise callbacks — and they run them with very different priority. You will learn exactly what goes into each queue, when each queue is processed, how promises and await create microtasks, and how to use that knowledge to batch work without freezing the page.",
   "difficulty": "intermediate",
@@ -1414,6 +1835,24 @@
    "b1-macrotasks",
    "b1-queue-microtask",
    "b1-microtask-starvation"
+  ]
+ },
+ "b1-module-pattern": {
+  "summary": "Before JavaScript had modules, developers built them from functions — an immediately invoked function that keeps its variables private and returns a public object. You will learn how the IIFE module pattern and its revealing variant work, why they were needed, how AMD and UMD grew out of them, and how to read and safely maintain code that still uses them.",
+  "difficulty": "intermediate",
+  "minutes": 35,
+  "words": 2650,
+  "concepts": []
+ },
+ "b1-modules": {
+  "summary": "An ES module is a JavaScript file with its own private scope that shares code only through explicit `export` and `import` statements. You will learn how the module system finds, links and runs files, how to choose between named and default exports, and how dynamic `import()` loads code only when it is needed.",
+  "difficulty": "intermediate",
+  "minutes": 55,
+  "words": 5231,
+  "concepts": [
+   "b1-export-import",
+   "b1-default-named-exports",
+   "b1-dynamic-import"
   ]
  },
  "b1-name-resolution": {
@@ -1477,6 +1916,13 @@
    "b1-object-freeze-seal",
    "b1-object-hasown"
   ]
+ },
+ "b1-object-create": {
+  "summary": "`Object.create(proto)` makes a new empty object whose prototype is exactly the object you pass, without running any constructor. You will learn how it sets up delegation directly, how its second argument defines properties with descriptors, when a null-prototype object is the right dictionary, and how it underpins pre-class inheritance.",
+  "difficulty": "intermediate",
+  "minutes": 40,
+  "words": 3991,
+  "concepts": []
  },
  "b1-object-literals": {
   "summary": "An object literal is the `{ … }` syntax that creates a new object with the properties you list. You will learn exactly what each form of key and value means — plain keys, dot and bracket access, computed names, shorthand properties and methods, spread and the special `__proto__` key — and the bugs each one prevents or causes.",
@@ -1562,6 +2008,36 @@
    "b1-call-by-sharing"
   ]
  },
+ "b1-profiling-basics": {
+  "summary": "When a page feels slow or memory keeps growing, profiling turns the feeling into evidence. You will learn how a sampling CPU profiler and flame chart show where time goes, how to instrument your own code with performance.mark and measure, how heap snapshots reveal what keeps memory alive, and how to profile in conditions that reflect what users experience.",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 3879,
+  "concepts": []
+ },
+ "b1-promise-combinators": {
+  "summary": "Promise combinators — `Promise.all`, `Promise.allSettled`, `Promise.race` and `Promise.any` — turn many promises into one, each with a different rule for when the combined promise succeeds or fails. You will learn the exact rule of each, how they behave with empty input and losing promises, and how to pick and combine them in real loading, timeout and fallback code.",
+  "difficulty": "intermediate",
+  "minutes": 55,
+  "words": 3608,
+  "concepts": [
+   "b1-promise-all",
+   "b1-promise-allsettled",
+   "b1-promise-race",
+   "b1-promise-any"
+  ]
+ },
+ "b1-promises": {
+  "summary": "A promise is an object that stands for a result that is not ready yet. You will learn how a promise moves from pending to fulfilled or rejected, how `.then`, `.catch` and `.finally` attach work to that result, and how chaining turns nested callbacks into a flat, readable sequence with one error path.",
+  "difficulty": "intermediate",
+  "minutes": 55,
+  "words": 4702,
+  "concepts": [
+   "b1-promise-states",
+   "b1-then-catch-finally",
+   "b1-promise-chaining"
+  ]
+ },
  "b1-property-descriptors": {
   "summary": "Every JavaScript property is more than a key and a value — it is a small record, the property descriptor, that also says whether the value can change, whether the property is listed, and whether its settings can be changed or the property deleted. You will learn to read and write descriptors with Object.defineProperty, what each of the three flags controls, and how they explain read-only built-ins, Object.freeze and silent assignment failures.",
   "difficulty": "intermediate",
@@ -1572,6 +2048,22 @@
    "b1-writable-enumerable-configurable"
   ]
  },
+ "b1-prototype-chain": {
+  "summary": "Prototypes link to other prototypes, forming a chain that JavaScript walks whenever a property is missing on an object. You will learn how the chain is built, exactly how reads and writes travel along it, why assignment usually shadows instead of changing the prototype, and how `extends`, `super` and `instanceof` are all expressed in terms of the same chain.",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 4366,
+  "concepts": [
+   "b1-property-lookup"
+  ]
+ },
+ "b1-prototype-pollution": {
+  "summary": "Prototype pollution is a security bug in which attacker-controlled keys such as `__proto__` or `constructor.prototype` let a merge or path-setting routine write onto `Object.prototype`, so every object in the program inherits the attacker's values. You will learn exactly why the language allows it, which code patterns are vulnerable, what an attacker can do with it, and how to defend in layers.",
+  "difficulty": "advanced",
+  "minutes": 45,
+  "words": 4187,
+  "concepts": []
+ },
  "b1-prototypes": {
   "summary": "Every JavaScript object has a hidden link to another object, its prototype, and borrows any property it does not have from there. You will learn why the language shares behaviour this way instead of copying it, how built-ins, constructors and classes all rest on the same link, and how to read and change that link safely with `Object.getPrototypeOf` and friends.",
   "difficulty": "intermediate",
@@ -1579,6 +2071,17 @@
   "words": 5099,
   "concepts": [
    "b1-internal-prototype"
+  ]
+ },
+ "b1-proxy": {
+  "summary": "A Proxy wraps an object and lets your code run whenever someone reads, writes, deletes, enumerates or calls through it, and Reflect gives you the default behaviour of each of those operations as a plain function. You will learn how traps and invariants work, why Reflect and the receiver matter, and how validation layers and reactive frameworks such as Vue 3 are built on top of them.",
+  "difficulty": "advanced",
+  "minutes": 60,
+  "words": 5877,
+  "concepts": [
+   "b1-proxy-traps",
+   "b1-reflect",
+   "b1-reactivity-concept"
   ]
  },
  "b1-pure-functions": {
@@ -1595,6 +2098,43 @@
   "difficulty": "intermediate",
   "minutes": 50,
   "words": 4446,
+  "concepts": []
+ },
+ "b1-referential-transparency": {
+  "summary": "An expression is referentially transparent when you can replace it with its value without changing what the program does. You will learn how to test any JavaScript expression against that rule, what breaks it (time, randomness, mutation, I/O and hidden state), and why memoization, React's render skipping and safe refactoring all depend on it.",
+  "difficulty": "intermediate",
+  "minutes": 35,
+  "words": 2762,
+  "concepts": []
+ },
+ "b1-regex-basics": {
+  "summary": "A regular expression is a small pattern language for describing text, and in JavaScript every pattern is a RegExp object created either with a /literal/ or with the RegExp constructor. You will learn when to use each form, how escaping really works, why a regex object can carry state between calls, and the building blocks — classes, quantifiers, anchors and flags — that every pattern is made from.",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 4697,
+  "concepts": [
+   "b1-regex-classes-quantifiers"
+  ]
+ },
+ "b1-regex-groups": {
+  "summary": "Parentheses turn a regex from a yes/no test into an extraction tool, and lookaround lets a pattern check its surroundings without consuming them. You will learn capturing, named and non-capturing groups, backreferences, and the four lookaround assertions, with the numbering rules, undefined captures and performance traps that catch people out.",
+  "difficulty": "intermediate",
+  "minutes": 45,
+  "words": 2705,
+  "concepts": []
+ },
+ "b1-regex-methods": {
+  "summary": "JavaScript spreads regex functionality across RegExp methods (test, exec) and string methods (match, matchAll, replace, replaceAll, split, search). You will learn exactly what each returns, how the g flag and lastIndex change their behaviour, and which method to reach for when you need a yes/no answer, every match with its groups, or a transformed string.",
+  "difficulty": "intermediate",
+  "minutes": 45,
+  "words": 3079,
+  "concepts": []
+ },
+ "b1-requestanimationframe-js": {
+  "summary": "requestAnimationFrame asks the browser to call a function just before it next paints the screen, passing a timestamp for that frame. You will learn where these callbacks sit in the event loop, how they differ from timers and microtasks, and how to write animation loops that are smooth, frame-rate independent and cancellable.",
+  "difficulty": "intermediate",
+  "minutes": 35,
+  "words": 3387,
   "concepts": []
  },
  "b1-runtimes": {
@@ -1631,6 +2171,52 @@
    "b1-script-module"
   ]
  },
+ "b1-sequential-vs-parallel": {
+  "summary": "When code has several asynchronous operations to do, it can wait for them one after another or start them together and wait once. You will learn why that choice often decides whether a page takes 100 ms or 300 ms, how to spot accidental sequential code, how to run partly dependent work in the fastest safe order, and how to cap concurrency so \"parallel\" does not overload a server.",
+  "difficulty": "intermediate",
+  "minutes": 45,
+  "words": 3222,
+  "concepts": []
+ },
+ "b1-set": {
+  "summary": "A Set is a collection that holds each value at most once and can answer \"is this value in here?\" without scanning. You will learn how Set decides that two values are the same, how it keeps insertion order while still looking values up quickly, and when to choose it over an array.",
+  "difficulty": "beginner",
+  "minutes": 40,
+  "words": 3422,
+  "concepts": [
+   "b1-set-vs-array"
+  ]
+ },
+ "b1-setinterval": {
+  "summary": "setInterval asks the host to run a function again and again, roughly every n milliseconds, until clearInterval stops it. You will learn how repeats are actually scheduled, why intervals drift and never overlap synchronous runs but can overlap async ones, and when a chain of setTimeout calls is the better tool.",
+  "difficulty": "beginner",
+  "minutes": 40,
+  "words": 3506,
+  "concepts": []
+ },
+ "b1-settimeout": {
+  "summary": "setTimeout asks the host to run a function later, after at least a given number of milliseconds, and clearTimeout cancels that request. You will learn what really happens between the call and the callback, why the delay is a minimum and not a promise, and how to use timers safely for delays, cancellation, timeouts and retries.",
+  "difficulty": "beginner",
+  "minutes": 45,
+  "words": 4358,
+  "concepts": [
+   "b1-minimum-delay"
+  ]
+ },
+ "b1-source-maps": {
+  "summary": "The code a browser runs is usually not the code you wrote — it has been compiled, bundled and minified. A source map is a JSON file that maps every position in the generated code back to your original files, lines, columns and names, so debuggers and error trackers can show you your own code. You will learn what is inside one, how tools find and use it, and how to configure maps safely for development and production.",
+  "difficulty": "intermediate",
+  "minutes": 40,
+  "words": 3215,
+  "concepts": []
+ },
+ "b1-spread-rest": {
+  "summary": "The three dots `...` either spread a collection out into individual values or gather individual values into a collection, depending on where they appear. You will learn every place each form is allowed, the exact rules they follow, why every copy they make is shallow, and how they power the immutable updates used throughout modern front-end code.",
+  "difficulty": "beginner",
+  "minutes": 45,
+  "words": 5088,
+  "concepts": []
+ },
  "b1-stale-closures": {
   "summary": "A stale closure is a long-lived function that keeps reading variables from an earlier call or render after the program has moved on to newer ones. You will learn why this happens even though closures read live variables, how it shows up in plain JavaScript and in React components, and the four reliable ways to fix it.",
   "difficulty": "intermediate",
@@ -1638,6 +2224,15 @@
   "words": 3231,
   "concepts": [
    "b1-closures-react"
+  ]
+ },
+ "b1-stale-requests": {
+  "summary": "When several requests for the same piece of UI overlap, an old response can arrive last and overwrite a newer one. This lesson shows why that race happens, the standard fixes — request identity checks and aborting superseded work — and the related resilience patterns of timeouts, retries with backoff, and in-flight deduplication.",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 3895,
+  "concepts": [
+   "b1-timeouts-retries"
   ]
  },
  "b1-statements-expressions": {
@@ -1673,6 +2268,16 @@
   "minutes": 40,
   "words": 3479,
   "concepts": []
+ },
+ "b1-symbols": {
+  "summary": "A symbol is a primitive value that is guaranteed to be unique, used as a property key that cannot clash with any other. You will learn how symbols behave as keys, when to share them through the global registry, and how the built-in \"well-known\" symbols let your objects plug into `for...of`, `instanceof`, type conversion and other language features.",
+  "difficulty": "intermediate",
+  "minutes": 40,
+  "words": 4255,
+  "concepts": [
+   "b1-symbol-for",
+   "b1-well-known-symbols"
+  ]
  },
  "b1-syntax-basics": {
   "summary": "JavaScript source code is text that the engine breaks into tokens — names, keywords, literals and punctuation — and assembles into statements before anything runs. You will learn the building blocks of that text, the rules for naming things, how comments, case, semicolons and strict mode work, and how to print output with the console so you can see what your code is doing.",
@@ -1714,6 +2319,13 @@
    "b1-escape-sequences"
   ]
  },
+ "b1-temporal-api": {
+  "summary": "`Temporal` is the modern JavaScript date-and-time API designed to replace most uses of `Date`. You will learn its core idea — separate, immutable types for instants, calendar dates, wall-clock times and zoned date-times — how it fixes the classic `Date` pitfalls, how to convert between it and `Date`, and how to adopt it while engine support is still uneven.",
+  "difficulty": "intermediate",
+  "minutes": 35,
+  "words": 2573,
+  "concepts": []
+ },
  "b1-ternary": {
   "summary": "The conditional (ternary) operator `condition ? a : b` chooses between two values inside an expression and evaluates only the branch it picks. You will learn its exact evaluation rules, its low precedence and right-associativity, where it beats `if`/`else` (assignments, returns, template literals, JSX), and where nested ternaries should be replaced with something clearer.",
   "difficulty": "beginner",
@@ -1734,6 +2346,20 @@
    "b1-this-arrow",
    "b1-this-lost"
   ]
+ },
+ "b1-throttle": {
+  "summary": "Throttling lets a function run at most once per interval while events keep firing, so scroll, drag and mouse-move handlers stay responsive without doing hundreds of updates a second. You will implement timestamp and timer-based throttles, add a trailing call so the final event is never lost, and learn when requestAnimationFrame is the better throttle.",
+  "difficulty": "intermediate",
+  "minutes": 35,
+  "words": 2434,
+  "concepts": []
+ },
+ "b1-throw-try-catch": {
+  "summary": "throw stops the current work and sends an error up the call stack; try, catch and finally decide where it stops and what cleanup always happens. You will learn exactly how control moves through these blocks, including the edge cases with return, rethrowing and asynchronous code.",
+  "difficulty": "beginner",
+  "minutes": 40,
+  "words": 3487,
+  "concepts": []
  },
  "b1-to-primitive": {
   "summary": "Operators such as `+`, `-`, `<` and `==` only work on primitive values, so when you hand them an object, JavaScript first asks the object to turn itself into a primitive. You will learn the exact algorithm the engine follows, the \"hint\" that decides between a number and a string, and how `valueOf`, `toString` and `Symbol.toPrimitive` let your own objects take part — or deliberately refuse to.",
@@ -1795,6 +2421,13 @@
   "words": 3173,
   "concepts": []
  },
+ "b1-unhandled-rejection": {
+  "summary": "A promise that rejects with no handler attached is an unhandled rejection — the asynchronous version of an uncaught exception. You will learn what counts as handling, when browsers and Node.js decide a rejection is unhandled, how each reacts, and the code patterns that cause it.",
+  "difficulty": "intermediate",
+  "minutes": 40,
+  "words": 3081,
+  "concepts": []
+ },
  "b1-unicode-strings": {
   "summary": "JavaScript stores text as UTF-16 code units, which is why `'🙂'.length` is 2 and why reversing or truncating a string can corrupt it. You will learn the three levels of \"character\" — code units, code points and grapheme clusters — which APIs work at each level, and how to count, slice, compare and encode international text correctly.",
   "difficulty": "intermediate",
@@ -1839,11 +2472,251 @@
    "b1-redeclaration"
   ]
  },
+ "b1-weakmap": {
+  "summary": "A WeakMap associates data with objects without keeping those objects alive - when a key object becomes unreachable, its entry disappears with it. You will learn why an ordinary Map leaks in this situation, what \"weakly held\" means to the garbage collector, why a WeakMap cannot be counted or iterated, and where WeakRef and FinalizationRegistry fit.",
+  "difficulty": "intermediate",
+  "minutes": 40,
+  "words": 3764,
+  "concepts": [
+   "b1-weak-references"
+  ]
+ },
+ "b1-weakset": {
+  "summary": "A WeakSet records which objects belong to a group without keeping those objects alive. You will learn its three-method API, why it accepts only objects and cannot be counted or iterated, and how it is used to mark objects as visited, processed or genuine.",
+  "difficulty": "intermediate",
+  "minutes": 25,
+  "words": 2334,
+  "concepts": []
+ },
  "b1-what-is-javascript": {
   "summary": "JavaScript is a high-level, dynamically typed, garbage-collected language that always runs inside a host such as a browser or Node.js. You will learn what kind of language it is, where it came from, which parts belong to the language and which to the host, and why those facts explain most of its surprising behaviour.",
   "difficulty": "beginner",
   "minutes": 35,
   "words": 3265,
+  "concepts": []
+ },
+ "b2-as-const-objects": {
+  "summary": "Adding `as const` to an object literal tells TypeScript to keep every value's exact literal type and to make every property readonly, at every level. You will learn why TypeScript normally widens `\"/about\"` to `string`, how `as const` stops that, how to derive key and value unions from the object, how `satisfies` checks its shape without losing the literals, and why this pattern has become the standard replacement for enums.",
+  "difficulty": "intermediate",
+  "minutes": 45,
+  "words": 3104,
+  "concepts": []
+ },
+ "b2-enums": {
+  "summary": "An enum gives a name to each value in a fixed set of constants — order statuses, directions, log levels — and creates both a type and a real JavaScript object. You will learn how numeric and string enums are written, exactly what JavaScript they compile to, how the type checker treats them, and the pitfalls (reverse mappings, const enums, modern build tools) that shape when teams use them.",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 3571,
+  "concepts": [
+   "b2-string-enums"
+  ]
+ },
+ "b2-explicit-types": {
+  "summary": "An explicit type is a type you write yourself instead of letting the compiler work it out. You will learn what writing a type actually changes — which direction the compiler checks, where errors appear, what information is kept or lost — and how explicit types differ from type assertions and `satisfies`.",
+  "difficulty": "beginner",
+  "minutes": 35,
+  "words": 2664,
+  "concepts": []
+ },
+ "b2-interface-vs-type-when": {
+  "summary": "Interfaces and type aliases can both describe object shapes, so TypeScript developers constantly have to choose between them. You will learn exactly where the two overlap, the handful of real differences (what they can name, merging, extension errors, index-signature compatibility, performance), and a simple rule for choosing that you can defend in a code review or interview.",
+  "difficulty": "intermediate",
+  "minutes": 35,
+  "words": 2556,
+  "concepts": []
+ },
+ "b2-interfaces": {
+  "summary": "An interface gives a name to the shape of an object — which properties it has, their types, which are optional or read-only, and which methods it offers. You will learn how to declare and use interfaces, how the compiler checks values against them, how to build bigger interfaces from smaller ones with `extends`, and why none of it exists at runtime.",
+  "difficulty": "beginner",
+  "minutes": 50,
+  "words": 4364,
+  "concepts": [
+   "b2-extending-interfaces"
+  ]
+ },
+ "b2-literal-unions-vs-enums": {
+  "summary": "TypeScript offers two main ways to model a fixed set of values — a union of literal types such as `\"idle\" | \"loading\" | \"done\"`, or an enum. You will compare them on what they compile to, how they accept data, how you list their values, how they refactor and how they work with modern tooling, and leave with a clear rule for choosing.",
+  "difficulty": "intermediate",
+  "minutes": 40,
+  "words": 2762,
+  "concepts": []
+ },
+ "b2-null-undefined-ts": {
+  "summary": "JavaScript has two values for \"nothing here\" — null and undefined — and TypeScript gives each its own type. You will learn how they differ at runtime, how to model absence precisely with optional properties and unions, and how to handle possibly-missing values safely with narrowing, ?? and ?.",
+  "difficulty": "beginner",
+  "minutes": 40,
+  "words": 3294,
+  "concepts": []
+ },
+ "b2-object-types": {
+  "summary": "An object type lists the properties a value must have and the type of each one. You will learn how to write object types, why TypeScript compares them by shape rather than by name, why a typo in an object literal is an error but the same typo in a variable is not, and how optional and readonly properties describe data that may be missing or must not change.",
+  "difficulty": "beginner",
+  "minutes": 55,
+  "words": 5020,
+  "concepts": [
+   "b2-optional-properties",
+   "b2-readonly-properties"
+  ]
+ },
+ "b2-optional-static-typing": {
+  "summary": "In TypeScript you rarely have to write types everywhere — the compiler infers most of them, and annotations are optional, so typed and untyped code can coexist. You will learn what is inferred, where annotations are still required or worth adding, how strictness settings change the rules, and how this design lets a JavaScript codebase become typed one file at a time.",
+  "difficulty": "beginner",
+  "minutes": 35,
+  "words": 2364,
+  "concepts": []
+ },
+ "b2-parameter-destructuring": {
+  "summary": "Destructuring a parameter unpacks the properties of an object (or the items of a tuple) right in the function's parameter list. You will learn where the type annotation goes, why `{ x: number }` inside a pattern does not mean what it looks like, how defaults interact with optional properties, and how to type rest properties and destructured unions.",
+  "difficulty": "beginner",
+  "minutes": 40,
+  "words": 3197,
+  "concepts": []
+ },
+ "b2-primitive-object-types": {
+  "summary": "TypeScript describes every JavaScript value as either a primitive (string, number, boolean, bigint, symbol, null, undefined) or an object. You will learn how each primitive type maps to real runtime values, why lowercase `string` and uppercase `String` are different things, and how the primitive/object split explains copying, comparison and mutation.",
+  "difficulty": "beginner",
+  "minutes": 45,
+  "words": 4151,
+  "concepts": [
+   "b2-type-string",
+   "b2-type-number",
+   "b2-type-boolean"
+  ]
+ },
+ "b2-readonly-tuples": {
+  "summary": "A readonly tuple is a fixed-shape array that the compiler will not let anyone change. You will learn how to write one, how as const produces deeply readonly literal tuples, how to derive union types from constant lists, and how to pass readonly tuples to functions without fighting the compiler.",
+  "difficulty": "intermediate",
+  "minutes": 35,
+  "words": 3141,
+  "concepts": []
+ },
+ "b2-special-types": {
+  "summary": "TypeScript has four special types that do not describe ordinary data — any, unknown, never and void. You will learn what set of values each one stands for, how the compiler treats them, and how to use them to keep untrusted data, impossible cases and side-effect-only functions under control.",
+  "difficulty": "intermediate",
+  "minutes": 55,
+  "words": 5548,
+  "concepts": [
+   "b2-avoiding-any",
+   "b2-unknown",
+   "b2-never",
+   "b2-void-ts"
+  ]
+ },
+ "b2-strict-null-checks": {
+  "summary": "strictNullChecks is the compiler flag that makes null and undefined separate types, so \"this value might be missing\" becomes something the compiler checks instead of a runtime crash. You will learn what changes when it is on, how control flow analysis proves values present, which related flags extend it, and how to switch it on in an existing codebase.",
+  "difficulty": "intermediate",
+  "minutes": 40,
+  "words": 3135,
+  "concepts": []
+ },
+ "b2-ts-disadvantages": {
+  "summary": "TypeScript has real costs — a build pipeline, a learning curve, types that can lie, friction with dynamic code and untyped libraries, and slower feedback on huge codebases. This lesson names each cost precisely, shows where it bites in code, and teaches the practices that keep it small, so you can judge when TypeScript is worth it.",
+  "difficulty": "intermediate",
+  "minutes": 30,
+  "words": 2214,
+  "concepts": []
+ },
+ "b2-ts-vs-javascript": {
+  "summary": "JavaScript is the language engines run; TypeScript is JavaScript plus a checker that runs before it. This lesson compares them precisely — syntax, typing, tooling, runtime, performance and output — so you can say exactly what changes when a project moves to TypeScript and what stays the same.",
+  "difficulty": "beginner",
+  "minutes": 35,
+  "words": 2182,
+  "concepts": []
+ },
+ "b2-ts-vs-tsx": {
+  "summary": "`.ts` files hold TypeScript; `.tsx` files hold TypeScript plus JSX, the HTML-like syntax React components use. The extension tells the parser how to read `<`, which changes what is legal in the file. You will learn why two extensions exist, what the `jsx` option emits, and the two syntax traps that catch people in `.tsx` files.",
+  "difficulty": "beginner",
+  "minutes": 30,
+  "words": 2094,
+  "concepts": []
+ },
+ "b2-tsc-compilation": {
+  "summary": "`tsc`, the TypeScript compiler, reads your `.ts` files, type-checks the whole program and emits JavaScript, declaration files and source maps according to `tsconfig.json`. You will learn what happens inside a compile, how to drive `tsc` from the command line and a config file, what its exit codes and outputs mean, and how real projects split checking from transpiling.",
+  "difficulty": "beginner",
+  "minutes": 40,
+  "words": 2603,
+  "concepts": []
+ },
+ "b2-tuples": {
+  "summary": "A tuple is an array with a fixed shape — a known number of elements and a type for each position. You will learn how to write tuples with optional, rest and labelled elements, why functions that return pairs need a tuple annotation, how tuples type rest parameters, and when an object is the better choice.",
+  "difficulty": "intermediate",
+  "minutes": 40,
+  "words": 2819,
+  "concepts": []
+ },
+ "b2-type-alias-patterns": {
+  "summary": "Experienced TypeScript engineers reuse a small set of type-alias patterns to turn domain rules into types — branded IDs, Result unions, derived input types, values-first unions, deep partials and non-empty arrays. You will learn what each pattern is for, how it works, where it stops protecting you, and how to combine them in a real module.",
+  "difficulty": "intermediate",
+  "minutes": 45,
+  "words": 3017,
+  "concepts": []
+ },
+ "b2-type-aliases": {
+  "summary": "A type alias gives a name to any type expression — a union, a tuple, a function signature, an object shape or a type computed from other types. You will learn the syntax for every kind of alias, why an alias is a new name rather than a new type, how generic and recursive aliases work, and how aliases keep complex types readable without any runtime cost.",
+  "difficulty": "beginner",
+  "minutes": 40,
+  "words": 3096,
+  "concepts": []
+ },
+ "b2-type-annotations": {
+  "summary": "A type annotation is the `: Type` syntax that attaches a type to a variable, parameter, return value, property or class member. You will learn where annotations can go, what each position means to the compiler, the syntax traps (destructuring, optional parameters, catch clauses), and why annotations vanish from the JavaScript that actually runs.",
+  "difficulty": "beginner",
+  "minutes": 40,
+  "words": 2344,
+  "concepts": []
+ },
+ "b2-type-inference": {
+  "summary": "Type inference is the TypeScript compiler working out types you did not write, from initial values, return statements, surrounding context and control flow. You will learn the rules it follows — literal widening, best common type, contextual typing, return inference, generic inference — so you can predict what the compiler infers and spot where inference needs help.",
+  "difficulty": "intermediate",
+  "minutes": 45,
+  "words": 2912,
+  "concepts": []
+ },
+ "b2-typed-arrays": {
+  "summary": "TypeScript describes a JavaScript array by the type of its elements, so the compiler can check every push, index read and map/filter chain. You will learn the array type syntax, how array methods carry element types through, how readonly arrays protect data you do not own, and how the compiler infers array types when you do not write them.",
+  "difficulty": "beginner",
+  "minutes": 50,
+  "words": 4208,
+  "concepts": [
+   "b2-readonly-arrays",
+   "b2-array-inference"
+  ]
+ },
+ "b2-union-patterns": {
+  "summary": "Unions and intersections become powerful when combined into a few standard patterns — state modelled as a discriminated union, exhaustive handling with `assertNever`, action unions for reducers, narrowing array filters, complete lookup tables, and props composed with intersections. You will learn each pattern, the bug it prevents, and how they fit together in a real UI state machine.",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 3196,
+  "concepts": []
+ },
+ "b2-unions": {
+  "summary": "A union type says a value is one of several types; an intersection type says it is all of several types at once. You will learn how the compiler treats each, why you must narrow a union before using type-specific members, how intersections combine object shapes (and when they collapse to `never`), and how the two relate to sets of values.",
+  "difficulty": "beginner",
+  "minutes": 50,
+  "words": 3579,
+  "concepts": [
+   "b2-intersections"
+  ]
+ },
+ "b2-what-is-typescript": {
+  "summary": "TypeScript is JavaScript with a static type system that is checked before the code runs and then erased. You will learn what that sentence really means, what the compiler does and does not do for you, and why the types vanish from the program that actually runs.",
+  "difficulty": "beginner",
+  "minutes": 35,
+  "words": 2807,
+  "concepts": []
+ },
+ "b2-when-explicit-vs-inferred": {
+  "summary": "Good TypeScript writes types where they protect a contract or supply missing information, and lets the compiler infer everything else. You will learn a practical decision process for every declaration — boundaries, empty or external data, literal precision — and how to recognise both over-annotated and under-annotated code.",
+  "difficulty": "intermediate",
+  "minutes": 35,
+  "words": 2400,
+  "concepts": []
+ },
+ "b2-why-typescript": {
+  "summary": "Teams adopt TypeScript because types turn assumptions into checked contracts — which makes refactoring safe, makes code self-documenting, powers precise editor tooling and removes whole categories of bugs before review. You will see each benefit in working code and learn how to adopt TypeScript so the benefits are real rather than nominal.",
+  "difficulty": "beginner",
+  "minutes": 35,
+  "words": 2193,
   "concepts": []
  },
  "b4-fiber": {
