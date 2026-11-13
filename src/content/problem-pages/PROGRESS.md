@@ -10,11 +10,11 @@ One interview walkthrough per problem: `src/content/problem-pages/<problem-id>.m
 
 ## Status
 
-**Done: 22 / 650.** NeetCode `arrays-hashing` is complete (`listOrder` 1–22).
+**Done: 35 / 650.** NeetCode `arrays-hashing` (`listOrder` 1–22) and `two-pointers` (23–35) are complete.
 
 ## Next batch (not started)
 
-NeetCode `two-pointers`, `listOrder` 23–35 (13 problems): `nc-reverse-string` … `nc-trapping-rain-water`.
+NeetCode `listOrder` 36 onwards: the next category in list order.
 
 ## Done
 
@@ -23,3 +23,4 @@ NeetCode `two-pointers`, `listOrder` 23–35 (13 problems): `nc-reverse-string` 
 | sample | arrays-hashing | `nc-two-sum` | Reference page |
 | 1 | arrays-hashing | `nc-concatenation-of-array`, `nc-contains-duplicate`, `nc-valid-anagram`, `nc-longest-common-prefix`, `nc-group-anagrams`, `nc-remove-element`, `nc-majority-element`, `nc-design-hashset`, `nc-design-hashmap` | Constraints checked against LeetCode; every approach compiled and tested |
 | 2 | arrays-hashing | `nc-sort-an-array`, `nc-sort-colors`, `nc-top-k-frequent-elements`, `nc-encode-and-decode-strings`, `nc-range-sum-query-2d-immutable`, `nc-product-of-array-except-self`, `nc-valid-sudoku`, `nc-longest-consecutive-sequence`, `nc-best-time-to-buy-sell-stock-ii`, `nc-majority-element-ii`, `nc-subarray-sum-equals-k`, `nc-first-missing-positive` | Constraints checked against LeetCode (Encode and Decode: NeetCode's free version); every approach compiled and tested |
+| 3 | two-pointers | `nc-reverse-string`, `nc-valid-palindrome`, `nc-valid-palindrome-ii`, `nc-merge-strings-alternately`, `nc-merge-sorted-array`, `nc-remove-duplicates-from-sorted-array`, `nc-two-sum-ii-input-array-is-sorted`, `nc-3sum`, `nc-4sum`, `nc-rotate-array`, `nc-container-with-most-water`, `nc-boats-to-save-people`, `nc-trapping-rain-water` | Constraints checked against LeetCode; every approach compiled and tested |
