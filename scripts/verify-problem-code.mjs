@@ -137,7 +137,8 @@ try {
       }
       // A fragment that ends in `return` must not get a trailing throw ("unreachable statement").
       const endsInReturn = /^\s*return\b[^;]*;\s*$/.test(block.code.trim().split('\n').pop() ?? '')
-      const tail = endsInReturn ? '' : '\n        throw new IllegalArgumentException("no answer");'
+      const returnsVoid = /\bvoid\s+\w+\s*\(/.test(block.fragment ?? '')
+      const tail = endsInReturn || returnsVoid ? '' : '\n        throw new IllegalArgumentException("no answer");'
       const source = complete
         ? block.code
         : `import java.util.*;\n\nclass Solution {\n    ${block.fragment} {\n${block.code}${tail}\n    }\n}\n`
