@@ -142,7 +142,45 @@ Run for every page, and for **every approach on it**, not only the recommended o
    that change once and confirm the output.
 6. `npm run problems:check` and `npm run build` pass.
 
-## 7. Batches
+## 7. CSES problems
+
+CSES problems are judged as whole programs, not as a method, so their pages differ in four ways.
+
+- **Code.** Every approach is a complete `public class Main` with a `main` method that reads standard
+  input and writes standard output. Use fast I/O: `BufferedReader` (with `StringTokenizer` or
+  `DataInputStream` for large inputs) and a `PrintWriter` or one `StringBuilder` for output, flushed
+  once. Say on the page why: `Scanner` and printing value by value are too slow at 10^5–10^6 tokens.
+- **Interview framing.** The interview script treats the problem as if an interviewer had posed it.
+  Clarifying questions cover input format, output format (spaces, newlines, "NO SOLUTION"-style
+  answers) and the stated limits, and the constraints table names the time limit (usually 1 s).
+- **Frontmatter.** `source: cses`, `difficulty` is your judgement (`easy`, `medium` or `hard`; the
+  problem list has no official difficulty), and `patterns` starts with the problem's `primaryPattern`.
+- **Tests.** `tests/<id>.java` declares `class Tests` with a helper that runs the program on a given
+  input and captures what it prints:
+
+  ```java
+  static String run(String input) throws Exception {
+      InputStream oldIn = System.in;
+      PrintStream oldOut = System.out;
+      ByteArrayOutputStream buf = new ByteArrayOutputStream();
+      try {
+          System.setIn(new ByteArrayInputStream(input.getBytes(StandardCharsets.US_ASCII)));
+          System.setOut(new PrintStream(buf, true, "US-ASCII"));
+          Main.main(new String[0]);
+      } finally {
+          System.setIn(oldIn);
+          System.setOut(oldOut);
+      }
+      return buf.toString("US-ASCII");
+  }
+  ```
+
+  Compare outputs token by token, so trailing spaces and newlines do not matter. When several outputs
+  are correct (any valid permutation, any valid split), write a checker that validates the output
+  instead of comparing it with one expected answer. Include a case at the largest input size, and
+  keep each program's run at that size well under the time limit.
+
+## 8. Batches
 
 Work in `listOrder` order, one category at a time, about ten pages per batch. After each batch:
 run the three commands above, commit with a message naming the batch, and update `PROGRESS.md`
