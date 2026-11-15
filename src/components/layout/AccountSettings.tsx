@@ -85,7 +85,7 @@ export function AccountSettings() {
             className="text-[var(--accent)] hover:underline"
             onClick={() =>
               void resendVerification()
-                .then(() => setNote('Verification email sent.'))
+                .then(() => setNote(`Confirmation email sent to ${user.email}. Check your inbox and spam folder.`))
                 .catch((e) => setNote(authErrorMessage(e)))
             }
           >

@@ -3,6 +3,7 @@ import { Link, Outlet, useLocation } from 'react-router-dom'
 import { GlobalSearch } from './GlobalSearch'
 import { Sidebar } from './Sidebar'
 import { AccountMenu } from './AccountMenu'
+import { VerifyEmailBanner } from './VerifyEmailBanner'
 import { useAuthStore } from '@/stores/auth-store'
 import { useUserStore } from '@/stores/user-store'
 import { applyAppearance } from '@/lib/appearance'
@@ -122,6 +123,7 @@ export function AppShell() {
           </label>
           <AccountMenu />
         </header>
+        <VerifyEmailBanner />
         <main id="main-scroll" tabIndex={-1} className="cd-scroll flex-1 overflow-y-auto focus:outline-none">
           <Outlet />
         </main>

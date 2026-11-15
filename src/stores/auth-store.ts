@@ -33,12 +33,18 @@ type AuthStore = {
   syncStatus: SyncStatus
   syncError: string | null
   lastSyncedAt: number | null
+  /** Email a confirmation link was sent to during this session (shown in the verify banner). */
+  verificationSentTo: string | null
+  /** Epoch ms of the last confirmation email, for the resend cooldown. */
+  verificationSentAt: number | null
   init: () => void
   signInWithGoogle: () => Promise<void>
   signInWithEmail: (email: string, password: string) => Promise<void>
   signUpWithEmail: (name: string, email: string, password: string) => Promise<void>
   sendPasswordReset: (email: string) => Promise<void>
   resendVerification: () => Promise<void>
+  /** Re-reads the account from Firebase (e.g. after the user clicks the email link). */
+  refreshUser: () => Promise<void>
   signOut: () => Promise<void>
   syncNow: () => Promise<void>
 }
@@ -75,6 +81,15 @@ function toAccountUser(u: User): AccountUser {
 }
 
 /** Turns Firebase error codes into messages a learner can act on. */
+/** Seconds a user must wait between confirmation emails (Firebase also rate-limits). */
+export const VERIFY_RESEND_COOLDOWN_S = 60
+
+/** Where the confirmation link sends people back to once verified. */
+function verificationContinueUrl(): string | undefined {
+  if (typeof window === 'undefined') return undefined
+  return `${window.location.origin}/?verified=1`
+}
+
 export function authErrorMessage(error: unknown): string {
   const code = (error as { code?: string })?.code ?? ''
   switch (code) {
@@ -267,6 +282,8 @@ export const useAuthStore = create<AuthStore>((set, get) => {
     syncStatus: 'idle',
     syncError: null,
     lastSyncedAt: null,
+    verificationSentTo: null,
+    verificationSentAt: null,
 
     init: () => {
       if (initialized || !isCloudConfigured) return
@@ -293,7 +310,12 @@ export const useAuthStore = create<AuthStore>((set, get) => {
           window.addEventListener('pagehide', flushOnHide)
           document.addEventListener('visibilitychange', () => {
             if (document.visibilityState === 'hidden') flushOnHide()
+            // Coming back from the inbox: pick up a just-confirmed email.
+            else if (get().user && !get().user!.emailVerified) void get().refreshUser()
           })
+          if (new URLSearchParams(window.location.search).has('verified')) {
+            setTimeout(() => void get().refreshUser(), 1500)
+          }
         }
       })()
     },
@@ -326,8 +348,17 @@ export const useAuthStore = create<AuthStore>((set, get) => {
       const [{ auth }, mod] = await Promise.all([getFirebase(), import('firebase/auth')])
       const cred = await mod.createUserWithEmailAndPassword(auth, email.trim(), password)
       if (name.trim()) await mod.updateProfile(cred.user, { displayName: name.trim() })
-      void mod.sendEmailVerification(cred.user).catch(() => undefined)
       set({ user: toAccountUser(cred.user) })
+      // Signup confirmation email (Firebase sends it for free). The account already
+      // exists at this point, so a failure here shouldn't fail the signup — the
+      // verify banner lets the user resend.
+      try {
+        const url = verificationContinueUrl()
+        await mod.sendEmailVerification(cred.user, url ? { url } : undefined)
+        set({ verificationSentTo: cred.user.email, verificationSentAt: Date.now() })
+      } catch {
+        set({ verificationSentTo: null, verificationSentAt: null })
+      }
     },
 
     sendPasswordReset: async (email) => {
@@ -343,7 +374,23 @@ export const useAuthStore = create<AuthStore>((set, get) => {
         getFirebase(),
         import('firebase/auth'),
       ])
-      if (auth.currentUser) await sendEmailVerification(auth.currentUser)
+      const user = auth.currentUser
+      if (!user) return
+      const url = verificationContinueUrl()
+      await sendEmailVerification(user, url ? { url } : undefined)
+      set({ verificationSentTo: user.email, verificationSentAt: Date.now() })
+    },
+
+    refreshUser: async () => {
+      const { auth } = await getFirebase()
+      const user = auth.currentUser
+      if (!user) return
+      try {
+        await user.reload()
+        set({ user: toAccountUser(user) })
+      } catch {
+        /* offline — try again next time */
+      }
     },
 
     signOut: async () => {

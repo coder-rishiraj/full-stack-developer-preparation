@@ -30,6 +30,19 @@ Code: `src/lib/firebase.ts`, `src/lib/cloud-sync.ts`, `src/stores/auth-store.ts`
 `src/pages/LoginPage.tsx`, `src/components/layout/AccountMenu.tsx`,
 `src/components/layout/AccountSettings.tsx`. Security rules: `firestore.rules`.
 
+## Signup email
+
+Email/password signups get Firebase's free confirmation email (subject "Verify your email for Career
+Duo", from `noreply@career-duo.firebaseapp.com`). The link returns people to the site
+(`/?verified=1`), which re-checks their status. Until they confirm, a banner shows where the email went
+with **Resend** (60 s cooldown) and **I've confirmed** buttons. Google signups are already verified by
+Google, so no email is sent to them.
+
+Firebase currently blocks template edits on this new project ("Email template updates are currently
+unavailable"), so the default wording is used; the message body of this template can't be customised on
+any project. Sender name / subject can be set later under Authentication → Templates once Firebase lifts
+the restriction.
+
 ## Current setup (done 2026-11-16)
 
 - Firebase project **`career-duo`** (Spark plan, Google Analytics and Gemini off), web app `career-duo-web`.
