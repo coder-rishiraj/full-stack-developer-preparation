@@ -24,8 +24,12 @@ matter more than speed.
 ## Where things stand
 
 - Branch: `problem-walkthroughs` (pushed to `origin`). Do not merge into `main` unless the user asks.
-- **Done and committed (72 / 650):** the NeetCode categories `arrays-hashing` (listOrder 1–22),
-  `two-pointers` (23–35), `sliding-window` (36–44), `stack` (45–58) and `binary-search` (59–72).
+- **Done and committed (77 / 650):** the NeetCode categories `arrays-hashing` (listOrder 1–22),
+  `two-pointers` (23–35), `sliding-window` (36–44), `stack` (45–58) and `binary-search` (59–72),
+  and the five CSES Programming Fundamentals problems. `PROGRESS.md` has the current count.
+- **Every page has a Run panel** (guide §6, "Run panel"): the reader runs each solution in the
+  browser on the samples or on their own input. A new page is not done until it has samples in
+  `src/content/problem-pages/run-samples.json` and `npm run problems:runner` passes.
 - **Next:** continue NeetCode in `listOrder`, one category at a time (`linked-list` starts at
   listOrder 73), then CSES.
 - Untracked `src/content/lessons/b2-*.md` files belong to the user. Never stage, edit or delete them.
@@ -50,14 +54,17 @@ use it, say so on the page.
 - **Commands** (run from the repo root):
   - `npm run problems:verify -- <ids>` compiles every Java block on the pages (warnings are errors)
     and runs it against `tests/<id>.java`. Run it with no ids to check all pages.
+  - `npm run problems:runner` compiles the pages' Java to JavaScript (TeaVM) for the Run panel and
+    fails unless it prints exactly what the JVM prints on every sample. Needs Gradle and a JDK 17.
+    Commit `src/runner/generated/` with the pages.
   - `npm run problems:check` checks page structure, frontmatter, links, and that a test file exists.
   - `npx tsc -b` and `npx vite build` check that the site still builds. Do not run `npm run build`:
     it regenerates lesson files and would sweep in the user's untracked lessons.
 - **JDK:** `javac` on PATH is a macOS stub. The verifier finds Homebrew's JDK at
   `/opt/homebrew/opt/openjdk` automatically; otherwise set `JAVA_HOME` to that path.
-- **After each batch:** all three checks pass; search the new pages for "obviously" and remove it;
+- **After each batch:** add the pages to `run-samples.json`; all four checks pass; search the new pages for "obviously" and remove it;
   update `PROGRESS.md` (the done count, the next batch, and a row in the Done table); then commit
-  only `src/content/problem-pages/` and any script you changed. Name the batch in the commit
+  only `src/content/problem-pages/`, `src/runner/generated/` and any script you changed. Name the batch in the commit
   message.
 
 ## Pitfalls that earlier batches hit (check for each one)

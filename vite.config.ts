@@ -22,6 +22,11 @@ export default defineConfig({
     port: 5173,
     strictPort: true,
   },
+  // ES-module workers can split code, so the Java runner worker loads only the bundle
+  // (src/runner/generated/<category>.js) the page needs instead of all of them.
+  worker: {
+    format: 'es',
+  },
   test: {
     environment: 'jsdom',
     globals: true,

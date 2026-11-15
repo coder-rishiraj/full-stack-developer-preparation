@@ -1,10 +1,13 @@
-// Compiles the walkthrough pages' Java programs to one JavaScript module with TeaVM.
-// Do not run this directly: `npm run problems:runner` generates the program sources
-// (build/programs) and then calls `gradle generateJavaScript` here.
+// Compiles one bundle of walkthrough programs to a JavaScript module with TeaVM.
+// Do not run this directly: `npm run problems:runner` generates each bundle's sources in
+// build/chunks/<chunk> and then calls `gradle generateJavaScript -Pchunk=<chunk>` here.
 plugins {
     java
     id("org.teavm") version "0.14.1"
 }
+
+val chunk = providers.gradleProperty("chunk").getOrElse("default")
+layout.buildDirectory.set(file("build/out/$chunk"))
 
 repositories {
     mavenCentral()
@@ -23,7 +26,7 @@ java {
 sourceSets {
     main {
         java {
-            srcDir("build/programs")
+            srcDir("build/chunks/$chunk")
         }
     }
 }

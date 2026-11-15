@@ -5,12 +5,14 @@ One interview walkthrough per problem: `src/content/problem-pages/<problem-id>.m
 
 - Standards: `docs/PROBLEM_PAGE_GUIDE.md`. Reference page: `nc-two-sum.md`. Read both before writing.
 - Depth follows the problem: Two Sum's length is not the target (guide §3).
-- After each batch: `npm run problems:check`, `npm run problems:verify` (compiles and tests every Java approach), `npm run build`, then commit.
+- After each batch: add the pages to `run-samples.json` (Run panel samples), then `npm run problems:verify` (compiles and tests every Java approach), `npm run problems:runner` (browser build, checked against the JVM), `npm run problems:check`, `npx tsc -b` and `npx vite build`, then commit.
 - Order: NeetCode by `listOrder`, one category at a time, in batches of about 10. Then CSES.
 
 ## Status
 
 **Done: 77 / 650.** NeetCode `arrays-hashing` (`listOrder` 1–22), `two-pointers` (23–35), `sliding-window` (36–44), `stack` (45–58) and `binary-search` (59–72) are complete. CSES: the five Programming Fundamentals problems (`cses-weird-algorithm`, `cses-repetitions`, `cses-increasing-array`, `cses-permutations`, `cses-two-sets`).
+
+Every done page has a Run panel: its samples are in `run-samples.json` and its programs are built in `src/runner/generated/`.
 
 ## Next batch (not started)
 

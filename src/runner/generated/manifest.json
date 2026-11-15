@@ -1,87 +1,1796 @@
 {
-  "cses-increasing-array": [
-    {
-      "key": "cses-increasing-array#1",
-      "title": "Approach 1: raise in place",
-      "hash": "80017b4f"
+  "chunks": {
+    "arrays-hashing": "0b451af758241bbd",
+    "binary-search": "f4f89e552402c127",
+    "introductory": "c1fcb3f4c671ccef",
+    "sliding-window": "c9613f28b93a3d5a",
+    "stack": "769ea0678378cae7",
+    "two-pointers": "71f355157446b68c"
+  },
+  "pages": {
+    "cses-increasing-array": {
+      "chunk": "introductory",
+      "format": "stdin",
+      "hint": "Standard input, exactly as the judge sends it.",
+      "programs": [
+        {
+          "key": "cses-increasing-array#1",
+          "title": "Approach 1: raise in place",
+          "hash": "80017b4f"
+        },
+        {
+          "key": "cses-increasing-array#2",
+          "title": "Approach 2: running maximum, no array (recommended)",
+          "hash": "2b1f0f39"
+        },
+        {
+          "key": "cses-increasing-array#3",
+          "title": "Increasing Array in a dozen lines",
+          "hash": "43b5abee"
+        }
+      ]
     },
-    {
-      "key": "cses-increasing-array#2",
-      "title": "Approach 2: running maximum, no array (recommended)",
-      "hash": "2b1f0f39"
+    "cses-permutations": {
+      "chunk": "introductory",
+      "format": "stdin",
+      "hint": "Standard input, exactly as the judge sends it.",
+      "programs": [
+        {
+          "key": "cses-permutations#1",
+          "title": "Approach 1: odds then evens, n = 4 patched",
+          "hash": "794797c2"
+        },
+        {
+          "key": "cses-permutations#2",
+          "title": "Approach 2: evens then odds (recommended)",
+          "hash": "54395b90"
+        },
+        {
+          "key": "cses-permutations#3",
+          "title": "Permutations in a few lines",
+          "hash": "c8cdaab7"
+        }
+      ]
     },
-    {
-      "key": "cses-increasing-array#3",
-      "title": "Increasing Array in a dozen lines",
-      "hash": "43b5abee"
+    "cses-repetitions": {
+      "chunk": "introductory",
+      "format": "stdin",
+      "hint": "Standard input, exactly as the judge sends it.",
+      "programs": [
+        {
+          "key": "cses-repetitions#1",
+          "title": "Approach 1: measure each block and jump past it",
+          "hash": "c0615ac1"
+        },
+        {
+          "key": "cses-repetitions#2",
+          "title": "Approach 2: one pass with a running length (recommended)",
+          "hash": "fb869520"
+        },
+        {
+          "key": "cses-repetitions#3",
+          "title": "Repetitions in a few lines",
+          "hash": "8e31e742"
+        }
+      ]
+    },
+    "cses-two-sets": {
+      "chunk": "introductory",
+      "format": "stdin",
+      "hint": "Standard input, exactly as the judge sends it.",
+      "programs": [
+        {
+          "key": "cses-two-sets#1",
+          "title": "Approach 1: pairing by n mod 4",
+          "hash": "6f892a27"
+        },
+        {
+          "key": "cses-two-sets#2",
+          "title": "Approach 2: greedy from n downwards (recommended)",
+          "hash": "fb23ba3b"
+        },
+        {
+          "key": "cses-two-sets#3",
+          "title": "Two Sets, greedy",
+          "hash": "a0780c57"
+        }
+      ]
+    },
+    "cses-weird-algorithm": {
+      "chunk": "introductory",
+      "format": "stdin",
+      "hint": "Standard input, exactly as the judge sends it.",
+      "programs": [
+        {
+          "key": "cses-weird-algorithm#1",
+          "title": "Approach 1: Scanner and one print per value",
+          "hash": "d8a6092f"
+        },
+        {
+          "key": "cses-weird-algorithm#2",
+          "title": "Approach 2: BufferedReader and one StringBuilder (recommended)",
+          "hash": "b6b38d27"
+        },
+        {
+          "key": "cses-weird-algorithm#3",
+          "title": "Weird Algorithm in a dozen lines",
+          "hash": "e1fcce4e"
+        }
+      ]
+    },
+    "nc-3sum": {
+      "chunk": "two-pointers",
+      "format": "leetcode",
+      "hint": "One value per parameter of threeSum(int[] nums), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-3sum#1",
+          "title": "Approach 1: sort + hash set per anchor",
+          "hash": "3b9fc22e"
+        },
+        {
+          "key": "nc-3sum#2",
+          "title": "Approach 2: sort + two pointers (recommended)",
+          "hash": "6662369b"
+        }
+      ]
+    },
+    "nc-4sum": {
+      "chunk": "two-pointers",
+      "format": "leetcode",
+      "hint": "One value per parameter of fourSum(int[] nums, int target), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-4sum#1",
+          "title": "Approach 1: brute force + set",
+          "hash": "71f96304"
+        },
+        {
+          "key": "nc-4sum#2",
+          "title": "Approach 2: two fixed values + two pointers (recommended)",
+          "hash": "8a767439"
+        },
+        {
+          "key": "nc-4sum#3",
+          "title": "Alternative: recursive k-Sum",
+          "hash": "86b858f1"
+        }
+      ]
+    },
+    "nc-asteroid-collision": {
+      "chunk": "stack",
+      "format": "leetcode",
+      "hint": "One value per parameter of asteroidCollision(int[] asteroids), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-asteroid-collision#1",
+          "title": "Approach 1: repeated passes",
+          "hash": "5cb32255"
+        },
+        {
+          "key": "nc-asteroid-collision#2",
+          "title": "Approach 2: stack of survivors (recommended)",
+          "hash": "e98ddf63"
+        }
+      ]
+    },
+    "nc-baseball-game": {
+      "chunk": "stack",
+      "format": "leetcode",
+      "hint": "One value per parameter of calPoints(String[] operations), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-baseball-game#1",
+          "title": "Approach 1: stack of scores, summed at the end",
+          "hash": "8977111b"
+        },
+        {
+          "key": "nc-baseball-game#2",
+          "title": "Approach 2: int array as a stack, running total (recommended)",
+          "hash": "7c459041"
+        },
+        {
+          "key": "nc-baseball-game#3",
+          "title": "Baseball Game, array stack with running total",
+          "hash": "578268e3"
+        }
+      ]
+    },
+    "nc-best-time-to-buy-and-sell-stock": {
+      "chunk": "sliding-window",
+      "format": "leetcode",
+      "hint": "One value per parameter of maxProfit(int[] prices), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-best-time-to-buy-and-sell-stock#1",
+          "title": "Approach 1: brute force",
+          "hash": "b40fefeb"
+        },
+        {
+          "key": "nc-best-time-to-buy-and-sell-stock#2",
+          "title": "Approach 2: minimum so far (recommended)",
+          "hash": "f74fd07e"
+        },
+        {
+          "key": "nc-best-time-to-buy-and-sell-stock#3",
+          "title": "Alternative: Kadane on daily differences",
+          "hash": "77154a9b"
+        },
+        {
+          "key": "nc-best-time-to-buy-and-sell-stock#4",
+          "title": "One pass",
+          "hash": "d9c10418"
+        }
+      ]
+    },
+    "nc-best-time-to-buy-sell-stock-ii": {
+      "chunk": "arrays-hashing",
+      "format": "leetcode",
+      "hint": "One value per parameter of maxProfit(int[] prices), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-best-time-to-buy-sell-stock-ii#1",
+          "title": "Approach 1: two-state DP",
+          "hash": "1588ef91"
+        },
+        {
+          "key": "nc-best-time-to-buy-sell-stock-ii#2",
+          "title": "Approach 2: sum of positive daily changes (recommended)",
+          "hash": "b184c239"
+        },
+        {
+          "key": "nc-best-time-to-buy-sell-stock-ii#3",
+          "title": "Alternative: valley-to-peak trades",
+          "hash": "8f1e734e"
+        }
+      ]
+    },
+    "nc-binary-search": {
+      "chunk": "binary-search",
+      "format": "leetcode",
+      "hint": "One value per parameter of search(int[] nums, int target), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-binary-search#1",
+          "title": "Approach 1: linear scan",
+          "hash": "1d54f60d"
+        },
+        {
+          "key": "nc-binary-search#2",
+          "title": "Approach 2: iterative binary search, closed range (recommended)",
+          "hash": "d2d92fdf"
+        },
+        {
+          "key": "nc-binary-search#3",
+          "title": "Alternative: recursive binary search",
+          "hash": "54aeb329"
+        }
+      ]
+    },
+    "nc-boats-to-save-people": {
+      "chunk": "two-pointers",
+      "format": "leetcode",
+      "hint": "One value per parameter of numRescueBoats(int[] people, int limit), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-boats-to-save-people#1",
+          "title": "Approach 1: sort, then heaviest with lightest (recommended)",
+          "hash": "239847ac"
+        },
+        {
+          "key": "nc-boats-to-save-people#2",
+          "title": "Approach 2: counting sort, then two pointers",
+          "hash": "fafa57fb"
+        },
+        {
+          "key": "nc-boats-to-save-people#3",
+          "title": "Heaviest with lightest",
+          "hash": "4714c211"
+        }
+      ]
+    },
+    "nc-capacity-to-ship-packages-within-d-days": {
+      "chunk": "binary-search",
+      "format": "leetcode",
+      "hint": "One value per parameter of shipWithinDays(int[] weights, int days), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-capacity-to-ship-packages-within-d-days#1",
+          "title": "Approach 1: scan capacities from a tight lower bound",
+          "hash": "fbfd2927"
+        },
+        {
+          "key": "nc-capacity-to-ship-packages-within-d-days#2",
+          "title": "Approach 2: binary search on the capacity (recommended)",
+          "hash": "11604c5f"
+        }
+      ]
+    },
+    "nc-car-fleet": {
+      "chunk": "stack",
+      "format": "leetcode",
+      "hint": "One value per parameter of carFleet(int target, int[] position, int[] speed), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-car-fleet#1",
+          "title": "Approach 1: sort by position, stack of fleet times",
+          "hash": "6121013e"
+        },
+        {
+          "key": "nc-car-fleet#2",
+          "title": "Approach 2: one fleet-ahead time, exact comparison (recommended)",
+          "hash": "0213e9c9"
+        },
+        {
+          "key": "nc-car-fleet#3",
+          "title": "Alternative: bucket by position",
+          "hash": "31f11a28"
+        }
+      ]
+    },
+    "nc-concatenation-of-array": {
+      "chunk": "arrays-hashing",
+      "format": "leetcode",
+      "hint": "One value per parameter of getConcatenation(int[] nums), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-concatenation-of-array#1",
+          "title": "Approach 1: one loop, two writes (recommended)",
+          "hash": "56eef7aa"
+        },
+        {
+          "key": "nc-concatenation-of-array#2",
+          "title": "Approach 2: Arrays.copyOf + System.arraycopy",
+          "hash": "eaba464a"
+        },
+        {
+          "key": "nc-concatenation-of-array#3",
+          "title": "Concatenation in five lines",
+          "hash": "79c8d203"
+        }
+      ]
+    },
+    "nc-container-with-most-water": {
+      "chunk": "two-pointers",
+      "format": "leetcode",
+      "hint": "One value per parameter of maxArea(int[] height), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-container-with-most-water#1",
+          "title": "Approach 1: brute force",
+          "hash": "c6687d07"
+        },
+        {
+          "key": "nc-container-with-most-water#2",
+          "title": "Approach 2: two pointers, move the shorter line (recommended)",
+          "hash": "a1ac16e2"
+        }
+      ]
+    },
+    "nc-contains-duplicate": {
+      "chunk": "arrays-hashing",
+      "format": "leetcode",
+      "hint": "One value per parameter of containsDuplicate(int[] nums), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-contains-duplicate#1",
+          "title": "Approach 1: brute force",
+          "hash": "06a60184"
+        },
+        {
+          "key": "nc-contains-duplicate#2",
+          "title": "Approach 2: sort a copy, compare neighbours",
+          "hash": "416ce647"
+        },
+        {
+          "key": "nc-contains-duplicate#3",
+          "title": "Approach 3: hash set, one pass (recommended)",
+          "hash": "e3b87795"
+        },
+        {
+          "key": "nc-contains-duplicate#4",
+          "title": "Contains Duplicate in four lines",
+          "hash": "142160b2"
+        }
+      ]
+    },
+    "nc-contains-duplicate-ii": {
+      "chunk": "sliding-window",
+      "format": "leetcode",
+      "hint": "One value per parameter of containsNearbyDuplicate(int[] nums, int k), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-contains-duplicate-ii#1",
+          "title": "Approach 1: brute force within distance k",
+          "hash": "e0124b24"
+        },
+        {
+          "key": "nc-contains-duplicate-ii#2",
+          "title": "Approach 2: value to last index",
+          "hash": "29a042b5"
+        },
+        {
+          "key": "nc-contains-duplicate-ii#3",
+          "title": "Approach 3: sliding-window set (recommended)",
+          "hash": "02e16661"
+        },
+        {
+          "key": "nc-contains-duplicate-ii#4",
+          "title": "Window set",
+          "hash": "58002e2c"
+        }
+      ]
+    },
+    "nc-daily-temperatures": {
+      "chunk": "stack",
+      "format": "leetcode",
+      "hint": "One value per parameter of dailyTemperatures(int[] temperatures), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-daily-temperatures#1",
+          "title": "Approach 1: nearest later day for each temperature",
+          "hash": "92fc196d"
+        },
+        {
+          "key": "nc-daily-temperatures#2",
+          "title": "Approach 2: monotonic stack of waiting days (recommended)",
+          "hash": "7af81205"
+        },
+        {
+          "key": "nc-daily-temperatures#3",
+          "title": "Alternative: backward jumps",
+          "hash": "ea241930"
+        }
+      ]
+    },
+    "nc-decode-string": {
+      "chunk": "stack",
+      "format": "leetcode",
+      "hint": "One value per parameter of decodeString(String s), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-decode-string#1",
+          "title": "Approach 1: expand the innermost group, repeat",
+          "hash": "8b3f791d"
+        },
+        {
+          "key": "nc-decode-string#2",
+          "title": "Approach 2: recursive descent",
+          "hash": "35741f5b"
+        },
+        {
+          "key": "nc-decode-string#3",
+          "title": "Approach 3: two stacks (recommended)",
+          "hash": "be5192be"
+        }
+      ]
+    },
+    "nc-design-hashmap": {
+      "chunk": "arrays-hashing",
+      "format": "leetcode",
+      "hint": "Line 1: the MyHashMap operations to call. Line 2: their arguments, LeetCode style.",
+      "programs": [
+        {
+          "key": "nc-design-hashmap#1",
+          "title": "Approach 1: direct addressing",
+          "hash": "55915c98"
+        },
+        {
+          "key": "nc-design-hashmap#2",
+          "title": "Approach 2: separate chaining (recommended)",
+          "hash": "3e3d1b2b"
+        },
+        {
+          "key": "nc-design-hashmap#3",
+          "title": "Chained hash map, core",
+          "hash": "df8152ab"
+        }
+      ]
+    },
+    "nc-design-hashset": {
+      "chunk": "arrays-hashing",
+      "format": "leetcode",
+      "hint": "Line 1: the MyHashSet operations to call. Line 2: their arguments, LeetCode style.",
+      "programs": [
+        {
+          "key": "nc-design-hashset#1",
+          "title": "Approach 1: list of keys",
+          "hash": "0763b447"
+        },
+        {
+          "key": "nc-design-hashset#2",
+          "title": "Approach 2: direct addressing",
+          "hash": "4efc5212"
+        },
+        {
+          "key": "nc-design-hashset#3",
+          "title": "Approach 3: separate chaining (recommended)",
+          "hash": "191544da"
+        },
+        {
+          "key": "nc-design-hashset#4",
+          "title": "Chained hash set, core",
+          "hash": "4d950340"
+        }
+      ]
+    },
+    "nc-encode-and-decode-strings": {
+      "chunk": "arrays-hashing",
+      "format": "leetcode",
+      "hint": "One value per line, for example strs = [\"hi\", \"\", \"a,b\"].",
+      "programs": [
+        {
+          "key": "nc-encode-and-decode-strings#1",
+          "title": "Approach 1: escaping with a terminator",
+          "hash": "fb64d730"
+        },
+        {
+          "key": "nc-encode-and-decode-strings#2",
+          "title": "Approach 2: length prefix (recommended)",
+          "hash": "8492a5f4"
+        },
+        {
+          "key": "nc-encode-and-decode-strings#3",
+          "title": "Alternative: fixed two-char header",
+          "hash": "84126e59"
+        },
+        {
+          "key": "nc-encode-and-decode-strings#4",
+          "title": "Encode and Decode Strings, length prefix",
+          "hash": "c9c8f704"
+        }
+      ]
+    },
+    "nc-evaluate-reverse-polish-notation": {
+      "chunk": "stack",
+      "format": "leetcode",
+      "hint": "One value per parameter of evalRPN(String[] tokens), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-evaluate-reverse-polish-notation#1",
+          "title": "Approach 1: reduce the first operator, repeatedly",
+          "hash": "a19cd8d0"
+        },
+        {
+          "key": "nc-evaluate-reverse-polish-notation#2",
+          "title": "Approach 2: stack of values (recommended)",
+          "hash": "e42eb792"
+        },
+        {
+          "key": "nc-evaluate-reverse-polish-notation#3",
+          "title": "Alternative: recursive evaluation from the last token",
+          "hash": "901cb1e9"
+        },
+        {
+          "key": "nc-evaluate-reverse-polish-notation#4",
+          "title": "RPN evaluation with an int array as the stack",
+          "hash": "8146c09b"
+        }
+      ]
+    },
+    "nc-find-in-mountain-array": {
+      "chunk": "binary-search",
+      "format": "leetcode",
+      "hint": "One value per line, for example array = [1, 2, 3, 4, 5, 3, 1], target = 3.",
+      "programs": [
+        {
+          "key": "nc-find-in-mountain-array#1",
+          "title": "Approach 1: peak, then rising slope, then falling slope (recommended)",
+          "hash": "48893d55"
+        },
+        {
+          "key": "nc-find-in-mountain-array#2",
+          "title": "Approach 2: the same searches with a cache",
+          "hash": "61b95422"
+        }
+      ]
+    },
+    "nc-find-k-closest-elements": {
+      "chunk": "sliding-window",
+      "format": "leetcode",
+      "hint": "One value per parameter of findClosestElements(int[] arr, int k, int x), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-find-k-closest-elements#1",
+          "title": "Approach 1: sort by (distance, value)",
+          "hash": "6130dfd0"
+        },
+        {
+          "key": "nc-find-k-closest-elements#2",
+          "title": "Approach 2: shrink from both ends",
+          "hash": "da6feaf8"
+        },
+        {
+          "key": "nc-find-k-closest-elements#3",
+          "title": "Approach 3: binary search for the window start (recommended)",
+          "hash": "cdab1481"
+        }
+      ]
+    },
+    "nc-find-minimum-in-rotated-sorted-array": {
+      "chunk": "binary-search",
+      "format": "leetcode",
+      "hint": "One value per parameter of findMin(int[] nums), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-find-minimum-in-rotated-sorted-array#1",
+          "title": "Approach 1: linear scan",
+          "hash": "e4ea84b7"
+        },
+        {
+          "key": "nc-find-minimum-in-rotated-sorted-array#2",
+          "title": "Approach 2: binary search against nums[hi] (recommended)",
+          "hash": "58918f9f"
+        }
+      ]
+    },
+    "nc-first-missing-positive": {
+      "chunk": "arrays-hashing",
+      "format": "leetcode",
+      "hint": "One value per parameter of firstMissingPositive(int[] nums), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-first-missing-positive#1",
+          "title": "Approach 1: sort, then walk up from 1",
+          "hash": "6d557257"
+        },
+        {
+          "key": "nc-first-missing-positive#2",
+          "title": "Approach 2: hash set",
+          "hash": "1b15f909"
+        },
+        {
+          "key": "nc-first-missing-positive#3",
+          "title": "Approach 3: boolean presence array",
+          "hash": "2c6619a4"
+        },
+        {
+          "key": "nc-first-missing-positive#4",
+          "title": "Approach 4: cyclic placement (recommended)",
+          "hash": "b181d82a"
+        },
+        {
+          "key": "nc-first-missing-positive#5",
+          "title": "Alternative: sign marking",
+          "hash": "ac3b530c"
+        }
+      ]
+    },
+    "nc-group-anagrams": {
+      "chunk": "arrays-hashing",
+      "format": "leetcode",
+      "hint": "One value per parameter of groupAnagrams(String[] strs), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-group-anagrams#1",
+          "title": "Approach 1: compare with each group's representative",
+          "hash": "99f37878"
+        },
+        {
+          "key": "nc-group-anagrams#2",
+          "title": "Approach 2: sorted string as key",
+          "hash": "0012592c"
+        },
+        {
+          "key": "nc-group-anagrams#3",
+          "title": "Approach 3: letter counts as key (recommended)",
+          "hash": "fac6f35b"
+        },
+        {
+          "key": "nc-group-anagrams#4",
+          "title": "Group Anagrams with a count key",
+          "hash": "bc9c1498"
+        }
+      ]
+    },
+    "nc-guess-number-higher-or-lower": {
+      "chunk": "binary-search",
+      "format": "leetcode",
+      "hint": "One value per line, for example n = 10, pick = 6.",
+      "programs": [
+        {
+          "key": "nc-guess-number-higher-or-lower#1",
+          "title": "Approach 1: binary search, overflow-safe midpoint (recommended)",
+          "hash": "a76b67b1"
+        },
+        {
+          "key": "nc-guess-number-higher-or-lower#2",
+          "title": "Approach 2: ternary search",
+          "hash": "29d1ed3b"
+        },
+        {
+          "key": "nc-guess-number-higher-or-lower#3",
+          "title": "Guess the number, closed range",
+          "hash": "a95ed7e4"
+        }
+      ]
+    },
+    "nc-implement-queue-using-stacks": {
+      "chunk": "stack",
+      "format": "leetcode",
+      "hint": "Line 1: the MyQueue operations to call. Line 2: their arguments, LeetCode style.",
+      "programs": [
+        {
+          "key": "nc-implement-queue-using-stacks#1",
+          "title": "Approach 1: pour over and back",
+          "hash": "08565537"
+        },
+        {
+          "key": "nc-implement-queue-using-stacks#2",
+          "title": "Approach 2: lazy transfer (recommended)",
+          "hash": "6d84651d"
+        },
+        {
+          "key": "nc-implement-queue-using-stacks#3",
+          "title": "Two-stack queue, core",
+          "hash": "b187ffab"
+        }
+      ]
+    },
+    "nc-implement-stack-using-queues": {
+      "chunk": "stack",
+      "format": "leetcode",
+      "hint": "Line 1: the MyStack operations to call. Line 2: their arguments, LeetCode style.",
+      "programs": [
+        {
+          "key": "nc-implement-stack-using-queues#1",
+          "title": "Approach 1: two queues, rotate on pop",
+          "hash": "9aa16191"
+        },
+        {
+          "key": "nc-implement-stack-using-queues#2",
+          "title": "Approach 2: two queues, rotate on push",
+          "hash": "3a59d587"
+        },
+        {
+          "key": "nc-implement-stack-using-queues#3",
+          "title": "Approach 3: one queue (recommended)",
+          "hash": "c8ce89f0"
+        },
+        {
+          "key": "nc-implement-stack-using-queues#4",
+          "title": "One-queue stack, core",
+          "hash": "ca5a4ff0"
+        }
+      ]
+    },
+    "nc-koko-eating-bananas": {
+      "chunk": "binary-search",
+      "format": "leetcode",
+      "hint": "One value per parameter of minEatingSpeed(int[] piles, int h), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-koko-eating-bananas#1",
+          "title": "Approach 1: binary search on the speed (recommended)",
+          "hash": "a3ac482f"
+        },
+        {
+          "key": "nc-koko-eating-bananas#2",
+          "title": "Approach 2: binary search on a range narrowed by the total",
+          "hash": "f1ada9e1"
+        }
+      ]
+    },
+    "nc-largest-rectangle-in-histogram": {
+      "chunk": "stack",
+      "format": "leetcode",
+      "hint": "One value per parameter of largestRectangleArea(int[] heights), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-largest-rectangle-in-histogram#1",
+          "title": "Approach 1: brute force, extending the minimum",
+          "hash": "7c78729b"
+        },
+        {
+          "key": "nc-largest-rectangle-in-histogram#2",
+          "title": "Approach 2: nearest lower bar on each side, two passes",
+          "hash": "35b98858"
+        },
+        {
+          "key": "nc-largest-rectangle-in-histogram#3",
+          "title": "Approach 3: one pass with a sentinel (recommended)",
+          "hash": "063e8eeb"
+        }
+      ]
+    },
+    "nc-longest-common-prefix": {
+      "chunk": "arrays-hashing",
+      "format": "leetcode",
+      "hint": "One value per parameter of longestCommonPrefix(String[] strs), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-longest-common-prefix#1",
+          "title": "Approach 1: horizontal scanning",
+          "hash": "f0db0dee"
+        },
+        {
+          "key": "nc-longest-common-prefix#2",
+          "title": "Approach 2: vertical scanning (recommended)",
+          "hash": "619bfdbc"
+        },
+        {
+          "key": "nc-longest-common-prefix#3",
+          "title": "Alternative: sort a copy, compare first and last",
+          "hash": "9ce3bb03"
+        },
+        {
+          "key": "nc-longest-common-prefix#4",
+          "title": "Vertical scanning",
+          "hash": "e2150fff"
+        }
+      ]
+    },
+    "nc-longest-consecutive-sequence": {
+      "chunk": "arrays-hashing",
+      "format": "leetcode",
+      "hint": "One value per parameter of longestConsecutive(int[] nums), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-longest-consecutive-sequence#1",
+          "title": "Approach 1: sort and scan",
+          "hash": "dff95f1b"
+        },
+        {
+          "key": "nc-longest-consecutive-sequence#2",
+          "title": "Approach 2: hash set, count from run starts (recommended)",
+          "hash": "49b4f838"
+        },
+        {
+          "key": "nc-longest-consecutive-sequence#3",
+          "title": "Alternative: union-find",
+          "hash": "d9899819"
+        }
+      ]
+    },
+    "nc-longest-repeating-character-replacement": {
+      "chunk": "sliding-window",
+      "format": "leetcode",
+      "hint": "One value per parameter of characterReplacement(String s, int k), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-longest-repeating-character-replacement#1",
+          "title": "Approach 1: one window per target letter",
+          "hash": "38e8d35a"
+        },
+        {
+          "key": "nc-longest-repeating-character-replacement#2",
+          "title": "Approach 2: one window, recompute the max count",
+          "hash": "dfb6d3cb"
+        },
+        {
+          "key": "nc-longest-repeating-character-replacement#3",
+          "title": "Approach 3: maxFreq never decreases (recommended)",
+          "hash": "3c218bd3"
+        }
+      ]
+    },
+    "nc-longest-substring-without-repeating-characters": {
+      "chunk": "sliding-window",
+      "format": "leetcode",
+      "hint": "One value per parameter of lengthOfLongestSubstring(String s), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-longest-substring-without-repeating-characters#1",
+          "title": "Approach 1: extend from every start",
+          "hash": "696bfaa2"
+        },
+        {
+          "key": "nc-longest-substring-without-repeating-characters#2",
+          "title": "Approach 2: window with a set",
+          "hash": "05794e8b"
+        },
+        {
+          "key": "nc-longest-substring-without-repeating-characters#3",
+          "title": "Approach 3: last-seen index map (recommended)",
+          "hash": "d7bff118"
+        },
+        {
+          "key": "nc-longest-substring-without-repeating-characters#4",
+          "title": "Alternative: int[128] last-seen array (ASCII only)",
+          "hash": "7f083e2f"
+        },
+        {
+          "key": "nc-longest-substring-without-repeating-characters#5",
+          "title": "Last-seen jump",
+          "hash": "9d23d954"
+        }
+      ]
+    },
+    "nc-majority-element": {
+      "chunk": "arrays-hashing",
+      "format": "leetcode",
+      "hint": "One value per parameter of majorityElement(int[] nums), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-majority-element#1",
+          "title": "Approach 1: sort a copy, take the middle",
+          "hash": "8024deb8"
+        },
+        {
+          "key": "nc-majority-element#2",
+          "title": "Approach 2: hash map counting",
+          "hash": "bdf63d9f"
+        },
+        {
+          "key": "nc-majority-element#3",
+          "title": "Approach 3: Boyer-Moore voting (recommended)",
+          "hash": "f3598f6f"
+        },
+        {
+          "key": "nc-majority-element#4",
+          "title": "Alternative: bit-by-bit majority",
+          "hash": "96a12c89"
+        },
+        {
+          "key": "nc-majority-element#5",
+          "title": "Boyer-Moore in five lines",
+          "hash": "9e6c0c3a"
+        }
+      ]
+    },
+    "nc-majority-element-ii": {
+      "chunk": "arrays-hashing",
+      "format": "leetcode",
+      "hint": "One value per parameter of majorityElement(int[] nums), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-majority-element-ii#1",
+          "title": "Approach 1: sort a copy, measure the runs",
+          "hash": "2b8156e5"
+        },
+        {
+          "key": "nc-majority-element-ii#2",
+          "title": "Approach 2: hash map counting",
+          "hash": "12f497cd"
+        },
+        {
+          "key": "nc-majority-element-ii#3",
+          "title": "Approach 3: two-candidate voting + verification (recommended)",
+          "hash": "4857cb5d"
+        }
+      ]
+    },
+    "nc-maximum-frequency-stack": {
+      "chunk": "stack",
+      "format": "leetcode",
+      "hint": "Line 1: the FreqStack operations to call. Line 2: their arguments, LeetCode style.",
+      "programs": [
+        {
+          "key": "nc-maximum-frequency-stack#1",
+          "title": "Approach 1: list and count map, scan on every pop",
+          "hash": "680d839a"
+        },
+        {
+          "key": "nc-maximum-frequency-stack#2",
+          "title": "Approach 2: priority queue of pushes",
+          "hash": "c3f053eb"
+        },
+        {
+          "key": "nc-maximum-frequency-stack#3",
+          "title": "Approach 3: count map plus one stack per frequency (recommended)",
+          "hash": "30b6250a"
+        },
+        {
+          "key": "nc-maximum-frequency-stack#4",
+          "title": "Maximum Frequency Stack, one stack per level",
+          "hash": "b2557fa8"
+        }
+      ]
+    },
+    "nc-median-of-two-sorted-arrays": {
+      "chunk": "binary-search",
+      "format": "leetcode",
+      "hint": "One value per parameter of findMedianSortedArrays(int[] nums1, int[] nums2), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-median-of-two-sorted-arrays#1",
+          "title": "Approach 1: merge, then pick the middle",
+          "hash": "a845c7f4"
+        },
+        {
+          "key": "nc-median-of-two-sorted-arrays#2",
+          "title": "Approach 2: k-th smallest, discarding k / 2 per round",
+          "hash": "34e73e0f"
+        },
+        {
+          "key": "nc-median-of-two-sorted-arrays#3",
+          "title": "Approach 3: binary search for the partition (recommended)",
+          "hash": "12dcfadf"
+        }
+      ]
+    },
+    "nc-merge-sorted-array": {
+      "chunk": "two-pointers",
+      "format": "leetcode",
+      "hint": "One value per parameter of merge(int[] nums1, int m, int[] nums2, int n), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-merge-sorted-array#1",
+          "title": "Approach 1: copy in and sort",
+          "hash": "7295dd9b"
+        },
+        {
+          "key": "nc-merge-sorted-array#2",
+          "title": "Approach 2: copy out, then merge forward",
+          "hash": "e64c82ed"
+        },
+        {
+          "key": "nc-merge-sorted-array#3",
+          "title": "Approach 3: merge backwards from the end (recommended)",
+          "hash": "fa65bcfd"
+        },
+        {
+          "key": "nc-merge-sorted-array#4",
+          "title": "Merge Sorted Array from the back",
+          "hash": "f704cb6e"
+        }
+      ]
+    },
+    "nc-merge-strings-alternately": {
+      "chunk": "two-pointers",
+      "format": "leetcode",
+      "hint": "One value per parameter of mergeAlternately(String word1, String word2), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-merge-strings-alternately#1",
+          "title": "Approach 1: concatenate onto a String",
+          "hash": "0f6bdb66"
+        },
+        {
+          "key": "nc-merge-strings-alternately#2",
+          "title": "Approach 2: StringBuilder, one index (recommended)",
+          "hash": "cfdc66ec"
+        },
+        {
+          "key": "nc-merge-strings-alternately#3",
+          "title": "Alternative: loop to the shorter length, then append the tail",
+          "hash": "74ba9a33"
+        },
+        {
+          "key": "nc-merge-strings-alternately#4",
+          "title": "Merge Strings Alternately in one loop",
+          "hash": "daca19af"
+        }
+      ]
+    },
+    "nc-min-stack": {
+      "chunk": "stack",
+      "format": "leetcode",
+      "hint": "Line 1: the MinStack operations to call. Line 2: their arguments, LeetCode style.",
+      "programs": [
+        {
+          "key": "nc-min-stack#1",
+          "title": "Approach 1: scan for the minimum",
+          "hash": "f4525d55"
+        },
+        {
+          "key": "nc-min-stack#2",
+          "title": "Approach 2: value and minimum-so-far in each entry",
+          "hash": "a0465085"
+        },
+        {
+          "key": "nc-min-stack#3",
+          "title": "Approach 3: second stack of minimums (recommended)",
+          "hash": "b7a6b570"
+        },
+        {
+          "key": "nc-min-stack#4",
+          "title": "Alternative: differences stored as long",
+          "hash": "3a9ea352"
+        },
+        {
+          "key": "nc-min-stack#5",
+          "title": "Min stack, core",
+          "hash": "7002f3eb"
+        }
+      ]
+    },
+    "nc-minimum-size-subarray-sum": {
+      "chunk": "sliding-window",
+      "format": "leetcode",
+      "hint": "One value per parameter of minSubArrayLen(int target, int[] nums), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-minimum-size-subarray-sum#1",
+          "title": "Approach 1: prefix sums + binary search",
+          "hash": "dda6c9b4"
+        },
+        {
+          "key": "nc-minimum-size-subarray-sum#2",
+          "title": "Approach 2: sliding window (recommended)",
+          "hash": "6c2c107e"
+        }
+      ]
+    },
+    "nc-minimum-window-substring": {
+      "chunk": "sliding-window",
+      "format": "leetcode",
+      "hint": "One value per parameter of minWindow(String s, String t), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-minimum-window-substring#1",
+          "title": "Approach 1: sliding window, checking the whole count table",
+          "hash": "fe3ea09c"
+        },
+        {
+          "key": "nc-minimum-window-substring#2",
+          "title": "Approach 2: sliding window with a missing counter (recommended)",
+          "hash": "c7afcb4d"
+        }
+      ]
+    },
+    "nc-online-stock-span": {
+      "chunk": "stack",
+      "format": "leetcode",
+      "hint": "Line 1: the StockSpanner operations to call. Line 2: their arguments, LeetCode style.",
+      "programs": [
+        {
+          "key": "nc-online-stock-span#1",
+          "title": "Approach 1: keep every price and walk back",
+          "hash": "1191bf9e"
+        },
+        {
+          "key": "nc-online-stock-span#2",
+          "title": "Approach 2: stack of (price, span) pairs (recommended)",
+          "hash": "100d00d0"
+        },
+        {
+          "key": "nc-online-stock-span#3",
+          "title": "Online Stock Span, stack of blocks",
+          "hash": "306f8e2c"
+        }
+      ]
+    },
+    "nc-permutation-in-string": {
+      "chunk": "sliding-window",
+      "format": "leetcode",
+      "hint": "One value per parameter of checkInclusion(String s1, String s2), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-permutation-in-string#1",
+          "title": "Approach 1: sort every window",
+          "hash": "0e1f65e0"
+        },
+        {
+          "key": "nc-permutation-in-string#2",
+          "title": "Approach 2: fixed window, compare count arrays",
+          "hash": "f72e3a57"
+        },
+        {
+          "key": "nc-permutation-in-string#3",
+          "title": "Approach 3: match counter (co-recommended)",
+          "hash": "a151cdec"
+        }
+      ]
+    },
+    "nc-product-of-array-except-self": {
+      "chunk": "arrays-hashing",
+      "format": "leetcode",
+      "hint": "One value per parameter of productExceptSelf(int[] nums), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-product-of-array-except-self#1",
+          "title": "Approach 1: brute force",
+          "hash": "96f4465d"
+        },
+        {
+          "key": "nc-product-of-array-except-self#2",
+          "title": "Approach 2: prefix and suffix arrays",
+          "hash": "bb836171"
+        },
+        {
+          "key": "nc-product-of-array-except-self#3",
+          "title": "Approach 3: output array + running suffix (recommended)",
+          "hash": "03d1d22a"
+        }
+      ]
+    },
+    "nc-range-sum-query-2d-immutable": {
+      "chunk": "arrays-hashing",
+      "format": "leetcode",
+      "hint": "Line 1: the NumMatrix operations to call. Line 2: their arguments, LeetCode style.",
+      "programs": [
+        {
+          "key": "nc-range-sum-query-2d-immutable#1",
+          "title": "Approach 1: brute force",
+          "hash": "a0f6abc6"
+        },
+        {
+          "key": "nc-range-sum-query-2d-immutable#2",
+          "title": "Approach 2: prefix sums per row",
+          "hash": "64365bae"
+        },
+        {
+          "key": "nc-range-sum-query-2d-immutable#3",
+          "title": "Approach 3: 2D prefix sums (recommended)",
+          "hash": "17b062b0"
+        },
+        {
+          "key": "nc-range-sum-query-2d-immutable#4",
+          "title": "2D prefix sums, padded",
+          "hash": "f0f1dc33"
+        }
+      ]
+    },
+    "nc-remove-duplicates-from-sorted-array": {
+      "chunk": "two-pointers",
+      "format": "leetcode",
+      "hint": "One value per parameter of removeDuplicates(int[] nums), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-remove-duplicates-from-sorted-array#1",
+          "title": "Approach 1: buffer, then copy back",
+          "hash": "3a65dcdf"
+        },
+        {
+          "key": "nc-remove-duplicates-from-sorted-array#2",
+          "title": "Approach 2: read and write pointers (recommended)",
+          "hash": "a749142a"
+        },
+        {
+          "key": "nc-remove-duplicates-from-sorted-array#3",
+          "title": "Remove Duplicates in six lines",
+          "hash": "8d884b8e"
+        }
+      ]
+    },
+    "nc-remove-element": {
+      "chunk": "arrays-hashing",
+      "format": "leetcode",
+      "hint": "One value per parameter of removeElement(int[] nums, int val), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-remove-element#1",
+          "title": "Approach 1: delete by shifting left",
+          "hash": "62177f25"
+        },
+        {
+          "key": "nc-remove-element#2",
+          "title": "Approach 2: read and write pointers (recommended)",
+          "hash": "f6a5355a"
+        },
+        {
+          "key": "nc-remove-element#3",
+          "title": "Approach 3: replace with the last element",
+          "hash": "1a3c2756"
+        },
+        {
+          "key": "nc-remove-element#4",
+          "title": "Remove Element in six lines",
+          "hash": "ae7ae199"
+        }
+      ]
+    },
+    "nc-reverse-string": {
+      "chunk": "two-pointers",
+      "format": "leetcode",
+      "hint": "One value per parameter of reverseString(char[] s), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-reverse-string#1",
+          "title": "Approach 1: reversed copy, copied back",
+          "hash": "6e59f449"
+        },
+        {
+          "key": "nc-reverse-string#2",
+          "title": "Approach 2: swap from both ends (recommended)",
+          "hash": "eb7c0e64"
+        },
+        {
+          "key": "nc-reverse-string#3",
+          "title": "Reverse String in seven lines",
+          "hash": "8d1f6fd2"
+        }
+      ]
+    },
+    "nc-rotate-array": {
+      "chunk": "two-pointers",
+      "format": "leetcode",
+      "hint": "One value per parameter of rotate(int[] nums, int k), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-rotate-array#1",
+          "title": "Approach 1: copy into a new array, then copy back",
+          "hash": "639b4a5d"
+        },
+        {
+          "key": "nc-rotate-array#2",
+          "title": "Approach 2: three reversals (recommended)",
+          "hash": "c52dda63"
+        },
+        {
+          "key": "nc-rotate-array#3",
+          "title": "Alternative: cyclic replacements",
+          "hash": "24d6c301"
+        },
+        {
+          "key": "nc-rotate-array#4",
+          "title": "Three reversals",
+          "hash": "5f3ca319"
+        }
+      ]
+    },
+    "nc-search-a-2d-matrix": {
+      "chunk": "binary-search",
+      "format": "leetcode",
+      "hint": "One value per parameter of searchMatrix(int[][] matrix, int target), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-search-a-2d-matrix#1",
+          "title": "Approach 1: staircase walk (O(m + n), fails the stated requirement)",
+          "hash": "c487158a"
+        },
+        {
+          "key": "nc-search-a-2d-matrix#2",
+          "title": "Approach 2: binary search the rows, then the row",
+          "hash": "b994dcc8"
+        },
+        {
+          "key": "nc-search-a-2d-matrix#3",
+          "title": "Approach 3: one binary search over the flattened index (recommended)",
+          "hash": "0c22f3de"
+        }
+      ]
+    },
+    "nc-search-in-rotated-sorted-array": {
+      "chunk": "binary-search",
+      "format": "leetcode",
+      "hint": "One value per parameter of search(int[] nums, int target), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-search-in-rotated-sorted-array#1",
+          "title": "Approach 1: linear scan",
+          "hash": "1d54f60d"
+        },
+        {
+          "key": "nc-search-in-rotated-sorted-array#2",
+          "title": "Approach 2: find the rotation point, then binary search",
+          "hash": "186f12eb"
+        },
+        {
+          "key": "nc-search-in-rotated-sorted-array#3",
+          "title": "Approach 3: one pass (recommended)",
+          "hash": "d86035a3"
+        }
+      ]
+    },
+    "nc-search-in-rotated-sorted-array-ii": {
+      "chunk": "binary-search",
+      "format": "leetcode",
+      "hint": "One value per parameter of search(int[] nums, int target), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-search-in-rotated-sorted-array-ii#1",
+          "title": "Approach 1: linear scan",
+          "hash": "5d141c4e"
+        },
+        {
+          "key": "nc-search-in-rotated-sorted-array-ii#2",
+          "title": "Approach 2: sorted-half search with tie shrinking (recommended)",
+          "hash": "ebbd8bac"
+        }
+      ]
+    },
+    "nc-search-insert-position": {
+      "chunk": "binary-search",
+      "format": "leetcode",
+      "hint": "One value per parameter of searchInsert(int[] nums, int target), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-search-insert-position#1",
+          "title": "Approach 1: linear scan",
+          "hash": "f71429e0"
+        },
+        {
+          "key": "nc-search-insert-position#2",
+          "title": "Approach 2: closed-range binary search, return lo",
+          "hash": "b82364f4"
+        },
+        {
+          "key": "nc-search-insert-position#3",
+          "title": "Approach 3: lower bound, half-open range (recommended)",
+          "hash": "dd5f7179"
+        },
+        {
+          "key": "nc-search-insert-position#4",
+          "title": "Alternative: Arrays.binarySearch",
+          "hash": "e7d6bb56"
+        }
+      ]
+    },
+    "nc-simplify-path": {
+      "chunk": "stack",
+      "format": "leetcode",
+      "hint": "One value per parameter of simplifyPath(String path), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-simplify-path#1",
+          "title": "Approach 1: split + stack of directories (recommended)",
+          "hash": "590f972d"
+        },
+        {
+          "key": "nc-simplify-path#2",
+          "title": "Approach 2: single scan, output as the stack",
+          "hash": "88d906aa"
+        }
+      ]
+    },
+    "nc-sliding-window-maximum": {
+      "chunk": "sliding-window",
+      "format": "leetcode",
+      "hint": "One value per parameter of maxSlidingWindow(int[] nums, int k), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-sliding-window-maximum#1",
+          "title": "Approach 1: max-heap with lazy deletion",
+          "hash": "86246625"
+        },
+        {
+          "key": "nc-sliding-window-maximum#2",
+          "title": "Approach 2: monotonic deque of indices (recommended)",
+          "hash": "d7c51770"
+        },
+        {
+          "key": "nc-sliding-window-maximum#3",
+          "title": "Alternative: block prefix and suffix maxima",
+          "hash": "8b8a3c6f"
+        }
+      ]
+    },
+    "nc-sort-an-array": {
+      "chunk": "arrays-hashing",
+      "format": "leetcode",
+      "hint": "One value per parameter of sortArray(int[] nums), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-sort-an-array#1",
+          "title": "Approach 1: merge sort",
+          "hash": "be5df21b"
+        },
+        {
+          "key": "nc-sort-an-array#2",
+          "title": "Approach 2: randomized quicksort, three-way partition",
+          "hash": "b4830735"
+        },
+        {
+          "key": "nc-sort-an-array#3",
+          "title": "Approach 3: heap sort (recommended)",
+          "hash": "48978ba8"
+        },
+        {
+          "key": "nc-sort-an-array#4",
+          "title": "Alternative: counting sort (bounded values)",
+          "hash": "e63a5caa"
+        },
+        {
+          "key": "nc-sort-an-array#5",
+          "title": "Heap sort in two loops",
+          "hash": "c35e08d5"
+        }
+      ]
+    },
+    "nc-sort-colors": {
+      "chunk": "arrays-hashing",
+      "format": "leetcode",
+      "hint": "One value per parameter of sortColors(int[] nums), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-sort-colors#1",
+          "title": "Approach 1: count, then overwrite",
+          "hash": "0d3b80ae"
+        },
+        {
+          "key": "nc-sort-colors#2",
+          "title": "Approach 2: Dutch national flag (recommended)",
+          "hash": "f9215273"
+        },
+        {
+          "key": "nc-sort-colors#3",
+          "title": "Dutch national flag in one loop",
+          "hash": "8bfc81d7"
+        }
+      ]
+    },
+    "nc-split-array-largest-sum": {
+      "chunk": "binary-search",
+      "format": "leetcode",
+      "hint": "One value per parameter of splitArray(int[] nums, int k), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-split-array-largest-sum#1",
+          "title": "Approach 1: DP over (pieces, prefix length)",
+          "hash": "1f48095d"
+        },
+        {
+          "key": "nc-split-array-largest-sum#2",
+          "title": "Approach 2: binary search on the largest sum (recommended)",
+          "hash": "7c091ddc"
+        }
+      ]
+    },
+    "nc-sqrt-x": {
+      "chunk": "binary-search",
+      "format": "leetcode",
+      "hint": "One value per parameter of mySqrt(int x), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-sqrt-x#1",
+          "title": "Approach 1: count upwards",
+          "hash": "d054b399"
+        },
+        {
+          "key": "nc-sqrt-x#2",
+          "title": "Approach 2: binary search on the answer (recommended)",
+          "hash": "107d172e"
+        },
+        {
+          "key": "nc-sqrt-x#3",
+          "title": "Alternative: integer Newton's method",
+          "hash": "76b0ebc0"
+        }
+      ]
+    },
+    "nc-subarray-sum-equals-k": {
+      "chunk": "arrays-hashing",
+      "format": "leetcode",
+      "hint": "One value per parameter of subarraySum(int[] nums, int k), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-subarray-sum-equals-k#1",
+          "title": "Approach 1: every start, running sum",
+          "hash": "2a699f74"
+        },
+        {
+          "key": "nc-subarray-sum-equals-k#2",
+          "title": "Approach 2: prefix sums + hash map (recommended)",
+          "hash": "6da71997"
+        }
+      ]
+    },
+    "nc-time-based-key-value-store": {
+      "chunk": "binary-search",
+      "format": "leetcode",
+      "hint": "Line 1: the TimeMap operations to call. Line 2: their arguments, LeetCode style.",
+      "programs": [
+        {
+          "key": "nc-time-based-key-value-store#1",
+          "title": "Approach 1: HashMap of TreeMaps",
+          "hash": "2d5bda80"
+        },
+        {
+          "key": "nc-time-based-key-value-store#2",
+          "title": "Approach 2: HashMap of lists, upper-bound binary search (recommended)",
+          "hash": "b233b908"
+        },
+        {
+          "key": "nc-time-based-key-value-store#3",
+          "title": "TimeMap, lists plus upper bound",
+          "hash": "af283ff5"
+        }
+      ]
+    },
+    "nc-top-k-frequent-elements": {
+      "chunk": "arrays-hashing",
+      "format": "leetcode",
+      "hint": "One value per parameter of topKFrequent(int[] nums, int k), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-top-k-frequent-elements#1",
+          "title": "Approach 1: count, then sort by count",
+          "hash": "31176a67"
+        },
+        {
+          "key": "nc-top-k-frequent-elements#2",
+          "title": "Approach 2: count + min-heap of size k",
+          "hash": "1d381789"
+        },
+        {
+          "key": "nc-top-k-frequent-elements#3",
+          "title": "Approach 3: bucket by frequency (recommended)",
+          "hash": "7491717f"
+        },
+        {
+          "key": "nc-top-k-frequent-elements#4",
+          "title": "Alternative: quickselect on counts",
+          "hash": "19fc2ed9"
+        }
+      ]
+    },
+    "nc-trapping-rain-water": {
+      "chunk": "two-pointers",
+      "format": "leetcode",
+      "hint": "One value per parameter of trap(int[] height), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-trapping-rain-water#1",
+          "title": "Approach 1: per-column brute force",
+          "hash": "a6fdf60d"
+        },
+        {
+          "key": "nc-trapping-rain-water#2",
+          "title": "Approach 2: prefix and suffix maximum arrays",
+          "hash": "a2b2ece2"
+        },
+        {
+          "key": "nc-trapping-rain-water#3",
+          "title": "Approach 3: two pointers with running maximums (recommended)",
+          "hash": "3a60e84e"
+        },
+        {
+          "key": "nc-trapping-rain-water#4",
+          "title": "Alternative: monotonic stack (horizontal layers)",
+          "hash": "ff261158"
+        }
+      ]
+    },
+    "nc-two-sum": {
+      "chunk": "arrays-hashing",
+      "format": "leetcode",
+      "hint": "One value per parameter of twoSum(int[] nums, int target), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-two-sum#1",
+          "title": "Approach 1: brute force",
+          "hash": "c37add48"
+        },
+        {
+          "key": "nc-two-sum#2",
+          "title": "Approach 2: sort indices + two pointers",
+          "hash": "f43ffe9c"
+        },
+        {
+          "key": "nc-two-sum#3",
+          "title": "Approach 3: hash map, two passes",
+          "hash": "817b3222"
+        },
+        {
+          "key": "nc-two-sum#4",
+          "title": "Approach 4: hash map, one pass (recommended)",
+          "hash": "9d07fbae"
+        }
+      ]
+    },
+    "nc-two-sum-ii-input-array-is-sorted": {
+      "chunk": "two-pointers",
+      "format": "leetcode",
+      "hint": "One value per parameter of twoSum(int[] numbers, int target), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-two-sum-ii-input-array-is-sorted#1",
+          "title": "Approach 1: brute force",
+          "hash": "2f73d0db"
+        },
+        {
+          "key": "nc-two-sum-ii-input-array-is-sorted#2",
+          "title": "Approach 2: binary search for each complement",
+          "hash": "7b46e70a"
+        },
+        {
+          "key": "nc-two-sum-ii-input-array-is-sorted#3",
+          "title": "Approach 3: two pointers (recommended)",
+          "hash": "0f7f1fbd"
+        }
+      ]
+    },
+    "nc-valid-anagram": {
+      "chunk": "arrays-hashing",
+      "format": "leetcode",
+      "hint": "One value per parameter of isAnagram(String s, String t), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-valid-anagram#1",
+          "title": "Approach 1: sort both and compare",
+          "hash": "a4378bae"
+        },
+        {
+          "key": "nc-valid-anagram#2",
+          "title": "Approach 2: hash map of counts",
+          "hash": "71c8c486"
+        },
+        {
+          "key": "nc-valid-anagram#3",
+          "title": "Approach 3: int[26] counts (recommended)",
+          "hash": "6f78447d"
+        },
+        {
+          "key": "nc-valid-anagram#4",
+          "title": "Unicode version: count code points",
+          "hash": "022cd41b"
+        },
+        {
+          "key": "nc-valid-anagram#5",
+          "title": "Valid Anagram in seven lines",
+          "hash": "cc33e1e8"
+        }
+      ]
+    },
+    "nc-valid-palindrome": {
+      "chunk": "two-pointers",
+      "format": "leetcode",
+      "hint": "One value per parameter of isPalindrome(String s), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-valid-palindrome#1",
+          "title": "Approach 1: cleaned string compared with its reverse",
+          "hash": "2c9682d9"
+        },
+        {
+          "key": "nc-valid-palindrome#2",
+          "title": "Approach 2: two pointers skipping non-alphanumerics (recommended)",
+          "hash": "17710a96"
+        },
+        {
+          "key": "nc-valid-palindrome#3",
+          "title": "Valid Palindrome in ten lines",
+          "hash": "155bf570"
+        }
+      ]
+    },
+    "nc-valid-palindrome-ii": {
+      "chunk": "two-pointers",
+      "format": "leetcode",
+      "hint": "One value per parameter of validPalindrome(String s), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-valid-palindrome-ii#1",
+          "title": "Approach 1: try every deletion",
+          "hash": "fce7c37a"
+        },
+        {
+          "key": "nc-valid-palindrome-ii#2",
+          "title": "Approach 2: try both deletions at the first mismatch (recommended)",
+          "hash": "9d1f6364"
+        }
+      ]
+    },
+    "nc-valid-parentheses": {
+      "chunk": "stack",
+      "format": "leetcode",
+      "hint": "One value per parameter of isValid(String s), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-valid-parentheses#1",
+          "title": "Approach 1: delete adjacent pairs until nothing changes",
+          "hash": "cf54ecd0"
+        },
+        {
+          "key": "nc-valid-parentheses#2",
+          "title": "Approach 2: stack of expected closers (recommended)",
+          "hash": "b9e08e9b"
+        },
+        {
+          "key": "nc-valid-parentheses#3",
+          "title": "Valid Parentheses with a char array as the stack",
+          "hash": "43e81ba7"
+        }
+      ]
+    },
+    "nc-valid-sudoku": {
+      "chunk": "arrays-hashing",
+      "format": "leetcode",
+      "hint": "One value per parameter of isValidSudoku(char[][] board), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-valid-sudoku#1",
+          "title": "Approach 1: brute force",
+          "hash": "512f158f"
+        },
+        {
+          "key": "nc-valid-sudoku#2",
+          "title": "Approach 2: three passes with a set per unit",
+          "hash": "a61dc2c9"
+        },
+        {
+          "key": "nc-valid-sudoku#3",
+          "title": "Approach 3: one pass with boolean tables (recommended)",
+          "hash": "cb8f2430"
+        },
+        {
+          "key": "nc-valid-sudoku#4",
+          "title": "Alternative: bitmask records",
+          "hash": "0b6af164"
+        }
+      ]
     }
-  ],
-  "cses-permutations": [
-    {
-      "key": "cses-permutations#1",
-      "title": "Approach 1: odds then evens, n = 4 patched",
-      "hash": "794797c2"
-    },
-    {
-      "key": "cses-permutations#2",
-      "title": "Approach 2: evens then odds (recommended)",
-      "hash": "54395b90"
-    },
-    {
-      "key": "cses-permutations#3",
-      "title": "Permutations in a few lines",
-      "hash": "c8cdaab7"
-    }
-  ],
-  "cses-repetitions": [
-    {
-      "key": "cses-repetitions#1",
-      "title": "Approach 1: measure each block and jump past it",
-      "hash": "c0615ac1"
-    },
-    {
-      "key": "cses-repetitions#2",
-      "title": "Approach 2: one pass with a running length (recommended)",
-      "hash": "fb869520"
-    },
-    {
-      "key": "cses-repetitions#3",
-      "title": "Repetitions in a few lines",
-      "hash": "8e31e742"
-    }
-  ],
-  "cses-two-sets": [
-    {
-      "key": "cses-two-sets#1",
-      "title": "Approach 1: pairing by n mod 4",
-      "hash": "6f892a27"
-    },
-    {
-      "key": "cses-two-sets#2",
-      "title": "Approach 2: greedy from n downwards (recommended)",
-      "hash": "fb23ba3b"
-    },
-    {
-      "key": "cses-two-sets#3",
-      "title": "Two Sets, greedy",
-      "hash": "a0780c57"
-    }
-  ],
-  "cses-weird-algorithm": [
-    {
-      "key": "cses-weird-algorithm#1",
-      "title": "Approach 1: Scanner and one print per value",
-      "hash": "d8a6092f"
-    },
-    {
-      "key": "cses-weird-algorithm#2",
-      "title": "Approach 2: BufferedReader and one StringBuilder (recommended)",
-      "hash": "b6b38d27"
-    },
-    {
-      "key": "cses-weird-algorithm#3",
-      "title": "Weird Algorithm in a dozen lines",
-      "hash": "e1fcce4e"
-    }
-  ]
+  }
 }

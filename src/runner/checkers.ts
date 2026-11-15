@@ -1,4 +1,4 @@
-import type { CheckKind } from './context'
+import type { CheckKind, Runnable } from './context'
 
 /** A verdict on an output, or null when the input is outside the problem's limits. */
 export type Verdict = { ok: boolean; message: string } | null
@@ -80,15 +80,115 @@ function checkTwoSets(input: string, output: string): Verdict {
   return { ok: true, message: `Valid: both sets sum to ${sums[0]} and together hold 1 to ${n} once each.` }
 }
 
+// ---------------------------------------------------------------- LeetCode-style values
+
+type Value = string | boolean | null | { num: number } | Value[]
+
+/** Parses one printed value: numbers, "strings", 'c', true/false/null, [lists]. Null on failure. */
+export function parseValue(text: string): Value | undefined {
+  let i = 0
+  const space = () => {
+    while (i < text.length && /\s/.test(text[i])) i++
+  }
+  const value = (): Value => {
+    space()
+    const c = text[i]
+    if (c === '[') {
+      i++
+      const items: Value[] = []
+      space()
+      if (text[i] === ']') {
+        i++
+        return items
+      }
+      for (;;) {
+        items.push(value())
+        space()
+        if (text[i] === ',') i++
+        else if (text[i] === ']') {
+          i++
+          return items
+        } else throw new Error('bad list')
+      }
+    }
+    if (c === '"' || c === "'") {
+      i++
+      let out = ''
+      while (i < text.length && text[i] !== c) {
+        if (text[i] === '\\' && i + 1 < text.length) {
+          const e = text[i + 1]
+          out += e === 'n' ? '\n' : e === 't' ? '\t' : e
+          i += 2
+        } else out += text[i++]
+      }
+      if (text[i] !== c) throw new Error('unclosed string')
+      i++
+      return out
+    }
+    const m = text.slice(i).match(/^[^\s,\]]+/)
+    if (!m) throw new Error('bad value')
+    i += m[0].length
+    if (m[0] === 'true') return true
+    if (m[0] === 'false') return false
+    if (m[0] === 'null') return null
+    const num = Number(m[0])
+    if (Number.isNaN(num)) throw new Error('bad number')
+    return { num }
+  }
+  try {
+    const v = value()
+    space()
+    return i === text.length ? v : undefined
+  } catch {
+    return undefined
+  }
+}
+
+const key = (v: Value): string => JSON.stringify(v)
+
+function normalise(v: Value, mode: CheckKind, depth = 0): Value {
+  if (!Array.isArray(v)) return v
+  const nested = mode === 'unordered-nested'
+  const items = v.map((x) => (nested ? normalise(x, mode, depth + 1) : x))
+  return (mode === 'unordered' && depth === 0) || nested ? [...items].sort((a, b) => key(a).localeCompare(key(b))) : items
+}
+
+/** One output line as [name or "", value]; the value is undefined if it does not parse. */
+function line(text: string): [string, Value | undefined] {
+  const m = text.trim().match(/^([A-Za-z_]\w*)\s*=\s*(.*)$/)
+  return m ? [m[1], parseValue(m[2])] : ['', parseValue(text.trim())]
+}
+
+/** LeetCode-style comparison of printed values, line by line. */
+export function sameValues(output: string, expected: string, mode: CheckKind): boolean {
+  let out = output.split('\n').filter((l) => l.trim())
+  let exp = expected.split('\n').filter((l) => l.trim())
+  if (mode === 'first-line') {
+    out = out.slice(0, 1)
+    exp = exp.slice(0, 1)
+  }
+  if (out.length !== exp.length) return false
+  return out.every((o, i) => {
+    const [na, a] = line(o)
+    const [nb, b] = line(exp[i])
+    if (a === undefined || b === undefined) return o.trim() === exp[i].trim()
+    return na === nb && key(normalise(a, mode)) === key(normalise(b, mode))
+  })
+}
+
 /**
- * Checks a run's output. Exact problems are compared with `expected` (only known for the
- * statement's samples); problems with many correct answers are checked by rule, on any input.
+ * Checks a run's output. Answers with one right output are compared with `expected`
+ * (known only for the statement's samples); CSES problems with many correct answers are
+ * checked by rule, on any input.
  */
-export function check(kind: CheckKind, input: string, output: string, expected: string | undefined): Verdict {
+export function check(runnable: Pick<Runnable, 'check' | 'format'>, input: string, output: string, expected: string | undefined): Verdict {
+  const kind = runnable.check
   if (kind === 'permutations') return checkPermutations(input, output)
   if (kind === 'two-sets') return checkTwoSets(input, output)
   if (expected === undefined) return null
-  return sameTokens(output, expected)
-    ? { ok: true, message: 'Matches the expected output.' }
-    : { ok: false, message: 'Differs from the expected output.' }
+  const same = runnable.format === 'stdin' ? sameTokens(output, expected) : sameValues(output, expected, kind)
+  const note = kind === 'unordered' || kind === 'unordered-nested' ? ' (in any order)' : ''
+  return same
+    ? { ok: true, message: `Matches the expected output${note}.` }
+    : { ok: false, message: `Differs from the expected output${note}.` }
 }

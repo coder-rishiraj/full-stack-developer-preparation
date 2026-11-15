@@ -30,7 +30,7 @@ export function CodeRunner({ runnable }: { runnable: Runnable }) {
     if (running) return
     setRunning(true)
     const ranInput = input
-    const run = await runJava(runnable.key, ranInput)
+    const run = await runJava(runnable, ranInput)
     setResult({ input: ranInput, run })
     setRunning(false)
   }
@@ -73,7 +73,7 @@ export function CodeRunner({ runnable }: { runnable: Runnable }) {
         aria-label="Standard input for the program"
       />
       <p className="cd-run-note">
-        Edit the input and run again (⌘/Ctrl + Enter). The program runs in your browser: this exact code, compiled to
+        {runnable.hint} Edit it and run again (⌘/Ctrl + Enter). This exact code runs in your browser, compiled to
         JavaScript ahead of time.
       </p>
       {result && <RunOutput runnable={runnable} input={result.input} run={result.run} />}
@@ -101,9 +101,10 @@ function RunOutput({ runnable, input, run }: { runnable: Runnable; input: string
 
   const sample = runnable.samples.find((s) => s.input === input)
   const ok = run.status === 'ok' || run.status === 'exit 0'
-  const verdict = ok ? check(runnable.check, input, run.stdout, sample?.output) : null
+  const verdict = ok ? check(runnable, input, run.stdout, sample?.output) : null
   const out = clip(run.stdout)
-  const showExpected = sample && verdict && !verdict.ok && runnable.check === 'exact'
+  const byRule = runnable.check === 'permutations' || runnable.check === 'two-sets'
+  const showExpected = sample && verdict && !verdict.ok && !byRule
 
   return (
     <div className="cd-run-output" data-state={ok ? 'ok' : 'error'}>
@@ -123,7 +124,7 @@ function RunOutput({ runnable, input, run }: { runnable: Runnable; input: string
       {verdict && (
         <div className="cd-run-verdict" data-ok={verdict.ok}>
           {verdict.ok ? '✓' : '✗'} {verdict.message}
-          {sample && runnable.check !== 'exact' && verdict.ok && sample.output.trim() !== run.stdout.trim() && (
+          {sample && byRule && verdict.ok && sample.output.trim() !== run.stdout.trim() && (
             <> Any valid answer is accepted; the statement shows another one.</>
           )}
         </div>

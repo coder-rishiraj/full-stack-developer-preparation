@@ -9,8 +9,14 @@ export type RunResult =
 /** Wall-clock limit for one run in the browser. */
 export const RUN_TIME_LIMIT_MS = 5000
 
-type ManifestEntry = { key: string; title: string; hash: string }
-type PageSamples = { check: CheckKind; samples: Sample[] }
+type ManifestPage = {
+  chunk: string
+  format: 'stdin' | 'leetcode'
+  hint: string
+  programs: { key: string; title: string; hash: string }[]
+}
+type PageSamples = { check?: CheckKind; samples: Sample[] }
+const PAGES = (manifest as { pages: Record<string, ManifestPage> }).pages
 
 /** Same normalisation and FNV-1a hash as scripts/build-java-runner.mjs. */
 export function codeHash(code: string): string {
@@ -33,20 +39,29 @@ export function codeHash(code: string): string {
  * until `npm run problems:runner` is run again (a test fails meanwhile).
  */
 export function findRunnable(problemId: string, code: string): Runnable | null {
-  const entries = (manifest as Record<string, ManifestEntry[]>)[problemId]
+  const built = PAGES[problemId]
   const page = (samplesConfig as Record<string, PageSamples>)[problemId]
-  if (!entries || !page) return null
+  if (!built || !page) return null
   const hash = codeHash(code)
-  const entry = entries.find((e) => e.hash === hash)
-  return entry ? { key: entry.key, problemId, check: page.check, samples: page.samples } : null
+  const entry = built.programs.find((e) => e.hash === hash)
+  if (!entry) return null
+  return {
+    key: entry.key,
+    chunk: built.chunk,
+    problemId,
+    format: built.format,
+    hint: built.hint,
+    check: page.check ?? 'exact',
+    samples: page.samples,
+  }
 }
 
 export function runnableProblemIds(): string[] {
-  return Object.keys(manifest)
+  return Object.keys(PAGES)
 }
 
 /** Runs a compiled program in a fresh worker; stops it after RUN_TIME_LIMIT_MS. */
-export function runJava(key: string, input: string): Promise<RunResult> {
+export function runJava(runnable: Runnable, input: string): Promise<RunResult> {
   return new Promise((resolve) => {
     let worker: Worker
     try {
@@ -70,6 +85,6 @@ export function runJava(key: string, input: string): Promise<RunResult> {
       worker.terminate()
       resolve({ kind: 'failed', message: event.message || 'The program could not be started.' })
     }
-    worker.postMessage({ key, input })
+    worker.postMessage({ chunk: runnable.chunk, key: runnable.key, input })
   })
 }

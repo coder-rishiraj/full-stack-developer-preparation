@@ -2,41 +2,1136 @@
   "cses-weird-algorithm": {
     "check": "exact",
     "samples": [
-      { "label": "Example 1", "input": "3\n", "output": "3 10 5 16 8 4 2 1\n" },
-      { "label": "Example 2", "input": "1\n", "output": "1\n" }
+      {
+        "label": "Example 1",
+        "input": "3\n",
+        "output": "3 10 5 16 8 4 2 1\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "1\n",
+        "output": "1\n"
+      }
     ],
-    "extraInputs": ["2\n", "27\n", "113383\n", "704511\n", "837799\n", "1000000\n"]
+    "extraInputs": [
+      "2\n",
+      "27\n",
+      "113383\n",
+      "704511\n",
+      "837799\n",
+      "1000000\n"
+    ]
   },
   "cses-repetitions": {
     "check": "exact",
     "samples": [
-      { "label": "Example 1", "input": "ATTCGGGA\n", "output": "3\n" },
-      { "label": "Example 2", "input": "ACGT\n", "output": "1\n" }
+      {
+        "label": "Example 1",
+        "input": "ATTCGGGA\n",
+        "output": "3\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "ACGT\n",
+        "output": "1\n"
+      }
     ],
-    "extraInputs": ["A\n", "GGGGGGGGGG\n", "ACCGGGTTTT\n", "TTTTAAAC\n", "ATTCGGGA"]
+    "extraInputs": [
+      "A\n",
+      "GGGGGGGGGG\n",
+      "ACCGGGTTTT\n",
+      "TTTTAAAC\n",
+      "ATTCGGGA"
+    ]
   },
   "cses-increasing-array": {
     "check": "exact",
     "samples": [
-      { "label": "Example 1", "input": "5\n3 2 5 1 7\n", "output": "5\n" },
-      { "label": "Example 2", "input": "3\n1 2 2\n", "output": "0\n" }
+      {
+        "label": "Example 1",
+        "input": "5\n3 2 5 1 7\n",
+        "output": "5\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "3\n1 2 2\n",
+        "output": "0\n"
+      }
     ],
-    "extraInputs": ["1\n42\n", "4\n1000000000 1 1 1\n", "6\n5 4 3 2 1 9\n", "3\n1\n2\n3\n"]
+    "extraInputs": [
+      "1\n42\n",
+      "4\n1000000000 1 1 1\n",
+      "6\n5 4 3 2 1 9\n",
+      "3\n1\n2\n3\n"
+    ]
   },
   "cses-permutations": {
     "check": "permutations",
     "samples": [
-      { "label": "Example 1", "input": "5\n", "output": "4 2 5 3 1\n" },
-      { "label": "Example 2", "input": "3\n", "output": "NO SOLUTION\n" }
+      {
+        "label": "Example 1",
+        "input": "5\n",
+        "output": "4 2 5 3 1\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "3\n",
+        "output": "NO SOLUTION\n"
+      }
     ],
-    "extraInputs": ["1\n", "2\n", "4\n", "6\n", "10\n", "1000\n"]
+    "extraInputs": [
+      "1\n",
+      "2\n",
+      "4\n",
+      "6\n",
+      "10\n",
+      "1000\n"
+    ]
   },
   "cses-two-sets": {
     "check": "two-sets",
     "samples": [
-      { "label": "Example 1", "input": "7\n", "output": "YES\n4\n1 2 4 7\n3\n3 5 6\n" },
-      { "label": "Example 2", "input": "6\n", "output": "NO\n" }
+      {
+        "label": "Example 1",
+        "input": "7\n",
+        "output": "YES\n4\n1 2 4 7\n3\n3 5 6\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "6\n",
+        "output": "NO\n"
+      }
     ],
-    "extraInputs": ["1\n", "2\n", "3\n", "4\n", "8\n", "11\n", "12\n", "1000\n"]
+    "extraInputs": [
+      "1\n",
+      "2\n",
+      "3\n",
+      "4\n",
+      "8\n",
+      "11\n",
+      "12\n",
+      "1000\n"
+    ]
+  },
+  "nc-3sum": {
+    "check": "unordered-nested",
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "nums = [0, -1, 2, -3, 1, -1]\n",
+        "output": "[[-3, 1, 2], [-1, -1, 2], [-1, 0, 1]]\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "nums = [0, 0, 0, 0]\n",
+        "output": "[[0, 0, 0]]\n"
+      },
+      {
+        "label": "Example 3",
+        "input": "nums = [3, -1, 5]\n",
+        "output": "[]\n"
+      }
+    ]
+  },
+  "nc-4sum": {
+    "check": "unordered-nested",
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "nums = [2, -1, 0, 1, -2, 2]\ntarget = 1\n",
+        "output": "[[-2, -1, 2, 2], [-2, 0, 1, 2]]\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "nums = [3, 3, 3, 3, 3]\ntarget = 12\n",
+        "output": "[[3, 3, 3, 3]]\n"
+      },
+      {
+        "label": "Example 3",
+        "input": "nums = [1000000000, 1000000000, 1000000000, 1000000000]\ntarget = -294967296\n",
+        "output": "[]\n"
+      }
+    ]
+  },
+  "nc-asteroid-collision": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "asteroids = [3, 9, -4, 2, -7]\n",
+        "output": "[3, 9]\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "asteroids = [-2, -1, 1, 2]\n",
+        "output": "[-2, -1, 1, 2]\n"
+      }
+    ]
+  },
+  "nc-baseball-game": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "operations = [\"5\",\"2\",\"C\",\"D\",\"+\"]\n",
+        "output": "30\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "operations = [\"5\",\"-2\",\"4\",\"C\",\"D\",\"9\",\"+\",\"+\"]\n",
+        "output": "27\n"
+      },
+      {
+        "label": "Example 3",
+        "input": "operations = [\"1\",\"C\"]\n",
+        "output": "0\n"
+      }
+    ]
+  },
+  "nc-best-time-to-buy-and-sell-stock": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "prices = [4, 9, 1, 7, 2]\n",
+        "output": "6\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "prices = [9, 6, 6, 2]\n",
+        "output": "0\n"
+      }
+    ]
+  },
+  "nc-best-time-to-buy-sell-stock-ii": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "prices = [3, 1, 4, 2, 6]\n",
+        "output": "7\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "prices = [9, 7, 4, 2]\n",
+        "output": "0\n"
+      }
+    ]
+  },
+  "nc-binary-search": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "nums = [-4, 1, 6, 9, 15, 22]\ntarget = 15\n",
+        "output": "4\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "nums = [-4, 1, 6, 9, 15, 22]\ntarget = 7\n",
+        "output": "-1\n"
+      }
+    ]
+  },
+  "nc-boats-to-save-people": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "people = [1, 2, 2, 3]\nlimit = 3\n",
+        "output": "3\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "people = [4, 1, 3, 2]\nlimit = 5\n",
+        "output": "2\n"
+      }
+    ]
+  },
+  "nc-capacity-to-ship-packages-within-d-days": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "weights = [3, 2, 2, 4, 1, 4]\ndays = 3\n",
+        "output": "6\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "weights = [1, 2, 3, 1, 1]\ndays = 4\n",
+        "output": "3\n"
+      }
+    ]
+  },
+  "nc-car-fleet": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "target = 12\nposition = [10, 8, 0, 5, 3]\nspeed = [2, 4, 1, 1, 3]\n",
+        "output": "3\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "target = 100\nposition = [0, 2, 4]\nspeed = [4, 2, 1]\n",
+        "output": "1\n"
+      }
+    ]
+  },
+  "nc-concatenation-of-array": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "nums = [7, 2, 9]\n",
+        "output": "[7, 2, 9, 7, 2, 9]\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "nums = [4, 4]\n",
+        "output": "[4, 4, 4, 4]\n"
+      }
+    ]
+  },
+  "nc-container-with-most-water": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "height = [1, 8, 6, 2, 5, 4, 8, 3, 7]\n",
+        "output": "49\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "height = [4, 3, 2, 1, 4]\n",
+        "output": "16\n"
+      }
+    ]
+  },
+  "nc-contains-duplicate": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "nums = [4, 9, 2, 9]\n",
+        "output": "true\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "nums = [5, -1, 0, 3]\n",
+        "output": "false\n"
+      }
+    ]
+  },
+  "nc-contains-duplicate-ii": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "nums = [5, 8, 5, 2]\nk = 2\n",
+        "output": "true\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "nums = [5, 8, 2, 5]\nk = 2\n",
+        "output": "false\n"
+      }
+    ]
+  },
+  "nc-daily-temperatures": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "temperatures = [73, 74, 75, 71, 69, 72, 76, 73]\n",
+        "output": "[1, 1, 4, 2, 1, 1, 0, 0]\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "temperatures = [30, 40, 50, 60]\n",
+        "output": "[1, 1, 1, 0]\n"
+      }
+    ]
+  },
+  "nc-decode-string": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "s = \"2[x3[y]]z\"\n",
+        "output": "\"xyyyxyyyz\"\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "s = \"ab10[c]\"\n",
+        "output": "\"abcccccccccc\"\n"
+      }
+    ]
+  },
+  "nc-design-hashmap": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "[\"MyHashMap\", \"put\", \"put\", \"get\", \"get\", \"put\", \"get\", \"remove\", \"get\"]\n[[], [1, 1], [2, 2], [1], [3], [2, 1], [2], [2], [2]]\n",
+        "output": "[null, null, null, 1, -1, null, 1, null, -1]\n"
+      }
+    ]
+  },
+  "nc-design-hashset": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "[\"MyHashSet\", \"add\", \"add\", \"contains\", \"contains\", \"add\", \"contains\", \"remove\", \"contains\"]\n[[], [1], [2], [1], [3], [2], [2], [2], [2]]\n",
+        "output": "[null, null, null, true, false, null, true, null, false]\n"
+      }
+    ]
+  },
+  "nc-encode-and-decode-strings": {
+    "check": "first-line",
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "strs = [\"hi\", \"\", \"a,b\"]\n",
+        "output": "[\"hi\", \"\", \"a,b\"]\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "strs = [\"\"]\n",
+        "output": "[\"\"]\n"
+      },
+      {
+        "label": "Example 3",
+        "input": "strs = []\n",
+        "output": "[]\n"
+      }
+    ]
+  },
+  "nc-evaluate-reverse-polish-notation": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "tokens = [\"2\",\"1\",\"+\",\"3\",\"*\"]\n",
+        "output": "9\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "tokens = [\"4\",\"13\",\"5\",\"/\",\"+\"]\n",
+        "output": "6\n"
+      },
+      {
+        "label": "Example 3",
+        "input": "tokens = [\"10\",\"6\",\"9\",\"3\",\"+\",\"-11\",\"*\",\"/\",\"*\",\"17\",\"+\",\"5\",\"+\"]\n",
+        "output": "22\n"
+      }
+    ]
+  },
+  "nc-find-in-mountain-array": {
+    "check": "first-line",
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "array = [1, 2, 3, 4, 5, 3, 1]\ntarget = 3\n",
+        "output": "2\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "array = [0, 1, 2, 4, 2, 1]\ntarget = 3\n",
+        "output": "-1\n"
+      }
+    ]
+  },
+  "nc-find-k-closest-elements": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "arr = [1, 2, 3, 4, 5]\nk = 4\nx = 3\n",
+        "output": "[1, 2, 3, 4]\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "arr = [1, 1, 2, 3, 4, 5]\nk = 4\nx = -1\n",
+        "output": "[1, 1, 2, 3]\n"
+      }
+    ]
+  },
+  "nc-find-minimum-in-rotated-sorted-array": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "nums = [5, 6, 7, 1, 2, 3, 4]\n",
+        "output": "1\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "nums = [8, 10, 12, 14]\n",
+        "output": "8\n"
+      }
+    ]
+  },
+  "nc-first-missing-positive": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "nums = [5, 3, -2, 1, 2]\n",
+        "output": "4\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "nums = [8, 9, 10]\n",
+        "output": "1\n"
+      }
+    ]
+  },
+  "nc-group-anagrams": {
+    "check": "unordered-nested",
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "strs = [\"dusty\", \"study\", \"night\", \"thing\", \"act\"]\n",
+        "output": "[[\"dusty\", \"study\"], [\"night\", \"thing\"], [\"act\"]]\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "strs = [\"\", \"b\", \"\"]\n",
+        "output": "[[\"\", \"\"], [\"b\"]]\n"
+      }
+    ]
+  },
+  "nc-guess-number-higher-or-lower": {
+    "check": "first-line",
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "n = 10\npick = 6\n",
+        "output": "6\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "n = 1\npick = 1\n",
+        "output": "1\n"
+      }
+    ]
+  },
+  "nc-implement-queue-using-stacks": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "[\"MyQueue\", \"push\", \"push\", \"peek\", \"pop\", \"empty\"]\n[[], [1], [2], [], [], []]\n",
+        "output": "[null, null, null, 1, 1, false]\n"
+      }
+    ]
+  },
+  "nc-implement-stack-using-queues": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "[\"MyStack\", \"push\", \"push\", \"top\", \"pop\", \"empty\"]\n[[], [1], [2], [], [], []]\n",
+        "output": "[null, null, null, 2, 2, false]\n"
+      }
+    ]
+  },
+  "nc-koko-eating-bananas": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "piles = [4, 9, 5]\nh = 6\n",
+        "output": "4\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "piles = [10]\nh = 4\n",
+        "output": "3\n"
+      }
+    ]
+  },
+  "nc-largest-rectangle-in-histogram": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "heights = [2, 1, 5, 6, 2, 3]\n",
+        "output": "10\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "heights = [2, 4]\n",
+        "output": "4\n"
+      }
+    ]
+  },
+  "nc-longest-common-prefix": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "strs = [\"interview\", \"internet\", \"interval\"]\n",
+        "output": "\"inter\"\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "strs = [\"team\", \"teammate\", \"teamwork\"]\n",
+        "output": "\"team\"\n"
+      }
+    ]
+  },
+  "nc-longest-consecutive-sequence": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "nums = [7, -1, 9, 0, 8, 1, 6]\n",
+        "output": "4\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "nums = [3, 1, 2, 2, 3]\n",
+        "output": "3\n"
+      }
+    ]
+  },
+  "nc-longest-repeating-character-replacement": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "s = \"ABBAB\"\nk = 1\n",
+        "output": "4\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "s = \"AAAB\"\nk = 0\n",
+        "output": "3\n"
+      }
+    ]
+  },
+  "nc-longest-substring-without-repeating-characters": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "s = \"abcbdea\"\n",
+        "output": "5\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "s = \"aaaa\"\n",
+        "output": "1\n"
+      }
+    ]
+  },
+  "nc-majority-element": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "nums = [6, 1, 6, 6, 2]\n",
+        "output": "6\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "nums = [4, 9, 9]\n",
+        "output": "9\n"
+      }
+    ]
+  },
+  "nc-majority-element-ii": {
+    "check": "unordered",
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "nums = [4, 1, 4, 2, 1, 4, 1]\n",
+        "output": "[4, 1]\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "nums = [5, 6, 7, 5]\n",
+        "output": "[5]\n"
+      }
+    ]
+  },
+  "nc-maximum-frequency-stack": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "[\"FreqStack\", \"push\", \"push\", \"push\", \"push\", \"push\", \"push\", \"pop\", \"pop\", \"pop\", \"pop\"]\n[[], [5], [7], [5], [7], [4], [5], [], [], [], []]\n",
+        "output": "[null, null, null, null, null, null, null, 5, 7, 5, 4]\n"
+      }
+    ]
+  },
+  "nc-median-of-two-sorted-arrays": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "nums1 = [1, 3]\nnums2 = [2]\n",
+        "output": "2.0\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "nums1 = [1, 2]\nnums2 = [3, 4]\n",
+        "output": "2.5\n"
+      }
+    ]
+  },
+  "nc-merge-sorted-array": {
+    "show": "arg:nums1",
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "nums1 = [1, 4, 7, 0, 0, 0]\nm = 3\nnums2 = [2, 4, 5]\nn = 3\n",
+        "output": "nums1 = [1, 2, 4, 4, 5, 7]\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "nums1 = [0]\nm = 0\nnums2 = [3]\nn = 1\n",
+        "output": "nums1 = [3]\n"
+      }
+    ]
+  },
+  "nc-merge-strings-alternately": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "word1 = \"ace\"\nword2 = \"bdfgh\"\n",
+        "output": "\"abcdefgh\"\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "word1 = \"wxyz\"\nword2 = \"ab\"\n",
+        "output": "\"waxbyz\"\n"
+      }
+    ]
+  },
+  "nc-min-stack": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "[\"MinStack\", \"push\", \"push\", \"push\", \"getMin\", \"pop\", \"top\", \"getMin\"]\n[[], [-2], [0], [-3], [], [], [], []]\n",
+        "output": "[null, null, null, null, -3, null, 0, -2]\n"
+      }
+    ]
+  },
+  "nc-minimum-size-subarray-sum": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "target = 7\nnums = [2, 3, 1, 2, 4, 3]\n",
+        "output": "2\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "target = 11\nnums = [1, 1, 1, 1, 1, 1, 1, 1]\n",
+        "output": "0\n"
+      }
+    ]
+  },
+  "nc-minimum-window-substring": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "s = \"ADOBECODEBANC\"\nt = \"ABC\"\n",
+        "output": "\"BANC\"\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "s = \"a\"\nt = \"aa\"\n",
+        "output": "\"\"\n"
+      }
+    ]
+  },
+  "nc-online-stock-span": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "[\"StockSpanner\", \"next\", \"next\", \"next\", \"next\", \"next\", \"next\", \"next\"]\n[[], [100], [80], [60], [70], [60], [75], [85]]\n",
+        "output": "[null, 1, 1, 1, 2, 1, 4, 6]\n"
+      }
+    ]
+  },
+  "nc-permutation-in-string": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "s1 = \"ab\"\ns2 = \"cbad\"\n",
+        "output": "true\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "s1 = \"aab\"\ns2 = \"abbab\"\n",
+        "output": "false\n"
+      }
+    ]
+  },
+  "nc-product-of-array-except-self": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "nums = [2, 3, 4, 5]\n",
+        "output": "[60, 40, 30, 24]\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "nums = [3, 0, -2, 4]\n",
+        "output": "[0, -24, 0, 0]\n"
+      }
+    ]
+  },
+  "nc-range-sum-query-2d-immutable": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "[\"NumMatrix\", \"sumRegion\", \"sumRegion\", \"sumRegion\"]\n[[[[3, 0, 1, 4, 2], [5, 6, 3, 2, 1], [1, 2, 0, 1, 5], [4, 1, 0, 1, 7], [1, 0, 3, 0, 5]]], [2, 1, 4, 3], [1, 1, 2, 2], [1, 2, 2, 4]]\n",
+        "output": "[null, 8, 11, 12]\n"
+      }
+    ]
+  },
+  "nc-remove-duplicates-from-sorted-array": {
+    "show": "k-prefix:nums",
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "nums = [1, 1, 2, 3, 3]\n",
+        "output": "k = 3\nnums = [1, 2, 3]\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "nums = [-2, -2, 0, 3, 3, 3]\n",
+        "output": "k = 3\nnums = [-2, 0, 3]\n"
+      }
+    ]
+  },
+  "nc-remove-element": {
+    "check": "unordered",
+    "show": "k-prefix:nums",
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "nums = [4, 1, 4, 2]\nval = 4\n",
+        "output": "k = 2\nnums = [1, 2]\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "nums = [5, 3, 5, 5, 0, 3]\nval = 5\n",
+        "output": "k = 3\nnums = [3, 0, 3]\n"
+      }
+    ]
+  },
+  "nc-reverse-string": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "s = ['h', 'e', 'l', 'l', 'o']\n",
+        "output": "s = ['o', 'l', 'l', 'e', 'h']\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "s = ['H', 'a', 'n', 'n', 'a', 'h']\n",
+        "output": "s = ['h', 'a', 'n', 'n', 'a', 'H']\n"
+      }
+    ]
+  },
+  "nc-rotate-array": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "nums = [10, 20, 30, 40, 50]\nk = 2\n",
+        "output": "nums = [40, 50, 10, 20, 30]\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "nums = [7, 8]\nk = 5\n",
+        "output": "nums = [8, 7]\n"
+      }
+    ]
+  },
+  "nc-search-a-2d-matrix": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "matrix = [[2, 5, 8, 11], [14, 17, 19, 23], [30, 34, 40, 45]]\ntarget = 19\n",
+        "output": "true\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "matrix = [[2, 5, 8, 11], [14, 17, 19, 23], [30, 34, 40, 45]]\ntarget = 13\n",
+        "output": "false\n"
+      }
+    ]
+  },
+  "nc-search-in-rotated-sorted-array": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "nums = [6, 7, 9, 1, 3, 4]\ntarget = 3\n",
+        "output": "4\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "nums = [6, 7, 9, 1, 3, 4]\ntarget = 5\n",
+        "output": "-1\n"
+      }
+    ]
+  },
+  "nc-search-in-rotated-sorted-array-ii": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "nums = [3, 4, 4, 0, 1, 1, 2]\ntarget = 1\n",
+        "output": "true\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "nums = [3, 4, 4, 0, 1, 1, 2]\ntarget = 5\n",
+        "output": "false\n"
+      }
+    ]
+  },
+  "nc-search-insert-position": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "nums = [2, 5, 8, 11, 14]\ntarget = 9\n",
+        "output": "3\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "nums = [2, 5, 8, 11, 14]\ntarget = 16\n",
+        "output": "5\n"
+      }
+    ]
+  },
+  "nc-simplify-path": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "path = \"/home/user/Documents/../Pictures\"\n",
+        "output": "\"/home/user/Pictures\"\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "path = \"/.../a/../b/c/../d/./\"\n",
+        "output": "\"/.../b/d\"\n"
+      }
+    ]
+  },
+  "nc-sliding-window-maximum": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "nums = [1, 3, -1, -3, 5, 3, 6, 7]\nk = 3\n",
+        "output": "[3, 3, 5, 5, 6, 7]\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "nums = [1]\nk = 1\n",
+        "output": "[1]\n"
+      }
+    ]
+  },
+  "nc-sort-an-array": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "nums = [2, 5, 1, 4, 3]\n",
+        "output": "[1, 2, 3, 4, 5]\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "nums = [0, -3, 0, 7, -3]\n",
+        "output": "[-3, -3, 0, 0, 7]\n"
+      }
+    ]
+  },
+  "nc-sort-colors": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "nums = [2, 0, 1, 2, 1, 0]\n",
+        "output": "nums = [0, 0, 1, 1, 2, 2]\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "nums = [1, 2, 0]\n",
+        "output": "nums = [0, 1, 2]\n"
+      }
+    ]
+  },
+  "nc-split-array-largest-sum": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "nums = [7, 2, 5, 10, 8]\nk = 2\n",
+        "output": "18\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "nums = [0, 4, 0, 0]\nk = 3\n",
+        "output": "4\n"
+      }
+    ]
+  },
+  "nc-sqrt-x": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "x = 8\n",
+        "output": "2\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "x = 16\n",
+        "output": "4\n"
+      }
+    ]
+  },
+  "nc-subarray-sum-equals-k": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "nums = [1, 2, 3]\nk = 3\n",
+        "output": "2\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "nums = [1, -1, 1, -1]\nk = 0\n",
+        "output": "4\n"
+      }
+    ]
+  },
+  "nc-time-based-key-value-store": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "[\"TimeMap\", \"set\", \"get\", \"get\", \"set\", \"get\", \"get\"]\n[[], [\"foo\", \"bar\", 1], [\"foo\", 1], [\"foo\", 3], [\"foo\", \"bar2\", 4], [\"foo\", 4], [\"foo\", 5]]\n",
+        "output": "[null, null, \"bar\", \"bar\", null, \"bar2\", \"bar2\"]\n"
+      }
+    ]
+  },
+  "nc-top-k-frequent-elements": {
+    "check": "unordered",
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "nums = [4, 4, 7, 4, 7, 2]\nk = 2\n",
+        "output": "[4, 7]\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "nums = [3, -3, -3, 0, 3, -3]\nk = 1\n",
+        "output": "[-3]\n"
+      }
+    ]
+  },
+  "nc-trapping-rain-water": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "height = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]\n",
+        "output": "6\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "height = [4, 2, 0, 3, 2, 5]\n",
+        "output": "9\n"
+      }
+    ]
+  },
+  "nc-two-sum": {
+    "check": "unordered",
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "nums = [5, 1, 8, 3]\ntarget = 11\n",
+        "output": "[2, 3]\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "nums = [4, 6, 2]\ntarget = 8\n",
+        "output": "[1, 2]\n"
+      }
+    ]
+  },
+  "nc-two-sum-ii-input-array-is-sorted": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "numbers = [1, 3, 4, 7, 11]\ntarget = 11\n",
+        "output": "[3, 4]\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "numbers = [-3, -3, 2, 5]\ntarget = -6\n",
+        "output": "[1, 2]\n"
+      }
+    ]
+  },
+  "nc-valid-anagram": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "s = \"stale\"\nt = \"least\"\n",
+        "output": "true\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "s = \"aab\"\nt = \"abb\"\n",
+        "output": "false\n"
+      }
+    ]
+  },
+  "nc-valid-palindrome": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "s = \"A man, a plan, a canal: Panama\"\n",
+        "output": "true\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "s = \"race a car\"\n",
+        "output": "false\n"
+      },
+      {
+        "label": "Example 3",
+        "input": "s = \" \"\n",
+        "output": "true\n"
+      }
+    ]
+  },
+  "nc-valid-palindrome-ii": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "s = \"aba\"\n",
+        "output": "true\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "s = \"abca\"\n",
+        "output": "true\n"
+      },
+      {
+        "label": "Example 3",
+        "input": "s = \"abc\"\n",
+        "output": "false\n"
+      }
+    ]
+  },
+  "nc-valid-parentheses": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "s = \"()[]{}\"\n",
+        "output": "true\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "s = \"(]\"\n",
+        "output": "false\n"
+      },
+      {
+        "label": "Example 3",
+        "input": "s = \"([)]\"\n",
+        "output": "false\n"
+      },
+      {
+        "label": "Example 4",
+        "input": "s = \"([])\"\n",
+        "output": "true\n"
+      }
+    ]
+  },
+  "nc-valid-sudoku": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "board = [[\"5\",\"3\",\".\",\".\",\"7\",\".\",\".\",\".\",\".\"],[\"6\",\".\",\".\",\"1\",\"9\",\"5\",\".\",\".\",\".\"],[\".\",\"9\",\"8\",\".\",\".\",\".\",\".\",\"6\",\".\"],[\"8\",\".\",\".\",\".\",\"6\",\".\",\".\",\".\",\"3\"],[\"4\",\".\",\".\",\"8\",\".\",\"3\",\".\",\".\",\"1\"],[\"7\",\".\",\".\",\".\",\"2\",\".\",\".\",\".\",\"6\"],[\".\",\"6\",\".\",\".\",\".\",\".\",\"2\",\"8\",\".\"],[\".\",\".\",\".\",\"4\",\"1\",\"9\",\".\",\".\",\"5\"],[\".\",\".\",\".\",\".\",\"8\",\".\",\".\",\"7\",\"9\"]]\n",
+        "output": "true\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "board = [[\"8\",\"3\",\".\",\".\",\"7\",\".\",\".\",\".\",\".\"],[\"6\",\".\",\".\",\"1\",\"9\",\"5\",\".\",\".\",\".\"],[\".\",\"9\",\"8\",\".\",\".\",\".\",\".\",\"6\",\".\"],[\"8\",\".\",\".\",\".\",\"6\",\".\",\".\",\".\",\"3\"],[\"4\",\".\",\".\",\"8\",\".\",\"3\",\".\",\".\",\"1\"],[\"7\",\".\",\".\",\".\",\"2\",\".\",\".\",\".\",\"6\"],[\".\",\"6\",\".\",\".\",\".\",\".\",\"2\",\"8\",\".\"],[\".\",\".\",\".\",\"4\",\"1\",\"9\",\".\",\".\",\"5\"],[\".\",\".\",\".\",\".\",\"8\",\".\",\".\",\"7\",\"9\"]]\n",
+        "output": "false\n"
+      }
+    ]
   }
 }

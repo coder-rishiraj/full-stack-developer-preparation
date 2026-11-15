@@ -13,6 +13,7 @@ paragraph by that.
 |---|---|
 | Page | `src/content/problem-pages/<problem-id>.md` (the `id` from `src/content/problems/*.ts`) |
 | Java tests | `src/content/problem-pages/tests/<problem-id>.java` |
+| Run-panel samples | `src/content/problem-pages/run-samples.json` (and, rarely, a harness in `run/<problem-id>.java`) |
 | Progress log | `src/content/problem-pages/PROGRESS.md` |
 | Rendered at | `/dsa/<problem-id>` |
 
@@ -21,6 +22,7 @@ paragraph by that.
 | `npm run problems:check` | Structure: frontmatter, the 13 sections, required parts, links, a test file exists |
 | `npm run problems:verify` | Java: every solution compiles (warnings are errors) and passes its tests. Needs a JDK |
 | `npm run problems:verify -- <id> <id>` | The same, for the named pages only |
+| `npm run problems:runner` | Compiles every page's Java to JavaScript for the Run panel and checks it prints what the JVM prints. Needs Gradle and a JDK 17 |
 | `npm run build` | The site still builds |
 
 Pages use the lesson Markdown dialect ([LESSON_GUIDE.md](LESSON_GUIDE.md)). `[[id|label]]` links a
@@ -140,7 +142,57 @@ Run for every page, and for **every approach on it**, not only the recommended o
    loop changes the bound.
 5. **Claimed bugs are real.** If the page says a mistake produces a particular wrong output, make
    that change once and confirm the output.
-6. `npm run problems:check` and `npm run build` pass.
+6. **The page can be run in the browser** (see "Run panel" below): it has samples in
+   `run-samples.json`, and `npm run problems:runner` passes.
+7. `npm run problems:check` and `npm run build` pass.
+
+### Run panel
+
+Every walkthrough page lets the reader run each solution on the page in the browser, pick a
+sample, edit the input and run again. A page cannot be done without it:
+`src/test/java-runner.test.ts` fails for a page that has no entry in `run-samples.json`, and for
+a page whose Java changed after the last `npm run problems:runner`.
+
+For a new page, add an entry to `src/content/problem-pages/run-samples.json`:
+
+```json
+"nc-two-sum": {
+  "check": "unordered",
+  "samples": [
+    { "label": "Example 1", "input": "nums = [5, 1, 8, 3]\ntarget = 11\n", "output": "[2, 3]\n" }
+  ]
+}
+```
+
+- **samples**: the examples from section 1, as the reader would type them. LeetCode problems
+  take one value per parameter (`name = value`, JSON-like: `[1, 2]`, `"text"`, `'c'`, `true`).
+  Design problems (a class such as `MinStack`) take LeetCode's two lines: the operations list,
+  then the arguments list; the output is the list of results (`[null, null, -3]`). CSES problems
+  take standard input exactly as the judge sends it.
+- **output**: what a correct program prints. Return values print LeetCode style (`[2, 3]`,
+  `"abc"`, `2.5`, `true`). A void method prints the array it changed (`nums = [0, 1, 2]`).
+- **check** (default `exact`): `unordered` when the answer may come in any order,
+  `unordered-nested` when the inner lists may too (3Sum, Group Anagrams), `first-line` when only
+  the first line is the answer. CSES problems with several correct answers use a checker in
+  `src/runner/checkers.ts` (`permutations`, `two-sets`); write one for each new such problem.
+- **show**: `arg:<name>` prints a parameter after the call instead of the return value (the
+  default for void methods is the first array parameter); `k-prefix:<name>` prints `k` and the
+  first k elements (Remove Element).
+- **method** names the method to call when `class Solution` has several public ones.
+- **extraInputs** (optional): more inputs used only for the JVM comparison, such as the largest
+  input or an overflow boundary.
+- A problem that needs judge-provided types (`GuessGame`, `MountainArray`, `ListNode` when it
+  is not a plain parameter) or a special call gets `run/<id>.java`, with a `class Harness` whose
+  `static void run(java.util.List<Object> in)` reads the values with `runner.In` and prints.
+  Start its second line with `// Input: <example>.`, which becomes the panel's input hint.
+
+Then run `npm run problems:runner`. It compiles the programs with TeaVM into
+`src/runner/generated/<category>.js`, one bundle per problem category, and fails unless every
+program prints exactly what the real JVM prints on every sample and extra input (lists compare in
+any order where `check` allows it). It rebuilds only the bundles whose code changed. Parameter
+types it does not support yet (for example `ListNode`, `TreeNode`) are reported by name: add the
+conversion to `tools/java-runner/src/main/java/runner/In.java` and `CONVERT` in
+`scripts/build-java-runner.mjs`, or write a harness. Commit the generated files with the page.
 
 ## 7. CSES problems
 
@@ -180,19 +232,9 @@ CSES problems are judged as whole programs, not as a method, so their pages diff
   instead of comparing it with one expected answer. Include a case at the largest input size, and
   keep each program's run at that size well under the time limit.
 
-- **Run in the browser.** A page listed in `src/content/problem-pages/run-samples.json` gets a Run
-  panel under each whole program (`public class Main`): the reader picks a sample or types any
-  input and sees the program's output. Add an entry with the statement's samples written exactly as
-  standard input, a few `extraInputs` (edge cases, the largest input), and `check` (`exact`, or a
-  checker in `src/runner/checkers.ts` for problems with many correct answers). Then run
-  `npm run problems:runner` (needs Gradle and a JDK 17). It compiles the programs to JavaScript with
-  TeaVM into `src/runner/generated/`, and fails unless every program prints exactly what the real
-  JVM prints on every sample and extra input. Run it again whenever a program on such a page
-  changes; until then the page shows no Run panel for that program and `src/test/java-runner.test.ts`
-  fails.
-
 ## 8. Batches
 
 Work in `listOrder` order, one category at a time, about ten pages per batch. After each batch:
-run the three commands above, commit with a message naming the batch, and update `PROGRESS.md`
+add the batch to `run-samples.json`, run `npm run problems:verify`, `npm run problems:runner`,
+`npm run problems:check` and the build, commit with a message naming the batch, and update `PROGRESS.md`
 (ids done, next batch). Never commit a placeholder page or a page whose Java has not been run.
