@@ -180,6 +180,17 @@ CSES problems are judged as whole programs, not as a method, so their pages diff
   instead of comparing it with one expected answer. Include a case at the largest input size, and
   keep each program's run at that size well under the time limit.
 
+- **Run in the browser.** A page listed in `src/content/problem-pages/run-samples.json` gets a Run
+  panel under each whole program (`public class Main`): the reader picks a sample or types any
+  input and sees the program's output. Add an entry with the statement's samples written exactly as
+  standard input, a few `extraInputs` (edge cases, the largest input), and `check` (`exact`, or a
+  checker in `src/runner/checkers.ts` for problems with many correct answers). Then run
+  `npm run problems:runner` (needs Gradle and a JDK 17). It compiles the programs to JavaScript with
+  TeaVM into `src/runner/generated/`, and fails unless every program prints exactly what the real
+  JVM prints on every sample and extra input. Run it again whenever a program on such a page
+  changes; until then the page shows no Run panel for that program and `src/test/java-runner.test.ts`
+  fails.
+
 ## 8. Batches
 
 Work in `listOrder` order, one category at a time, about ten pages per batch. After each batch:

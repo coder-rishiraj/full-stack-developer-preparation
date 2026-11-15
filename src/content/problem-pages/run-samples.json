@@ -1,0 +1,42 @@
+{
+  "cses-weird-algorithm": {
+    "check": "exact",
+    "samples": [
+      { "label": "Example 1", "input": "3\n", "output": "3 10 5 16 8 4 2 1\n" },
+      { "label": "Example 2", "input": "1\n", "output": "1\n" }
+    ],
+    "extraInputs": ["2\n", "27\n", "113383\n", "704511\n", "837799\n", "1000000\n"]
+  },
+  "cses-repetitions": {
+    "check": "exact",
+    "samples": [
+      { "label": "Example 1", "input": "ATTCGGGA\n", "output": "3\n" },
+      { "label": "Example 2", "input": "ACGT\n", "output": "1\n" }
+    ],
+    "extraInputs": ["A\n", "GGGGGGGGGG\n", "ACCGGGTTTT\n", "TTTTAAAC\n", "ATTCGGGA"]
+  },
+  "cses-increasing-array": {
+    "check": "exact",
+    "samples": [
+      { "label": "Example 1", "input": "5\n3 2 5 1 7\n", "output": "5\n" },
+      { "label": "Example 2", "input": "3\n1 2 2\n", "output": "0\n" }
+    ],
+    "extraInputs": ["1\n42\n", "4\n1000000000 1 1 1\n", "6\n5 4 3 2 1 9\n", "3\n1\n2\n3\n"]
+  },
+  "cses-permutations": {
+    "check": "permutations",
+    "samples": [
+      { "label": "Example 1", "input": "5\n", "output": "4 2 5 3 1\n" },
+      { "label": "Example 2", "input": "3\n", "output": "NO SOLUTION\n" }
+    ],
+    "extraInputs": ["1\n", "2\n", "4\n", "6\n", "10\n", "1000\n"]
+  },
+  "cses-two-sets": {
+    "check": "two-sets",
+    "samples": [
+      { "label": "Example 1", "input": "7\n", "output": "YES\n4\n1 2 4 7\n3\n3 5 6\n" },
+      { "label": "Example 2", "input": "6\n", "output": "NO\n" }
+    ],
+    "extraInputs": ["1\n", "2\n", "3\n", "4\n", "8\n", "11\n", "12\n", "1000\n"]
+  }
+}

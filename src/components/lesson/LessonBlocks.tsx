@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useId, useState, type ReactNode } from 'react'
+import { Suspense, createContext, lazy, useContext, useEffect, useId, useState, type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { getTopicMeta } from '@/content/taxonomy'
 import { getProblem } from '@/content/problems'
@@ -6,6 +6,7 @@ import type { CalloutVariant, Inline, MdBlock } from '@/lib/lesson-markdown'
 import { useUserStore } from '@/stores/user-store'
 import { isDarkTheme } from '@/lib/appearance'
 import { CodeBlock } from './CodeBlock'
+import { CodeRunContext } from '@/runner/context'
 import { QuizBlock } from '@/components/topic/ContentBlocks'
 
 /** Lets a page make `- [ ]` task items interactive and persistent. */
@@ -133,6 +134,24 @@ export function LessonBlocks({ blocks }: { blocks: MdBlock[] }) {
   )
 }
 
+// Loaded only on pages that have a runnable program.
+const CodeRunner = lazy(() => import('./CodeRunner').then((m) => ({ default: m.CodeRunner })))
+
+/** A code block, with a Run panel when the page knows how to run this exact program. */
+function CodeView({ block }: { block: Extract<MdBlock, { type: 'code' }> }) {
+  const findRunnable = useContext(CodeRunContext)
+  const runnable = block.language === 'java' && findRunnable ? findRunnable(block.code) : null
+  return (
+    <CodeBlock code={block.code} language={block.language} title={block.title} output={block.output}>
+      {runnable && (
+        <Suspense fallback={null}>
+          <CodeRunner runnable={runnable} />
+        </Suspense>
+      )}
+    </CodeBlock>
+  )
+}
+
 function BlockView({ block }: { block: MdBlock }): ReactNode {
   switch (block.type) {
     case 'heading': {
@@ -182,7 +201,7 @@ function BlockView({ block }: { block: MdBlock }): ReactNode {
       )
     }
     case 'code':
-      return <CodeBlock code={block.code} language={block.language} title={block.title} output={block.output} />
+      return <CodeView block={block} />
     case 'mermaid':
       return <ThemedMermaid diagram={block.diagram} caption={block.caption} />
     case 'callout':

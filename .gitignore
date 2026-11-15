@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Java runner build (generated sources, Gradle state)
+tools/java-runner/build
+tools/java-runner/.gradle

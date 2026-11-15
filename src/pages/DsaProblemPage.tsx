@@ -8,6 +8,8 @@ import { Button } from '@/components/ui/Button'
 import { LessonBlocks } from '@/components/lesson/LessonBlocks'
 import { TableOfContents, scrollToHeading, useReadingProgress } from '@/components/lesson/LessonRail'
 import { useProblemPage } from '@/hooks/useProblemPage'
+import { CodeRunContext } from '@/runner/context'
+import { findRunnable } from '@/runner/run-java'
 import type { DsaProblem, DsaStatus } from '@/domain/types'
 import { useUserStore } from '@/stores/user-store'
 
@@ -205,7 +207,9 @@ export function DsaProblemPage() {
             </div>
           </details>
           <article className="cd-article">
-            <LessonBlocks blocks={blocks} />
+            <CodeRunContext.Provider value={(code) => findRunnable(problem.id, code)}>
+              <LessonBlocks blocks={blocks} />
+            </CodeRunContext.Provider>
           </article>
           {hidden && (
             <section className="rounded-md border border-[var(--border)] bg-[var(--bg-elevated)] px-5 py-4" aria-labelledby="practice-gate-title">

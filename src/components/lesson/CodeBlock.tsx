@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useState, type ReactNode } from 'react'
 import hljs from 'highlight.js/lib/core'
 import bash from 'highlight.js/lib/languages/bash'
 import cpp from 'highlight.js/lib/languages/cpp'
@@ -122,11 +122,14 @@ export function CodeBlock({
   language,
   title,
   output,
+  children,
 }: {
   code: string
   language: string
   title?: string
   output?: string
+  /** Extra panel shown inside the frame, under the code (for example the Run panel). */
+  children?: ReactNode
 }) {
   const trimmed = code.replace(/\s+$/, '')
   const html = useMemo(() => highlight(trimmed, language), [trimmed, language])
@@ -163,6 +166,7 @@ export function CodeBlock({
           </pre>
         </div>
       )}
+      {children}
     </figure>
   )
 }

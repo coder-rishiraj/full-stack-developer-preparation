@@ -16,7 +16,8 @@
     "lessons:sync": "node scripts/lessons-sync.mjs",
     "lessons:check": "vitest run src/test/lessons.test.ts",
     "problems:check": "vitest run src/test/problem-pages.test.ts",
-    "problems:verify": "node scripts/verify-problem-code.mjs"
+    "problems:verify": "node scripts/verify-problem-code.mjs",
+    "problems:runner": "node scripts/build-java-runner.mjs"
   },
   "dependencies": {
     "firebase": "^12.19.0",

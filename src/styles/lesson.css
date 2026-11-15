@@ -482,3 +482,129 @@
     display: none !important;
   }
 }
+
+/* Run panel under a runnable program (src/components/lesson/CodeRunner.tsx) */
+.cd-run {
+  border-top: 1px solid var(--code-border);
+  background: var(--code-output-bg);
+  font-family: var(--font-ui);
+  padding: 0.6rem 0.85rem 0.75rem;
+}
+.cd-run-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+.cd-run-label,
+.cd-run-status {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+.cd-run-samples {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  flex: 1;
+}
+.cd-run-sample {
+  font-size: 0.75rem;
+  padding: 0.15rem 0.55rem;
+  border: 1px solid var(--code-border);
+  border-radius: 999px;
+  background: var(--bg-elevated);
+  color: var(--text-muted);
+  cursor: pointer;
+}
+.cd-run-sample[aria-pressed='true'] {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+.cd-run-button {
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.3rem 0.9rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: var(--accent-contrast);
+  cursor: pointer;
+}
+.cd-run-button:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+.cd-run-button:disabled {
+  opacity: 0.7;
+  cursor: progress;
+}
+.cd-run-input {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  padding: 0.45rem 0.6rem;
+  border: 1px solid var(--code-border);
+  border-radius: var(--radius);
+  background: var(--code-bg);
+  color: var(--code-text);
+  resize: vertical;
+}
+.cd-run-input:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+.cd-run-note {
+  margin: 0.35rem 0 0;
+  font-size: 0.75rem;
+  color: var(--text-faint);
+}
+.cd-run-output {
+  margin-top: 0.6rem;
+  border: 1px solid var(--code-border);
+  border-radius: var(--radius);
+  background: var(--code-bg);
+  overflow: hidden;
+}
+.cd-run-output .cd-run-status {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.35rem 0.6rem 0;
+}
+.cd-run-output[data-state='error'] .cd-run-status {
+  color: var(--danger);
+}
+.cd-run-output pre {
+  margin: 0;
+  padding: 0.35rem 0.6rem 0.5rem;
+  max-height: 18rem;
+  overflow: auto;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--code-text);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.cd-run-output .cd-run-stderr {
+  color: var(--danger);
+}
+.cd-run-time {
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.cd-run-verdict {
+  padding: 0.4rem 0.6rem;
+  border-top: 1px solid var(--code-border);
+  font-size: 0.8rem;
+  color: var(--danger);
+}
+.cd-run-verdict[data-ok='true'] {
+  color: var(--success);
+}

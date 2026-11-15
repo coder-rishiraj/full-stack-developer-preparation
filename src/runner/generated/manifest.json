@@ -1,0 +1,87 @@
+{
+  "cses-increasing-array": [
+    {
+      "key": "cses-increasing-array#1",
+      "title": "Approach 1: raise in place",
+      "hash": "80017b4f"
+    },
+    {
+      "key": "cses-increasing-array#2",
+      "title": "Approach 2: running maximum, no array (recommended)",
+      "hash": "2b1f0f39"
+    },
+    {
+      "key": "cses-increasing-array#3",
+      "title": "Increasing Array in a dozen lines",
+      "hash": "43b5abee"
+    }
+  ],
+  "cses-permutations": [
+    {
+      "key": "cses-permutations#1",
+      "title": "Approach 1: odds then evens, n = 4 patched",
+      "hash": "794797c2"
+    },
+    {
+      "key": "cses-permutations#2",
+      "title": "Approach 2: evens then odds (recommended)",
+      "hash": "54395b90"
+    },
+    {
+      "key": "cses-permutations#3",
+      "title": "Permutations in a few lines",
+      "hash": "c8cdaab7"
+    }
+  ],
+  "cses-repetitions": [
+    {
+      "key": "cses-repetitions#1",
+      "title": "Approach 1: measure each block and jump past it",
+      "hash": "c0615ac1"
+    },
+    {
+      "key": "cses-repetitions#2",
+      "title": "Approach 2: one pass with a running length (recommended)",
+      "hash": "fb869520"
+    },
+    {
+      "key": "cses-repetitions#3",
+      "title": "Repetitions in a few lines",
+      "hash": "8e31e742"
+    }
+  ],
+  "cses-two-sets": [
+    {
+      "key": "cses-two-sets#1",
+      "title": "Approach 1: pairing by n mod 4",
+      "hash": "6f892a27"
+    },
+    {
+      "key": "cses-two-sets#2",
+      "title": "Approach 2: greedy from n downwards (recommended)",
+      "hash": "fb23ba3b"
+    },
+    {
+      "key": "cses-two-sets#3",
+      "title": "Two Sets, greedy",
+      "hash": "a0780c57"
+    }
+  ],
+  "cses-weird-algorithm": [
+    {
+      "key": "cses-weird-algorithm#1",
+      "title": "Approach 1: Scanner and one print per value",
+      "hash": "d8a6092f"
+    },
+    {
+      "key": "cses-weird-algorithm#2",
+      "title": "Approach 2: BufferedReader and one StringBuilder (recommended)",
+      "hash": "b6b38d27"
+    },
+    {
+      "key": "cses-weird-algorithm#3",
+      "title": "Weird Algorithm in a dozen lines",
+      "hash": "e1fcce4e"
+    }
+  ]
+}
