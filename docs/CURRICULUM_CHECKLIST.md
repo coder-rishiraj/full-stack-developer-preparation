@@ -10,11 +10,11 @@ them under an anchored heading.
 | Track | Name | Lessons | Done |
 |---|---|---|---|
 | A | DSA & Problem Solving | 125 / 125 | 100% |
-| B | Frontend Engineering | 240 / 647 | 37% |
+| B | Frontend Engineering | 272 / 647 | 42% |
 | C | Java & Backend Engineering | 18 / 329 | 5% |
 | D | LLD, System Design & Distributed Systems | 25 / 111 | 23% |
 | E | Applied AI Engineering | 15 / 77 | 19% |
-| | **All tracks** | **423 / 1289** | **33%** |
+| | **All tracks** | **455 / 1289** | **35%** |
 
 Legend: ✅ lesson written · ◐ condensed notes only · ○ generic template only · ✗ no content
 
@@ -678,67 +678,67 @@ Legend: ✅ lesson written · ◐ condensed notes only · ○ generic template o
 - [x] `b2-template-literal-types` Template Literal Types — ✅ lesson (2459 words)
 - [x] `b2-change-handlers-pattern` ChangeHandlers Pattern — ✅ lesson (2419 words)
 
-#### B2.27 · Type-Safe API Design — 0/2
+#### B2.27 · Type-Safe API Design — 2/2
 
-- [ ] `b2-type-safe-apis` Type-Safe API Design — ◐ condensed notes · nested 0/1
-- [ ] `b2-generic-pick-helper` Generic pick() Helper — ◐ condensed notes
+- [x] `b2-type-safe-apis` Type-Safe API Design — ✅ lesson (4634 words) · nested 1/1
+- [x] `b2-generic-pick-helper` Generic pick() Helper — ✅ lesson (2752 words)
 
-#### B2.28 · React + TypeScript — 0/3
+#### B2.28 · React + TypeScript — 3/3
 
-- [ ] `b2-react-typescript` React + TypeScript — ◐ condensed notes · nested 0/2
-- [ ] `b2-mutually-exclusive-props` Mutually Exclusive Props — ◐ condensed notes
-- [ ] `b2-hooks-typing` Typing Hooks — ◐ condensed notes
+- [x] `b2-react-typescript` React + TypeScript — ✅ lesson (4111 words) · nested 2/2
+- [x] `b2-mutually-exclusive-props` Mutually Exclusive Props — ✅ lesson (2628 words)
+- [x] `b2-hooks-typing` Typing Hooks — ✅ lesson (3242 words)
 
-#### B2.29 · Node.js + TypeScript — 0/1
+#### B2.29 · Node.js + TypeScript — 1/1
 
-- [ ] `b2-node-typescript` Node.js + TypeScript — ◐ condensed notes · nested 0/1
+- [x] `b2-node-typescript` Node.js + TypeScript — ✅ lesson (3952 words) · nested 1/1
 
-#### B2.30 · Modules — 0/3
+#### B2.30 · Modules — 3/3
 
-- [ ] `b2-ts-modules` TypeScript Modules — ◐ condensed notes
-- [ ] `b2-esm-vs-cjs-ts` ESM vs CommonJS in TS — ◐ condensed notes
-- [ ] `b2-namespaces` Namespaces — ◐ condensed notes
+- [x] `b2-ts-modules` TypeScript Modules — ✅ lesson (3832 words)
+- [x] `b2-esm-vs-cjs-ts` ESM vs CommonJS in TS — ✅ lesson (3192 words)
+- [x] `b2-namespaces` Namespaces — ✅ lesson (2850 words)
 
-#### B2.31 · tsconfig & Compiler Options — 0/3
+#### B2.31 · tsconfig & Compiler Options — 3/3
 
-- [ ] `b2-tsconfig` tsconfig.json — ◐ condensed notes · nested 0/2
-- [ ] `b2-declaration-files` Declaration Files (.d.ts) — ◐ condensed notes
-- [ ] `b2-source-maps-ts` Source Maps & Debugging — ◐ condensed notes
+- [x] `b2-tsconfig` tsconfig.json — ✅ lesson (5056 words) · nested 2/2
+- [x] `b2-declaration-files` Declaration Files (.d.ts) — ✅ lesson (3008 words)
+- [x] `b2-source-maps-ts` Source Maps & Debugging — ✅ lesson (3044 words)
 
-#### B2.32 · Tooling & Ecosystem — 0/4
+#### B2.32 · Tooling & Ecosystem — 4/4
 
-- [ ] `b2-definitely-typed` Definitely Typed (@types) — ◐ condensed notes
-- [ ] `b2-third-party-types` Third-Party Library Types — ◐ condensed notes
-- [ ] `b2-eslint-typescript` ESLint + TypeScript — ◐ condensed notes
-- [ ] `b2-vite-typescript` Vite / Build Tooling — ◐ condensed notes
+- [x] `b2-definitely-typed` Definitely Typed (@types) — ✅ lesson (3347 words)
+- [x] `b2-third-party-types` Third-Party Library Types — ✅ lesson (2889 words)
+- [x] `b2-eslint-typescript` ESLint + TypeScript — ✅ lesson (2744 words)
+- [x] `b2-vite-typescript` Vite / Build Tooling — ✅ lesson (2867 words)
 
-#### B2.33 · Migration & Decorators — 0/2
+#### B2.33 · Migration & Decorators — 2/2
 
-- [ ] `b2-migration-js-to-ts` Migrating JavaScript → TypeScript — ◐ condensed notes · nested 0/1
-- [ ] `b2-decorators` Decorators — ◐ condensed notes
+- [x] `b2-migration-js-to-ts` Migrating JavaScript → TypeScript — ✅ lesson (3214 words) · nested 1/1
+- [x] `b2-decorators` Decorators — ✅ lesson (2550 words)
 
-#### B2.34 · Advanced Patterns — 0/3
+#### B2.34 · Advanced Patterns — 3/3
 
-- [ ] `b2-mixins` Mixins — ◐ condensed notes
-- [ ] `b2-this-types` this Types — ◐ condensed notes
-- [ ] `b2-branded-types` Branded / Nominal Types — ◐ condensed notes
+- [x] `b2-mixins` Mixins — ✅ lesson (4069 words)
+- [x] `b2-this-types` this Types — ✅ lesson (3367 words)
+- [x] `b2-branded-types` Branded / Nominal Types — ✅ lesson (3349 words)
 
-#### B2.35 · TypeScript Implementation Exercises — 0/5
+#### B2.35 · TypeScript Implementation Exercises — 5/5
 
-- [ ] `b2-impl-pick` Implement type-safe pick() — ◐ condensed notes
-- [ ] `b2-impl-discriminated-union` Implement RemoteData<T> — ◐ condensed notes
-- [ ] `b2-impl-exclusive-props` Implement Exclusive Button Props — ◐ condensed notes
-- [ ] `b2-impl-change-handlers` Implement ChangeHandlers<T> — ◐ condensed notes
-- [ ] `b2-impl-type-guard` Implement isPreferences Guard — ◐ condensed notes
+- [x] `b2-impl-pick` Implement type-safe pick() — ✅ lesson (2799 words)
+- [x] `b2-impl-discriminated-union` Implement RemoteData<T> — ✅ lesson (2544 words)
+- [x] `b2-impl-exclusive-props` Implement Exclusive Button Props — ✅ lesson (2487 words)
+- [x] `b2-impl-change-handlers` Implement ChangeHandlers<T> — ✅ lesson (2277 words)
+- [x] `b2-impl-type-guard` Implement isPreferences Guard — ✅ lesson (2682 words)
 
-#### B3.1 · Browser Architecture — 0/9
+#### B3.1 · Browser Architecture — 6/9
 
-- [ ] `b3-browser-overview` Browser Architecture Overview — ◐ condensed notes
-- [ ] `b3-browser-processes` Browser Processes — ◐ condensed notes · nested 0/5
-- [ ] `b3-browser-threads` Browser Threads — ◐ condensed notes · nested 0/4
-- [ ] `b3-url-navigation` URL Navigation Lifecycle — ◐ condensed notes · nested 0/4
-- [ ] `b3-site-isolation` Site Isolation & Process Model — ◐ condensed notes · nested 0/2
-- [ ] `b3-rendering-engine` Rendering Engine (Blink / WebKit) — ◐ condensed notes
+- [x] `b3-browser-overview` Browser Architecture Overview — ✅ lesson (3216 words)
+- [x] `b3-browser-processes` Browser Processes — ✅ lesson (4448 words) · nested 5/5
+- [x] `b3-browser-threads` Browser Threads — ✅ lesson (3911 words) · nested 4/4
+- [x] `b3-url-navigation` URL Navigation Lifecycle — ✅ lesson (5023 words) · nested 4/4
+- [x] `b3-site-isolation` Site Isolation & Process Model — ✅ lesson (3926 words) · nested 2/2
+- [x] `b3-rendering-engine` Rendering Engine (Blink / WebKit) — ✅ lesson (2926 words)
 - [ ] `b3-javascript-engine-browser` JavaScript Engine in the Browser — ◐ condensed notes
 - [ ] `b3-browser-security-sandbox` Browser Security Sandbox — ◐ condensed notes
 - [ ] `b3-multi-tab-architecture` Multi-Tab & Multi-Window Architecture — ◐ condensed notes

@@ -42,8 +42,9 @@ The 1,289 classified topics are split into ~350 batches (`scripts/data/lesson-ba
 prerequisites and existing notes. Each batch is written by one session following
 `docs/LESSON_AGENT_BRIEF.md`.
 
-To continue: run `npm run lessons:sync`, open the checklist, and pick batches whose topics are
-still unchecked (`node scripts/module-brief.mjs --batch N` shows what a batch covers).
+To continue: run `npm run lessons:sync`, then `node scripts/pending-batches.mjs [TRACK]` to list
+batches with missing lessons (`node scripts/module-brief.mjs --batch N` shows what a batch
+covers). A ready-to-paste prompt for a new session is in [CONTINUE_PROMPT.md](CONTINUE_PROMPT.md).
 
 ## Known follow-ups
 

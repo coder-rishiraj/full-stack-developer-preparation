@@ -2525,6 +2525,13 @@
   "words": 2368,
   "concepts": []
  },
+ "b2-branded-types": {
+  "summary": "TypeScript compares types by shape, so a user ID and an order ID that are both strings are interchangeable. Branded types add a compile-time-only marker that makes such values distinct, at zero runtime cost. You will learn how to build brands, how to create branded values safely through validation, and where the technique stops protecting you.",
+  "difficulty": "advanced",
+  "minutes": 40,
+  "words": 3349,
+  "concepts": []
+ },
  "b2-change-handlers-pattern": {
   "summary": "The ChangeHandlers pattern derives one correctly typed `onXxxChange` callback per field from a form's state type — `onEmailChange(value: string)`, `onAgeChange(value: number)` — using a mapped type, key remapping and a template literal type. You will learn to build it, adapt it for optional, read-only and skipped fields, implement it at runtime, use it in React props, and compare it with a single `onChange(field, value)`.",
   "difficulty": "advanced",
@@ -2549,6 +2556,13 @@
   "words": 3316,
   "concepts": []
  },
+ "b2-declaration-files": {
+  "summary": "A declaration file (`.d.ts`) describes the types of JavaScript code without containing any implementation. You will learn how TypeScript generates them for your own code, how to write them for untyped JavaScript and global variables, how the compiler finds them for npm packages, and how to keep them truthful.",
+  "difficulty": "intermediate",
+  "minutes": 45,
+  "words": 3008,
+  "concepts": []
+ },
  "b2-declaration-merging": {
   "summary": "Declaration merging is TypeScript's rule for combining several declarations that share a name into one entity — interfaces merging their members, namespaces adding properties to functions, classes and enums, and module and global augmentations extending types you do not own. You will learn which declarations can merge, how conflicts and overloads are resolved, and how to safely extend library and global types such as Express's `Request` or `Window`.",
   "difficulty": "intermediate",
@@ -2557,6 +2571,20 @@
   "concepts": [
    "b2-module-augmentation"
   ]
+ },
+ "b2-decorators": {
+  "summary": "Decorators are functions you attach to a class or class member with `@` syntax to wrap, replace or register it when the class is defined. You will learn how the standard (ECMAScript) decorators in TypeScript 5+ work and how to type them, how they differ from the older `experimentalDecorators` used by Angular and NestJS, and what TypeScript actually emits for each.",
+  "difficulty": "advanced",
+  "minutes": 50,
+  "words": 2550,
+  "concepts": []
+ },
+ "b2-definitely-typed": {
+  "summary": "DefinitelyTyped is the community repository that publishes type declarations for JavaScript libraries as `@types/*` packages on npm. You will learn how the compiler finds those packages, how to choose the right version, how TypeScript 6 changed which ones load automatically, and how to diagnose the errors that appear when types are missing or mismatched.",
+  "difficulty": "intermediate",
+  "minutes": 40,
+  "words": 3347,
+  "concepts": []
  },
  "b2-discriminated-unions": {
   "summary": "A discriminated union is a union of object types that share one literal-typed \"tag\" property, such as kind or type. You will learn how the tag lets TypeScript work out exactly which variant you hold, how to make impossible states unrepresentable, and how to make the compiler tell you whenever a case is left unhandled.",
@@ -2575,6 +2603,20 @@
   "concepts": [
    "b2-string-enums"
   ]
+ },
+ "b2-eslint-typescript": {
+  "summary": "The TypeScript compiler proves your types are consistent, but it happily compiles code that drops a promise, passes an async function where nothing awaits it, or lets `any` flow through unchecked. typescript-eslint lets ESLint parse TypeScript and use the compiler's type information to catch those bugs. You will learn how the pieces fit, how to configure typed linting with ESLint's flat config, which rules matter most, and how to keep it fast.",
+  "difficulty": "intermediate",
+  "minutes": 45,
+  "words": 2744,
+  "concepts": []
+ },
+ "b2-esm-vs-cjs-ts": {
+  "summary": "Node.js runs two module systems, ES modules and CommonJS, and TypeScript must know which one each file will become. You will learn how the two differ at runtime, how Node.js and TypeScript decide a file's format, what `tsc` emits for each `module` setting, and how to make imports between the two systems work without runtime surprises.",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 3192,
+  "concepts": []
  },
  "b2-explicit-types": {
   "summary": "An explicit type is a type you write yourself instead of letting the compiler work it out. You will learn what writing a type actually changes — which direction the compiler checks, where errors appear, what information is kept or lost — and how explicit types differ from type assertions and `satisfies`.",
@@ -2604,6 +2646,13 @@
   "words": 3512,
   "concepts": []
  },
+ "b2-generic-pick-helper": {
+  "summary": "A generic `pick()` helper copies a chosen set of properties from an object and gives the result the exact type `Pick<T, K>`, so typos in key names are compile errors and the result has no fields you did not ask for. You will implement it, understand how `K extends keyof T` drives inference, build the matching `omit()` and `Patch<T, K>` helpers, and learn where inference quietly widens what callers may send.",
+  "difficulty": "intermediate",
+  "minutes": 35,
+  "words": 2752,
+  "concepts": []
+ },
  "b2-generics": {
   "summary": "Generics let one function, interface, type alias or class work with many types while keeping the link between what goes in and what comes out. You will learn how type parameters are declared and inferred, why they beat `any` and `unknown` for reusable code, how generic classes and default type parameters work, and why none of it exists at runtime.",
   "difficulty": "intermediate",
@@ -2613,6 +2662,48 @@
    "b2-generic-classes",
    "b2-default-type-parameters"
   ]
+ },
+ "b2-hooks-typing": {
+  "summary": "Hooks are ordinary generic functions, so most of their types come from inference — but the places where inference guesses wrong (empty arrays, `null` initial state, DOM refs, context defaults, returned tuples) are exactly where typed React code breaks. You will learn how each built-in hook is typed in React 19, when to annotate, and how to write custom hooks whose types are as precise as the built-in ones.",
+  "difficulty": "intermediate",
+  "minutes": 45,
+  "words": 3242,
+  "concepts": []
+ },
+ "b2-impl-change-handlers": {
+  "summary": "An implementation exercise that derives change-handler prop types such as onEmailChange and onAgeChange from a form model, using a mapped type with key remapping, template literal types and Capitalize. You will check a handlers object with satisfies, see how a typo slips through without it, build the handlers at runtime with a typed factory, and reverse the mapping with infer.",
+  "difficulty": "intermediate",
+  "minutes": 35,
+  "words": 2277,
+  "concepts": []
+ },
+ "b2-impl-discriminated-union": {
+  "summary": "An implementation exercise that models the result of an API call as a RemoteData<T> discriminated union, consumes it with an exhaustive switch and assertNever, and then adds a new variant to watch the compiler point at every place that must change. Along the way you will build typed constructors, a match helper and a map function.",
+  "difficulty": "intermediate",
+  "minutes": 40,
+  "words": 2544,
+  "concepts": []
+ },
+ "b2-impl-exclusive-props": {
+  "summary": "An implementation exercise in typing React props so that conflicting combinations are compile errors. You will build a Button that is either a link or an action (never both), a TextInput that is either controlled or uncontrolled, and a reusable XOR helper, and learn why a plain union is not enough and how optional never fields close the gap.",
+  "difficulty": "intermediate",
+  "minutes": 40,
+  "words": 2487,
+  "concepts": []
+ },
+ "b2-impl-pick": {
+  "summary": "A step-by-step walkthrough of the classic live-coding prompt \"write a type-safe pick()\". You will design the signature, implement the body with a single honest assertion, prove the types with compile-time tests, and handle the runtime edge cases (missing keys, empty key lists, `__proto__`) that interviewers use as follow-ups.",
+  "difficulty": "intermediate",
+  "minutes": 40,
+  "words": 2799,
+  "concepts": []
+ },
+ "b2-impl-type-guard": {
+  "summary": "An implementation exercise in turning untrusted data into a typed value. You will write isPreferences(value: unknown): value is Preferences, with checks for nested objects, literal unions and optional fields, use it to load settings from storage safely and to filter unknown[] into Preferences[], and learn why a guard that checks too little is worse than no guard at all.",
+  "difficulty": "intermediate",
+  "minutes": 40,
+  "words": 2682,
+  "concepts": []
  },
  "b2-implements-vs-extends": {
   "summary": "`extends` makes a class inherit another class's code and builds a real prototype chain; `implements` only asks the compiler to check that a class matches a contract. You will learn exactly what each keyword does at compile time and at runtime, how to combine them, the surprising things `implements` does not do, and how to choose between them when designing types.",
@@ -2695,6 +2786,36 @@
    "b2-key-remapping"
   ]
  },
+ "b2-migration-js-to-ts": {
+  "summary": "Real codebases move from JavaScript to TypeScript gradually, while features keep shipping. You will learn how `allowJs` and `checkJs` let JavaScript and TypeScript live in one project, how to type JavaScript with JSDoc before renaming anything, which files to convert first, and how to tighten strictness in stages without stopping the team.",
+  "difficulty": "intermediate",
+  "minutes": 55,
+  "words": 3214,
+  "concepts": [
+   "b2-allowjs-checkjs"
+  ]
+ },
+ "b2-mixins": {
+  "summary": "A mixin is a function that takes a class and returns a subclass with extra behaviour, so features like timestamps or activation can be added to unrelated classes without a deep inheritance tree. You will learn how the pattern works at runtime, how TypeScript types it, and when plain composition is the better tool.",
+  "difficulty": "advanced",
+  "minutes": 40,
+  "words": 4069,
+  "concepts": []
+ },
+ "b2-mutually-exclusive-props": {
+  "summary": "Some props must never be passed together — `value` with `defaultValue`, `href` with `onClick`, `src` with `initials`. You will learn why an ordinary union does not forbid the combination, how optional `never` properties close the gap, how to write a reusable `XOR` type, and when a discriminant prop is the better design.",
+  "difficulty": "intermediate",
+  "minutes": 35,
+  "words": 2628,
+  "concepts": []
+ },
+ "b2-namespaces": {
+  "summary": "Namespaces are TypeScript's original way to group code under one named object, from before JavaScript had modules. You will learn how they compile, how they merge with each other and with functions, classes and enums, why new application code uses ES modules instead, and where namespaces are still the right tool: declaration files and global type augmentation.",
+  "difficulty": "intermediate",
+  "minutes": 35,
+  "words": 2850,
+  "concepts": []
+ },
  "b2-narrowing": {
   "summary": "Narrowing is how TypeScript turns a broad type such as string | number | null, or unknown, into a precise one inside a branch of your code, by following the runtime checks you write. You will learn how control-flow analysis works, the built-in checks (equality, truthiness, typeof, instanceof, in), and how to write your own type guards and assertion functions safely.",
   "difficulty": "intermediate",
@@ -2705,6 +2826,15 @@
    "b2-instanceof-narrowing",
    "b2-in-operator",
    "b2-custom-type-guards"
+  ]
+ },
+ "b2-node-typescript": {
+  "summary": "TypeScript on Node.js is the same language as in the browser, but with different host types, a different module system to configure, and several ways to run the code. You will learn how to set up `tsconfig.json` for Node, why ES module imports need `.js` extensions, how to type environment variables and Node errors honestly, how Node's built-in type stripping compares with `tsc` and `tsx`, and how to type Express handlers and middleware.",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 3952,
+  "concepts": [
+   "b2-express-typing"
   ]
  },
  "b2-null-undefined-ts": {
@@ -2765,6 +2895,16 @@
    "b2-readonly-class-members"
   ]
  },
+ "b2-react-typescript": {
+  "summary": "TypeScript turns a React component's props into a checked contract, so missing props, misspelt attributes and wrong event handlers fail in the editor rather than in the browser. You will learn how React 19's type definitions model components, children, events and refs, how to design props that reuse native HTML attributes safely, and how to type components that can be controlled or uncontrolled.",
+  "difficulty": "intermediate",
+  "minutes": 55,
+  "words": 4111,
+  "concepts": [
+   "b2-react-component-props",
+   "b2-controlled-uncontrolled-props"
+  ]
+ },
  "b2-readonly-tuples": {
   "summary": "A readonly tuple is a fixed-shape array that the compiler will not let anyone change. You will learn how to write one, how as const produces deeply readonly literal tuples, how to derive union types from constant lists, and how to pass readonly tuples to functions without fighting the compiler.",
   "difficulty": "intermediate",
@@ -2800,6 +2940,13 @@
   "words": 2595,
   "concepts": []
  },
+ "b2-source-maps-ts": {
+  "summary": "The JavaScript that runs is not the TypeScript you wrote, so errors and breakpoints point at the wrong lines unless something translates between them. You will learn what a source map is, how `tsc` produces one, how to read its encoded mappings, and how to use maps in Node.js, the browser, editors and production error monitoring without leaking your source.",
+  "difficulty": "intermediate",
+  "minutes": 40,
+  "words": 3044,
+  "concepts": []
+ },
  "b2-special-types": {
   "summary": "TypeScript has four special types that do not describe ordinary data — any, unknown, never and void. You will learn what set of values each one stands for, how the compiler treats them, and how to use them to keep untrusted data, impossible cases and side-effect-only functions under control.",
   "difficulty": "intermediate",
@@ -2833,11 +2980,32 @@
   "words": 2459,
   "concepts": []
  },
+ "b2-third-party-types": {
+  "summary": "Every library you import gets its types from one of a few places — the package itself, a DefinitelyTyped `@types` package, a declaration you write, or a typed wrapper you build around it. You will learn how to find out which applies, how the compiler locates a package's types, and how to type an untyped or wrongly typed library without letting `any` leak through your codebase.",
+  "difficulty": "intermediate",
+  "minutes": 45,
+  "words": 2889,
+  "concepts": []
+ },
+ "b2-this-types": {
+  "summary": "TypeScript has several features built around `this` — the polymorphic `this` type that keeps fluent APIs working in subclasses, `this` parameters that declare what a function expects `this` to be, `this`-based type guards, and the utility types that read or set `this`. You will learn what each one checks, why it exists, and how it prevents the classic \"lost `this`\" bugs.",
+  "difficulty": "advanced",
+  "minutes": 40,
+  "words": 3367,
+  "concepts": []
+ },
  "b2-ts-disadvantages": {
   "summary": "TypeScript has real costs — a build pipeline, a learning curve, types that can lie, friction with dynamic code and untyped libraries, and slower feedback on huge codebases. This lesson names each cost precisely, shows where it bites in code, and teaches the practices that keep it small, so you can judge when TypeScript is worth it.",
   "difficulty": "intermediate",
   "minutes": 30,
   "words": 2214,
+  "concepts": []
+ },
+ "b2-ts-modules": {
+  "summary": "A TypeScript module is a file with its own scope that shares values and types only through `import` and `export`. You will learn what makes a file a module, how type-only imports are erased, how the compiler resolves an import string to a file, and how to give types to modules that have none.",
+  "difficulty": "intermediate",
+  "minutes": 45,
+  "words": 3832,
   "concepts": []
  },
  "b2-ts-vs-javascript": {
@@ -2860,6 +3028,16 @@
   "minutes": 40,
   "words": 2603,
   "concepts": []
+ },
+ "b2-tsconfig": {
+  "summary": "`tsconfig.json` tells the TypeScript compiler and your editor which files make up the project and how to check and emit them. You will learn how the file is structured, which options matter and why, what changed in TypeScript 6.0's defaults, how to share and split configurations, and how the `strict` family of flags and `noImplicitAny` turn TypeScript from a suggestion into a safety net.",
+  "difficulty": "intermediate",
+  "minutes": 60,
+  "words": 5056,
+  "concepts": [
+   "b2-strict-compiler-options",
+   "b2-noimplicitany"
+  ]
  },
  "b2-tuples": {
   "summary": "A tuple is an array with a fixed shape — a known number of elements and a type for each position. You will learn how to write tuples with optional, rest and labelled elements, why functions that return pairs need a tuple annotation, how tuples type rest parameters, and when an object is the better choice.",
@@ -2905,6 +3083,15 @@
   "minutes": 45,
   "words": 2912,
   "concepts": []
+ },
+ "b2-type-safe-apis": {
+  "summary": "A type-safe API makes the client and the server agree on request and response shapes at compile time, and checks untrusted JSON once at the network boundary so the rest of the code can trust its types. You will learn why `as User` on a response is a lie, how to validate at the edge, how to model success and failure as data, and how to type PATCH payloads that cannot overwrite fields they should not touch.",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 4634,
+  "concepts": [
+   "b2-pick-partial-patch"
+  ]
  },
  "b2-typed-arrays": {
   "summary": "TypeScript describes a JavaScript array by the type of its elements, so the compiler can check every push, index read and map/filter chain. You will learn the array type syntax, how array methods carry element types through, how readonly arrays protect data you do not own, and how the compiler infers array types when you do not write them.",
@@ -2973,6 +3160,13 @@
   "words": 2841,
   "concepts": []
  },
+ "b2-vite-typescript": {
+  "summary": "Vite runs and bundles TypeScript by stripping the types from each file without checking them, which is why it is fast and why it never reports a type error. You will learn how Vite turns `.ts` and `.tsx` into JavaScript, which TypeScript settings that model requires, how the official templates split type checking from building, and how to type environment variables, asset imports and path aliases.",
+  "difficulty": "intermediate",
+  "minutes": 45,
+  "words": 2867,
+  "concepts": []
+ },
  "b2-what-is-typescript": {
   "summary": "TypeScript is JavaScript with a static type system that is checked before the code runs and then erased. You will learn what that sentence really means, what the compiler does and does not do for you, and why the types vanish from the program that actually runs.",
   "difficulty": "beginner",
@@ -2993,6 +3187,67 @@
   "minutes": 35,
   "words": 2193,
   "concepts": []
+ },
+ "b3-browser-overview": {
+  "summary": "A modern browser is not one program but a small operating system of cooperating processes and threads. This lesson gives you the map — the major components, why they are split apart, and how they cooperate to turn a URL into pixels — so every later browser lesson has somewhere to attach.",
+  "difficulty": "beginner",
+  "minutes": 35,
+  "words": 3216,
+  "concepts": []
+ },
+ "b3-browser-processes": {
+  "summary": "Chromium splits the browser into a privileged browser process, sandboxed renderer processes, a GPU process, a network service and a set of utility processes. You will learn what each one does, why it is a separate process, how they talk to each other, and what happens when one of them crashes.",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 4448,
+  "concepts": [
+   "b3-browser-process",
+   "b3-renderer-process",
+   "b3-gpu-process",
+   "b3-network-process",
+   "b3-utility-process"
+  ]
+ },
+ "b3-browser-threads": {
+  "summary": "Inside each renderer process, several threads share the work of running a page — the main thread runs your JavaScript, style and layout; the compositor thread scrolls and animates; raster threads produce pixels; and Web Workers run your own background code. You will learn what each thread does and how to keep the one that matters most free.",
+  "difficulty": "intermediate",
+  "minutes": 50,
+  "words": 3911,
+  "concepts": [
+   "b3-main-thread",
+   "b3-compositor-thread",
+   "b3-raster-threads",
+   "b3-worker-threads-browser"
+  ]
+ },
+ "b3-rendering-engine": {
+  "summary": "The rendering engine — Blink in Chromium, WebKit in Safari, Gecko in Firefox — is the part of the browser that understands HTML and CSS, owns the DOM, and turns documents into drawable output. You will learn what it does stage by stage, how it connects to the JavaScript engine, where today's engines came from, and how engine differences affect the code you ship.",
+  "difficulty": "intermediate",
+  "minutes": 40,
+  "words": 2926,
+  "concepts": []
+ },
+ "b3-site-isolation": {
+  "summary": "Site isolation puts documents from different sites into different renderer processes — even when one site embeds another in an iframe — so that a compromised or Spectre-exploiting page cannot read another site's data. You will learn why it was needed, how sites are defined, how origin-keyed processes go further, and how cross-site iframes work across process boundaries.",
+  "difficulty": "advanced",
+  "minutes": 50,
+  "words": 3926,
+  "concepts": [
+   "b3-origin-keyed-processes",
+   "b3-cross-site-iframes"
+  ]
+ },
+ "b3-url-navigation": {
+  "summary": "Pressing Enter in the address bar sets off a precise sequence — URL handling, DNS lookup, TCP and TLS handshakes, an HTTP exchange, choosing a renderer process, and streaming the document into the HTML parser. You will learn each step, who performs it, what it costs in round trips, and how to measure it.",
+  "difficulty": "intermediate",
+  "minutes": 60,
+  "words": 5023,
+  "concepts": [
+   "b3-dns-resolution",
+   "b3-tcp-tls-handshake",
+   "b3-http-request-response",
+   "b3-document-download"
+  ]
  },
  "b4-fiber": {
   "summary": "React Fiber is the engine inside React that does rendering work. It turns your component tree into a linked tree of \"fiber\" objects that React can walk one unit at a time, pause, resume or throw away. You will learn what a fiber holds, how the current and work-in-progress trees cooperate, and how the work loop turns a render into DOM changes while keeping the page responsive.",
