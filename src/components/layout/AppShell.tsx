@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import { Link, Outlet, useLocation } from 'react-router-dom'
 import { GlobalSearch } from './GlobalSearch'
 import { Sidebar } from './Sidebar'
+import { AccountMenu } from './AccountMenu'
+import { useAuthStore } from '@/stores/auth-store'
 import { useUserStore } from '@/stores/user-store'
 import { applyAppearance } from '@/lib/appearance'
 import { THEMES } from '@/lib/import-export'
@@ -21,9 +23,12 @@ export function AppShell() {
     location.pathname,
   )
 
+  const initAuth = useAuthStore((s) => s.init)
+
   useEffect(() => {
+    initAuth()
     void hydrate()
-  }, [hydrate])
+  }, [hydrate, initAuth])
 
   useEffect(() => {
     applyAppearance(theme, reading)
@@ -115,6 +120,7 @@ export function AppShell() {
               ))}
             </select>
           </label>
+          <AccountMenu />
         </header>
         <main id="main-scroll" tabIndex={-1} className="cd-scroll flex-1 overflow-y-auto focus:outline-none">
           <Outlet />

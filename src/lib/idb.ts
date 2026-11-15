@@ -27,21 +27,29 @@ function getDb() {
   return dbPromise
 }
 
-export async function loadUserState(): Promise<UserState | null> {
+/** IndexedDB key for logged-out progress on this device. */
+export const GUEST_KEY = 'state'
+
+/** Local cache key for a signed-in account (instant load + offline use). */
+export function accountKey(uid: string): string {
+  return `state:${uid}`
+}
+
+export async function loadUserState(key: string = GUEST_KEY): Promise<UserState | null> {
   try {
     const db = await getDb()
-    return (await db.get(STORE, 'state')) ?? null
+    return (await db.get(STORE, key)) ?? null
   } catch {
     return null
   }
 }
 
-export async function saveUserState(state: UserState): Promise<void> {
+export async function saveUserState(state: UserState, key: string = GUEST_KEY): Promise<void> {
   const db = await getDb()
-  await db.put(STORE, state, 'state')
+  await db.put(STORE, state, key)
 }
 
-export async function clearUserState(): Promise<void> {
+export async function clearUserState(key: string = GUEST_KEY): Promise<void> {
   const db = await getDb()
-  await db.delete(STORE, 'state')
+  await db.delete(STORE, key)
 }

@@ -18,9 +18,16 @@ Applied AI — taught as complete lessons with examples, diagrams, practice and 
 - **Phase 4:** Incremental deep content — done (all curriculum topics have deep notes)
 - **Phase 5:** Quality control — **complete** (automated QC gate + print/screen fixes)
 
+## Accounts & progress sync
+
+Free sign-in (Google or email/password) with per-user progress saved to the cloud, on Firebase's free
+Spark plan. Guests keep working offline-first in the browser; signing in merges that progress into the
+account and syncs it across devices. Project `career-duo` is configured; its public web
+config lives in `.env`. Details: [docs/AUTH_SETUP.md](docs/AUTH_SETUP.md).
+
 ## Personal overlays (extra points + custom topics)
 
-Your edits never rewrite curriculum `.ts` files. They live in IndexedDB with progress and export via Settings:
+Your edits never rewrite curriculum `.ts` files. They live with your progress (IndexedDB, plus your account when signed in) and export via Settings:
 
 - **Extra points** — on any topic page, use **Your additions** to append bullets to Key Takeaways, Quick Revision, and related lists
 - **Custom topics** — sidebar **My Topics** → create a topic (track, priority, notes); appears in roadmap, track pages, search, and favorites

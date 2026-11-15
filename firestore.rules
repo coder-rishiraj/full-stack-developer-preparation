@@ -1,0 +1,21 @@
+rules_version = '2';
+
+// Career Duo — each signed-in user can read and write only their own progress
+// document at users/{uid}. Everything else is closed.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{uid} {
+      allow read, delete: if request.auth != null && request.auth.uid == uid;
+      allow create, update: if request.auth != null
+        && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(['stateJson', 'updatedAt', 'clientId', 'schema'])
+        && request.resource.data.stateJson is string
+        && request.resource.data.stateJson.size() < 950000
+        && request.resource.data.updatedAt == request.time;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import { create } from 'zustand'
-import { clearUserState, loadUserState, saveUserState } from '@/lib/idb'
+import { GUEST_KEY, accountKey, loadUserState, saveUserState } from '@/lib/idb'
+import { getRememberedUid } from '@/lib/firebase'
 import {
   EMPTY_USER_STATE,
   exportUserState,
@@ -64,6 +65,13 @@ type UserStore = UserState & {
   exportJson: () => string
   importJson: (json: string) => void
   resetAll: () => Promise<void>
+  /**
+   * Swaps the whole store to another account's progress (sign in / sign out).
+   * `notify` also forwards the new state to the cloud-sync listener.
+   */
+  loadAccount: (key: string, state: Partial<UserState> | null, opts?: { notify?: boolean }) => void
+  /** Applies progress that arrived from another device without echoing it back. */
+  applyRemoteState: (state: Partial<UserState>) => void
 }
 
 const ACTION_KEYS = new Set([
@@ -93,19 +101,88 @@ const ACTION_KEYS = new Set([
   'exportJson',
   'importJson',
   'resetAll',
+  'loadAccount',
+  'applyRemoteState',
 ])
 
+/** IndexedDB key the store currently persists to (guest or a signed-in account). */
+let storageKey = GUEST_KEY
+export function currentStorageKey(): string {
+  return storageKey
+}
+
+type ChangeListener = (state: UserState) => void
+let changeListener: ChangeListener | null = null
+
+/** Registered by the cloud-sync controller; receives every persisted local change. */
+export function setUserStateChangeListener(listener: ChangeListener | null): void {
+  changeListener = listener
+}
+
+function toUserState(full: UserStore): UserState {
+  return Object.fromEntries(
+    Object.entries(full).filter(([k]) => !ACTION_KEYS.has(k)),
+  ) as UserState
+}
+
+/** Plain data snapshot of the current progress (no actions). */
+export function snapshotUserState(): UserState {
+  return toUserState(useUserStore.getState())
+}
+
+/** Cleans up a stored/remote state so missing or legacy fields get defaults. */
+export function normalizeUserState(loaded: Partial<UserState> | null | undefined): UserState {
+  if (!loaded) return { ...EMPTY_USER_STATE }
+  const customTopics = Object.fromEntries(
+    Object.entries(loaded.customTopics ?? {}).map(([id, topic]) => [
+      id,
+      { ...topic, sectionId: topic.sectionId?.trim() || `CUSTOM-${topic.track}` },
+    ]),
+  )
+  return {
+    ...EMPTY_USER_STATE,
+    ...loaded,
+    version: 1,
+    theme: sanitizeTheme(loaded.theme),
+    reading: sanitizeReading(loaded.reading),
+    learning: sanitizeLearning(loaded.learning),
+    recentTopics: Array.isArray(loaded.recentTopics) ? loaded.recentTopics : [],
+    capstoneTasks: loaded.capstoneTasks ?? {},
+    topics: loaded.topics ?? {},
+    problems: loaded.problems ?? {},
+    notes: loaded.notes ?? {},
+    bookmarks: Array.isArray(loaded.bookmarks) ? loaded.bookmarks : [],
+    topicOverlays: loaded.topicOverlays ?? {},
+    customTopics,
+    currentFocus: loaded.currentFocus ?? {},
+  }
+}
+
 let persistTimer: ReturnType<typeof setTimeout> | null = null
+let persistGetter: (() => UserStore) | null = null
+
+function persistNow(getState: () => UserStore) {
+  const state = toUserState(getState())
+  void saveUserState(state, storageKey)
+  changeListener?.(state)
+}
 
 function schedulePersist(getState: () => UserStore) {
   if (persistTimer) clearTimeout(persistTimer)
+  persistGetter = getState
   persistTimer = setTimeout(() => {
-    const full = getState()
-    const state = Object.fromEntries(
-      Object.entries(full).filter(([k]) => !ACTION_KEYS.has(k)),
-    ) as UserState
-    void saveUserState(state)
+    persistTimer = null
+    persistNow(getState)
   }, 200)
+}
+
+/** Writes any debounced change immediately (before switching accounts). */
+export function flushPersist(): void {
+  if (persistTimer && persistGetter) {
+    clearTimeout(persistTimer)
+    persistTimer = null
+    persistNow(persistGetter)
+  }
 }
 
 function normalizeOverlay(overlay: TopicOverlay): TopicOverlay | undefined {
@@ -126,34 +203,31 @@ export const useUserStore = create<UserStore>((set, get) => ({
   hydrated: false,
 
   hydrate: async () => {
-    const loaded = await loadUserState()
-    if (loaded) {
-      const customTopics = Object.fromEntries(
-        Object.entries(loaded.customTopics ?? {}).map(([id, topic]) => [
-          id,
-          {
-            ...topic,
-            sectionId:
-              topic.sectionId?.trim() ||
-              `CUSTOM-${topic.track}`,
-          },
-        ]),
-      )
-      set({
-        ...EMPTY_USER_STATE,
-        ...loaded,
-        theme: sanitizeTheme(loaded.theme),
-        reading: sanitizeReading(loaded.reading),
-        learning: sanitizeLearning(loaded.learning),
-        recentTopics: Array.isArray(loaded.recentTopics) ? loaded.recentTopics : [],
-        capstoneTasks: loaded.capstoneTasks ?? {},
-        topicOverlays: loaded.topicOverlays ?? {},
-        customTopics,
-        hydrated: true,
-      })
-    } else {
-      set({ hydrated: true })
-    }
+    // If an account was signed in on this device, show its cached progress
+    // immediately; cloud sync then refreshes (or signs out) in the background.
+    const uid = getRememberedUid()
+    const key = uid ? accountKey(uid) : GUEST_KEY
+    const loaded = await loadUserState(key)
+    // Sign-in may have already swapped the store in while we waited.
+    if (get().hydrated) return
+    storageKey = key
+    set({ ...normalizeUserState(loaded), hydrated: true })
+  },
+
+  loadAccount: (key, state, opts) => {
+    flushPersist()
+    storageKey = key
+    const next = normalizeUserState(state)
+    set({ ...next, hydrated: true })
+    void saveUserState(next, key)
+    if (opts?.notify) changeListener?.(next)
+  },
+
+  applyRemoteState: (state) => {
+    if (persistTimer) return // a local edit is about to be pushed; it wins
+    const next = normalizeUserState(state)
+    set({ ...next })
+    void saveUserState(next, storageKey)
   },
 
   setTheme: (theme) => {
@@ -469,13 +543,7 @@ export const useUserStore = create<UserStore>((set, get) => ({
     schedulePersist(get)
   },
 
-  exportJson: () => {
-    const full = get()
-    const state = Object.fromEntries(
-      Object.entries(full).filter(([k]) => !ACTION_KEYS.has(k)),
-    ) as UserState
-    return exportUserState(state)
-  },
+  exportJson: () => exportUserState(toUserState(get())),
 
   importJson: (json) => {
     const state = importUserState(json)
@@ -484,7 +552,9 @@ export const useUserStore = create<UserStore>((set, get) => ({
   },
 
   resetAll: async () => {
-    await clearUserState()
+    // Persisting the empty state also clears the signed-in account's cloud copy.
     set({ ...EMPTY_USER_STATE, hydrated: true })
+    schedulePersist(get)
+    flushPersist()
   },
 }))

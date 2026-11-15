@@ -1,5 +1,7 @@
 import { useRef, useState } from 'react'
 import { Button } from '@/components/ui/Button'
+import { AccountSettings } from '@/components/layout/AccountSettings'
+import { useAuthStore } from '@/stores/auth-store'
 import { useUserStore } from '@/stores/user-store'
 import { THEMES } from '@/lib/import-export'
 import type { ReadingPrefs } from '@/domain/types'
@@ -49,6 +51,7 @@ export function SettingsPage() {
   const resetAll = useUserStore((s) => s.resetAll)
   const fileRef = useRef<HTMLInputElement>(null)
   const [message, setMessage] = useState('')
+  const signedIn = useAuthStore((s) => s.status === 'signed_in')
 
   function downloadExport() {
     const blob = new Blob([exportJson()], { type: 'application/json' })
@@ -76,9 +79,11 @@ export function SettingsPage() {
       <div>
         <h1 className="text-2xl font-semibold">Settings</h1>
         <p className="text-sm text-[var(--text-muted)]">
-          Appearance, reading and learning preferences, and portable backups of your progress.
+          Your account, appearance, reading and learning preferences, and portable backups of your progress.
         </p>
       </div>
+
+      <AccountSettings />
 
       <section className="space-y-3">
         <h2 className="font-semibold text-[var(--heading)]">Theme</h2>
@@ -222,7 +227,14 @@ export function SettingsPage() {
         <Button
           variant="danger"
           onClick={() => {
-            if (confirm('Reset all personal progress?')) void resetAll()
+            if (
+              confirm(
+                signedIn
+                  ? 'Reset all progress? This also clears the copy saved to your account on every device.'
+                  : 'Reset all personal progress?',
+              )
+            )
+              void resetAll()
           }}
         >
           Reset all progress

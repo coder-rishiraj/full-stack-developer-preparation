@@ -22,6 +22,7 @@ import { PrintGraphAlgorithmsPage } from '@/pages/PrintGraphAlgorithmsPage'
 import { PrintGraphCorePage } from '@/pages/PrintGraphCorePage'
 import { SettingsPage } from '@/pages/SettingsPage'
 import { FavoritesPage } from '@/pages/FavoritesPage'
+import { LoginPage } from '@/pages/LoginPage'
 
 export function AppRouter() {
   return (
@@ -55,6 +56,7 @@ export function AppRouter() {
           <Route path="search" element={<Navigate to="/" replace />} />
           <Route path="favorites" element={<FavoritesPage />} />
           <Route path="settings" element={<SettingsPage />} />
+          <Route path="login" element={<LoginPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
       </Routes>
