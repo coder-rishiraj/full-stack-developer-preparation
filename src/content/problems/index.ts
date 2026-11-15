@@ -2,6 +2,7 @@ import type { DsaProblem } from '@/domain/types'
 import { CSES_PROBLEMS } from './cses'
 import { NEETCODE_250 } from './neetcode250'
 import { ROADMAP, ROADMAP_TOPICS, type RoadmapEntry, type RoadmapTopic } from './dsa-roadmap'
+import { LESSON_PROBLEMS } from './lesson-problems'
 
 /** Full Phase 3 DSA index: NeetCode 250 + CSES 400. */
 export const PROBLEMS: DsaProblem[] = [...NEETCODE_250, ...CSES_PROBLEMS]
@@ -32,6 +33,18 @@ export function getProblem(id: string): DsaProblem | undefined {
 export function getProblemsForTopic(topicId: string): DsaProblem[] {
   return PROBLEMS.filter((p) => p.primaryTopic === topicId)
 }
+
+/** Hand-picked practice problems for a Track A lesson, in roadmap order (easiest first). */
+export function getLessonProblems(topicId: string): DsaProblem[] {
+  const ids = LESSON_PROBLEMS[topicId]
+  if (!ids) return []
+  return ids
+    .map((id) => getProblem(id))
+    .filter((p): p is DsaProblem => p !== undefined)
+    .sort((a, b) => (ROADMAP[a.id]?.order ?? 1e9) - (ROADMAP[b.id]?.order ?? 1e9))
+}
+
+export { LESSON_PROBLEMS }
 
 export function getProblemCategories(source?: DsaProblem['source']): string[] {
   const set = new Set<string>()

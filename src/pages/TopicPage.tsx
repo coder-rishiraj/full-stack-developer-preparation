@@ -6,6 +6,8 @@ import { TopicBody } from '@/components/topic/TopicBody'
 import { ExtraPointsEditor } from '@/components/topic/ExtraPointsEditor'
 import { RevisionScheduleCard } from '@/components/topic/RevisionScheduleCard'
 import { LessonBlocks } from '@/components/lesson/LessonBlocks'
+import { LessonPractice, PRACTICE_HEADING_ID } from '@/components/lesson/LessonPractice'
+import { getLessonProblems } from '@/content/problems'
 import { LessonRail, TableOfContents, scrollToHeading, type OutlineItem } from '@/components/lesson/LessonRail'
 import { getTopicProgress } from '@/domain/progress-selectors'
 import {
@@ -180,7 +182,11 @@ export function TopicPage({ mode = 'full' }: { mode?: Mode }) {
     }
 
     const blocks = lesson.focus ? lesson.focus.blocks : lesson.lesson.blocks
-    const outline = lesson.focus ? outlineOf(lesson.focus.blocks) : lesson.lesson.outline
+    const baseOutline = lesson.focus ? outlineOf(lesson.focus.blocks) : lesson.lesson.outline
+    const outline: OutlineItem[] =
+      getLessonProblems(meta.id).length > 0
+        ? [...baseOutline, { id: PRACTICE_HEADING_ID, level: 2, text: 'Practice problems' }]
+        : baseOutline
     return (
       <Layout mode={mode} header={header} rail={<LessonRail meta={meta} outline={outline} />} outline={outline}>
         {lesson.focus ? (
@@ -193,6 +199,7 @@ export function TopicPage({ mode = 'full' }: { mode?: Mode }) {
             </article>
           </>
         )}
+        <LessonPractice topicId={meta.id} />
         {footer}
         {personalTools}
       </Layout>
