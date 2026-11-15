@@ -1,11 +1,29 @@
 import type { DsaProblem } from '@/domain/types'
 import { CSES_PROBLEMS } from './cses'
 import { NEETCODE_250 } from './neetcode250'
+import { ROADMAP, ROADMAP_TOPICS, type RoadmapEntry, type RoadmapTopic } from './dsa-roadmap'
 
 /** Full Phase 3 DSA index: NeetCode 250 + CSES 400. */
 export const PROBLEMS: DsaProblem[] = [...NEETCODE_250, ...CSES_PROBLEMS]
 
 export { CSES_PROBLEMS, NEETCODE_250 }
+export { ROADMAP, ROADMAP_LEVELS, ROADMAP_TOPICS } from './dsa-roadmap'
+export type { RoadmapEntry, RoadmapLevel, RoadmapTier, RoadmapTopic } from './dsa-roadmap'
+
+/** Every problem in roadmap order (topic, then Core before Challenge, then group, then difficulty). */
+export const PROBLEMS_IN_ROADMAP_ORDER: DsaProblem[] = [...PROBLEMS].sort(
+  (a, b) => (ROADMAP[a.id]?.order ?? 1e9) - (ROADMAP[b.id]?.order ?? 1e9),
+)
+
+const ROADMAP_TOPIC_BY_ID = new Map(ROADMAP_TOPICS.map((t) => [t.id, t]))
+
+export function getRoadmapEntry(problemId: string): RoadmapEntry | undefined {
+  return ROADMAP[problemId]
+}
+
+export function getRoadmapTopic(topicId: string): RoadmapTopic | undefined {
+  return ROADMAP_TOPIC_BY_ID.get(topicId)
+}
 
 export function getProblem(id: string): DsaProblem | undefined {
   return PROBLEMS.find((p) => p.id === id)

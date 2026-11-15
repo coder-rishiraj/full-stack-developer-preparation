@@ -1,6 +1,6 @@
 import { useEffect, useState, type ReactNode } from 'react'
 import { Link, useLocation, useParams } from 'react-router-dom'
-import { getProblem } from '@/content/problems'
+import { PROBLEMS_IN_ROADMAP_ORDER, ROADMAP_LEVELS, getProblem, getRoadmapEntry, getRoadmapTopic } from '@/content/problems'
 import { getTopicMeta } from '@/content/taxonomy'
 import { practiceGateIndex, type ProblemPage } from '@/content/problem-pages'
 import { DsaStatusBadge, PriorityBadge } from '@/components/ui/Badge'
@@ -63,6 +63,14 @@ export function DsaProblemPage() {
   const revealed = gate === -1 || revealedFor === problem.id || location.hash.length > 1
   const hidden = Boolean(page) && !revealed
 
+  // Roadmap position. The topic and group name the technique, so they wait for the reveal.
+  const roadmap = getRoadmapEntry(problem.id)
+  const roadmapTopic = roadmap ? getRoadmapTopic(roadmap.topicId) : undefined
+  const roadmapIndex = PROBLEMS_IN_ROADMAP_ORDER.findIndex((p) => p.id === problem.id)
+  const previous = roadmapIndex > 0 ? PROBLEMS_IN_ROADMAP_ORDER[roadmapIndex - 1] : undefined
+  const next = roadmapIndex >= 0 ? PROBLEMS_IN_ROADMAP_ORDER[roadmapIndex + 1] : undefined
+  const levelLabel = ROADMAP_LEVELS.find((l) => l.id === roadmap?.level)?.label
+
   const header = (
     <div>
       <div className="flex flex-wrap gap-2">
@@ -80,6 +88,30 @@ export function DsaProblemPage() {
           </>
         )}
       </p>
+      {roadmap && (
+        <p className="mt-1 flex flex-wrap items-baseline gap-x-2 text-sm text-[var(--text-muted)]">
+          <span>
+            Roadmap #{roadmap.order} · <span title={roadmap.basis}>{levelLabel} ({roadmap.score.toFixed(1)}/10)</span>
+            {!hidden && roadmapTopic && (
+              <>
+                {' '}· {roadmapTopic.order}. {roadmapTopic.title} · {roadmap.tier === 'core' ? 'Core' : 'Challenge'} · {roadmap.group}
+              </>
+            )}
+          </span>
+          <span className="print-hidden ml-auto flex gap-3 text-xs" data-screen-only>
+            {previous && (
+              <Link className="text-[var(--accent)] hover:underline" to={`/dsa/${previous.id}`}>
+                ← {previous.name}
+              </Link>
+            )}
+            {next && (
+              <Link className="text-[var(--accent)] hover:underline" to={`/dsa/${next.id}`}>
+                Next: {next.name} →
+              </Link>
+            )}
+          </span>
+        </p>
+      )}
     </div>
   )
 
