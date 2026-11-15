@@ -23,47 +23,14 @@ matter more than speed.
 
 ## Where things stand
 
-- Branch: `problem-walkthroughs`, 4 commits ahead of `origin/problem-walkthroughs`. Nothing is pushed.
-  Do not push or merge unless the user asks.
-- **Done and committed (58 / 650):** the NeetCode categories `arrays-hashing` (listOrder 1–22),
-  `two-pointers` (23–35), `sliding-window` (36–44) and `stack` (45–58).
-- **Batch 6, `binary-search` (listOrder 59–72), is half-finished and uncommitted.** Two earlier
-  sessions were cut off by usage limits.
-  - Complete, verified, ready to commit (page + tests pass): `nc-binary-search`,
-    `nc-search-insert-position`, `nc-capacity-to-ship-packages-within-d-days`,
-    `nc-find-minimum-in-rotated-sorted-array`, `nc-search-in-rotated-sorted-array`.
-  - Page written, test file missing (so `problems:check` fails): `nc-search-in-rotated-sorted-array-ii`,
-    `nc-split-array-largest-sum`. Read each page carefully, write `tests/<id>.java`, and fix the page
-    if the tests disagree with it.
-  - Test file written, page missing: `nc-guess-number-higher-or-lower`, `nc-time-based-key-value-store`,
-    `nc-median-of-two-sorted-arrays`, `nc-find-in-mountain-array`. Read the existing test file
-    before writing the page. If you rewrite it, keep any judge-provided types it declares
-    (`GuessGame`, the `MountainArray` interface).
-  - Nothing written yet: `nc-sqrt-x`, `nc-search-a-2d-matrix`, `nc-koko-eating-bananas`.
-- **Next after batch 6:** continue NeetCode in `listOrder`, one category at a time (`linked-list`
-  starts at listOrder 73). Then do CSES.
+- Branch: `problem-walkthroughs` (pushed to `origin`). Do not merge into `main` unless the user asks.
+- **Done and committed (72 / 650):** the NeetCode categories `arrays-hashing` (listOrder 1–22),
+  `two-pointers` (23–35), `sliding-window` (36–44), `stack` (45–58) and `binary-search` (59–72).
+- **Next:** continue NeetCode in `listOrder`, one category at a time (`linked-list` starts at
+  listOrder 73), then CSES.
 - Untracked `src/content/lessons/b2-*.md` files belong to the user. Never stage, edit or delete them.
 
-## Official constraints for the rest of batch 6 (read from LeetCode on 2026-11-14)
-
-- **Guess Number Higher or Lower:** 1 ≤ n ≤ 2^31 − 1; 1 ≤ pick ≤ n. `int guess(int num)` returns −1 if
-  num > pick, 1 if num < pick, 0 if equal. Java template: `public class Solution extends GuessGame { public int guessNumber(int n) }`.
-- **Sqrt(x):** 0 ≤ x ≤ 2^31 − 1; return ⌊√x⌋; no built-in exponent function or operator.
-- **Search a 2D Matrix:** m × n matrix, rows non-decreasing, each row's first value is greater than
-  the previous row's last; 1 ≤ m, n ≤ 100; −10^4 ≤ values, target ≤ 10^4; must be O(log(m·n)).
-- **Koko Eating Bananas:** 1 ≤ piles.length ≤ 10^4; piles.length ≤ h ≤ 10^9; 1 ≤ piles[i] ≤ 10^9.
-  The hours total overflows `int` at k = 1, so use `long`.
-- **Time Based Key-Value Store:** class `TimeMap` with `set(String key, String value, int timestamp)`
-  and `String get(String key, int timestamp)`, returning "" if there is no value. Keys and values
-  are 1–100 lowercase letters or digits; 1 ≤ timestamp ≤ 10^7; set timestamps are strictly
-  increasing; at most 2·10^5 calls.
-- **Median of Two Sorted Arrays:** 0 ≤ m, n ≤ 1000; 1 ≤ m + n ≤ 2000; −10^6 ≤ values ≤ 10^6; must be O(log(m+n)).
-- **Find in Mountain Array:** interactive. `int findInMountainArray(int target, MountainArray mountainArr)`;
-  3 ≤ length ≤ 10^4; 0 ≤ target, values ≤ 10^9; more than 100 `get` calls is Wrong Answer; return
-  the minimum index, or −1.
-- **Search in Rotated Sorted Array II:** 1 ≤ n ≤ 5000; −10^4 ≤ values, target ≤ 10^4; duplicates
-  allowed. The follow-up asks how duplicates affect complexity (worst case Θ(n)).
-- **Split Array Largest Sum:** 1 ≤ n ≤ 1000; 0 ≤ nums[i] ≤ 10^6; 1 ≤ k ≤ min(50, n).
+## Official constraints
 
 For every later problem, read the official statement and constraints before writing. Never invent
 a constraint. LeetCode's GraphQL endpoint (`POST https://leetcode.com/graphql` with

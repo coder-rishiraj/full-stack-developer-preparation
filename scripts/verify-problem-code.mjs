@@ -13,7 +13,8 @@
  *     method when the page marks them `fragment="<signature>"`, otherwise listed.
  *
  * `tests/<id>.java` declares `class Tests` with a `main` that throws on failure. It may
- * also declare helper types the judge normally provides (ListNode, TreeNode, …).
+ * also declare helper types the judge normally provides (ListNode, TreeNode, MountainArray, …);
+ * javac's `auxiliaryclass` lint is off so solutions can use those types.
  * Needs a JDK: JAVA_HOME, `/usr/libexec/java_home`, Homebrew's openjdk, or javac on PATH.
  */
 import { execFileSync, spawnSync } from 'node:child_process'
@@ -146,7 +147,7 @@ try {
       const className = source.match(COMPLETE_NAME)?.[3] ?? 'Solution'
       writeFileSync(path.join(dir, `${className}.java`), source)
       writeFileSync(path.join(dir, 'Tests.java'), tests)
-      const compiled = run(javac, ['-Xlint:all', '-Werror', '-d', 'out', `${className}.java`, 'Tests.java'], dir)
+      const compiled = run(javac, ['-Xlint:all,-auxiliaryclass', '-Werror', '-d', 'out', `${className}.java`, 'Tests.java'], dir)
       if (!compiled.ok) {
         fail(`does not compile: ${block.title}\n${compiled.out.replace(/^/gm, '      ')}`)
         return
