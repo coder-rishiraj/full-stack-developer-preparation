@@ -4,12 +4,26 @@ import { mainClassOf } from '@/runner/java/prepare'
 import { highlight } from './CodeBlock'
 import { CodeRunner, LessonRun } from './CodeRunner'
 
-/** A runnable stand-in for Java the build did not compile: it runs with the in-browser compiler. */
+/**
+ * A runnable stand-in for Java the build did not precompile: it is compiled with javac and run
+ * on a real JVM in the browser when the reader presses Run, so its output is Java's own.
+ */
 function compileOnly(code: string): Runnable {
-  const note = mainClassOf(code)
-    ? 'This example runs with the in-browser Java compiler; it was not checked against the JVM, so its output may differ slightly from the lesson.'
-    : 'This is a fragment (it has no main method), so it cannot run as written. Edit it into a complete program, with public static void main(String[] args), to run it.'
-  return { key: '', chunk: '', problemId: '', format: 'lesson', hint: '', check: 'exact', samples: [], verified: false, note }
+  const complete = mainClassOf(code) !== null
+  return {
+    key: '',
+    chunk: '',
+    problemId: '',
+    format: 'lesson',
+    hint: '',
+    check: 'exact',
+    samples: [],
+    stdin: /\bSystem\.in\b/.test(code),
+    verified: complete,
+    note: complete
+      ? undefined
+      : 'This is a fragment (it has no main method), so it cannot run as written. Edit it into a complete program, with public static void main(String[] args), to run it.',
+  }
 }
 
 /**

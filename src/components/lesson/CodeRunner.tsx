@@ -2,7 +2,7 @@ import { useState } from 'react'
 import type { Runnable } from '@/runner/context'
 import { check } from '@/runner/checkers'
 import { RUN_TIME_LIMIT_MS, runJava, type RunResult } from '@/runner/worker-run'
-import { EDITED_JAVA_TIME_LIMIT_MS } from '@/runner/java/run-edited'
+import { JVM_TIME_LIMIT_MS } from '@/runner/java/cheerpj'
 
 /**
  * How the code is run: `precompiled` uses the build's verified JavaScript (unedited code);
@@ -13,10 +13,24 @@ type Mode = { kind: 'precompiled' } | { kind: 'compile'; source: string; earlier
 
 type Outcome = { run: RunResult | null; errors: string[]; message?: string }
 
-async function execute(runnable: Runnable, mode: Mode, input: string): Promise<Outcome> {
+async function execute(runnable: Runnable, mode: Mode, input: string, onPhase: (phase: string) => void): Promise<Outcome> {
   if (mode.kind === 'precompiled') return { run: await runJava(runnable, input), errors: [] }
   const { runJavaSource } = await import('@/runner/java/run-source')
-  return runJavaSource(runnable.format === 'leetcode' ? runnable : null, mode.source, input, mode.earlier)
+  return runJavaSource(runnable.format === 'leetcode' ? runnable : null, mode.source, input, mode.earlier, onPhase)
+}
+
+/** CheerpJ's free licence asks for this credit wherever it is used. */
+function JvmCredit() {
+  return (
+    <>
+      {' '}
+      Real JVM in your browser:{' '}
+      <a href="https://cheerpj.com" target="_blank" rel="noreferrer">
+        Built with CheerpJ
+      </a>
+      .
+    </>
+  )
 }
 
 function CompileErrors({ outcome }: { outcome: Outcome }) {
@@ -33,7 +47,8 @@ function CompileErrors({ outcome }: { outcome: Outcome }) {
   )
 }
 
-const busyLabel = (phase: string) => (phase === 'compiling' ? 'Compiling…' : 'Running…')
+const busyLabel = (phase: string) =>
+  phase === 'starting' ? 'Starting Java…' : phase === 'compiling' ? 'Compiling and running…' : 'Running…'
 
 /** Longest output shown on the page; longer output is cut (the run itself is complete). */
 const MAX_SHOWN = 20_000
@@ -62,7 +77,7 @@ export function CodeRunner({ runnable, mode = { kind: 'precompiled' } }: { runna
     if (running) return
     setRunning(mode.kind === 'compile' ? 'compiling' : 'running')
     const ranInput = input
-    const outcome = await execute(runnable, mode, ranInput)
+    const outcome = await execute(runnable, mode, ranInput, (p) => setRunning(p === 'running' ? 'compiling' : p))
     setResult({ input: ranInput, outcome })
     setRunning(null)
   }
@@ -107,8 +122,9 @@ export function CodeRunner({ runnable, mode = { kind: 'precompiled' } }: { runna
       <p className="cd-run-note">
         {runnable.hint} Edit it and run again (⌘/Ctrl + Enter).{' '}
         {mode.kind === 'compile'
-          ? 'Your edited code is compiled in your browser (the first run loads the Java compiler, about 7 MB).'
+          ? 'Your edited code is compiled with javac and run on Java 21 (the first run starts Java, which can take a minute).'
           : 'This exact code runs in your browser, compiled to JavaScript ahead of time.'}
+        {mode.kind === 'compile' && <JvmCredit />}
       </p>
       {result && <CompileErrors outcome={result.outcome} />}
       {result?.outcome.run && <RunOutput runnable={runnable} input={result.input} run={result.outcome.run} />}
@@ -199,7 +215,7 @@ export function LessonRun({
   async function go() {
     if (running) return
     setRunning(mode.kind === 'compile' ? 'compiling' : 'running')
-    setOutcome(await execute(runnable, mode, input))
+    setOutcome(await execute(runnable, mode, input, (p) => setRunning(p === 'running' ? 'compiling' : p)))
     setRunning(null)
   }
 
@@ -222,8 +238,9 @@ export function LessonRun({
         </button>
         <span className="cd-run-note">
           {mode.kind === 'compile'
-            ? 'Compiles and runs this code in your browser (the first run loads the Java compiler, about 7 MB).'
+            ? 'Compiles this code with javac and runs it on Java 21 (the first run starts Java, which can take a minute).'
             : 'Runs this program in your browser and shows what it prints.'}
+          {mode.kind === 'compile' && <JvmCredit />}
         </span>
       </div>
       {unverified && runnable.note && <p className="cd-run-note cd-run-caveat">{runnable.note}</p>}
@@ -257,7 +274,7 @@ function LessonOutput({ run }: { run: RunResult }) {
       <div className="cd-run-output" data-state="error">
         <div className="cd-run-status">
           {run.kind === 'timeout'
-            ? `Stopped after ${Math.max(RUN_TIME_LIMIT_MS, EDITED_JAVA_TIME_LIMIT_MS) / 1000} s.`
+            ? `Stopped after ${Math.max(RUN_TIME_LIMIT_MS, JVM_TIME_LIMIT_MS) / 1000} s.`
             : `Could not start the program: ${run.message}`}
         </div>
       </div>

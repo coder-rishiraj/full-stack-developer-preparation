@@ -413,7 +413,7 @@ const chunkState = Object.fromEntries(
 )
 writeFileSync(manifestPath, JSON.stringify({ chunks: chunkState, pages }, null, 2) + '\n')
 // For editing in the browser: the generated harness (Main and any judge types) of each
-// LeetCode-style program, compiled with the reader's edited Solution by the in-browser compiler.
+// LeetCode-style program, compiled with the reader's edited Solution on the in-browser JVM (CheerpJ).
 const harnesses = {}
 for (const programs of Object.values(chunks)) {
   for (const p of programs) if (p.harnessMain) harnesses[p.key] = { main: p.harnessMain, ...(p.harnessExtra ? { extra: p.harnessExtra } : {}) }

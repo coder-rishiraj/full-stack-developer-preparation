@@ -179,11 +179,14 @@ implementation examples (Python or TypeScript), with realistic data and failure 
   is clearer, say what surrounds it.
 - Show output in an ` ```output ` block right after the code.
 - Every Java block on a lesson or walkthrough page is **editable**: the reader edits it and
-  runs it, and the edited code is compiled in the browser (javac and TeaVM compiled to
-  WebAssembly, `public/java-compiler/`, about 7 MB, loaded on the first edited run). A block
-  without a `main` method runs only once the reader completes it. `npm run java:check-compiler`
-  measures how closely the in-browser compiler matches the JVM on the lesson and walkthrough
-  programs (`src/runner/generated/java-compiler-check.json`).
+  runs it. Edited code (and any Java the build did not precompile) is compiled with the JDK's
+  own javac and run on a real JVM in the browser: CheerpJ, OpenJDK 21
+  (`public/cheerpj/frame.html` and `runner.jar`, from `tools/cheerpj-runner/Runner.java`; rebuild
+  with `npm run runner:cheerpj`). Its output is Java's own. The first run starts Java (a few
+  seconds); later runs take well under a second. A block without a `main` method runs only once
+  the reader completes it. CheerpJ's free licence covers personal, educational and
+  non-commercial open-source use and asks for the "Built with CheerpJ" credit the Run panel
+  shows; a commercial site needs a CheerpJ licence (cheerpj.com/licensing).
 - Track A (DSA) Java programs get a **Run** button: the reader runs the program in the browser
   and sees what it really prints, and the written output is kept for print. After adding or
   editing a Java program in an `a*` lesson, run `npm run lessons:runner` (Gradle and a JDK

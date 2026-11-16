@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Java runner</title>
+    <!--
+      Runs readers' Java for the site's Run panels on a real JVM in the browser: CheerpJ
+      (https://cheerpj.com, Leaning Technologies), OpenJDK 21. Loaded in a hidden frame by
+      src/runner/java/cheerpj.ts; the frame is replaced to stop a program that runs too long.
+      Built with CheerpJ.
+    -->
+    <script src="https://cjrtnc.leaningtech.com/5.0/loader.js"></script>
+  </head>
+  <body>
+    <pre id="console" hidden></pre>
+    <script>
+      const parentOrigin = window.location.origin
+      let ready = null
+      let queue = Promise.resolve()
+
+      // The JVM starts once; Runner (public/cheerpj/runner.jar) is called directly from
+      // JavaScript (library mode), with the sources, main class and input as strings.
+      function start() {
+        ready ??= (async () => {
+          await cheerpjInit({ version: 21, status: 'none', javaProperties: ['java.security.manager=allow', 'file.encoding=UTF-8', 'stdout.encoding=UTF-8'] })
+          const lib = await cheerpjRunLibrary('/app/cheerpj/runner.jar')
+          return await lib.Runner
+        })()
+        return ready
+      }
+
+      function parseResult(text) {
+        let i = text.indexOf('\n')
+        const [status, compileMs, runMs] = text.slice(0, i).split(' ')
+        const parts = []
+        i += 1
+        for (let k = 0; k < 3; k++) {
+          const nl = text.indexOf('\n', i)
+          const n = Number(text.slice(i, nl))
+          parts.push(text.slice(nl + 1, nl + 1 + n))
+          i = nl + 1 + n
+        }
+        return { status, compileErrors: parts[0], stdout: parts[1], stderr: parts[2], compileMs: Number(compileMs), runMs: Number(runMs) }
+      }
+
+      async function run({ id, files, mainClass, input }) {
+        const started = performance.now()
+        const Runner = await start()
+        const packed = Object.entries(files).map(([name, text]) => `${name}\u0000${text}\u0000`).join('')
+        const result = parseResult(await Runner.run(packed, mainClass, input))
+        return { id, ...result, ms: performance.now() - started }
+      }
+
+      window.addEventListener('message', (event) => {
+        if (event.origin !== parentOrigin || event.data?.type !== 'run') return
+        queue = queue.then(() =>
+          run(event.data).then(
+            (result) => event.source.postMessage({ type: 'result', ...result }, parentOrigin),
+            (err) => event.source.postMessage({ type: 'result', id: event.data.id, status: 'failed', compileErrors: '', stdout: '', stderr: String(err?.message ?? err), ms: 0 }, parentOrigin),
+          ),
+        )
+      })
+
+      window.parent.postMessage({ type: 'ready' }, parentOrigin)
+      // Start the JVM straight away and warm up javac, so the first run is quicker.
+      start().then(async (Runner) => {
+        window.parent.postMessage({ type: 'jvm-ready' }, parentOrigin)
+        queue = queue.then(() => Runner.warmUp()).catch(() => {})
+      })
+    </script>
+  </body>
+</html>

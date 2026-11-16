@@ -1,12 +1,13 @@
 import type { Runnable } from '../context'
 import type { RunResult } from '../worker-run'
-import { compileJava, runCompiledJava } from './run-edited'
+import { runOnJvm } from './cheerpj'
 import { harnessUnit, programUnit, topTypes, type CompileUnit } from './prepare'
 
 export type SourceRun = { errors: string[]; run: RunResult | null; message?: string }
 
 let harnesses: Promise<Record<string, { main: string; extra?: string }>> | null = null
-const loadHarnesses = () => (harnesses ??= import('../generated/java-harness.json').then((m) => m.default as Record<string, { main: string; extra?: string }>))
+const loadHarnesses = () =>
+  (harnesses ??= import('../generated/java-harness.json').then((m) => m.default as Record<string, { main: string; extra?: string }>))
 
 /**
  * Earlier blocks of the lesson that a program may build on: nearest first, each type name
@@ -25,31 +26,34 @@ function companionsFor(code: string, earlier: string[]): string[] {
 }
 
 /**
- * Compiles the reader's Java in the browser and runs it. LeetCode-style problem programs get
- * their generated harness; lesson programs that use classes from earlier blocks of the
- * lesson are compiled together with those blocks.
+ * Compiles the reader's Java with javac and runs it on a real JVM (CheerpJ) in the browser.
+ * LeetCode-style problem programs get their generated harness; lesson programs that use
+ * classes from earlier blocks of the lesson are compiled together with those blocks.
  */
-export async function runJavaSource(runnable: Runnable | null, source: string, input: string, earlier: string[] = []): Promise<SourceRun> {
+export async function runJavaSource(
+  runnable: Runnable | null,
+  source: string,
+  input: string,
+  earlier: string[] = [],
+  onPhase?: (phase: 'starting' | 'running') => void,
+): Promise<SourceRun> {
   let unit: CompileUnit | { error: string }
   if (runnable?.format === 'leetcode') {
     const harness = (await loadHarnesses())[runnable.key]
     if (!harness) return { errors: [], run: null, message: 'This program has no harness to run it.' }
-    unit = harnessUnit(source, input, harness.main, harness.extra)
+    unit = harnessUnit(source, harness.main, harness.extra)
   } else {
-    unit = programUnit(source, input)
+    unit = programUnit(source)
   }
   if ('error' in unit) return { errors: [unit.error], run: null }
-  let compiled = await compileJava(unit)
-  if (!compiled.ok && earlier.length > 0 && compiled.errors.some((e) => e.includes('cannot find symbol'))) {
+  let result = await runOnJvm(unit.files, unit.mainClass, input, onPhase)
+  if (!result.run && earlier.length > 0 && result.compileErrors.some((e) => e.includes('cannot find symbol'))) {
     const companions = companionsFor(source, earlier)
-    if (companions.length > 0) {
-      const withCompanions = programUnit(source, input, companions)
-      if (!('error' in withCompanions)) {
-        const retry = await compileJava(withCompanions)
-        if (retry.ok) compiled = retry
-      }
+    const withCompanions = companions.length > 0 ? programUnit(source, companions) : null
+    if (withCompanions && !('error' in withCompanions)) {
+      const retry = await runOnJvm(withCompanions.files, withCompanions.mainClass, input, onPhase)
+      if (retry.run) result = retry
     }
   }
-  if (!compiled.ok) return { errors: compiled.errors, run: null, message: compiled.message }
-  return { errors: compiled.errors, run: await runCompiledJava(compiled.wasm) }
+  return { errors: result.compileErrors, run: result.run, message: result.message }
 }
