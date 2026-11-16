@@ -32,7 +32,7 @@ import javax.tools.ToolProvider;
 /**
  * Compiles and runs one Java program inside CheerpJ (a real JVM, OpenJDK 21, in the browser)
  * for the site's Run panels. Built into public/cheerpj/runner.jar by
- * `npm run runner:cheerpj`; driven by public/cheerpj/frame.html.
+ * `npm run runner:cheerpj`; driven by public/cheerpj/worker.js.
  *
  * From JavaScript: Runner.run(packedSources, mainClass, input) (CheerpJ library mode).
  * For local testing: Runner <jobPrefix> <resultFile>
@@ -148,15 +148,65 @@ public final class Runner {
      */
     public static String run(String packed, String mainClass, String input) {
         if (System.getSecurityManager() == null) installExitTrap();
-        List<Source> sources = new ArrayList<>();
-        String[] parts = packed.split("\u0000", -1);
-        for (int i = 0; i + 1 < parts.length; i += 2) sources.add(new Source(parts[i], parts[i + 1]));
-
         Map<String, ClassOut> classes = new HashMap<>();
         StringBuilder compileErrors = new StringBuilder();
         runMs = 0;
-        if (!compile(sources, classes, compileErrors)) return result("compile-error", compileErrors.toString(), "", "");
+        if (!compile(unpack(packed), classes, compileErrors)) return result("compile-error", compileErrors.toString(), "", "");
+        String[] r = runOne(classes, mainClass, input);
+        runMs = Long.parseLong(r[1]);
+        return result(r[0].replace('_', ' '), "", r[2], r[3]);
+    }
 
+    /**
+     * Compiles once and runs the program on each input (fresh class loader each time, so static
+     * fields start fresh, as in separate runs). `inputs` holds the inputs separated by NUL.
+     * Returns "status compileMs count\n", the compile errors (length-prefixed), then per test
+     * "status runMs\n" and its stdout and stderr (length-prefixed).
+     */
+    // The last program compiled for runTests: the page sends one test at a time (so it can stop
+    // a test that runs too long), and only the first of them needs javac.
+    private static String lastPacked;
+    private static Map<String, ClassOut> lastClasses;
+
+    public static String runTests(String packed, String mainClass, String inputs) {
+        if (System.getSecurityManager() == null) installExitTrap();
+        Map<String, ClassOut> classes = new HashMap<>();
+        StringBuilder compileErrors = new StringBuilder();
+        String[] cases = inputs.isEmpty() ? new String[0] : inputs.split("\u0000", -1);
+        StringBuilder sb = new StringBuilder();
+        if (packed.equals(lastPacked)) {
+            classes = lastClasses;
+            compileMs = 0;
+        } else if (!compile(unpack(packed), classes, compileErrors)) {
+            sb.append("compile-error ").append(compileMs).append(" 0\n");
+            sb.append(compileErrors.length()).append('\n').append(compileErrors);
+            return sb.toString();
+        }
+        lastPacked = packed;
+        lastClasses = classes;
+        sb.append("ok ").append(compileMs).append(' ').append(cases.length).append('\n');
+        sb.append(compileErrors.length()).append('\n').append(compileErrors);
+        for (String input : cases) {
+            String[] r = runOne(classes, mainClass, input);
+            sb.append(r[0]).append(' ').append(r[1]).append('\n');
+            sb.append(r[2].length()).append('\n').append(r[2]);
+            sb.append(r[3].length()).append('\n').append(r[3]);
+        }
+        return sb.toString();
+    }
+
+    private static List<Source> unpack(String packed) {
+        List<Source> sources = new ArrayList<>();
+        String[] parts = packed.split("\u0000", -1);
+        for (int i = 0; i + 1 < parts.length; i += 2) sources.add(new Source(parts[i], parts[i + 1]));
+        return sources;
+    }
+
+    /** Output kept per run; more is cut (a runaway print loop would otherwise fill memory). */
+    private static final int MAX_OUTPUT = 1 << 20;
+
+    /** Runs main once: {status, runMs, stdout, stderr}. */
+    private static String[] runOne(Map<String, ClassOut> classes, String mainClass, String input) {
         ByteArrayOutputStream stdout = new ByteArrayOutputStream();
         ByteArrayOutputStream stderr = new ByteArrayOutputStream();
         PrintStream realOut = System.out;
@@ -165,8 +215,8 @@ public final class Runner {
         String status = "ok";
         ClassLoader loader = new MemoryLoader(classes, Runner.class.getClassLoader());
         System.setIn(new java.io.ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8)));
-        System.setOut(new PrintStream(stdout, true, StandardCharsets.UTF_8));
-        System.setErr(new PrintStream(stderr, true, StandardCharsets.UTF_8));
+        System.setOut(new PrintStream(new Capped(stdout), true, StandardCharsets.UTF_8));
+        System.setErr(new PrintStream(new Capped(stderr), true, StandardCharsets.UTF_8));
         Set<Thread> before = Thread.getAllStackTraces().keySet();
         long runStart = System.nanoTime();
         trapExit = true;
@@ -196,7 +246,6 @@ public final class Runner {
         } catch (InterruptedException e) {
             status = "error";
         } finally {
-            runMs = (System.nanoTime() - runStart) / 1_000_000;
             trapExit = false;
             System.out.flush();
             System.err.flush();
@@ -204,7 +253,28 @@ public final class Runner {
             System.setErr(realErr);
             System.setIn(realIn);
         }
-        return result(status, "", stdout.toString(StandardCharsets.UTF_8), stderr.toString(StandardCharsets.UTF_8));
+        long ms = (System.nanoTime() - runStart) / 1_000_000;
+        return new String[] {status.replace(' ', '_'), Long.toString(ms), stdout.toString(StandardCharsets.UTF_8), stderr.toString(StandardCharsets.UTF_8)};
+    }
+
+    /** Stops keeping output after MAX_OUTPUT bytes. */
+    static final class Capped extends OutputStream {
+        private final ByteArrayOutputStream out;
+
+        Capped(ByteArrayOutputStream out) {
+            this.out = out;
+        }
+
+        @Override
+        public void write(int b) {
+            if (out.size() < MAX_OUTPUT) out.write(b);
+        }
+
+        @Override
+        public void write(byte[] b, int off, int len) {
+            int room = MAX_OUTPUT - out.size();
+            if (room > 0) out.write(b, off, Math.min(room, len));
+        }
     }
 
     /** Compiles a tiny program, so javac is warm before the reader's first run. */

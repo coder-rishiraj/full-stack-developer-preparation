@@ -1,0 +1,1 @@
+{"problemId":"cses-k-th-highest-score","source":"cses","credit":"Official CSES test data (cses.fi)","total":12,"anyAnswer":false,"interactive":true,"timeLimit":"1.00 s","tests":[{"name":"Test 1","input":"1 2\n29\n48\n","output":""},{"name":"Test 2","input":"10 10\n91 80 68 39 38 37 31 30 7 1\n100 95 87 71 67 41 33 18 17 11\n","output":""}]}

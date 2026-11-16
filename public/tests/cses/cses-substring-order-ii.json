@@ -1,0 +1,1 @@
+{"problemId":"cses-substring-order-ii","source":"cses","credit":"Official CSES test data (cses.fi)","total":9,"anyAnswer":false,"interactive":false,"timeLimit":"1.00 s","tests":[{"name":"Test 1","input":"abaabbaabbab\n10\n","output":"aab"},{"name":"Test 2","input":"sdmgaasdgiakfatiskwlpswatsgdmuew\n42\n","output":"akfatiskwlp"}]}

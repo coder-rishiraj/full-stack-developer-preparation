@@ -4,6 +4,7 @@ import { PROBLEMS_IN_ROADMAP_ORDER, ROADMAP_LEVELS, getProblem, getRoadmapEntry,
 import { getTopicMeta } from '@/content/taxonomy'
 import { practiceGateIndex, type ProblemPage } from '@/content/problem-pages'
 import { DsaStatusBadge, PriorityBadge } from '@/components/ui/Badge'
+import { ProblemPractice } from '@/components/problem/ProblemPractice'
 import { Button } from '@/components/ui/Button'
 import { LessonBlocks } from '@/components/lesson/LessonBlocks'
 import { TableOfContents, scrollToHeading, useReadingProgress } from '@/components/lesson/LessonRail'
@@ -214,6 +215,7 @@ export function DsaProblemPage() {
               </JavaBlocksContext.Provider>
             </CodeRunContext.Provider>
           </article>
+          <ProblemPractice problem={problem} />
           {hidden && (
             <section className="rounded-md border border-[var(--border)] bg-[var(--bg-elevated)] px-5 py-4" aria-labelledby="practice-gate-title">
               <h2 id="practice-gate-title" className="text-sm font-semibold text-[var(--heading)]">
@@ -247,6 +249,7 @@ export function DsaProblemPage() {
       {header}
       {sourceLink}
       {status}
+      <ProblemPractice problem={problem} />
 
       <section className="space-y-2 text-sm">
         <h2 className="font-semibold">Recognition Clues</h2>

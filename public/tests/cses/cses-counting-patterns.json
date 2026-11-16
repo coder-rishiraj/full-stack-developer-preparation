@@ -1,0 +1,1 @@
+{"problemId":"cses-counting-patterns","source":"cses","credit":"Official CSES test data (cses.fi)","total":12,"anyAnswer":false,"interactive":false,"timeLimit":"1.00 s","tests":[{"name":"Test 7","input":"abcdef\n3\nabcd\ncdlm\nd\n","output":"1\n0\n1\n"},{"name":"Test 12","input":"aaaa\n1\naaab\n","output":"0\n"}]}

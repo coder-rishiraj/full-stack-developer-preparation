@@ -1,0 +1,1 @@
+{"problemId":"cses-all-palindromes","source":"cses","credit":"Official CSES test data (cses.fi)","total":7,"anyAnswer":false,"interactive":false,"timeLimit":"1.00 s","tests":[{"name":"Test 1","input":"ababbababaa\n","output":"1 1 3 3 2 4 6 8 5 5 2\n"}]}

@@ -1,0 +1,1 @@
+{"problemId":"cses-special-substrings","source":"cses","credit":"Official CSES test data (cses.fi)","total":8,"anyAnswer":false,"interactive":false,"timeLimit":"1.00 s","tests":[{"name":"Test 1","input":"a\n","output":"1\n"},{"name":"Test 8","input":"adadad\n","output":"9\n"}]}

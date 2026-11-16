@@ -1,0 +1,1 @@
+{"problemId":"cses-grid-completion","source":"cses","credit":"Official CSES test data (cses.fi)","total":6,"anyAnswer":false,"interactive":false,"timeLimit":"1.00 s","tests":[{"name":"Test 1","input":"5\nA.B..\nBA...\n.B.A.\n...BA\n....B\n","output":"1\n"}]}

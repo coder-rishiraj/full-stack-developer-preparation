@@ -1,0 +1,1 @@
+{"problemId":"cses-filling-trominos","source":"cses","credit":"Official CSES test data (cses.fi)","total":4,"anyAnswer":true,"interactive":false,"timeLimit":"1.00 s","tests":[{"name":"Test 3","input":"1\n15 5\n","output":"YES\nGGQQV\nGMQVV\nIMMXX\nIITTX\nFFTUU\nGFQQU\nGGQWW\nIINXW\nINNXX\nFFPPU\nFLPUU\nHLLWW\nHHSSW\nJJOSY\nJOOYY\n"}]}

@@ -1,0 +1,1 @@
+{"problemId":"cses-string-transform","source":"cses","credit":"Official CSES test data (cses.fi)","total":6,"anyAnswer":false,"interactive":false,"timeLimit":"1.00 s","tests":[{"name":"Test 1","input":"aaaaaaaaaa#\n","output":"aaaaaaaaaa\n"},{"name":"Test 2","input":"b#bbabbbbba\n","output":"ababbbbbbb\n"},{"name":"Test 3","input":"knwdl#pvaku\n","output":"lkvpnauwdk\n"}]}

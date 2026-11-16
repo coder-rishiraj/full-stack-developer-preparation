@@ -1,6 +1,6 @@
 /**
  * Builds public/cheerpj/runner.jar from tools/cheerpj-runner/Runner.java: the class that
- * compiles and runs readers' Java inside CheerpJ (see public/cheerpj/frame.html).
+ * compiles and runs readers' Java inside CheerpJ (see public/cheerpj/worker.js).
  *
  *   npm run runner:cheerpj
  *

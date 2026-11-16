@@ -21,7 +21,9 @@
     "lessons:runner": "node scripts/build-lesson-runner.mjs",
     "lessons:js-runner": "node scripts/build-js-lesson-runner.mjs",
     "runner:page": "node scripts/build-page-runtime.mjs",
-    "runner:cheerpj": "node scripts/build-cheerpj-runner.mjs"
+    "runner:cheerpj": "node scripts/build-cheerpj-runner.mjs",
+    "tests:cses": "node scripts/build-cses-tests.mjs",
+    "tests:leetcode": "node scripts/build-leetcode-examples.mjs"
   },
   "dependencies": {
     "firebase": "^12.19.0",

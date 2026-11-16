@@ -1,0 +1,1 @@
+{"problemId":"cses-repeating-substring","source":"cses","credit":"Official CSES test data (cses.fi)","total":9,"anyAnswer":true,"interactive":false,"timeLimit":"1.00 s","tests":[{"name":"Test 6","input":"abc\n","output":"-1\n"},{"name":"Test 8","input":"pvkkexhpapehpzkuh\n","output":"hp\n"},{"name":"Test 9","input":"a\n","output":"-1\n"}]}

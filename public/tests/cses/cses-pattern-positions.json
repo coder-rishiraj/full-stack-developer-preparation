@@ -1,0 +1,1 @@
+{"problemId":"cses-pattern-positions","source":"cses","credit":"Official CSES test data (cses.fi)","total":10,"anyAnswer":false,"interactive":false,"timeLimit":"1.00 s","tests":[{"name":"Test 7","input":"abcdef\n3\nabcd\ncdlm\nd\n","output":"1\n-1\n4\n"}]}

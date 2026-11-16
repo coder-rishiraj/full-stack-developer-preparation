@@ -1,0 +1,1 @@
+{"problemId":"cses-substring-distribution","source":"cses","credit":"Official CSES test data (cses.fi)","total":9,"anyAnswer":false,"interactive":false,"timeLimit":"1.00 s","tests":[{"name":"Test 1","input":"aaaaaaaaa\n","output":"1 1 1 1 1 1 1 1 1 "},{"name":"Test 2","input":"dfgfglrisgdsdgskd\n","output":"8 15 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 "}]}

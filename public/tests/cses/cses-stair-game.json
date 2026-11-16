@@ -1,0 +1,1 @@
+{"problemId":"cses-stair-game","source":"cses","credit":"Official CSES test data (cses.fi)","total":7,"anyAnswer":false,"interactive":false,"timeLimit":"1.00 s","tests":[{"name":"Test 5","input":"3\n3\n0 2 1\n4\n1 1 1 1\n2\n5 3\n","output":"first\nsecond\nfirst\n"},{"name":"Test 7","input":"1\n1\n1\n","output":"second\n"}]}

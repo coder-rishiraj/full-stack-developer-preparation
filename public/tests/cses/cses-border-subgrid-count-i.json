@@ -1,0 +1,1 @@
+{"problemId":"cses-border-subgrid-count-i","source":"cses","credit":"Official CSES test data (cses.fi)","total":4,"anyAnswer":false,"interactive":false,"timeLimit":"1.00 s","tests":[{"name":"Test 1","input":"10 2\nAAAAAAABAA\nAAAAABAAAA\nAAAAAAABAA\nAAAAAAAAAA\nAAAAAAAAAA\nAAAAAAAAAA\nAAAAABAAAA\nAAAABAAAAA\nAAABABAAAA\nBBAAAAAAAA\n","output":"207\n9\n"}]}

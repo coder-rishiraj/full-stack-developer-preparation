@@ -677,3 +677,92 @@
 .cd-run-frame-wrap .cd-run-frame {
   min-height: 100%;
 }
+
+/* Write-and-check panel on problem pages (src/components/problem/ProblemPractice.tsx) */
+.cd-practice {
+  margin-top: 2rem;
+}
+.cd-practice h2 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--heading);
+  margin-bottom: 0.35rem;
+}
+.cd-practice .cd-code {
+  margin-top: 0.75rem;
+}
+.cd-practice-editor {
+  min-height: 16rem;
+  box-shadow: none;
+}
+.cd-practice-results {
+  margin-top: 0.6rem;
+  border: 1px solid var(--code-border);
+  border-radius: var(--radius);
+  background: var(--code-bg);
+}
+.cd-practice-summary {
+  padding: 0.45rem 0.7rem;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--danger);
+  border-bottom: 1px solid var(--code-border);
+}
+.cd-practice-summary[data-ok='true'] {
+  color: var(--success);
+}
+.cd-practice-results ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.cd-practice-results li + li {
+  border-top: 1px solid var(--code-border);
+}
+.cd-practice-row {
+  display: flex;
+  width: 100%;
+  gap: 0.6rem;
+  align-items: center;
+  padding: 0.35rem 0.7rem;
+  background: none;
+  border: 0;
+  font: inherit;
+  font-size: 0.82rem;
+  color: var(--text);
+  cursor: pointer;
+  text-align: left;
+}
+.cd-practice-row .cd-run-time {
+  margin-left: auto;
+  color: var(--text-faint);
+}
+.cd-practice-mark {
+  width: 1rem;
+  font-weight: 700;
+}
+li[data-result='pass'] .cd-practice-mark {
+  color: var(--success);
+}
+li[data-result='fail'] .cd-practice-mark {
+  color: var(--danger);
+}
+li[data-result='unknown'] .cd-practice-mark {
+  color: var(--warning);
+}
+.cd-practice-detail {
+  padding: 0 0.7rem 0.6rem;
+}
+.cd-practice-detail pre {
+  margin: 0.2rem 0 0.4rem;
+  padding: 0.4rem 0.6rem;
+  max-height: 14rem;
+  overflow: auto;
+  background: var(--bg-elevated);
+  border: 1px solid var(--code-border);
+  border-radius: var(--radius);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+}

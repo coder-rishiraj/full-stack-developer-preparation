@@ -146,6 +146,19 @@ Run for every page, and for **every approach on it**, not only the recommended o
    `run-samples.json`, and `npm run problems:runner` passes.
 7. `npm run problems:check` and `npm run build` pass.
 
+### Write-and-check panel (every problem page)
+
+Every problem page, with or without a walkthrough, has a Java editor and a **Check** button that
+compiles the reader's code with javac and runs it on a real JVM in the browser (CheerpJ), once
+per test:
+
+- CSES: official CSES test data, imported by `npm run tests:cses` into `public/tests/cses/`
+  (up to 12 of each problem's smallest tests; statements are read for problems that accept any
+  valid answer, where a differing output is marked "check by hand", and for interactive ones).
+- NeetCode: LeetCode's statement examples (its judge tests are private), imported by
+  `npm run tests:leetcode` into `public/tests/leetcode/`, with LeetCode's Java starter code and
+  method signature, from which `src/runner/java/leetcode-harness.ts` builds the harness.
+
 ### Run panel
 
 Every walkthrough page lets the reader run each solution on the page in the browser, pick a

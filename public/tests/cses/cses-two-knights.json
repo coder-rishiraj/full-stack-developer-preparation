@@ -1,0 +1,1 @@
+{"problemId":"cses-two-knights","source":"cses","credit":"Official CSES test data (cses.fi)","total":3,"anyAnswer":false,"interactive":false,"timeLimit":"1.00 s","tests":[{"name":"Test 2","input":"2\n","output":"0\n6\n"},{"name":"Test 3","input":"1\n","output":"0\n"}]}

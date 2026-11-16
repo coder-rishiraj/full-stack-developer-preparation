@@ -1,0 +1,1 @@
+{"problemId":"cses-distinct-values-subsequences","source":"cses","credit":"Official CSES test data (cses.fi)","total":4,"anyAnswer":false,"interactive":false,"timeLimit":"1.00 s","tests":[{"name":"Test 1","input":"20\n1 2 3 2 3 2 2 3 1 2 1 1 1 2 3 2 3 3 2 2\n","output":"419\n"}]}
