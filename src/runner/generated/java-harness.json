@@ -709,5 +709,50 @@
  },
  "nc-time-based-key-value-store#3": {
   "main": "public class Main {\n    public static void main(String[] args) throws Exception {\n        java.util.List<Object> in = runner.In.values(System.in);\n        java.util.List<Object> ops = runner.In.list(runner.In.arg(in, 0, \"operations\"));\n        java.util.List<Object> argv = in.size() > 1 ? runner.In.list(in.get(1)) : new java.util.ArrayList<Object>();\n        StringBuilder out = new StringBuilder(\"[\");\n        TimeMap obj = null;\n        for (int i = 0; i < ops.size(); i++) {\n            String op = runner.In.toStr(ops.get(i));\n            java.util.List<Object> a = i < argv.size() ? runner.In.list(argv.get(i)) : new java.util.ArrayList<Object>();\n            if (i > 0) out.append(\", \");\n            switch (op) {\n                case \"TimeMap\": obj = new TimeMap(); out.append(\"null\"); break;\n                case \"set\": need(obj); obj.set(runner.In.toStr(runner.In.arg(a, 0, \"key\")), runner.In.toStr(runner.In.arg(a, 1, \"value\")), runner.In.toInt(runner.In.arg(a, 2, \"timestamp\"))); out.append(\"null\"); break;\n                case \"get\": need(obj); out.append(runner.Show.of(obj.get(runner.In.toStr(runner.In.arg(a, 0, \"key\")), runner.In.toInt(runner.In.arg(a, 1, \"timestamp\"))))); break;\n                default: throw new IllegalArgumentException(\"unknown operation \" + op);\n            }\n        }\n        System.out.println(out.append(\"]\"));\n    }\n    private static void need(Object obj) {\n        if (obj == null) throw new IllegalStateException(\"the first operation must be \\\"TimeMap\\\"\");\n    }\n}"
+ },
+ "nc-excel-sheet-column-title#1": {
+  "main": "public class Main {\n    public static void main(String[] args) throws Exception {\n        java.util.List<Object> in = runner.In.values(System.in);\n        int columnNumber = runner.In.toInt(runner.In.arg(in, 0, \"columnNumber\"));\n        String result = new Solution().convertToTitle(columnNumber);\n        System.out.println(runner.Show.of(result));\n    }\n}"
+ },
+ "nc-excel-sheet-column-title#2": {
+  "main": "public class Main {\n    public static void main(String[] args) throws Exception {\n        java.util.List<Object> in = runner.In.values(System.in);\n        int columnNumber = runner.In.toInt(runner.In.arg(in, 0, \"columnNumber\"));\n        String result = new Solution().convertToTitle(columnNumber);\n        System.out.println(runner.Show.of(result));\n    }\n}"
+ },
+ "nc-happy-number#1": {
+  "main": "public class Main {\n    public static void main(String[] args) throws Exception {\n        java.util.List<Object> in = runner.In.values(System.in);\n        int n = runner.In.toInt(runner.In.arg(in, 0, \"n\"));\n        boolean result = new Solution().isHappy(n);\n        System.out.println(runner.Show.of(result));\n    }\n}"
+ },
+ "nc-happy-number#2": {
+  "main": "public class Main {\n    public static void main(String[] args) throws Exception {\n        java.util.List<Object> in = runner.In.values(System.in);\n        int n = runner.In.toInt(runner.In.arg(in, 0, \"n\"));\n        boolean result = new Solution().isHappy(n);\n        System.out.println(runner.Show.of(result));\n    }\n}"
+ },
+ "nc-happy-number#3": {
+  "main": "public class Main {\n    public static void main(String[] args) throws Exception {\n        java.util.List<Object> in = runner.In.values(System.in);\n        int n = runner.In.toInt(runner.In.arg(in, 0, \"n\"));\n        boolean result = new Solution().isHappy(n);\n        System.out.println(runner.Show.of(result));\n    }\n}"
+ },
+ "nc-multiply-strings#1": {
+  "main": "public class Main {\n    public static void main(String[] args) throws Exception {\n        java.util.List<Object> in = runner.In.values(System.in);\n        String num1 = runner.In.toStr(runner.In.arg(in, 0, \"num1\"));\n        String num2 = runner.In.toStr(runner.In.arg(in, 1, \"num2\"));\n        String result = new Solution().multiply(num1, num2);\n        System.out.println(runner.Show.of(result));\n    }\n}"
+ },
+ "nc-multiply-strings#2": {
+  "main": "public class Main {\n    public static void main(String[] args) throws Exception {\n        java.util.List<Object> in = runner.In.values(System.in);\n        String num1 = runner.In.toStr(runner.In.arg(in, 0, \"num1\"));\n        String num2 = runner.In.toStr(runner.In.arg(in, 1, \"num2\"));\n        String result = new Solution().multiply(num1, num2);\n        System.out.println(runner.Show.of(result));\n    }\n}"
+ },
+ "nc-multiply-strings#3": {
+  "main": "public class Main {\n    public static void main(String[] args) throws Exception {\n        java.util.List<Object> in = runner.In.values(System.in);\n        String num1 = runner.In.toStr(runner.In.arg(in, 0, \"num1\"));\n        String num2 = runner.In.toStr(runner.In.arg(in, 1, \"num2\"));\n        String result = new Solution().multiply(num1, num2);\n        System.out.println(runner.Show.of(result));\n    }\n}"
+ },
+ "nc-plus-one#1": {
+  "main": "public class Main {\n    public static void main(String[] args) throws Exception {\n        java.util.List<Object> in = runner.In.values(System.in);\n        int[] digits = runner.In.toIntArray(runner.In.arg(in, 0, \"digits\"));\n        int[] result = new Solution().plusOne(digits);\n        System.out.println(runner.Show.of(result));\n    }\n}"
+ },
+ "nc-plus-one#2": {
+  "main": "public class Main {\n    public static void main(String[] args) throws Exception {\n        java.util.List<Object> in = runner.In.values(System.in);\n        int[] digits = runner.In.toIntArray(runner.In.arg(in, 0, \"digits\"));\n        int[] result = new Solution().plusOne(digits);\n        System.out.println(runner.Show.of(result));\n    }\n}"
+ },
+ "nc-roman-to-integer#1": {
+  "main": "public class Main {\n    public static void main(String[] args) throws Exception {\n        java.util.List<Object> in = runner.In.values(System.in);\n        String s = runner.In.toStr(runner.In.arg(in, 0, \"s\"));\n        int result = new Solution().romanToInt(s);\n        System.out.println(runner.Show.of(result));\n    }\n}"
+ },
+ "nc-roman-to-integer#2": {
+  "main": "public class Main {\n    public static void main(String[] args) throws Exception {\n        java.util.List<Object> in = runner.In.values(System.in);\n        String s = runner.In.toStr(runner.In.arg(in, 0, \"s\"));\n        int result = new Solution().romanToInt(s);\n        System.out.println(runner.Show.of(result));\n    }\n}"
+ },
+ "nc-reverse-integer#1": {
+  "main": "public class Main {\n    public static void main(String[] args) throws Exception {\n        java.util.List<Object> in = runner.In.values(System.in);\n        int x = runner.In.toInt(runner.In.arg(in, 0, \"x\"));\n        int result = new Solution().reverse(x);\n        System.out.println(runner.Show.of(result));\n    }\n}"
+ },
+ "nc-reverse-integer#2": {
+  "main": "public class Main {\n    public static void main(String[] args) throws Exception {\n        java.util.List<Object> in = runner.In.values(System.in);\n        int x = runner.In.toInt(runner.In.arg(in, 0, \"x\"));\n        int result = new Solution().reverse(x);\n        System.out.println(runner.Show.of(result));\n    }\n}"
+ },
+ "nc-reverse-integer#3": {
+  "main": "public class Main {\n    public static void main(String[] args) throws Exception {\n        java.util.List<Object> in = runner.In.values(System.in);\n        int x = runner.In.toInt(runner.In.arg(in, 0, \"x\"));\n        int result = new Solution().reverse(x);\n        System.out.println(runner.Show.of(result));\n    }\n}"
  }
 }

@@ -2,12 +2,80 @@
   "chunks": {
     "arrays-hashing": "aca8d95abdf692f0",
     "binary-search": "66395616ccddb5fe",
-    "introductory": "1ac79d4b8c7ffc40",
+    "bit-manipulation": "18c8c083ccf70b11",
+    "introductory": "03fb5bb64c2ba6b6",
+    "math-geometry": "99aafe33d59dc57e",
     "sliding-window": "54a8abccf7ee3b68",
     "stack": "05f64d081954c9c5",
     "two-pointers": "dd7b702f4f8cc77c"
   },
   "pages": {
+    "cses-bit-strings": {
+      "chunk": "introductory",
+      "format": "stdin",
+      "hint": "Standard input, exactly as the judge sends it.",
+      "programs": [
+        {
+          "key": "cses-bit-strings#1",
+          "title": "Approach 1: n doublings modulo 10^9 + 7",
+          "hash": "689db707"
+        },
+        {
+          "key": "cses-bit-strings#2",
+          "title": "Approach 2: fast modular exponentiation (recommended as the general tool)",
+          "hash": "cefc2a0d"
+        },
+        {
+          "key": "cses-bit-strings#3",
+          "title": "Bit Strings with fast exponentiation",
+          "hash": "ae513df8"
+        }
+      ]
+    },
+    "cses-coin-piles": {
+      "chunk": "introductory",
+      "format": "stdin",
+      "hint": "Standard input, exactly as the judge sends it.",
+      "programs": [
+        {
+          "key": "cses-coin-piles#1",
+          "title": "Approach 1: solve for the move counts",
+          "hash": "61f629ed"
+        },
+        {
+          "key": "cses-coin-piles#2",
+          "title": "Approach 2: sum divisible by 3 and 2 * min >= max (recommended)",
+          "hash": "f842d142"
+        },
+        {
+          "key": "cses-coin-piles#3",
+          "title": "Coin Piles",
+          "hash": "c48f8eb3"
+        }
+      ]
+    },
+    "cses-digit-queries": {
+      "chunk": "introductory",
+      "format": "stdin",
+      "hint": "Standard input, exactly as the judge sends it.",
+      "programs": [
+        {
+          "key": "cses-digit-queries#1",
+          "title": "Approach 1: binary search on the number",
+          "hash": "8fd4f731"
+        },
+        {
+          "key": "cses-digit-queries#2",
+          "title": "Approach 2: skip whole blocks, then divide (recommended)",
+          "hash": "bd8f4995"
+        },
+        {
+          "key": "cses-digit-queries#3",
+          "title": "Digit Queries",
+          "hash": "b7a82d41"
+        }
+      ]
+    },
     "cses-increasing-array": {
       "chunk": "introductory",
       "format": "stdin",
@@ -27,6 +95,28 @@
           "key": "cses-increasing-array#3",
           "title": "Increasing Array in a dozen lines",
           "hash": "43b5abee"
+        }
+      ]
+    },
+    "cses-number-spiral": {
+      "chunk": "introductory",
+      "format": "stdin",
+      "hint": "Standard input, exactly as the judge sends it.",
+      "programs": [
+        {
+          "key": "cses-number-spiral#1",
+          "title": "Approach 1: shell start plus position along the shell",
+          "hash": "7c69b650"
+        },
+        {
+          "key": "cses-number-spiral#2",
+          "title": "Approach 2: diagonal value plus or minus (y - x) (recommended)",
+          "hash": "61589c7d"
+        },
+        {
+          "key": "cses-number-spiral#3",
+          "title": "Number Spiral in a few lines",
+          "hash": "4db11b80"
         }
       ]
     },
@@ -71,6 +161,50 @@
           "key": "cses-repetitions#3",
           "title": "Repetitions in a few lines",
           "hash": "8e31e742"
+        }
+      ]
+    },
+    "cses-trailing-zeros": {
+      "chunk": "introductory",
+      "format": "stdin",
+      "hint": "Standard input, exactly as the judge sends it.",
+      "programs": [
+        {
+          "key": "cses-trailing-zeros#1",
+          "title": "Approach 1: sum n / 5^i with a long power",
+          "hash": "5499c7a0"
+        },
+        {
+          "key": "cses-trailing-zeros#2",
+          "title": "Approach 2: divide n by 5 and accumulate (recommended)",
+          "hash": "bc4687ae"
+        },
+        {
+          "key": "cses-trailing-zeros#3",
+          "title": "Trailing Zeros in a few lines",
+          "hash": "dcaecfae"
+        }
+      ]
+    },
+    "cses-two-knights": {
+      "chunk": "introductory",
+      "format": "stdin",
+      "hint": "Standard input, exactly as the judge sends it.",
+      "programs": [
+        {
+          "key": "cses-two-knights#1",
+          "title": "Approach 1: count each knight displacement",
+          "hash": "58e41142"
+        },
+        {
+          "key": "cses-two-knights#2",
+          "title": "Approach 2: closed form from 2 x 3 rectangles (recommended)",
+          "hash": "c9f87e78"
+        },
+        {
+          "key": "cses-two-knights#3",
+          "title": "Two Knights",
+          "hash": "285e8889"
         }
       ]
     },
@@ -568,6 +702,23 @@
         }
       ]
     },
+    "nc-excel-sheet-column-title": {
+      "chunk": "math-geometry",
+      "format": "leetcode",
+      "hint": "One value per parameter of convertToTitle(int columnNumber), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-excel-sheet-column-title#1",
+          "title": "Approach 1: find the length, then plain base 26 inside the block",
+          "hash": "65f11562"
+        },
+        {
+          "key": "nc-excel-sheet-column-title#2",
+          "title": "Approach 2: subtract one, then divide (recommended)",
+          "hash": "a1248a6a"
+        }
+      ]
+    },
     "nc-find-in-mountain-array": {
       "chunk": "binary-search",
       "format": "leetcode",
@@ -702,6 +853,28 @@
           "key": "nc-guess-number-higher-or-lower#3",
           "title": "Guess the number, closed range",
           "hash": "a95ed7e4"
+        }
+      ]
+    },
+    "nc-happy-number": {
+      "chunk": "math-geometry",
+      "format": "leetcode",
+      "hint": "One value per parameter of isHappy(int n), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-happy-number#1",
+          "title": "Approach 1: HashSet of seen values",
+          "hash": "4f28c9e5"
+        },
+        {
+          "key": "nc-happy-number#2",
+          "title": "Approach 2: Floyd's tortoise and hare (recommended final answer)",
+          "hash": "baf3ae55"
+        },
+        {
+          "key": "nc-happy-number#3",
+          "title": "Alternative: stop at 1 or 4",
+          "hash": "b1b2db28"
         }
       ]
     },
@@ -1119,6 +1292,28 @@
         }
       ]
     },
+    "nc-multiply-strings": {
+      "chunk": "math-geometry",
+      "format": "leetcode",
+      "hint": "One value per parameter of multiply(String num1, String num2), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-multiply-strings#1",
+          "title": "Approach 1: add shifted rows",
+          "hash": "42da0d6e"
+        },
+        {
+          "key": "nc-multiply-strings#2",
+          "title": "Approach 2: digit products into slots (recommended)",
+          "hash": "4d0b4434"
+        },
+        {
+          "key": "nc-multiply-strings#3",
+          "title": "Alternative: accumulate, then carry once",
+          "hash": "fb6d757f"
+        }
+      ]
+    },
     "nc-online-stock-span": {
       "chunk": "stack",
       "format": "leetcode",
@@ -1160,6 +1355,23 @@
           "key": "nc-permutation-in-string#3",
           "title": "Approach 3: match counter (co-recommended)",
           "hash": "a151cdec"
+        }
+      ]
+    },
+    "nc-plus-one": {
+      "chunk": "math-geometry",
+      "format": "leetcode",
+      "hint": "One value per parameter of plusOne(int[] digits), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-plus-one#1",
+          "title": "Approach 1: full addition with a carry",
+          "hash": "39809efc"
+        },
+        {
+          "key": "nc-plus-one#2",
+          "title": "Approach 2: in place with early return (recommended)",
+          "hash": "5da2509c"
         }
       ]
     },
@@ -1261,6 +1473,28 @@
         }
       ]
     },
+    "nc-reverse-integer": {
+      "chunk": "bit-manipulation",
+      "format": "leetcode",
+      "hint": "One value per parameter of reverse(int x), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-reverse-integer#1",
+          "title": "Approach 1: reverse in a long (breaks the 64-bit rule)",
+          "hash": "e72cd431"
+        },
+        {
+          "key": "nc-reverse-integer#2",
+          "title": "Approach 2: check before every multiply (recommended)",
+          "hash": "d21d6bb7"
+        },
+        {
+          "key": "nc-reverse-integer#3",
+          "title": "Alternative: undo the step and compare",
+          "hash": "c330c9e0"
+        }
+      ]
+    },
     "nc-reverse-string": {
       "chunk": "two-pointers",
       "format": "leetcode",
@@ -1280,6 +1514,23 @@
           "key": "nc-reverse-string#3",
           "title": "Reverse String in seven lines",
           "hash": "8d1f6fd2"
+        }
+      ]
+    },
+    "nc-roman-to-integer": {
+      "chunk": "math-geometry",
+      "format": "leetcode",
+      "hint": "One value per parameter of romanToInt(String s), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-roman-to-integer#1",
+          "title": "Approach 1: tokens of one or two characters",
+          "hash": "ade1ceed"
+        },
+        {
+          "key": "nc-roman-to-integer#2",
+          "title": "Approach 2: sign from the right neighbour (recommended)",
+          "hash": "e56a3e2f"
         }
       ]
     },

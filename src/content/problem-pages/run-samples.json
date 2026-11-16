@@ -1133,5 +1133,268 @@
         "output": "false\n"
       }
     ]
+  },
+  "nc-roman-to-integer": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "s = \"LVIII\"\n",
+        "output": "58\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "s = \"MCMXCIV\"\n",
+        "output": "1994\n"
+      },
+      {
+        "label": "Repeated symbols",
+        "input": "s = \"III\"\n",
+        "output": "3\n"
+      }
+    ],
+    "extraInputs": [
+      "s = \"MMMDCCCLXXXVIII\"\n",
+      "s = \"MMMCMXCIX\"\n",
+      "s = \"IV\"\n",
+      "s = \"M\"\n"
+    ]
+  },
+  "nc-plus-one": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "digits = [1, 2, 9]\n",
+        "output": "[1, 3, 0]\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "digits = [9, 9]\n",
+        "output": "[1, 0, 0]\n"
+      },
+      {
+        "label": "No carry",
+        "input": "digits = [1, 2, 3]\n",
+        "output": "[1, 2, 4]\n"
+      }
+    ],
+    "extraInputs": [
+      "digits = [0]\n",
+      "digits = [9]\n",
+      "digits = [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9]\n",
+      "digits = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]\n"
+    ]
+  },
+  "nc-excel-sheet-column-title": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "columnNumber = 28\n",
+        "output": "\"AB\"\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "columnNumber = 701\n",
+        "output": "\"ZY\"\n"
+      },
+      {
+        "label": "Multiple of 26",
+        "input": "columnNumber = 52\n",
+        "output": "\"AZ\"\n"
+      }
+    ],
+    "extraInputs": [
+      "columnNumber = 1\n",
+      "columnNumber = 26\n",
+      "columnNumber = 703\n",
+      "columnNumber = 321272407\n",
+      "columnNumber = 2147483647\n"
+    ]
+  },
+  "cses-number-spiral": {
+    "check": "exact",
+    "samples": [
+      {
+        "label": "Example",
+        "input": "3\n2 3\n1 1\n4 2\n",
+        "output": "8\n1\n15\n"
+      },
+      {
+        "label": "Dry run",
+        "input": "4\n2 3\n4 2\n5 3\n1 4\n",
+        "output": "8\n15\n19\n10\n"
+      }
+    ],
+    "extraInputs": [
+      "1\n1 1\n",
+      "3\n1 5\n5 1\n4 1\n",
+      "3\n1000000000 1\n1 1000000000\n1000000000 1000000000\n",
+      "3\n999999999 1\n1 999999999\n999999999 999999999\n",
+      "2\n46341 1\n1 46341\n"
+    ]
+  },
+  "cses-bit-strings": {
+    "check": "exact",
+    "samples": [
+      {
+        "label": "Example",
+        "input": "3\n",
+        "output": "8\n"
+      },
+      {
+        "label": "n = 1",
+        "input": "1\n",
+        "output": "2\n"
+      }
+    ],
+    "extraInputs": [
+      "5\n",
+      "13\n",
+      "30\n",
+      "31\n",
+      "63\n",
+      "64\n",
+      "1000000\n"
+    ]
+  },
+  "cses-trailing-zeros": {
+    "check": "exact",
+    "samples": [
+      {
+        "label": "Example",
+        "input": "20\n",
+        "output": "4\n"
+      },
+      {
+        "label": "n = 4",
+        "input": "4\n",
+        "output": "0\n"
+      }
+    ],
+    "extraInputs": [
+      "1\n",
+      "5\n",
+      "25\n",
+      "100\n",
+      "125\n",
+      "130\n",
+      "244140625\n",
+      "1000000000\n"
+    ]
+  },
+  "cses-coin-piles": {
+    "check": "exact",
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "3\n2 1\n2 2\n3 3\n",
+        "output": "YES\nNO\nYES\n"
+      }
+    ],
+    "extraInputs": [
+      "1\n0 0\n",
+      "4\n0 3\n1 1\n1 2\n4 8\n",
+      "3\n7 5\n11 4\n6 6\n",
+      "4\n1000000000 1000000000\n1000000000 500000000\n999999999 999999999\n0 1000000000\n"
+    ]
+  },
+  "cses-two-knights": {
+    "check": "exact",
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "8\n",
+        "output": "0\n6\n28\n96\n252\n550\n1056\n1848\n"
+      }
+    ],
+    "extraInputs": [
+      "1\n",
+      "2\n",
+      "216\n",
+      "10000\n"
+    ]
+  },
+  "cses-digit-queries": {
+    "check": "exact",
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "3\n7\n19\n12\n",
+        "output": "7\n4\n1\n"
+      }
+    ],
+    "extraInputs": [
+      "8\n1\n9\n10\n11\n189\n190\n191\n2889\n",
+      "3\n1000000000000000000\n158888888888888889\n158888888888888890\n",
+      "2\n788888889\n788888890\n"
+    ]
+  },
+  "nc-multiply-strings": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "num1 = \"2\"\nnum2 = \"3\"\n",
+        "output": "\"6\"\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "num1 = \"123\"\nnum2 = \"456\"\n",
+        "output": "\"56088\"\n"
+      }
+    ],
+    "extraInputs": [
+      "num1 = \"0\"\nnum2 = \"52\"\n",
+      "num1 = \"99\"\nnum2 = \"99\"\n",
+      "num1 = \"10\"\nnum2 = \"10\"\n",
+      "num1 = \"99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999\"\nnum2 = \"99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999\"\n"
+    ]
+  },
+  "nc-reverse-integer": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "x = 123\n",
+        "output": "321\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "x = -123\n",
+        "output": "-321\n"
+      },
+      {
+        "label": "Example 3",
+        "input": "x = 120\n",
+        "output": "21\n"
+      }
+    ],
+    "extraInputs": [
+      "x = 0\n",
+      "x = 1534236469\n",
+      "x = 2147483647\n",
+      "x = -2147483648\n",
+      "x = 1463847412\n",
+      "x = -1463847412\n",
+      "x = 1000000003\n"
+    ]
+  },
+  "nc-happy-number": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "n = 19\n",
+        "output": "true\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "n = 2\n",
+        "output": "false\n"
+      }
+    ],
+    "extraInputs": [
+      "n = 1\n",
+      "n = 4\n",
+      "n = 7\n",
+      "n = 15999\n",
+      "n = 2147483647\n"
+    ]
   }
 }
