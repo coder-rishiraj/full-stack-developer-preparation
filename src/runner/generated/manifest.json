@@ -1,17 +1,52 @@
 {
   "chunks": {
+    "additional-1": "051ac02ce7869f72",
+    "additional-2": "49392d201522fbb2",
     "arrays-hashing": "aca8d95abdf692f0",
     "binary-search": "66395616ccddb5fe",
     "bit-manipulation": "8ca37aabab270341",
     "graphs": "c598890b81ece350",
     "introductory": "5334ecfdefa14d96",
     "math-geometry": "aac4e5996115b8d0",
+    "range-queries": "f1359f006c69da67",
     "sliding-window": "54a8abccf7ee3b68",
-    "sorting-searching": "20ef29ed3c1e650f",
+    "sorting-searching": "bf19ff0c8b125b52",
     "stack": "05f64d081954c9c5",
     "two-pointers": "dd7b702f4f8cc77c"
   },
   "pages": {
+    "cses-apartments": {
+      "chunk": "sorting-searching",
+      "format": "stdin",
+      "hint": "Standard input, exactly as the judge sends it.",
+      "programs": [
+        {
+          "key": "cses-apartments#1",
+          "title": "Alternative: try every assignment (exponential)",
+          "hash": "f44b8a2c"
+        },
+        {
+          "key": "cses-apartments#2",
+          "title": "Alternative: sorted applicants, scan all apartments (O(n·m), too slow at the limits)",
+          "hash": "3b956be1"
+        },
+        {
+          "key": "cses-apartments#3",
+          "title": "Approach 1: TreeMap of free sizes",
+          "hash": "e56f7f2a"
+        },
+        {
+          "key": "cses-apartments#4",
+          "title": "Approach 2: sort both, two pointers (recommended)",
+          "hash": "bb425af4"
+        },
+        {
+          "key": "cses-apartments#5",
+          "title": "Apartments, sort both and two pointers",
+          "hash": "ecbca9e8"
+        }
+      ]
+    },
     "cses-bit-strings": {
       "chunk": "introductory",
       "format": "stdin",
@@ -34,6 +69,65 @@
         }
       ]
     },
+    "cses-bubble-sort-rounds-i": {
+      "chunk": "additional-1",
+      "format": "stdin",
+      "hint": "Standard input, exactly as the judge sends it.",
+      "programs": [
+        {
+          "key": "cses-bubble-sort-rounds-i#1",
+          "title": "Alternative: simulate the rounds (too slow at n = 2 · 10^5)",
+          "hash": "a47a4e76"
+        },
+        {
+          "key": "cses-bubble-sort-rounds-i#2",
+          "title": "Alternative: count larger earlier values by scanning (too slow at n = 2 · 10^5)",
+          "hash": "557b2b78"
+        },
+        {
+          "key": "cses-bubble-sort-rounds-i#3",
+          "title": "Approach 1: Fenwick tree over compressed values",
+          "hash": "50064706"
+        },
+        {
+          "key": "cses-bubble-sort-rounds-i#4",
+          "title": "Approach 2: largest leftward distance after a stable sort (recommended)",
+          "hash": "38cf9f99"
+        },
+        {
+          "key": "cses-bubble-sort-rounds-i#5",
+          "title": "Bubble Sort Rounds I, stable-sort distance",
+          "hash": "80d7df47"
+        }
+      ]
+    },
+    "cses-bubble-sort-rounds-ii": {
+      "chunk": "additional-1",
+      "format": "stdin",
+      "hint": "Standard input, exactly as the judge sends it.",
+      "programs": [
+        {
+          "key": "cses-bubble-sort-rounds-ii#1",
+          "title": "Alternative: simulate min(k, n) rounds (too slow at n = 2 · 10^5)",
+          "hash": "7f3ca24d"
+        },
+        {
+          "key": "cses-bubble-sort-rounds-ii#2",
+          "title": "Approach 1: place the slow elements, sort the rest into the gaps",
+          "hash": "446d7c6c"
+        },
+        {
+          "key": "cses-bubble-sort-rounds-ii#3",
+          "title": "Approach 2: a min-heap of size k (recommended)",
+          "hash": "c6ae0ce9"
+        },
+        {
+          "key": "cses-bubble-sort-rounds-ii#4",
+          "title": "Bubble Sort Rounds II, min-heap",
+          "hash": "fbeeb8c4"
+        }
+      ]
+    },
     "cses-coin-piles": {
       "chunk": "introductory",
       "format": "stdin",
@@ -53,6 +147,60 @@
           "key": "cses-coin-piles#3",
           "title": "Coin Piles",
           "hash": "c48f8eb3"
+        }
+      ]
+    },
+    "cses-collecting-numbers": {
+      "chunk": "sorting-searching",
+      "format": "stdin",
+      "hint": "Standard input, exactly as the judge sends it.",
+      "programs": [
+        {
+          "key": "cses-collecting-numbers#1",
+          "title": "Alternative: simulate the rounds (too slow at n = 2 · 10^5)",
+          "hash": "45fb8e47"
+        },
+        {
+          "key": "cses-collecting-numbers#2",
+          "title": "Approach 1: sort (value, index) pairs",
+          "hash": "b66b425e"
+        },
+        {
+          "key": "cses-collecting-numbers#3",
+          "title": "Approach 2: positions array (recommended)",
+          "hash": "5ac518f9"
+        },
+        {
+          "key": "cses-collecting-numbers#4",
+          "title": "Collecting Numbers, positions array",
+          "hash": "05baa591"
+        }
+      ]
+    },
+    "cses-collecting-numbers-ii": {
+      "chunk": "sorting-searching",
+      "format": "stdin",
+      "hint": "Standard input, exactly as the judge sends it.",
+      "programs": [
+        {
+          "key": "cses-collecting-numbers-ii#1",
+          "title": "Alternative: recount after every swap (too slow at n = m = 2 · 10^5)",
+          "hash": "c28c8205"
+        },
+        {
+          "key": "cses-collecting-numbers-ii#2",
+          "title": "Approach 1: subtract, swap, add over the touched pairs",
+          "hash": "352fba9e"
+        },
+        {
+          "key": "cses-collecting-numbers-ii#3",
+          "title": "Approach 2: refresh the flags of the touched pairs (recommended)",
+          "hash": "872cc6bd"
+        },
+        {
+          "key": "cses-collecting-numbers-ii#4",
+          "title": "Collecting Numbers II, refresh the touched flags",
+          "hash": "83a00224"
         }
       ]
     },
@@ -129,6 +277,65 @@
           "key": "cses-distinct-values-subsequences#4",
           "title": "Distinct Values Subsequences, sort and multiply",
           "hash": "e72877b4"
+        }
+      ]
+    },
+    "cses-ferris-wheel": {
+      "chunk": "sorting-searching",
+      "format": "stdin",
+      "hint": "Standard input, exactly as the judge sends it.",
+      "programs": [
+        {
+          "key": "cses-ferris-wheel#1",
+          "title": "Alternative: try every pairing (exponential)",
+          "hash": "a06e3d25"
+        },
+        {
+          "key": "cses-ferris-wheel#2",
+          "title": "Alternative: heaviest first, scan for a partner (O(n²) in the worst case)",
+          "hash": "cf9698dd"
+        },
+        {
+          "key": "cses-ferris-wheel#3",
+          "title": "Approach 1: best fit with a TreeMap",
+          "hash": "b45ded40"
+        },
+        {
+          "key": "cses-ferris-wheel#4",
+          "title": "Approach 2: sort, heaviest with lightest (recommended)",
+          "hash": "133febfc"
+        },
+        {
+          "key": "cses-ferris-wheel#5",
+          "title": "Ferris Wheel, heaviest with lightest",
+          "hash": "93a112de"
+        }
+      ]
+    },
+    "cses-forest-queries": {
+      "chunk": "range-queries",
+      "format": "stdin",
+      "hint": "Standard input, exactly as the judge sends it.",
+      "programs": [
+        {
+          "key": "cses-forest-queries#1",
+          "title": "Alternative: count square by square (too slow at n = 1000, q = 2 · 10^5)",
+          "hash": "5eeb2465"
+        },
+        {
+          "key": "cses-forest-queries#2",
+          "title": "Approach 1: prefix counts per row, O(n) per question",
+          "hash": "6647328a"
+        },
+        {
+          "key": "cses-forest-queries#3",
+          "title": "Approach 2: 2D prefix sums (recommended)",
+          "hash": "c391d023"
+        },
+        {
+          "key": "cses-forest-queries#4",
+          "title": "Forest Queries, 2D prefix sums",
+          "hash": "89a16b33"
         }
       ]
     },
@@ -272,6 +479,33 @@
         }
       ]
     },
+    "cses-range-xor-queries": {
+      "chunk": "range-queries",
+      "format": "stdin",
+      "hint": "Standard input, exactly as the judge sends it.",
+      "programs": [
+        {
+          "key": "cses-range-xor-queries#1",
+          "title": "Alternative: XOR each range again (too slow at n = q = 2 · 10^5)",
+          "hash": "a3e89fae"
+        },
+        {
+          "key": "cses-range-xor-queries#2",
+          "title": "Approach 1: block XORs, about 3√n steps per question",
+          "hash": "e7cae23b"
+        },
+        {
+          "key": "cses-range-xor-queries#3",
+          "title": "Approach 2: prefix XOR (recommended)",
+          "hash": "dbf59eba"
+        },
+        {
+          "key": "cses-range-xor-queries#4",
+          "title": "Range Xor Queries, prefix XOR",
+          "hash": "41d26b52"
+        }
+      ]
+    },
     "cses-repetitions": {
       "chunk": "introductory",
       "format": "stdin",
@@ -291,6 +525,264 @@
           "key": "cses-repetitions#3",
           "title": "Repetitions in a few lines",
           "hash": "8e31e742"
+        }
+      ]
+    },
+    "cses-sorting-methods": {
+      "chunk": "additional-1",
+      "format": "stdin",
+      "hint": "Standard input, exactly as the judge sends it.",
+      "programs": [
+        {
+          "key": "cses-sorting-methods#1",
+          "title": "Alternative: breadth-first search over arrangements (exponential)",
+          "hash": "a3a967da"
+        },
+        {
+          "key": "cses-sorting-methods#2",
+          "title": "Alternative: the four formulas with O(n²) counting (too slow at n = 2 · 10^5)",
+          "hash": "96846f68"
+        },
+        {
+          "key": "cses-sorting-methods#3",
+          "title": "Approach 1: merge sort inversions + smallest-tails LIS",
+          "hash": "f9e3b26b"
+        },
+        {
+          "key": "cses-sorting-methods#4",
+          "title": "Approach 2: Fenwick tree inversions + smallest-tails LIS (recommended)",
+          "hash": "a7b079e7"
+        },
+        {
+          "key": "cses-sorting-methods#5",
+          "title": "Sorting Methods, Fenwick + smallest tails",
+          "hash": "272f1fbc"
+        }
+      ]
+    },
+    "cses-static-range-sum-queries": {
+      "chunk": "range-queries",
+      "format": "stdin",
+      "hint": "Standard input, exactly as the judge sends it.",
+      "programs": [
+        {
+          "key": "cses-static-range-sum-queries#1",
+          "title": "Alternative: add each range again (too slow at n = q = 2 · 10^5)",
+          "hash": "053475a2"
+        },
+        {
+          "key": "cses-static-range-sum-queries#2",
+          "title": "Approach 1: block totals, about 3√n steps per question",
+          "hash": "62791edf"
+        },
+        {
+          "key": "cses-static-range-sum-queries#3",
+          "title": "Approach 2: prefix sums (recommended)",
+          "hash": "be6dd979"
+        },
+        {
+          "key": "cses-static-range-sum-queries#4",
+          "title": "Static Range Sum Queries, prefix sums",
+          "hash": "1b6c12c6"
+        }
+      ]
+    },
+    "cses-subarray-divisibility": {
+      "chunk": "sorting-searching",
+      "format": "stdin",
+      "hint": "Standard input, exactly as the judge sends it.",
+      "programs": [
+        {
+          "key": "cses-subarray-divisibility#1",
+          "title": "Alternative: every start with a running sum (too slow at n = 2 · 10^5)",
+          "hash": "9c944bc8"
+        },
+        {
+          "key": "cses-subarray-divisibility#2",
+          "title": "Approach 1: prefix remainders with a hash map",
+          "hash": "a57c8391"
+        },
+        {
+          "key": "cses-subarray-divisibility#3",
+          "title": "Approach 2: remainder counts in an array (recommended)",
+          "hash": "abc5e7a9"
+        },
+        {
+          "key": "cses-subarray-divisibility#4",
+          "title": "Subarray Divisibility, remainder counts",
+          "hash": "182665d7"
+        }
+      ]
+    },
+    "cses-subarray-sum-constraints": {
+      "chunk": "additional-1",
+      "format": "stdin",
+      "hint": "Standard input, exactly as the judge sends it.",
+      "programs": [
+        {
+          "key": "cses-subarray-sum-constraints#1",
+          "title": "Alternative: sweep until nothing changes (too slow in the worst case)",
+          "hash": "bd849746"
+        },
+        {
+          "key": "cses-subarray-sum-constraints#2",
+          "title": "Approach 1: BFS potentials on the prefix-sum graph (recommended)",
+          "hash": "f3111f9c"
+        },
+        {
+          "key": "cses-subarray-sum-constraints#3",
+          "title": "Approach 2: weighted union-find",
+          "hash": "8d3dc9ab"
+        },
+        {
+          "key": "cses-subarray-sum-constraints#4",
+          "title": "Subarray Sum Constraints, BFS potentials",
+          "hash": "8ae6622e"
+        }
+      ]
+    },
+    "cses-subarray-sums-ii": {
+      "chunk": "sorting-searching",
+      "format": "stdin",
+      "hint": "Standard input, exactly as the judge sends it.",
+      "programs": [
+        {
+          "key": "cses-subarray-sums-ii#1",
+          "title": "Alternative: every subarray from scratch (too slow at n = 2 · 10^5)",
+          "hash": "412f4651"
+        },
+        {
+          "key": "cses-subarray-sums-ii#2",
+          "title": "Alternative: every start with a running sum (too slow at n = 2 · 10^5)",
+          "hash": "de1f5994"
+        },
+        {
+          "key": "cses-subarray-sums-ii#3",
+          "title": "Approach 1: sorted prefix sums with binary search",
+          "hash": "3ff1541c"
+        },
+        {
+          "key": "cses-subarray-sums-ii#4",
+          "title": "Approach 2: running prefix sum with a hash map (recommended)",
+          "hash": "dd115338"
+        },
+        {
+          "key": "cses-subarray-sums-ii#5",
+          "title": "Subarray Sums II, prefix sums with a hash map",
+          "hash": "ee648e9f"
+        }
+      ]
+    },
+    "cses-sum-of-four-values": {
+      "chunk": "sorting-searching",
+      "format": "stdin",
+      "hint": "Standard input, exactly as the judge sends it.",
+      "programs": [
+        {
+          "key": "cses-sum-of-four-values#1",
+          "title": "Alternative: every quadruple (too slow at n = 1000)",
+          "hash": "a62c6ce8"
+        },
+        {
+          "key": "cses-sum-of-four-values#2",
+          "title": "Approach 1: sort positions, fix two, two pointers",
+          "hash": "e795da48"
+        },
+        {
+          "key": "cses-sum-of-four-values#3",
+          "title": "Approach 2: pair sums in a hash map, inserted after the lookups (recommended)",
+          "hash": "55c3fe70"
+        },
+        {
+          "key": "cses-sum-of-four-values#4",
+          "title": "Sum of Four Values, pair-sum map",
+          "hash": "49d7605b"
+        }
+      ]
+    },
+    "cses-sum-of-three-values": {
+      "chunk": "sorting-searching",
+      "format": "stdin",
+      "hint": "Standard input, exactly as the judge sends it.",
+      "programs": [
+        {
+          "key": "cses-sum-of-three-values#1",
+          "title": "Alternative: every triple (too slow at n = 5000)",
+          "hash": "0a5380db"
+        },
+        {
+          "key": "cses-sum-of-three-values#2",
+          "title": "Approach 1: fix one value, Two Sum with a hash map",
+          "hash": "7d498fe0"
+        },
+        {
+          "key": "cses-sum-of-three-values#3",
+          "title": "Approach 2: sort positions by value, two pointers (recommended)",
+          "hash": "684a41b1"
+        },
+        {
+          "key": "cses-sum-of-three-values#4",
+          "title": "Sum of Three Values, sort positions + two pointers",
+          "hash": "225370f2"
+        }
+      ]
+    },
+    "cses-sum-of-two-values": {
+      "chunk": "sorting-searching",
+      "format": "stdin",
+      "hint": "Standard input, exactly as the judge sends it.",
+      "programs": [
+        {
+          "key": "cses-sum-of-two-values#1",
+          "title": "Alternative: check all pairs (O(n²), too slow at n = 2 · 10^5)",
+          "hash": "8d961875"
+        },
+        {
+          "key": "cses-sum-of-two-values#2",
+          "title": "Approach 1: hash map of values seen",
+          "hash": "7ad7fe11"
+        },
+        {
+          "key": "cses-sum-of-two-values#3",
+          "title": "Approach 2: sort with positions, binary search",
+          "hash": "b043b7f6"
+        },
+        {
+          "key": "cses-sum-of-two-values#4",
+          "title": "Approach 3: sort with positions, two pointers (recommended)",
+          "hash": "753404fc"
+        },
+        {
+          "key": "cses-sum-of-two-values#5",
+          "title": "Sum of Two Values, packed sort and two pointers",
+          "hash": "3ce1d745"
+        }
+      ]
+    },
+    "cses-swap-round-sorting": {
+      "chunk": "additional-2",
+      "format": "stdin",
+      "hint": "Standard input, exactly as the judge sends it.",
+      "programs": [
+        {
+          "key": "cses-swap-round-sorting#1",
+          "title": "Alternative: BFS where one step is a round (exponential)",
+          "hash": "d5db688c"
+        },
+        {
+          "key": "cses-swap-round-sorting#2",
+          "title": "Approach 1: mirror each loop, then read round 2 off the array (recommended)",
+          "hash": "45bd6fb5"
+        },
+        {
+          "key": "cses-swap-round-sorting#3",
+          "title": "Approach 2: both reflections from index formulas",
+          "hash": "77cb8d0e"
+        },
+        {
+          "key": "cses-swap-round-sorting#4",
+          "title": "Swap Round Sorting, mirror then read",
+          "hash": "f3ee6cd3"
         }
       ]
     },

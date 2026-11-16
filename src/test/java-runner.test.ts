@@ -58,7 +58,7 @@ describe('in-browser Java runner', () => {
           expect(check(runnable!, sample.input, stdout, sample.output)?.ok, `${label}: got ${stdout}`).toBe(true)
         }
       }
-    })
+    }, 60_000) // slow rungs (exhaustive search) run as JavaScript here
   }
 })
 

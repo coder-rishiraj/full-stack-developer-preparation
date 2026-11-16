@@ -8,7 +8,7 @@ export type Sample = { label: string; input: string; output: string }
  * `unordered` modes ignore list order (top level, or every level), and `first-line` judges
  * only the first line (the rest is extra information such as a call count).
  */
-export type CheckKind = 'exact' | 'unordered' | 'unordered-nested' | 'first-line' | 'permutations' | 'two-sets' | 'palindrome'
+export type CheckKind = 'exact' | 'unordered' | 'unordered-nested' | 'first-line' | 'permutations' | 'two-sets' | 'palindrome' | 'sum-of-2' | 'sum-of-3' | 'sum-of-4' | 'swap-rounds' | 'subarray-constraints'
 
 /** A program on a page that the reader can run. */
 export type Runnable = {

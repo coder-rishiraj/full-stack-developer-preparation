@@ -45,10 +45,15 @@ export function verdict(tests: CsesTests | LeetCodeTests, input: string, output:
   if (expected === null) return { result: 'unknown', note: 'The expected output could not be read from the statement.' }
   if (tests.source === 'cses') {
     if (sameTokens(output, expected)) return { result: 'pass' }
-    const checkers: Record<string, 'permutations' | 'two-sets' | 'palindrome'> = {
+    const checkers: Record<string, 'permutations' | 'two-sets' | 'palindrome' | 'sum-of-2' | 'sum-of-3' | 'sum-of-4' | 'swap-rounds' | 'subarray-constraints'> = {
       'cses-permutations': 'permutations',
       'cses-two-sets': 'two-sets',
       'cses-palindrome-reorder': 'palindrome',
+      'cses-sum-of-two-values': 'sum-of-2',
+      'cses-sum-of-three-values': 'sum-of-3',
+      'cses-sum-of-four-values': 'sum-of-4',
+      'cses-swap-round-sorting': 'swap-rounds',
+      'cses-subarray-sum-constraints': 'subarray-constraints',
     }
     if (checkers[tests.problemId]) {
       const kind = checkers[tests.problemId]

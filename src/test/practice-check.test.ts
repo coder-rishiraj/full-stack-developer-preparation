@@ -33,6 +33,29 @@ describe('Check verdicts', () => {
     expect(verdict(cses(true, 'cses-palindrome-reorder'), 'AAAACACBA', 'AAACBCAAB\n', 'AAACBCAAA\n').result).toBe('fail')
     expect(verdict(cses(true, 'cses-palindrome-reorder'), 'ABZ', 'NO SOLUTION\n', 'NO SOLUTION\n').result).toBe('pass')
     expect(verdict(cses(true, 'cses-palindrome-reorder'), 'AAB', 'NO SOLUTION\n', 'ABA\n').result).toBe('fail')
+    // Sum of Two / Three / Four Values: any valid positions, or IMPOSSIBLE only when none exist.
+    expect(verdict(cses(true, 'cses-sum-of-two-values'), '4 8\n2 7 5 1', '4 2\n', '2 4\n').result).toBe('pass')
+    expect(verdict(cses(true, 'cses-sum-of-two-values'), '4 8\n2 7 5 1', '1 3\n', '2 4\n').result).toBe('fail')
+    expect(verdict(cses(true, 'cses-sum-of-two-values'), '3 100\n1 2 3', 'IMPOSSIBLE\n', 'IMPOSSIBLE\n').result).toBe('pass')
+    expect(verdict(cses(true, 'cses-sum-of-two-values'), '4 8\n2 7 5 1', 'IMPOSSIBLE\n', '2 4\n').result).toBe('fail')
+    expect(verdict(cses(true, 'cses-sum-of-three-values'), '4 8\n2 7 5 1', '1 3 4\n', '1 3 4\n').result).toBe('pass')
+    expect(verdict(cses(true, 'cses-sum-of-four-values'), '8 15\n3 2 5 8 1 3 2 3', '1 2 3 5\n', '2 4 6 7\n').result).toBe('fail')
+    expect(verdict(cses(true, 'cses-sum-of-four-values'), '8 15\n3 2 5 8 1 3 2 3', '1 2 4 7\n', '2 4 6 7\n').result).toBe('pass')
+    // Subarray Sum Constraints: any valid array, or NO only when contradictory.
+    const sc = cses(true, 'cses-subarray-sum-constraints')
+    const ex = '5 3\n1 3 3\n3 5 3\n4 4 -1\n'
+    expect(verdict(sc, ex, 'YES\n0 2 1 -1 3\n', 'YES\n0 0 3 -1 1\n').result).toBe('pass')
+    expect(verdict(sc, ex, 'YES\n0 0 3 -1 2\n', 'YES\n0 0 3 -1 1\n').result).toBe('fail')
+    expect(verdict(sc, ex, 'NO\n', 'YES\n0 0 3 -1 1\n').result).toBe('fail')
+    expect(verdict(sc, '3 3\n1 1 2\n2 3 4\n1 3 5\n', 'NO\n', 'NO\n').result).toBe('pass')
+    expect(verdict(sc, '2 1\n2 2 5\n', 'YES\n0 5\n', 'YES\n0 5\n').result).toBe('pass')
+    // Swap Round Sorting: minimum rounds of disjoint swaps that sort the array.
+    const sr = cses(true, 'cses-swap-round-sorting')
+    expect(verdict(sr, '5\n5 2 1 3 4', '2\n2\n1 3\n4 5\n1\n3 5\n', '').result).toBe('pass')
+    expect(verdict(sr, '5\n5 2 1 3 4', '3\n1\n1 3\n1\n4 5\n1\n3 5\n', '').result).toBe('fail')
+    expect(verdict(sr, '2\n2 1', '1\n1\n1 2\n', '').result).toBe('pass')
+    expect(verdict(sr, '3\n1 2 3', '0\n', '').result).toBe('pass')
+    expect(verdict(sr, '3\n2 3 1', '2\n1\n1 2\n1\n2 3\n', '').result).toBe('fail')
   })
 })
 

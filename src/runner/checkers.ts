@@ -46,6 +46,176 @@ function checkPermutations(input: string, output: string): Verdict {
 }
 
 /** CSES Two Sets: YES with two sets of equal sum covering 1..n, or NO when the total is odd. */
+/** Whether some k distinct positions of `a` sum to x (k = 2, 3, 4; at most O(n^2) for the CSES limits). */
+function kSumExists(a: number[], x: number, k: number): boolean {
+  const n = a.length
+  if (k === 2) {
+    const seen = new Set<number>()
+    for (const v of a) {
+      if (seen.has(x - v)) return true
+      seen.add(v)
+    }
+    return false
+  }
+  if (k === 3) {
+    const sorted = [...a].sort((p, q) => p - q)
+    for (let i = 0; i < n; i++) {
+      let lo = i + 1
+      let hi = n - 1
+      while (lo < hi) {
+        const sum = sorted[i] + sorted[lo] + sorted[hi]
+        if (sum === x) return true
+        if (sum < x) lo++
+        else hi--
+      }
+    }
+    return false
+  }
+  // k = 4: pair sums seen so far, from pairs that end before the current first index.
+  const pairs = new Set<number>()
+  for (let j = 0; j < n; j++) {
+    for (let l = j + 1; l < n; l++) if (pairs.has(x - a[j] - a[l])) return true
+    for (let i = 0; i < j; i++) pairs.add(a[i] + a[j])
+  }
+  return false
+}
+
+/** CSES Sum of Two / Three / Four Values: any k distinct positions whose values sum to x, or IMPOSSIBLE. */
+function checkKSum(input: string, output: string, k: number): Verdict {
+  const t = tokens(input).map(Number)
+  const n = t[0]
+  const x = t[1]
+  const a = t.slice(2, 2 + n)
+  if (!Number.isInteger(n) || a.length !== n || a.some((v) => !Number.isFinite(v))) return null
+  const out = tokens(output)
+  const exists = kSumExists(a, x, k)
+  if (out.join(' ') === 'IMPOSSIBLE') {
+    return exists
+      ? { ok: false, message: `${k} positions with sum ${x} do exist, so IMPOSSIBLE is wrong.` }
+      : { ok: true, message: `No ${k} positions sum to ${x}.` }
+  }
+  if (out.length !== k) return { ok: false, message: `Expected ${k} positions or IMPOSSIBLE, got ${out.length} values.` }
+  const pos = out.map(Number)
+  if (pos.some((p) => !Number.isInteger(p) || p < 1 || p > n)) return { ok: false, message: `Positions must be whole numbers from 1 to ${n}.` }
+  if (new Set(pos).size !== k) return { ok: false, message: 'The positions must be different.' }
+  const sum = pos.reduce((acc, p) => acc + a[p - 1], 0)
+  return sum === x
+    ? { ok: true, message: `Valid: the values at these positions sum to ${x}.` }
+    : { ok: false, message: `The values at these positions sum to ${sum}, not ${x}.` }
+}
+
+/**
+ * CSES Swap Round Sorting: the minimum number of rounds (0 if sorted, 1 if every cycle has
+ * length at most 2, otherwise 2), and rounds of disjoint swaps that sort the array.
+ */
+function checkSwapRounds(input: string, output: string): Verdict {
+  const t = tokens(input).map(Number)
+  const n = t[0]
+  const a = t.slice(1, 1 + n)
+  if (!Number.isInteger(n) || a.length !== n) return null
+  let longest = 0
+  const seen = new Uint8Array(n + 1)
+  for (let i = 1; i <= n; i++) {
+    let len = 0
+    for (let j = i; !seen[j]; j = a[j - 1]) {
+      seen[j] = 1
+      len++
+    }
+    longest = Math.max(longest, len)
+  }
+  const minimum = longest <= 1 ? 0 : longest === 2 ? 1 : 2
+  const out = tokens(output).map(Number)
+  let pos = 0
+  const k = out[pos++]
+  if (k !== minimum) return { ok: false, message: `The minimum number of rounds is ${minimum}, not ${out[0]}.` }
+  const arr = [...a]
+  for (let r = 1; r <= k; r++) {
+    const c = out[pos++]
+    if (!Number.isInteger(c) || c < 0) return { ok: false, message: `Round ${r} needs a swap count.` }
+    const used = new Set<number>()
+    for (let s = 0; s < c; s++) {
+      const x = out[pos++]
+      const y = out[pos++]
+      if (![x, y].every((v) => Number.isInteger(v) && v >= 1 && v <= n)) return { ok: false, message: `Round ${r}: positions must be from 1 to ${n}.` }
+      if (x === y) return { ok: false, message: `Round ${r}: position ${x} is swapped with itself.` }
+      if (used.has(x) || used.has(y)) return { ok: false, message: `Round ${r}: a position is used in two swaps.` }
+      used.add(x)
+      used.add(y)
+      ;[arr[x - 1], arr[y - 1]] = [arr[y - 1], arr[x - 1]]
+    }
+  }
+  if (pos !== out.length) return { ok: false, message: 'There is extra output after the last round.' }
+  for (let i = 0; i < n; i++) if (arr[i] !== i + 1) return { ok: false, message: 'After the rounds the array is not sorted.' }
+  return { ok: true, message: `Valid: ${k} round${k === 1 ? '' : 's'}, the minimum, and the array ends sorted.` }
+}
+
+/**
+ * CSES Subarray Sum Constraints: YES with any array (elements within ±10^15) meeting every
+ * constraint sum, or NO exactly when the constraints contradict each other. Solvability is
+ * decided independently with a weighted union-find on prefix sums P[r] − P[l−1] = s.
+ */
+function checkSubarrayConstraints(input: string, output: string): Verdict {
+  const t = tokens(input).map(Number)
+  const n = t[0]
+  const m = t[1]
+  if (!Number.isInteger(n) || !Number.isInteger(m) || t.length < 2 + 3 * m) return null
+  const cons: [number, number, number][] = []
+  for (let i = 0; i < m; i++) cons.push([t[2 + 3 * i], t[3 + 3 * i], t[4 + 3 * i]])
+  // parent[v] and diff[v] = P[v] − P[parent[v]]; |values| stay far below 2^53 (n ≤ 5000, |s| ≤ 10^9).
+  const parent = Array.from({ length: n + 1 }, (_, i) => i)
+  const diff = new Array<number>(n + 1).fill(0)
+  const find = (v: number): number => {
+    const path: number[] = []
+    while (parent[v] !== v) {
+      path.push(v)
+      v = parent[v]
+    }
+    for (let i = path.length - 1; i >= 0; i--) {
+      const u = path[i]
+      const p = parent[u]
+      if (p !== v) diff[u] += diff[p]
+      parent[u] = v
+    }
+    return v
+  }
+  let solvable = true
+  for (const [l, r, sum] of cons) {
+    const a = find(l - 1)
+    const b = find(r)
+    if (a === b) {
+      if (diff[r] - diff[l - 1] !== sum) solvable = false
+    } else {
+      parent[b] = a
+      diff[b] = diff[l - 1] + sum - diff[r]
+    }
+  }
+  const out = tokens(output)
+  if (out[0] === 'NO' && out.length === 1) {
+    return solvable
+      ? { ok: false, message: 'An array satisfying every constraint exists, so NO is wrong.' }
+      : { ok: true, message: 'The constraints contradict each other, so no array exists.' }
+  }
+  if (out[0] !== 'YES') return { ok: false, message: 'The first line must be YES or NO.' }
+  if (!solvable) return { ok: false, message: 'The constraints contradict each other; the answer must be NO.' }
+  if (out.length !== n + 1) return { ok: false, message: `Expected ${n} numbers after YES, got ${out.length - 1}.` }
+  const limit = 10n ** 15n
+  const prefix: bigint[] = [0n]
+  for (let i = 1; i <= n; i++) {
+    let x: bigint
+    try {
+      x = BigInt(out[i])
+    } catch {
+      return { ok: false, message: `"${out[i]}" is not an integer.` }
+    }
+    if (x > limit || x < -limit) return { ok: false, message: `Element ${i} is outside −10^15 … 10^15.` }
+    prefix.push(prefix[i - 1] + x)
+  }
+  for (const [l, r, sum] of cons) {
+    if (prefix[r] - prefix[l - 1] !== BigInt(sum)) return { ok: false, message: `The sum of elements ${l}..${r} is ${prefix[r] - prefix[l - 1]}, not ${sum}.` }
+  }
+  return { ok: true, message: 'Valid: every constraint sum holds.' }
+}
+
 /** CSES Palindrome Reorder: any palindrome using exactly the input's letters, or NO SOLUTION. */
 function checkPalindrome(input: string, output: string): Verdict {
   const s = input.trim()
@@ -213,6 +383,9 @@ export function check(runnable: Pick<Runnable, 'check' | 'format'>, input: strin
   if (kind === 'permutations') return checkPermutations(input, output)
   if (kind === 'two-sets') return checkTwoSets(input, output)
   if (kind === 'palindrome') return checkPalindrome(input, output)
+  if (kind === 'swap-rounds') return checkSwapRounds(input, output)
+  if (kind === 'subarray-constraints') return checkSubarrayConstraints(input, output)
+  if (kind === 'sum-of-2' || kind === 'sum-of-3' || kind === 'sum-of-4') return checkKSum(input, output, Number(kind.slice(-1)))
   if (expected === undefined) return null
   const same = runnable.format === 'stdin' ? sameTokens(output, expected) : sameValues(output, expected, kind)
   const extra =
