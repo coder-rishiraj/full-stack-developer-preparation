@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import type { Runnable } from '@/runner/context'
 import { check } from '@/runner/checkers'
-import { RUN_TIME_LIMIT_MS, runJava, type RunResult } from '@/runner/run-java'
+import { RUN_TIME_LIMIT_MS, runJava, type RunResult } from '@/runner/worker-run'
 
 /** Longest output shown on the page; longer output is cut (the run itself is complete). */
 const MAX_SHOWN = 20_000
@@ -113,7 +113,7 @@ function RunOutput({ runnable, input, run }: { runnable: Runnable; input: string
         <span className="cd-run-time">{formatMs(run.ms)}</span>
       </div>
       <pre tabIndex={0}>
-        <code>{out.text.replace(/\s+$/, '') || '(no output)'}</code>
+        <code>{out.text.replace(/\s+$/, '') || 'The program printed nothing.'}</code>
       </pre>
       {out.cut > 0 && <p className="cd-run-note">… {out.cut.toLocaleString()} more characters not shown.</p>}
       {run.stderr && (
@@ -136,6 +136,85 @@ function RunOutput({ runnable, input, run }: { runnable: Runnable; input: string
             <code>{sample.output.replace(/\s+$/, '')}</code>
           </pre>
         </>
+      )}
+    </div>
+  )
+}
+
+/**
+ * The Run button under a lesson program: runs the program as it is (no input, unless it
+ * reads standard input) and shows what it prints. The written output stays in print only.
+ */
+export function LessonRun({ runnable, writtenOutput }: { runnable: Runnable; writtenOutput?: string }) {
+  const [input, setInput] = useState('')
+  const [running, setRunning] = useState(false)
+  const [run, setRun] = useState<RunResult | null>(null)
+
+  async function execute() {
+    if (running) return
+    setRunning(true)
+    setRun(await runJava(runnable, input))
+    setRunning(false)
+  }
+
+  return (
+    <section className="cd-run cd-run-lesson" aria-label="Run this program">
+      {runnable.stdin && (
+        <textarea
+          className="cd-run-input"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          spellCheck={false}
+          rows={2}
+          placeholder="Standard input for the program"
+          aria-label="Standard input for the program"
+        />
+      )}
+      <div className="cd-run-head">
+        <button type="button" className="cd-run-button" onClick={() => void execute()} disabled={running}>
+          {running ? 'Running…' : run ? '▶ Run again' : '▶ Run'}
+        </button>
+        <span className="cd-run-note">Runs this program in your browser and shows what it prints.</span>
+      </div>
+      {run && <LessonOutput run={run} />}
+      {writtenOutput !== undefined && (
+        <div className="hidden print:block">
+          <div className="cd-code-output-label">Output</div>
+          <pre>
+            <code>{writtenOutput.replace(/\s+$/, '')}</code>
+          </pre>
+        </div>
+      )}
+    </section>
+  )
+}
+
+function LessonOutput({ run }: { run: RunResult }) {
+  if (run.kind !== 'done') {
+    return (
+      <div className="cd-run-output" data-state="error">
+        <div className="cd-run-status">
+          {run.kind === 'timeout' ? `Stopped after ${RUN_TIME_LIMIT_MS / 1000} s.` : `Could not start the program: ${run.message}`}
+        </div>
+      </div>
+    )
+  }
+  const ok = run.status === 'ok' || run.status === 'exit 0'
+  const out = clip(run.stdout)
+  return (
+    <div className="cd-run-output" data-state={ok ? 'ok' : 'error'}>
+      <div className="cd-run-status">
+        <span>{ok ? 'Output' : run.status.startsWith('exit') ? `Exited with status ${run.status.slice(5)}` : 'Runtime error'}</span>
+        <span className="cd-run-time">{formatMs(run.ms)}</span>
+      </div>
+      <pre tabIndex={0}>
+        <code>{out.text.replace(/\s+$/, '') || 'The program printed nothing.'}</code>
+      </pre>
+      {out.cut > 0 && <p className="cd-run-note">… {out.cut.toLocaleString()} more characters not shown.</p>}
+      {run.stderr && (
+        <pre className="cd-run-stderr" tabIndex={0}>
+          <code>{run.stderr.replace(/\s+$/, '')}</code>
+        </pre>
       )}
     </div>
   )

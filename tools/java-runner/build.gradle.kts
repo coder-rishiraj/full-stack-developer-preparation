@@ -36,5 +36,8 @@ teavm {
         mainClass.set("runner.Entry")
         moduleType.set(org.teavm.gradle.api.JSModuleType.ES2015)
         obfuscated.set(true)
+        // Java's runtime checks (array bounds, null, division by zero, casts), so a program
+        // fails in the browser where it fails on the JVM.
+        strict.set(true)
     }
 }

@@ -24,69 +24,38 @@
  * and success/failure match exactly.
  */
 import { execFileSync, spawnSync } from 'node:child_process'
-import { copyFileSync, existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { createHash } from 'node:crypto'
 import os from 'node:os'
 import path from 'node:path'
-import { fileURLToPath, pathToFileURL } from 'node:url'
+import { pathToFileURL } from 'node:url'
+import {
+  RUNTIME_FILES,
+  classBody,
+  codeHash,
+  compileChunk,
+  javaBlocks,
+  outDir,
+  parseRun,
+  requireTools,
+  rewrite,
+  root,
+  runtimeDir,
+  stopGradle,
+  toolDir,
+} from './java-runner-lib.mjs'
 
-const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const pageDir = path.join(root, 'src/content/problem-pages')
 const harnessDir = path.join(pageDir, 'run')
-const toolDir = path.join(root, 'tools/java-runner')
-const runtimeDir = path.join(toolDir, 'src/main/java/runner')
-const chunkSrcRoot = path.join(toolDir, 'build/chunks')
-const outDir = path.join(root, 'src/runner/generated')
 const force = process.argv.includes('--force')
 const only = process.argv.slice(2).filter((a) => !a.startsWith('--'))
 
 // ---------------------------------------------------------------- environment
 
-function findJdkHome() {
-  const candidates = [process.env.JAVA_HOME, '/opt/homebrew/opt/openjdk@17', '/opt/homebrew/opt/openjdk@21', '/opt/homebrew/opt/openjdk']
-  try {
-    candidates.push(execFileSync('/usr/libexec/java_home', { stdio: ['ignore', 'pipe', 'ignore'] }).toString().trim())
-  } catch {
-    // no system JDK registered
-  }
-  return candidates.find((home) => home && existsSync(path.join(home, 'bin/javac'))) ?? null
-}
 
 // ---------------------------------------------------------------- page parsing
 
-/** Same normalisation and FNV-1a hash as src/runner/run-java.ts, so pages detect stale builds. */
-export function codeHash(code) {
-  const text = code
-    .split('\n')
-    .map((l) => l.trimEnd())
-    .join('\n')
-    .trim()
-  let h = 0x811c9dc5
-  for (let i = 0; i < text.length; i++) {
-    h ^= text.charCodeAt(i)
-    h = Math.imul(h, 0x01000193) >>> 0
-  }
-  return h.toString(16).padStart(8, '0')
-}
 
-function javaBlocks(markdown) {
-  const blocks = []
-  let open = null
-  for (const line of markdown.split('\n')) {
-    if (open) {
-      if (/^\s*```\s*$/.test(line)) {
-        blocks.push(open)
-        open = null
-      } else open.code += line + '\n'
-      continue
-    }
-    const fence = line.match(/^\s*```java\b(.*)$/)
-    if (fence) {
-      open = { title: fence[1].match(/title="([^"]*)"/)?.[1] ?? '', fragment: /fragment="/.test(fence[1]), code: '' }
-    }
-  }
-  return blocks
-}
 
 const isStdinProgram = (code) => /^public\s+(final\s+)?class\s+Main\b/m.test(code) && /static\s+void\s+main\s*\(/.test(code)
 const declares = (code, name) => new RegExp(`^(public\\s+)?(final\\s+)?class\\s+${name}\\b`, 'm').test(code)
@@ -122,17 +91,6 @@ function splitParams(text) {
   })
 }
 
-/** The body of top-level class `name` in `code`. */
-function classBody(code, name) {
-  const start = code.search(new RegExp(`^(public\\s+)?(final\\s+)?class\\s+${name}\\b`, 'm'))
-  if (start < 0) return ''
-  let depth = 0
-  for (let i = code.indexOf('{', start); i < code.length; i++) {
-    if (code[i] === '{') depth++
-    if (code[i] === '}' && --depth === 0) return code.slice(start, i + 1)
-  }
-  return code.slice(start)
-}
 
 /** Public members of a class, read from its 4-space-indented declarations. */
 function members(code, name) {
@@ -279,22 +237,6 @@ function combine(parts) {
   return [...imports, '', ...bodies].join('\n')
 }
 
-/** TeaVM version: own package; System.in/out/err/exit and Scanner point at runner.*. */
-function rewrite(code, pkg) {
-  for (const banned of ['System.setIn', 'System.setOut', 'System.setErr', 'System.console', 'Runtime.getRuntime']) {
-    if (code.includes(banned)) throw new Error(`${pkg}: ${banned} is not supported in the browser runner`)
-  }
-  let src = code
-    .replace(/\bSystem\.in\b/g, 'runner.Io.in')
-    .replace(/\bSystem\.out\b/g, 'runner.Io.out')
-    .replace(/\bSystem\.err\b/g, 'runner.Io.err')
-    .replace(/\bSystem\.exit\s*\(/g, 'runner.Io.exit(')
-    .replace(/^import\s+java\.util\.Scanner\s*;/m, 'import runner.Scanner;')
-    .replace(/^import\s+java\.util\.concurrent\.ThreadLocalRandom\s*;/m, 'import runner.ThreadLocalRandom;')
-    .replace(/\bjava\.util\.concurrent\.ThreadLocalRandom\b/g, 'runner.ThreadLocalRandom')
-  if (/\bScanner\b/.test(src) && !/^import\s+runner\.Scanner\s*;/m.test(src)) src = 'import runner.Scanner;\n' + src
-  return `package ${pkg};\n\n${src}`
-}
 
 /** The runnable programs of one page: [{ title, code (page block), source (JVM Main.java) }]. */
 function pagePrograms(id, entry) {
@@ -338,13 +280,6 @@ function pagePrograms(id, entry) {
   })
 }
 
-/** Splits the bundle's "status NUL n NUL stdout stderr" result (see runner/Entry.java). */
-function parseRun(raw) {
-  const a = raw.indexOf('\u0000')
-  const b = raw.indexOf('\u0000', a + 1)
-  const n = Number(raw.slice(a + 1, b))
-  return { status: raw.slice(0, a), stdout: raw.slice(b + 1, b + 1 + n), stderr: raw.slice(b + 1 + n) }
-}
 
 /**
  * Output in a form where only differences the page cares about remain. Pages whose answer
@@ -373,15 +308,7 @@ function canonical(stdout, mode) {
 
 // ---------------------------------------------------------------- build
 
-const jdkHome = findJdkHome()
-if (!jdkHome) {
-  console.error('No JDK 17+ found. Install one (brew install openjdk@17) or set JAVA_HOME.')
-  process.exit(2)
-}
-if (spawnSync('gradle', ['--version'], { stdio: 'ignore' }).status !== 0) {
-  console.error('Gradle not found on PATH (brew install gradle).')
-  process.exit(2)
-}
+const jdkHome = requireTools()
 
 const config = JSON.parse(readFileSync(path.join(pageDir, 'run-samples.json'), 'utf8'))
 const category = categories()
@@ -411,7 +338,7 @@ const chunkHashes = {}
 for (const [chunk, programs] of Object.entries(chunks)) {
   const h = createHash('sha256')
   h.update(readFileSync(path.join(toolDir, 'build.gradle.kts')))
-  for (const f of ['Entry.java', 'Io.java', 'Scanner.java', 'In.java', 'Show.java', 'ThreadLocalRandom.java']) h.update(readFileSync(path.join(runtimeDir, f)))
+  for (const f of RUNTIME_FILES) h.update(readFileSync(path.join(runtimeDir, f)))
   for (const p of programs) {
     h.update(p.key)
     h.update(p.source)
@@ -438,29 +365,14 @@ try {
 
   for (const chunk of todo) {
     const programs = chunks[chunk]
-    const srcDir = path.join(chunkSrcRoot, chunk)
-    rmSync(srcDir, { recursive: true, force: true })
-    mkdirSync(path.join(srcDir, 'runner'), { recursive: true })
-    for (const p of programs) {
-      mkdirSync(path.join(srcDir, p.pkg))
-      writeFileSync(path.join(srcDir, p.pkg, 'Main.java'), rewrite(p.source, p.pkg))
-    }
-    const cases = programs.map((p) => `            case "${p.key}": ${p.pkg}.Main.main(new String[0]); return true;`).join('\n')
-    writeFileSync(
-      path.join(srcDir, 'runner/Programs.java'),
-      `package runner;\n\n/** Generated by scripts/build-java-runner.mjs. */\nfinal class Programs {\n    private Programs() {}\n\n    static boolean run(String key) throws Exception {\n        switch (key) {\n${cases}\n            default: return false;\n        }\n    }\n}\n`,
-    )
-
     console.log(`- ${chunk}: compiling ${programs.length} program(s) with TeaVM…`)
-    const gradle = spawnSync('gradle', ['generateJavaScript', '-q', `-Pchunk=${chunk}`], {
-      cwd: toolDir,
-      env: { ...process.env, JAVA_HOME: jdkHome },
-      stdio: 'inherit',
-    })
-    if (gradle.status !== 0) throw new Error(`TeaVM build failed for ${chunk}`)
-    const built = path.join(toolDir, `build/out/${chunk}/generated/teavm/js/java-runner.js`)
+    const compiled = compileChunk(
+      chunk,
+      programs.map((p) => ({ key: p.key, pkg: p.pkg, mainClass: 'Main', source: rewrite(p.source, p.pkg) })),
+      jdkHome,
+    )
+    if (!compiled.ok) throw new Error(`TeaVM build failed for ${chunk}`)
     const bundle = path.join(outDir, `${chunk}.js`)
-    copyFileSync(built, bundle)
 
     // Equivalence check: real JVM vs the TeaVM build, on every sample and extra input.
     const { run } = await import(pathToFileURL(bundle).href + `?t=${Date.now()}`)
@@ -486,7 +398,7 @@ try {
   }
 } finally {
   rmSync(work, { recursive: true, force: true })
-  spawnSync('gradle', ['--stop', '-q'], { cwd: toolDir, stdio: 'ignore' })
+  stopGradle()
 }
 
 // Drop bundles of chunks that no longer exist.

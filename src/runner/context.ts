@@ -15,11 +15,28 @@ export type Runnable = {
   key: string
   chunk: string
   problemId: string
-  format: 'stdin' | 'leetcode'
+  /**
+   * stdin: CSES program; leetcode: generated harness; lesson: a Java lesson program, run as it
+   * is; js: lesson JavaScript/TypeScript, editable and run in the browser.
+   */
+  format: 'stdin' | 'leetcode' | 'lesson' | 'js'
+  /** For js: the source language. */
+  lang?: 'js' | 'ts' | 'jsx' | 'tsx'
+  /** For js: where it runs (node: the Node-like worker; page: a sandboxed frame with a DOM). */
+  env?: 'node' | 'page'
+  /**
+   * false when the build found that the block, exactly as written, does not run the same in
+   * the browser (a fragment, or code that needs files, a server or packages the runner lacks).
+   * It is still editable and runnable; `note` says why the original may not work.
+   */
+  verified?: boolean
+  note?: string
   hint: string
+  /** For lesson programs: whether the program reads standard input (then it gets an input box). */
+  stdin?: boolean
   check: CheckKind
   samples: Sample[]
 }
 
 /** Lets code blocks inside a page ask whether they can be run (null outside walkthrough pages). */
-export const CodeRunContext = createContext<((code: string) => Runnable | null) | null>(null)
+export const CodeRunContext = createContext<((code: string, language: string) => Runnable | null) | null>(null)

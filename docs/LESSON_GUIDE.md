@@ -178,6 +178,32 @@ implementation examples (Python or TypeScript), with realistic data and failure 
 - Always label the language. Prefer complete, runnable programs over fragments; when a fragment
   is clearer, say what surrounds it.
 - Show output in an ` ```output ` block right after the code.
+- Track A (DSA) Java programs get a **Run** button: the reader runs the program in the browser
+  and sees what it really prints, and the written output is kept for print. After adding or
+  editing a Java program in an `a*` lesson, run `npm run lessons:runner` (Gradle and a JDK
+  needed) and commit `src/runner/generated/`. It compiles each whole program (a class with
+  `main`) with TeaVM and gives it a Run button only if the browser prints exactly what the JVM
+  prints; the others keep the written output, with the reason recorded under `excluded` in
+  `src/runner/generated/lessons-manifest.json`. `src/test/java-runner.test.ts` fails while a
+  lesson's build is stale.
+- Every JavaScript, TypeScript, JSX and TSX block (` ```js `, ` ```ts `, ` ```jsx `, ` ```tsx `)
+  in any lesson is **editable and runnable** in the browser:
+  - Programs that print run like Node (console formatting, event-loop order, timers on a
+    virtual clock). TypeScript and TSX are first type-checked like `tsc --strict`.
+  - Code that needs a page (React components, `react-dom/client`, `document`) renders in a
+    sandboxed preview frame with a live, clickable page and its console. A JSX block that only
+    defines components renders `App` (or the last component). React hooks and APIs are
+    available without an import.
+  - Provided packages: `react`, `react-dom` (client and server), `zod`, `lodash`. Anything else
+    (other npm packages, other files, servers) is not available.
+  After adding or editing such blocks, run `npm run lessons:js-runner` and commit
+  `src/runner/generated/js-lessons-manifest.json`. It runs every block with the browser
+  runtime and with real Node (or renders it in jsdom), and marks the blocks that behave the
+  same as verified: their written output is replaced by the live run. The other blocks
+  (fragments that use names from elsewhere in the lesson, code that needs files or a server)
+  stay editable and runnable, keep their written output visible, and show a short note.
+  After changing `src/runner/page/` or the provided packages, run `npm run runner:page` to
+  rebuild `public/runner/page-runtime.js`.
 - Comments explain *why*, not what. Keep lines under ~90 characters.
 - Java 21, modern JavaScript (ES2023), TypeScript 5.x–6.x (the repo compiler), React 19, Spring Boot 3, PostgreSQL 16,
   Python 3.12 unless the topic is specifically about an older version.

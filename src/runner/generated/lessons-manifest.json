@@ -1,0 +1,4218 @@
+{
+  "chunks": {
+    "lessons-a1": "9f70afecc8d01857",
+    "lessons-a10": "a42e512841127a2f",
+    "lessons-a11": "7e42ff911523350a",
+    "lessons-a12": "101b9c5fc61bda5f",
+    "lessons-a13": "436aed3791fd922d",
+    "lessons-a14": "4b2a15cf3c834c69",
+    "lessons-a2": "9e2672f1defe98f7",
+    "lessons-a3": "68d8df10244cc252",
+    "lessons-a4": "78a012c9ec0211f0",
+    "lessons-a5": "88d3f8c11cbd62ae",
+    "lessons-a6": "77dc6c7e06c1ec0f",
+    "lessons-a7": "be23ad27622e2e93",
+    "lessons-a8": "32ec534fa5737c8c",
+    "lessons-a9": "126fd54f85ab1b6f"
+  },
+  "lessons": {
+    "a1-arraylist": {
+      "chunk": "lessons-a1",
+      "programs": [
+        {
+          "key": "a1-arraylist#1",
+          "title": "ListBasics.java",
+          "hash": "892419db",
+          "stdin": false
+        },
+        {
+          "key": "a1-arraylist#2",
+          "title": "RemoveTrap.java",
+          "hash": "a9590963",
+          "stdin": false
+        },
+        {
+          "key": "a1-arraylist#3",
+          "title": "SafeRemoval.java",
+          "hash": "ad9a350b",
+          "stdin": false
+        },
+        {
+          "key": "a1-arraylist#4",
+          "title": "Adjacency.java",
+          "hash": "4bec8343",
+          "stdin": false
+        },
+        {
+          "key": "a1-arraylist#5",
+          "title": "MapBasics.java",
+          "hash": "50d2a2cb",
+          "stdin": false
+        },
+        {
+          "key": "a1-arraylist#6",
+          "title": "TwoSum.java",
+          "hash": "4ea9957b",
+          "stdin": false
+        },
+        {
+          "key": "a1-arraylist#7",
+          "title": "SubarraySum.java",
+          "hash": "5914ead6",
+          "stdin": false
+        },
+        {
+          "key": "a1-arraylist#8",
+          "title": "SetBasics.java",
+          "hash": "4c55fabc",
+          "stdin": false
+        },
+        {
+          "key": "a1-arraylist#9",
+          "title": "LongestRun.java",
+          "hash": "c1f9e7f6",
+          "stdin": false
+        },
+        {
+          "key": "a1-arraylist#10",
+          "title": "ArrayKeys.java",
+          "hash": "4f4f38bb",
+          "stdin": false
+        },
+        {
+          "key": "a1-arraylist#11",
+          "title": "TreeMapNav.java",
+          "hash": "f362bdee",
+          "stdin": false
+        },
+        {
+          "key": "a1-arraylist#12",
+          "title": "MeetingRooms.java",
+          "hash": "c64d30b2",
+          "stdin": false
+        },
+        {
+          "key": "a1-arraylist#13",
+          "title": "TreeSetNav.java",
+          "hash": "6309f9c3",
+          "stdin": false
+        },
+        {
+          "key": "a1-arraylist#14",
+          "title": "NearbyAlmostDuplicate.java",
+          "hash": "9dc272b4",
+          "stdin": false
+        },
+        {
+          "key": "a1-arraylist#15",
+          "title": "DequeBasics.java",
+          "hash": "9f6ffa99",
+          "stdin": false
+        },
+        {
+          "key": "a1-arraylist#16",
+          "title": "BfsDemo.java",
+          "hash": "15f2573f",
+          "stdin": false
+        },
+        {
+          "key": "a1-arraylist#17",
+          "title": "WindowMax.java",
+          "hash": "9435e24a",
+          "stdin": false
+        },
+        {
+          "key": "a1-arraylist#18",
+          "title": "HeapBasics.java",
+          "hash": "e9f35f21",
+          "stdin": false
+        },
+        {
+          "key": "a1-arraylist#19",
+          "title": "TopKFrequent.java",
+          "hash": "177b3db8",
+          "stdin": false
+        }
+      ]
+    },
+    "a1-big-o": {
+      "chunk": "lessons-a1",
+      "programs": [
+        {
+          "key": "a1-big-o#1",
+          "title": "Dominance.java",
+          "hash": "6424a24b",
+          "stdin": false
+        },
+        {
+          "key": "a1-big-o#2",
+          "title": "Growth.java",
+          "hash": "09b2ac93",
+          "stdin": false
+        }
+      ]
+    },
+    "a1-comparable-comparator": {
+      "chunk": "lessons-a1",
+      "programs": [
+        {
+          "key": "a1-comparable-comparator#1",
+          "title": "NaturalOrder.java",
+          "hash": "d4f3427c",
+          "stdin": false
+        },
+        {
+          "key": "a1-comparable-comparator#2",
+          "title": "ComparatorDemo.java",
+          "hash": "1a4adc55",
+          "stdin": false
+        },
+        {
+          "key": "a1-comparable-comparator#3",
+          "title": "SubtractionBug.java",
+          "hash": "7a8a7551",
+          "stdin": false
+        },
+        {
+          "key": "a1-comparable-comparator#4",
+          "title": "TieDrop.java",
+          "hash": "afd8afaf",
+          "stdin": false
+        },
+        {
+          "key": "a1-comparable-comparator#5",
+          "title": "ConsistentWithEquals.java",
+          "hash": "90773412",
+          "stdin": false
+        },
+        {
+          "key": "a1-comparable-comparator#6",
+          "title": "MergeIntervals.java",
+          "hash": "06de0911",
+          "stdin": false
+        }
+      ]
+    },
+    "a1-custom-classes": {
+      "chunk": "lessons-a1",
+      "programs": [
+        {
+          "key": "a1-custom-classes#1",
+          "title": "Edges.java",
+          "hash": "92a35964",
+          "stdin": false
+        },
+        {
+          "key": "a1-custom-classes#2",
+          "title": "Intervals.java",
+          "hash": "473627ea",
+          "stdin": false
+        },
+        {
+          "key": "a1-custom-classes#3",
+          "title": "EqualityDemo.java",
+          "hash": "7d45d0da",
+          "stdin": false
+        },
+        {
+          "key": "a1-custom-classes#4",
+          "title": "ManualKey.java",
+          "hash": "ef7f7b51",
+          "stdin": false
+        },
+        {
+          "key": "a1-custom-classes#5",
+          "title": "MutableKey.java",
+          "hash": "7a39a2dd",
+          "stdin": false
+        },
+        {
+          "key": "a1-custom-classes#7",
+          "title": "TrieDemo.java",
+          "hash": "c090265a",
+          "stdin": false
+        },
+        {
+          "key": "a1-custom-classes#8",
+          "title": "DijkstraState.java",
+          "hash": "ef9d8310",
+          "stdin": false
+        }
+      ]
+    },
+    "a1-java-streams-interviews": {
+      "chunk": "lessons-a1",
+      "programs": [
+        {
+          "key": "a1-java-streams-interviews#1",
+          "title": "Lazy.java",
+          "hash": "9434d35b",
+          "stdin": false
+        },
+        {
+          "key": "a1-java-streams-interviews#3",
+          "title": "Recipes.java",
+          "hash": "822c464e",
+          "stdin": false
+        }
+      ]
+    },
+    "a1-java-syntax-competitive": {
+      "chunk": "lessons-a1",
+      "programs": [
+        {
+          "key": "a1-java-syntax-competitive#1",
+          "title": "Main.java",
+          "hash": "afcf7b31",
+          "stdin": false
+        },
+        {
+          "key": "a1-java-syntax-competitive#2",
+          "title": "Main.java",
+          "hash": "05eff8be",
+          "stdin": true
+        },
+        {
+          "key": "a1-java-syntax-competitive#3",
+          "title": "Main.java",
+          "hash": "75f51dc0",
+          "stdin": true
+        },
+        {
+          "key": "a1-java-syntax-competitive#4",
+          "title": "Overflow.java",
+          "hash": "99ae2e2f",
+          "stdin": false
+        },
+        {
+          "key": "a1-java-syntax-competitive#5",
+          "title": "BoxingTrap.java",
+          "hash": "ae926aa5",
+          "stdin": false
+        },
+        {
+          "key": "a1-java-syntax-competitive#6",
+          "title": "Main.java",
+          "hash": "a07cb032",
+          "stdin": true
+        },
+        {
+          "key": "a1-java-syntax-competitive#7",
+          "title": "Trap.java",
+          "hash": "286767fa",
+          "stdin": true
+        },
+        {
+          "key": "a1-java-syntax-competitive#8",
+          "title": "BulkPrint.java",
+          "hash": "c9fc487c",
+          "stdin": false
+        },
+        {
+          "key": "a1-java-syntax-competitive#9",
+          "title": "ModMath.java",
+          "hash": "56433edd",
+          "stdin": false
+        },
+        {
+          "key": "a1-java-syntax-competitive#10",
+          "title": "ModInverse.java",
+          "hash": "66aed273",
+          "stdin": false
+        },
+        {
+          "key": "a1-java-syntax-competitive#11",
+          "title": "Factorials.java",
+          "hash": "effbbf20",
+          "stdin": false
+        },
+        {
+          "key": "a1-java-syntax-competitive#12",
+          "title": "Main.java",
+          "hash": "efd0644f",
+          "stdin": true
+        }
+      ]
+    },
+    "a1-recursion": {
+      "chunk": "lessons-a1",
+      "programs": [
+        {
+          "key": "a1-recursion#1",
+          "title": "Factorial.java",
+          "hash": "eeed41c4",
+          "stdin": false
+        },
+        {
+          "key": "a1-recursion#2",
+          "title": "TraceFactorial.java",
+          "hash": "42cbe4b0",
+          "stdin": false
+        },
+        {
+          "key": "a1-recursion#4",
+          "title": "TreeRecursion.java",
+          "hash": "424fbee6",
+          "stdin": false
+        },
+        {
+          "key": "a1-recursion#5",
+          "title": "Fibonacci.java",
+          "hash": "ab7c5675",
+          "stdin": false
+        },
+        {
+          "key": "a1-recursion#6",
+          "title": "Subsets.java",
+          "hash": "794fc2fa",
+          "stdin": false
+        },
+        {
+          "key": "a1-recursion#7",
+          "title": "Permutations.java",
+          "hash": "9a07dfce",
+          "stdin": false
+        },
+        {
+          "key": "a1-recursion#8",
+          "title": "IterativeDfs.java",
+          "hash": "29ebfe95",
+          "stdin": false
+        }
+      ]
+    },
+    "a1-strings-stringbuilder": {
+      "chunk": "lessons-a1",
+      "programs": [
+        {
+          "key": "a1-strings-stringbuilder#1",
+          "title": "StringBasics.java",
+          "hash": "b4343c68",
+          "stdin": false
+        },
+        {
+          "key": "a1-strings-stringbuilder#2",
+          "title": "StringEquality.java",
+          "hash": "2f898486",
+          "stdin": false
+        },
+        {
+          "key": "a1-strings-stringbuilder#3",
+          "title": "BuilderBasics.java",
+          "hash": "ce5da08b",
+          "stdin": false
+        },
+        {
+          "key": "a1-strings-stringbuilder#4",
+          "title": "BuildFast.java",
+          "hash": "c6949374",
+          "stdin": false
+        },
+        {
+          "key": "a1-strings-stringbuilder#5",
+          "title": "Anagram.java",
+          "hash": "cfdb21d4",
+          "stdin": false
+        },
+        {
+          "key": "a1-strings-stringbuilder#6",
+          "title": "Palindrome.java",
+          "hash": "97a09300",
+          "stdin": false
+        },
+        {
+          "key": "a1-strings-stringbuilder#7",
+          "title": "Compress.java",
+          "hash": "ce0099bf",
+          "stdin": false
+        },
+        {
+          "key": "a1-strings-stringbuilder#9",
+          "title": "SplitTraps.java",
+          "hash": "d0a63d4d",
+          "stdin": false
+        }
+      ]
+    },
+    "a1-time-complexity": {
+      "chunk": "lessons-a1",
+      "programs": [
+        {
+          "key": "a1-time-complexity#1",
+          "title": "LoopShapes.java",
+          "hash": "81f479c1",
+          "stdin": false
+        },
+        {
+          "key": "a1-time-complexity#2",
+          "title": "GrowthCost.java",
+          "hash": "0c273f57",
+          "stdin": false
+        },
+        {
+          "key": "a1-time-complexity#3",
+          "title": "TwoSum.java",
+          "hash": "d52d4974",
+          "stdin": false
+        },
+        {
+          "key": "a1-time-complexity#4",
+          "title": "UniquePaths.java",
+          "hash": "7623f5d9",
+          "stdin": false
+        }
+      ]
+    },
+    "a10-heap-greedy": {
+      "chunk": "lessons-a10",
+      "programs": [
+        {
+          "key": "a10-heap-greedy#1",
+          "title": "ConnectSticks.java",
+          "hash": "6e44f52a",
+          "stdin": false
+        },
+        {
+          "key": "a10-heap-greedy#2",
+          "title": "MaxEvents.java",
+          "hash": "7267adc7",
+          "stdin": false
+        },
+        {
+          "key": "a10-heap-greedy#3",
+          "title": "CourseScheduleIII.java",
+          "hash": "395ee79f",
+          "stdin": false
+        },
+        {
+          "key": "a10-heap-greedy#4",
+          "title": "RefuelingStops.java",
+          "hash": "cea21287",
+          "stdin": false
+        },
+        {
+          "key": "a10-heap-greedy#5",
+          "title": "FurthestBuilding.java",
+          "hash": "03f830c6",
+          "stdin": false
+        }
+      ]
+    },
+    "a10-interval-scheduling": {
+      "chunk": "lessons-a10",
+      "programs": [
+        {
+          "key": "a10-interval-scheduling#1",
+          "title": "ActivitySelection.java",
+          "hash": "7314e3da",
+          "stdin": false
+        },
+        {
+          "key": "a10-interval-scheduling#2",
+          "title": "RoomAssignment.java",
+          "hash": "e22b3617",
+          "stdin": false
+        },
+        {
+          "key": "a10-interval-scheduling#3",
+          "title": "VideoStitching.java",
+          "hash": "6e20065b",
+          "stdin": false
+        },
+        {
+          "key": "a10-interval-scheduling#4",
+          "title": "WeightedScheduling.java",
+          "hash": "cb61e3bf",
+          "stdin": false
+        }
+      ]
+    },
+    "a10-local-vs-global": {
+      "chunk": "lessons-a10",
+      "programs": [
+        {
+          "key": "a10-local-vs-global#1",
+          "title": "CoinGreedyCheck.java",
+          "hash": "68f99a43",
+          "stdin": false
+        },
+        {
+          "key": "a10-local-vs-global#2",
+          "title": "Knapsack01VsFractional.java",
+          "hash": "0cc051f7",
+          "stdin": false
+        },
+        {
+          "key": "a10-local-vs-global#3",
+          "title": "JumpGames.java",
+          "hash": "76109f6d",
+          "stdin": false
+        },
+        {
+          "key": "a10-local-vs-global#4",
+          "title": "GasStation.java",
+          "hash": "1134a3e5",
+          "stdin": false
+        }
+      ]
+    },
+    "a10-sorting-greedy": {
+      "chunk": "lessons-a10",
+      "programs": [
+        {
+          "key": "a10-sorting-greedy#1",
+          "title": "SchedulingRules.java",
+          "hash": "e33a8b19",
+          "stdin": false
+        },
+        {
+          "key": "a10-sorting-greedy#2",
+          "title": "AssignCookies.java",
+          "hash": "0ac9bdd4",
+          "stdin": false
+        },
+        {
+          "key": "a10-sorting-greedy#3",
+          "title": "TwoCity.java",
+          "hash": "74d4c5c6",
+          "stdin": false
+        },
+        {
+          "key": "a10-sorting-greedy#4",
+          "title": "FractionalKnapsack.java",
+          "hash": "085c65eb",
+          "stdin": false
+        },
+        {
+          "key": "a10-sorting-greedy#5",
+          "title": "PartitionLabels.java",
+          "hash": "93e94c3f",
+          "stdin": false
+        }
+      ]
+    },
+    "a11-1d-dp": {
+      "chunk": "lessons-a11",
+      "programs": [
+        {
+          "key": "a11-1d-dp#2",
+          "title": "RobberRolling.java",
+          "hash": "3e25c32f",
+          "stdin": false
+        },
+        {
+          "key": "a11-1d-dp#3",
+          "title": "DecodeWays.java",
+          "hash": "fa334e32",
+          "stdin": false
+        },
+        {
+          "key": "a11-1d-dp#4",
+          "title": "CoinChange.java",
+          "hash": "03921f0b",
+          "stdin": false
+        },
+        {
+          "key": "a11-1d-dp#5",
+          "title": "WordBreak.java",
+          "hash": "3e57c26b",
+          "stdin": false
+        }
+      ]
+    },
+    "a11-2d-dp": {
+      "chunk": "lessons-a11",
+      "programs": [
+        {
+          "key": "a11-2d-dp#1",
+          "title": "GridPaths.java",
+          "hash": "43e218b4",
+          "stdin": false
+        },
+        {
+          "key": "a11-2d-dp#2",
+          "title": "EditDistanceBrute.java",
+          "hash": "65c72b78",
+          "stdin": false
+        },
+        {
+          "key": "a11-2d-dp#3",
+          "title": "EditDistance.java",
+          "hash": "b42e95d1",
+          "stdin": false
+        },
+        {
+          "key": "a11-2d-dp#4",
+          "title": "PalindromeOrder.java",
+          "hash": "5dc3f6f2",
+          "stdin": false
+        },
+        {
+          "key": "a11-2d-dp#5",
+          "title": "EditDistanceCheck.java",
+          "hash": "ae02dfab",
+          "stdin": false
+        }
+      ]
+    },
+    "a11-bitmask-dp": {
+      "chunk": "lessons-a11",
+      "programs": [
+        {
+          "key": "a11-bitmask-dp#1",
+          "title": "BitmaskDp.java",
+          "hash": "a8f1a63c",
+          "stdin": false
+        }
+      ]
+    },
+    "a11-grid-dp": {
+      "chunk": "lessons-a11",
+      "programs": [
+        {
+          "key": "a11-grid-dp#1",
+          "title": "GridDp.java",
+          "hash": "3e265cb4",
+          "stdin": false
+        },
+        {
+          "key": "a11-grid-dp#2",
+          "title": "GridVariants.java",
+          "hash": "e5c92cdc",
+          "stdin": false
+        }
+      ]
+    },
+    "a11-knapsack": {
+      "chunk": "lessons-a11",
+      "programs": [
+        {
+          "key": "a11-knapsack#1",
+          "title": "KnapsackBrute.java",
+          "hash": "9ec847b3",
+          "stdin": false
+        },
+        {
+          "key": "a11-knapsack#2",
+          "title": "KnapsackMemo.java",
+          "hash": "d1f0f588",
+          "stdin": false
+        },
+        {
+          "key": "a11-knapsack#4",
+          "title": "OneRow.java",
+          "hash": "2abbda39",
+          "stdin": false
+        },
+        {
+          "key": "a11-knapsack#5",
+          "title": "GreedyVsDp.java",
+          "hash": "927ba90d",
+          "stdin": false
+        },
+        {
+          "key": "a11-knapsack#6",
+          "title": "PartitionEqualSubset.java",
+          "hash": "eb040269",
+          "stdin": false
+        },
+        {
+          "key": "a11-knapsack#7",
+          "title": "TargetSum.java",
+          "hash": "47cca14e",
+          "stdin": false
+        },
+        {
+          "key": "a11-knapsack#8",
+          "title": "CoinChangeWays.java",
+          "hash": "8dd89bad",
+          "stdin": false
+        },
+        {
+          "key": "a11-knapsack#9",
+          "title": "ExactVsAtMost.java",
+          "hash": "a76a07a2",
+          "stdin": false
+        },
+        {
+          "key": "a11-knapsack#10",
+          "title": "Bounded.java",
+          "hash": "2d008464",
+          "stdin": false
+        },
+        {
+          "key": "a11-knapsack#11",
+          "title": "KnapsackCheck.java",
+          "hash": "511a27a4",
+          "stdin": false
+        }
+      ]
+    },
+    "a11-lcs": {
+      "chunk": "lessons-a11",
+      "programs": [
+        {
+          "key": "a11-lcs#1",
+          "title": "Lcs.java",
+          "hash": "e7af0d6c",
+          "stdin": false
+        },
+        {
+          "key": "a11-lcs#2",
+          "title": "LcsStressTest.java",
+          "hash": "bab81497",
+          "stdin": false
+        },
+        {
+          "key": "a11-lcs#3",
+          "title": "LcsVariants.java",
+          "hash": "505eb4c9",
+          "stdin": false
+        }
+      ]
+    },
+    "a11-lis": {
+      "chunk": "lessons-a11",
+      "programs": [
+        {
+          "key": "a11-lis#1",
+          "title": "LisRecursive.java",
+          "hash": "109ba3df",
+          "stdin": false
+        },
+        {
+          "key": "a11-lis#2",
+          "title": "LisQuadratic.java",
+          "hash": "8e8370e3",
+          "stdin": false
+        },
+        {
+          "key": "a11-lis#3",
+          "title": "LisFast.java",
+          "hash": "3b89c2da",
+          "stdin": false
+        },
+        {
+          "key": "a11-lis#4",
+          "title": "NumberOfLis.java",
+          "hash": "89e745bd",
+          "stdin": false
+        },
+        {
+          "key": "a11-lis#5",
+          "title": "Envelopes.java",
+          "hash": "4336394b",
+          "stdin": false
+        },
+        {
+          "key": "a11-lis#6",
+          "title": "PairChain.java",
+          "hash": "961cd5a6",
+          "stdin": false
+        },
+        {
+          "key": "a11-lis#7",
+          "title": "LisCrossCheck.java",
+          "hash": "46633bfe",
+          "stdin": false
+        }
+      ]
+    },
+    "a11-memoization": {
+      "chunk": "lessons-a11",
+      "programs": [
+        {
+          "key": "a11-memoization#1",
+          "title": "FibRepeats.java",
+          "hash": "28e02042",
+          "stdin": false
+        },
+        {
+          "key": "a11-memoization#2",
+          "title": "MinSteps.java",
+          "hash": "488cf30e",
+          "stdin": false
+        },
+        {
+          "key": "a11-memoization#4",
+          "title": "DiceWays.java",
+          "hash": "57b30b91",
+          "stdin": false
+        },
+        {
+          "key": "a11-memoization#5",
+          "title": "MinStepsHuge.java",
+          "hash": "363fcf48",
+          "stdin": false
+        },
+        {
+          "key": "a11-memoization#6",
+          "title": "MinStepsTable.java",
+          "hash": "96dc37fd",
+          "stdin": false
+        },
+        {
+          "key": "a11-memoization#7",
+          "title": "FibRolling.java",
+          "hash": "f50b4b1d",
+          "stdin": false
+        },
+        {
+          "key": "a11-memoization#8",
+          "title": "MinStepsCheck.java",
+          "hash": "26cf5e9e",
+          "stdin": false
+        }
+      ]
+    },
+    "a11-partition-dp": {
+      "chunk": "lessons-a11",
+      "programs": [
+        {
+          "key": "a11-partition-dp#1",
+          "title": "PrefixPartition.java",
+          "hash": "f9a4361d",
+          "stdin": false
+        },
+        {
+          "key": "a11-partition-dp#2",
+          "title": "IntervalPartition.java",
+          "hash": "c1570143",
+          "stdin": false
+        }
+      ]
+    },
+    "a11-state-machine-dp": {
+      "chunk": "lessons-a11",
+      "programs": [
+        {
+          "key": "a11-state-machine-dp#1",
+          "title": "StockDp.java",
+          "hash": "bb280ebc",
+          "stdin": false
+        },
+        {
+          "key": "a11-state-machine-dp#2",
+          "title": "MoreStateMachines.java",
+          "hash": "4b1d1a98",
+          "stdin": false
+        }
+      ]
+    },
+    "a11-subsequences": {
+      "chunk": "lessons-a11",
+      "programs": [
+        {
+          "key": "a11-subsequences#1",
+          "title": "Arithmetic.java",
+          "hash": "412c5d11",
+          "stdin": false
+        },
+        {
+          "key": "a11-subsequences#2",
+          "title": "IsSubsequence.java",
+          "hash": "1b8f0de6",
+          "stdin": false
+        },
+        {
+          "key": "a11-subsequences#3",
+          "title": "DistinctSubsequences.java",
+          "hash": "e6c9c7b9",
+          "stdin": false
+        },
+        {
+          "key": "a11-subsequences#4",
+          "title": "CountDistinct.java",
+          "hash": "2190a954",
+          "stdin": false
+        },
+        {
+          "key": "a11-subsequences#5",
+          "title": "Palindromic.java",
+          "hash": "8526e9ee",
+          "stdin": false
+        },
+        {
+          "key": "a11-subsequences#6",
+          "title": "SubseqCrossCheck.java",
+          "hash": "b0334851",
+          "stdin": false
+        }
+      ]
+    },
+    "a11-tree-dp": {
+      "chunk": "lessons-a11",
+      "programs": [
+        {
+          "key": "a11-tree-dp#1",
+          "title": "BinaryTreeDp.java",
+          "hash": "1c8113be",
+          "stdin": false
+        },
+        {
+          "key": "a11-tree-dp#2",
+          "title": "GeneralTreeDp.java",
+          "hash": "81e68825",
+          "stdin": false
+        }
+      ]
+    },
+    "a12-fenwick": {
+      "chunk": "lessons-a12",
+      "programs": [
+        {
+          "key": "a12-fenwick#1",
+          "title": "Fenwick.java",
+          "hash": "224b8769",
+          "stdin": false
+        },
+        {
+          "key": "a12-fenwick#2",
+          "title": "RangeFenwick.java",
+          "hash": "ac58ba78",
+          "stdin": false
+        },
+        {
+          "key": "a12-fenwick#3",
+          "title": "Inversions.java",
+          "hash": "5253d553",
+          "stdin": false
+        },
+        {
+          "key": "a12-fenwick#4",
+          "title": "KthFenwick.java",
+          "hash": "c3596a32",
+          "stdin": false
+        }
+      ]
+    },
+    "a12-prefix-matching": {
+      "chunk": "lessons-a12",
+      "programs": [
+        {
+          "key": "a12-prefix-matching#1",
+          "title": "PrefixDictionary.java",
+          "hash": "7a8131a0",
+          "stdin": false
+        },
+        {
+          "key": "a12-prefix-matching#2",
+          "title": "SearchSuggestions.java",
+          "hash": "d6db27a8",
+          "stdin": false
+        },
+        {
+          "key": "a12-prefix-matching#3",
+          "title": "SortedPrefix.java",
+          "hash": "31d53416",
+          "stdin": false
+        },
+        {
+          "key": "a12-prefix-matching#4",
+          "title": "Kmp.java",
+          "hash": "19c83491",
+          "stdin": false
+        },
+        {
+          "key": "a12-prefix-matching#5",
+          "title": "Structure.java",
+          "hash": "ed5c9b2c",
+          "stdin": false
+        },
+        {
+          "key": "a12-prefix-matching#6",
+          "title": "ZFunction.java",
+          "hash": "bb5bcbe5",
+          "stdin": false
+        },
+        {
+          "key": "a12-prefix-matching#7",
+          "title": "RabinKarp.java",
+          "hash": "1246043a",
+          "stdin": false
+        }
+      ]
+    },
+    "a12-segment-trees": {
+      "chunk": "lessons-a12",
+      "programs": [
+        {
+          "key": "a12-segment-trees#1",
+          "title": "SegmentTree.java",
+          "hash": "91999351",
+          "stdin": false
+        },
+        {
+          "key": "a12-segment-trees#2",
+          "title": "MaxSubarrayTree.java",
+          "hash": "a3e55dfc",
+          "stdin": false
+        },
+        {
+          "key": "a12-segment-trees#3",
+          "title": "LazySegmentTree.java",
+          "hash": "f9bd1531",
+          "stdin": false
+        },
+        {
+          "key": "a12-segment-trees#4",
+          "title": "IterativeSegmentTree.java",
+          "hash": "35f2c8d6",
+          "stdin": false
+        }
+      ]
+    },
+    "a12-sparse-tables": {
+      "chunk": "lessons-a12",
+      "programs": [
+        {
+          "key": "a12-sparse-tables#1",
+          "title": "SparseTable.java",
+          "hash": "44435b9a",
+          "stdin": false
+        },
+        {
+          "key": "a12-sparse-tables#2",
+          "title": "SparseSum.java",
+          "hash": "9a7b11e5",
+          "stdin": false
+        }
+      ]
+    },
+    "a12-trie": {
+      "chunk": "lessons-a12",
+      "programs": [
+        {
+          "key": "a12-trie#1",
+          "title": "Trie.java",
+          "hash": "17c41498",
+          "stdin": false
+        },
+        {
+          "key": "a12-trie#2",
+          "title": "WordDictionary.java",
+          "hash": "5993a4ff",
+          "stdin": false
+        },
+        {
+          "key": "a12-trie#3",
+          "title": "MaxXor.java",
+          "hash": "1e78c22a",
+          "stdin": false
+        }
+      ]
+    },
+    "a13-and-or-xor": {
+      "chunk": "lessons-a13",
+      "programs": [
+        {
+          "key": "a13-and-or-xor#1",
+          "title": "BitBasics.java",
+          "hash": "120d314b",
+          "stdin": false
+        },
+        {
+          "key": "a13-and-or-xor#2",
+          "title": "Shifts.java",
+          "hash": "9d880746",
+          "stdin": false
+        },
+        {
+          "key": "a13-and-or-xor#3",
+          "title": "Identities.java",
+          "hash": "92c6ecc5",
+          "stdin": false
+        },
+        {
+          "key": "a13-and-or-xor#4",
+          "title": "AddWithoutPlus.java",
+          "hash": "860bd130",
+          "stdin": false
+        }
+      ]
+    },
+    "a13-bitmasking": {
+      "chunk": "lessons-a13",
+      "programs": [
+        {
+          "key": "a13-bitmasking#1",
+          "title": "SetOps.java",
+          "hash": "80e7cabf",
+          "stdin": false
+        },
+        {
+          "key": "a13-bitmasking#2",
+          "title": "Subsets.java",
+          "hash": "dddebfc0",
+          "stdin": false
+        },
+        {
+          "key": "a13-bitmasking#3",
+          "title": "Submasks.java",
+          "hash": "d718dc36",
+          "stdin": false
+        },
+        {
+          "key": "a13-bitmasking#4",
+          "title": "Gosper.java",
+          "hash": "95a26f61",
+          "stdin": false
+        },
+        {
+          "key": "a13-bitmasking#5",
+          "title": "WordProduct.java",
+          "hash": "939efdb6",
+          "stdin": false
+        },
+        {
+          "key": "a13-bitmasking#6",
+          "title": "Tsp.java",
+          "hash": "bb116607",
+          "stdin": false
+        }
+      ]
+    },
+    "a13-powers-of-two": {
+      "chunk": "lessons-a13",
+      "programs": [
+        {
+          "key": "a13-powers-of-two#2",
+          "title": "PowerOfFour.java",
+          "hash": "6b3d3fdd",
+          "stdin": false
+        },
+        {
+          "key": "a13-powers-of-two#3",
+          "title": "Rounding.java",
+          "hash": "d7d845cb",
+          "stdin": false
+        },
+        {
+          "key": "a13-powers-of-two#4",
+          "title": "ModPow2.java",
+          "hash": "d4fac8cd",
+          "stdin": false
+        }
+      ]
+    },
+    "a13-set-bit": {
+      "chunk": "lessons-a13",
+      "programs": [
+        {
+          "key": "a13-set-bit#1",
+          "title": "SetPitfalls.java",
+          "hash": "630f59bb",
+          "stdin": false
+        },
+        {
+          "key": "a13-set-bit#2",
+          "title": "UnsetDemo.java",
+          "hash": "00094453",
+          "stdin": false
+        },
+        {
+          "key": "a13-set-bit#4",
+          "title": "CheckDemo.java",
+          "hash": "56ecc5dc",
+          "stdin": false
+        },
+        {
+          "key": "a13-set-bit#5",
+          "title": "SetBitsList.java",
+          "hash": "18273b65",
+          "stdin": false
+        },
+        {
+          "key": "a13-set-bit#6",
+          "title": "Permissions.java",
+          "hash": "3715eefb",
+          "stdin": false
+        }
+      ]
+    },
+    "a13-xor-tricks": {
+      "chunk": "lessons-a13",
+      "programs": [
+        {
+          "key": "a13-xor-tricks#1",
+          "title": "XorBasics.java",
+          "hash": "113817ed",
+          "stdin": false
+        },
+        {
+          "key": "a13-xor-tricks#2",
+          "title": "SumOverflow.java",
+          "hash": "7ab007e9",
+          "stdin": false
+        },
+        {
+          "key": "a13-xor-tricks#3",
+          "title": "TwoSingles.java",
+          "hash": "582f9b8c",
+          "stdin": false
+        },
+        {
+          "key": "a13-xor-tricks#4",
+          "title": "SingleII.java",
+          "hash": "c3c251df",
+          "stdin": false
+        },
+        {
+          "key": "a13-xor-tricks#5",
+          "title": "SubarrayXor.java",
+          "hash": "6e969af4",
+          "stdin": false
+        },
+        {
+          "key": "a13-xor-tricks#6",
+          "title": "XorSwap.java",
+          "hash": "31bce703",
+          "stdin": false
+        }
+      ]
+    },
+    "a14-brute-force-first": {
+      "chunk": "lessons-a14",
+      "programs": [
+        {
+          "key": "a14-brute-force-first#1",
+          "title": "SubarraySumK.java",
+          "hash": "a9500060",
+          "stdin": false
+        }
+      ]
+    },
+    "a14-clarifying-requirements": {
+      "chunk": "lessons-a14",
+      "programs": [
+        {
+          "key": "a14-clarifying-requirements#1",
+          "title": "MergeIntervals.java",
+          "hash": "abafaef1",
+          "stdin": false
+        }
+      ]
+    },
+    "a14-clean-coding": {
+      "chunk": "lessons-a14",
+      "programs": [
+        {
+          "key": "a14-clean-coding#1",
+          "title": "Islands.java",
+          "hash": "9a3fb875",
+          "stdin": false
+        },
+        {
+          "key": "a14-clean-coding#2",
+          "title": "IslandCounter.java",
+          "hash": "7b7e1ba6",
+          "stdin": false
+        },
+        {
+          "key": "a14-clean-coding#3",
+          "title": "NoIdePitfalls.java",
+          "hash": "51eb379a",
+          "stdin": false
+        }
+      ]
+    },
+    "a14-complexity-in-interview": {
+      "chunk": "lessons-a14",
+      "programs": [
+        {
+          "key": "a14-complexity-in-interview#1",
+          "title": "GroupAnagrams.java",
+          "hash": "765a5cb9",
+          "stdin": false
+        },
+        {
+          "key": "a14-complexity-in-interview#2",
+          "title": "WindowCost.java",
+          "hash": "5ac34c81",
+          "stdin": false
+        },
+        {
+          "key": "a14-complexity-in-interview#3",
+          "title": "WordBreakCalls.java",
+          "hash": "8ed15468",
+          "stdin": false
+        }
+      ]
+    },
+    "a14-deriving-optimization": {
+      "chunk": "lessons-a14",
+      "programs": [
+        {
+          "key": "a14-deriving-optimization#1",
+          "title": "SubarraySumCount.java",
+          "hash": "6c884b2a",
+          "stdin": false
+        },
+        {
+          "key": "a14-deriving-optimization#2",
+          "title": "HouseRobber.java",
+          "hash": "c884dd9d",
+          "stdin": false
+        },
+        {
+          "key": "a14-deriving-optimization#3",
+          "title": "CoinGreedy.java",
+          "hash": "c0ec1ad1",
+          "stdin": false
+        }
+      ]
+    },
+    "a14-edge-cases": {
+      "chunk": "lessons-a14",
+      "programs": [
+        {
+          "key": "a14-edge-cases#1",
+          "title": "EdgeTraps.java",
+          "hash": "a0383164",
+          "stdin": false
+        },
+        {
+          "key": "a14-edge-cases#2",
+          "title": "RemoveNthFromEnd.java",
+          "hash": "4c30c726",
+          "stdin": false
+        },
+        {
+          "key": "a14-edge-cases#4",
+          "title": "KadaneInit.java",
+          "hash": "70e2d069",
+          "stdin": false
+        }
+      ]
+    },
+    "a14-manual-testing": {
+      "chunk": "lessons-a14",
+      "programs": [
+        {
+          "key": "a14-manual-testing#1",
+          "title": "WindowSum.java",
+          "hash": "23b787d9",
+          "stdin": false
+        }
+      ]
+    },
+    "a14-responding-to-hints": {
+      "chunk": "lessons-a14",
+      "programs": [
+        {
+          "key": "a14-responding-to-hints#1",
+          "title": "DailyTemperatures.java",
+          "hash": "db6f6d4b",
+          "stdin": false
+        }
+      ]
+    },
+    "a14-thinking-aloud": {
+      "chunk": "lessons-a14",
+      "programs": [
+        {
+          "key": "a14-thinking-aloud#1",
+          "title": "MeetingRooms.java",
+          "hash": "a5e42f66",
+          "stdin": false
+        }
+      ]
+    },
+    "a14-timed-coding": {
+      "chunk": "lessons-a14",
+      "programs": [
+        {
+          "key": "a14-timed-coding#1",
+          "title": "RotatedSearch.java",
+          "hash": "ed64a634",
+          "stdin": false
+        }
+      ]
+    },
+    "a2-array-string-traversal": {
+      "chunk": "lessons-a2",
+      "programs": [
+        {
+          "key": "a2-array-string-traversal#1",
+          "title": "MaxOnes.java",
+          "hash": "f65d9b0f",
+          "stdin": false
+        },
+        {
+          "key": "a2-array-string-traversal#2",
+          "title": "PlusOne.java",
+          "hash": "6516036d",
+          "stdin": false
+        },
+        {
+          "key": "a2-array-string-traversal#3",
+          "title": "MoveZeroes.java",
+          "hash": "5e51c6da",
+          "stdin": false
+        },
+        {
+          "key": "a2-array-string-traversal#4",
+          "title": "RemoveDuplicates.java",
+          "hash": "633d75dd",
+          "stdin": false
+        },
+        {
+          "key": "a2-array-string-traversal#5",
+          "title": "ReverseWords.java",
+          "hash": "f90fc7e9",
+          "stdin": false
+        },
+        {
+          "key": "a2-array-string-traversal#6",
+          "title": "Palindrome.java",
+          "hash": "572dacf8",
+          "stdin": false
+        },
+        {
+          "key": "a2-array-string-traversal#7",
+          "title": "Atoi.java",
+          "hash": "28c41e5a",
+          "stdin": false
+        }
+      ]
+    },
+    "a2-difference-arrays": {
+      "chunk": "lessons-a2",
+      "programs": [
+        {
+          "key": "a2-difference-arrays#1",
+          "title": "DifferenceArray.java",
+          "hash": "fbd1c9e1",
+          "stdin": false
+        },
+        {
+          "key": "a2-difference-arrays#2",
+          "title": "FlightBookings.java",
+          "hash": "d17b38fb",
+          "stdin": false
+        },
+        {
+          "key": "a2-difference-arrays#3",
+          "title": "CarPooling.java",
+          "hash": "7d1d34df",
+          "stdin": false
+        },
+        {
+          "key": "a2-difference-arrays#4",
+          "title": "SparseSweep.java",
+          "hash": "cac7b6ee",
+          "stdin": false
+        },
+        {
+          "key": "a2-difference-arrays#5",
+          "title": "Diff2D.java",
+          "hash": "58424527",
+          "stdin": false
+        }
+      ]
+    },
+    "a2-frequency-counting": {
+      "chunk": "lessons-a2",
+      "programs": [
+        {
+          "key": "a2-frequency-counting#1",
+          "title": "Anagram.java",
+          "hash": "f33fd49f",
+          "stdin": false
+        },
+        {
+          "key": "a2-frequency-counting#2",
+          "title": "FirstUnique.java",
+          "hash": "f30fe9b7",
+          "stdin": false
+        },
+        {
+          "key": "a2-frequency-counting#3",
+          "title": "GroupAnagrams.java",
+          "hash": "a72bb3de",
+          "stdin": false
+        },
+        {
+          "key": "a2-frequency-counting#4",
+          "title": "TopKFrequent.java",
+          "hash": "81d3ad48",
+          "stdin": false
+        },
+        {
+          "key": "a2-frequency-counting#5",
+          "title": "MajorityElement.java",
+          "hash": "c4efc378",
+          "stdin": false
+        }
+      ]
+    },
+    "a2-hashing": {
+      "chunk": "lessons-a2",
+      "programs": [
+        {
+          "key": "a2-hashing#1",
+          "title": "MutableKey.java",
+          "hash": "b4b8516a",
+          "stdin": false
+        },
+        {
+          "key": "a2-hashing#2",
+          "title": "TwoSum.java",
+          "hash": "483e422c",
+          "stdin": false
+        },
+        {
+          "key": "a2-hashing#3",
+          "title": "SubarraySumK.java",
+          "hash": "29ed7687",
+          "stdin": false
+        },
+        {
+          "key": "a2-hashing#4",
+          "title": "LongestConsecutive.java",
+          "hash": "0da71633",
+          "stdin": false
+        }
+      ]
+    },
+    "a2-intervals": {
+      "chunk": "lessons-a2",
+      "programs": [
+        {
+          "key": "a2-intervals#1",
+          "title": "MergeIntervals.java",
+          "hash": "12851fdc",
+          "stdin": false
+        },
+        {
+          "key": "a2-intervals#2",
+          "title": "InsertInterval.java",
+          "hash": "57a55ecb",
+          "stdin": false
+        },
+        {
+          "key": "a2-intervals#3",
+          "title": "IntervalIntersection.java",
+          "hash": "57f8e952",
+          "stdin": false
+        },
+        {
+          "key": "a2-intervals#4",
+          "title": "NonOverlapping.java",
+          "hash": "74f5bd2c",
+          "stdin": false
+        },
+        {
+          "key": "a2-intervals#5",
+          "title": "MeetingRooms.java",
+          "hash": "9a759427",
+          "stdin": false
+        }
+      ]
+    },
+    "a2-kadane": {
+      "chunk": "lessons-a2",
+      "programs": [
+        {
+          "key": "a2-kadane#1",
+          "title": "MaxSubarrayBrute.java",
+          "hash": "fb0a3a80",
+          "stdin": false
+        },
+        {
+          "key": "a2-kadane#2",
+          "title": "PrefixView.java",
+          "hash": "8e95ecb0",
+          "stdin": false
+        },
+        {
+          "key": "a2-kadane#3",
+          "title": "Kadane.java",
+          "hash": "5ea6bb8d",
+          "stdin": false
+        },
+        {
+          "key": "a2-kadane#4",
+          "title": "KadaneWithBounds.java",
+          "hash": "6391f034",
+          "stdin": false
+        },
+        {
+          "key": "a2-kadane#5",
+          "title": "Variations.java",
+          "hash": "1ba5e115",
+          "stdin": false
+        },
+        {
+          "key": "a2-kadane#6",
+          "title": "MaxSumRectangle.java",
+          "hash": "7088176c",
+          "stdin": false
+        }
+      ]
+    },
+    "a2-matrix": {
+      "chunk": "lessons-a2",
+      "programs": [
+        {
+          "key": "a2-matrix#1",
+          "title": "GridBasics.java",
+          "hash": "0f8e0a6c",
+          "stdin": false
+        },
+        {
+          "key": "a2-matrix#2",
+          "title": "Toeplitz.java",
+          "hash": "39fde630",
+          "stdin": false
+        },
+        {
+          "key": "a2-matrix#3",
+          "title": "SpiralOrder.java",
+          "hash": "bba751d7",
+          "stdin": false
+        },
+        {
+          "key": "a2-matrix#4",
+          "title": "RotateImage.java",
+          "hash": "9039545c",
+          "stdin": false
+        },
+        {
+          "key": "a2-matrix#5",
+          "title": "SetMatrixZeroes.java",
+          "hash": "f1607f2c",
+          "stdin": false
+        },
+        {
+          "key": "a2-matrix#6",
+          "title": "SearchSortedMatrix.java",
+          "hash": "763ffd99",
+          "stdin": false
+        },
+        {
+          "key": "a2-matrix#7",
+          "title": "NumberOfIslands.java",
+          "hash": "a89d48ad",
+          "stdin": false
+        }
+      ]
+    },
+    "a2-prefix-suffix": {
+      "chunk": "lessons-a2",
+      "programs": [
+        {
+          "key": "a2-prefix-suffix#1",
+          "title": "RangeSum.java",
+          "hash": "c34b324f",
+          "stdin": false
+        },
+        {
+          "key": "a2-prefix-suffix#2",
+          "title": "StockProfit.java",
+          "hash": "a8211ebe",
+          "stdin": false
+        },
+        {
+          "key": "a2-prefix-suffix#3",
+          "title": "ProductExceptSelf.java",
+          "hash": "2e7437e1",
+          "stdin": false
+        },
+        {
+          "key": "a2-prefix-suffix#4",
+          "title": "TrappingRainWater.java",
+          "hash": "fddcdd00",
+          "stdin": false
+        },
+        {
+          "key": "a2-prefix-suffix#5",
+          "title": "PivotIndex.java",
+          "hash": "1e4d198a",
+          "stdin": false
+        },
+        {
+          "key": "a2-prefix-suffix#6",
+          "title": "MatrixSum.java",
+          "hash": "2c0ddbae",
+          "stdin": false
+        }
+      ]
+    },
+    "a2-sliding-window": {
+      "chunk": "lessons-a2",
+      "programs": [
+        {
+          "key": "a2-sliding-window#1",
+          "title": "MaxSumK.java",
+          "hash": "a910f3ee",
+          "stdin": false
+        },
+        {
+          "key": "a2-sliding-window#2",
+          "title": "FindAnagrams.java",
+          "hash": "cb2afbfc",
+          "stdin": false
+        },
+        {
+          "key": "a2-sliding-window#3",
+          "title": "LongestUniqueSubstring.java",
+          "hash": "0b028574",
+          "stdin": false
+        },
+        {
+          "key": "a2-sliding-window#4",
+          "title": "MinSubarrayLen.java",
+          "hash": "6a718e3f",
+          "stdin": false
+        },
+        {
+          "key": "a2-sliding-window#5",
+          "title": "MinimumWindow.java",
+          "hash": "82335ddf",
+          "stdin": false
+        },
+        {
+          "key": "a2-sliding-window#6",
+          "title": "SubarraysWithKDistinct.java",
+          "hash": "9e161c47",
+          "stdin": false
+        }
+      ]
+    },
+    "a2-sorting-based": {
+      "chunk": "lessons-a2",
+      "programs": [
+        {
+          "key": "a2-sorting-based#1",
+          "title": "ContainsDuplicate.java",
+          "hash": "780dae4b",
+          "stdin": false
+        },
+        {
+          "key": "a2-sorting-based#2",
+          "title": "MinimumAbsDifference.java",
+          "hash": "28b48f97",
+          "stdin": false
+        },
+        {
+          "key": "a2-sorting-based#3",
+          "title": "GroupAnagrams.java",
+          "hash": "8ba7abd3",
+          "stdin": false
+        },
+        {
+          "key": "a2-sorting-based#4",
+          "title": "RankTransform.java",
+          "hash": "e3603c45",
+          "stdin": false
+        },
+        {
+          "key": "a2-sorting-based#5",
+          "title": "BoatsToSavePeople.java",
+          "hash": "8a3ddff1",
+          "stdin": false
+        },
+        {
+          "key": "a2-sorting-based#6",
+          "title": "LargestNumber.java",
+          "hash": "b7ad716a",
+          "stdin": false
+        }
+      ]
+    },
+    "a2-two-pointers": {
+      "chunk": "lessons-a2",
+      "programs": [
+        {
+          "key": "a2-two-pointers#1",
+          "title": "TwoSumSorted.java",
+          "hash": "aef814b5",
+          "stdin": false
+        },
+        {
+          "key": "a2-two-pointers#2",
+          "title": "ContainerWithMostWater.java",
+          "hash": "45ad2d54",
+          "stdin": false
+        },
+        {
+          "key": "a2-two-pointers#3",
+          "title": "ThreeSum.java",
+          "hash": "4b3c57a1",
+          "stdin": false
+        },
+        {
+          "key": "a2-two-pointers#4",
+          "title": "SortColors.java",
+          "hash": "9186210a",
+          "stdin": false
+        },
+        {
+          "key": "a2-two-pointers#5",
+          "title": "MergeSortedArray.java",
+          "hash": "403a1fdb",
+          "stdin": false
+        }
+      ]
+    },
+    "a3-binary-search": {
+      "chunk": "lessons-a3",
+      "programs": [
+        {
+          "key": "a3-binary-search#1",
+          "title": "BinarySearch.java",
+          "hash": "d3454721",
+          "stdin": false
+        }
+      ]
+    },
+    "a3-binary-search-on-answer": {
+      "chunk": "lessons-a3",
+      "programs": [
+        {
+          "key": "a3-binary-search-on-answer#1",
+          "title": "ShipWithinDays.java",
+          "hash": "f9e5eec2",
+          "stdin": false
+        },
+        {
+          "key": "a3-binary-search-on-answer#2",
+          "title": "Koko.java",
+          "hash": "a9891c8b",
+          "stdin": false
+        },
+        {
+          "key": "a3-binary-search-on-answer#3",
+          "title": "MagneticForce.java",
+          "hash": "b26383c0",
+          "stdin": false
+        },
+        {
+          "key": "a3-binary-search-on-answer#4",
+          "title": "SqrtBisection.java",
+          "hash": "bc1b5f7f",
+          "stdin": false
+        }
+      ]
+    },
+    "a3-comparator-sorting": {
+      "chunk": "lessons-a3",
+      "programs": [
+        {
+          "key": "a3-comparator-sorting#1",
+          "title": "SubtractionBug.java",
+          "hash": "331157d3",
+          "stdin": false
+        },
+        {
+          "key": "a3-comparator-sorting#2",
+          "title": "People.java",
+          "hash": "87bd46f0",
+          "stdin": false
+        },
+        {
+          "key": "a3-comparator-sorting#3",
+          "title": "ArraysAndIndices.java",
+          "hash": "a94e69cb",
+          "stdin": false
+        },
+        {
+          "key": "a3-comparator-sorting#4",
+          "title": "LargestNumber.java",
+          "hash": "2c05cf3a",
+          "stdin": false
+        },
+        {
+          "key": "a3-comparator-sorting#5",
+          "title": "MeetingRooms.java",
+          "hash": "2a793098",
+          "stdin": false
+        },
+        {
+          "key": "a3-comparator-sorting#6",
+          "title": "TreeSetDrop.java",
+          "hash": "3015edba",
+          "stdin": false
+        }
+      ]
+    },
+    "a3-counting-sort": {
+      "chunk": "lessons-a3",
+      "programs": [
+        {
+          "key": "a3-counting-sort#1",
+          "title": "CountingSort.java",
+          "hash": "55e94778",
+          "stdin": false
+        },
+        {
+          "key": "a3-counting-sort#2",
+          "title": "StableCountingSort.java",
+          "hash": "dd346f49",
+          "stdin": false
+        },
+        {
+          "key": "a3-counting-sort#3",
+          "title": "RadixSort.java",
+          "hash": "7789e08f",
+          "stdin": false
+        },
+        {
+          "key": "a3-counting-sort#4",
+          "title": "BucketSort.java",
+          "hash": "a3721214",
+          "stdin": false
+        },
+        {
+          "key": "a3-counting-sort#5",
+          "title": "TopKFrequent.java",
+          "hash": "e1b98e7d",
+          "stdin": false
+        }
+      ]
+    },
+    "a3-lower-upper-bounds": {
+      "chunk": "lessons-a3",
+      "programs": [
+        {
+          "key": "a3-lower-upper-bounds#1",
+          "title": "Bounds.java",
+          "hash": "9efea288",
+          "stdin": false
+        },
+        {
+          "key": "a3-lower-upper-bounds#2",
+          "title": "FirstTrue.java",
+          "hash": "e50b344c",
+          "stdin": false
+        },
+        {
+          "key": "a3-lower-upper-bounds#3",
+          "title": "RotatedMin.java",
+          "hash": "6ec8d493",
+          "stdin": false
+        },
+        {
+          "key": "a3-lower-upper-bounds#4",
+          "title": "LastTrue.java",
+          "hash": "0ec60fc5",
+          "stdin": false
+        },
+        {
+          "key": "a3-lower-upper-bounds#5",
+          "title": "LibraryBounds.java",
+          "hash": "1cb4afb8",
+          "stdin": false
+        }
+      ]
+    },
+    "a3-merge-sort": {
+      "chunk": "lessons-a3",
+      "programs": [
+        {
+          "key": "a3-merge-sort#1",
+          "title": "StableMerge.java",
+          "hash": "4600fb2e",
+          "stdin": false
+        },
+        {
+          "key": "a3-merge-sort#2",
+          "title": "MergeSort.java",
+          "hash": "5dc815a7",
+          "stdin": false
+        },
+        {
+          "key": "a3-merge-sort#3",
+          "title": "BottomUpMergeSort.java",
+          "hash": "590fa610",
+          "stdin": false
+        },
+        {
+          "key": "a3-merge-sort#4",
+          "title": "ListMergeSort.java",
+          "hash": "132de42c",
+          "stdin": false
+        },
+        {
+          "key": "a3-merge-sort#5",
+          "title": "Inversions.java",
+          "hash": "8d676745",
+          "stdin": false
+        }
+      ]
+    },
+    "a3-quick-sort": {
+      "chunk": "lessons-a3",
+      "programs": [
+        {
+          "key": "a3-quick-sort#1",
+          "title": "QuickSort.java",
+          "hash": "242b97ef",
+          "stdin": false
+        },
+        {
+          "key": "a3-quick-sort#2",
+          "title": "PivotCost.java",
+          "hash": "bcf1c22c",
+          "stdin": false
+        },
+        {
+          "key": "a3-quick-sort#3",
+          "title": "Hoare.java",
+          "hash": "5c3718d1",
+          "stdin": false
+        },
+        {
+          "key": "a3-quick-sort#4",
+          "title": "ThreeWay.java",
+          "hash": "f7cad178",
+          "stdin": false
+        }
+      ]
+    },
+    "a3-quickselect": {
+      "chunk": "lessons-a3",
+      "programs": [
+        {
+          "key": "a3-quickselect#1",
+          "title": "QuickSelect.java",
+          "hash": "c23dad09",
+          "stdin": false
+        },
+        {
+          "key": "a3-quickselect#2",
+          "title": "SelectCost.java",
+          "hash": "5ab25a3c",
+          "stdin": false
+        },
+        {
+          "key": "a3-quickselect#3",
+          "title": "TopK.java",
+          "hash": "7fe85553",
+          "stdin": false
+        }
+      ]
+    },
+    "a4-cycle-detection": {
+      "chunk": "lessons-a4",
+      "programs": [
+        {
+          "key": "a4-cycle-detection#1",
+          "title": "CycleDetection.java",
+          "hash": "e5dcfd00",
+          "stdin": false
+        },
+        {
+          "key": "a4-cycle-detection#2",
+          "title": "Implicit.java",
+          "hash": "706aef32",
+          "stdin": false
+        }
+      ]
+    },
+    "a4-fast-slow-pointers": {
+      "chunk": "lessons-a4",
+      "programs": [
+        {
+          "key": "a4-fast-slow-pointers#1",
+          "title": "FastSlow.java",
+          "hash": "ae274b17",
+          "stdin": false
+        }
+      ]
+    },
+    "a4-intersection": {
+      "chunk": "lessons-a4",
+      "programs": [
+        {
+          "key": "a4-intersection#1",
+          "title": "Intersection.java",
+          "hash": "ba42b2a2",
+          "stdin": false
+        }
+      ]
+    },
+    "a4-lru-style": {
+      "chunk": "lessons-a4",
+      "programs": [
+        {
+          "key": "a4-lru-style#1",
+          "title": "LRUCache.java",
+          "hash": "87a79cbd",
+          "stdin": false
+        },
+        {
+          "key": "a4-lru-style#2",
+          "title": "LinkedHashMapLru.java",
+          "hash": "61c6780d",
+          "stdin": false
+        }
+      ]
+    },
+    "a4-merge-lists": {
+      "chunk": "lessons-a4",
+      "programs": [
+        {
+          "key": "a4-merge-lists#1",
+          "title": "MergeLists.java",
+          "hash": "3263081a",
+          "stdin": false
+        }
+      ]
+    },
+    "a4-singly-linked-lists": {
+      "chunk": "lessons-a4",
+      "programs": [
+        {
+          "key": "a4-singly-linked-lists#1",
+          "title": "LinkedListBasics.java",
+          "hash": "28d5bb11",
+          "stdin": false
+        },
+        {
+          "key": "a4-singly-linked-lists#2",
+          "title": "DoublyLinkedList.java",
+          "hash": "72212c34",
+          "stdin": false
+        }
+      ]
+    },
+    "a5-deque": {
+      "chunk": "lessons-a5",
+      "programs": [
+        {
+          "key": "a5-deque#1",
+          "title": "DequeBasics.java",
+          "hash": "01e6b5ce",
+          "stdin": false
+        },
+        {
+          "key": "a5-deque#2",
+          "title": "CircularDeque.java",
+          "hash": "9c613fe5",
+          "stdin": false
+        },
+        {
+          "key": "a5-deque#3",
+          "title": "Palindrome.java",
+          "hash": "b9444da8",
+          "stdin": false
+        },
+        {
+          "key": "a5-deque#4",
+          "title": "ZeroOneBfs.java",
+          "hash": "f9097463",
+          "stdin": false
+        }
+      ]
+    },
+    "a5-monotonic-queue": {
+      "chunk": "lessons-a5",
+      "programs": [
+        {
+          "key": "a5-monotonic-queue#1",
+          "title": "SlidingMax.java",
+          "hash": "1a08d6e8",
+          "stdin": false
+        },
+        {
+          "key": "a5-monotonic-queue#2",
+          "title": "JumpGame6.java",
+          "hash": "cb36e9e5",
+          "stdin": false
+        },
+        {
+          "key": "a5-monotonic-queue#3",
+          "title": "ShortestSubarrayK.java",
+          "hash": "75b3075f",
+          "stdin": false
+        },
+        {
+          "key": "a5-monotonic-queue#4",
+          "title": "LongestLimit.java",
+          "hash": "640dd808",
+          "stdin": false
+        }
+      ]
+    },
+    "a5-monotonic-stack": {
+      "chunk": "lessons-a5",
+      "programs": [
+        {
+          "key": "a5-monotonic-stack#1",
+          "title": "MonoTrace.java",
+          "hash": "db7c0e1d",
+          "stdin": false
+        },
+        {
+          "key": "a5-monotonic-stack#2",
+          "title": "Histogram.java",
+          "hash": "dd64e056",
+          "stdin": false
+        },
+        {
+          "key": "a5-monotonic-stack#3",
+          "title": "RemoveKDigits.java",
+          "hash": "bb056970",
+          "stdin": false
+        },
+        {
+          "key": "a5-monotonic-stack#4",
+          "title": "SubarrayMins.java",
+          "hash": "c3c545ef",
+          "stdin": false
+        }
+      ]
+    },
+    "a5-next-greater-smaller": {
+      "chunk": "lessons-a5",
+      "programs": [
+        {
+          "key": "a5-next-greater-smaller#1",
+          "title": "Nearest.java",
+          "hash": "b4c5d72d",
+          "stdin": false
+        },
+        {
+          "key": "a5-next-greater-smaller#2",
+          "title": "StockSpanner.java",
+          "hash": "4704eda5",
+          "stdin": false
+        }
+      ]
+    },
+    "a5-parentheses": {
+      "chunk": "lessons-a5",
+      "programs": [
+        {
+          "key": "a5-parentheses#1",
+          "title": "ValidParens.java",
+          "hash": "24113038",
+          "stdin": false
+        },
+        {
+          "key": "a5-parentheses#2",
+          "title": "ParenFixes.java",
+          "hash": "aa53be06",
+          "stdin": false
+        },
+        {
+          "key": "a5-parentheses#3",
+          "title": "LongestValid.java",
+          "hash": "5df8768e",
+          "stdin": false
+        },
+        {
+          "key": "a5-parentheses#4",
+          "title": "GenerateParens.java",
+          "hash": "f7b4c33e",
+          "stdin": false
+        },
+        {
+          "key": "a5-parentheses#5",
+          "title": "EvalRpn.java",
+          "hash": "2af2ad4e",
+          "stdin": false
+        },
+        {
+          "key": "a5-parentheses#6",
+          "title": "Calc2.java",
+          "hash": "3cfac1e1",
+          "stdin": false
+        },
+        {
+          "key": "a5-parentheses#7",
+          "title": "Calc1.java",
+          "hash": "2c895250",
+          "stdin": false
+        },
+        {
+          "key": "a5-parentheses#8",
+          "title": "ShuntingYard.java",
+          "hash": "a83fc12c",
+          "stdin": false
+        },
+        {
+          "key": "a5-parentheses#9",
+          "title": "Descent.java",
+          "hash": "5031dbf0",
+          "stdin": false
+        }
+      ]
+    },
+    "a5-queue": {
+      "chunk": "lessons-a5",
+      "programs": [
+        {
+          "key": "a5-queue#1",
+          "title": "RingQueue.java",
+          "hash": "2104a54d",
+          "stdin": false
+        },
+        {
+          "key": "a5-queue#2",
+          "title": "QueueBasics.java",
+          "hash": "3bec579c",
+          "stdin": false
+        },
+        {
+          "key": "a5-queue#3",
+          "title": "MyQueue.java",
+          "hash": "1921b8de",
+          "stdin": false
+        },
+        {
+          "key": "a5-queue#4",
+          "title": "GridBfs.java",
+          "hash": "4f6241f4",
+          "stdin": false
+        },
+        {
+          "key": "a5-queue#5",
+          "title": "RecentCounter.java",
+          "hash": "adf1a117",
+          "stdin": false
+        }
+      ]
+    },
+    "a5-stack": {
+      "chunk": "lessons-a5",
+      "programs": [
+        {
+          "key": "a5-stack#1",
+          "title": "ArrayStack.java",
+          "hash": "d1c5b04a",
+          "stdin": false
+        },
+        {
+          "key": "a5-stack#2",
+          "title": "StackBasics.java",
+          "hash": "f4670e75",
+          "stdin": false
+        },
+        {
+          "key": "a5-stack#3",
+          "title": "IterativeDfs.java",
+          "hash": "37dc0aa8",
+          "stdin": false
+        },
+        {
+          "key": "a5-stack#4",
+          "title": "MinStack.java",
+          "hash": "3abeccdb",
+          "stdin": false
+        },
+        {
+          "key": "a5-stack#5",
+          "title": "DecodeString.java",
+          "hash": "744146f6",
+          "stdin": false
+        }
+      ]
+    },
+    "a6-bfs": {
+      "chunk": "lessons-a6",
+      "programs": [
+        {
+          "key": "a6-bfs#1",
+          "title": "TreeBfs.java",
+          "hash": "548480f6",
+          "stdin": false
+        },
+        {
+          "key": "a6-bfs#2",
+          "title": "LevelProblems.java",
+          "hash": "f1d46f35",
+          "stdin": false
+        },
+        {
+          "key": "a6-bfs#3",
+          "title": "LevelOrderVariants.java",
+          "hash": "0b7ce2a1",
+          "stdin": false
+        }
+      ]
+    },
+    "a6-binary-trees": {
+      "chunk": "lessons-a6",
+      "programs": [
+        {
+          "key": "a6-binary-trees#1",
+          "title": "BuildByHand.java",
+          "hash": "196c5cc6",
+          "stdin": false
+        },
+        {
+          "key": "a6-binary-trees#2",
+          "title": "LevelOrderBuilder.java",
+          "hash": "26bfa092",
+          "stdin": false
+        },
+        {
+          "key": "a6-binary-trees#3",
+          "title": "TreeBasics.java",
+          "hash": "9b1474db",
+          "stdin": false
+        },
+        {
+          "key": "a6-binary-trees#5",
+          "title": "ExpressionTree.java",
+          "hash": "7eb7ca53",
+          "stdin": false
+        }
+      ]
+    },
+    "a6-bst": {
+      "chunk": "lessons-a6",
+      "programs": [
+        {
+          "key": "a6-bst#1",
+          "title": "BstShapes.java",
+          "hash": "ae6884b3",
+          "stdin": false
+        },
+        {
+          "key": "a6-bst#2",
+          "title": "BstDelete.java",
+          "hash": "5041c67d",
+          "stdin": false
+        },
+        {
+          "key": "a6-bst#3",
+          "title": "ValidateBst.java",
+          "hash": "3c6685ce",
+          "stdin": false
+        },
+        {
+          "key": "a6-bst#4",
+          "title": "BstQueries.java",
+          "hash": "15bfcd64",
+          "stdin": false
+        }
+      ]
+    },
+    "a6-construction": {
+      "chunk": "lessons-a6",
+      "programs": [
+        {
+          "key": "a6-construction#1",
+          "title": "BuildTree.java",
+          "hash": "e43a54fc",
+          "stdin": false
+        },
+        {
+          "key": "a6-construction#2",
+          "title": "MoreBuilds.java",
+          "hash": "79eef589",
+          "stdin": false
+        }
+      ]
+    },
+    "a6-dfs": {
+      "chunk": "lessons-a6",
+      "programs": [
+        {
+          "key": "a6-dfs#1",
+          "title": "ThreeOrders.java",
+          "hash": "4597cdbe",
+          "stdin": false
+        },
+        {
+          "key": "a6-dfs#2",
+          "title": "SumOfDescendants.java",
+          "hash": "c322e037",
+          "stdin": false
+        },
+        {
+          "key": "a6-dfs#3",
+          "title": "PathSumII.java",
+          "hash": "27b91225",
+          "stdin": false
+        },
+        {
+          "key": "a6-dfs#4",
+          "title": "IterativeDfs.java",
+          "hash": "032dec3c",
+          "stdin": false
+        }
+      ]
+    },
+    "a6-diameter": {
+      "chunk": "lessons-a6",
+      "programs": [
+        {
+          "key": "a6-diameter#1",
+          "title": "Diameter.java",
+          "hash": "2d167c5a",
+          "stdin": false
+        },
+        {
+          "key": "a6-diameter#2",
+          "title": "PathPatterns.java",
+          "hash": "8d15eddd",
+          "stdin": false
+        },
+        {
+          "key": "a6-diameter#3",
+          "title": "TreeDiameterTwoBfs.java",
+          "hash": "7a727512",
+          "stdin": false
+        }
+      ]
+    },
+    "a6-height-depth": {
+      "chunk": "lessons-a6",
+      "programs": [
+        {
+          "key": "a6-height-depth#1",
+          "title": "HeightDepth.java",
+          "hash": "4e674c01",
+          "stdin": false
+        }
+      ]
+    },
+    "a6-lca": {
+      "chunk": "lessons-a6",
+      "programs": [
+        {
+          "key": "a6-lca#1",
+          "title": "Lca.java",
+          "hash": "c48f1203",
+          "stdin": false
+        },
+        {
+          "key": "a6-lca#2",
+          "title": "LcaVariants.java",
+          "hash": "db686bee",
+          "stdin": false
+        },
+        {
+          "key": "a6-lca#3",
+          "title": "BinaryLifting.java",
+          "hash": "8cc700ef",
+          "stdin": false
+        }
+      ]
+    },
+    "a6-nary-trees": {
+      "chunk": "lessons-a6",
+      "programs": [
+        {
+          "key": "a6-nary-trees#1",
+          "title": "NaryTree.java",
+          "hash": "f7d24fc7",
+          "stdin": false
+        },
+        {
+          "key": "a6-nary-trees#2",
+          "title": "NaryEncodings.java",
+          "hash": "bfd071f8",
+          "stdin": false
+        }
+      ]
+    },
+    "a6-path-problems": {
+      "chunk": "lessons-a6",
+      "programs": [
+        {
+          "key": "a6-path-problems#1",
+          "title": "RootToLeaf.java",
+          "hash": "0d2555a0",
+          "stdin": false
+        },
+        {
+          "key": "a6-path-problems#2",
+          "title": "PathSumIII.java",
+          "hash": "015c505e",
+          "stdin": false
+        },
+        {
+          "key": "a6-path-problems#3",
+          "title": "AnyPaths.java",
+          "hash": "6efaed77",
+          "stdin": false
+        }
+      ]
+    },
+    "a6-serialization": {
+      "chunk": "lessons-a6",
+      "programs": [
+        {
+          "key": "a6-serialization#1",
+          "title": "Codec.java",
+          "hash": "dacd6e2c",
+          "stdin": false
+        },
+        {
+          "key": "a6-serialization#2",
+          "title": "SerializationUses.java",
+          "hash": "a98a2a0c",
+          "stdin": false
+        }
+      ]
+    },
+    "a6-tree-views": {
+      "chunk": "lessons-a6",
+      "programs": [
+        {
+          "key": "a6-tree-views#1",
+          "title": "Views.java",
+          "hash": "db401c39",
+          "stdin": false
+        },
+        {
+          "key": "a6-tree-views#2",
+          "title": "VerticalAndBoundary.java",
+          "hash": "17754046",
+          "stdin": false
+        }
+      ]
+    },
+    "a7-k-way-merge": {
+      "chunk": "lessons-a7",
+      "programs": [
+        {
+          "key": "a7-k-way-merge#1",
+          "title": "MergeKArrays.java",
+          "hash": "498aa9ea",
+          "stdin": false
+        },
+        {
+          "key": "a7-k-way-merge#2",
+          "title": "MergingIterator.java",
+          "hash": "3eac26c5",
+          "stdin": false
+        },
+        {
+          "key": "a7-k-way-merge#3",
+          "title": "KthSmallestMatrix.java",
+          "hash": "caacf90b",
+          "stdin": false
+        },
+        {
+          "key": "a7-k-way-merge#4",
+          "title": "KSmallestPairs.java",
+          "hash": "8abb8175",
+          "stdin": false
+        },
+        {
+          "key": "a7-k-way-merge#5",
+          "title": "SmallestRange.java",
+          "hash": "c6445daa",
+          "stdin": false
+        }
+      ]
+    },
+    "a7-min-heap": {
+      "chunk": "lessons-a7",
+      "programs": [
+        {
+          "key": "a7-min-heap#1",
+          "title": "MinHeap.java",
+          "hash": "fc04cdff",
+          "stdin": false
+        },
+        {
+          "key": "a7-min-heap#2",
+          "title": "MaxHeapDemo.java",
+          "hash": "2bd658a3",
+          "stdin": false
+        },
+        {
+          "key": "a7-min-heap#3",
+          "title": "KSmallest.java",
+          "hash": "1c5a3701",
+          "stdin": false
+        }
+      ]
+    },
+    "a7-priority-queues": {
+      "chunk": "lessons-a7",
+      "programs": [
+        {
+          "key": "a7-priority-queues#2",
+          "title": "MutationBug.java",
+          "hash": "dc0aeb3c",
+          "stdin": false
+        },
+        {
+          "key": "a7-priority-queues#3",
+          "title": "LazyUpdate.java",
+          "hash": "c5e29b15",
+          "stdin": false
+        },
+        {
+          "key": "a7-priority-queues#4",
+          "title": "MeetingRooms.java",
+          "hash": "e61a2993",
+          "stdin": false
+        },
+        {
+          "key": "a7-priority-queues#5",
+          "title": "TaskScheduler.java",
+          "hash": "c5669731",
+          "stdin": false
+        }
+      ]
+    },
+    "a7-running-median": {
+      "chunk": "lessons-a7",
+      "programs": [
+        {
+          "key": "a7-running-median#1",
+          "title": "SortedListMedian.java",
+          "hash": "ea4609cf",
+          "stdin": false
+        },
+        {
+          "key": "a7-running-median#2",
+          "title": "MedianFinder.java",
+          "hash": "b56809ad",
+          "stdin": false
+        },
+        {
+          "key": "a7-running-median#3",
+          "title": "CountingMedian.java",
+          "hash": "f3571e27",
+          "stdin": false
+        }
+      ]
+    },
+    "a7-top-k": {
+      "chunk": "lessons-a7",
+      "programs": [
+        {
+          "key": "a7-top-k#1",
+          "title": "TopK.java",
+          "hash": "750b15b5",
+          "stdin": false
+        },
+        {
+          "key": "a7-top-k#2",
+          "title": "KthLargestStream.java",
+          "hash": "0b533d37",
+          "stdin": false
+        },
+        {
+          "key": "a7-top-k#3",
+          "title": "TopKFrequentWords.java",
+          "hash": "98dc7b9f",
+          "stdin": false
+        },
+        {
+          "key": "a7-top-k#4",
+          "title": "KClosest.java",
+          "hash": "708fe83e",
+          "stdin": false
+        },
+        {
+          "key": "a7-top-k#5",
+          "title": "TopKBuckets.java",
+          "hash": "d3b63d53",
+          "stdin": false
+        }
+      ]
+    },
+    "a7-two-heap-pattern": {
+      "chunk": "lessons-a7",
+      "programs": [
+        {
+          "key": "a7-two-heap-pattern#1",
+          "title": "SlidingWindowMedian.java",
+          "hash": "b55fa50e",
+          "stdin": false
+        },
+        {
+          "key": "a7-two-heap-pattern#2",
+          "title": "IPO.java",
+          "hash": "2ae8cfd3",
+          "stdin": false
+        }
+      ]
+    },
+    "a8-articulation-points": {
+      "chunk": "lessons-a8",
+      "programs": [
+        {
+          "key": "a8-articulation-points#1",
+          "title": "ArticulationPoints.java",
+          "hash": "99a3a9e2",
+          "stdin": false
+        },
+        {
+          "key": "a8-articulation-points#2",
+          "title": "CutFinder.java",
+          "hash": "4aef3d29",
+          "stdin": false
+        },
+        {
+          "key": "a8-articulation-points#3",
+          "title": "Biconnected.java",
+          "hash": "7c46bc67",
+          "stdin": false
+        }
+      ]
+    },
+    "a8-bellman-ford": {
+      "chunk": "lessons-a8",
+      "programs": [
+        {
+          "key": "a8-bellman-ford#1",
+          "title": "BellmanFord.java",
+          "hash": "d3010358",
+          "stdin": false
+        },
+        {
+          "key": "a8-bellman-ford#2",
+          "title": "NegativeCycles.java",
+          "hash": "32a92593",
+          "stdin": false
+        },
+        {
+          "key": "a8-bellman-ford#3",
+          "title": "CycleFromSource.java",
+          "hash": "814652cf",
+          "stdin": false
+        },
+        {
+          "key": "a8-bellman-ford#4",
+          "title": "CheapestFlights.java",
+          "hash": "341942f4",
+          "stdin": false
+        },
+        {
+          "key": "a8-bellman-ford#5",
+          "title": "DiffConstraints.java",
+          "hash": "463b35f2",
+          "stdin": false
+        },
+        {
+          "key": "a8-bellman-ford#6",
+          "title": "Spfa.java",
+          "hash": "d4cb0e39",
+          "stdin": false
+        }
+      ]
+    },
+    "a8-bfs": {
+      "chunk": "lessons-a8",
+      "programs": [
+        {
+          "key": "a8-bfs#1",
+          "title": "Bfs.java",
+          "hash": "3bc24bef",
+          "stdin": false
+        },
+        {
+          "key": "a8-bfs#2",
+          "title": "MarkLate.java",
+          "hash": "94362c7d",
+          "stdin": false
+        },
+        {
+          "key": "a8-bfs#3",
+          "title": "Levels.java",
+          "hash": "8d99886a",
+          "stdin": false
+        },
+        {
+          "key": "a8-bfs#4",
+          "title": "ShortestPath.java",
+          "hash": "26118116",
+          "stdin": false
+        },
+        {
+          "key": "a8-bfs#5",
+          "title": "GridBfs.java",
+          "hash": "231bc371",
+          "stdin": false
+        },
+        {
+          "key": "a8-bfs#6",
+          "title": "Dfs.java",
+          "hash": "9df368ee",
+          "stdin": false
+        },
+        {
+          "key": "a8-bfs#8",
+          "title": "IterativeDfs.java",
+          "hash": "68b4699c",
+          "stdin": false
+        },
+        {
+          "key": "a8-bfs#9",
+          "title": "CloneGraph.java",
+          "hash": "8be66d31",
+          "stdin": false
+        },
+        {
+          "key": "a8-bfs#10",
+          "title": "CloneDag.java",
+          "hash": "d801f715",
+          "stdin": false
+        }
+      ]
+    },
+    "a8-bipartite": {
+      "chunk": "lessons-a8",
+      "programs": [
+        {
+          "key": "a8-bipartite#1",
+          "title": "BipartiteBfs.java",
+          "hash": "577d75f9",
+          "stdin": false
+        },
+        {
+          "key": "a8-bipartite#2",
+          "title": "PossibleBipartition.java",
+          "hash": "4b7ff103",
+          "stdin": false
+        },
+        {
+          "key": "a8-bipartite#3",
+          "title": "UnionFindBipartite.java",
+          "hash": "fe3e4e80",
+          "stdin": false
+        },
+        {
+          "key": "a8-bipartite#4",
+          "title": "OddCycle.java",
+          "hash": "0f76c512",
+          "stdin": false
+        },
+        {
+          "key": "a8-bipartite#5",
+          "title": "TwoCliques.java",
+          "hash": "ef9aa2b7",
+          "stdin": false
+        }
+      ]
+    },
+    "a8-bridges": {
+      "chunk": "lessons-a8",
+      "programs": [
+        {
+          "key": "a8-bridges#1",
+          "title": "Bridges.java",
+          "hash": "e2fd574b",
+          "stdin": false
+        },
+        {
+          "key": "a8-bridges#2",
+          "title": "CriticalConnections.java",
+          "hash": "9c151dc4",
+          "stdin": false
+        },
+        {
+          "key": "a8-bridges#3",
+          "title": "TwoEdgeConnected.java",
+          "hash": "f733f45f",
+          "stdin": false
+        }
+      ]
+    },
+    "a8-connected-components": {
+      "chunk": "lessons-a8",
+      "programs": [
+        {
+          "key": "a8-connected-components#1",
+          "title": "ComponentsBfs.java",
+          "hash": "c93e53cf",
+          "stdin": false
+        },
+        {
+          "key": "a8-connected-components#2",
+          "title": "GridComponentsBfs.java",
+          "hash": "ac32fb1e",
+          "stdin": false
+        },
+        {
+          "key": "a8-connected-components#3",
+          "title": "ComponentsDfs.java",
+          "hash": "53d2c1df",
+          "stdin": false
+        },
+        {
+          "key": "a8-connected-components#5",
+          "title": "LargestRegion.java",
+          "hash": "cf422b96",
+          "stdin": false
+        },
+        {
+          "key": "a8-connected-components#6",
+          "title": "CountTrees.java",
+          "hash": "ea5baf86",
+          "stdin": false
+        },
+        {
+          "key": "a8-connected-components#7",
+          "title": "UniversalSink.java",
+          "hash": "c521f91b",
+          "stdin": false
+        },
+        {
+          "key": "a8-connected-components#8",
+          "title": "NumberOfSinks.java",
+          "hash": "9dd95c2d",
+          "stdin": false
+        }
+      ]
+    },
+    "a8-cycle-detection": {
+      "chunk": "lessons-a8",
+      "programs": [
+        {
+          "key": "a8-cycle-detection#1",
+          "title": "DirectedCycle.java",
+          "hash": "85918214",
+          "stdin": false
+        },
+        {
+          "key": "a8-cycle-detection#2",
+          "title": "IterativeCycle.java",
+          "hash": "19f78ace",
+          "stdin": false
+        },
+        {
+          "key": "a8-cycle-detection#3",
+          "title": "EdgeTypes.java",
+          "hash": "45a69adc",
+          "stdin": false
+        },
+        {
+          "key": "a8-cycle-detection#4",
+          "title": "SafeStates.java",
+          "hash": "8ce16169",
+          "stdin": false
+        },
+        {
+          "key": "a8-cycle-detection#5",
+          "title": "KahnCycle.java",
+          "hash": "ef628c26",
+          "stdin": false
+        },
+        {
+          "key": "a8-cycle-detection#6",
+          "title": "NegativeCycle.java",
+          "hash": "48d91d88",
+          "stdin": false
+        }
+      ]
+    },
+    "a8-cycle-undirected": {
+      "chunk": "lessons-a8",
+      "programs": [
+        {
+          "key": "a8-cycle-undirected#1",
+          "title": "UndirectedCycleDfs.java",
+          "hash": "b130cda8",
+          "stdin": false
+        },
+        {
+          "key": "a8-cycle-undirected#2",
+          "title": "FindCycleDfs.java",
+          "hash": "27e56c2b",
+          "stdin": false
+        },
+        {
+          "key": "a8-cycle-undirected#3",
+          "title": "UndirectedCycleBfs.java",
+          "hash": "cf9bf863",
+          "stdin": false
+        },
+        {
+          "key": "a8-cycle-undirected#4",
+          "title": "RedundantConnection.java",
+          "hash": "77232c1d",
+          "stdin": false
+        },
+        {
+          "key": "a8-cycle-undirected#5",
+          "title": "ShortestCycle.java",
+          "hash": "1edccae7",
+          "stdin": false
+        },
+        {
+          "key": "a8-cycle-undirected#6",
+          "title": "MinWeightCycle.java",
+          "hash": "1a471d1e",
+          "stdin": false
+        },
+        {
+          "key": "a8-cycle-undirected#7",
+          "title": "CyclesOfLengthN.java",
+          "hash": "ee626136",
+          "stdin": false
+        },
+        {
+          "key": "a8-cycle-undirected#8",
+          "title": "AllCycles.java",
+          "hash": "225b26b0",
+          "stdin": false
+        }
+      ]
+    },
+    "a8-dijkstra": {
+      "chunk": "lessons-a8",
+      "programs": [
+        {
+          "key": "a8-dijkstra#1",
+          "title": "DijkstraPQ.java",
+          "hash": "40f62bcc",
+          "stdin": false
+        },
+        {
+          "key": "a8-dijkstra#2",
+          "title": "DijkstraSet.java",
+          "hash": "661d2185",
+          "stdin": false
+        },
+        {
+          "key": "a8-dijkstra#3",
+          "title": "DenseDijkstra.java",
+          "hash": "a02f8e9d",
+          "stdin": false
+        },
+        {
+          "key": "a8-dijkstra#4",
+          "title": "DijkstraPath.java",
+          "hash": "f3097e21",
+          "stdin": false
+        },
+        {
+          "key": "a8-dijkstra#5",
+          "title": "NegativeEdge.java",
+          "hash": "e5e104c6",
+          "stdin": false
+        },
+        {
+          "key": "a8-dijkstra#6",
+          "title": "DialsAlgorithm.java",
+          "hash": "3c73a2e1",
+          "stdin": false
+        },
+        {
+          "key": "a8-dijkstra#7",
+          "title": "DesopoPape.java",
+          "hash": "ae219aa6",
+          "stdin": false
+        }
+      ]
+    },
+    "a8-euler-path": {
+      "chunk": "lessons-a8",
+      "programs": [
+        {
+          "key": "a8-euler-path#1",
+          "title": "SevenBridges.java",
+          "hash": "fdeb2ab7",
+          "stdin": false
+        },
+        {
+          "key": "a8-euler-path#2",
+          "title": "Hamiltonian.java",
+          "hash": "18891de8",
+          "stdin": false
+        },
+        {
+          "key": "a8-euler-path#3",
+          "title": "Fleury.java",
+          "hash": "95908300",
+          "stdin": false
+        },
+        {
+          "key": "a8-euler-path#4",
+          "title": "EulerUndirected.java",
+          "hash": "6d54d495",
+          "stdin": false
+        },
+        {
+          "key": "a8-euler-path#5",
+          "title": "EulerDirected.java",
+          "hash": "50d1752f",
+          "stdin": false
+        },
+        {
+          "key": "a8-euler-path#6",
+          "title": "ChinesePostman.java",
+          "hash": "a0bbc989",
+          "stdin": false
+        }
+      ]
+    },
+    "a8-floyd-warshall": {
+      "chunk": "lessons-a8",
+      "programs": [
+        {
+          "key": "a8-floyd-warshall#1",
+          "title": "LoopOrder.java",
+          "hash": "434306a5",
+          "stdin": false
+        },
+        {
+          "key": "a8-floyd-warshall#2",
+          "title": "FloydWarshall.java",
+          "hash": "f251dc68",
+          "stdin": false
+        },
+        {
+          "key": "a8-floyd-warshall#3",
+          "title": "FwNegInf.java",
+          "hash": "0c7bd03f",
+          "stdin": false
+        },
+        {
+          "key": "a8-floyd-warshall#4",
+          "title": "CityThreshold.java",
+          "hash": "0a1f61fe",
+          "stdin": false
+        },
+        {
+          "key": "a8-floyd-warshall#5",
+          "title": "Johnson.java",
+          "hash": "b54fe037",
+          "stdin": false
+        },
+        {
+          "key": "a8-floyd-warshall#6",
+          "title": "Multistage.java",
+          "hash": "ea1c6f27",
+          "stdin": false
+        },
+        {
+          "key": "a8-floyd-warshall#7",
+          "title": "MinReversals.java",
+          "hash": "8ec21f54",
+          "stdin": false
+        },
+        {
+          "key": "a8-floyd-warshall#8",
+          "title": "MinMeanCycle.java",
+          "hash": "38e0f9fc",
+          "stdin": false
+        }
+      ]
+    },
+    "a8-gfg-must-do-extras": {
+      "chunk": "lessons-a8",
+      "programs": [
+        {
+          "key": "a8-gfg-must-do-extras#1",
+          "title": "MinSwaps.java",
+          "hash": "ee6d9ecf",
+          "stdin": false
+        },
+        {
+          "key": "a8-gfg-must-do-extras#2",
+          "title": "MinCostPath.java",
+          "hash": "bad3edc9",
+          "stdin": false
+        },
+        {
+          "key": "a8-gfg-must-do-extras#3",
+          "title": "ShortestChain.java",
+          "hash": "21f7ba2f",
+          "stdin": false
+        },
+        {
+          "key": "a8-gfg-must-do-extras#4",
+          "title": "Bidirectional.java",
+          "hash": "c8016a01",
+          "stdin": false
+        }
+      ]
+    },
+    "a8-graph-coloring": {
+      "chunk": "lessons-a8",
+      "programs": [
+        {
+          "key": "a8-graph-coloring#1",
+          "title": "MColoring.java",
+          "hash": "0d9d4e7c",
+          "stdin": false
+        },
+        {
+          "key": "a8-graph-coloring#2",
+          "title": "GreedyColoring.java",
+          "hash": "5995bbbd",
+          "stdin": false
+        },
+        {
+          "key": "a8-graph-coloring#3",
+          "title": "HeldKarp.java",
+          "hash": "d6f6bac2",
+          "stdin": false
+        },
+        {
+          "key": "a8-graph-coloring#5",
+          "title": "Petersen.java",
+          "hash": "c910a43f",
+          "stdin": false
+        }
+      ]
+    },
+    "a8-graph-interview-framework": {
+      "chunk": "lessons-a8",
+      "programs": [
+        {
+          "key": "a8-graph-interview-framework#1",
+          "title": "BusRoutes.java",
+          "hash": "44252b8a",
+          "stdin": false
+        },
+        {
+          "key": "a8-graph-interview-framework#2",
+          "title": "ObstacleElimination.java",
+          "hash": "4d4003d2",
+          "stdin": false
+        },
+        {
+          "key": "a8-graph-interview-framework#3",
+          "title": "MinimumEffort.java",
+          "hash": "eadf771a",
+          "stdin": false
+        },
+        {
+          "key": "a8-graph-interview-framework#4",
+          "title": "KStops.java",
+          "hash": "a97cdb07",
+          "stdin": false
+        },
+        {
+          "key": "a8-graph-interview-framework#5",
+          "title": "SilentBugs.java",
+          "hash": "0377597d",
+          "stdin": false
+        },
+        {
+          "key": "a8-graph-interview-framework#6",
+          "title": "GraphTemplates.java",
+          "hash": "7204bf2e",
+          "stdin": false
+        }
+      ]
+    },
+    "a8-graph-representation": {
+      "chunk": "lessons-a8",
+      "programs": [
+        {
+          "key": "a8-graph-representation#1",
+          "title": "Degrees.java",
+          "hash": "c0bb81e6",
+          "stdin": false
+        },
+        {
+          "key": "a8-graph-representation#2",
+          "title": "AdjacencyListDemo.java",
+          "hash": "6080083c",
+          "stdin": false
+        },
+        {
+          "key": "a8-graph-representation#3",
+          "title": "MapGraph.java",
+          "hash": "a8eb5530",
+          "stdin": false
+        },
+        {
+          "key": "a8-graph-representation#4",
+          "title": "Csr.java",
+          "hash": "2e40866c",
+          "stdin": false
+        },
+        {
+          "key": "a8-graph-representation#5",
+          "title": "AdjacencyMatrixDemo.java",
+          "hash": "48318d5f",
+          "stdin": false
+        },
+        {
+          "key": "a8-graph-representation#6",
+          "title": "EdgeListDemo.java",
+          "hash": "0af29dfa",
+          "stdin": false
+        },
+        {
+          "key": "a8-graph-representation#7",
+          "title": "TransitiveClosure.java",
+          "hash": "97b6aa58",
+          "stdin": false
+        },
+        {
+          "key": "a8-graph-representation#8",
+          "title": "BitClosure.java",
+          "hash": "ee4d13a0",
+          "stdin": false
+        },
+        {
+          "key": "a8-graph-representation#9",
+          "title": "HavelHakimi.java",
+          "hash": "aae0b0ad",
+          "stdin": false
+        }
+      ]
+    },
+    "a8-max-flow": {
+      "chunk": "lessons-a8",
+      "programs": [
+        {
+          "key": "a8-max-flow#1",
+          "title": "EdmondsKarp.java",
+          "hash": "09604871",
+          "stdin": false
+        },
+        {
+          "key": "a8-max-flow#2",
+          "title": "FordFulkerson.java",
+          "hash": "d7a9339b",
+          "stdin": false
+        },
+        {
+          "key": "a8-max-flow#3",
+          "title": "Dinic.java",
+          "hash": "93af1aca",
+          "stdin": false
+        },
+        {
+          "key": "a8-max-flow#4",
+          "title": "PushRelabel.java",
+          "hash": "8a128e09",
+          "stdin": false
+        },
+        {
+          "key": "a8-max-flow#5",
+          "title": "MinCut.java",
+          "hash": "31d647eb",
+          "stdin": false
+        },
+        {
+          "key": "a8-max-flow#6",
+          "title": "EdgeDisjointPaths.java",
+          "hash": "1a28ef36",
+          "stdin": false
+        },
+        {
+          "key": "a8-max-flow#7",
+          "title": "MatchingFlow.java",
+          "hash": "55e47442",
+          "stdin": false
+        },
+        {
+          "key": "a8-max-flow#8",
+          "title": "HopcroftKarp.java",
+          "hash": "439ac4dc",
+          "stdin": false
+        },
+        {
+          "key": "a8-max-flow#9",
+          "title": "ChannelAssignment.java",
+          "hash": "84db7a30",
+          "stdin": false
+        },
+        {
+          "key": "a8-max-flow#10",
+          "title": "Karger.java",
+          "hash": "ba44fafc",
+          "stdin": false
+        }
+      ]
+    },
+    "a8-mst-kruskal": {
+      "chunk": "lessons-a8",
+      "programs": [
+        {
+          "key": "a8-mst-kruskal#1",
+          "title": "Kruskal.java",
+          "hash": "aba0fcf8",
+          "stdin": false
+        },
+        {
+          "key": "a8-mst-kruskal#2",
+          "title": "Prim.java",
+          "hash": "31245867",
+          "stdin": false
+        },
+        {
+          "key": "a8-mst-kruskal#3",
+          "title": "ConnectPoints.java",
+          "hash": "23df3076",
+          "stdin": false
+        },
+        {
+          "key": "a8-mst-kruskal#4",
+          "title": "ConnectCities.java",
+          "hash": "2857112d",
+          "stdin": false
+        },
+        {
+          "key": "a8-mst-kruskal#5",
+          "title": "Boruvka.java",
+          "hash": "365af358",
+          "stdin": false
+        },
+        {
+          "key": "a8-mst-kruskal#6",
+          "title": "ReverseDelete.java",
+          "hash": "e788fef4",
+          "stdin": false
+        },
+        {
+          "key": "a8-mst-kruskal#7",
+          "title": "CountSpanningTrees.java",
+          "hash": "5d33319e",
+          "stdin": false
+        },
+        {
+          "key": "a8-mst-kruskal#8",
+          "title": "MinProductTree.java",
+          "hash": "9f636079",
+          "stdin": false
+        },
+        {
+          "key": "a8-mst-kruskal#9",
+          "title": "Clustering.java",
+          "hash": "9e6874ab",
+          "stdin": false
+        }
+      ]
+    },
+    "a8-multi-source-bfs": {
+      "chunk": "lessons-a8",
+      "programs": [
+        {
+          "key": "a8-multi-source-bfs#1",
+          "title": "GridAsGraph.java",
+          "hash": "a33b9fd5",
+          "stdin": false
+        },
+        {
+          "key": "a8-multi-source-bfs#2",
+          "title": "NearestGate.java",
+          "hash": "3e3af1ac",
+          "stdin": false
+        },
+        {
+          "key": "a8-multi-source-bfs#3",
+          "title": "RottingOranges.java",
+          "hash": "9badf107",
+          "stdin": false
+        },
+        {
+          "key": "a8-multi-source-bfs#4",
+          "title": "PacificAtlantic.java",
+          "hash": "fa8fc372",
+          "stdin": false
+        },
+        {
+          "key": "a8-multi-source-bfs#5",
+          "title": "FloodFill.java",
+          "hash": "0c5be189",
+          "stdin": false
+        },
+        {
+          "key": "a8-multi-source-bfs#6",
+          "title": "NumberOfIslands.java",
+          "hash": "f6fbb2a0",
+          "stdin": false
+        },
+        {
+          "key": "a8-multi-source-bfs#7",
+          "title": "BinaryMatrix.java",
+          "hash": "c34733c6",
+          "stdin": false
+        },
+        {
+          "key": "a8-multi-source-bfs#8",
+          "title": "KnightSteps.java",
+          "hash": "10c09e48",
+          "stdin": false
+        },
+        {
+          "key": "a8-multi-source-bfs#9",
+          "title": "SnakesAndLadders.java",
+          "hash": "ee356d2a",
+          "stdin": false
+        },
+        {
+          "key": "a8-multi-source-bfs#10",
+          "title": "WordLadder.java",
+          "hash": "9c3bee2e",
+          "stdin": false
+        },
+        {
+          "key": "a8-multi-source-bfs#11",
+          "title": "WaterJug.java",
+          "hash": "fff41bfa",
+          "stdin": false
+        },
+        {
+          "key": "a8-multi-source-bfs#12",
+          "title": "ZeroOneBfs.java",
+          "hash": "31bd24b3",
+          "stdin": false
+        },
+        {
+          "key": "a8-multi-source-bfs#13",
+          "title": "Boggle.java",
+          "hash": "b0b6903f",
+          "stdin": false
+        }
+      ]
+    },
+    "a8-scc": {
+      "chunk": "lessons-a8",
+      "programs": [
+        {
+          "key": "a8-scc#1",
+          "title": "Kosaraju.java",
+          "hash": "1d3728aa",
+          "stdin": false
+        },
+        {
+          "key": "a8-scc#2",
+          "title": "KosarajuIterative.java",
+          "hash": "be499995",
+          "stdin": false
+        },
+        {
+          "key": "a8-scc#3",
+          "title": "TarjanScc.java",
+          "hash": "69e23f6e",
+          "stdin": false
+        },
+        {
+          "key": "a8-scc#4",
+          "title": "Condensation.java",
+          "hash": "ca212ab7",
+          "stdin": false
+        },
+        {
+          "key": "a8-scc#5",
+          "title": "TwoSat.java",
+          "hash": "54f7a791",
+          "stdin": false
+        },
+        {
+          "key": "a8-scc#6",
+          "title": "CountWalks.java",
+          "hash": "48e4bb32",
+          "stdin": false
+        },
+        {
+          "key": "a8-scc#7",
+          "title": "WordCircle.java",
+          "hash": "b5b31a95",
+          "stdin": false
+        }
+      ]
+    },
+    "a8-topological-sorting": {
+      "chunk": "lessons-a8",
+      "programs": [
+        {
+          "key": "a8-topological-sorting#1",
+          "title": "Kahn.java",
+          "hash": "f1dfdfc0",
+          "stdin": false
+        },
+        {
+          "key": "a8-topological-sorting#2",
+          "title": "KahnVariants.java",
+          "hash": "24371b7b",
+          "stdin": false
+        },
+        {
+          "key": "a8-topological-sorting#3",
+          "title": "TopoDfs.java",
+          "hash": "b6c4d427",
+          "stdin": false
+        },
+        {
+          "key": "a8-topological-sorting#4",
+          "title": "DepartureTime.java",
+          "hash": "87cabe40",
+          "stdin": false
+        },
+        {
+          "key": "a8-topological-sorting#5",
+          "title": "CourseSchedule.java",
+          "hash": "c0e68545",
+          "stdin": false
+        },
+        {
+          "key": "a8-topological-sorting#6",
+          "title": "AlienDictionary.java",
+          "hash": "19d7948b",
+          "stdin": false
+        },
+        {
+          "key": "a8-topological-sorting#7",
+          "title": "AllTopoSorts.java",
+          "hash": "5f79970f",
+          "stdin": false
+        },
+        {
+          "key": "a8-topological-sorting#8",
+          "title": "MaxEdgesDag.java",
+          "hash": "7ee392f2",
+          "stdin": false
+        },
+        {
+          "key": "a8-topological-sorting#9",
+          "title": "DagShortestPath.java",
+          "hash": "6f438a74",
+          "stdin": false
+        },
+        {
+          "key": "a8-topological-sorting#10",
+          "title": "CriticalPath.java",
+          "hash": "ce6cc4e4",
+          "stdin": false
+        },
+        {
+          "key": "a8-topological-sorting#11",
+          "title": "DagDp.java",
+          "hash": "7e62d4e0",
+          "stdin": false
+        },
+        {
+          "key": "a8-topological-sorting#12",
+          "title": "ChainItinerary.java",
+          "hash": "ced2f7d1",
+          "stdin": false
+        },
+        {
+          "key": "a8-topological-sorting#13",
+          "title": "ReconstructItinerary.java",
+          "hash": "218dc6da",
+          "stdin": false
+        }
+      ]
+    },
+    "a8-union-find": {
+      "chunk": "lessons-a8",
+      "programs": [
+        {
+          "key": "a8-union-find#1",
+          "title": "PathCompression.java",
+          "hash": "74859855",
+          "stdin": false
+        },
+        {
+          "key": "a8-union-find#3",
+          "title": "UnionByRank.java",
+          "hash": "e7a755d5",
+          "stdin": false
+        },
+        {
+          "key": "a8-union-find#4",
+          "title": "UnionBySize.java",
+          "hash": "b7a0661f",
+          "stdin": false
+        },
+        {
+          "key": "a8-union-find#5",
+          "title": "UnionFind.java",
+          "hash": "929d5b0e",
+          "stdin": false
+        },
+        {
+          "key": "a8-union-find#7",
+          "title": "IslandsOnline.java",
+          "hash": "a132bd1d",
+          "stdin": false
+        },
+        {
+          "key": "a8-union-find#8",
+          "title": "Percolation.java",
+          "hash": "5d6f330f",
+          "stdin": false
+        },
+        {
+          "key": "a8-union-find#9",
+          "title": "ReverseDeletions.java",
+          "hash": "f258db3f",
+          "stdin": false
+        },
+        {
+          "key": "a8-union-find#10",
+          "title": "LimitedPaths.java",
+          "hash": "0608226e",
+          "stdin": false
+        }
+      ]
+    },
+    "a9-combination-sum": {
+      "chunk": "lessons-a9",
+      "programs": [
+        {
+          "key": "a9-combination-sum#1",
+          "title": "NaiveOrdered.java",
+          "hash": "2de2b640",
+          "stdin": false
+        },
+        {
+          "key": "a9-combination-sum#2",
+          "title": "CombinationSum.java",
+          "hash": "3367c30a",
+          "stdin": false
+        },
+        {
+          "key": "a9-combination-sum#3",
+          "title": "CombinationSum2.java",
+          "hash": "7182f3b6",
+          "stdin": false
+        },
+        {
+          "key": "a9-combination-sum#4",
+          "title": "CombinationSum3.java",
+          "hash": "5fdc871e",
+          "stdin": false
+        },
+        {
+          "key": "a9-combination-sum#5",
+          "title": "CountWays.java",
+          "hash": "f63f0d5c",
+          "stdin": false
+        }
+      ]
+    },
+    "a9-combinations": {
+      "chunk": "lessons-a9",
+      "programs": [
+        {
+          "key": "a9-combinations#1",
+          "title": "Combinations.java",
+          "hash": "b7c2ff3c",
+          "stdin": false
+        },
+        {
+          "key": "a9-combinations#2",
+          "title": "CombIncEx.java",
+          "hash": "098292bd",
+          "stdin": false
+        },
+        {
+          "key": "a9-combinations#3",
+          "title": "CombineDup.java",
+          "hash": "eaeda61c",
+          "stdin": false
+        },
+        {
+          "key": "a9-combinations#4",
+          "title": "LetterCombinations.java",
+          "hash": "3f250c35",
+          "stdin": false
+        }
+      ]
+    },
+    "a9-constraint-backtracking": {
+      "chunk": "lessons-a9",
+      "programs": [
+        {
+          "key": "a9-constraint-backtracking#1",
+          "title": "SudokuSolver.java",
+          "hash": "e06297cc",
+          "stdin": false
+        },
+        {
+          "key": "a9-constraint-backtracking#2",
+          "title": "GraphColoring.java",
+          "hash": "72b5cbb9",
+          "stdin": false
+        },
+        {
+          "key": "a9-constraint-backtracking#3",
+          "title": "ForwardChecking.java",
+          "hash": "f68d7679",
+          "stdin": false
+        }
+      ]
+    },
+    "a9-grid-search": {
+      "chunk": "lessons-a9",
+      "programs": [
+        {
+          "key": "a9-grid-search#1",
+          "title": "WordSearch.java",
+          "hash": "c76cc088",
+          "stdin": false
+        },
+        {
+          "key": "a9-grid-search#2",
+          "title": "NoUnmark.java",
+          "hash": "f62cef01",
+          "stdin": false
+        },
+        {
+          "key": "a9-grid-search#3",
+          "title": "RatInMaze.java",
+          "hash": "ac1c2d3e",
+          "stdin": false
+        },
+        {
+          "key": "a9-grid-search#4",
+          "title": "UniquePathsIII.java",
+          "hash": "1e329003",
+          "stdin": false
+        },
+        {
+          "key": "a9-grid-search#5",
+          "title": "WordSearchII.java",
+          "hash": "86c9b4a2",
+          "stdin": false
+        }
+      ]
+    },
+    "a9-n-queens": {
+      "chunk": "lessons-a9",
+      "programs": [
+        {
+          "key": "a9-n-queens#1",
+          "title": "NQueens.java",
+          "hash": "7b911013",
+          "stdin": false
+        },
+        {
+          "key": "a9-n-queens#2",
+          "title": "NQueensBits.java",
+          "hash": "be926af4",
+          "stdin": false
+        }
+      ]
+    },
+    "a9-permutations": {
+      "chunk": "lessons-a9",
+      "programs": [
+        {
+          "key": "a9-permutations#1",
+          "title": "Permutations.java",
+          "hash": "c95ce0f7",
+          "stdin": false
+        },
+        {
+          "key": "a9-permutations#2",
+          "title": "PermuteSwap.java",
+          "hash": "532467d5",
+          "stdin": false
+        },
+        {
+          "key": "a9-permutations#3",
+          "title": "PermutationsWithDup.java",
+          "hash": "e4a59ad0",
+          "stdin": false
+        },
+        {
+          "key": "a9-permutations#4",
+          "title": "NextPermutation.java",
+          "hash": "ded50d3c",
+          "stdin": false
+        },
+        {
+          "key": "a9-permutations#5",
+          "title": "KthPermutation.java",
+          "hash": "8c50256a",
+          "stdin": false
+        }
+      ]
+    },
+    "a9-pruning": {
+      "chunk": "lessons-a9",
+      "programs": [
+        {
+          "key": "a9-pruning#1",
+          "title": "CombinationsPrune.java",
+          "hash": "738cdfcc",
+          "stdin": false
+        },
+        {
+          "key": "a9-pruning#2",
+          "title": "SubsetSum.java",
+          "hash": "74ee7bad",
+          "stdin": false
+        },
+        {
+          "key": "a9-pruning#3",
+          "title": "UniqueSubsetSums.java",
+          "hash": "46dbb7fe",
+          "stdin": false
+        },
+        {
+          "key": "a9-pruning#4",
+          "title": "KPartition.java",
+          "hash": "3a18ced0",
+          "stdin": false
+        },
+        {
+          "key": "a9-pruning#5",
+          "title": "JobAssignment.java",
+          "hash": "15b08165",
+          "stdin": false
+        }
+      ]
+    },
+    "a9-subsets": {
+      "chunk": "lessons-a9",
+      "programs": [
+        {
+          "key": "a9-subsets#1",
+          "title": "Subsets.java",
+          "hash": "16a5904b",
+          "stdin": false
+        },
+        {
+          "key": "a9-subsets#2",
+          "title": "SubsetsIterative.java",
+          "hash": "7a3c5599",
+          "stdin": false
+        },
+        {
+          "key": "a9-subsets#3",
+          "title": "SubsetsWithDup.java",
+          "hash": "724622eb",
+          "stdin": false
+        },
+        {
+          "key": "a9-subsets#4",
+          "title": "SubsetSumCount.java",
+          "hash": "1c16df9b",
+          "stdin": false
+        }
+      ]
+    }
+  },
+  "excluded": {
+    "a1-custom-classes": [
+      {
+        "title": "",
+        "reason": "does not compile with javac 17: non-static variable this cannot be referenced from a static context"
+      }
+    ],
+    "a1-java-streams-interviews": [
+      {
+        "title": "Reuse.java",
+        "reason": "the browser build prints different output from the JVM (line 2: JVM \"IllegalStateException: stream has already been operated upon\", browser \"0\")"
+      },
+      {
+        "title": "PeekCount.java",
+        "reason": "the browser build prints different output from the JVM (line 1: JVM \"count = 3\", browser \"saw a\")"
+      }
+    ],
+    "a1-recursion": [
+      {
+        "title": "DeepRecursion.java",
+        "reason": "the browser build prints different output from the JVM (line 1: JVM \"StackOverflowError after more than 1000 calls: true\", browser \"\")"
+      }
+    ],
+    "a1-strings-stringbuilder": [
+      {
+        "title": "CodePoints.java",
+        "reason": "the browser build prints different output from the JVM (line 2: JVM \"😀ih\", browser \"?ih\")"
+      }
+    ],
+    "a11-1d-dp": [
+      {
+        "title": "HouseRobber.java",
+        "reason": "does not compile with javac 17: cannot find symbol"
+      },
+      {
+        "title": "OneDCheck.java",
+        "reason": "does not compile with javac 17: cannot find symbol"
+      }
+    ],
+    "a11-knapsack": [
+      {
+        "title": "Knapsack01.java",
+        "reason": "does not compile with javac 17: cannot find symbol"
+      }
+    ],
+    "a11-memoization": [
+      {
+        "title": "DeepMemo.java",
+        "reason": "TeaVM cannot compile it: Method java.lang.Thread.<init>(Ljava/lang/ThreadGroup;Ljava/lang/Runnable;Ljava/lang/String;J)V was not found"
+      }
+    ],
+    "a13-and-or-xor": [
+      {
+        "title": "Parity.java",
+        "reason": "the browser build prints different output from the JVM (line 1: JVM \"  7  n % 2 == 1: true   (n & 1) == 1: true\", browser \"  7  n % 2 == 1: true   (n & 1) == 1: \")"
+      }
+    ],
+    "a13-powers-of-two": [
+      {
+        "title": "PowerOfTwo.java",
+        "reason": "the browser build prints different output from the JVM (line 10: JVM \"-2147483648   false false  true    true\", browser \"--2147483648   false false  true    true\")"
+      }
+    ],
+    "a13-set-bit": [
+      {
+        "title": "Kernighan.java",
+        "reason": "the browser build prints different output from the JVM (line 5: JVM \"-2147483648 ->  1 (Integer.bitCount: 1)\", browser \"--2147483648 ->  1 (Integer.bitCount: 1)\")"
+      }
+    ],
+    "a14-edge-cases": [
+      {
+        "title": "ProductExceptSelf.java",
+        "reason": "the browser build prints different output from the JVM (line 2: JVM \"[1, 2, 0, 4]   division=ArithmeticException: / by zero     p\", browser \"[1, 2, 0, 4]   division=[0, 0, 0, 0]                       p\")"
+      }
+    ],
+    "a14-responding-to-hints": [
+      {
+        "title": "KokoBananas.java",
+        "reason": "the browser build prints different output from the JVM (line 3: JVM \"h=1 draft=ArithmeticException: / by zero fixed=1\", browser \"\")"
+      }
+    ],
+    "a2-sorting-based": [
+      {
+        "title": "BadComparator.java",
+        "reason": "the browser build prints different output from the JVM (line 1: JVM \"[0, 2147483647, -3, 5, -2147483648]\", browser \"[0, 5, 2147483647, -2147483648, -3]\")"
+      }
+    ],
+    "a4-reversal": [
+      {
+        "title": "Reversal.java",
+        "reason": "the browser build prints different output from the JVM (line 10: JVM \"recursive, 1,000,000 nodes: StackOverflowError\", browser \"\")"
+      }
+    ],
+    "a6-binary-trees": [
+      {
+        "title": "DeepTree.java",
+        "reason": "the browser build prints different output from the JVM (line 1: JVM \"recursive: StackOverflowError\", browser \"\")"
+      }
+    ],
+    "a7-priority-queues": [
+      {
+        "title": "Triage.java",
+        "reason": "the browser build prints different output from the JVM (line 1: JVM \"severity only:    Ben(1) Dee(1) Fay(1) Ana(2) Eli(2) Cal(2)\", browser \"severity only:    Ben(1) Fay(1) Dee(1) Ana(2) Cal(2) Eli(2)\")"
+      }
+    ],
+    "a8-bfs": [
+      {
+        "title": "DeepChain.java",
+        "reason": "the browser build prints different output from the JVM (line 1: JVM \"StackOverflowError\", browser \"\")"
+      }
+    ],
+    "a8-connected-components": [
+      {
+        "title": "DeepRecursion.java",
+        "reason": "the browser build prints different output from the JVM (line 1: JVM \"100 x 100: area = 10000\", browser \"\")"
+      }
+    ],
+    "a8-graph-coloring": [
+      {
+        "title": "ErdosRenyi.java",
+        "reason": "runs longer than 10 s on the JVM"
+      }
+    ],
+    "a8-union-find": [
+      {
+        "title": "DsuExperiment.java",
+        "reason": "runs longer than 10 s on the JVM"
+      },
+      {
+        "title": "RecFind.java",
+        "reason": "the browser build prints different output from the JVM (line 2: JVM \"10000: root = 9999\", browser \"\")"
+      }
+    ]
+  }
+}

@@ -136,11 +136,31 @@ export function LessonBlocks({ blocks }: { blocks: MdBlock[] }) {
 
 // Loaded only on pages that have a runnable program.
 const CodeRunner = lazy(() => import('./CodeRunner').then((m) => ({ default: m.CodeRunner })))
+const LessonRun = lazy(() => import('./CodeRunner').then((m) => ({ default: m.LessonRun })))
+const JsCodeBlock = lazy(() => import('./JsRunner').then((m) => ({ default: m.JsCodeBlock })))
 
 /** A code block, with a Run panel when the page knows how to run this exact program. */
 function CodeView({ block }: { block: Extract<MdBlock, { type: 'code' }> }) {
   const findRunnable = useContext(CodeRunContext)
-  const runnable = block.language === 'java' && findRunnable ? findRunnable(block.code) : null
+  const runnable = findRunnable ? findRunnable(block.code, block.language) : null
+  // Lesson JavaScript/TypeScript: editable, runs in the browser like Node.
+  if (runnable?.format === 'js') {
+    return (
+      <Suspense fallback={<CodeBlock code={block.code} language={block.language} title={block.title} output={block.output} />}>
+        <JsCodeBlock code={block.code} language={block.language} title={block.title} writtenOutput={block.output} runnable={runnable} />
+      </Suspense>
+    )
+  }
+  // A runnable lesson program shows what it really prints when run, instead of the written output.
+  if (runnable?.format === 'lesson') {
+    return (
+      <CodeBlock code={block.code} language={block.language} title={block.title}>
+        <Suspense fallback={null}>
+          <LessonRun runnable={runnable} writtenOutput={block.output} />
+        </Suspense>
+      </CodeBlock>
+    )
+  }
   return (
     <CodeBlock code={block.code} language={block.language} title={block.title} output={block.output}>
       {runnable && (

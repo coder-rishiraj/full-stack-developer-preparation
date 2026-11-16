@@ -17,7 +17,10 @@
     "lessons:check": "vitest run src/test/lessons.test.ts",
     "problems:check": "vitest run src/test/problem-pages.test.ts",
     "problems:verify": "node scripts/verify-problem-code.mjs",
-    "problems:runner": "node scripts/build-java-runner.mjs"
+    "problems:runner": "node scripts/build-java-runner.mjs",
+    "lessons:runner": "node scripts/build-lesson-runner.mjs",
+    "lessons:js-runner": "node scripts/build-js-lesson-runner.mjs",
+    "runner:page": "node scripts/build-page-runtime.mjs"
   },
   "dependencies": {
     "firebase": "^12.19.0",
@@ -35,15 +38,18 @@
     "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^14.6.4",
+    "@types/lodash": "^4.17.27",
     "@types/node": "^24.13.3",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.4",
     "jsdom": "^30.0.1",
+    "lodash": "^4.18.1",
     "oxlint": "^1.75.0",
     "tailwindcss": "^4.3.3",
     "typescript": "~6.0.2",
     "vite": "^8.2.0",
-    "vitest": "^4.1.10"
+    "vitest": "^4.1.10",
+    "zod": "^4.6.7"
   }
 }

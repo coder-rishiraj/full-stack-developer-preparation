@@ -608,3 +608,72 @@
 .cd-run-verdict[data-ok='true'] {
   color: var(--success);
 }
+.cd-run-lesson .cd-run-head {
+  margin-bottom: 0;
+}
+.cd-run-lesson .cd-run-note {
+  margin: 0;
+}
+.cd-run-lesson .cd-run-input {
+  margin-bottom: 0.5rem;
+}
+.cd-code-actions {
+  margin-left: auto;
+  display: flex;
+  gap: 0.25rem;
+}
+.cd-code-bar .cd-code-actions .cd-code-copy {
+  margin-left: 0;
+}
+.cd-code-edited {
+  font-size: 0.7rem;
+  color: var(--warning);
+}
+.cd-code-editor {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0.9rem 1rem;
+  border: 0;
+  outline: none;
+  resize: vertical;
+  background: var(--code-bg);
+  color: var(--code-text);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  line-height: 1.6;
+  tab-size: 2;
+  white-space: pre;
+  overflow-x: auto;
+  box-shadow: inset 0 0 0 2px var(--accent-soft);
+}
+.cd-run-output[data-state='warn'] .cd-run-status {
+  color: var(--warning);
+}
+.cd-run-output .cd-run-err {
+  color: var(--danger);
+}
+.cd-run-output .cd-run-explain {
+  padding: 0 0.6rem 0.5rem;
+  margin: 0;
+}
+.cd-run-frame {
+  display: block;
+  width: 100%;
+  border: 0;
+  background: #fff;
+  border-top: 1px solid var(--code-border);
+}
+.cd-run-caveat {
+  margin-top: 0.5rem;
+  color: var(--warning);
+}
+.cd-run-frame-wrap {
+  resize: vertical;
+  overflow: hidden;
+  min-height: 60px;
+}
+.cd-run-frame-wrap .cd-run-frame {
+  min-height: 100%;
+}

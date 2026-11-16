@@ -207,7 +207,7 @@ export function DsaProblemPage() {
             </div>
           </details>
           <article className="cd-article">
-            <CodeRunContext.Provider value={(code) => findRunnable(problem.id, code)}>
+            <CodeRunContext.Provider value={(code, language) => (language === 'java' ? findRunnable(problem.id, code) : null)}>
               <LessonBlocks blocks={blocks} />
             </CodeRunContext.Provider>
           </article>

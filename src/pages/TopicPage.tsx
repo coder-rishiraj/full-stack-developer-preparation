@@ -6,6 +6,8 @@ import { TopicBody } from '@/components/topic/TopicBody'
 import { ExtraPointsEditor } from '@/components/topic/ExtraPointsEditor'
 import { RevisionScheduleCard } from '@/components/topic/RevisionScheduleCard'
 import { LessonBlocks } from '@/components/lesson/LessonBlocks'
+import { useLessonRunnables } from '@/hooks/useLessonRunnables'
+import { CodeRunContext } from '@/runner/context'
 import { LessonPractice, PRACTICE_HEADING_ID } from '@/components/lesson/LessonPractice'
 import { getLessonProblems } from '@/content/problems'
 import { LessonRail, TableOfContents, scrollToHeading, type OutlineItem } from '@/components/lesson/LessonRail'
@@ -41,6 +43,7 @@ export function TopicPage({ mode = 'full' }: { mode?: Mode }) {
   const { lesson, loading: lessonLoading } = useLesson(isCustom ? undefined : topicId)
   const { content: curriculumContent, loading: notesLoading } = useTopicContent(isCustom ? undefined : topicId)
   const overlay = getOverlay(state, topicId)
+  const findRunnable = useLessonRunnables(isCustom ? '' : topicId)
 
   const content = useMemo(() => {
     if (isCustom && custom) return customTopicToContent(custom, overlay)
@@ -189,16 +192,18 @@ export function TopicPage({ mode = 'full' }: { mode?: Mode }) {
         : baseOutline
     return (
       <Layout mode={mode} header={header} rail={<LessonRail meta={meta} outline={outline} />} outline={outline}>
-        {lesson.focus ? (
-          <FocusedConcept lesson={lesson} meta={meta} />
-        ) : (
-          <>
-            <Objectives items={lesson.lesson.frontmatter.objectives} />
-            <article className="cd-article">
-              <LessonBlocks blocks={blocks} />
-            </article>
-          </>
-        )}
+        <CodeRunContext.Provider value={findRunnable}>
+          {lesson.focus ? (
+            <FocusedConcept lesson={lesson} meta={meta} />
+          ) : (
+            <>
+              <Objectives items={lesson.lesson.frontmatter.objectives} />
+              <article className="cd-article">
+                <LessonBlocks blocks={blocks} />
+              </article>
+            </>
+          )}
+        </CodeRunContext.Provider>
         <LessonPractice topicId={meta.id} />
         {footer}
         {personalTools}

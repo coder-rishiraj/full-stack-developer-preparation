@@ -2,6 +2,12 @@ import { describe, expect, test } from 'vitest'
 import { parseProblemPage } from '@/content/problem-pages'
 import samplesConfig from '@/content/problem-pages/run-samples.json'
 import manifest from '@/runner/generated/manifest.json'
+import lessonsManifest from '@/runner/generated/lessons-manifest.json'
+import { findLessonRunnable } from '@/runner/lesson-runnables'
+import { parseLesson } from '@/lib/lesson-markdown'
+import jsLessonsManifest from '@/runner/generated/js-lessons-manifest.json'
+import { sourceLang } from '@/runner/js/compile'
+import { format, inspect } from '@/runner/js/runtime'
 import { check, sameValues } from '@/runner/checkers'
 import { parseRun, type BundleModule } from '@/runner/parse-run'
 import { codeHash, findRunnable } from '@/runner/run-java'
@@ -54,6 +60,102 @@ describe('in-browser Java runner', () => {
       }
     })
   }
+})
+
+const lessonSources = import.meta.glob<string>('../content/lessons/a*.md', { query: '?raw', import: 'default', eager: true })
+type BuiltLesson = { chunk: string; programs: { key: string; title: string; hash: string }[] }
+const builtLessons = (lessonsManifest as unknown as { lessons: Record<string, BuiltLesson>; chunks: Record<string, string> })
+
+describe('Track A lesson programs', () => {
+  test('every Track A module has been built', () => {
+    const modules = new Set(
+      Object.keys(lessonSources)
+        .map((p) => p.split('/').pop()!)
+        .filter((f) => /^a\d+-/.test(f))
+        .map((f) => `lessons-${f.split('-')[0]}`),
+    )
+    for (const m of modules) expect(builtLessons.chunks[m], `${m}: run npm run lessons:runner`).toBeTruthy()
+  })
+
+  for (const [lessonId, lesson] of Object.entries(builtLessons.lessons)) {
+    test(`${lessonId}: the build is current (run \`npm run lessons:runner\` after editing its Java)`, () => {
+      const source = lessonSources[`../content/lessons/${lessonId}.md`]
+      expect(source, `${lessonId}.md`).toBeTypeOf('string')
+      const blocks = parseLesson(source).blocks.flatMap((b) => (b.type === 'code' && b.language === 'java' ? [b.code] : []))
+      const hashes = new Set(blocks.map(codeHash))
+      for (const program of lesson.programs) expect(hashes.has(program.hash), `${program.title} changed`).toBe(true)
+      for (const code of blocks) {
+        const runnable = findLessonRunnable(lessonId, code)
+        if (runnable) expect(bundles[`../runner/generated/${runnable.chunk}.js`], runnable.chunk).toBeDefined()
+      }
+    })
+  }
+})
+
+/** Every code block in a lesson, including those inside lists and callouts. */
+function allCodeBlocks(source: string): { language: string; code: string }[] {
+  const out: { language: string; code: string }[] = []
+  const walk = (blocks: ReturnType<typeof parseLesson>['blocks']) => {
+    for (const b of blocks) {
+      if (b.type === 'code') out.push(b)
+      else if (b.type === 'callout' || b.type === 'quote') walk(b.blocks)
+      else if (b.type === 'list') for (const item of b.items) walk(item.children)
+    }
+  }
+  walk(parseLesson(source).blocks)
+  return out
+}
+
+const allLessonSources = import.meta.glob<string>('../content/lessons/*.md', { query: '?raw', import: 'default', eager: true })
+const jsLessons = (jsLessonsManifest as unknown as { lessons: Record<string, { hash: string }[]>; excluded: Record<string, unknown[]> })
+
+describe('JavaScript/TypeScript lesson blocks', () => {
+  test('every lesson with JavaScript/TypeScript has been checked (run npm run lessons:js-runner)', () => {
+    const checked = new Set([...Object.keys(jsLessons.lessons), ...Object.keys(jsLessons.excluded)])
+    const missing = Object.entries(allLessonSources)
+      .filter(([, src]) => allCodeBlocks(src).some((b) => sourceLang(b.language) !== null))
+      .map(([p]) => p.split('/').pop()!.replace(/\.md$/, ''))
+      .filter((id) => !checked.has(id))
+    expect(missing).toEqual([])
+  })
+
+  for (const [lessonId, entries] of Object.entries(jsLessons.lessons)) {
+    test(`${lessonId}: the JavaScript/TypeScript check is current`, () => {
+      const source = allLessonSources[`../content/lessons/${lessonId}.md`]
+      expect(source, `${lessonId}.md`).toBeTypeOf('string')
+      const hashes = new Set(
+        allCodeBlocks(source).flatMap((b) => (sourceLang(b.language) !== null ? [codeHash(b.code)] : [])),
+      )
+      const stale = entries.filter((e) => !hashes.has(e.hash))
+      expect(stale.length, 'blocks changed since the last npm run lessons:js-runner').toBe(0)
+    })
+  }
+})
+
+describe('preview frame runtime', () => {
+  test('public/runner/page-runtime.js is built (npm run runner:page)', () => {
+    const files = import.meta.glob<string>('../../public/runner/page-runtime.js', { query: '?raw', import: 'default', eager: true })
+    const text = Object.values(files)[0] ?? ''
+    expect(text.length).toBeGreaterThan(100_000)
+    expect(text).toMatch(/["`']ready["`']/)
+  })
+})
+
+describe('Node-style console formatting', () => {
+  test('matches Node for common values', () => {
+    expect(inspect({ a: 1, b: 'x' })).toBe("{ a: 1, b: 'x' }")
+    expect(inspect([1, 2, 3])).toBe('[ 1, 2, 3 ]')
+    expect(inspect(new Map([['a', 1]]))).toBe("Map(1) { 'a' => 1 }")
+    expect(inspect(new Set())).toBe('Set(0) {}')
+    expect(inspect({ 'a-b': [] })).toBe("{ 'a-b': [] }")
+    expect(inspect({ a: { b: { c: { d: 1 } } } })).toBe('{ a: { b: { c: [Object] } } }')
+    expect(inspect("it's")).toBe('"it\'s"')
+    expect(inspect(-0)).toBe('-0')
+    expect(inspect(class Foo {})).toBe('[class Foo]')
+    expect(inspect(function named() {})).toBe('[Function: named]')
+    expect(format(['%s is %d years', 'Ada', 36])).toBe('Ada is 36 years')
+    expect(inspect(Array.from({ length: 10 }, (_, i) => i))).toBe('[\n  0, 1, 2, 3, 4,\n  5, 6, 7, 8, 9\n]')
+  })
 })
 
 describe('answer checkers', () => {
