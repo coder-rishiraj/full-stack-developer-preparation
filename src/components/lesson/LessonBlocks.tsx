@@ -6,7 +6,7 @@ import type { CalloutVariant, Inline, MdBlock } from '@/lib/lesson-markdown'
 import { useUserStore } from '@/stores/user-store'
 import { isDarkTheme } from '@/lib/appearance'
 import { CodeBlock } from './CodeBlock'
-import { CodeRunContext } from '@/runner/context'
+import { CodeRunContext, JavaBlocksContext } from '@/runner/context'
 import { QuizBlock } from '@/components/topic/ContentBlocks'
 
 /** Lets a page make `- [ ]` task items interactive and persistent. */
@@ -138,11 +138,28 @@ export function LessonBlocks({ blocks }: { blocks: MdBlock[] }) {
 const CodeRunner = lazy(() => import('./CodeRunner').then((m) => ({ default: m.CodeRunner })))
 const LessonRun = lazy(() => import('./CodeRunner').then((m) => ({ default: m.LessonRun })))
 const JsCodeBlock = lazy(() => import('./JsRunner').then((m) => ({ default: m.JsCodeBlock })))
+const JavaCodeBlock = lazy(() => import('./JavaRunner').then((m) => ({ default: m.JavaCodeBlock })))
 
 /** A code block, with a Run panel when the page knows how to run this exact program. */
 function CodeView({ block }: { block: Extract<MdBlock, { type: 'code' }> }) {
   const findRunnable = useContext(CodeRunContext)
+  const javaBlocks = useContext(JavaBlocksContext)
   const runnable = findRunnable ? findRunnable(block.code, block.language) : null
+  // Java on a lesson or walkthrough page: editable, runnable (precompiled, or compiled in the browser).
+  if (block.language === 'java' && findRunnable) {
+    const index = javaBlocks.indexOf(block.code)
+    return (
+      <Suspense fallback={<CodeBlock code={block.code} language={block.language} title={block.title} output={block.output} />}>
+        <JavaCodeBlock
+          code={block.code}
+          title={block.title}
+          writtenOutput={block.output}
+          runnable={runnable}
+          earlier={index > 0 ? javaBlocks.slice(0, index) : []}
+        />
+      </Suspense>
+    )
+  }
   // Lesson JavaScript/TypeScript: editable, runs in the browser like Node.
   if (runnable?.format === 'js') {
     return (

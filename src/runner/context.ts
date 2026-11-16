@@ -40,3 +40,6 @@ export type Runnable = {
 
 /** Lets code blocks inside a page ask whether they can be run (null outside walkthrough pages). */
 export const CodeRunContext = createContext<((code: string, language: string) => Runnable | null) | null>(null)
+
+/** Every Java block of the page, in order: a program may build on classes from earlier blocks. */
+export const JavaBlocksContext = createContext<string[]>([])

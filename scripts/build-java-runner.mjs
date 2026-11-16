@@ -276,7 +276,7 @@ function pagePrograms(id, entry) {
       main = designMain(cls, members(b.code, cls), where)
       hint = `Line 1: the ${cls} operations to call. Line 2: their arguments, LeetCode style.`
     }
-    return { title: b.title, code: b.code, hint, source: combine(harness ? [b.code, harness, main] : [b.code, main]) }
+    return { title: b.title, code: b.code, hint, source: combine(harness ? [b.code, harness, main] : [b.code, main]), harnessMain: main, harnessExtra: harness ?? undefined }
   })
 }
 
@@ -412,6 +412,13 @@ const chunkState = Object.fromEntries(
     .map((c) => [c, todo.includes(c) && !builtOk ? (previous.chunks?.[c] ?? '') : chunkHashes[c]]),
 )
 writeFileSync(manifestPath, JSON.stringify({ chunks: chunkState, pages }, null, 2) + '\n')
+// For editing in the browser: the generated harness (Main and any judge types) of each
+// LeetCode-style program, compiled with the reader's edited Solution by the in-browser compiler.
+const harnesses = {}
+for (const programs of Object.values(chunks)) {
+  for (const p of programs) if (p.harnessMain) harnesses[p.key] = { main: p.harnessMain, ...(p.harnessExtra ? { extra: p.harnessExtra } : {}) }
+}
+writeFileSync(path.join(outDir, 'java-harness.json'), JSON.stringify(harnesses, null, 1) + '\n')
 if (!builtOk) {
   console.error(`${failures} of ${checked} runs differ between the JVM and the browser build.`)
   process.exit(1)

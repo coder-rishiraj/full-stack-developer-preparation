@@ -8,7 +8,8 @@ import { Button } from '@/components/ui/Button'
 import { LessonBlocks } from '@/components/lesson/LessonBlocks'
 import { TableOfContents, scrollToHeading, useReadingProgress } from '@/components/lesson/LessonRail'
 import { useProblemPage } from '@/hooks/useProblemPage'
-import { CodeRunContext } from '@/runner/context'
+import { CodeRunContext, JavaBlocksContext } from '@/runner/context'
+import { javaCodeBlocks } from '@/lib/java-blocks'
 import { findRunnable } from '@/runner/run-java'
 import type { DsaProblem, DsaStatus } from '@/domain/types'
 import { useUserStore } from '@/stores/user-store'
@@ -208,7 +209,9 @@ export function DsaProblemPage() {
           </details>
           <article className="cd-article">
             <CodeRunContext.Provider value={(code, language) => (language === 'java' ? findRunnable(problem.id, code) : null)}>
-              <LessonBlocks blocks={blocks} />
+              <JavaBlocksContext.Provider value={javaCodeBlocks(blocks)}>
+                <LessonBlocks blocks={blocks} />
+              </JavaBlocksContext.Provider>
             </CodeRunContext.Provider>
           </article>
           {hidden && (

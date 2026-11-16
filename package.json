@@ -20,7 +20,8 @@
     "problems:runner": "node scripts/build-java-runner.mjs",
     "lessons:runner": "node scripts/build-lesson-runner.mjs",
     "lessons:js-runner": "node scripts/build-js-lesson-runner.mjs",
-    "runner:page": "node scripts/build-page-runtime.mjs"
+    "runner:page": "node scripts/build-page-runtime.mjs",
+    "java:check-compiler": "node scripts/check-java-compiler.mjs"
   },
   "dependencies": {
     "firebase": "^12.19.0",

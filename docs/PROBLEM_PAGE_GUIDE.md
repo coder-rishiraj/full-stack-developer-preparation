@@ -149,7 +149,10 @@ Run for every page, and for **every approach on it**, not only the recommended o
 ### Run panel
 
 Every walkthrough page lets the reader run each solution on the page in the browser, pick a
-sample, edit the input and run again. A page cannot be done without it:
+sample, edit the input and run again. The reader can also edit the solution itself: edited
+code is compiled in the browser together with the page's generated harness
+(`src/runner/generated/java-harness.json`, written by `npm run problems:runner`), so a
+LeetCode-style `Solution` still receives the sample input and its answer is judged. A page cannot be done without it:
 `src/test/java-runner.test.ts` fails for a page that has no entry in `run-samples.json`, and for
 a page whose Java changed after the last `npm run problems:runner`.
 

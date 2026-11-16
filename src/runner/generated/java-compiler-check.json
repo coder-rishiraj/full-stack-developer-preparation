@@ -1,0 +1,126 @@
+{
+ "checked": 1070,
+ "same": 1046,
+ "differs": [
+  {
+   "id": "a1-java-streams-interviews",
+   "title": "Reuse.java",
+   "reason": "line 2: JVM \"IllegalStateException: stream has already been operated upon\", browser \"0\" "
+  },
+  {
+   "id": "a1-java-streams-interviews",
+   "title": "PeekCount.java",
+   "reason": "line 1: JVM \"count = 3\", browser \"saw a\" "
+  },
+  {
+   "id": "a1-recursion",
+   "title": "DeepRecursion.java",
+   "reason": "line 1: JVM \"StackOverflowError after more than 1000 calls: true\", browser \"\" Maximum call stack size exceeded"
+  },
+  {
+   "id": "a1-strings-stringbuilder",
+   "title": "CodePoints.java",
+   "reason": "line 2: JVM \"😀ih\", browser \"\\ude00\\ud83dih\" "
+  },
+  {
+   "id": "a11-memoization",
+   "title": "DeepMemo.java",
+   "reason": "does not compile: DeepMemo.java:29: no suitable constructor found for Thread(<nulltype>,()->run(1000000),java.lang.String,long)"
+  },
+  {
+   "id": "a13-powers-of-two",
+   "title": "PowerOfTwo.java",
+   "reason": "line 10: JVM \"-2147483648   false false  true    true\", browser \"--2147483648   false false  true    true\" "
+  },
+  {
+   "id": "a13-set-bit",
+   "title": "Kernighan.java",
+   "reason": "line 5: JVM \"-2147483648 ->  1 (Integer.bitCount: 1)\", browser \"--2147483648 ->  1 (Integer.bitCount: 1)\" "
+  },
+  {
+   "id": "a14-edge-cases",
+   "title": "ProductExceptSelf.java",
+   "reason": "line 2: JVM \"[1, 2, 0, 4]   division=ArithmeticException: / by zero     p\", browser \"[1, 2, 0, 4]   division=ArithmeticException: null          p\" "
+  },
+  {
+   "id": "a14-responding-to-hints",
+   "title": "KokoBananas.java",
+   "reason": "line 3: JVM \"h=1 draft=ArithmeticException: / by zero fixed=1\", browser \"h=1 draft=ArithmeticException: null fixed=1\" "
+  },
+  {
+   "id": "a2-sorting-based",
+   "title": "BadComparator.java",
+   "reason": "line 1: JVM \"[0, 2147483647, -3, 5, -2147483648]\", browser \"[0, 5, 2147483647, -2147483648, -3]\" "
+  },
+  {
+   "id": "a4-reversal",
+   "title": "Reversal.java",
+   "reason": "line 10: JVM \"recursive, 1,000,000 nodes: StackOverflowError\", browser \"\" Maximum call stack size exceeded"
+  },
+  {
+   "id": "a6-binary-trees",
+   "title": "DeepTree.java",
+   "reason": "line 1: JVM \"recursive: StackOverflowError\", browser \"\" Maximum call stack size exceeded"
+  },
+  {
+   "id": "a7-k-way-merge",
+   "title": "MergingIterator.java",
+   "reason": "does not compile: MergingIterator.java:4: MergingIterator is not abstract and does not override abstract method remove() in java.util.Iterator"
+  },
+  {
+   "id": "a7-priority-queues",
+   "title": "Triage.java",
+   "reason": "line 1: JVM \"severity only:    Ben(1) Dee(1) Fay(1) Ana(2) Eli(2) Cal(2)\", browser \"severity only:    Ben(1) Fay(1) Dee(1) Ana(2) Cal(2) Eli(2)\" "
+  },
+  {
+   "id": "a8-bfs",
+   "title": "DeepChain.java",
+   "reason": "line 1: JVM \"StackOverflowError\", browser \"\" Maximum call stack size exceeded"
+  },
+  {
+   "id": "a8-connected-components",
+   "title": "DeepRecursion.java",
+   "reason": "line 1: JVM \"100 x 100: area = 10000\", browser \"\" Maximum call stack size exceeded"
+  },
+  {
+   "id": "a8-graph-coloring",
+   "title": "ErdosRenyi.java",
+   "reason": "line 2: JVM \"c=0.5 edges=  979 largest=  15 (0.4% of n)\", browser \"c=0.5 edges=    0 largest=   1 (0.0% of n)\" "
+  },
+  {
+   "id": "a8-union-find",
+   "title": "RecFind.java",
+   "reason": "line 3: JVM \"100000: StackOverflowError\", browser \"\" Maximum call stack size exceeded"
+  },
+  {
+   "id": "nc-4sum",
+   "title": "Approach 1: brute force + set (Example 1)",
+   "reason": "JVM \"[[-2, 0, 1, 2], [-2, -1, 2, 2]]\\n\", browser \"[[-2, -1, 2, 2], [-2, 0, 1, 2]]\\n\" "
+  },
+  {
+   "id": "nc-group-anagrams",
+   "title": "Approach 2: sorted string as key (Example 1)",
+   "reason": "JVM \"[[\\\"night\\\", \\\"thing\\\"], [\\\"act\\\"], [\\\"dusty\\\", \\\"study\\\"]]\\n\", browser \"[[\\\"act\\\"], [\\\"dusty\\\", \\\"study\\\"], [\\\"night\\\", \\\"thing\\\"]]\\n\" "
+  },
+  {
+   "id": "nc-group-anagrams",
+   "title": "Approach 3: letter counts as key (recommended) (Example 1)",
+   "reason": "JVM \"[[\\\"act\\\"], [\\\"night\\\", \\\"thing\\\"], [\\\"dusty\\\", \\\"study\\\"]]\\n\", browser \"[[\\\"night\\\", \\\"thing\\\"], [\\\"dusty\\\", \\\"study\\\"], [\\\"act\\\"]]\\n\" "
+  },
+  {
+   "id": "nc-group-anagrams",
+   "title": "Approach 3: letter counts as key (recommended) (Example 2)",
+   "reason": "JVM \"[[\\\"\\\", \\\"\\\"], [\\\"b\\\"]]\\n\", browser \"[[\\\"b\\\"], [\\\"\\\", \\\"\\\"]]\\n\" "
+  },
+  {
+   "id": "nc-group-anagrams",
+   "title": "Group Anagrams with a count key (Example 1)",
+   "reason": "JVM \"[[\\\"act\\\"], [\\\"night\\\", \\\"thing\\\"], [\\\"dusty\\\", \\\"study\\\"]]\\n\", browser \"[[\\\"night\\\", \\\"thing\\\"], [\\\"dusty\\\", \\\"study\\\"], [\\\"act\\\"]]\\n\" "
+  },
+  {
+   "id": "nc-group-anagrams",
+   "title": "Group Anagrams with a count key (Example 2)",
+   "reason": "JVM \"[[\\\"\\\", \\\"\\\"], [\\\"b\\\"]]\\n\", browser \"[[\\\"b\\\"], [\\\"\\\", \\\"\\\"]]\\n\" "
+  }
+ ]
+}

@@ -7,7 +7,8 @@ import { ExtraPointsEditor } from '@/components/topic/ExtraPointsEditor'
 import { RevisionScheduleCard } from '@/components/topic/RevisionScheduleCard'
 import { LessonBlocks } from '@/components/lesson/LessonBlocks'
 import { useLessonRunnables } from '@/hooks/useLessonRunnables'
-import { CodeRunContext } from '@/runner/context'
+import { CodeRunContext, JavaBlocksContext } from '@/runner/context'
+import { javaCodeBlocks } from '@/lib/java-blocks'
 import { LessonPractice, PRACTICE_HEADING_ID } from '@/components/lesson/LessonPractice'
 import { getLessonProblems } from '@/content/problems'
 import { LessonRail, TableOfContents, scrollToHeading, type OutlineItem } from '@/components/lesson/LessonRail'
@@ -193,6 +194,7 @@ export function TopicPage({ mode = 'full' }: { mode?: Mode }) {
     return (
       <Layout mode={mode} header={header} rail={<LessonRail meta={meta} outline={outline} />} outline={outline}>
         <CodeRunContext.Provider value={findRunnable}>
+          <JavaBlocksContext.Provider value={javaCodeBlocks(lesson.focus ? lesson.focus.blocks : lesson.lesson.blocks)}>
           {lesson.focus ? (
             <FocusedConcept lesson={lesson} meta={meta} />
           ) : (
@@ -203,6 +205,7 @@ export function TopicPage({ mode = 'full' }: { mode?: Mode }) {
               </article>
             </>
           )}
+          </JavaBlocksContext.Provider>
         </CodeRunContext.Provider>
         <LessonPractice topicId={meta.id} />
         {footer}

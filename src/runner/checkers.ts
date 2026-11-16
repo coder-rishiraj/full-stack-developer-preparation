@@ -166,6 +166,9 @@ export function sameValues(output: string, expected: string, mode: CheckKind): b
   if (mode === 'first-line') {
     out = out.slice(0, 1)
     exp = exp.slice(0, 1)
+  } else if (out.length > exp.length) {
+    // The harness prints the answer last; lines before it are the reader's own prints.
+    out = out.slice(out.length - exp.length)
   }
   if (out.length !== exp.length) return false
   return out.every((o, i) => {
@@ -187,7 +190,9 @@ export function check(runnable: Pick<Runnable, 'check' | 'format'>, input: strin
   if (kind === 'two-sets') return checkTwoSets(input, output)
   if (expected === undefined) return null
   const same = runnable.format === 'stdin' ? sameTokens(output, expected) : sameValues(output, expected, kind)
-  const note = kind === 'unordered' || kind === 'unordered-nested' ? ' (in any order)' : ''
+  const extra =
+    runnable.format !== 'stdin' && kind !== 'first-line' && output.split('\n').filter((l) => l.trim()).length > expected.split('\n').filter((l) => l.trim()).length
+  const note = (kind === 'unordered' || kind === 'unordered-nested' ? ' (in any order)' : '') + (extra ? '; the lines printed before the answer are ignored' : '')
   return same
     ? { ok: true, message: `Matches the expected output${note}.` }
     : { ok: false, message: `Differs from the expected output${note}.` }
