@@ -2,8 +2,8 @@
   "chunks": {
     "arrays-hashing": "aca8d95abdf692f0",
     "binary-search": "66395616ccddb5fe",
-    "bit-manipulation": "18c8c083ccf70b11",
-    "introductory": "03fb5bb64c2ba6b6",
+    "bit-manipulation": "8ca37aabab270341",
+    "introductory": "583459c342cd5ae6",
     "math-geometry": "99aafe33d59dc57e",
     "sliding-window": "54a8abccf7ee3b68",
     "stack": "05f64d081954c9c5",
@@ -95,6 +95,53 @@
           "key": "cses-increasing-array#3",
           "title": "Increasing Array in a dozen lines",
           "hash": "43b5abee"
+        }
+      ]
+    },
+    "cses-missing-number": {
+      "chunk": "introductory",
+      "format": "stdin",
+      "hint": "Standard input, exactly as the judge sends it.",
+      "programs": [
+        {
+          "key": "cses-missing-number#1",
+          "title": "Alternative: scan once per candidate (too slow at n = 2 · 10^5)",
+          "hash": "f70271ff"
+        },
+        {
+          "key": "cses-missing-number#2",
+          "title": "Approach 1: sort, then the first gap",
+          "hash": "d2c85677"
+        },
+        {
+          "key": "cses-missing-number#3",
+          "title": "Approach 2: hash set",
+          "hash": "b8553722"
+        },
+        {
+          "key": "cses-missing-number#4",
+          "title": "Approach 3: boolean presence array",
+          "hash": "67ca4197"
+        },
+        {
+          "key": "cses-missing-number#5",
+          "title": "Approach 4: n(n + 1)/2 minus the input (recommended)",
+          "hash": "6659639c"
+        },
+        {
+          "key": "cses-missing-number#6",
+          "title": "Approach 5: XOR of 1..n and the input",
+          "hash": "7c6313f7"
+        },
+        {
+          "key": "cses-missing-number#7",
+          "title": "Approach 6: sign marking in the stored input",
+          "hash": "0bb516f6"
+        },
+        {
+          "key": "cses-missing-number#8",
+          "title": "Missing Number, sum formula",
+          "hash": "607bbc8b"
         }
       ]
     },
@@ -1289,6 +1336,48 @@
           "key": "nc-minimum-window-substring#2",
           "title": "Approach 2: sliding window with a missing counter (recommended)",
           "hash": "c7afcb4d"
+        }
+      ]
+    },
+    "nc-missing-number": {
+      "chunk": "bit-manipulation",
+      "format": "leetcode",
+      "hint": "One value per parameter of missingNumber(int[] nums), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-missing-number#1",
+          "title": "Approach 1: scan once per candidate",
+          "hash": "75da3abe"
+        },
+        {
+          "key": "nc-missing-number#2",
+          "title": "Approach 2: sort a copy, first gap",
+          "hash": "2ef569ab"
+        },
+        {
+          "key": "nc-missing-number#3",
+          "title": "Approach 3: hash set",
+          "hash": "273d604c"
+        },
+        {
+          "key": "nc-missing-number#4",
+          "title": "Approach 4: boolean presence array",
+          "hash": "1e956a11"
+        },
+        {
+          "key": "nc-missing-number#5",
+          "title": "Approach 5: n(n + 1)/2 minus the sum (recommended)",
+          "hash": "20140da5"
+        },
+        {
+          "key": "nc-missing-number#6",
+          "title": "Approach 6: XOR of indices and values",
+          "hash": "6a18a876"
+        },
+        {
+          "key": "nc-missing-number#7",
+          "title": "Approach 7: cyclic placement (modifies nums)",
+          "hash": "3939a03f"
         }
       ]
     },

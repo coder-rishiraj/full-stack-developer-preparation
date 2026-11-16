@@ -10,13 +10,13 @@ One interview walkthrough per problem: `src/content/problem-pages/<problem-id>.m
 
 ## Status
 
-**Done: 89 / 650.** NeetCode `arrays-hashing` (`listOrder` 1–22), `two-pointers` (23–35), `sliding-window` (36–44), `stack` (45–58) and `binary-search` (59–72) are complete. By roadmap: section 1 "Programming Fundamentals & Simulation" (5 CSES problems) and section 2 "Math & Number Manipulation Basics" (12 problems) are complete.
+**Done: 91 / 650.** NeetCode `arrays-hashing` (`listOrder` 1–22), `two-pointers` (23–35), `sliding-window` (36–44), `stack` (45–58) and `binary-search` (59–72) are complete. By roadmap: sections 1 "Programming Fundamentals & Simulation", 2 "Math & Number Manipulation Basics" and 3 "Arrays: Traversal & In-place Updates" are complete.
 
 Every done page has a Run panel: its samples are in `run-samples.json` and its programs are built in `src/runner/generated/`.
 
 ## Next batch (not started)
 
-Roadmap section 3 "Arrays: Traversal & In-place Updates" (the user now asks for batches by roadmap section; see `src/content/problems/dsa-roadmap.ts`). Skip problems that already have a page.
+Roadmap section 4 "Hashing: Maps & Sets" (the user now asks for batches by roadmap section; see `src/content/problems/dsa-roadmap.ts`). Skip problems that already have a page.
 
 ## Done
 
@@ -31,3 +31,4 @@ Roadmap section 3 "Arrays: Traversal & In-place Updates" (the user now asks for 
 | 6 | binary-search | `nc-binary-search`, `nc-search-insert-position`, `nc-guess-number-higher-or-lower`, `nc-sqrt-x`, `nc-search-a-2d-matrix`, `nc-koko-eating-bananas`, `nc-capacity-to-ship-packages-within-d-days`, `nc-find-minimum-in-rotated-sorted-array`, `nc-search-in-rotated-sorted-array`, `nc-search-in-rotated-sorted-array-ii`, `nc-time-based-key-value-store`, `nc-split-array-largest-sum`, `nc-median-of-two-sorted-arrays`, `nc-find-in-mountain-array` | Constraints checked against LeetCode; every approach compiled and tested |
 | 7 | CSES introductory (roadmap topic 1) | `cses-weird-algorithm`, `cses-repetitions`, `cses-increasing-array`, `cses-permutations`, `cses-two-sets` | First CSES pages; whole-program convention in the guide §7 |
 | 8 | Roadmap section 2: Math & Number Manipulation Basics | `nc-roman-to-integer`, `nc-plus-one`, `nc-excel-sheet-column-title`, `nc-multiply-strings`, `nc-reverse-integer`, `nc-happy-number`, `cses-number-spiral`, `cses-bit-strings`, `cses-trailing-zeros`, `cses-coin-piles`, `cses-two-knights`, `cses-digit-queries` | Constraints checked against LeetCode and cses.fi; CSES approaches pass the official CSES tests in `public/tests/cses` (Number Spiral has none under the size cap: checked against a brute force) |
+| 9 | Roadmap section 3: Arrays: Traversal & In-place Updates | `cses-missing-number`, `nc-missing-number` (the section's other four pages were done in batches 1–3) | Every approach from naive to most efficient (7 rungs each), now a rule in the guide §3; CSES approaches pass the 8 official tests |

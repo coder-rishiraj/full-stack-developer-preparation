@@ -79,6 +79,15 @@ mistake? Does this alternative have a situation where it wins? If not, leave it 
 The validator sets floors (two approaches, three hints, three challenges, three follow-ups,
 1,500 words), not targets.
 
+**Every approach from naive to most efficient.** Whatever the length, section 4 climbs the whole
+ladder of approaches an interviewer could expect for the problem: the brute force first, then
+each real improvement (sorting, a lookup table or hash map, a formula, a bit trick, an in-place
+technique, …) up to the most efficient. Each rung has its full parts and appears in section 5's
+tables. Do not skip the brute force or an intermediate rung that a candidate would naturally
+reach. A rung too slow for the largest tests is still written out (as `### Alternative: …`, see
+the pitfall about numbered approaches), at its place in the ladder. "Do not invent alternatives"
+above means alternatives with no real use; it never means leaving out a step of the ladder.
+
 ## 4. Reasoning and voice
 
 - **Derive, don't recite.** Start from the simplest correct approach, name the bottleneck, ask

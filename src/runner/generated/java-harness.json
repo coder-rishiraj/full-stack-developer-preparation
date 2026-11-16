@@ -746,6 +746,27 @@
  "nc-roman-to-integer#2": {
   "main": "public class Main {\n    public static void main(String[] args) throws Exception {\n        java.util.List<Object> in = runner.In.values(System.in);\n        String s = runner.In.toStr(runner.In.arg(in, 0, \"s\"));\n        int result = new Solution().romanToInt(s);\n        System.out.println(runner.Show.of(result));\n    }\n}"
  },
+ "nc-missing-number#1": {
+  "main": "public class Main {\n    public static void main(String[] args) throws Exception {\n        java.util.List<Object> in = runner.In.values(System.in);\n        int[] nums = runner.In.toIntArray(runner.In.arg(in, 0, \"nums\"));\n        int result = new Solution().missingNumber(nums);\n        System.out.println(runner.Show.of(result));\n    }\n}"
+ },
+ "nc-missing-number#2": {
+  "main": "public class Main {\n    public static void main(String[] args) throws Exception {\n        java.util.List<Object> in = runner.In.values(System.in);\n        int[] nums = runner.In.toIntArray(runner.In.arg(in, 0, \"nums\"));\n        int result = new Solution().missingNumber(nums);\n        System.out.println(runner.Show.of(result));\n    }\n}"
+ },
+ "nc-missing-number#3": {
+  "main": "public class Main {\n    public static void main(String[] args) throws Exception {\n        java.util.List<Object> in = runner.In.values(System.in);\n        int[] nums = runner.In.toIntArray(runner.In.arg(in, 0, \"nums\"));\n        int result = new Solution().missingNumber(nums);\n        System.out.println(runner.Show.of(result));\n    }\n}"
+ },
+ "nc-missing-number#4": {
+  "main": "public class Main {\n    public static void main(String[] args) throws Exception {\n        java.util.List<Object> in = runner.In.values(System.in);\n        int[] nums = runner.In.toIntArray(runner.In.arg(in, 0, \"nums\"));\n        int result = new Solution().missingNumber(nums);\n        System.out.println(runner.Show.of(result));\n    }\n}"
+ },
+ "nc-missing-number#5": {
+  "main": "public class Main {\n    public static void main(String[] args) throws Exception {\n        java.util.List<Object> in = runner.In.values(System.in);\n        int[] nums = runner.In.toIntArray(runner.In.arg(in, 0, \"nums\"));\n        int result = new Solution().missingNumber(nums);\n        System.out.println(runner.Show.of(result));\n    }\n}"
+ },
+ "nc-missing-number#6": {
+  "main": "public class Main {\n    public static void main(String[] args) throws Exception {\n        java.util.List<Object> in = runner.In.values(System.in);\n        int[] nums = runner.In.toIntArray(runner.In.arg(in, 0, \"nums\"));\n        int result = new Solution().missingNumber(nums);\n        System.out.println(runner.Show.of(result));\n    }\n}"
+ },
+ "nc-missing-number#7": {
+  "main": "public class Main {\n    public static void main(String[] args) throws Exception {\n        java.util.List<Object> in = runner.In.values(System.in);\n        int[] nums = runner.In.toIntArray(runner.In.arg(in, 0, \"nums\"));\n        int result = new Solution().missingNumber(nums);\n        System.out.println(runner.Show.of(result));\n    }\n}"
+ },
  "nc-reverse-integer#1": {
   "main": "public class Main {\n    public static void main(String[] args) throws Exception {\n        java.util.List<Object> in = runner.In.values(System.in);\n        int x = runner.In.toInt(runner.In.arg(in, 0, \"x\"));\n        int result = new Solution().reverse(x);\n        System.out.println(runner.Show.of(result));\n    }\n}"
  },
