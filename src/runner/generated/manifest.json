@@ -3,9 +3,11 @@
     "arrays-hashing": "aca8d95abdf692f0",
     "binary-search": "66395616ccddb5fe",
     "bit-manipulation": "8ca37aabab270341",
-    "introductory": "583459c342cd5ae6",
-    "math-geometry": "99aafe33d59dc57e",
+    "graphs": "c598890b81ece350",
+    "introductory": "5334ecfdefa14d96",
+    "math-geometry": "aac4e5996115b8d0",
     "sliding-window": "54a8abccf7ee3b68",
+    "sorting-searching": "20ef29ed3c1e650f",
     "stack": "05f64d081954c9c5",
     "two-pointers": "dd7b702f4f8cc77c"
   },
@@ -73,6 +75,60 @@
           "key": "cses-digit-queries#3",
           "title": "Digit Queries",
           "hash": "b7a82d41"
+        }
+      ]
+    },
+    "cses-distinct-numbers": {
+      "chunk": "sorting-searching",
+      "format": "stdin",
+      "hint": "Standard input, exactly as the judge sends it.",
+      "programs": [
+        {
+          "key": "cses-distinct-numbers#1",
+          "title": "Alternative: compare with every earlier value (too slow at n = 2 · 10^5)",
+          "hash": "b1c71b0f"
+        },
+        {
+          "key": "cses-distinct-numbers#2",
+          "title": "Approach 1: sort, then count changes (recommended)",
+          "hash": "96dfcc66"
+        },
+        {
+          "key": "cses-distinct-numbers#3",
+          "title": "Approach 2: hash set",
+          "hash": "0f6c1e92"
+        },
+        {
+          "key": "cses-distinct-numbers#4",
+          "title": "Distinct Numbers, sort and count changes",
+          "hash": "697dbe67"
+        }
+      ]
+    },
+    "cses-distinct-values-subsequences": {
+      "chunk": "sorting-searching",
+      "format": "stdin",
+      "hint": "Standard input, exactly as the judge sends it.",
+      "programs": [
+        {
+          "key": "cses-distinct-values-subsequences#1",
+          "title": "Alternative: enumerate all position sets (exponential, n up to about 20)",
+          "hash": "cee989a9"
+        },
+        {
+          "key": "cses-distinct-values-subsequences#2",
+          "title": "Approach 1: sort, multiply (block length + 1) (recommended)",
+          "hash": "e4f48aeb"
+        },
+        {
+          "key": "cses-distinct-values-subsequences#3",
+          "title": "Approach 2: hash map of counts",
+          "hash": "617dee37"
+        },
+        {
+          "key": "cses-distinct-values-subsequences#4",
+          "title": "Distinct Values Subsequences, sort and multiply",
+          "hash": "e72877b4"
         }
       ]
     },
@@ -164,6 +220,33 @@
           "key": "cses-number-spiral#3",
           "title": "Number Spiral in a few lines",
           "hash": "4db11b80"
+        }
+      ]
+    },
+    "cses-palindrome-reorder": {
+      "chunk": "introductory",
+      "format": "stdin",
+      "hint": "Standard input, exactly as the judge sends it.",
+      "programs": [
+        {
+          "key": "cses-palindrome-reorder#1",
+          "title": "Alternative: try arrangements in alphabetical order (factorial time)",
+          "hash": "90efbd30"
+        },
+        {
+          "key": "cses-palindrome-reorder#2",
+          "title": "Approach 1: sort, then pair neighbours",
+          "hash": "0306b23d"
+        },
+        {
+          "key": "cses-palindrome-reorder#3",
+          "title": "Approach 2: count letters, half + middle + reversed half (recommended)",
+          "hash": "d90babe3"
+        },
+        {
+          "key": "cses-palindrome-reorder#4",
+          "title": "Palindrome Reorder, count and mirror",
+          "hash": "b2f72368"
         }
       ]
     },
@@ -695,6 +778,48 @@
         }
       ]
     },
+    "nc-detect-squares": {
+      "chunk": "math-geometry",
+      "format": "leetcode",
+      "hint": "Line 1: the DetectSquares operations to call. Line 2: their arguments, LeetCode style.",
+      "programs": [
+        {
+          "key": "nc-detect-squares#1",
+          "title": "Alternative: every triple (too slow at 3000 calls)",
+          "hash": "388fd1d3"
+        },
+        {
+          "key": "nc-detect-squares#2",
+          "title": "Alternative: diagonal + scans (too slow at 3000 calls)",
+          "hash": "f0a56fac"
+        },
+        {
+          "key": "nc-detect-squares#3",
+          "title": "Approach 1: list of points + count map",
+          "hash": "ed4c0650"
+        },
+        {
+          "key": "nc-detect-squares#4",
+          "title": "Approach 2: count map, distinct diagonals",
+          "hash": "dbeccdbd"
+        },
+        {
+          "key": "nc-detect-squares#5",
+          "title": "Approach 3: column index with nested maps (recommended)",
+          "hash": "9c3f38b8"
+        },
+        {
+          "key": "nc-detect-squares#6",
+          "title": "Alternative: 1001 x 1001 count grid",
+          "hash": "6ab1a765"
+        },
+        {
+          "key": "nc-detect-squares#7",
+          "title": "DetectSquares, column index",
+          "hash": "ac5ea000"
+        }
+      ]
+    },
     "nc-encode-and-decode-strings": {
       "chunk": "arrays-hashing",
       "format": "leetcode",
@@ -851,6 +976,33 @@
           "key": "nc-first-missing-positive#5",
           "title": "Alternative: sign marking",
           "hash": "ac3b530c"
+        }
+      ]
+    },
+    "nc-greatest-common-divisor-of-strings": {
+      "chunk": "math-geometry",
+      "format": "leetcode",
+      "hint": "One value per parameter of gcdOfStrings(String str1, String str2), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-greatest-common-divisor-of-strings#1",
+          "title": "Approach 1: every prefix, rebuilt by repetition",
+          "hash": "ef05a7be"
+        },
+        {
+          "key": "nc-greatest-common-divisor-of-strings#2",
+          "title": "Approach 2: only common divisors of the lengths",
+          "hash": "a313c612"
+        },
+        {
+          "key": "nc-greatest-common-divisor-of-strings#3",
+          "title": "Approach 3: only the prefix of length gcd(m, n)",
+          "hash": "0f3047c4"
+        },
+        {
+          "key": "nc-greatest-common-divisor-of-strings#4",
+          "title": "Approach 4: concatenation test + gcd length (recommended)",
+          "hash": "126109fa"
         }
       ]
     },
@@ -2129,6 +2281,33 @@
           "key": "nc-valid-sudoku#4",
           "title": "Alternative: bitmask records",
           "hash": "0b6af164"
+        }
+      ]
+    },
+    "nc-verifying-an-alien-dictionary": {
+      "chunk": "graphs",
+      "format": "leetcode",
+      "hint": "One value per parameter of isAlienSorted(String[] words, String order), LeetCode style: name = value.",
+      "programs": [
+        {
+          "key": "nc-verifying-an-alien-dictionary#1",
+          "title": "Approach 1: every pair, letter ranks by indexOf",
+          "hash": "c6302373"
+        },
+        {
+          "key": "nc-verifying-an-alien-dictionary#2",
+          "title": "Approach 2: translate, then compareTo on neighbours",
+          "hash": "a64e2ad1"
+        },
+        {
+          "key": "nc-verifying-an-alien-dictionary#3",
+          "title": "Approach 3: neighbours in place, HashMap of ranks",
+          "hash": "e5b376a0"
+        },
+        {
+          "key": "nc-verifying-an-alien-dictionary#4",
+          "title": "Approach 4: neighbours in place, int[26] ranks (recommended)",
+          "hash": "02d3930b"
         }
       ]
     }

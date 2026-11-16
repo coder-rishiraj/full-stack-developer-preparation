@@ -154,7 +154,7 @@ function RunOutput({ runnable, input, run }: { runnable: Runnable; input: string
   const ok = run.status === 'ok' || run.status === 'exit 0'
   const verdict = ok ? check(runnable, input, run.stdout, sample?.output) : null
   const out = clip(run.stdout)
-  const byRule = runnable.check === 'permutations' || runnable.check === 'two-sets'
+  const byRule = runnable.check === 'permutations' || runnable.check === 'two-sets' || runnable.check === 'palindrome'
   const showExpected = sample && verdict && !verdict.ok && !byRule
 
   return (

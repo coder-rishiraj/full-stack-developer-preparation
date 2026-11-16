@@ -46,6 +46,30 @@ function checkPermutations(input: string, output: string): Verdict {
 }
 
 /** CSES Two Sets: YES with two sets of equal sum covering 1..n, or NO when the total is odd. */
+/** CSES Palindrome Reorder: any palindrome using exactly the input's letters, or NO SOLUTION. */
+function checkPalindrome(input: string, output: string): Verdict {
+  const s = input.trim()
+  if (!/^[A-Z]{1,1000000}$/.test(s)) return null
+  const counts = new Map<string, number>()
+  for (const c of s) counts.set(c, (counts.get(c) ?? 0) + 1)
+  const possible = [...counts.values()].filter((n) => n % 2 === 1).length <= 1
+  const out = output.trim()
+  if (out === 'NO SOLUTION') {
+    return possible
+      ? { ok: false, message: 'A palindrome can be formed from these letters, so NO SOLUTION is wrong.' }
+      : { ok: true, message: 'More than one letter occurs an odd number of times, so no palindrome exists.' }
+  }
+  if (!possible) return { ok: false, message: 'More than one letter occurs an odd number of times; the answer must be NO SOLUTION.' }
+  if (out.length !== s.length) return { ok: false, message: `Expected ${s.length} letters, got ${out.length}.` }
+  for (let i = 0, j = out.length - 1; i < j; i++, j--) {
+    if (out[i] !== out[j]) return { ok: false, message: `Not a palindrome: position ${i + 1} is ${out[i]} but position ${j + 1} is ${out[j]}.` }
+  }
+  const used = new Map<string, number>()
+  for (const c of out) used.set(c, (used.get(c) ?? 0) + 1)
+  for (const [c, n] of counts) if (used.get(c) !== n) return { ok: false, message: `The letter ${c} appears ${used.get(c) ?? 0} times instead of ${n}.` }
+  return { ok: true, message: 'Valid: a palindrome using exactly the input letters.' }
+}
+
 function checkTwoSets(input: string, output: string): Verdict {
   const n = readN(input)
   if (n === null) return null
@@ -188,6 +212,7 @@ export function check(runnable: Pick<Runnable, 'check' | 'format'>, input: strin
   const kind = runnable.check
   if (kind === 'permutations') return checkPermutations(input, output)
   if (kind === 'two-sets') return checkTwoSets(input, output)
+  if (kind === 'palindrome') return checkPalindrome(input, output)
   if (expected === undefined) return null
   const same = runnable.format === 'stdin' ? sameTokens(output, expected) : sameValues(output, expected, kind)
   const extra =

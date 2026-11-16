@@ -29,6 +29,10 @@ describe('Check verdicts', () => {
     expect(verdict(cses(true), '5', '1 3 5 2 4\n', '2 4 1 3 5\n').result).toBe('unknown')
     expect(verdict(cses(true, 'cses-permutations'), '5', '1 3 5 2 4\n', '2 4 1 3 5\n').result).toBe('pass')
     expect(verdict(cses(true, 'cses-permutations'), '5', '1 2 3 4 5\n', '2 4 1 3 5\n').result).toBe('fail')
+    expect(verdict(cses(true, 'cses-palindrome-reorder'), 'AAAACACBA', 'CAAABAAAC\n', 'AAACBCAAA\n').result).toBe('pass')
+    expect(verdict(cses(true, 'cses-palindrome-reorder'), 'AAAACACBA', 'AAACBCAAB\n', 'AAACBCAAA\n').result).toBe('fail')
+    expect(verdict(cses(true, 'cses-palindrome-reorder'), 'ABZ', 'NO SOLUTION\n', 'NO SOLUTION\n').result).toBe('pass')
+    expect(verdict(cses(true, 'cses-palindrome-reorder'), 'AAB', 'NO SOLUTION\n', 'ABA\n').result).toBe('fail')
   })
 })
 

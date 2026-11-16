@@ -45,8 +45,13 @@ export function verdict(tests: CsesTests | LeetCodeTests, input: string, output:
   if (expected === null) return { result: 'unknown', note: 'The expected output could not be read from the statement.' }
   if (tests.source === 'cses') {
     if (sameTokens(output, expected)) return { result: 'pass' }
-    if (tests.problemId === 'cses-permutations' || tests.problemId === 'cses-two-sets') {
-      const kind = tests.problemId === 'cses-permutations' ? 'permutations' : 'two-sets'
+    const checkers: Record<string, 'permutations' | 'two-sets' | 'palindrome'> = {
+      'cses-permutations': 'permutations',
+      'cses-two-sets': 'two-sets',
+      'cses-palindrome-reorder': 'palindrome',
+    }
+    if (checkers[tests.problemId]) {
+      const kind = checkers[tests.problemId]
       const v = check({ check: kind, format: 'stdin' }, input, output, undefined)
       if (v) return { result: v.ok ? 'pass' : 'fail', note: v.message }
     }

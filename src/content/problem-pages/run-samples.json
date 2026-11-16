@@ -1443,5 +1443,132 @@
       "nums = [1, 2]\n",
       "nums = [2, 0]\n"
     ]
+  },
+  "nc-verifying-an-alien-dictionary": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "words = [\"word\", \"world\", \"row\"]\norder = \"worldabcefghijkmnpqstuvxyz\"\n",
+        "output": "false\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "words = [\"apple\", \"app\"]\norder = \"abcdefghijklmnopqrstuvwxyz\"\n",
+        "output": "false\n"
+      },
+      {
+        "label": "Official example",
+        "input": "words = [\"hello\", \"leetcode\"]\norder = \"hlabcdefgijkmnopqrstuvwxyz\"\n",
+        "output": "true\n"
+      }
+    ]
+  },
+  "nc-detect-squares": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "[\"DetectSquares\", \"add\", \"add\", \"add\", \"count\", \"count\", \"add\", \"count\"]\n[[], [[3, 10]], [[11, 2]], [[3, 2]], [[11, 10]], [[14, 8]], [[11, 2]], [[11, 10]]]\n",
+        "output": "[null, null, null, null, 1, 0, null, 2]\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "[\"DetectSquares\", \"add\", \"add\", \"add\", \"add\", \"count\", \"count\"]\n[[], [[1, 1]], [[1, 3]], [[3, 1]], [[3, 3]], [[1, 1]], [[2, 2]]]\n",
+        "output": "[null, null, null, null, null, 1, 0]\n"
+      }
+    ]
+  },
+  "nc-greatest-common-divisor-of-strings": {
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "str1 = \"ABABAB\"\nstr2 = \"ABAB\"\n",
+        "output": "\"AB\"\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "str1 = \"AAAAAB\"\nstr2 = \"AAA\"\n",
+        "output": "\"\"\n"
+      },
+      {
+        "label": "Official example 1",
+        "input": "str1 = \"ABCABC\"\nstr2 = \"ABC\"\n",
+        "output": "\"ABC\"\n"
+      },
+      {
+        "label": "Official example 3",
+        "input": "str1 = \"LEET\"\nstr2 = \"CODE\"\n",
+        "output": "\"\"\n"
+      }
+    ]
+  },
+  "cses-distinct-numbers": {
+    "check": "exact",
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "5\n2 3 2 2 3\n",
+        "output": "2\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "1\n1000000000\n",
+        "output": "1\n"
+      }
+    ],
+    "extraInputs": [
+      "10\n1 1 1 1 1 1 1 1 1 1\n",
+      "10\n7 4 10 9 6 1 8 2 5 3\n",
+      "10\n5 9 5 5 10 9 3 1 8 8\n",
+      "4\n1 2 8 9\n",
+      "3\n7 7 7\n",
+      "4\n4 3 2 1\n",
+      "3\n1000 2000 1000\n"
+    ]
+  },
+  "cses-distinct-values-subsequences": {
+    "check": "exact",
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "4\n1 2 1 3\n",
+        "output": "11\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "2\n5 5\n",
+        "output": "2\n"
+      }
+    ],
+    "extraInputs": [
+      "20\n1 2 3 2 3 2 2 3 1 2 1 1 1 2 3 2 3 3 2 2\n",
+      "1\n1\n",
+      "4\n1 1 2 2\n",
+      "7\n5 5 5 5 5 5 5\n",
+      "5\n4 3 2 1 1000000000\n"
+    ]
+  },
+  "cses-palindrome-reorder": {
+    "check": "palindrome",
+    "samples": [
+      {
+        "label": "Example 1",
+        "input": "AAAACACBA\n",
+        "output": "AAACBCAAA\n"
+      },
+      {
+        "label": "Example 2",
+        "input": "ABZ\n",
+        "output": "NO SOLUTION\n"
+      }
+    ],
+    "extraInputs": [
+      "A\n",
+      "AB\n",
+      "AAB\n",
+      "AAABB\n",
+      "CBPPBFCFAA\n",
+      "AADDDCC\n",
+      "ACCAB\n"
+    ]
   }
 }
